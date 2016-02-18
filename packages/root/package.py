@@ -33,6 +33,6 @@ class Root(Package):
             make()
             make("install")
 
-    def url_for_version(sefl, version):
+    def url_for_version(self, version):
         """Handle ROOT's unusual version string."""
         return "https://root.cern.ch/download/root_v%s.source.tar.gz" % version
