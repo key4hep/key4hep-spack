@@ -35,6 +35,23 @@ $ spack info root
 $ spack install root
 ```
 
+### Setup environment
+
+If you have [Environment Modules](http://modules.sf.net) installed:
+
+```bash
+$ spack load root
+$ root
+   --------------------------------------------------------------------------
+  | Welcome to ROOT 6.07/02                              http://root.cern.ch |
+  |                                             (c) 1995-2014, The ROOT Team |
+  | Built for linuxx8664gcc                                                  |
+  | From heads/master@v6-07-01-ROOTaaS-1-123-gb5924cd, Dec 18 2015, 11:21:36 |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'               |
+   --------------------------------------------------------------------------
+```
+
+
 ### Create Geant4 packaging
 
 
