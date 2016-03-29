@@ -11,6 +11,15 @@ class Modules(Package):
     depends_on("tcl")
 
     def install(self, spec, prefix):
-        configure('--prefix=%s' % prefix)
+
+	options = ['--prefix=%s' % prefix, 
+                   '--disable-debug',
+                   '--disable-dependency-tracking',
+                   '--disable-silent-rules',
+                   '--disable-versioning', 
+                   '--datarootdir=%s' % prefix.share,
+                   'CPPFLAGS=-DUSE_INTERP_ERRORLINE']
+
+        configure(*options)
         make()
         make("install")
