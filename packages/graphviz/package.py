@@ -16,7 +16,7 @@ class Graphviz(Package):
     depends_on("ghostscript")
 
     def install(self, spec, prefix):
-        configure("--prefix=%s" %prefix, '--disable-perl')
+        configure("--prefix=%s" %prefix, '--disable-perl', '--disable-java', '--without-x')
 
         make()
         make("install")

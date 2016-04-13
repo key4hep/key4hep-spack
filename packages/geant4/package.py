@@ -9,6 +9,7 @@ class Geant4(Package):
     version('4.10.01.p03', '4fb4175cc0dabcd517443fbdccd97439')
 
     depends_on("xerces-c")
+    depends_on("cmake")
 
     def install(self, spec, prefix):
 
