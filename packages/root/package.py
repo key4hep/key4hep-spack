@@ -15,15 +15,14 @@ class Root(Package):
     depends_on("pcre")
     depends_on("fftw")
 
-    if sys.platform != 'darwin' :
-        depends_on("graphviz")
-        depends_on("python")
-        depends_on("gsl")
-        depends_on("libxml2+python")
-        depends_on("libpng")
-        depends_on("jpeg")
-        depends_on("openssl")
-        depends_on("freetype")
+    depends_on("graphviz")
+    depends_on("python")
+    depends_on("gsl")
+    depends_on("libxml2+python")
+    depends_on("libpng")
+    depends_on("jpeg")
+    depends_on("openssl")
+    depends_on("freetype")
     
 
     def install(self, spec, prefix):

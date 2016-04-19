@@ -28,6 +28,7 @@ class Gccxml(Package):
 
     # FIXME: Add dependencies if this package requires them.
     # depends_on("foo")
+    depends_on("cmake")
 
     def install(self, spec, prefix):
         # FIXME: Modify the configure line to suit your build system here.
