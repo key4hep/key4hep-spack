@@ -21,7 +21,7 @@ class Root(Package):
     depends_on("libxml2+python")
     depends_on("libpng")
     depends_on("jpeg")
-    depends_on("openssl")
+    depends_on("openssl@1.0.2f")
     depends_on("freetype")
     
 
@@ -43,6 +43,9 @@ class Root(Package):
             darwin_options= [
             '-Dcastor=OFF',
             '-Drfio=OFF',
+            '-Dbonjour=OFF',
+            '-Dcocoa=OFF',
+            '-Dx11=ON',
             '-Ddcache=OFF' ]
             options.extend(darwin_options)
 
