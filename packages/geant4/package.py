@@ -6,7 +6,7 @@ class Geant4(Package):
     homepage = "http://geant4.cern.ch/"
     url      = "http://geant4.cern.ch/support/source/geant4.10.01.p03.tar.gz"
 
-    version('4.10.01.p03', '4fb4175cc0dabcd517443fbdccd97439')
+    version('10.01.p03', '4fb4175cc0dabcd517443fbdccd97439')
 
     depends_on("xerces-c")
     depends_on("cmake")
@@ -22,7 +22,7 @@ class Geant4(Package):
         # fixme: turn off data for now and maybe each data set should
         # go into a separate package to cut down on disk usage between
         # different code versions using the same data versions.
-        cmake_args.append('-DGEANT4_INSTALL_DATA=OFF') 
+        cmake_args.append('-DGEANT4_INSTALL_DATA=OFF')
 
         # http://geant4.web.cern.ch/geant4/UserDocumentation/UsersGuides/InstallationGuide/html/ch02s03.html
         # fixme: likely things that need addressing:
