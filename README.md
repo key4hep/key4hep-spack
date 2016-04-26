@@ -21,7 +21,7 @@ cd -
 To not have to type a full path to `spack` and to gain some other shell-level features do
 
 ```bash
-$ source share/spack/setup-env.sh
+$ source spack/share/spack/setup-env.sh
 ```
 
 This is assumed below.
