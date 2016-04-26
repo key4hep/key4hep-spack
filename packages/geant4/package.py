@@ -43,7 +43,7 @@ class Geant4(Package):
             make()
             make("install")
 
-    # def url_for_version(self, version):
-    #     """Handle Geant4's unusual version string."""
-    #     return "http://geant4.cern.ch/support/source/geant%s.tar.gz"%version
+    def url_for_version(self, version):
+         """Handle Geant4's unusual version string."""
+         return "http://geant4.cern.ch/support/source/geant4.%s.tar.gz"%version
 
