@@ -11,10 +11,11 @@ Initial setup like:
 ```bash
 cd /path/to/big/disk
 git clone https://github.com/LLNL/spack.git
+cd spack/var/spack/repos
 git clone https://github.com/HEP-SF/hep-spack.git
-cd spack
+cd -
 ./bin/spack compiler add /usr/bin/gcc
-./bin/spack repo add /path/to/big/disk/hep-spack
+./bin/spack repo add spack/var/spack/repos/hep-spack
 ```
 
 To not have to type a full path to `spack` and to gain some other shell-level features do
