@@ -9,14 +9,16 @@ class Geant4(Package):
     version('10.02.p01', 'b81f7082a15f6a34b720b6f15c6289cfe4ddbbbdcef0dc52719f71fac95f7f1c')
     version('10.01.p03', '4fb4175cc0dabcd517443fbdccd97439')
 
+    variant('qt', default=False, description='Enable Qt support')
+
     depends_on("cmake")
 
     depends_on("clhep@2.3.1.1+cxx11", when="@10.02.p01")
     depends_on("clhep@2.2.0.4+cxx11", when="@10.01.p03")
-
     depends_on("expat")
     depends_on("zlib")
     depends_on("xerces-c")
+    depends_on("qt@4.8:", when="+qt")
 
     def install(self, spec, prefix):
         cmake_args = list(std_cmake_args)
