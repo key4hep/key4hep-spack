@@ -7,9 +7,13 @@ class Gaudi(Package):
 
     version('v27r1', '7d7283ca2c3d8d050af3db2b89a25ab629abbb57')
 
+    depends_on("python")
     depends_on("root")
-    depends_on("boost")
+    depends_on("py-qmtest")
+    depends_on("clhep")
+    depends_on("boost@1.59.0")
     depends_on("cppunit")
+    depends_on("aida")
 
     def install(self, spec, prefix):
         options = []
@@ -21,7 +25,7 @@ class Gaudi(Package):
         if '+debug' in spec:
             options.append('-DCMAKE_BUILD_TYPE:STRING=Debug ')
 
-	options.append("-DCMAKE_TOOLCHAIN_FILE=" + source_directory +"/toolchain.cmake")
+	#options.append("-DCMAKE_TOOLCHAIN_FILE=" + source_directory +"/toolchain.cmake")
 
         with working_dir(build_directory, create=True):
             import os
