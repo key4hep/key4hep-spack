@@ -5,7 +5,7 @@ class Gaudi(Package):
     homepage = "https://gaudi.cern.ch"
     url      = "http://gaudi.cern.ch"
 
-    version('v27r1', '7d7283ca2c3d8d050af3db2b89a25ab629abbb57')
+    version('v27r1', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v27r1')
 
     depends_on("python")
     depends_on("root")
@@ -34,7 +34,3 @@ class Gaudi(Package):
             make(" VERBOSE=1")
             make("install")
 
-    def url_for_version(self, version):
-        """Handle ROOT's unusual version string."""
-        #return "http://lhcbproject.web.cern.ch/lhcbproject/dist/GAUDI/GAUDI_GAUDI_%s.tar.gz" % version
-        return "http://cern.ch/bcouturi/Gaudi_%s.tar.gz" % version
