@@ -29,6 +29,8 @@ class Cppunit(Package):
 
     def install(self, spec, prefix):
         # FIXME: Modify the configure line to suit your build system here.
+        import os
+        os.environ["LDFLAGS"] = os.environ.get("LDFLAG", "") + " -ldl "
         configure('--prefix=%s' % prefix)
 
         # FIXME: Add logic to build and install here

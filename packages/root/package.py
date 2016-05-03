@@ -15,7 +15,7 @@ class Root(Package):
     depends_on("pcre")
     depends_on("fftw")
 
-    depends_on("graphviz")
+    #depends_on("graphviz")
     depends_on("python")
     depends_on("gsl")
     depends_on("libxml2+python")
