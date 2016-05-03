@@ -11,9 +11,10 @@ class Gaudi(Package):
     depends_on("root")
     depends_on("py-qmtest")
     depends_on("clhep")
-    depends_on("boost@1.59.0")
+    depends_on("boost@1.59.0+python")
     depends_on("cppunit")
     depends_on("aida")
+    depends_on("tbb@20140122oss")
 
     def install(self, spec, prefix):
         options = []
@@ -30,7 +31,7 @@ class Gaudi(Package):
         with working_dir(build_directory, create=True):
             import os
             cmake(source_directory , *options)
-            make()
+            make(" VERBOSE=1")
             make("install")
 
     def url_for_version(self, version):
