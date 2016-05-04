@@ -11,11 +11,12 @@ class Root(Package):
 
     if sys.platform == 'darwin': patch('math_uint.patch')
 
+    variant('graphviz', default=False, description='Enable graphviz support')
+
     depends_on("cmake")
     depends_on("pcre")
     depends_on("fftw")
-
-    #depends_on("graphviz")
+    depends_on("graphviz",when="+graphviz")    
     depends_on("python")
     depends_on("gsl")
     depends_on("libxml2+python")
