@@ -1,4 +1,4 @@
-# Spack repo for HEP software packaging
+# [Spack](https://github.com/LLNL/spack) package repo for HEP software packaging
 
 This holds a set of Spack packages for common HEP software.  It relies
 on Spack and the builtin Spack packages, some of which are overridden
