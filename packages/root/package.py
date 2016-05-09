@@ -21,10 +21,10 @@ class Root(Package):
     depends_on("gsl")
     depends_on("libxml2+python")
     depends_on("jpeg")
-    depends_on("openssl@1.0.2f")
     depends_on("freetype")
     if sys.platform != 'darwin': 
         depends_on("libpng")
+        depends_on("openssl")
 
     def install(self, spec, prefix):
 
