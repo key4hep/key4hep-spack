@@ -15,6 +15,8 @@ class Gaudi(Package):
     depends_on("cppunit")
     depends_on("aida")
     depends_on("tbb@20140122oss")
+    depends_on("gperftools")
+    depends_on("heppdt@2.06.01")
 
     def install(self, spec, prefix):
         options = []
