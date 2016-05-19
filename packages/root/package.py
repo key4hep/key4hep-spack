@@ -9,7 +9,8 @@ class Root(Package):
     version('6.07.02', '3fb585bf9fa6ce06ca503173c8bee107')
     version('6.06.02', 'e9b8b86838f65b0a78d8d02c66c2ec55')
 
-    if sys.platform == 'darwin': patch('math_uint.patch')
+    if sys.platform == 'darwin': 
+       patch('math_uint.patch')
 
     variant('graphviz', default=False, description='Enable graphviz support')
 
@@ -21,10 +22,10 @@ class Root(Package):
     depends_on("gsl")
     depends_on("libxml2+python")
     depends_on("jpeg")
-    depends_on("freetype")
     if sys.platform != 'darwin': 
         depends_on("libpng")
         depends_on("openssl")
+        depends_on("freetype")
 
     def install(self, spec, prefix):
 
@@ -44,9 +45,6 @@ class Root(Package):
             darwin_options= [
             '-Dcastor=OFF',
             '-Drfio=OFF',
-            '-Dbonjour=OFF',
-            '-Dcocoa=OFF',
-            '-Dx11=ON',
             '-Ddcache=OFF' ]
             options.extend(darwin_options)
 
