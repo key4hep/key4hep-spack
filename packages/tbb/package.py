@@ -36,7 +36,7 @@ class Tbb(Package):
 
     # Only version-specific URL's work for TBB
     version('4.4.3', '80707e277f69d9b20eeebdd7a5f5331137868ce1', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src_0.tgz')
-    version('4.2', '70345f907f5ffe9b2bc3b7ed0d6508bc', url='http://service-spi.web.cern.ch/service-spi/external/tarFiles/tbb42_20140122oss_src.tgz')
+    version('20140122oss', '70345f907f5ffe9b2bc3b7ed0d6508bc', url='https://github.com/intel-tbb/intel-tbb/archive/tbb42_20140122oss.tar.gz')
 
     def coerce_to_spack(self,tbb_build_subdir):
         for compiler in ["icc","gcc","clang"]:
