@@ -35,9 +35,10 @@ class Tbb(Package):
     homepage = "http://www.threadingbuildingblocks.org/"
 
     # Only version-specific URL's work for TBB
-    version('4.4.3', '80707e277f69d9b20eeebdd7a5f5331137868ce1', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src_0.tgz')
-    version('20140122oss', '70345f907f5ffe9b2bc3b7ed0d6508bc', url='https://github.com/intel-tbb/intel-tbb/archive/tbb42_20140122oss.tar.gz')
-
+    version('20160128oss', '9d8a4cdf43496f1b3f7c473a5248e5cc', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src_0.tgz')
+    version('20151115oss', '7fae6a6bbca68bbdc18e844d6721d5e4', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20151115oss_src.tgz')
+    version('20150728oss', '2ef1d8cb790324c09aa17360d75dd619', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20150728oss_src.tgz')
+    version('20140122oss', '70345f907f5ffe9b2bc3b7ed0d6508bc', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb42_20140122oss_src.tgz')
     def coerce_to_spack(self,tbb_build_subdir):
         for compiler in ["icc","gcc","clang"]:
               fs = glob.glob(join_path(tbb_build_subdir,"*.%s.inc" % compiler ))
