@@ -38,7 +38,7 @@ class Root(Package):
             options.append('-DCMAKE_BUILD_TYPE:STRING=Debug')
         else:
             options.append('-DCMAKE_BUILD_TYPE:STRING=Release')
-        
+        options.append('-Dcxx14=on')        
         options.extend(std_cmake_args)
 
         if sys.platform == 'darwin': 
@@ -48,15 +48,15 @@ class Root(Package):
             '-Ddcache=OFF' ]
             options.extend(darwin_options)
 
-        def setup_dependent_environment(self, module, spec, dep_spec):
-           """Root wants to set ROOTSYS"""
-           os.environ['ROOTSYS'] = self.prefix
- 
 
         with working_dir(build_directory, create=True):
             cmake(*options)
             make()
             make("install")
+    def setup_dependent_environment(self, spack_env, run_env, dspec):
+        spack_env.set('ROOTSYS', self.prefix)
+        spack_env.set('PYTHONPATH', self.prefix.lib)
+        spack_env.set('ROOT_VERSION', 'v6')
 
     def url_for_version(self, version):
         """Handle ROOT's unusual version string."""

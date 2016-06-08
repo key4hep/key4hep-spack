@@ -1,29 +1,44 @@
-# FIXME:
-# This is a template package file for Spack.  We've conveniently
-# put "FIXME" labels next to all the things you'll want to change.
+##############################################################################
+# Copyright (c) 2013-2016, Lawrence Livermore National Security, LLC.
+# Produced at the Lawrence Livermore National Laboratory.
 #
-# Once you've edited all the FIXME's, delete this whole message,
-# save this file, and test out your package like this:
+# This file is part of Spack.
+# Created by Todd Gamblin, tgamblin@llnl.gov, All rights reserved.
+# LLNL-CODE-647188
 #
-#     spack install tbb
+# For details, see https://github.com/llnl/spack
+# Please also see the LICENSE file for our notice and the LGPL.
 #
-# You can always get back here to change things with:
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License (as
+# published by the Free Software Foundation) version 2.1, February 1999.
 #
-#     spack edit tbb
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the IMPLIED WARRANTY OF
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the terms and
+# conditions of the GNU Lesser General Public License for more details.
 #
-# See the spack documentation for more information on building
-# packages.
-#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+##############################################################################
 from spack import *
+import os
 import glob
 
 class Tbb(Package):
-    """Repacked TBB with correct version """
-    homepage = "http://tbb.intel.com"
-    url      = "http://service-spi.web.cern.ch/service-spi/external/tarFiles/tbb42_20140122oss_src.tgz"
+    """Widely used C++ template library for task parallelism.
+    Intel Threading Building Blocks (Intel TBB) lets you easily write parallel
+    C++ programs that take full advantage of multicore performance, that are
+    portable and composable, and that have future-proof scalability.
+    """
+    homepage = "http://www.threadingbuildingblocks.org/"
 
-    version('20140122oss', '70345f907f5ffe9b2bc3b7ed0d6508bc')
-
+    # Only version-specific URL's work for TBB
+    version('20160128oss', '9d8a4cdf43496f1b3f7c473a5248e5cc', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src_0.tgz')
+    version('20151115oss', '7fae6a6bbca68bbdc18e844d6721d5e4', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20151115oss_src.tgz')
+    version('20150728oss', '2ef1d8cb790324c09aa17360d75dd619', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20150728oss_src.tgz')
+    version('20140122oss', '70345f907f5ffe9b2bc3b7ed0d6508bc', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb42_20140122oss_src.tgz')
     def coerce_to_spack(self,tbb_build_subdir):
         for compiler in ["icc","gcc","clang"]:
               fs = glob.glob(join_path(tbb_build_subdir,"*.%s.inc" % compiler ))
@@ -39,8 +54,6 @@ class Tbb(Package):
                         of.write("CONLY = $(CC)\n")
                       else:
                         of.write(l);
-
-
 
     def install(self, spec, prefix):
         #
@@ -90,5 +103,3 @@ class Tbb(Package):
             fs = glob.glob(join_path("build","*debug",lib_name + "_debug.*"))
             for f in fs:
                 install(f, prefix.lib)
-
-
