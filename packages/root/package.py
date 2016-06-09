@@ -1,5 +1,6 @@
 from spack import *
 import sys
+import os
 
 class Root(Package):
     """ROOT is a data analysis framework."""
@@ -53,10 +54,11 @@ class Root(Package):
             cmake(*options)
             make()
             make("install")
+
     def setup_dependent_environment(self, spack_env, run_env, dspec):
         spack_env.set('ROOTSYS', self.prefix)
-        spack_env.set('PYTHONPATH', self.prefix.lib)
         spack_env.set('ROOT_VERSION', 'v6')
+        spack_env.prepend_path('PYTHONPATH',self.prefix.lib)
 
     def url_for_version(self, version):
         """Handle ROOT's unusual version string."""
