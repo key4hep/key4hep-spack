@@ -15,6 +15,7 @@
 # packages.
 #
 from spack import *
+import sys
 
 class Clhep(Package):
     """CLHEP is a C++ Class Library for High Energy Physics. """
@@ -32,9 +33,16 @@ class Clhep(Package):
 
     variant('debug', default=False, description="Switch to the debug version of CLHEP.")
     variant('cxx11', default=True, description="Compile using c++11 dialect.")
+    variant('cxx14', default=False, description="Compile using c++14 dialect.")
 
     depends_on('cmake@2.8.12.2:', when='@2.2.0.4:2.3.0.0')
     depends_on('cmake@3.2:', when='@2.3.0.1:')
+
+    def patch(self):
+        filter_file('SET CMP0042 OLD',
+                    'SET CMP0042 NEW',
+                    '%s/%s/CLHEP/CMakeLists.txt'
+                    %(self.stage.path,self.spec.version))
 
     def install(self, spec, prefix):
         # Handle debug
@@ -46,6 +54,10 @@ class Clhep(Package):
         if '+cxx11' in spec:
             env['CXXFLAGS'] = self.compiler.cxx11_flag
             cmake_args.append('-DCLHEP_BUILD_CXXSTD=' + self.compiler.cxx11_flag)
+
+        if '+cxx14' in spec:
+            env['CXXFLAGS'] = self.compiler.cxx14_flag
+            cmake_args.append('-DCLHEP_BUILD_CXXSTD=' + self.compiler.cxx14_flag)
 
         # Note that the tar file is unusual in that there's a CLHEP directory (addtional layer)
         cmake_args.append("../CLHEP")
