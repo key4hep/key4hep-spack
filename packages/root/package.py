@@ -15,7 +15,7 @@ class Root(Package):
 
     variant('graphviz', default=False, description='Enable graphviz support')
 
-    depends_on("cmake")
+    depends_on("cmake", type='build')
     depends_on("pcre")
     depends_on("fftw")
     depends_on("graphviz",when="+graphviz")    

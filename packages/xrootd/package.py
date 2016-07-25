@@ -7,7 +7,7 @@ class Xrootd(Package):
 
     version('4.3.0', '39c2fab9f632f35e12ff607ccaf9e16c')
 
-    depends_on('cmake')
+    depends_on('cmake', type='build')
 
     def install(self, spec, prefix):
         options = []

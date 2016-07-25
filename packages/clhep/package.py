@@ -35,8 +35,8 @@ class Clhep(Package):
     variant('cxx11', default=True, description="Compile using c++11 dialect.")
     variant('cxx14', default=False, description="Compile using c++14 dialect.")
 
-    depends_on('cmake@2.8.12.2:', when='@2.2.0.4:2.3.0.0')
-    depends_on('cmake@3.2:', when='@2.3.0.1:')
+    depends_on('cmake@2.8.12.2:', when='@2.2.0.4:2.3.0.0', type='build')
+    depends_on('cmake@3.2:', when='@2.3.0.1:', type='build')
 
     def patch(self):
         filter_file('SET CMP0042 OLD',
