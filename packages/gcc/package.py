@@ -39,6 +39,7 @@ class Gcc(Package):
     list_depth = 2
 
     version('6.1.0', '8fb6cb98b8459f5863328380fbf06bd1')
+    version('5.4.0', '4c626ac2a83ef30dfb9260e6f59c2b30')
     version('5.3.0', 'c9616fd448f980259c31de613e575719')
     version('5.2.0', 'a51bcfeb3da7dd4c623e27207ed43467')
     version('4.9.3', '6f831b4d251872736e8e9cc09746f327')
@@ -74,6 +75,9 @@ class Gcc(Package):
         filter_file(r"'@.*@'", "'@[[:alnum:]]*@'", 'libjava/configure',
             string=True)
 
+        filter_file(r"@shlib_slibdir@", "@rpath", 
+            'libgcc/config/t-slibgcc-darwin',string=True)
+
         enabled_languages = set(('c', 'c++', 'fortran'))
 
         # Generic options to compile GCC
@@ -105,7 +109,7 @@ class Gcc(Package):
             options.extend(isl_options)
 
         if sys.platform == 'darwin' :
-            darwin_options = [ "--with-build-config=bootstrap-debug" ]
+            darwin_options = [ "--with-build-config=bootstrap-debug", "--with-default-libstdcxx-abi=gcc4-compatible" ]
             options.extend(darwin_options)
 
         build_dir = join_path(self.stage.path, 'spack-build')
@@ -142,6 +146,6 @@ class Gcc(Package):
             for line in lines:
                 out.write(line + "\n")
                 if line.startswith("*link:"):
-                    out.write("-rpath %s/lib:%s/lib64 \\\n" %
+                    out.write("-rpath %s/lib:%s/lib64 -headerpad_max_install_names  \\\n" %
                         (self.prefix, self.prefix))
         set_install_permissions(specs_file)
