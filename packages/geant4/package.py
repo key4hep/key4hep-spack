@@ -13,8 +13,8 @@ class Geant4(Package):
 
     depends_on('cmake@3.5:', type='build')
 
-    depends_on("clhep@2.3.1.1+cxx11", when="@10.02.p01")
-    depends_on("clhep@2.2.0.4+cxx11", when="@10.01.p03")
+    depends_on("clhep@2.3.1.1~cxx11+cxx14", when="@10.02.p01")
+    depends_on("clhep@2.2.0.4~cxx11+cxx14", when="@10.01.p03")
     depends_on("expat")
     depends_on("zlib")
     depends_on("xerces-c")
@@ -23,7 +23,7 @@ class Geant4(Package):
     def install(self, spec, prefix):
         cmake_args = list(std_cmake_args)
         cmake_args.append('-DXERCESC_ROOT_DIR:STRING=%s'%spec['xerces-c'].prefix)
-        cmake_args.append('-DGEANT4_BUILD_CXXSTD=c++11')
+        cmake_args.append('-DGEANT4_BUILD_CXXSTD=c++14')
 
         cmake_args += ['-DGEANT4_USE_GDML=ON',
                        '-DGEANT4_USE_SYSTEM_EXPAT=ON',
