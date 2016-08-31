@@ -13,6 +13,7 @@ class Root(Package):
 
     if sys.platform == 'darwin': 
        patch('math_uint.patch', when='@6.06.02')
+       patch('root6-60606-mathmore.patch', when='@6.06.06')
 
     variant('graphviz', default=False, description='Enable graphviz support')
 
