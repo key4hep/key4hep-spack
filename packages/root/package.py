@@ -7,11 +7,13 @@ class Root(Package):
     homepage = "https://root.cern.ch"
     url      = "https://root.cern.ch/download/root_v6.07.02.source.tar.gz"
 
-    version('6.07.02', '3fb585bf9fa6ce06ca503173c8bee107')
+    version('6.06.06', '4308449892210c8d36e36924261fea26')
+    version('6.06.04', '55a2f98dd4cea79c9c4e32407c2d6d17')
     version('6.06.02', 'e9b8b86838f65b0a78d8d02c66c2ec55')
 
     if sys.platform == 'darwin': 
-       patch('math_uint.patch')
+       patch('math_uint.patch', when='@6.06.02')
+       patch('root6-60606-mathmore.patch', when='@6.06.06')
 
     variant('graphviz', default=False, description='Enable graphviz support')
 
@@ -49,7 +51,7 @@ class Root(Package):
             darwin_options= [
             '-Dcastor=OFF',
             '-Drfio=OFF',
-            '-Ddcache=OFF' ]
+            '-Ddcache=OFF']
             options.extend(darwin_options)
 
 
