@@ -1,47 +1,26 @@
-##############################################################################
-# Copyright (c) 2013-2016, Lawrence Livermore National Security, LLC.
-# Produced at the Lawrence Livermore National Laboratory.
-#
-# This file is part of Spack.
-# Created by Todd Gamblin, tgamblin@llnl.gov, All rights reserved.
-# LLNL-CODE-647188
-#
-# For details, see https://github.com/llnl/spack
-# Please also see the LICENSE file for our notice and the LGPL.
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License (as
-# published by the Free Software Foundation) version 2.1, February 1999.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the IMPLIED WARRANTY OF
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the terms and
-# conditions of the GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public
-# License along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-##############################################################################
 from spack import *
 
 from contextlib import closing
 from glob import glob
 import sys
-import os
+
 
 class Gcc(Package):
     """The GNU Compiler Collection includes front ends for C, C++,
        Objective-C, Fortran, and Java."""
     homepage = "https://gcc.gnu.org"
 
-    url = "http://open-source-box.org/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2"
-    list_url = 'http://open-source-box.org/gcc/'
+    url = "http://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2"
+    list_url = 'http://ftp.gnu.org/gnu/gcc/'
     list_depth = 2
 
+    version('6.2.0', '9768625159663b300ae4de2f4745fcc4')
     version('6.1.0', '8fb6cb98b8459f5863328380fbf06bd1')
     version('5.4.0', '4c626ac2a83ef30dfb9260e6f59c2b30')
     version('5.3.0', 'c9616fd448f980259c31de613e575719')
     version('5.2.0', 'a51bcfeb3da7dd4c623e27207ed43467')
+    version('5.1.0', 'd5525b1127d07d215960e6051c5da35e')
+    version('4.9.4', '87c24a4090c1577ba817ec6882602491')
     version('4.9.3', '6f831b4d251872736e8e9cc09746f327')
     version('4.9.2', '4df8ee253b7f3863ad0b86359cd39c43')
     version('4.9.1', 'fddf71348546af523353bd43d34919c1')
@@ -51,10 +30,15 @@ class Gcc(Package):
     version('4.6.4', 'b407a3d1480c11667f293bfb1f17d1a4')
     version('4.5.4', '27e459c2566b8209ab064570e1b378f7')
 
-    variant('binutils', default=False,
-        description="Build via binutils")
-    variant('gold', default=False,
-        description="Build the gold linker plugin for ld-based LTO")
+    variant('binutils',
+            default=sys.platform != 'darwin',
+            description="Build via binutils")
+    variant('gold',
+            default=sys.platform != 'darwin',
+            description="Build the gold linker plugin for ld-based LTO")
+    variant('piclibs',
+            default=False,
+            description="Build PIC versions of libgfortran.a and libstdc++.a")
 
     depends_on("mpfr")
     depends_on("gmp")
@@ -64,65 +48,67 @@ class Gcc(Package):
     depends_on("binutils~libiberty+gold", when='+binutils +gold')
 
     # TODO: integrate these libraries.
-    #depends_on("ppl")
-    #depends_on("cloog")
+    # depends_on("ppl")
+    # depends_on("cloog")
     if sys.platform == 'darwin':
         patch('darwin/gcc-4.9.patch1', when='@4.9.3')
         patch('darwin/gcc-4.9.patch2', when='@4.9.3')
+    else:
+        provides('golang', when='@4.7.1:')
+
+    patch('piclibs.patch', when='+piclibs')
 
     def install(self, spec, prefix):
         # libjava/configure needs a minor fix to install into spack paths.
         filter_file(r"'@.*@'", "'@[[:alnum:]]*@'", 'libjava/configure',
-            string=True)
+                    string=True)
 
-        filter_file(r"@shlib_slibdir@", "@rpath", 
-            'libgcc/config/t-slibgcc-darwin',string=True)
+        enabled_languages = set(('c', 'c++', 'fortran', 'java', 'objc'))
 
-        enabled_languages = set(('c', 'c++', 'fortran'))
+        if spec.satisfies("@4.7.1:") and sys.platform != 'darwin':
+            enabled_languages.add('go')
 
         # Generic options to compile GCC
-        options = ["--prefix=%s" % prefix,
-                   "--libdir=%s/lib64" % prefix,
+        options = ["--prefix=%s" % prefix, "--libdir=%s/lib64" % prefix,
                    "--disable-multilib",
                    "--enable-languages=" + ','.join(enabled_languages),
-                   "--with-mpc=%s" % spec['mpc'].prefix,
-                   "--with-mpfr=%s" % spec['mpfr'].prefix,
-                   "--with-gmp=%s" % spec['gmp'].prefix,
-                   "--enable-lto",
-                   "--with-quad"]
+                   "--with-mpc=%s" % spec['mpc'].prefix, "--with-mpfr=%s" %
+                   spec['mpfr'].prefix, "--with-gmp=%s" % spec['gmp'].prefix,
+                   "--enable-lto", "--with-quad"]
         # Binutils
         if spec.satisfies('+binutils'):
             static_bootstrap_flags = "-static-libstdc++ -static-libgcc"
-            binutils_options = ["--with-sysroot=/",
-                                "--with-stage1-ldflags=%s %s" %
-                                    (self.rpath_args, static_bootstrap_flags),
-                                "--with-boot-ldflags=%s %s" %
-                                    (self.rpath_args, static_bootstrap_flags),
-                                "--with-gnu-ld",
-                                "--with-ld=%s/bin/ld" % spec['binutils'].prefix,
-                                "--with-gnu-as",
-                                "--with-as=%s/bin/as" % spec['binutils'].prefix]
+            binutils_options = [
+                "--with-sysroot=/", "--with-stage1-ldflags=%s %s" %
+                (self.rpath_args, static_bootstrap_flags),
+                "--with-boot-ldflags=%s %s" %
+                (self.rpath_args, static_bootstrap_flags), "--with-gnu-ld",
+                "--with-ld=%s/bin/ld" % spec['binutils'].prefix,
+                "--with-gnu-as",
+                "--with-as=%s/bin/as" % spec['binutils'].prefix
+            ]
             options.extend(binutils_options)
         # Isl
         if 'isl' in spec:
             isl_options = ["--with-isl=%s" % spec['isl'].prefix]
             options.extend(isl_options)
 
-        if sys.platform == 'darwin' :
-            darwin_options = [ "--with-build-config=bootstrap-debug", "--with-default-libstdcxx-abi=gcc4-compatible" ]
+        if sys.platform == 'darwin':
+            darwin_options = ["--with-build-config=bootstrap-debug", "--with-default-libstdcxx-abi=gcc4-compatible"]
             options.extend(darwin_options)
 
         build_dir = join_path(self.stage.path, 'spack-build')
-        configure = Executable( join_path(self.stage.source_path, 'configure') )
+        configure = Executable(join_path(self.stage.source_path, 'configure'))
         with working_dir(build_dir, create=True):
             # Rest of install is straightforward.
             configure(*options)
-            if sys.platform == 'darwin' : make("bootstrap")
-            else: make()
+            if sys.platform == 'darwin':
+                make("bootstrap")
+            else:
+                make()
             make("install")
 
         self.write_rpath_specs()
-
 
     @property
     def spec_dir(self):
@@ -130,13 +116,12 @@ class Gcc(Package):
         spec_dir = glob("%s/lib64/gcc/*/*" % self.prefix)
         return spec_dir[0] if spec_dir else None
 
-
     def write_rpath_specs(self):
         """Generate a spec file so the linker adds a rpath to the libs
            the compiler used to build the executable."""
         if not self.spec_dir:
             tty.warn("Could not install specs for %s." %
-                self.spec.format('$_$@'))
+                     self.spec.format('$_$@'))
             return
 
         gcc = Executable(join_path(self.prefix.bin, 'gcc'))
@@ -152,5 +137,5 @@ class Gcc(Package):
                   else:
                     out.write("-rpath %s/lib:%s/lib64 \\\n" %
                         (self.prefix, self.prefix))
-                    
+
         set_install_permissions(specs_file)
