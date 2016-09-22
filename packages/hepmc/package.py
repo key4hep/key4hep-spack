@@ -27,11 +27,11 @@ from spack import *
 
 
 class Hepmc(Package):
-    """FIXME: Put a proper description of your package here."""
+    """The HepMC package is an object oriented, C++ event record for \
+       High Energy Physics Monte Carlo generators and simulation."""
 
-    # FIXME: Add a proper url for your package's homepage here.
-    homepage = "http://www.example.com"
-    url      = "http://lcgapp.cern.ch/project/simu/HepMC/download/HepMC-2.06.07.tar.gz"
+    homepage = "http://hepmc.web.cern.ch/hepmc/"
+    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
 
     version('2.06.09', 'c47627ced4255b40e731b8666848b087')
     version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
@@ -39,7 +39,6 @@ class Hepmc(Package):
     version('2.06.06', '102e5503537a3ecd6ea6f466aa5bc4ae')
     version('2.06.05', '2a4a2a945adf26474b8bdccf4f881d9c')
 
-    # FIXME: Add additional dependencies if required.
     depends_on("cmake", type='build')
 
     def install(self, spec, prefix):
