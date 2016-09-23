@@ -25,10 +25,12 @@
 
 from spack import *
 
+
 class Geant4(Package):
-    """Geant4 is a toolkit for the simulation of the passage of particles through matter.\
-        Its areas of application include high energy, nuclear and accelerator physics, \
-        as well as studies in medical and space science."""
+    """Geant4 is a toolkit for the simulation of the passage of particles
+    through matter. Its areas of application include high energy, nuclear
+    and accelerator physics, as well as studies in medical and space
+    science."""
 
     homepage = "http://geant4.cern.ch/"
     url      = "http://geant4.cern.ch/support/source/geant4.10.01.p03.tar.gz"
@@ -49,7 +51,8 @@ class Geant4(Package):
 
     def install(self, spec, prefix):
         cmake_args = list(std_cmake_args)
-        cmake_args.append('-DXERCESC_ROOT_DIR:STRING=%s' % spec['xerces-c'].prefix )
+        cmake_args.append('-DXERCESC_ROOT_DIR:STRING=%s' %
+                          spec['xerces-c'].prefix)
         cmake_args.append('-DGEANT4_BUILD_CXXSTD=c++14')
 
         cmake_args += ['-DGEANT4_USE_GDML=ON',
@@ -78,6 +81,5 @@ class Geant4(Package):
             make("install")
 
     def url_for_version(self, version):
-         """Handle Geant4's unusual version string."""
-         return "http://geant4.cern.ch/support/source/geant4.%s.tar.gz"%version
-
+        """Handle Geant4's unusual version string."""
+        return "http://geant4.cern.ch/support/source/geant4.%s.tar.gz" % version

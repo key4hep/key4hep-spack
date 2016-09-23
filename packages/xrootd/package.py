@@ -25,8 +25,9 @@
 
 from spack import *
 
+
 class Xrootd(Package):
-    """The XROOTD project aims at giving high performance, scalable fault \ 
+    """The XROOTD project aims at giving high performance, scalable fault
        tolerant access to data repositories of many kinds."""
     homepage = "http://xrootd.org"
     url      = "http://xrootd.org/download/v4.3.0/xrootd-4.3.0.tar.gz"
@@ -49,4 +50,3 @@ class Xrootd(Package):
             cmake(source_directory, *options)
             make()
             make("install")
-
