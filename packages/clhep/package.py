@@ -25,6 +25,7 @@
 
 from spack import *
 
+
 class Clhep(Package):
     """CLHEP is a C++ Class Library for High Energy Physics. """
     homepage = "http://proj-clhep.web.cern.ch/proj-clhep/"
@@ -50,24 +51,27 @@ class Clhep(Package):
         filter_file('SET CMP0042 OLD',
                     'SET CMP0042 NEW',
                     '%s/%s/CLHEP/CMakeLists.txt'
-                    %(self.stage.path,self.spec.version))
+                    % (self.stage.path, self.spec.version))
 
     def install(self, spec, prefix):
         # Handle debug
         # Pull out the BUILD_TYPE so we can change it (Release is default)
-        cmake_args = [ arg for arg in std_cmake_args if 'BUILD_TYPE' not in arg ]
+        cmake_args = [arg for arg in std_cmake_args if 'BUILD_TYPE' not in arg]
         build_type = 'Debug' if '+debug' in spec else 'MinSizeRel'
         cmake_args.extend(['-DCMAKE_BUILD_TYPE=' + build_type])
 
         if '+cxx11' in spec:
             env['CXXFLAGS'] = self.compiler.cxx11_flag
-            cmake_args.append('-DCLHEP_BUILD_CXXSTD=' + self.compiler.cxx11_flag)
+            cmake_args.append('-DCLHEP_BUILD_CXXSTD=' +
+                              self.compiler.cxx11_flag)
 
         if '+cxx14' in spec:
             env['CXXFLAGS'] = self.compiler.cxx14_flag
-            cmake_args.append('-DCLHEP_BUILD_CXXSTD=' + self.compiler.cxx14_flag)
+            cmake_args.append('-DCLHEP_BUILD_CXXSTD=' +
+                              self.compiler.cxx14_flag)
 
-        # Note that the tar file is unusual in that there's a CLHEP directory (addtional layer)
+        # Note that the tar file is unusual in that there's a
+        # CLHEP directory (addtional layer)
         cmake_args.append("../CLHEP")
 
         # Run cmake in a build directory

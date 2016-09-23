@@ -33,11 +33,10 @@ class Gmake(Package):
 
     version('4.0', 'b5e558f981326d9ca1bfdb841640721a')
 
-
     def install(self, spec, prefix):
         configure('--prefix={0}'.format(prefix))
 
         make()
         make('install')
         with working_dir(prefix.bin):
-            symlink('make','gmake')
+            symlink('make', 'gmake')

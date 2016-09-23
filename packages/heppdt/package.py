@@ -25,11 +25,12 @@
 
 from spack import *
 
+
 class Heppdt(Package):
-    """ The HepPID library contains translation methods for particle ID's \
-        to and from various Monte Carlo generators and the PDG standard \
-        numbering scheme. We realize that the generators adhere closely \
-        to the standard, but there are occasional differences."""
+    """ The HepPID library contains translation methods for particle ID's
+    to and from various Monte Carlo generators and the PDG standard
+    numbering scheme. We realize that the generators adhere closely
+    to the standard, but there are occasional differences."""
     homepage = "http://lcgapp.cern.ch/project/simu/HepPDT/"
     url      = "http://lcgapp.cern.ch/project/simu/HepPDT/download/HepPDT-2.06.01.tar.gz"
 

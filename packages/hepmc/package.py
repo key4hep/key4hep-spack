@@ -27,7 +27,7 @@ from spack import *
 
 
 class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for \
+    """The HepMC package is an object oriented, C++ event record for
        High Energy Physics Monte Carlo generators and simulation."""
 
     homepage = "http://hepmc.web.cern.ch/hepmc/"
@@ -44,7 +44,7 @@ class Hepmc(Package):
     def install(self, spec, prefix):
         build_directory = join_path(self.stage.path, 'spack-build')
         source_directory = self.stage.source_path
-        options=[source_directory]
+        options = [source_directory]
         options.append('-Dmomentum:STRING=GEV')
         options.append('-Dlength:STRING=MM')
         options.extend(std_cmake_args)
