@@ -63,7 +63,7 @@ class Gcc(Package):
         filter_file(r"'@.*@'", "'@[[:alnum:]]*@'", 'libjava/configure',
                     string=True)
 
-        enabled_languages = set(('c', 'c++', 'fortran', 'java', 'objc'))
+        enabled_languages = set(('c', 'c++', 'fortran'))
 
         if spec.satisfies("@4.7.1:") and sys.platform != 'darwin':
             enabled_languages.add('go')
