@@ -39,7 +39,6 @@ class Hepmc(Package):
     version('2.06.06', '102e5503537a3ecd6ea6f466aa5bc4ae')
     version('2.06.05', '2a4a2a945adf26474b8bdccf4f881d9c')
 
-    depends_on("cmake", type='build')
 
     def install(self, spec, prefix):
         build_directory = join_path(self.stage.path, 'spack-build')
