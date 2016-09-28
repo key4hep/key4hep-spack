@@ -40,7 +40,7 @@ class Geant4(Package):
 
     variant('qt', default=False, description='Enable Qt support')
 
-    depends_on('cmake@3.5:', type='build')
+    depends_on('cmake@3.5', type='build')
 
     depends_on("clhep@2.3.1.1~cxx11+cxx14", when="@10.02.p01")
     depends_on("clhep@2.2.0.4~cxx11+cxx14", when="@10.01.p03")
