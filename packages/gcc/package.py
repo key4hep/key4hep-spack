@@ -97,6 +97,10 @@ class Gcc(Package):
             darwin_options = ["--with-build-config=bootstrap-debug", "--with-default-libstdcxx-abi=gcc4-compatible"]
             options.extend(darwin_options)
 
+        if spec.satisfies("@5:") and sys.platform != 'darwin':
+            comp_options = ["--with-default-libstdcxx-abi=gcc4-compatible"]
+            options.extend(comp_options)
+
         build_dir = join_path(self.stage.path, 'spack-build')
         configure = Executable(join_path(self.stage.source_path, 'configure'))
         with working_dir(build_dir, create=True):
