@@ -53,3 +53,6 @@ class Hepmc(Package):
             cmake(*options)
             make()
             make('install')
+
+    def setup_dependent_environment(self, spack_env, run_env, dspec):
+        spack_env.set('HEPMC_PREFIX', self.prefix)
