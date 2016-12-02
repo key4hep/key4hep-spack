@@ -31,10 +31,10 @@ class Gcc(Package):
     version('4.5.4', '27e459c2566b8209ab064570e1b378f7')
 
     variant('binutils',
-            default=sys.platform != 'darwin',
+            default=False,
             description="Build via binutils")
     variant('gold',
-            default=sys.platform != 'darwin',
+            default=False,
             description="Build the gold linker plugin for ld-based LTO")
     variant('piclibs',
             default=False,
