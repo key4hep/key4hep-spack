@@ -39,6 +39,13 @@ class Gcc(Package):
     variant('piclibs',
             default=False,
             description="Build PIC versions of libgfortran.a and libstdc++.a")
+    variant('go',
+            default=False,
+            description="Build go compiler")
+    variant('java',
+            default=False,
+            description="Build java compiler")
+
 
     depends_on("mpfr")
     depends_on("gmp")
@@ -54,9 +61,10 @@ class Gcc(Package):
         patch('darwin/gcc-4.9.patch1', when='@4.9.3')
         patch('darwin/gcc-4.9.patch2', when='@4.9.3')
     else:
-        provides('golang', when='@4.7.1:')
+        provides('golang', when='+go @4.7.1:')
 
     patch('piclibs.patch', when='+piclibs')
+    patch('gcc-backport.patch', when='@4.7:4.9.2,5:5.3')
 
     def install(self, spec, prefix):
         # libjava/configure needs a minor fix to install into spack paths.
@@ -65,8 +73,10 @@ class Gcc(Package):
 
         enabled_languages = set(('c', 'c++', 'fortran'))
 
-        if spec.satisfies("@4.7.1:") and sys.platform != 'darwin':
+        if spec.satisfies("+go") and sys.platform != 'darwin':
             enabled_languages.add('go')
+        if spec.satisfies("+java"):
+            enabled_languages.add('java')
 
         # Generic options to compile GCC
         options = ["--prefix=%s" % prefix, "--libdir=%s/lib64" % prefix,
