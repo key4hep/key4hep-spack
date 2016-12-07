@@ -3,20 +3,21 @@ from spack import *
 class Gaudi(Package):
     """Gaudi framework."""
     homepage = "https://gaudi.cern.ch"
-    url      = "http://gaudi.cern.ch"
+    url      = "https://gaudi.cern.ch"
 
     version('v27r1', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v27r1')
+    version('v28r0', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v28r0')
 
     depends_on("python")
     depends_on("root")
     depends_on("py-qmtest")
     depends_on("clhep")
-    depends_on("boost@1.59.0+python")
+    depends_on("boost")
     depends_on("cppunit")
     depends_on("aida")
-    depends_on("tbb@20140122oss")
+    depends_on("tbb")
     depends_on("gperftools")
-    depends_on("heppdt@2.06.01")
+    depends_on("heppdt")
 
     def install(self, spec, prefix):
         options = []
