@@ -31,6 +31,13 @@ class Dd4hep(CMakePackage):
     homepage = "https://github.com/AIDASoft/DD4hep/"
     url      = "https://github.com/AIDASoft/DD4hep/archive/v00-19.tar.gz"
 
+    version('19', 'f5e162261433082c6363e6c96c08c66e')
+    version('18', 'ab4f3033c9ac7494f863bc88eedbdcf5')
+    version('17', '9b9ea29790aa887893484ed8a4afae68')
+    version('16', '4df618f2f7b10f0e995d7f30214f0850')
+    version('15', 'cf0b50903e37c30f2361318c79f115ce')
+
+
     depends_on('cmake', type='build')
     depends_on('boost')
     depends_on('xerces-c')
