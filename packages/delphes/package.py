@@ -42,6 +42,7 @@ class Delphes(CMakePackage):
     version('10', 'dfc76e38838c15bad29ebc9ebb3d0724')
     version('09', 'ac3ad6211009feaaa58d734101cbc99e')
     version('3.3.3', '1a2099854a4131cd53bd0b90ca0dff3d')
+    version('3.4.0', 'cfe26bfc2638d195c9880238c6f7adc4')
     version('develop', git='https://github.com/delphes/delphes.git', branch='master')
 
     depends_on('cmake', type='build')
