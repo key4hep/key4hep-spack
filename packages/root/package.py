@@ -32,6 +32,7 @@ class Root(Package):
     homepage = "https://root.cern.ch"
     url      = "https://root.cern.ch/download/root_v6.07.02.source.tar.gz"
 
+    version('6.08.02', '50c4dbb8aa81124aa58524e776fd4b4b')
     version('6.06.08', '6ef0fe9bd9f88f3ce8890e3651142ee4')
     version('6.06.06', '4308449892210c8d36e36924261fea26')
     version('6.06.04', '55a2f98dd4cea79c9c4e32407c2d6d17')
