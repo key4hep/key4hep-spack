@@ -53,13 +53,13 @@ class Tinyxml(Package):
       patch('tinyxml.patch')
 
     # FIXME: Add dependencies if required.
-    depends_on('boost')
+    depends_on('boost@1.60.0')
     depends_on('gmake',type='build')
 
     def install(self, spec, prefix):
         # FIXME: Unknown build system
         gmake=which('gmake')
-        gmake()
+        gmake('BOOST_ROOT=%s' % spec['boost'].prefix)
         cp=which('cp')
         md=which('mkdir')
         md('%s' % self.prefix.lib)
