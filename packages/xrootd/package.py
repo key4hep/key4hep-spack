@@ -46,7 +46,7 @@ class Xrootd(Package):
 
         if '+debug' in spec:
             options.append('-DCMAKE_BUILD_TYPE:STRING=Debug')
-        if sys.platform == 'Darwin':
+        if sys.platform == 'darwin':
             options.append('-DCMAKE_CXX_FLAGS=-fno-strict-aliasing -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-unused-variable')
         with working_dir(build_directory, create=True):
             cmake(source_directory, *options)
