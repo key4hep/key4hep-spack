@@ -35,9 +35,6 @@ class Hepmc(Package):
 
     version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
     version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
-    version('2.06.07', '11d7035dccb0650b331f51520c6172e7')
-    version('2.06.06', '102e5503537a3ecd6ea6f466aa5bc4ae')
-    version('2.06.05', '2a4a2a945adf26474b8bdccf4f881d9c')
 
     depends_on("cmake", type='build')
 
