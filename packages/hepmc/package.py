@@ -50,3 +50,8 @@ class Hepmc(Package):
             cmake(*options)
             make()
             make('install')
+            fix_darwin_install_name(prefix.lib)
+
+
+    def setup_dependent_environment(self, spack_env, run_env, dspec):
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
