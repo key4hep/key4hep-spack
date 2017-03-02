@@ -33,16 +33,9 @@ class Delphes(CMakePackage):
     homepage = "https://github.com/delphes/delphes"
     url      = "https://github.com/delphes/delphes/archive/3.3.3.tar.gz"
 
-    version('16', '542ce3c064094f2b04456395227621cf')
-    version('15', 'f04f7c7495deb84193b49058ea50c111')
-    version('14', '1dd287ab24d6c237ccb428cc6dd4a4bf')
-    version('13', 'faca7e76269c88099d95ef74525b732f')
-    version('12', '450f801f7d60c09bf77cd6013d364c65')
-    version('11', '8bcb45a0a38c17d0cf762dadd49d5a02')
-    version('10', 'dfc76e38838c15bad29ebc9ebb3d0724')
-    version('09', 'ac3ad6211009feaaa58d734101cbc99e')
     version('3.3.3', '1a2099854a4131cd53bd0b90ca0dff3d')
     version('3.4.0', 'cfe26bfc2638d195c9880238c6f7adc4')
+    version('3.4.1pre01', git=homepage, tag='3.4.1pre01')
     version('develop', git='https://github.com/delphes/delphes.git', branch='master')
 
     depends_on('cmake', type='build')
