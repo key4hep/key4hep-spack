@@ -7,6 +7,7 @@ class Gaudi(Package):
 
     version('v27r1', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v27r1')
     version('v28r0', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v28r0')
+    version('v28r1', git='https://gitlab.cern.ch/gaudi/Gaudi.git', tag='v28r1')
 
     depends_on("python")
     depends_on("root")
