@@ -48,3 +48,7 @@ class Dd4hep(CMakePackage):
         return [
             '-DCMAKE_BUILD_TYPE:STRING=%s' ('Debug' if '+debug' in spec else 'Release')
         ]
+
+
+    def setup_dependent_environment(self, spack_env, run_env, dspec):
+        spack_env.set('DD4hep_DIR', self.prefix)
