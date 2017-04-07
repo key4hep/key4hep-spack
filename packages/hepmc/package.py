@@ -33,11 +33,8 @@ class Hepmc(Package):
     homepage = "http://hepmc.web.cern.ch/hepmc/"
     url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
 
-    version('2.06.09', 'c47627ced4255b40e731b8666848b087')
+    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
     version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
-    version('2.06.07', '11d7035dccb0650b331f51520c6172e7')
-    version('2.06.06', '102e5503537a3ecd6ea6f466aa5bc4ae')
-    version('2.06.05', '2a4a2a945adf26474b8bdccf4f881d9c')
 
     depends_on("cmake", type='build')
 
@@ -53,3 +50,8 @@ class Hepmc(Package):
             cmake(*options)
             make()
             make('install')
+            fix_darwin_install_name(prefix.lib)
+
+
+    def setup_dependent_environment(self, spack_env, run_env, dspec):
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
