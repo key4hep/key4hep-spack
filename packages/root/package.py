@@ -47,7 +47,7 @@ class Root(Package):
     depends_on("cmake", type='build')
     depends_on("libtool", type='build')
     depends_on("pcre")
-    depends_on("fftw")
+    depends_on("fftw~mpi")
     depends_on("graphviz", when="+graphviz")
     depends_on("python")
     depends_on("gsl")
