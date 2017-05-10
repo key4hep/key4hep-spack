@@ -35,6 +35,8 @@ class Tbb(Package):
     homepage = "http://www.threadingbuildingblocks.org/"
 
     # Only version-specific URL's work for TBB
+
+    version('20161128oss', 'bd71c82574927ce5507abcbcd3be2c1c', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb2017_20161128oss_src.tgz')
     version('20160316oss', '1908b8901730fa1049f0c45d8d0e6d7d', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160316oss_src.tgz')
     version('20160128oss', '9d8a4cdf43496f1b3f7c473a5248e5cc', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20160128oss_src_0.tgz')
     version('20151115oss', '7fae6a6bbca68bbdc18e844d6721d5e4', url='https://www.threadingbuildingblocks.org/sites/default/files/software_releases/source/tbb44_20151115oss_src.tgz')
@@ -85,7 +87,7 @@ class Tbb(Package):
         # tbb does not have a configure script or make install target
         # we simply call make, and try to put the pieces together
         #
-        make("compiler=%s"  %(tbb_compiler))
+        make("compiler=%s"  %(tbb_compiler),"stdver=c++14")
 
         # install headers to {prefix}/include
         install_tree('include',prefix.include)
