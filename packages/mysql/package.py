@@ -24,34 +24,47 @@
 ##############################################################################
 
 from spack import *
+import os
 
+class Mysql(Package):
+    """The MySQL software delivers a very fast, multi-threaded, multi-user,
+       and robust SQL (Structured Query Language) database server."""
 
-class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for
-       High Energy Physics Monte Carlo generators and simulation."""
+    homepage = "http://dev.mysql.com/"
+    url      = "http://pkgs.fedoraproject.org/repo/pkgs/community-mysql/mysql-5.7.11.tar.gz/f84d945a40ed876d10f8d5a7f4ccba32/mysql-5.7.11.tar.gz"
+    list_url = "http://pkgs.fedoraproject.org/repo/pkgs/community-mysql/"
 
-    homepage = "http://hepmc.web.cern.ch/hepmc/"
-    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
+    version('5.7.11', 'f84d945a40ed876d10f8d5a7f4ccba32')
+    version('5.5.30', 'de881c1940aa05e78266e77c9ac3d129')
+    version('5.5.27', '070340bc98dcb7f646287c97f1b91a1e')
+    version('5.5.19', 'a78cf450974e9202bd43674860349b5a')
+    version('5.5.18', '38b65815249f3bcacf3b0ee85171c486')
 
-    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
-    version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
+    patch('mysql-5.7.11.patch', when='@5.7.11')
 
-    depends_on("cmake", type='build')
+    depends_on('cmake', type='build')
+    depends_on('libaio')
 
     def install(self, spec, prefix):
         build_directory = join_path(self.stage.path, 'spack-build')
         source_directory = self.stage.source_path
-        options = [source_directory]
-        options.append('-Dmomentum:STRING=GEV')
-        options.append('-Dlength:STRING=MM')
-        options.extend(std_cmake_args)
+
+        cmake_args = []
+
+        if '+debug' in spec:
+            cmake_args.append('-DCMAKE_BUILD_TYPE:STRING=Debug')
+        else:
+            cmake_args.append('-DCMAKE_BUILD_TYPE:STRING=Release')
+
+        cmake_args.extend([
+            '-DDOWNLOAD_BOOST=1',
+            '-DWITH_BOOST='+build_directory+'/boost',
+            '-DWITH_SSL=system',
+        ])
+
+        cmake_args.extend(std_cmake_args)
 
         with working_dir(build_directory, create=True):
-            cmake(*options)
+            cmake(source_directory,*cmake_args)
             make()
-            make('install')
-            fix_darwin_install_name(prefix.lib)
-
-
-    def setup_dependent_environment(self, spack_env, run_env, dspec):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+            make("install")
