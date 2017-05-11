@@ -26,32 +26,26 @@
 from spack import *
 
 
-class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for
-       High Energy Physics Monte Carlo generators and simulation."""
+class Delphes(CMakePackage):
+    """Event data model description library"""
 
-    homepage = "http://hepmc.web.cern.ch/hepmc/"
-    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
+    # FIXME: Add a proper url for your package's homepage here.
+    homepage = "https://github.com/delphes/delphes"
+    url      = "https://github.com/delphes/delphes/archive/3.3.3.tar.gz"
 
-    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
-    version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
+    version('3.3.3', '1a2099854a4131cd53bd0b90ca0dff3d')
+    version('3.4.0', 'cfe26bfc2638d195c9880238c6f7adc4')
+    version('3.4.1pre01', git=homepage, tag='3.4.1pre01')
+    version('develop', git='https://github.com/delphes/delphes.git', branch='master')
 
-    depends_on("cmake", type='build')
+    depends_on('cmake', type='build')
+    depends_on('root')
 
-    def install(self, spec, prefix):
-        build_directory = join_path(self.stage.path, 'spack-build')
-        source_directory = self.stage.source_path
-        options = [source_directory]
-        options.append('-Dmomentum:STRING=GEV')
-        options.append('-Dlength:STRING=MM')
-        options.extend(std_cmake_args)
-
-        with working_dir(build_directory, create=True):
-            cmake(*options)
-            make()
-            make('install')
-            fix_darwin_install_name(prefix.lib)
+    def configure_args(self):
+        spec = self.spec
+        return [
+            '-DCMAKE_BUILD_TYPE:STRING=%s' ('Debug' if '+debug' in spec else 'Release')
+        ]
 
     def setup_dependent_environment(self, spack_env, run_env, dspec):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-        spack_env.set('HEPMC_PREFIX', self.prefix)
+        spack_env.set('DELPHES_DIR', self.prefix)

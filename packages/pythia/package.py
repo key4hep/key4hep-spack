@@ -24,34 +24,26 @@
 ##############################################################################
 
 from spack import *
+import os
 
+class Pythia(Package):
+    """Event generator pythia"""
 
-class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for
-       High Energy Physics Monte Carlo generators and simulation."""
+    homepage = "http://home.thep.lu.se/~torbjorn/Pythia.html"
+    url      = "http://home.thep.lu.se/~torbjorn/pythia8/pythia8219.tgz"
 
-    homepage = "http://hepmc.web.cern.ch/hepmc/"
-    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
-
-    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
-    version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
-
-    depends_on("cmake", type='build')
+    version('8219', '3459b52b5da1deae52cbddefa6196feb')
+    version('8215', 'b4653133e6ab1782a5a4aa66eda6a54b')
+    version('8212', '0886d1b2827d8f0cd2ae69b925045f40')
+    version('8210', '685d61f08ca486caa6d5dfa35089e4ab')
+    version('8209', '1b9e9dc2f8a2c2db63bce739242fbc12')
 
     def install(self, spec, prefix):
-        build_directory = join_path(self.stage.path, 'spack-build')
-        source_directory = self.stage.source_path
-        options = [source_directory]
-        options.append('-Dmomentum:STRING=GEV')
-        options.append('-Dlength:STRING=MM')
-        options.extend(std_cmake_args)
-
-        with working_dir(build_directory, create=True):
-            cmake(*options)
-            make()
-            make('install')
-            fix_darwin_install_name(prefix.lib)
+        configure("--prefix=%s" % prefix)
+        make()
+        make("install")
 
     def setup_dependent_environment(self, spack_env, run_env, dspec):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-        spack_env.set('HEPMC_PREFIX', self.prefix)
+        spack_env.set('PYTHIA8_DIR', self.prefix)
+        spack_env.set('PYTHIA8_XML', os.path.join(self.prefix, "share", "Pythia8", "xmldoc"))
+        spack_env.set('PYTHIA8DATA', os.path.join(self.prefix, "share", "Pythia8", "xmldoc"))
