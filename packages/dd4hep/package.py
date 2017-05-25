@@ -26,32 +26,29 @@
 from spack import *
 
 
-class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for
-       High Energy Physics Monte Carlo generators and simulation."""
+class Dd4hep(CMakePackage):
+    """software framework of the FCC project"""
+    homepage = "https://github.com/AIDASoft/DD4hep/"
+    url      = "https://github.com/AIDASoft/DD4hep/archive/v00-19.tar.gz"
 
-    homepage = "http://hepmc.web.cern.ch/hepmc/"
-    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
+    version('19', 'f5e162261433082c6363e6c96c08c66e')
+    version('18', 'ab4f3033c9ac7494f863bc88eedbdcf5')
+    version('17', '9b9ea29790aa887893484ed8a4afae68')
+    version('16', '4df618f2f7b10f0e995d7f30214f0850')
+    version('15', 'cf0b50903e37c30f2361318c79f115ce')
 
-    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
-    version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
 
-    depends_on("cmake", type='build')
+    depends_on('cmake', type='build')
+    depends_on('boost')
+    depends_on('xerces-c')
+    depends_on('geant4')
 
-    def install(self, spec, prefix):
-        build_directory = join_path(self.stage.path, 'spack-build')
-        source_directory = self.stage.source_path
-        options = [source_directory]
-        options.append('-Dmomentum:STRING=GEV')
-        options.append('-Dlength:STRING=MM')
-        options.extend(std_cmake_args)
+    def configure_args(self):
+        spec = self.spec
+        return [
+            '-DCMAKE_BUILD_TYPE:STRING=%s' ('Debug' if '+debug' in spec else 'Release')
+        ]
 
-        with working_dir(build_directory, create=True):
-            cmake(*options)
-            make()
-            make('install')
-            fix_darwin_install_name(prefix.lib)
 
     def setup_dependent_environment(self, spack_env, run_env, dspec):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-        spack_env.set('HEPMC_PREFIX', self.prefix)
+        spack_env.set('DD4hep_DIR', self.prefix)

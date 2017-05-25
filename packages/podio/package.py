@@ -26,32 +26,29 @@
 from spack import *
 
 
-class Hepmc(Package):
-    """The HepMC package is an object oriented, C++ event record for
-       High Energy Physics Monte Carlo generators and simulation."""
+class Podio(CMakePackage):
+    """Event data model description library"""
 
-    homepage = "http://hepmc.web.cern.ch/hepmc/"
-    url      = "http://hepmc.web.cern.ch/hepmc/releases/hepmc2.06.09.tgz"
+    # FIXME: Add a proper url for your package's homepage here.
+    homepage = "http://www.example.com"
+    url      = "https://github.com/HEP-FCC/podio/archive/v0.4.tar.gz"
 
-    version('2.06.09', 'c789ad9899058737b3563f41b9c7425b')
-    version('2.06.08', 'a2e889114cafc4f60742029d69abd907')
+    version('0.4.1', '6c3e166bfca6a7d36de05cbde3a55713')
+    version('0.4'  , '9cb8b0dd4510ed1ee05e03982196151d')
+    version('0.3.2', 'ed07d059e0fe79336a8c9c8e8be6d4e1')
+    version('0.3.1', 'a7bc95a99af6fc50ae39539e5aa1087e')
+    version('0.3'  , '04411e2a48126846f576ca292e4656a0')
+    version('develop', git='https://github.com/HEP-FCC/podio.git', branch='master')
 
-    depends_on("cmake", type='build')
+    depends_on('cmake', type='build')
+    depends_on('py-pyyaml', type='run')
+    depends_on('root')
 
-    def install(self, spec, prefix):
-        build_directory = join_path(self.stage.path, 'spack-build')
-        source_directory = self.stage.source_path
-        options = [source_directory]
-        options.append('-Dmomentum:STRING=GEV')
-        options.append('-Dlength:STRING=MM')
-        options.extend(std_cmake_args)
-
-        with working_dir(build_directory, create=True):
-            cmake(*options)
-            make()
-            make('install')
-            fix_darwin_install_name(prefix.lib)
+    def configure_args(self):
+        spec = self.spec
+        return [
+            '-DCMAKE_BUILD_TYPE:STRING=%s' ('Debug' if '+debug' in spec else 'Release')
+        ]
 
     def setup_dependent_environment(self, spack_env, run_env, dspec):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-        spack_env.set('HEPMC_PREFIX', self.prefix)
+        spack_env.set('PODIO', self.prefix)
