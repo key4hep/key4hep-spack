@@ -26,7 +26,7 @@
 from spack import *
 import os
 
-class Pythia(Package):
+class Pythia8(Package):
     """Event generator pythia"""
 
     homepage = "http://home.thep.lu.se/~torbjorn/Pythia.html"
