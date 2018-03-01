@@ -39,31 +39,33 @@ class Dd4hep(CMakePackage):
     version('00.16', '4df618f2f7b10f0e995d7f30214f0850')
     version('00.15', 'cf0b50903e37c30f2361318c79f115ce')
 
-
     depends_on('cmake', type='build')
     depends_on('boost')
     depends_on('xerces-c')
     depends_on('geant4')
     depends_on('root')
 
-    def configure_args(self):
+    def cmake_args(self):
         spec = self.spec
 
         options = []
 
+        # Set the correct compiler flag
+        if self.compiler.cxx11_flag:
+            options.extend(['-DDD4HEP_USE_CXX11=ON'])
+        if self.compiler.cxx14_flag:
+            options.extend(['-DDD4HEP_USE_CXX14=ON'])
+        if self.compiler.cxx17_flag:
+            options.extend(['-DDD4HEP_USE_CXX17=ON'])
+
         options.extend([
-            '-DCMAKE_BUILD_TYPE:STRING=%s' ('Debug' if '+debug' in spec else 'Release'),
-            '-DROOTSYS=' % spec['root'].prefix,
+            '-DROOTSYS=%s' % spec['root'].prefix,
             '-DDD4HEP_USE_GEANT4=ON',
             '-DDD4HEP_USE_XERCESC=ON',
-            '-DXERCESC_ROOT_DIR=' % spec['xerces-c'].prefix,
-            '-DDD4HEP_USE_CXX14=ON'
+            '-DXERCESC_ROOT_DIR=%s' % spec['xerces-c'].prefix
         ])
 
         return options
-
-    def setup_environment(self, spack_env, run_env):
-        spack_env.set('ROOT_DIR', self.spec['root'].prefix)
 
     def setup_dependent_environment(self, spack_env, run_env, dspec):
         spack_env.set('DD4hep_DIR', self.prefix)
