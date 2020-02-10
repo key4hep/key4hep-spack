@@ -27,7 +27,7 @@ from spack import *
 import llnl.util.tty as tty
 import subprocess
 
-class K4FWCore(CMakePackage):
+class K4fwcore(CMakePackage):
     """Core framework components of the Key4HEP project"""
     homepage = "https://github.com/key4hep/K4FWCore"
     git = "https://github.com/key4hep/K4FWCore.git"
@@ -46,12 +46,8 @@ class K4FWCore(CMakePackage):
             description='Use the specified C++ standard when building.')
 
 
-    # LCG Releases built with gcc7 use C++17
-    depends_on('fcc-edm@0.5.5: cxxstd=17', when="%gcc@7:")
-    depends_on('fcc-edm cxxstd=14', when="%gcc@:6.99")
 
     depends_on('gaudi')
-
     depends_on('root')
 
 
@@ -69,7 +65,7 @@ class K4FWCore(CMakePackage):
     def setup_environment(self, spack_env, run_env):
         # Need to explicitly add DD4hep libs to the LD_LIBRARY_PATH since
         # some cmake files (MakeGaudiMap.cmake) only rely on this variable
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
+        #spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
 
         # Gaudi automatically detects the processor if BINARY_TAG is not defined
         # in the environment. This leads to an error detecting a 'broadwell'

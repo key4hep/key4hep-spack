@@ -26,7 +26,7 @@
 from spack import *
 
 
-class EDM4hep(CMakePackage):
+class Edm4hep(CMakePackage):
     """Event data model of Key4HEP"""
 
     homepage = "https://github.com/HSF/EDM4hep"
@@ -48,6 +48,7 @@ class EDM4hep(CMakePackage):
     depends_on('python', type='build')
     depends_on('root')
     depends_on('podio')
+    depends_on('tbb')
 
     # in LCG_96 ROOT is installed with an external xz rather than the builtin,
     # so the genreflex binary needs to find it.
