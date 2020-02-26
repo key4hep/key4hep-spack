@@ -32,7 +32,7 @@ class Edm4hep(CMakePackage):
     homepage = "https://github.com/HSF/EDM4hep"
     git = "https://github.com/HSF/EDM4hep.git"
 
-    version('master', branch='master')
+    version('develop', branch='master')
 
     variant('build_type', default='Release',
             description='The build type to build',
@@ -47,8 +47,9 @@ class Edm4hep(CMakePackage):
     depends_on('cmake', type='build')
     depends_on('python', type='build')
     depends_on('root')
-    depends_on('podio')
-    depends_on('tbb')
+    depends_on('podio@develop')
+    depends_on('tbb', when="+lcg")
+    depends_on('davix', when="+lcg")
 
     # in LCG_96 ROOT is installed with an external xz rather than the builtin,
     # so the genreflex binary needs to find it.
