@@ -44,6 +44,9 @@ class Edm4hep(CMakePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
+    variant('lcg', default=False,
+            description='when built against lcg releases')
+
     depends_on('cmake', type='build')
     depends_on('python', type='build')
     depends_on('root')
@@ -56,7 +59,7 @@ class Edm4hep(CMakePackage):
     # As root is installed as an external package we cannot modify its
     # setup_dependent_environment function to add the xz lib folder to the
     # LD_LIBRARY_PATH hence we need to do it here.
-    depends_on('xz', when='^root@6.16:')
+    depends_on('xz', when='^root@6.16')
 
     def cmake_args(self):
         args = []
