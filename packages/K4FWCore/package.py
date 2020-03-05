@@ -33,6 +33,7 @@ class K4fwcore(CMakePackage):
     git = "https://github.com/key4hep/K4FWCore.git"
 
     version('master', branch='master')
+    version('develop', branch='master')
 
     variant('build_type', default='Release',
             description='CMake build type',
@@ -49,6 +50,7 @@ class K4fwcore(CMakePackage):
 
     depends_on('gaudi')
     depends_on('root')
+    depends_on('podio')
 
 
     depends_on('vdt', when="+lcg")
