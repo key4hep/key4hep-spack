@@ -1,0 +1,11 @@
+compilers:
+- compiler:
+    environment:
+      set: {LD_LIBRARY_PATH: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gcc/8/x86_64-centos7/lib64}
+    modules: []
+    operating_system: centos7
+    paths: {cc: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gcc/8/x86_64-centos7/bin/gcc,
+      cxx: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gcc/8/x86_64-centos7/bin/g++,
+      f77: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gcc/8/x86_64-centos7/bin/gfortran,
+      fc: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gcc/8/x86_64-centos7/bin/gfortran}
+    spec: gcc@8.3.0
