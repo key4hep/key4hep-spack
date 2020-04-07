@@ -1,0 +1,1411 @@
+packages:
+  git: 
+    buildable: false
+    paths: {git: /cvmfs/sft.cern.ch/lcg/contrib/git/latest/x86_64-centos7/}
+  4suite:
+    buildable: false
+    paths: {4suite@1.0.2p1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/4suite/1.0.2p1/x86_64-centos7-gcc8-opt}
+  absl_py:
+    buildable: false
+    paths: {absl_py@0.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/absl_py/0.7.1/x86_64-centos7-gcc8-opt}
+  acts_core:
+    buildable: false
+    paths: {acts_core@0.10.05%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/acts_core/0.10.05/x86_64-centos7-gcc8-opt}
+  agile:
+    buildable: false
+    paths: {agile@1.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/agile/1.5.0/x86_64-centos7-gcc8-opt}
+  aida:
+    buildable: false
+    paths: {aida@3.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/AIDA/3.2.1/x86_64-centos7-gcc8-opt}
+  alpgen:
+    buildable: false
+    paths: {alpgen@2.1.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/alpgen/2.1.4/x86_64-centos7-gcc8-opt}
+  ampt:
+    buildable: false
+    paths: {ampt@2.26t9b_atlas%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/ampt/2.26t9b_atlas/x86_64-centos7-gcc8-opt}
+  arrow:
+    buildable: false
+    paths: {arrow@0.15.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/arrow/0.15.1/x86_64-centos7-gcc8-opt}
+  asn1crypto:
+    buildable: false
+    paths: {asn1crypto@0.24.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/asn1crypto/0.24.0/x86_64-centos7-gcc8-opt}
+  assimp:
+    buildable: false
+    paths: {assimp@5.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/assimp/5.0.1/x86_64-centos7-gcc8-opt}
+  astor:
+    buildable: false
+    paths: {astor@0.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/astor/0.8.0/x86_64-centos7-gcc8-opt}
+  astroid:
+    buildable: false
+    paths: {astroid@1.6.6p1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/astroid/1.6.6p1/x86_64-centos7-gcc8-opt}
+  atomicwrites:
+    buildable: false
+    paths: {atomicwrites@1.3.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/atomicwrites/1.3.0/x86_64-centos7-gcc8-opt}
+  attrs:
+    buildable: false
+    paths: {attrs@19.3.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/attrs/19.3.0/x86_64-centos7-gcc8-opt}
+  autoconf:
+    buildable: false
+    paths: {autoconf@2.69%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/autoconf/2.69/x86_64-centos7-gcc8-opt}
+  automake:
+    buildable: false
+    paths: {automake@1.16.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/automake/1.16.1/x86_64-centos7-gcc8-opt}
+  autopep8:
+    buildable: false
+    paths: {autopep8@1.4.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/autopep8/1.4.4/x86_64-centos7-gcc8-opt}
+  awkward:
+    buildable: false
+    paths: {awkward@0.12.17%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/awkward/0.12.17/x86_64-centos7-gcc8-opt}
+  backcall:
+    buildable: false
+    paths: {backcall@0.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/backcall/0.1.0/x86_64-centos7-gcc8-opt}
+  backports:
+    buildable: false
+    paths: {backports@1.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/backports/1.0.0/x86_64-centos7-gcc8-opt}
+  backports_abc:
+    buildable: false
+    paths: {backports_abc@0.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/backports_abc/0.5/x86_64-centos7-gcc8-opt}
+  baurmc:
+    buildable: false
+    paths: {baurmc@1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/baurmc/1.0/x86_64-centos7-gcc8-opt}
+  benchmark:
+    buildable: false
+    paths: {benchmark@1.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/benchmark/1.5.0/x86_64-centos7-gcc8-opt}
+  bison:
+    buildable: false
+    paths: {bison@3.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/bison/3.3.2/x86_64-centos7-gcc8-opt}
+  bleach:
+    buildable: false
+    paths: {bleach@3.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/bleach/3.1.0/x86_64-centos7-gcc8-opt}
+  boost:
+    buildable: false
+    paths: {boost@1.72.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Boost/1.72.0/x86_64-centos7-gcc8-opt}
+  brotli:
+    buildable: false
+    paths: {brotli@1.0.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/brotli/1.0.7/x86_64-centos7-gcc8-opt}
+  c50:
+    buildable: false
+    paths: {c50@2.07%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/C50/2.07/x86_64-centos7-gcc8-opt}
+  cachetools:
+    buildable: false
+    paths: {cachetools@3.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cachetools/3.1.1/x86_64-centos7-gcc8-opt}
+  cairo:
+    buildable: false
+    paths: {cairo@1.17.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cairo/1.17.2/x86_64-centos7-gcc8-opt}
+  caniusepython3:
+    buildable: false
+    paths: {caniusepython3@7.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/caniusepython3/7.1.0/x86_64-centos7-gcc8-opt}
+  cartopy:
+    buildable: false
+    paths: {cartopy@0.17.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cartopy/0.17.0/x86_64-centos7-gcc8-opt}
+  catboost:
+    buildable: false
+    paths: {catboost@0.9.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/catboost/0.9.1.1/x86_64-centos7-gcc8-opt}
+  ccache:
+    buildable: false
+    paths: {ccache@3.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ccache/3.7.1/x86_64-centos7-gcc8-opt}
+  certifi:
+    buildable: false
+    paths: {certifi@2019.3.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/certifi/2019.3.9/x86_64-centos7-gcc8-opt}
+  cffi:
+    buildable: false
+    paths: {cffi@1.12.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cffi/1.12.2/x86_64-centos7-gcc8-opt}
+  chaplin:
+    buildable: false
+    paths: {chaplin@1.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/chaplin/1.2/x86_64-centos7-gcc8-opt}
+  chardet:
+    buildable: false
+    paths: {chardet@3.0.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/chardet/3.0.4/x86_64-centos7-gcc8-opt}
+  clhep:
+    buildable: false
+    paths: {clhep@2.4.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/clhep/2.4.1.3/x86_64-centos7-gcc8-opt}
+  click:
+    buildable: false
+    paths: {click@7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/click/7.0/x86_64-centos7-gcc8-opt}
+  cloudpickle:
+    buildable: false
+    paths: {cloudpickle@1.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cloudpickle/1.2.1/x86_64-centos7-gcc8-opt}
+  cmake:
+    buildable: false
+    paths: {cmake@3.14.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/CMake/3.14.3/x86_64-centos7-gcc8-opt}
+  cmaketools:
+    buildable: false
+    paths: {cmaketools@1.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cmaketools/1.8/x86_64-centos7-gcc8-opt}
+  cmmnbuild:
+    buildable: false
+    paths: {cmmnbuild@2.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cmmnbuild/2.1.3/x86_64-centos7-gcc8-opt}
+  coin3d:
+    buildable: false
+    paths: {coin3d@3.1.3p2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/coin3d/3.1.3p2/x86_64-centos7-gcc8-opt}
+  collier:
+    buildable: false
+    paths: {collier@1.2.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/collier/1.2.4/x86_64-centos7-gcc8-opt}
+  colorcet:
+    buildable: false
+    paths: {colorcet@2.0.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/colorcet/2.0.2/x86_64-centos7-gcc8-opt}
+  contextlib2:
+    buildable: false
+    paths: {contextlib2@0.5.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/contextlib2/0.5.5/x86_64-centos7-gcc8-opt}
+  cool:
+    buildable: false
+    paths: {cool@3_2_4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/COOL/3_2_4/x86_64-centos7-gcc8-opt}
+  coral:
+    buildable: false
+    paths: {coral@3_2_4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/CORAL/3_2_4/x86_64-centos7-gcc8-opt}
+  couchdb:
+    buildable: false
+    paths: {couchdb@1.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/CouchDB/1.2/x86_64-centos7-gcc8-opt}
+  coverage:
+    buildable: false
+    paths: {coverage@4.5.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/coverage/4.5.3/x86_64-centos7-gcc8-opt}
+  cppgsl:
+    buildable: false
+    paths: {cppgsl@2.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cppgsl/2.1.0/x86_64-centos7-gcc8-opt}
+  cppunit:
+    buildable: false
+    paths: {cppunit@1.14.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/CppUnit/1.14.0/x86_64-centos7-gcc8-opt}
+  cpymad:
+    buildable: false
+    paths: {cpymad@1.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cpymad/1.4.1/x86_64-centos7-gcc8-opt}
+  crmc:
+    buildable: false
+    paths: {crmc@1.6.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/crmc/1.6.0/x86_64-centos7-gcc8-opt}
+  cryptography:
+    buildable: false
+    paths: {cryptography@2.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cryptography/2.7/x86_64-centos7-gcc8-opt}
+  cx_oracle:
+    buildable: false
+    paths: {cx_oracle@7.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cx_oracle/7.1.3/x86_64-centos7-gcc8-opt}
+  cycler:
+    buildable: false
+    paths: {cycler@0.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cycler/0.10.0/x86_64-centos7-gcc8-opt}
+  cython:
+    buildable: false
+    paths: {cython@0.29.13%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/cython/0.29.13/x86_64-centos7-gcc8-opt}
+  dask:
+    buildable: false
+    paths: {dask@1.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/dask/1.2.2/x86_64-centos7-gcc8-opt}
+  davix:
+    buildable: false
+    paths: {davix@0.7.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Davix/0.7.3/x86_64-centos7-gcc8-opt}
+  dcap:
+    buildable: false
+    paths: {dcap@2.47.7-1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Grid/dcap/2.47.7-1/x86_64-centos7-gcc8-opt}
+  dd4hep:
+    buildable: false
+    paths: {dd4hep@01-12-01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/DD4hep/01-12-01/x86_64-centos7-gcc8-opt}
+  decorator:
+    buildable: false
+    paths: {decorator@4.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/decorator/4.3.2/x86_64-centos7-gcc8-opt}
+  defusedxml:
+    buildable: false
+    paths: {defusedxml@0.6.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/defusedxml/0.6.0/x86_64-centos7-gcc8-opt}
+  delphes:
+    buildable: false
+    paths: {delphes@3.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/delphes/3.4.2/x86_64-centos7-gcc8-opt}
+  dill:
+    buildable: false
+    paths: {dill@0.2.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/dill/0.2.9/x86_64-centos7-gcc8-opt}
+  distlib:
+    buildable: false
+    paths: {distlib@0.2.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/distlib/0.2.9/x86_64-centos7-gcc8-opt}
+  distributed:
+    buildable: false
+    paths: {distributed@1.28.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/distributed/1.28.1/x86_64-centos7-gcc8-opt}
+  double_conversion:
+    buildable: false
+    paths: {double_conversion@3.1.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/double_conversion/3.1.5/x86_64-centos7-gcc8-opt}
+  doxygen:
+    buildable: false
+    paths: {doxygen@1.8.15%gcc@8.3.0 +graphviz arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/doxygen/1.8.15/x86_64-centos7-gcc8-opt}
+  eigen:
+    buildable: false
+    paths: {eigen@3.3.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/eigen/3.3.7/x86_64-centos7-gcc8-opt}
+  elasticsearch:
+    buildable: false
+    paths: {elasticsearch@6.3.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/elasticsearch/6.3.0/x86_64-centos7-gcc8-opt}
+  entrypoints:
+    buildable: false
+    paths: {entrypoints@0.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/entrypoints/0.3/x86_64-centos7-gcc8-opt}
+  enum34:
+    buildable: false
+    paths: {enum34@1.1.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/enum34/1.1.6/x86_64-centos7-gcc8-opt}
+  evtgen:
+    buildable: false
+    paths: {evtgen@1.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/evtgen/1.7.0/x86_64-centos7-gcc8-opt}
+  expat:
+    buildable: false
+    paths: {expat@2.2.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/expat/2.2.6/x86_64-centos7-gcc8-opt}
+  fastjet:
+    buildable: false
+    paths: {fastjet@3.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fastjet/3.3.2/x86_64-centos7-gcc8-opt}
+  feynhiggs:
+    buildable: false
+    paths: {feynhiggs@2.10.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/feynhiggs/2.10.2/x86_64-centos7-gcc8-opt}
+  fftw:
+    buildable: false
+    paths: {fftw@3.3.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fftw3/3.3.8/x86_64-centos7-gcc8-opt}
+  fjcontrib:
+    buildable: false
+    paths: {fjcontrib@1.041%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fjcontrib/1.041/x86_64-centos7-gcc8-opt}
+  flake8:
+    buildable: false
+    paths: {flake8@3.7.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/flake8/3.7.8/x86_64-centos7-gcc8-opt}
+  flatbuffers:
+    buildable: false
+    paths: {flatbuffers@1.11.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/flatbuffers/1.11.0/x86_64-centos7-gcc8-opt}
+  flex:
+    buildable: false
+    paths: {flex@2.6.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/flex/2.6.4/x86_64-centos7-gcc8-opt}
+  fmt:
+    buildable: false
+    paths: {fmt@6.1.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fmt/6.1.2/x86_64-centos7-gcc8-opt}
+  fontconfig:
+    buildable: false
+    paths: {fontconfig@2.13.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fontconfig/2.13.1/x86_64-centos7-gcc8-opt}
+  form:
+    buildable: false
+    paths: {form@4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/FORM/4.1/x86_64-centos7-gcc8-opt}
+  fplll:
+    buildable: false
+    paths: {fplll@5.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/fplll/5.2.1/x86_64-centos7-gcc8-opt}
+  freetype:
+    buildable: false
+    paths: {freetype@2.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/freetype/2.10.0/x86_64-centos7-gcc8-opt}
+  frontier_client:
+    buildable: false
+    paths: {frontier_client@2.9.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/frontier_client/2.9.0/x86_64-centos7-gcc8-opt}
+  ftjam:
+    buildable: false
+    paths: {ftjam@2.5.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ftjam/2.5.2/x86_64-centos7-gcc8-opt}
+  funcsigs:
+    buildable: false
+    paths: {funcsigs@1.0.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/funcsigs/1.0.2/x86_64-centos7-gcc8-opt}
+  functools32:
+    buildable: false
+    paths: {functools32@3.2.3-2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/functools32/3.2.3-2/x86_64-centos7-gcc8-opt}
+  future:
+    buildable: false
+    paths: {future@0.17.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/future/0.17.1/x86_64-centos7-gcc8-opt}
+  futures:
+    buildable: false
+    paths: {futures@3.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/futures/3.2.0/x86_64-centos7-gcc8-opt}
+  garfield++:
+    buildable: false
+    paths: {garfield++@HEAD%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Garfield++/HEAD/x86_64-centos7-gcc8-opt}
+  gast:
+    buildable: false
+    paths: {gast@0.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gast/0.2.2/x86_64-centos7-gcc8-opt}
+  gaudi:
+    buildable: false
+    paths: {gaudi@v33r0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Gaudi/v33r0/x86_64-centos7-gcc8-opt}
+  gdal:
+    buildable: false
+    paths: {gdal@2.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gdal/2.4.1/x86_64-centos7-gcc8-opt}
+  gdb:
+    buildable: false
+    paths: {gdb@8.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gdb/8.3/x86_64-centos7-gcc8-opt}
+  geant4:
+    buildable: false
+    paths: {geant4@10.06.p01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Geant4/10.06.p01/x86_64-centos7-gcc8-opt}
+  genshi:
+    buildable: false
+    paths: {genshi@0.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/genshi/0.7/x86_64-centos7-gcc8-opt}
+  geos:
+    buildable: false
+    paths: {geos@3.7.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/geos/3.7.2/x86_64-centos7-gcc8-opt}
+  gettext:
+    buildable: false
+    paths: {gettext@0.20.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gettext/0.20.1/x86_64-centos7-gcc8-opt}
+  gfal:
+    buildable: false
+    paths: {gfal@1.13.0-0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Grid/gfal/1.13.0-0/x86_64-centos7-gcc8-opt}
+  gflags:
+    buildable: false
+    paths: {gflags@2.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gflags/2.2.2/x86_64-centos7-gcc8-opt}
+  gl2ps:
+    buildable: false
+    paths: {gl2ps@1.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gl2ps/1.4.0/x86_64-centos7-gcc8-opt}
+  globus_sdk:
+    buildable: false
+    paths: {globus_sdk@1.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/globus_sdk/1.8.0/x86_64-centos7-gcc8-opt}
+  glog:
+    buildable: false
+    paths: {glog@0.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/glog/0.4.0/x86_64-centos7-gcc8-opt}
+  gnuplot:
+    buildable: false
+    paths: {gnuplot@5.2.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gnuplot/5.2.7/x86_64-centos7-gcc8-opt}
+  go:
+    buildable: false
+    paths: {go@1.12.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go/1.12.5/x86_64-centos7-gcc8-opt}
+  go.uuid:
+    buildable: false
+    paths: {go.uuid@b2ce238%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go.uuid/b2ce238/x86_64-centos7-gcc8-opt}
+  go_demangle:
+    buildable: false
+    paths: {go_demangle@5e5cf60%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go_demangle/5e5cf60/x86_64-centos7-gcc8-opt}
+  go_liner:
+    buildable: false
+    paths: {go_liner@6f820f8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go_liner/6f820f8/x86_64-centos7-gcc8-opt}
+  go_readline:
+    buildable: false
+    paths: {go_readline@2972be2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go_readline/2972be2/x86_64-centos7-gcc8-opt}
+  go_runewidth:
+    buildable: false
+    paths: {go_runewidth@703b5e6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go_runewidth/703b5e6/x86_64-centos7-gcc8-opt}
+  go_zmq4:
+    buildable: false
+    paths: {go_zmq4@7a493a6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/go_zmq4/7a493a6/x86_64-centos7-gcc8-opt}
+  gomacro:
+    buildable: false
+    paths: {gomacro@c9f381e%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gomacro/c9f381e/x86_64-centos7-gcc8-opt}
+  google_auth:
+    buildable: false
+    paths: {google_auth@1.6.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/google_auth/1.6.3/x86_64-centos7-gcc8-opt}
+  gophernotes:
+    buildable: false
+    paths: {gophernotes@7c3ca4e%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gophernotes/7c3ca4e/x86_64-centos7-gcc8-opt}
+  gosam:
+    buildable: false
+    paths: {gosam@2.0.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/gosam/2.0.4/x86_64-centos7-gcc8-opt}
+  gosam_contrib:
+    buildable: false
+    paths: {gosam_contrib@2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/gosam_contrib/2.0/x86_64-centos7-gcc8-opt}
+  gperf:
+    buildable: false
+    paths: {gperf@3.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gperf/3.1/x86_64-centos7-gcc8-opt}
+  gperftools:
+    buildable: false
+    paths: {gperftools@2.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gperftools/2.7/x86_64-centos7-gcc8-opt}
+  graphviz:
+    buildable: false
+    paths: {graphviz@2.40.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/graphviz/2.40.1/x86_64-centos7-gcc8-opt}
+  grpcio:
+    buildable: false
+    paths: {grpcio@1.21.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/grpcio/1.21.1/x86_64-centos7-gcc8-opt}
+  gsl:
+    buildable: false
+    paths: {gsl@2.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/GSL/2.5/x86_64-centos7-gcc8-opt}
+  gtest:
+    buildable: false
+    paths: {gtest@1.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/gtest/1.10.0/x86_64-centos7-gcc8-opt}
+  h5py:
+    buildable: false
+    paths: {h5py@2.9.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/h5py/2.9.0/x86_64-centos7-gcc8-opt}
+  hadoop:
+    buildable: false
+    paths: {hadoop@2.7.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hadoop/2.7.5.1/x86_64-centos7-gcc8-opt}
+  hadoop_xrootd:
+    buildable: false
+    paths: {hadoop_xrootd@1.0.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hadoop_xrootd/1.0.4/x86_64-centos7-gcc8-opt}
+  harfbuzz:
+    buildable: false
+    paths: {harfbuzz@1.9.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/harfbuzz/1.9.0/x86_64-centos7-gcc8-opt}
+  hbase:
+    buildable: false
+    paths: {hbase@1.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hbase/1.2.0/x86_64-centos7-gcc8-opt}
+  hdf5:
+    buildable: false
+    paths: {hdf5@1.10.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hdf5/1.10.5/x86_64-centos7-gcc8-opt}
+  heapdict:
+    buildable: false
+    paths: {heapdict@1.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/HeapDict/1.0.0/x86_64-centos7-gcc8-opt}
+  hepdata_converter:
+    buildable: false
+    paths: {hepdata_converter@0.1.34%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hepdata_converter/0.1.34/x86_64-centos7-gcc8-opt}
+  hepdata_validator:
+    buildable: false
+    paths: {hepdata_validator@0.1.16%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hepdata_validator/0.1.16/x86_64-centos7-gcc8-opt}
+  hepmc:
+    buildable: false
+    paths: {hepmc@2.06.10%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/HepMC/2.06.10/x86_64-centos7-gcc8-opt}
+  hepmc3:
+    buildable: false
+    paths: {hepmc3@3.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hepmc3/3.2.1/x86_64-centos7-gcc8-opt}
+  hepmcanalysis:
+    buildable: false
+    paths: {hepmcanalysis@3.4.14%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hepmcanalysis/3.4.14/x86_64-centos7-gcc8-opt}
+  heppdt:
+    buildable: false
+    paths: {heppdt@2.06.01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/HepPDT/2.06.01/x86_64-centos7-gcc8-opt}
+  heputils:
+    buildable: false
+    paths: {heputils@1.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/heputils/1.3.2/x86_64-centos7-gcc8-opt}
+  herwig:
+    buildable: false
+    paths: {herwig@6.521.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/herwig/6.521.2/x86_64-centos7-gcc8-opt}
+  herwig3:
+    buildable: false
+    paths: {herwig3@7.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/herwig++/7.2.0/x86_64-centos7-gcc8-opt}
+  highfive:
+    buildable: false
+    paths: {highfive@2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/highfive/2.0/x86_64-centos7-gcc8-opt}
+  hijing:
+    buildable: false
+    paths: {hijing@1.383bs.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hijing/1.383bs.2/x86_64-centos7-gcc8-opt}
+  hive:
+    buildable: false
+    paths: {hive@1.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hive/1.1.1/x86_64-centos7-gcc8-opt}
+  hoppet:
+    buildable: false
+    paths: {hoppet@1.1.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hoppet/1.1.5/x86_64-centos7-gcc8-opt}
+  html5lib:
+    buildable: false
+    paths: {html5lib@1.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/html5lib/1.0.1/x86_64-centos7-gcc8-opt}
+  hto4l:
+    buildable: false
+    paths: {hto4l@2.02%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hto4l/2.02/x86_64-centos7-gcc8-opt}
+  hydjet:
+    buildable: false
+    paths: {hydjet@1.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hydjet/1.8/x86_64-centos7-gcc8-opt}
+  hydjet++:
+    buildable: false
+    paths: {hydjet++@2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/hydjet++/2.1/x86_64-centos7-gcc8-opt}
+  hypothesis:
+    buildable: false
+    paths: {hypothesis@4.57.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/hypothesis/4.57.1/x86_64-centos7-gcc8-opt}
+  idna:
+    buildable: false
+    paths: {idna@2.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/idna/2.8/x86_64-centos7-gcc8-opt}
+  igprof:
+    buildable: false
+    paths: {igprof@5.9.16%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/igprof/5.9.16/x86_64-centos7-gcc8-opt}
+  imageio:
+    buildable: false
+    paths: {imageio@2.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/imageio/2.5.0/x86_64-centos7-gcc8-opt}
+  imagemagick:
+    buildable: false
+    paths: {imagemagick@7.0.8-7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/imagemagick/7.0.8-7/x86_64-centos7-gcc8-opt}
+  iminuit:
+    buildable: false
+    paths: {iminuit@1.3.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/iminuit/1.3.6/x86_64-centos7-gcc8-opt}
+  importlib_metadata:
+    buildable: false
+    paths: {importlib_metadata@0.18%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/importlib_metadata/0.18/x86_64-centos7-gcc8-opt}
+  importlib_resources:
+    buildable: false
+    paths: {importlib_resources@1.0.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/importlib_resources/1.0.2/x86_64-centos7-gcc8-opt}
+  ipaddress:
+    buildable: false
+    paths: {ipaddress@1.0.22%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipaddress/1.0.22/x86_64-centos7-gcc8-opt}
+  ipykernel:
+    buildable: false
+    paths: {ipykernel@4.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipykernel/4.10.0/x86_64-centos7-gcc8-opt}
+  ipympl:
+    buildable: false
+    paths: {ipympl@0.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipympl/0.4.1/x86_64-centos7-gcc8-opt}
+  ipyparallel:
+    buildable: false
+    paths: {ipyparallel@6.2.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipyparallel/6.2.4/x86_64-centos7-gcc8-opt}
+  ipython:
+    buildable: false
+    paths: {ipython@5.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipython/5.8.0/x86_64-centos7-gcc8-opt}
+  ipython_genutils:
+    buildable: false
+    paths: {ipython_genutils@0.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipython_genutils/0.2.0/x86_64-centos7-gcc8-opt}
+  ipywidgets:
+    buildable: false
+    paths: {ipywidgets@7.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ipywidgets/7.4.2/x86_64-centos7-gcc8-opt}
+  isort:
+    buildable: false
+    paths: {isort@4.3.20%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/isort/4.3.20/x86_64-centos7-gcc8-opt}
+  jdk:
+    buildable: false
+    paths: {jdk@8u222%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/java/8u222/x86_64-centos7-gcc8-opt}
+  jedi:
+    buildable: false
+    paths: {jedi@0.13.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jedi/0.13.3/x86_64-centos7-gcc8-opt}
+  jemalloc:
+    buildable: false
+    paths: {jemalloc@5.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jemalloc/5.2.1/x86_64-centos7-gcc8-opt}
+  jhu:
+    buildable: false
+    paths: {jhu@5.6.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/jhu/5.6.3/x86_64-centos7-gcc8-opt}
+  jimmy:
+    buildable: false
+    paths: {jimmy@4.31.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/jimmy/4.31.3/x86_64-centos7-gcc8-opt}
+  jinja2:
+    buildable: false
+    paths: {jinja2@2.10.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Jinja2/2.10.1/x86_64-centos7-gcc8-opt}
+  joblib:
+    buildable: false
+    paths: {joblib@0.14.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/joblib/0.14.0/x86_64-centos7-gcc8-opt}
+  jpype:
+    buildable: false
+    paths: {jpype@0.6.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jpype/0.6.3/x86_64-centos7-gcc8-opt}
+  jsonc:
+    buildable: false
+    paths: {jsonc@0.12%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jsonc/0.12/x86_64-centos7-gcc8-opt}
+  jsoncpp:
+    buildable: false
+    paths: {jsoncpp@1.8.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jsoncpp/1.8.4/x86_64-centos7-gcc8-opt}
+  jsonmcpp:
+    buildable: false
+    paths: {jsonmcpp@3.6.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jsonmcpp/3.6.1/x86_64-centos7-gcc8-opt}
+  jsonschema:
+    buildable: false
+    paths: {jsonschema@3.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jsonschema/3.0.1/x86_64-centos7-gcc8-opt}
+  jupyter:
+    buildable: false
+    paths: {jupyter@1.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter/1.0.0/x86_64-centos7-gcc8-opt}
+  jupyter_client:
+    buildable: false
+    paths: {jupyter_client@5.2.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_client/5.2.4/x86_64-centos7-gcc8-opt}
+  jupyter_console:
+    buildable: false
+    paths: {jupyter_console@5.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_console/5.2.0/x86_64-centos7-gcc8-opt}
+  jupyter_contrib_core:
+    buildable: false
+    paths: {jupyter_contrib_core@0.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_contrib_core/0.3.3/x86_64-centos7-gcc8-opt}
+  jupyter_contrib_nbextensions:
+    buildable: false
+    paths: {jupyter_contrib_nbextensions@0.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_contrib_nbextensions/0.5.1/x86_64-centos7-gcc8-opt}
+  jupyter_core:
+    buildable: false
+    paths: {jupyter_core@4.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_core/4.4.0/x86_64-centos7-gcc8-opt}
+  jupyter_highlight_selected_word:
+    buildable: false
+    paths: {jupyter_highlight_selected_word@0.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_highlight_selected_word/0.2.0/x86_64-centos7-gcc8-opt}
+  jupyter_latex_envs:
+    buildable: false
+    paths: {jupyter_latex_envs@1.4.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_latex_envs/1.4.4/x86_64-centos7-gcc8-opt}
+  jupyter_nbextensions_configurator:
+    buildable: false
+    paths: {jupyter_nbextensions_configurator@0.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/jupyter_nbextensions_configurator/0.4.1/x86_64-centos7-gcc8-opt}
+  keras:
+    buildable: false
+    paths: {keras@2.2.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/keras/2.2.4/x86_64-centos7-gcc8-opt}
+  keras_applications:
+    buildable: false
+    paths: {keras_applications@1.0.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/keras_applications/1.0.8/x86_64-centos7-gcc8-opt}
+  keras_preprocessing:
+    buildable: false
+    paths: {keras_preprocessing@1.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/keras_preprocessing/1.1.0/x86_64-centos7-gcc8-opt}
+  kiwisolver:
+    buildable: false
+    paths: {kiwisolver@1.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/kiwisolver/1.0.1/x86_64-centos7-gcc8-opt}
+  kubernetes:
+    buildable: false
+    paths: {kubernetes@9.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/kubernetes/9.0.0/x86_64-centos7-gcc8-opt}
+  lazy_object_proxy:
+    buildable: false
+    paths: {lazy_object_proxy@1.3.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lazy_object_proxy/1.3.1/x86_64-centos7-gcc8-opt}
+  lcgenv:
+    buildable: false
+    paths: {lcgenv@1.3.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lcgenv/1.3.8/x86_64-centos7-gcc8-opt}
+  lcio:
+    buildable: false
+    paths: {lcio@02.13.02%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/LCIO/02.13.02/x86_64-centos7-gcc8-opt}
+  lcov:
+    buildable: false
+    paths: {lcov@1.14%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lcov/1.14/x86_64-centos7-gcc8-opt}
+  lhapdf:
+    buildable: false
+    paths: {lhapdf@6.2.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/lhapdf/6.2.3/x86_64-centos7-gcc8-opt}
+  libaio:
+    buildable: false
+    paths: {libaio@0.3.110-1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libaio/0.3.110-1/x86_64-centos7-gcc8-opt}
+  libffi:
+    buildable: false
+    paths: {libffi@3.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libffi/3.2.1/x86_64-centos7-gcc8-opt}
+  libgeotiff:
+    buildable: false
+    paths: {libgeotiff@1.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libgeotiff/1.5.1/x86_64-centos7-gcc8-opt}
+  libgit2:
+    buildable: false
+    paths: {libgit2@0.28.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libgit2/0.28.2/x86_64-centos7-gcc8-opt}
+  libsodium:
+    buildable: false
+    paths: {libsodium@1.0.18%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libsodium/1.0.18/x86_64-centos7-gcc8-opt}
+  libsvm:
+    buildable: false
+    paths: {libsvm@3.23%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libsvm/3.23/x86_64-centos7-gcc8-opt}
+  libtool:
+    buildable: false
+    paths: {libtool@2.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libtool/2.4.2/x86_64-centos7-gcc8-opt}
+  libunwind:
+    buildable: false
+    paths: {libunwind@1.3.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libunwind/1.3.1/x86_64-centos7-gcc8-opt}
+  libxkbcommon:
+    buildable: false
+    paths: {libxkbcommon@0.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libxkbcommon/0.7.1/x86_64-centos7-gcc8-opt}
+  libxml2:
+    buildable: false
+    paths: {libxml2@2.9.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libxml2/2.9.9/x86_64-centos7-gcc8-opt}
+  libxslt:
+    buildable: false
+    paths: {libxslt@1.1.33%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/libxslt/1.1.33/x86_64-centos7-gcc8-opt}
+  llvmlite:
+    buildable: false
+    paths: {llvmlite@0.29.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/llvmlite/0.29.0/x86_64-centos7-gcc8-opt}
+  log4cpp:
+    buildable: false
+    paths: {log4cpp@2.8.3p1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/log4cpp/2.8.3p1/x86_64-centos7-gcc8-opt}
+  logilabcommon:
+    buildable: false
+    paths: {logilabcommon@1.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/logilabcommon/1.4.2/x86_64-centos7-gcc8-opt}
+  looptools:
+    buildable: false
+    paths: {looptools@2.15%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/looptools/2.15/x86_64-centos7-gcc8-opt}
+  lwtnn:
+    buildable: false
+    paths: {lwtnn@2.8.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lwtnn/2.8.1/x86_64-centos7-gcc8-opt}
+  lxml:
+    buildable: false
+    paths: {lxml@4.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lxml/4.3.3/x86_64-centos7-gcc8-opt}
+  lz4:
+    buildable: false
+    paths: {lz4@1.9.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/lz4/1.9.2/x86_64-centos7-gcc8-opt}
+  m2crypto:
+    buildable: false
+    paths: {m2crypto@0.34.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/m2crypto/0.34.0/x86_64-centos7-gcc8-opt}
+  m4:
+    buildable: false
+    paths: {m4@1.4.18%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/m4/1.4.18/x86_64-centos7-gcc8-opt}
+  madgraph5amc:
+    buildable: false
+    paths: {madgraph5amc@2.6.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/madgraph5amc/2.6.7/x86_64-centos7-gcc8-opt}
+  madx:
+    buildable: false
+    paths: {madx@5.05.01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/madx/5.05.01/x86_64-centos7-gcc8-opt}
+  markdown:
+    buildable: false
+    paths: {markdown@3.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/markdown/3.1.1/x86_64-centos7-gcc8-opt}
+  markupsafe:
+    buildable: false
+    paths: {markupsafe@1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MarkupSafe/1.0/x86_64-centos7-gcc8-opt}
+  matplotlib:
+    buildable: false
+    paths: {matplotlib@2.2.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/matplotlib/2.2.4/x86_64-centos7-gcc8-opt}
+  maven:
+    buildable: false
+    paths: {maven@3.6.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/maven/3.6.1/x86_64-centos7-gcc8-opt}
+  mccabe:
+    buildable: false
+    paths: {mccabe@0.6.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mccabe/0.6.1/x86_64-centos7-gcc8-opt}
+  mctester:
+    buildable: false
+    paths: {mctester@1.25.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/mctester/1.25.0/x86_64-centos7-gcc8-opt}
+  mcutils:
+    buildable: false
+    paths: {mcutils@1.3.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/mcutils/1.3.4/x86_64-centos7-gcc8-opt}
+  messaging:
+    buildable: false
+    paths: {messaging@1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/messaging/1.1/x86_64-centos7-gcc8-opt}
+  metakernel:
+    buildable: false
+    paths: {metakernel@0.24.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/metakernel/0.24.2/x86_64-centos7-gcc8-opt}
+  minrpc:
+    buildable: false
+    paths: {minrpc@0.0.11%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/minrpc/0.0.11/x86_64-centos7-gcc8-opt}
+  mistune:
+    buildable: false
+    paths: {mistune@0.8.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mistune/0.8.4/x86_64-centos7-gcc8-opt}
+  mock:
+    buildable: false
+    paths: {mock@3.0.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mock/3.0.5/x86_64-centos7-gcc8-opt}
+  more_itertools:
+    buildable: false
+    paths: {more_itertools@5.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/more_itertools/5.0.0/x86_64-centos7-gcc8-opt}
+  mpfi:
+    buildable: false
+    paths: {mpfi@1.5.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mpfi/1.5.3/x86_64-centos7-gcc8-opt}
+  mpfr:
+    buildable: false
+    paths: {mpfr@4.0.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mpfr/4.0.2/x86_64-centos7-gcc8-opt}
+  mpmath:
+    buildable: false
+    paths: {mpmath@1.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mpmath/1.1.0/x86_64-centos7-gcc8-opt}
+  msgpack:
+    buildable: false
+    paths: {msgpack@0.6.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/msgpack/0.6.1/x86_64-centos7-gcc8-opt}
+  msgpackc:
+    buildable: false
+    paths: {msgpackc@3.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/msgpackc/3.2.0/x86_64-centos7-gcc8-opt}
+  multiprocess:
+    buildable: false
+    paths: {multiprocess@0.70.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/multiprocess/0.70.9/x86_64-centos7-gcc8-opt}
+  multiprocessing:
+    buildable: false
+    paths: {multiprocessing@2.6.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/multiprocessing/2.6.2.1/x86_64-centos7-gcc8-opt}
+  mysql:
+    buildable: false
+    paths: {mysql@10.4.12%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mysql/10.4.12/x86_64-centos7-gcc8-opt}
+  mysql_connector_python:
+    buildable: false
+    paths: {mysql_connector_python@8.0.18%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/mysql_connector_python/8.0.18/x86_64-centos7-gcc8-opt}
+  nanomsg:
+    buildable: false
+    paths: {nanomsg@1.1.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/nanomsg/1.1.5/x86_64-centos7-gcc8-opt}
+  nbconvert:
+    buildable: false
+    paths: {nbconvert@5.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/nbconvert/5.5.0/x86_64-centos7-gcc8-opt}
+  nbformat:
+    buildable: false
+    paths: {nbformat@4.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/nbformat/4.4.0/x86_64-centos7-gcc8-opt}
+  netcdfc:
+    buildable: false
+    paths: {netcdfc@4.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/netcdfc/4.7.0/x86_64-centos7-gcc8-opt}
+  networkx:
+    buildable: false
+    paths: {networkx@2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/networkx/2.2/x86_64-centos7-gcc8-opt}
+  neurobayes:
+    buildable: false
+    paths: {neurobayes@3.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/neurobayes/3.7.0/x86_64-centos7-gcc8-opt}
+  neurobayes_expert:
+    buildable: false
+    paths: {neurobayes_expert@3.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/neurobayes_expert/3.7.0/x86_64-centos7-gcc8-opt}
+  ninja:
+    buildable: false
+    paths: {ninja@1.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ninja/1.10.0/x86_64-centos7-gcc8-opt}
+  njet:
+    buildable: false
+    paths: {njet@2.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/njet/2.0.0/x86_64-centos7-gcc8-opt}
+  node.js:
+    buildable: false
+    paths: {node.js@12.16.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/node.js/12.16.1/x86_64-centos7-gcc8-opt}
+  nose:
+    buildable: false
+    paths: {nose@1.3.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/nose/1.3.7/x86_64-centos7-gcc8-opt}
+  notebook:
+    buildable: false
+    paths: {notebook@5.7.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/notebook/5.7.8/x86_64-centos7-gcc8-opt}
+  numba:
+    buildable: false
+    paths: {numba@0.44.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/numba/0.44.0/x86_64-centos7-gcc8-opt}
+  numexpr:
+    buildable: false
+    paths: {numexpr@2.6.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/numexpr/2.6.9/x86_64-centos7-gcc8-opt}
+  numpy:
+    buildable: false
+    paths: {numpy@1.16.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/numpy/1.16.4/x86_64-centos7-gcc8-opt}
+  oauthlib:
+    buildable: false
+    paths: {oauthlib@3.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/oauthlib/3.0.1/x86_64-centos7-gcc8-opt}
+  ocaml:
+    buildable: false
+    paths: {ocaml@4.07.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ocaml/4.07.1/x86_64-centos7-gcc8-opt}
+  octave:
+    buildable: false
+    paths: {octave@5.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/octave/5.1.0/x86_64-centos7-gcc8-opt}
+  octavekernel:
+    buildable: false
+    paths: {octavekernel@0.31.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/octavekernel/0.31.0/x86_64-centos7-gcc8-opt}
+  omniorb:
+    buildable: false
+    paths: {omniorb@4.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/omniorb/4.2.2/x86_64-centos7-gcc8-opt}
+  openloops:
+    buildable: false
+    paths: {openloops@1.3.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/openloops/1.3.1/x86_64-centos7-gcc8-opt}
+  openmpi:
+    buildable: false
+    paths: {openmpi@3.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/openmpi/3.1.0/x86_64-centos7-gcc8-opt}
+  oracle:
+    buildable: false
+    paths: {oracle@19.3.0.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/oracle/19.3.0.0.0/x86_64-centos7-gcc8-opt}
+  owslib:
+    buildable: false
+    paths: {owslib@0.17.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/OWSLib/0.17.1/x86_64-centos7-gcc8-opt}
+  packaging:
+    buildable: false
+    paths: {packaging@19.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/packaging/19.0/x86_64-centos7-gcc8-opt}
+  pacparser:
+    buildable: false
+    paths: {pacparser@1.3.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pacparser/1.3.7/x86_64-centos7-gcc8-opt}
+  pandas:
+    buildable: false
+    paths: {pandas@0.24.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pandas/0.24.2/x86_64-centos7-gcc8-opt}
+  pandocfilters:
+    buildable: false
+    paths: {pandocfilters@1.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pandocfilters/1.4.2/x86_64-centos7-gcc8-opt}
+  pango:
+    buildable: false
+    paths: {pango@1.40.13%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pango/1.40.13/x86_64-centos7-gcc8-opt}
+  param:
+    buildable: false
+    paths: {param@1.9.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/param/1.9.3/x86_64-centos7-gcc8-opt}
+  parso:
+    buildable: false
+    paths: {parso@0.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/parso/0.4.0/x86_64-centos7-gcc8-opt}
+  pathlib2:
+    buildable: false
+    paths: {pathlib2@2.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pathlib2/2.3.3/x86_64-centos7-gcc8-opt}
+  pathos:
+    buildable: false
+    paths: {pathos@0.2.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pathos/0.2.3/x86_64-centos7-gcc8-opt}
+  patsy:
+    buildable: false
+    paths: {patsy@0.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/patsy/0.5.1/x86_64-centos7-gcc8-opt}
+  pbr:
+    buildable: false
+    paths: {pbr@5.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pbr/5.2.1/x86_64-centos7-gcc8-opt}
+  pcre:
+    buildable: false
+    paths: {pcre@8.43%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pcre/8.43/x86_64-centos7-gcc8-opt}
+  pexpect:
+    buildable: false
+    paths: {pexpect@4.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pexpect/4.7.0/x86_64-centos7-gcc8-opt}
+  photos:
+    buildable: false
+    paths: {photos@215.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/photos/215.4/x86_64-centos7-gcc8-opt}
+  photos++:
+    buildable: false
+    paths: {photos++@3.61%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/photos++/3.61/x86_64-centos7-gcc8-opt}
+  pickleshare:
+    buildable: false
+    paths: {pickleshare@0.7.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pickleshare/0.7.5/x86_64-centos7-gcc8-opt}
+  pillow:
+    buildable: false
+    paths: {pillow@6.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pillow/6.0.0/x86_64-centos7-gcc8-opt}
+  pip:
+    buildable: false
+    paths: {pip@19.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pip/19.1.1/x86_64-centos7-gcc8-opt}
+  pixman:
+    buildable: false
+    paths: {pixman@0.38.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pixman/0.38.4/x86_64-centos7-gcc8-opt}
+  pjlsa:
+    buildable: false
+    paths: {pjlsa@0.0.14%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pjlsa/0.0.14/x86_64-centos7-gcc8-opt}
+  pkg_config:
+    buildable: false
+    paths: {pkg_config@0.29.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pkg_config/0.29.2/x86_64-centos7-gcc8-opt}
+  plotly:
+    buildable: false
+    paths: {plotly@4.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/plotly/4.5.0/x86_64-centos7-gcc8-opt}
+  pluggy:
+    buildable: false
+    paths: {pluggy@0.12.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pluggy/0.12.0/x86_64-centos7-gcc8-opt}
+  png:
+    buildable: false
+    paths: {png@1.6.37%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/png/1.6.37/x86_64-centos7-gcc8-opt}
+  podio:
+    #buildable: false
+    paths: {podio@00.09.02%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/podio/00.09.02/x86_64-centos7-gcc8-opt}
+  powheg-box-v2:
+    buildable: false
+    paths: {powheg-box-v2@r3043.lhcb%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/powheg-box-v2/r3043.lhcb/x86_64-centos7-gcc8-opt}
+  pox:
+    buildable: false
+    paths: {pox@0.2.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pox/0.2.5/x86_64-centos7-gcc8-opt}
+  ppft:
+    buildable: false
+    paths: {ppft@1.6.4.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ppft/1.6.4.9/x86_64-centos7-gcc8-opt}
+  pprof:
+    buildable: false
+    paths: {pprof@54271f7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pprof/54271f7/x86_64-centos7-gcc8-opt}
+  prctl:
+    buildable: false
+    paths: {prctl@1.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/prctl/1.7/x86_64-centos7-gcc8-opt}
+  prettytable:
+    buildable: false
+    paths: {prettytable@0.7.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/prettytable/0.7.2/x86_64-centos7-gcc8-opt}
+  processing:
+    buildable: false
+    paths: {processing@0.52%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/processing/0.52/x86_64-centos7-gcc8-opt}
+  professor:
+    buildable: false
+    paths: {professor@2.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/professor/2.3.2/x86_64-centos7-gcc8-opt}
+  proj:
+    buildable: false
+    paths: {proj@6.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/proj/6.0.0/x86_64-centos7-gcc8-opt}
+  prometheus_client:
+    buildable: false
+    paths: {prometheus_client@0.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/prometheus_client/0.7.0/x86_64-centos7-gcc8-opt}
+  prompt_toolkit:
+    buildable: false
+    paths: {prompt_toolkit@1.0.16%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/prompt_toolkit/1.0.16/x86_64-centos7-gcc8-opt}
+  prophecy4f:
+    buildable: false
+    paths: {prophecy4f@2.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/prophecy4f/2.0.1/x86_64-centos7-gcc8-opt}
+  protobuf:
+    buildable: false
+    paths: {protobuf@2.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/protobuf/2.5.0/x86_64-centos7-gcc8-opt}
+  psutil:
+    buildable: false
+    paths: {psutil@5.6.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/psutil/5.6.2/x86_64-centos7-gcc8-opt}
+  ptyprocess:
+    buildable: false
+    paths: {ptyprocess@0.6.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ptyprocess/0.6.0/x86_64-centos7-gcc8-opt}
+  py-py:
+    buildable: false
+    paths: {py-py@1.5.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/py/1.5.4/x86_64-centos7-gcc8-opt}
+  py-py2neo:
+    buildable: false
+    paths: {py-py2neo@4.3.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/py2neo/4.3.0/x86_64-centos7-gcc8-opt}
+  py-py4j:
+    buildable: false
+    paths: {py-py4j@0.10.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/py4j/0.10.7/x86_64-centos7-gcc8-opt}
+  py-pyanalysis:
+    buildable: false
+    paths: {py-pyanalysis@2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyanalysis/2.0/x86_64-centos7-gcc8-opt}
+  py-pyarrow:
+    buildable: false
+    paths: {py-pyarrow@0.15.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyarrow/0.15.1/x86_64-centos7-gcc8-opt}
+  py-pyasn1:
+    buildable: false
+    paths: {py-pyasn1@0.4.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyasn1/0.4.5/x86_64-centos7-gcc8-opt}
+  py-pyasn1_modules:
+    buildable: false
+    paths: {py-pyasn1_modules@0.2.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyasn1_modules/0.2.5/x86_64-centos7-gcc8-opt}
+  py-pycairo:
+    buildable: false
+    paths: {py-pycairo@1.18.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pycairo/1.18.1/x86_64-centos7-gcc8-opt}
+  py-pycodestyle:
+    buildable: false
+    paths: {py-pycodestyle@2.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pycodestyle/2.5.0/x86_64-centos7-gcc8-opt}
+  py-pycparser:
+    buildable: false
+    paths: {py-pycparser@2.19%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pycparser/2.19/x86_64-centos7-gcc8-opt}
+  py-pyct:
+    buildable: false
+    paths: {py-pyct@0.4.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyct/0.4.6/x86_64-centos7-gcc8-opt}
+  py-pydot:
+    buildable: false
+    paths: {py-pydot@1.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pydot/1.4.1/x86_64-centos7-gcc8-opt}
+  py-pydot_ng:
+    buildable: false
+    paths: {py-pydot_ng@2.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pydot_ng/2.0.0/x86_64-centos7-gcc8-opt}
+  py-pyflakes:
+    buildable: false
+    paths: {py-pyflakes@2.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyflakes/2.1.1/x86_64-centos7-gcc8-opt}
+  py-pygdal:
+    buildable: false
+    paths: {py-pygdal@2.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pygdal/2.4.0/x86_64-centos7-gcc8-opt}
+  py-pygments:
+    buildable: false
+    paths: {py-pygments@2.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pygments/2.4.2/x86_64-centos7-gcc8-opt}
+  py-pygraphics:
+    buildable: false
+    paths: {py-pygraphics@2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pygraphics/2.0/x86_64-centos7-gcc8-opt}
+  py-pygraphviz:
+    buildable: false
+    paths: {py-pygraphviz@0.11.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pygraphviz/0.11.1/x86_64-centos7-gcc8-opt}
+  py-pygsi:
+    buildable: false
+    paths: {py-pygsi@0.6.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pygsi/0.6.3/x86_64-centos7-gcc8-opt}
+  py-pyheadtail:
+    buildable: false
+    paths: {py-pyheadtail@1.13.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/PyHEADTAIL/1.13.1/x86_64-centos7-gcc8-opt}
+  py-pyjapc:
+    buildable: false
+    paths: {py-pyjapc@2.0.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyjapc/2.0.4/x86_64-centos7-gcc8-opt}
+  py-pyjson5:
+    buildable: false
+    paths: {py-pyjson5@0.9.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyjson5/0.9.1/x86_64-centos7-gcc8-opt}
+  py-pyjwt:
+    buildable: false
+    paths: {py-pyjwt@1.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/PyJWT/1.7.1/x86_64-centos7-gcc8-opt}
+  py-pylint:
+    buildable: false
+    paths: {py-pylint@1.9.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pylint/1.9.4/x86_64-centos7-gcc8-opt}
+  py-pyparsing:
+    buildable: false
+    paths: {py-pyparsing@2.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyparsing/2.4.0/x86_64-centos7-gcc8-opt}
+  py-pyproj:
+    buildable: false
+    paths: {py-pyproj@2.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyproj/2.1.3/x86_64-centos7-gcc8-opt}
+  py-pyqt5:
+    buildable: false
+    paths: {py-pyqt5@5.12.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyqt5/5.12.3/x86_64-centos7-gcc8-opt}
+  py-pyquen:
+    buildable: false
+    paths: {py-pyquen@1.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/pyquen/1.5.1/x86_64-centos7-gcc8-opt}
+  py-pyrdf:
+    buildable: false
+    paths: {py-pyrdf@0.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/PyRDF/0.2.0/x86_64-centos7-gcc8-opt}
+  py-pyrsistent:
+    buildable: false
+    paths: {py-pyrsistent@0.15.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyrsistent/0.15.2/x86_64-centos7-gcc8-opt}
+  py-pyshp:
+    buildable: false
+    paths: {py-pyshp@2.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyshp/2.1.0/x86_64-centos7-gcc8-opt}
+  py-pysqlite:
+    buildable: false
+    paths: {py-pysqlite@2.8.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pysqlite/2.8.3/x86_64-centos7-gcc8-opt}
+  py-pystan:
+    buildable: false
+    paths: {py-pystan@2.19.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pystan/2.19.0.0/x86_64-centos7-gcc8-opt}
+  py-pytables:
+    buildable: false
+    paths: {py-pytables@3.5.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytables/3.5.2/x86_64-centos7-gcc8-opt}
+  py-pytest:
+    buildable: false
+    paths: {py-pytest@4.6.9%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytest/4.6.9/x86_64-centos7-gcc8-opt}
+  py-pytest_runner:
+    buildable: false
+    paths: {py-pytest_runner@5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytest_runner/5.1/x86_64-centos7-gcc8-opt}
+  py-python_dateutil:
+    buildable: false
+    paths: {py-python_dateutil@2.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/python_dateutil/2.8.0/x86_64-centos7-gcc8-opt}
+  py-python_gitlab:
+    buildable: false
+    paths: {py-python_gitlab@1.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/python_gitlab/1.8.0/x86_64-centos7-gcc8-opt}
+  py-pythonsollya:
+    buildable: false
+    paths: {py-pythonsollya@0.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pythonsollya/0.3/x86_64-centos7-gcc8-opt}
+  py-pytimber:
+    buildable: false
+    paths: {py-pytimber@2.7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytimber/2.7.0/x86_64-centos7-gcc8-opt}
+  py-pytools:
+    buildable: false
+    paths: {py-pytools@2019.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytools/2019.1.1/x86_64-centos7-gcc8-opt}
+  py-pytz:
+    buildable: false
+    paths: {py-pytz@2019.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pytz/2019.1/x86_64-centos7-gcc8-opt}
+  py-pywt:
+    buildable: false
+    paths: {py-pywt@1.0.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pywt/1.0.3/x86_64-centos7-gcc8-opt}
+  py-pyzmq:
+    buildable: false
+    paths: {py-pyzmq@18.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/pyzmq/18.0.1/x86_64-centos7-gcc8-opt}
+  py-qmtest:
+    buildable: false
+    paths: {py-qmtest@2.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/QMtest/2.4.1/x86_64-centos7-gcc8-opt}
+  pythia6:
+    buildable: false
+    paths: {pythia6@429.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/pythia6/429.2/x86_64-centos7-gcc8-opt}
+  pythia8:
+    buildable: false
+    paths: {pythia8@244%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/pythia8/244/x86_64-centos7-gcc8-opt}
+  python:
+    buildable: false
+    paths: {python@2.7.16%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Python/2.7.16/x86_64-centos7-gcc8-opt}
+  qd:
+    buildable: false
+    paths: {qd@2.3.13%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/qd/2.3.13/x86_64-centos7-gcc8-opt}
+  qgraf:
+    buildable: false
+    paths: {qgraf@3.1.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/qgraf/3.1.4/x86_64-centos7-gcc8-opt}
+  qt5:
+    buildable: false
+    paths: {qt5@5.12.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/qt5/5.12.4/x86_64-centos7-gcc8-opt}
+  qtconsole:
+    buildable: false
+    paths: {qtconsole@4.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/qtconsole/4.5.1/x86_64-centos7-gcc8-opt}
+  qtpy:
+    buildable: false
+    paths: {qtpy@1.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/qtpy/1.7.1/x86_64-centos7-gcc8-opt}
+  r:
+    buildable: false
+    paths: {r@3.5.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/R/3.5.3/x86_64-centos7-gcc8-opt}
+  rangev3:
+    buildable: false
+    paths: {rangev3@0.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/rangev3/0.10.0/x86_64-centos7-gcc8-opt}
+  rapidjson:
+    buildable: false
+    paths: {rapidjson@1.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/rapidjson/1.1.0/x86_64-centos7-gcc8-opt}
+  rapidsim:
+    buildable: false
+    paths: {rapidsim@1.4.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/rapidsim/1.4.4/x86_64-centos7-gcc8-opt}
+  readline:
+    buildable: false
+    paths: {readline@8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/readline/8.0/x86_64-centos7-gcc8-opt}
+  recola:
+    buildable: false
+    paths: {recola@2.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/recola/2.2.0/x86_64-centos7-gcc8-opt}
+  recola_sm:
+    buildable: false
+    paths: {recola_sm@2.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/recola_SM/2.2.2/x86_64-centos7-gcc8-opt}
+  relax:
+    buildable: false
+    paths: {relax@root6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/RELAX/root6/x86_64-centos7-gcc8-opt}
+  requests:
+    buildable: false
+    paths: {requests@2.22.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/requests/2.22.0/x86_64-centos7-gcc8-opt}
+  requests_oauthlib:
+    buildable: false
+    paths: {requests_oauthlib@1.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/requests_oauthlib/1.2.0/x86_64-centos7-gcc8-opt}
+  retrying:
+    buildable: false
+    paths: {retrying@1.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/retrying/1.3.3/x86_64-centos7-gcc8-opt}
+  rise:
+    buildable: false
+    paths: {rise@5.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/rise/5.5.0/x86_64-centos7-gcc8-opt}
+  rivet:
+    buildable: false
+    paths: {rivet@3.0.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/rivet/3.0.1/x86_64-centos7-gcc8-opt}
+  root:
+    buildable: false
+    paths: {root@6.20.02%gcc@8.3.0 cxxstd=17  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/ROOT/v6.20.02/x86_64-centos7-gcc8-opt}
+  root_numpy:
+    buildable: false
+    paths: {root_numpy@4.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/root_numpy/4.8.0/x86_64-centos7-gcc8-opt}
+  rpy2:
+    buildable: false
+    paths: {rpy2@2.8.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/rpy2/2.8.6/x86_64-centos7-gcc8-opt}
+  rsa:
+    buildable: false
+    paths: {rsa@4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/rsa/4.0/x86_64-centos7-gcc8-opt}
+  scandir:
+    buildable: false
+    paths: {scandir@1.10.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/scandir/1.10.0/x86_64-centos7-gcc8-opt}
+  scikitimage:
+    buildable: false
+    paths: {scikitimage@0.14.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/scikitimage/0.14.3/x86_64-centos7-gcc8-opt}
+  scikitlearn:
+    buildable: false
+    paths: {scikitlearn@0.20.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/scikitlearn/0.20.3/x86_64-centos7-gcc8-opt}
+  scipy:
+    buildable: false
+    paths: {scipy@1.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/scipy/1.2.2/x86_64-centos7-gcc8-opt}
+  seaborn:
+    buildable: false
+    paths: {seaborn@0.9.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/seaborn/0.9.0/x86_64-centos7-gcc8-opt}
+  send2trash:
+    buildable: false
+    paths: {send2trash@1.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/send2trash/1.5.0/x86_64-centos7-gcc8-opt}
+  setuptools:
+    buildable: false
+    paths: {setuptools@41.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/setuptools/41.0.0/x86_64-centos7-gcc8-opt}
+  setuptools_scm:
+    buildable: false
+    paths: {setuptools_scm@3.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/setuptools_scm/3.3.3/x86_64-centos7-gcc8-opt}
+  shapely:
+    buildable: false
+    paths: {shapely@1.6.4.post2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/shapely/1.6.4.post2/x86_64-centos7-gcc8-opt}
+  sherpa:
+    buildable: false
+    paths: {sherpa@2.2.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/sherpa/2.2.8/x86_64-centos7-gcc8-opt}
+  sherpa-openmpi:
+    buildable: false
+    paths: {sherpa-openmpi@2.2.8.openmpi3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/sherpa/2.2.8.openmpi3/x86_64-centos7-gcc8-opt}
+  simplegeneric:
+    buildable: false
+    paths: {simplegeneric@0.8.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/simplegeneric/0.8.1/x86_64-centos7-gcc8-opt}
+  simplejson:
+    buildable: false
+    paths: {simplejson@3.16.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/simplejson/3.16.1/x86_64-centos7-gcc8-opt}
+  singledispatch:
+    buildable: false
+    paths: {singledispatch@3.4.0.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/singledispatch/3.4.0.3/x86_64-centos7-gcc8-opt}
+  sip:
+    buildable: false
+    paths: {sip@4.19.15%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sip/4.19.15/x86_64-centos7-gcc8-opt}
+  six:
+    buildable: false
+    paths: {six@1.12.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/six/1.12.0/x86_64-centos7-gcc8-opt}
+  snappy:
+    buildable: false
+    paths: {snappy@1.1.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/snappy/1.1.7/x86_64-centos7-gcc8-opt}
+  sollya:
+    buildable: false
+    paths: {sollya@7.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sollya/7.0/x86_64-centos7-gcc8-opt}
+  sortedcontainers:
+    buildable: false
+    paths: {sortedcontainers@2.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sortedcontainers/2.1.0/x86_64-centos7-gcc8-opt}
+  spark:
+    buildable: false
+    paths: {spark@2.4.5-cern1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/spark/2.4.5-cern1/x86_64-centos7-gcc8-opt}
+  spdlog:
+    buildable: false
+    paths: {spdlog@1.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/spdlog/1.5.0/x86_64-centos7-gcc8-opt}
+  sqlalchemy:
+    buildable: false
+    paths: {sqlalchemy@1.2.10%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sqlalchemy/1.2.10/x86_64-centos7-gcc8-opt}
+  sqlite:
+    buildable: false
+    paths: {sqlite@3280000%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sqlite/3280000/x86_64-centos7-gcc8-opt}
+  srm_ifce:
+    buildable: false
+    paths: {srm_ifce@1.13.0-0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Grid/srm-ifce/1.13.0-0/x86_64-centos7-gcc8-opt}
+  starlight:
+    buildable: false
+    paths: {starlight@r313%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/starlight/r313/x86_64-centos7-gcc8-opt}
+  statsmodels:
+    buildable: false
+    paths: {statsmodels@0.10.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/statsmodels/0.10.2/x86_64-centos7-gcc8-opt}
+  stomppy:
+    buildable: false
+    paths: {stomppy@3.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/stomppy/3.1.3/x86_64-centos7-gcc8-opt}
+  storm:
+    buildable: false
+    paths: {storm@0.20%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/storm/0.20/x86_64-centos7-gcc8-opt}
+  subprocess32:
+    buildable: false
+    paths: {subprocess32@3.5.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/subprocess32/3.5.4/x86_64-centos7-gcc8-opt}
+  superchic:
+    buildable: false
+    paths: {superchic@3.06%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/superchic/3.06/x86_64-centos7-gcc8-opt}
+  swig:
+    buildable: false
+    paths: {swig@3.0.12%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/swig/3.0.12/x86_64-centos7-gcc8-opt}
+  sympy:
+    buildable: false
+    paths: {sympy@1.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/sympy/1.4/x86_64-centos7-gcc8-opt}
+  syscalc:
+    buildable: false
+    paths: {syscalc@1.1.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/syscalc/1.1.7/x86_64-centos7-gcc8-opt}
+  tauola:
+    buildable: false
+    paths: {tauola@28.121.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/tauola/28.121.2/x86_64-centos7-gcc8-opt}
+  tauola++:
+    buildable: false
+    paths: {tauola++@1.1.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/tauola++/1.1.6/x86_64-centos7-gcc8-opt}
+  intel-tbb:
+    buildable: false
+    paths: {intel-tbb@2020_U1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tbb/2020_U1/x86_64-centos7-gcc8-opt}
+  tblib:
+    buildable: false
+    paths: {tblib@1.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tblib/1.4.0/x86_64-centos7-gcc8-opt}
+  tensorboard:
+    buildable: false
+    paths: {tensorboard@1.14.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tensorboard/1.14.0/x86_64-centos7-gcc8-opt}
+  tensorflow:
+    buildable: false
+    paths: {tensorflow@1.14.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tensorflow/1.14.0/x86_64-centos7-gcc8-opt}
+  tensorflow_estimator:
+    buildable: false
+    paths: {tensorflow_estimator@1.14.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tensorflow_estimator/1.14.0/x86_64-centos7-gcc8-opt}
+  termcolor:
+    buildable: false
+    paths: {termcolor@1.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/termcolor/1.1.0/x86_64-centos7-gcc8-opt}
+  terminado:
+    buildable: false
+    paths: {terminado@0.8.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/terminado/0.8.2/x86_64-centos7-gcc8-opt}
+  testpath:
+    buildable: false
+    paths: {testpath@0.4.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/testpath/0.4.2/x86_64-centos7-gcc8-opt}
+  texinfo:
+    buildable: false
+    paths: {texinfo@6.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/texinfo/6.3/x86_64-centos7-gcc8-opt}
+  theano:
+    buildable: false
+    paths: {theano@1.0.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/theano/1.0.4/x86_64-centos7-gcc8-opt}
+  thep8i:
+    buildable: false
+    paths: {thep8i@2.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/thep8i/2.0.0/x86_64-centos7-gcc8-opt}
+  thepeg:
+    buildable: false
+    paths: {thepeg@2.2.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/thepeg/2.2.0/x86_64-centos7-gcc8-opt}
+  thrift:
+    buildable: false
+    paths: {thrift@0.13.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/thrift/0.13.0/x86_64-centos7-gcc8-opt}
+  tiff:
+    buildable: false
+    paths: {tiff@4.0.10%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tiff/4.0.10/x86_64-centos7-gcc8-opt}
+  toolz:
+    buildable: false
+    paths: {toolz@0.9.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/toolz/0.9.0/x86_64-centos7-gcc8-opt}
+  torch:
+    buildable: false
+    paths: {torch@1.4.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/torch/1.4.0/x86_64-centos7-gcc8-opt}
+  torchvision:
+    buildable: false
+    paths: {torchvision@0.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/torchvision/0.5.0/x86_64-centos7-gcc8-opt}
+  tornado:
+    buildable: false
+    paths: {tornado@5.1.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tornado/5.1.1/x86_64-centos7-gcc8-opt}
+  traitlets:
+    buildable: false
+    paths: {traitlets@4.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/traitlets/4.3.2/x86_64-centos7-gcc8-opt}
+  traittypes:
+    buildable: false
+    paths: {traittypes@0.2.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/traittypes/0.2.1/x86_64-centos7-gcc8-opt}
+  typing:
+    buildable: false
+    paths: {typing@3.6.6%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/typing/3.6.6/x86_64-centos7-gcc8-opt}
+  tzlocal:
+    buildable: false
+    paths: {tzlocal@2.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/tzlocal/2.0.0/x86_64-centos7-gcc8-opt}
+  umesimd:
+    buildable: false
+    paths: {umesimd@0.8.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/umesimd/0.8.1/x86_64-centos7-gcc8-opt}
+  uncertainties:
+    buildable: false
+    paths: {uncertainties@3.0.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/uncertainties/3.0.3/x86_64-centos7-gcc8-opt}
+  unigen:
+    buildable: false
+    paths: {unigen@2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/unigen/2.2/x86_64-centos7-gcc8-opt}
+  uproot:
+    buildable: false
+    paths: {uproot@3.10.12%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/uproot/3.10.12/x86_64-centos7-gcc8-opt}
+  uproot_methods:
+    buildable: false
+    paths: {uproot_methods@0.7.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/uproot_methods/0.7.1/x86_64-centos7-gcc8-opt}
+  urllib3:
+    buildable: false
+    paths: {urllib3@1.25.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/urllib3/1.25.3/x86_64-centos7-gcc8-opt}
+  valgrind:
+    buildable: false
+    paths: {valgrind@3.15.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/valgrind/3.15.0/x86_64-centos7-gcc8-opt}
+  vbfnlo:
+    buildable: false
+    paths: {vbfnlo@3.0.0beta5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/vbfnlo/3.0.0beta5/x86_64-centos7-gcc8-opt}
+  vc:
+    buildable: false
+    paths: {vc@1.4.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/Vc/1.4.1/x86_64-centos7-gcc8-opt}
+  vcversioner:
+    buildable: false
+    paths: {vcversioner@2.16.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/vcversioner/2.16.0.0/x86_64-centos7-gcc8-opt}
+  vdt:
+    buildable: false
+    paths: {vdt@0.4.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/vdt/0.4.3/x86_64-centos7-gcc8-opt}
+  veccore:
+    buildable: false
+    paths: {veccore@0.6.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/veccore/0.6.0/x86_64-centos7-gcc8-opt}
+  vecgeom:
+    buildable: false
+    paths: {vecgeom@v1.1.5%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/VecGeom/v1.1.5/x86_64-centos7-gcc8-opt}
+  vectorclass:
+    buildable: false
+    paths: {vectorclass@1.30p1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/vectorclass/1.30p1/x86_64-centos7-gcc8-opt}
+  wcwidth:
+    buildable: false
+    paths: {wcwidth@0.1.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/wcwidth/0.1.7/x86_64-centos7-gcc8-opt}
+  webencodings:
+    buildable: false
+    paths: {webencodings@0.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/webencodings/0.5.1/x86_64-centos7-gcc8-opt}
+  websocket_client:
+    buildable: false
+    paths: {websocket_client@0.56.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/websocket_client/0.56.0/x86_64-centos7-gcc8-opt}
+  werkzeug:
+    buildable: false
+    paths: {werkzeug@0.15.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/werkzeug/0.15.4/x86_64-centos7-gcc8-opt}
+  wheel:
+    buildable: false
+    paths: {wheel@0.33.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/wheel/0.33.4/x86_64-centos7-gcc8-opt}
+  widgetsnbextension:
+    buildable: false
+    paths: {widgetsnbextension@3.3.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/widgetsnbextension/3.3.0/x86_64-centos7-gcc8-opt}
+  wrapt:
+    buildable: false
+    paths: {wrapt@1.11.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/wrapt/1.11.1/x86_64-centos7-gcc8-opt}
+  xapian:
+    buildable: false
+    paths: {xapian@1.4.11%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/xapian/1.4.11/x86_64-centos7-gcc8-opt}
+  xenv:
+    buildable: false
+    paths: {xenv@1.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/xenv/1.0.0/x86_64-centos7-gcc8-opt}
+  xerces-c:
+    buildable: false
+    paths: {xerces-c@3.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/XercesC/3.1.3/x86_64-centos7-gcc8-opt}
+  xgboost:
+    buildable: false
+    paths: {xgboost@0.90%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/xgboost/0.90/x86_64-centos7-gcc8-opt}
+  xqilla:
+    buildable: false
+    paths: {xqilla@2.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/xqilla/2.3.3/x86_64-centos7-gcc8-opt}
+  xrootd:
+    buildable: false
+    paths: {xrootd@4.11.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/xrootd/4.11.2/x86_64-centos7-gcc8-opt}
+  yamlcpp:
+    buildable: false
+    paths: {yamlcpp@0.6.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/yamlcpp/0.6.2/x86_64-centos7-gcc8-opt}
+  yoda:
+    buildable: false
+    paths: {yoda@1.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/MCGenerators/yoda/1.8.0/x86_64-centos7-gcc8-opt}
+  zeromq:
+    buildable: false
+    paths: {zeromq@4.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/zeromq/4.3.2/x86_64-centos7-gcc8-opt}
+  zict:
+    buildable: false
+    paths: {zict@0.1.4%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/zict/0.1.4/x86_64-centos7-gcc8-opt}
+  zipp:
+    buildable: false
+    paths: {zipp@0.5.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/zipp/0.5.1/x86_64-centos7-gcc8-opt}
+  zlib:
+    buildable: false
+    paths: {zlib@1.2.11%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/zlib/1.2.11/x86_64-centos7-gcc8-opt}
+  zstandard:
+    buildable: false
+    paths: {zstandard@0.13.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_1/zstandard/0.13.0/x86_64-centos7-gcc8-opt}
