@@ -1,27 +1,3 @@
-##############################################################################
-# Copyright (c) 2013-2016, Lawrence Livermore National Security, LLC.
-# Produced at the Lawrence Livermore National Laboratory.
-#
-# This file is part of Spack.
-# Created by Todd Gamblin, tgamblin@llnl.gov, All rights reserved.
-# LLNL-CODE-647188
-#
-# For details, see https://github.com/llnl/spack
-# Please also see the LICENSE file for our notice and the LGPL.
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License (as
-# published by the Free Software Foundation) version 2.1, February 1999.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the IMPLIED WARRANTY OF
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the terms and
-# conditions of the GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public
-# License along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-##############################################################################
 
 from spack import *
 
@@ -29,10 +5,13 @@ from spack import *
 class Edm4hep(CMakePackage):
     """Event data model of Key4HEP"""
 
-    homepage = "https://github.com/HSF/EDM4hep"
-    git = "https://github.com/HSF/EDM4hep.git"
+    homepage = "https://github.com/key4hep/EDM4hep"
+    url = "https://github.com/key4hep/EDM4hep/archive/v00-01.tar.gz"
+    git = "https://github.com/key4hep/EDM4hep.git"
 
-    version('develop', branch='master')
+    version('master', branch='master')
+    version('0.1.0', sha256='16a042def0cd064240df1fbf9dca2dc255f3006d94abbb1a11615a3c98d3a505')
+
 
     variant('build_type', default='Release',
             description='The build type to build',
@@ -44,43 +23,45 @@ class Edm4hep(CMakePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    variant('lcg', default=False,
-            description='when built against lcg releases')
+    variant('ddg4_edm4hep_plugin', default=True,
+            description="build the ddg4 plugin for edm4hep output")
 
-    depends_on('cmake', type='build')
+
+    # the cpack configuration fails with an error on some platforms (arch)
+    # since it is not used for spack builds, disable
+    patch("cpack.patch")
+
+    depends_on('cmake@3.3:', type='build')
     depends_on('python', type='build')
-    depends_on('root')
-    depends_on('podio@develop')
-    depends_on('tbb', when="+lcg")
-    depends_on('davix', when="+lcg")
+    depends_on('root@6.08:')
+    depends_on('podio@0.10.0:')
 
-    # in LCG_96 ROOT is installed with an external xz rather than the builtin,
-    # so the genreflex binary needs to find it.
-    # As root is installed as an external package we cannot modify its
-    # setup_dependent_environment function to add the xz lib folder to the
-    # LD_LIBRARY_PATH hence we need to do it here.
-    depends_on('xz', when='^root@6.16')
+
+    depends_on('dd4hep@1.12.1: +geant4', when='+ddg4_edm4hep_plugin')
+
+    depends_on('hepmc@:2.99.99', type='test')
+    depends_on('heppdt', type='test')
+    depends_on('tricktrack@1.0.9:', type='test')
+
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append(self.define('CMAKE_CXX_STANDARD', self.spec.variants['cxxstd'].value))
+        args.append(self.define('BUILD_TESTING', self.run_tests))
+        args.append(self.define_from_variant("BUILD_DDG4EDM4HEP", 'ddg4_edm4hep_plugin'))
         return args
 
-    # Override pre-defined test step
-    # Multiple tests access to the same root file, thus we avoid parallel
-    # execution at this stage
-    def check(self):
-        with working_dir(self.build_directory):
-            make("test", "CTEST_OUTPUT_ON_FAIL=1")
 
-    def setup_environment(self, spack_env, run_env):
-	# needed for genreflex
-    	spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['root'].prefix.lib)
-    	run_env.prepend_path('LD_LIBRARY_PATH', self.spec['root'].prefix.lib)
-        if 'xz' in self.spec:
-            spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['xz'].prefix.lib)
-
-    def setup_dependent_environment(self, spack_env, run_env, dspec):
-        #spack_env.set('EDM4hep', self.prefix)
-        pass
+    def url_for_version(self, version):
+        # releases are dashed and padded with a leading zero
+        # the patch version is omitted when 0
+        # so for example v01-12-01, v01-12 ...
+        major = (str(version[0]).zfill(2))
+        minor = (str(version[1]).zfill(2))
+        patch = (str(version[2]).zfill(2))
+        if version[2] == 0:
+            url = "https://github.com/key4hep/edm4hep/archive/v%s-%s.tar.gz" % (major, minor)
+        else:
+            url = "https://github.com/key4hep/edm4hep/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
+        return url

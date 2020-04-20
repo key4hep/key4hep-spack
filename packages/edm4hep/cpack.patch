@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ce0c371..1ff5c6b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -64,12 +64,15 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -DDROP_CGAL ${CPP_STANDARD_FLAGS}
+ 
+ option(BUILD_DDG4EDM4HEP "Build the EDM4hep plugin for DD4hep" ON)
+ option(EDM4HEP_DOCUMENTATION "Whether or not to create doxygen doc target.")
++option(EDM4HEP_ENABLE_CPACK "Whether or not to enable CPack." OFF)
+ 
+ #--- enable unit testing capabilities ------------------------------------------
+ include(CTest)
+ 
+ #--- enable CPack --------------------------------------------------------------
+-include(cmake/EDM4HEPCPack.cmake)
++if (EDM4HEP_ENABLE_CPACK)
++  include(cmake/EDM4HEPCPack.cmake)
++endif()
+ 
+ #--- target for Doxygen documentation ------------------------------------------
+ if(EDM4HEP_DOCUMENTATION)
+
