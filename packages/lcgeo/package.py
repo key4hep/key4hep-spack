@@ -50,3 +50,11 @@ class Lcgeo(CMakePackage):
         else:
             url = "https://github.com/iLCSoft/lcgeo/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
         return url
+
+    @run_after('install')
+    def install_compact(self):
+        install_tree('FCalTB', self.prefix.compact)
+        install_tree('FCCee', self.prefix.compact)
+        install_tree('fieldmaps', self.prefix.compact)
+        install_tree('ILD', self.prefix.compact)
+        install_tree('SiD', self.prefix.compact)
