@@ -17,9 +17,10 @@ class Edm4hep(CMakePackage):
             description='The build type to build',
             values=('Debug', 'Release'))
 
+    _cxx_std_vals = ('14', '17')
     variant('cxxstd',
             default='17',
-            values=('14', '17'),
+            values=_cxx_std_vals,
             multi=False,
             description='Use the specified C++ standard when building.')
 
@@ -33,9 +34,10 @@ class Edm4hep(CMakePackage):
 
     depends_on('cmake@3.3:', type='build')
     depends_on('python', type='build')
-    depends_on('root@6.08:')
-    depends_on('podio@0.10.0:')
 
+    for s in _cxx_std_vals:
+        depends_on('root@6.08: cxxstd=' + s, when='cxxstd=' + s)
+        depends_on('podio@0.10.0: cxxstd=' + s, when='cxxstd=' + s)
 
     depends_on('dd4hep@1.12.1: +geant4', when='+ddg4_edm4hep_plugin')
 
