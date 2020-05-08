@@ -41,7 +41,7 @@ class Lcio(CMakePackage):
 
     def cmake_args(self):
         args = [
-            self.define('CMAKE_CXX_STANDARD', self.spec.variants['cxxstd'].value))
+            self.define('CMAKE_CXX_STANDARD', self.spec.variants['cxxstd'].value),
             self.define('BUILD_TESTING', self.run_tests),
             self.define_from_variant("BUILD_LCIO_EXAMPLES", 'examples'),
             self.define_from_variant("BUILD_ROOTDICT", 'rootdict'),
