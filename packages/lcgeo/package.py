@@ -53,13 +53,13 @@ class Lcgeo(CMakePackage):
 
     @run_after('install')
     def install_compact(self):
-        install_tree('CaloTB', self.prefix.compact.CaloTB)
-        install_tree('CLIC', self.prefix.compact.CLIC)
-        install_tree('FCalTB', self.prefix.compact.FCalTB)
-        install_tree('FCCee', self.prefix.compact.FCCee)
-        install_tree('fieldmaps', self.prefix.compact.fieldmaps)
-        install_tree('ILD', self.prefix.compact.ILD)
-        install_tree('SiD', self.prefix.compact.Sid)
+        install_tree('CaloTB', self.prefix.share.lcgeo.compact.CaloTB)
+        install_tree('CLIC', self.prefix.share.lcgeo.compact.CLIC)
+        install_tree('FCalTB', self.prefix.share.lcgeo.compact.FCalTB)
+        install_tree('FCCee', self.prefix..share.lcgeo.compact.FCCee)
+        install_tree('fieldmaps', self.prefix.share.lcgeo.compact.fieldmaps)
+        install_tree('ILD', self.prefix.share.lcgeo.compact.ILD)
+        install_tree('SiD', self.prefix.share.lcgeo.compact.Sid)
 
     def setup_run_environment(self, env):
-        env.set('LCGEO', self.prefix.compact)
+        env.set('LCGEO', self.prefix.share.lcgeo.compact)
