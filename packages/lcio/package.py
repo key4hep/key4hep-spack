@@ -22,14 +22,14 @@ class Lcio(CMakePackage):
 
     variant('cxxstd',
             default='17',
-            values=('14', '17'),
+            values=('11', '14', '17'),
             multi=False,
             description='Use the specified C++ standard when building.')
     variant("jar", default=False,
     description="Turn on to build/install lcio.jar")
-    variant("rootdict", default=False,
+    variant("rootdict", default=True,
     description="Turn on to build/install ROOT dictionary.")
-    variant("examples", default=True,
+    variant("examples", default=False,
     description="Turn on to build LCIO examples")
 
     depends_on('root@6.04:', when="+rootdict")
