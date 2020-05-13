@@ -30,6 +30,6 @@ class Key4hepStack(BundlePackage):
     conflicts("%gcc@8.3.1",
               msg="There are known issues with compilers from redhat's devtoolsets" \
               "which are therefore not supported." \
-              "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/3828 ")
+              "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
     
