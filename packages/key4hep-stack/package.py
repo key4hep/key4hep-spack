@@ -23,13 +23,13 @@ class Key4hepStack(BundlePackage):
     depends_on('lcio')
     depends_on('lcgeo')
 
-    # 
+    # be explicit to avoid concretizer errors
     depends_on('root cxxstd=17 +root7 +ssl')
     depends_on('boost +python')
 
-    # there are known issues with compilers from red hat's devtoolset
-    # which are therefore not supported
-    # https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286
-    conflicts("gcc@8.3.1")
+    conflicts("%gcc@8.3.1",
+              msg="There are known issues with compilers from redhat's devtoolsets" \
+              "which are therefore not supported." \
+              "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/3828 ")
 
     
