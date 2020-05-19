@@ -21,7 +21,7 @@ cd -
 To not have to type a full path to `spack` and to gain some other shell-level features do
 
 ```bash
-$ source spack/share/spack/setup-env.sh
+source spack/share/spack/setup-env.sh
 ```
 
 This is assumed below.
@@ -32,8 +32,8 @@ This is assumed below.
 ### Install EDM4hep
 
 ```bash
-$ spack info edm4hep
-$ spack install edm4hep
+spack info edm4hep
+spack install edm4hep
 ```
 
 ### Setup environment
@@ -41,4 +41,52 @@ $ spack install edm4hep
 If you have [Environment Modules](http://modules.sf.net) installed:
 
 ```bash
-$ spack load edm4hep
+spack load edm4hep
+```
+
+### Working around spack concretizer problems
+
+Currently the default settings for some of the packages here do not work due to
+known [short comings of the spack
+concretizer](https://spack.readthedocs.io/en/latest/known_issues.html#variants-are-not-properly-forwarded-to-dependencies).
+For example `spack install K4FWCore` will most probably fail with the following error
+
+```
+1. "cxxstd=11" conflicts with "root+root7" [root7 requires at least C++14]
+```
+
+Instead of fixing all the packages to deal with these issues, one of the
+following workarounds can be used. The issues in spack are planned to be fixed
+with the next spack release which would hopefully make these obsolete.
+
+#### Requiring a specific package version
+
+The simplest solution to the above problem is to simply require a `root` version
+with the appropriate requirements, e.g.
+
+```bash
+spack install K4FWCore ^root cxxstd=17
+```
+
+will tell spack to use `cxxstd=17` also for building `root` and get rid of the
+conflict above. If using this, make sure to use the same value for `cxxstd` for
+`K4FWCore` and `root`.
+
+#### Requiring certain variants globally
+
+spack can be configured using some [configuration
+files](https://spack.readthedocs.io/en/latest/configuration.html). Specifically
+using `packages.yaml` which is read from the user directory, i.e. `~/.spack` (or
+`/.spack/linux`) can be used to enforce he value of certain default variants
+globally. To solve the above problem it is enough to put the following into
+`packages.yaml`:
+
+```yaml
+packages:
+  all:
+  variants: cxxstd=17
+  ```
+
+It is still possible to override this for certain packages either by
+individually configuring them in `packages.yaml` or via the command line which
+take precedence over all configuration files.
