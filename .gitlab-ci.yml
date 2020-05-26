@@ -22,7 +22,7 @@ build-spack:
         - export BINARY_TAG=x86_64-centos7-gcc8-opt
         - export LCG_VERSION=LCG_97_FCC_2
         - source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/setup.sh
-        - source $HOME/paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaading/spack/bin/spack"
+        - export SPCK="python $HOME/paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaading/spack/bin/spack"
         - export SPACKCMD="$SPCK -C $HOME/k4-spack/config/$LCG_VERSION/$BINARY_TAG/"
         - $SPACKCMD uninstall -y --all
         - $SPACKCMD repo list
