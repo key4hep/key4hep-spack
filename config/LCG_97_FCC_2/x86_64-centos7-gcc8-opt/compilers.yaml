@@ -9,6 +9,7 @@ compilers:
       f77: /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/bin/gfortran,
       fc: /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/bin/gfortran}
     spec: gcc@8.3.0
+
 - compiler:
     environment:
       set: {LD_LIBRARY_PATH: /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/lib64}

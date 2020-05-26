@@ -1,3 +1,0 @@
-
-mirrors:
-  eos_buildcache: http://key4hep.web.cern.ch/key4hep/spack_build/mirror/${DATE}/
