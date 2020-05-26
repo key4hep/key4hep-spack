@@ -1,7 +1,4 @@
 
-variables:
-  GIT_STRATEGY: none
-
 stages:
     - compilation
     - deployment
@@ -16,14 +13,15 @@ build-spack:
     script:
         - kinit sftnight@CERN.CH -5 -V -k -t /home/gitlab-runner/eos3.keytab
         - eosfusebind
+        - git clone -d 1 https://github.com/spack/spack
+        - source spack/share/spack/setup-env.sh
+        - spack repo add .
         - echo $PWD
-        - echo $HOME
         - ls /eos/project/k/key4hep/www/key4hep/spack_build
         - export BINARY_TAG=x86_64-centos7-gcc8-opt
         - export LCG_VERSION=LCG_97_FCC_2
         - source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/setup.sh
-        - export SPCK="python $HOME/paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaading/spack/bin/spack"
-        - export SPACKCMD="$SPCK -C $HOME/k4-spack/config/$LCG_VERSION/$BINARY_TAG/"
+        - export SPACKCMD="spack -C k4-spack/config/$LCG_VERSION/$BINARY_TAG/"
         - $SPACKCMD uninstall -y --all
         - $SPACKCMD repo list
         - $SPACKCMD spec -I podio@master

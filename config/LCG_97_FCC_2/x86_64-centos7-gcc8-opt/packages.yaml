@@ -1498,7 +1498,7 @@ packages:
   root:
     buildable: false
     paths:
-      root@6.20.04%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/ROOT/v6.20.04/x86_64-centos7-gcc8-opt
+      root@6.20.04%gcc@8.3.0 cxxstd=17 +tbb  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/ROOT/v6.20.04/x86_64-centos7-gcc8-opt
   root_numpy:
     buildable: false
     paths:
