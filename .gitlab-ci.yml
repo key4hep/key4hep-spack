@@ -1,0 +1,44 @@
+
+variables:
+  GIT_STRATEGY: none
+
+stages:
+    - compilation
+    - deployment
+
+build-spack:
+    stage: compilation
+    tags:
+        - key4hep-deploy
+    only:
+        - tags
+        - schedules # Only execute this on scheduled "nightly" pipelines
+    script:
+        - kinit sftnight@CERN.CH -5 -V -k -t /home/gitlab-runner/eos3.keytab
+        - eosfusebind
+        - echo $PWD
+        - echo $HOME
+        - ls /eos/project/k/key4hep/www/key4hep/spack_build
+        - export BINARY_TAG=x86_64-centos7-gcc8-opt
+        - export LCG_VERSION=LCG_97_FCC_2
+        - source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/setup.sh
+        - source $HOME/paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaading/spack/bin/spack"
+        - export SPACKCMD="$SPCK -C $HOME/k4-spack/config/$LCG_VERSION/$BINARY_TAG/"
+        - $SPACKCMD uninstall -y --all
+        - $SPACKCMD repo list
+        - $SPACKCMD spec -I podio@master
+        - $SPACKCMD install --no-cache podio@master
+        - $SPACKCMD buildcache create -m eos_buildcache -u -a -f podio@master
+
+deploy-cvmfs:
+    stage: deployment
+    needs: ["build-spack"]
+    tags:
+        - key4hep-deploy
+    only:
+        - tags
+        - schedules # Only execute this on scheduled "nightly" pipelines
+    script:
+        - ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
+
+
