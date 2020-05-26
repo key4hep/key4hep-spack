@@ -1,4 +1,7 @@
 packages:
+  #patchelf:
+    #buildable: false
+    #paths: {patchelf: /cvmfs/sw-nightlies.hsf.org/key4hep/nightlies/LCG_96c_LS/linux-centos7-haswell/gcc-4.8.5/patchelf-0.10-uuw7pepqm55i6qo6apsxt2eoyul5kjf2}
   4suite:
     buildable: false
     paths: {4suite@1.0.2p1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/4suite/1.0.2p1/x86_64-centos7-gcc8-opt}
@@ -73,7 +76,7 @@ packages:
     paths: {bleach@3.1.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/bleach/3.1.0/x86_64-centos7-gcc8-opt}
   boost:
     buildable: false
-    paths: {boost@1.70.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Boost/1.70.0/x86_64-centos7-gcc8-opt}
+    paths: {boost@1.70.0%gcc@8.3.0 +python  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Boost/1.70.0/x86_64-centos7-gcc8-opt}
   brotli:
     buildable: false
     paths: {brotli@1.0.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/brotli/1.0.7/x86_64-centos7-gcc8-opt}
@@ -182,9 +185,6 @@ packages:
   dcap:
     buildable: false
     paths: {dcap@2.47.7-1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Grid/dcap/2.47.7-1/x86_64-centos7-gcc8-opt}
-  dd4hep:
-    buildable: false
-    paths: {dd4hep@01-10%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/DD4hep/01-10/x86_64-centos7-gcc8-opt}
   decorator:
     buildable: false
     paths: {decorator@4.3.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/decorator/4.3.2/x86_64-centos7-gcc8-opt}
@@ -291,7 +291,7 @@ packages:
     buildable: false
     paths: {gast@0.2.2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gast/0.2.2/x86_64-centos7-gcc8-opt}
   gaudi:
-    buildable: false
+    #buildable: false
     paths: {gaudi@v32r2%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Gaudi/v32r2/x86_64-centos7-gcc8-opt}
   gdal:
     buildable: false
@@ -301,7 +301,7 @@ packages:
     paths: {gdb@8.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/gdb/8.3/x86_64-centos7-gcc8-opt}
   geant4:
     buildable: false
-    paths: {geant4@10.05.p01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Geant4/10.05.p01/x86_64-centos7-gcc8-opt}
+    paths: {geant4@10.05.01%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Geant4/10.05.p01/x86_64-centos7-gcc8-opt}
   genshi:
     buildable: false
     paths: {genshi@0.7%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/genshi/0.7/x86_64-centos7-gcc8-opt}
@@ -589,7 +589,7 @@ packages:
     paths: {lcgenv@1.3.8%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/lcgenv/1.3.8/x86_64-centos7-gcc8-opt}
   lcio:
     buildable: false
-    paths: {lcio@02.13%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/LCIO/02.13/x86_64-centos7-gcc8-opt}
+    paths: {lcio@02.13.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/LCIO/02.13/x86_64-centos7-gcc8-opt}
   lcov:
     buildable: false
     paths: {lcov@1.14%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/lcov/1.14/x86_64-centos7-gcc8-opt}
@@ -863,9 +863,8 @@ packages:
   png:
     buildable: false
     paths: {png@1.6.37%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/png/1.6.37/x86_64-centos7-gcc8-opt}
-  podio:
-    buildable: false
-    paths: {podio@00.09.02%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/podio/00.09.02/x86_64-centos7-gcc8-opt}
+  #podio:
+    #paths: {podio@00.09.02%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/podio/00.09.02/x86_64-centos7-gcc8-opt}
   powheg-box-v2:
     buildable: false
     paths: {powheg-box-v2@r3043.lhcb%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/MCGenerators/powheg-box-v2/r3043.lhcb/x86_64-centos7-gcc8-opt}
@@ -1105,7 +1104,7 @@ packages:
     paths: {rivet@2.7.2b%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/MCGenerators/rivet/2.7.2b/x86_64-centos7-gcc8-opt}
   root:
     buildable: false
-    paths: {root@6.18.04%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/ROOT/6.18.04/x86_64-centos7-gcc8-opt}
+    paths: {root@6.18.04%gcc@8.3.0 +vdt +python +root7 +ssl +tbb +threads cxxstd=17 arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/ROOT/6.18.04/x86_64-centos7-gcc8-opt}
   root_numpy:
     buildable: false
     paths: {root_numpy@4.8.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/root_numpy/4.8.0/x86_64-centos7-gcc8-opt}
@@ -1137,8 +1136,11 @@ packages:
     buildable: false
     paths: {send2trash@1.5.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/send2trash/1.5.0/x86_64-centos7-gcc8-opt}
   setuptools:
-    buildable: false
+    #buildable: false
     paths: {setuptools@41.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/setuptools/41.0.0/x86_64-centos7-gcc8-opt}
+  py-setuptools:
+    buildable: false
+    paths: {py-setuptools@41.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/setuptools/41.0.0/x86_64-centos7-gcc8-opt}
   setuptools_scm:
     buildable: false
     paths: {setuptools_scm@3.3.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/setuptools_scm/3.3.3/x86_64-centos7-gcc8-opt}
@@ -1349,9 +1351,9 @@ packages:
   xapian:
     buildable: false
     paths: {xapian@1.4.11%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/xapian/1.4.11/x86_64-centos7-gcc8-opt}
-  xenv:
+  py-xenv:
     buildable: false
-    paths: {xenv@1.0.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/xenv/1.0.0/x86_64-centos7-gcc8-opt}
+    paths: {py-xenv: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/xenv/1.0.0/x86_64-centos7-gcc8-opt}
   xerces-c:
     buildable: false
     paths: {xerces-c@3.1.3%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/XercesC/3.1.3/x86_64-centos7-gcc8-opt}

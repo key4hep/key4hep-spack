@@ -1,0 +1,3 @@
+mirrors:
+  eos_buildcache: file:///eos/project/k/key4hep/www/key4hep/spack_build/mirror/LCG_96c_LS/
+  http_buildcache: http://key4hep.web.cern.ch/key4hep/spack_build/mirror/LCG_96c_LS/
