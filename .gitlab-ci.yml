@@ -1,4 +1,7 @@
 
+variables:
+  GIT_STRATEGY: clone
+
 stages:
     - compilation
     - deployment
