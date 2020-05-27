@@ -15,13 +15,14 @@ class Key4hepStack(BundlePackage):
     depends_on('edm4hep@master', when="@nightly")
     depends_on('K4FWCore@master', when="@nightly")
     depends_on('guinea-pig@master', when="@nightly")
+    depends_on('lcgeo', when="@nightly")
     
     depends_on("edm4hep@0.1.0", when="@0.1")
     depends_on("K4FWCore@0.1.0", when="@0.1")
     depends_on('guinea-pig@1.2.2rc', when="@0.1")
 
-    depends_on('lcio')
-    depends_on('lcgeo')
+    depends_on('lcio', when="@0.1")
+    depends_on('lcgeo', when="@0.1")
 
     # be explicit to avoid concretizer errors
     depends_on('root cxxstd=17 +root7 +ssl')
