@@ -18,7 +18,7 @@ build-spack:
         - eosfusebind
         - git clone --depth 1 https://github.com/spack/spack
         - source spack/share/spack/setup-env.sh
-        - spack repo add .
+        - spack repo add --scope site .
         - echo $PWD
         - ls /eos/project/k/key4hep/www/key4hep/spack_build
         - export BINARY_TAG=x86_64-centos7-gcc8-opt
