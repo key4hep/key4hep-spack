@@ -18,14 +18,18 @@ class Lccd(CMakePackage):
     version('master', branch='master')
     version('1.5.0', sha256='876f751bebab760303b8dc3b7c6d4fe7d47ddd5aa19af9338f6565c5b817229b')
 
+    variant('conddbmysql', default=True,
+            description="builds with database support")
+
 
     depends_on("ilcutil")
+    depends_on("conddbmysql", when="+conddbmysql")
 
 
     def cmake_args(self):
         args = []  
         # todo: add variant
-        args.append(self.define('LCCD_CONDDBMYSQL', False))
+        args.append(self.define_from_variant('LCCD_CONDDBMYSQL', 'conddbmysql'))
         return args
 
     def url_for_version(self, version):
