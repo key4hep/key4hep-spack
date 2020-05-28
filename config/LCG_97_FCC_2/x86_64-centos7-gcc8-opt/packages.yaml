@@ -1875,3 +1875,5 @@ packages:
     buildable: false
     paths:
       zstandard@0.13.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/zstandard/0.13.0/x86_64-centos7-gcc8-opt
+  py-setuptools:
+    version: [44.1.0]
