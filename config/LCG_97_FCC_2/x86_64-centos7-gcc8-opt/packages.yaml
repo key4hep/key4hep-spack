@@ -394,7 +394,7 @@ packages:
   gaudi:
     buildable: false
     paths:
-      gaudi@v33r1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Gaudi/v33r1/x86_64-centos7-gcc8-opt
+      gaudi@v33.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Gaudi/v33r1/x86_64-centos7-gcc8-opt
   gdal:
     buildable: false
     paths:
