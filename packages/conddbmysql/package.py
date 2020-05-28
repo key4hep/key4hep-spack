@@ -21,7 +21,8 @@ class Conddbmysql(CMakePackage):
 
 
     depends_on("mysql")
-    depens_on("ilcutil")
+    depends_on("ilcutil")
+
 
 
     def cmake_args(self):
