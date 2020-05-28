@@ -254,7 +254,7 @@ packages:
   dd4hep:
     buildable: false
     paths:
-      dd4hep@1.12.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/DD4hep/01-12-01/x86_64-centos7-gcc8-opt
+      dd4hep@1.12.1%gcc@8.3.0 +geant4  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/DD4hep/01-12-01/x86_64-centos7-gcc8-opt
   decorator:
     buildable: false
     paths:
