@@ -54,6 +54,8 @@ class Marlin(CMakePackage):
         args.append(self.define_from_variant('MARLIN_LCCD', 'clhep'))
         args.append(self.define_from_variant('MARLIN_AIDA', 'aida'))
         args.append('-DCMAKE_CXX_STANDARD=17')
+        if 'aida' in self.spec:
+          args.append('-DAIDA_DIR=%s' % self.spec["aida"].prefix)
         return args
 
     def url_for_version(self, version):

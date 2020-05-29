@@ -23,6 +23,7 @@ class Lccd(CMakePackage):
 
 
     depends_on("ilcutil")
+    depends_on("lcio")
     depends_on("conddbmysql", when="+conddbmysql")
 
 
