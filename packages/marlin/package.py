@@ -42,7 +42,7 @@ class Marlin(CMakePackage):
     depends_on("qt4", when="+gui")
     depends_on("lccd", when="+lccd")
     depends_on("clhep", when="+clhep")
-    depends_on("aida", when="+aida")
+    depends_on("raida", when="+aida")
 
 
     def cmake_args(self):
