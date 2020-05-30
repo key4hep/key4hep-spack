@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LCGPREFIX=/cvmfs/sft.cern.ch/lcg
-LCGPATH=/cvmfs/sft.cern.ch/lcg/views/LCG_96c_LS/x86_64-centos7-gcc8-opt
+LCGPATH=/cvmfs/sft.cern.ch/lcg/views/LCG_97_FCC_2/x86_64-centos7-gcc8-opt
 
 function add_to_path {
     # Add the passed value only to path if it's not already in there.
@@ -28,8 +28,6 @@ else
 fi
 #THIS_DIR=/cvmfs/sw-nightlies.hsf.org/key4hep/views/latest/x86_64-centos7-gcc8-opt/
 
-# Setup DD4hep from FCC view
-source $THIS_DIR/bin/thisdd4hep.sh
 
 export BINARY_TAG=x86_64-centos7-gcc8-opt
 
@@ -54,8 +52,5 @@ export CMAKE_PREFIX_PATH=$THIS_DIR:$CMAKE_PREFIX_PATH
 export PYTHONPATH=$THIS_DIR/python:$PYTHONPATH
 export PYTHONPATH=$THIS_DIR/lib/python2.7/site-packages/:$PYTHONPATH
 add_to_path PYTHONPATH $THIS_DIR/lib
-add_to_path DD4HEP_LIBRARY_PATH $THIS_DIR/lib
 
-# Setup Gaudi_DIR since cmake files are not properly added to the LCG View
-export Gaudi_DIR=/cvmfs/sft.cern.ch/lcg/releases/LCG_96c_LS/Gaudi/v32r2/x86_64-centos7-gcc8-opt/
 

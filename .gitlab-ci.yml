@@ -24,12 +24,12 @@ build-spack:
         - export BINARY_TAG=x86_64-centos7-gcc8-opt
         - export LCG_VERSION=LCG_97_FCC_2
         - source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/setup.sh
-        - export SPACKCMD="spack -C k4-spack/config/$LCG_VERSION/$BINARY_TAG/"
+        - export SPACKCMD="spack -C config/$LCG_VERSION/$BINARY_TAG/"
         - $SPACKCMD uninstall -y --all
         - $SPACKCMD repo list
-        - $SPACKCMD spec -I podio@master
-        - $SPACKCMD install --no-cache podio@master
-        - $SPACKCMD buildcache create -m eos_buildcache -u -a -f podio@master
+        - $SPACKCMD spec -I key4hep-stack@nightly
+        - $SPACKCMD install --no-cache key4hep-stack@nightly
+        - $SPACKCMD buildcache create -m eos_buildcache -u -a -f key4hep-stack@nightly
 
 deploy-cvmfs:
     stage: deployment

@@ -102,7 +102,7 @@ packages:
   boost:
     buildable: false
     paths:
-      boost@1.72.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Boost/1.72.0/x86_64-centos7-gcc8-opt
+      boost@1.72.0%gcc@8.3.0  +python arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Boost/1.72.0/x86_64-centos7-gcc8-opt
   brotli:
     buildable: false
     paths:
@@ -254,7 +254,7 @@ packages:
   dd4hep:
     buildable: false
     paths:
-      dd4hep@1.12.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/DD4hep/01-12-01/x86_64-centos7-gcc8-opt
+      dd4hep@1.12.1%gcc@8.3.0 +geant4  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/DD4hep/01-12-01/x86_64-centos7-gcc8-opt
   decorator:
     buildable: false
     paths:
@@ -394,7 +394,7 @@ packages:
   gaudi:
     buildable: false
     paths:
-      gaudi@v33r1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Gaudi/v33r1/x86_64-centos7-gcc8-opt
+      gaudi@33.1%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/Gaudi/v33r1/x86_64-centos7-gcc8-opt
   gdal:
     buildable: false
     paths:
@@ -1498,7 +1498,7 @@ packages:
   root:
     buildable: false
     paths:
-      root@6.20.04%gcc@8.3.0 cxxstd=17 +tbb  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/ROOT/v6.20.04/x86_64-centos7-gcc8-opt
+      root@6.20.04%gcc@8.3.0 cxxstd=17 +tbb +root7 +ssl  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/ROOT/v6.20.04/x86_64-centos7-gcc8-opt
   root_numpy:
     buildable: false
     paths:
@@ -1875,3 +1875,5 @@ packages:
     buildable: false
     paths:
       zstandard@0.13.0%gcc@8.3.0  arch=x86_64-centos7: /cvmfs/sft.cern.ch/lcg/releases/LCG_97_FCC_2/zstandard/0.13.0/x86_64-centos7-gcc8-opt
+  py-setuptools:
+    version: [44.1.0]
