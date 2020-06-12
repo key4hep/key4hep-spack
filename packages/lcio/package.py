@@ -27,7 +27,7 @@ class Lcio(CMakePackage):
             description='Use the specified C++ standard when building.')
     variant("jar", default=False,
     description="Turn on to build/install lcio.jar")
-    variant("rootdict", default=True,
+    variant("rootdict", default=False,
     description="Turn on to build/install ROOT dictionary.")
     variant("examples", default=False,
     description="Turn on to build LCIO examples")
