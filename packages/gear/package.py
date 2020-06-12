@@ -26,6 +26,7 @@ class Gear(CMakePackage):
 
 
     depends_on("ilcutil")
+    depends_on("clhep")
     depends_on("root", when="+tgeo")
     depends_on("doxygen", when="+doc")
 

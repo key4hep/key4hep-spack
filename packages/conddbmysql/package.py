@@ -20,7 +20,7 @@ class Conddbmysql(CMakePackage):
 
 
 
-    depends_on("mysql")
+    depends_on("mariadb")
     depends_on("ilcutil")
 
 
