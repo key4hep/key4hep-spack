@@ -12,7 +12,7 @@ class GuineaPig(CMakePackage):
 
     homepage = "https://gitlab.cern.ch/clic-software/guinea-pig"
     url      = "https://gitlab.cern.ch/clic-software/guinea-pig/-/archive/v1.2.2rc/guinea-pig-v1.2.2rc.zip"
-    git = "https://gitlab.cern.ch/clic-software/guinea-pig"
+    git = "https://gitlab.cern.ch/clic-software/guinea-pig.git"
 
     version('master', branch='master')
     version('1.2.2rc', 'fec0d1b6aa72523eec4e7c71bca2c1ff', )
