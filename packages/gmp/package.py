@@ -8,20 +8,18 @@ from spack import *
 class Gmp(CMakePackage):
     """GMP Wrapper"""
 
-    homepage = "https://github.com/fdplacido/GMP"
-    git      = "https://github.com/fdplacido/GMP.git"
-    url      = "https://github.com/fdplacido/GMP/archive/plfernan/wrapper_improvements.tar.gz"
+    homepage = "https://github.com/key4hep/GMP"
+    git      = "https://github.com/key4hep/GMP.git"
+    url      = "https://github.com/key4hep/GMP/archive/master.tar.gz"
 
     maintainers = ['fdplacido']
 
-    version('plfernan/wrapper_improvements', branch='plfernan/wrapper_improvements')
+    version('develop', branch='master')
 
     depends_on('root')
     depends_on('lcio')
     depends_on('marlin')
     depends_on('gaudi')
-
-    patch('/home/plfernan/workspace/GMP/binary_tag_removal.patch')
 
     def cmake_args(self):
         args = [
