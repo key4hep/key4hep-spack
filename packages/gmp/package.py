@@ -10,11 +10,12 @@ class Gmp(CMakePackage):
 
     homepage = "https://github.com/key4hep/GMP"
     git      = "https://github.com/key4hep/GMP.git"
-    url      = "https://github.com/key4hep/GMP/archive/master.tar.gz"
+    url      = "https://github.com/key4hep/GMP/archive/v00-01.tar.gz"
 
     maintainers = ['fdplacido']
 
-    version('develop', branch='master')
+    version('master', branch='master')
+    version('0.1', sha256='649ffa462e75c716f54b4e0b530c27c27a7f62a8fad64af8aecc646046045efd')
 
     depends_on('root')
     depends_on('lcio')
@@ -26,3 +27,19 @@ class Gmp(CMakePackage):
             self.define('HOST_BINARY_TAG','x86_64-linux-gcc9-opt')
         ]
         return args
+
+    def url_for_version(self, version):
+        # releases are dashed and padded with a leading zero
+        # the patch version is omitted when 0
+        # so for example v01-12-01, v01-12 ...
+        major = (str(version[0]).zfill(2))
+        minor = (str(version[1]).zfill(2))
+        if (len(version) == 2):
+            url = "https://github.com/key4hep/GMP/archive/v%s-%s.tar.gz" % (major, minor)
+        elif (len(version) == 3):
+            patch = (str(version[2]).zfill(2))
+            url = "https://github.com/key4hep/GMP/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
+        else:
+            print('Error - Wrong version format provided')
+            return
+        return url
