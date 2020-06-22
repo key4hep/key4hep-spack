@@ -31,6 +31,8 @@ class Edm4hep(CMakePackage):
     # since it is not used for spack builds, disable
     patch("cpack.patch")
 
+    patch("rootmap.patch", when='@0.1.0')
+
     depends_on('cmake@3.3:', type='build')
     depends_on('python', type='build')
     depends_on('root@6.08:')
