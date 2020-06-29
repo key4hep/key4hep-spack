@@ -28,6 +28,10 @@ class Gmp(CMakePackage):
         ]
         return args
 
+    def setup_run_environment(self, spack_env):
+        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+        spack_env.prepend_path("PATH", self.prefix.scripts)
+
     def url_for_version(self, version):
         # releases are dashed and padded with a leading zero
         # the patch version is omitted when 0
