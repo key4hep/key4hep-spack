@@ -1,0 +1,30 @@
+--- a/utilities/ParticleUtils.cc.orig   2018-01-11 08:47:34.646902837 +0100
++++ b/utilities/ParticleUtils.cc        2018-01-11 08:48:24.884327024 +0100
+@@ -87,7 +87,7 @@
+
+
+ } // namespace
+-
++/*
+ std::ostream& operator<<(std::ostream& out, const fcc::BareParticle& ptc) {
+   if(not out) return out;
+
+@@ -117,3 +117,4 @@
+   out << ", " << ptc.endVertex().getObjectID().index << ")";
+   return out;
+ }
++*/
+--- a/utilities/ParticleUtils.h.orig    2018-01-11 10:00:18.206586597 +0100
++++ b/utilities/ParticleUtils.h 2018-01-11 10:00:50.774859784 +0100
+@@ -45,8 +45,8 @@
+
+ }
+
+-std::ostream& operator<<(std::ostream& out, const fcc::BareParticle& ptc);
+-std::ostream& operator<<(std::ostream& out, const fcc::Particle& ptc);
+-std::ostream& operator<<(std::ostream& out, const fcc::MCParticle& ptc);
++//std::ostream& operator<<(std::ostream& out, const fcc::BareParticle& ptc);
++//std::ostream& operator<<(std::ostream& out, const fcc::Particle& ptc);
++//std::ostream& operator<<(std::ostream& out, const fcc::MCParticle& ptc);
+
+ #endif

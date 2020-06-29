@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c6d36c0..5d60cde 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -96,7 +96,7 @@ include(CTest)
+ 
+ 
+ #--- enable CPack --------------------------------------------------------------
+-include(cmake/fccedmCPack.cmake)
++#include(cmake/fccedmCPack.cmake)
+ 
+ #--- target for Doxygen documen
