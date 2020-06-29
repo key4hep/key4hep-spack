@@ -1,0 +1,20 @@
+--- a/Visualization/CMakeLists.txt.orig	2019-02-25 11:09:35.928849494 +0100
++++ b/Visualization/CMakeLists.txt	2019-02-25 11:09:59.002066062 +0100
+@@ -10,7 +10,7 @@
+ 
+ 
+ set(CMAKE_MODULE_PATH  ${CMAKE_MODULE_PATH}  ${DD4hep_ROOT}/cmake )
+-find_package(DD4hep COMPONENTS DDCore DDG4 DDEve REQUIRED)
++find_package(DD4hep COMPONENTS DDCore DDG4 DDEvePlugins REQUIRED)
+ 
+ include(DD4hep)
+ 
+@@ -22,7 +22,7 @@
+                  NO_PUBLIC_HEADERS
+                  src/*.cpp
+                  INCLUDE_DIRS DD4hep ROOT Geant4 PODIO FCCEDM ROOT
+-                 LINK_LIBRARIES GaudiKernel DD4hep ROOT PODIO FCCEDM ${DD4hep_DDEVE_LIBRARY}
++                 LINK_LIBRARIES GaudiKernel DD4hep ROOT PODIO FCCEDM ${DD4hep_DDEVEPLUGINS_LIBRARY}
+                  )
+ set(LIBRARY_OUTPUT_PATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+ message(STATUS "LIBRARY_OUTPUT_PATH -> ${LIBRARY_OUTPUT_PATH}")
