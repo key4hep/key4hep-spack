@@ -10,6 +10,7 @@ class Fccsw(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.13', sha256='4b76b28404f02dac09d9b02eb1db9926f5a53b21c6b91e95d3812267d575b116')
     version('0.12', sha256='a67151c12177882abd8afcf56bee47c2830c44cac749b23d08d005b45096b264')
     version('0.11', 'e3b5aa8f396cffae745305801eb8f7a38a8a7881')
     version('0.10', '40b75f42fb51934cdc3c52049226ac39')
@@ -26,9 +27,6 @@ class Fccsw(CMakePackage):
             values=('14', '17'),
             multi=False,
             description='Use the specified C++ standard when building.')
-
-    #depends_on("key4hep-stack", when="@0.13:")
-    #depends_on('acts', when="@0.13:")
 
     depends_on('acts@0.10.5 +identification +dd4hep +tgeo +digitization', when="@0.12:")
     depends_on('clhep')
