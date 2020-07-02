@@ -1,0 +1,22 @@
+diff --git a/SConstruct b/SConstruct
+index 1111ea7..b651642 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -122,6 +122,16 @@ if config['print_python_version']:
+
+ SetOption('num_jobs', config['num_jobs'])
+
++env = Environment(
++                  ENV={'PATH': os.environ['PATH']},
++                  )
++
++env['ENV'].update(os.environ)
++if 'PYTHONHOME' in env['ENV']:
++    del env['ENV']['PYTHONHOME']
++
++
++
+ generator_options = ['--jobs=' + str(config['gjobs'])]
+ if config['glog']:
+     generator_options.append('--log')
+
