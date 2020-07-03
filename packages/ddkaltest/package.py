@@ -32,6 +32,11 @@ class Ddkaltest(CMakePackage):
     depends_on('kaltest')
     depends_on('aidatt')
     
+    @run_after('install')
+    def installheaders(self):
+      #make('install')
+      install_tree('.', self.prefix)
+    
     def url_for_version(self, version):
         # releases are dashed and padded with a leading zero
         # the patch version is omitted when 0

@@ -29,15 +29,18 @@ class Generalbrokenlines(CMakePackage):
     version('1.17.0', sha256='f0cd628fd734fc7228ff25bfd20958a7ae4fc2c290796957b3790e617143f56a')
 
 
-    variant('root', default=False,
-            description="Build with ROOT support")
+    #variant('root', default=True,
+    #        description="Build with ROOT support")
 
 
     depends_on('eigen')
-    depends_on('root', when="+root")
+    depends_on('root')
 
     def cmake_args(self):
-        args = [ self.define_from_variant("SUPPORT_ROOT", "root") ]
+        args = [ self.define("SUPPORT_ROOT", True) ]
+        args.append('-DCMAKE_CXX_STANDARD=%s'
+                  % self.spec['root'].variants['cxxstd'].value)
+
         return args
 
     def url_for_version(self, version):

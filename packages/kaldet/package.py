@@ -29,6 +29,15 @@ class Kaldet(CMakePackage):
     depends_on('kaltest')
     depends_on('root')
 
+    def cmake_args(self):
+        args = []
+        # C++ Standard
+        args.append('-DCMAKE_CXX_STANDARD=%s'
+                    % self.spec['root'].variants['cxxstd'].value)
+        args.append('-DBUILD_TESTING=%s' % self.run_tests)
+        return args
+
+
     def url_for_version(self, version):
         # releases are dashed and padded with a leading zero
         # the patch version is omitted when 0
