@@ -33,6 +33,7 @@ class Conformaltracking(CMakePackage):
     depends_on('root')
     depends_on('marlin')
     depends_on('marlinutil')
+    depends_on('marlintrk')
     depends_on('raida')
     depends_on('boost')
 
