@@ -16,17 +16,30 @@ class Aidatt(CMakePackage):
     maintainers = ['vvolkl']
 
     version("master", branch="master")
-    version('0.10.0',     sha256='5379a369ee29bebeece7e814c0595bac9f08f2737ce03ae529b4b4e84dea1283')
-
-    variant('gbl', default=False,
-            description="Build with GeneralBrokenLines")
-    variant('lcio', default=False,
-            description="Build with LCIO")
-    variant('dd4hep', default=False,
-            description="Build with DD4hep")
+    version('0.10',     sha256='5379a369ee29bebeece7e814c0595bac9f08f2737ce03ae529b4b4e84dea1283')
 
     depends_on('ilcutil')
     depends_on('eigen')
-    depends_on('generalbrokenlines', when="+gbl")
-    depends_on('dd4hep', when="+dd4hep")
-    depends_on('lcio', when="+lcio")
+    depends_on('generalbrokenlines')
+    depends_on('dd4hep')
+    depends_on('lcio')
+
+    def url_for_version(self, version):
+        # releases are dashed and padded with a leading zero
+        # the patch version is omitted when 0
+        # so for example v01-12-01, v01-12 ...
+        base_url = self.url[:self.url.rfind("/")]
+        major = (str(version[0]).zfill(2))
+        minor = (str(version[1]).zfill(2))
+        if (len(version) == 2):
+            url = base_url + "/v%s-%s.tar.gz" % (major, minor)
+        elif (len(version) == 3):
+            patch = (str(version[2]).zfill(2))
+            if version[2] == 0:
+                url = base_url + "/v%s-%s.tar.gz" % (major, minor)
+            else:
+                url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
+        else:
+            print('Error - Wrong version format provided')
+            return
+        return url
