@@ -36,6 +36,9 @@ class Conformaltracking(CMakePackage):
     depends_on('raida')
     depends_on('boost')
 
+    def setup_run_environment(self, spack_env):
+        spack_env.prepend_path('MARLIN_LDD', self.prefix.lib + "/libConformalTracking.so")
+
     def url_for_version(self, version):
         # releases are dashed and padded with a leading zero
         # the patch version is omitted when 0
