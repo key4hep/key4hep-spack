@@ -26,10 +26,10 @@ class Marlin(CMakePackage):
             description="builds with lccd")
 
     variant('clhep', default=True,
-            description="builds with lccd")
+            description="builds with clhep")
 
     variant('aida', default=True,
-            description="builds with lccd")
+            description="builds with aida")
 
     variant('doc', default=False,
             description="build doxygen documentation")
@@ -51,7 +51,7 @@ class Marlin(CMakePackage):
         args.append(self.define_from_variant('INSTALL_DOC', 'doc'))
         args.append(self.define_from_variant('MARLIN_GUI', 'gui'))
         args.append(self.define_from_variant('MARLIN_LCCD', 'lccd'))
-        args.append(self.define_from_variant('MARLIN_LCCD', 'clhep'))
+        args.append(self.define_from_variant('MARLIN_CLHEP', 'clhep'))
         args.append(self.define_from_variant('MARLIN_AIDA', 'aida'))
         args.append('-DCMAKE_CXX_STANDARD=17')
         if 'aida' in self.spec:
