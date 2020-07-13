@@ -1,0 +1,26 @@
+From 163a37e745ee4c00ab0534efdb30d28158cbd5fa Mon Sep 17 00:00:00 2001
+From: Marko Petric <marko.petric@cern.ch>
+Date: Wed, 1 Apr 2020 19:42:21 +0200
+Subject: [PATCH] the base library needs to link against Marlin because of
+ tinyxml
+
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 762d809..20de44b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -89,8 +89,8 @@ ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${library_sources} )
+
+ ADD_SHARED_LIBRARY( ${PROJECT_NAME}Processors ${processor_srcs} ${diagnostics_srcs} )
+
+-TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${MarlinUtil_LIBRARIES} ${LCIO_LIBRARIES} )
+-TARGET_LINK_LIBRARIES( ${PROJECT_NAME}Processors ${Marlin_LIBRARIES} ${AIDA_LIBRARIES} ${PROJECT_NAME} )
++TARGET_LINK_LIBRARIES( ${PROJECT_NAME} ${Marlin_LIBRARIES} ${MarlinUtil_LIBRARIES} ${LCIO_LIBRARIES} )
++TARGET_LINK_LIBRARIES( ${PROJECT_NAME}Processors ${AIDA_LIBRARIES} ${PROJECT_NAME} )
+
+ INSTALL_SHARED_LIBRARY( ${PROJECT_NAME} DESTINATION lib )
+ INSTALL_SHARED_LIBRARY( ${PROJECT_NAME}Processors DESTINATION lib )
+
