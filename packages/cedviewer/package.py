@@ -26,7 +26,7 @@ class Cedviewer(CMakePackage):
     depends_on('root')
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_LDD', self.prefix.lib + "/libCEDViewer.so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libCEDViewer.so")
 
 
     def url_for_version(self, version):
