@@ -14,12 +14,17 @@ def ilc_url_for_version(self, version):
         base_url = self.url.rsplit('/', 1)[0]
         major = str(version[0]).zfill(2)
         minor = str(version[1]).zfill(2)
+        # handle the different cases for the patch version:
+        # first case, no patch version is given in spack, i.e 0.1
         if len(version) == 2:
             url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-        elif (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
+        # a patch version is specified in spack, i.e. 0.1.x ...
+        elif len(version) == 3:
+            patch = str(version[2]).zfill(2)
+            # ... but it is zero, and not part of the ilc release url
             if version[2] == 0:
                 url = base_url + "/v%s-%s.tar.gz" % (major, minor)
+            # ... if it is non-zero, it is part  of the release url
             else:
                 url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
         else:
@@ -28,5 +33,8 @@ def ilc_url_for_version(self, version):
         return url
 
 class Ilcsoftpackage(Package):
+    # needs to be present to allow spack to import this file.
+    # the above function could also be a member here, but there is an
+    # issue with the logging of packages that use custom base classes.
     pass
 
