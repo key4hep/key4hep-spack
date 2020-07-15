@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Marlindd4hep(CMakePackage):
@@ -14,6 +15,7 @@ class Marlindd4hep(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('0.6', sha256='1cf8eb03bbdf6da8fbf277d8168d97f77e1675850a7e66d0e9f90684e3a2f077')
 
     depends_on('ilcutil')
@@ -27,25 +29,7 @@ class Marlindd4hep(CMakePackage):
         return args
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_LDD', self.prefix.lib + "/libMarlinDD4hep.so.so")
-
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so.so")
 
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        base_url = self.url[:self.url.rfind("/")]
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        if (len(version) == 2):
-            url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-        elif (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
-            if version[2] == 0:
-                url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-            else:
-                url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        else:
-            print('Error - Wrong version format provided')
-            return
-        return url
+       return ilc_url_for_version(self, version)

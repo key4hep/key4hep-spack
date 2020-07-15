@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Generalbrokenlines(CMakePackage):
@@ -28,11 +29,6 @@ class Generalbrokenlines(CMakePackage):
     version('1.17.1', sha256='66afdce406f7e7fe06c3faeadd73d651e39b9a2d60d0207b816bc2798159208d')
     version('1.17.0', sha256='f0cd628fd734fc7228ff25bfd20958a7ae4fc2c290796957b3790e617143f56a')
 
-
-    #variant('root', default=True,
-    #        description="Build with ROOT support")
-
-
     depends_on('eigen')
     depends_on('root')
 
@@ -44,14 +40,4 @@ class Generalbrokenlines(CMakePackage):
         return args
 
     def url_for_version(self, version):
-        # note this differs from ilc convention
-        base_url = self.url[:self.url.rfind("/")]
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        if (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
-            url = base_url + "/V%s-%s-%s.tar.gz" % (major, minor, patch)
-        else:
-            print('Error - Wrong version format provided')
-            return
-        return url
+       return ilc_url_for_version(self, version)

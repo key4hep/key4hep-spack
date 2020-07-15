@@ -8,7 +8,9 @@ from spack import *
 
 
 class Pandorapfa(CMakePackage):
-    """FIXME: Put a proper description of your package here."""
+    """Metadata package to bring together and build multiple Pandora libraries.
+       NOTE: for proper version control with spack, this should be broken up and
+       the subpackages installed individually."""
 
     url      = "https://github.com/PandoraPFA/PandoraPFA/archive/v03-14-00.tar.gz"
     hompage  = "https://github.com/PandoraPFA/PandoraPFA"
@@ -16,6 +18,7 @@ class Pandorapfa(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('3.14.0', sha256='1490f2504bdbd2960cba35fc552b762e3842d77ed5227f84ddabfde546fe6810')
 
     def cmake_args(self):
@@ -25,9 +28,7 @@ class Pandorapfa(CMakePackage):
         return args
 
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
+        # contrary to ilcsoftpackages, here the patch version is kept when 0
         base_url = self.url[:self.url.rfind("/")]
         major = (str(version[0]).zfill(2))
         minor = (str(version[1]).zfill(2))

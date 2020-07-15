@@ -4,14 +4,14 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Lcgeo(CMakePackage):
-    """FIXME: Put a proper description of your package here."""
+    """DD4hep geometry models for future colliders."""
 
-    # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://github.com/iLCSoft/lcgeo"
-    git      = "https://github.com/iLCSoft/lcgeo"
+    git      = "https://github.com/iLCSoft/lcgeo.git"
     url      = "https://github.com/iLCSoft/lcgeo/archive/v00-16-06.tar.gz"
 
     maintainers = ['vvolkl']
@@ -38,18 +38,6 @@ class Lcgeo(CMakePackage):
         args.append(self.define('BUILD_TESTING', self.run_tests))
         return args
 
-    def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        patch = (str(version[2]).zfill(2))
-        if version[2] == 0:
-            url = "https://github.com/iLCSoft/lcgeo/archive/v%s-%s.tar.gz" % (major, minor)
-        else:
-            url = "https://github.com/iLCSoft/lcgeo/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        return url
 
     @run_after('install')
     def install_compact(self):
@@ -63,3 +51,6 @@ class Lcgeo(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
+
+    def url_for_version(self, version):
+       return ilc_url_for_version(self, version)
