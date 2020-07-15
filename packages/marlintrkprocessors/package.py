@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Marlintrkprocessors(CMakePackage):
@@ -16,6 +17,7 @@ class Marlintrkprocessors(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('2.11', sha256='49a567831e2b7a0c43ded955ce31fbe7d467a59960f4bcc2c2120e20762639b0')
 
     depends_on('marlin')
@@ -30,25 +32,7 @@ class Marlintrkprocessors(CMakePackage):
 
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_LDD', self.prefix.lib + "/libMarlinTrkProcessors.so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinTrkProcessors.so")
 
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        base_url = self.url[:self.url.rfind("/")]
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        if (len(version) == 2):
-            url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-        elif (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
-            if version[2] == 0:
-                url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-            else:
-                url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        else:
-            print('Error - Wrong version format provided')
-            return
-        return url
-
+       return ilc_url_for_version(self, version)

@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Lcfivertex(CMakePackage):
@@ -32,21 +33,4 @@ class Lcfivertex(CMakePackage):
         return args
 
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        base_url = self.url[:self.url.rfind("/")]
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        if (len(version) == 2):
-            url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-        elif (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
-            if version[2] == 0:
-                url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-            else:
-                url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        else:
-            print('Error - Wrong version format provided')
-            return
-        return url
+       return ilc_url_for_version(self, version)

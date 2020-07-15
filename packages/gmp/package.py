@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 class Gmp(CMakePackage):
     """GMP Wrapper"""
@@ -33,17 +34,4 @@ class Gmp(CMakePackage):
         spack_env.prepend_path("PATH", self.prefix.scripts)
 
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        if (len(version) == 2):
-            url = "https://github.com/key4hep/GMP/archive/v%s-%s.tar.gz" % (major, minor)
-        elif (len(version) == 3):
-            patch = (str(version[2]).zfill(2))
-            url = "https://github.com/key4hep/GMP/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        else:
-            print('Error - Wrong version format provided')
-            return
-        return url
+       return ilc_url_for_version(self, version)

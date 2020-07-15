@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
 
 class Ddkaltest(CMakePackage):
@@ -16,6 +17,7 @@ class Ddkaltest(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('1.6',     sha256='e668242d84eb94e59edca18e524b1a928fcf7ae7c4b79f76f0338a0a4e835d8f')
     version('1.5',     sha256='4ef6fea7527dbb5f9a12322e92e27d80f2c29b115aae13987f55cb6cf02f31f5')
     version('1.4',     sha256='c5cefd23366c47087a6b04b5d48ab28ac88e8855446d782cfb8a954088fd4207')
@@ -38,11 +40,4 @@ class Ddkaltest(CMakePackage):
       install_tree('.', self.prefix)
     
     def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        base_url = self.url[:self.url.rfind("/")]
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        url = base_url + "/v%s-%s.tar.gz" % (major, minor)
-        return url
+       return ilc_url_for_version(self, version)
