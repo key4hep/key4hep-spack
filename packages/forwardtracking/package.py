@@ -19,6 +19,8 @@ class Forwardtracking(CMakePackage):
     version('master', branch='master')
     version('1.14', sha256='99149d170a1ae179500b2c47ec79dca227ff96c0bdf0cd69f2075eb468177a5e')
 
+    patch('testing.patch', when="@:1.15")
+
 
     depends_on('ilcutil')
     depends_on('marlin')
@@ -30,6 +32,12 @@ class Forwardtracking(CMakePackage):
     depends_on('root')
     depends_on('clhep')
     depends_on('raida')
+
+    def cmake_args(self):
+        args = []
+        args.append(self.define('BUILD_TESTING', self.run_tests))
+        return args
+
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libForwardTracking.so")

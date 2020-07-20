@@ -19,7 +19,7 @@ class Lccd(CMakePackage):
     version('master', branch='master')
     version('1.5.0', sha256='876f751bebab760303b8dc3b7c6d4fe7d47ddd5aa19af9338f6565c5b817229b')
 
-    variant('conddbmysql', default=True,
+    variant('conddbmysql', default=False,
             description="builds with database support")
 
 

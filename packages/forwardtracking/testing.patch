@@ -1,0 +1,17 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 99fbec3..599a05f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -172,12 +172,12 @@ ENDMACRO()
+ INCLUDE_DIRECTORIES( SYSTEM ${ILCTEST_INCLUDE_DIRS} )
+ 
+ 
+-
++IF(BUILD_TESTING)
+ ADD_UNIT_TEST( simple_circle ./src/testing/test_simple_circle.cc )
+ SET_TESTS_PROPERTIES( t_simple_circle PROPERTIES FAIL_REGULAR_EXPRESSION "TEST_FAILED" )
+ SET_TESTS_PROPERTIES( t_simple_circle PROPERTIES PASS_REGULAR_EXPRESSION "TEST_PASSED" )
+ SET_TESTS_PROPERTIES( t_simple_circle PROPERTIES WILL_FAIL TRUE )
+-
++ENDIF()
+
