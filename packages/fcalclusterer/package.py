@@ -24,8 +24,21 @@ class Fcalclusterer(CMakePackage):
     depends_on('gear')
     depends_on('marlin')
     depends_on('marlinutil')
-    depends_on('root')
+    depends_on('root +unuran +mathmore')
     depends_on('dd4hep')
+
+    def cmake_args(self):
+        args = []
+        # C++ Standard
+        args.append('-DCMAKE_CXX_STANDARD=%s'
+                    % self.spec['root'].variants['cxxstd'].value)
+        args.append('-DBUILD_TESTING=%s' % self.run_tests)
+        return args
+
+    def install(self, spec, prefix):
+        #make('install')
+        install_tree('.', self.prefix)
+
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libFCalClusterer.so")
