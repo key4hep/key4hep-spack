@@ -20,7 +20,7 @@ class Ddmarlinpandora(CMakePackage):
     depends_on('ilcutil')
     depends_on('marlinutil')
     depends_on('marlin')
-    depends_on('pandorasdk')
+    depends_on('pandorapfa')
     depends_on('dd4hep')
     depends_on('marlintrk')
 
