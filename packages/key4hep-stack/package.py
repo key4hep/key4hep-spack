@@ -21,7 +21,7 @@ class Key4hepStack(BundlePackage):
     depends_on("edm4hep@0.2.0", when="@0.1")
     depends_on("K4FWCore@0.1.0", when="@0.1")
     depends_on('guinea-pig@1.2.2rc', when="@0.1")
-    depends_on('whizard@2.8.2 +lcio', when="@0.1")
+    depends_on('whizard +lcio +openloops', when="@0.1")
 
     depends_on('lcio', when="@0.1")
     depends_on('lcgeo', when="@0.1")
@@ -70,6 +70,7 @@ class Key4hepStack(BundlePackage):
 
 
     depends_on("fccsw", when='@0.1')
+    depends_on("podio@0.10.0", when='@0.1')
 
     # be explicit to avoid concretizer errors
     depends_on('root cxxstd=17 +root7 +ssl')

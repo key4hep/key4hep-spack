@@ -19,7 +19,6 @@ class Marlinkinfit(CMakePackage):
     version('master', branch='master')
     version('0.6', sha256='e22127f3d349c5b5a6a1c95585f5bf410d77cf598b3432b188f781436632372a')
 
-
     depends_on('ilcutil')
     depends_on('marlin')
     depends_on('marlinutil')
@@ -27,6 +26,13 @@ class Marlinkinfit(CMakePackage):
     depends_on('gsl')
     depends_on('root')
     depends_on('raida')
+
+    def cmake_args(self):
+        args = []
+        # C++ Standard
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
+        args.append('-DBUILD_TESTING=%s' % self.run_tests)
+        return args
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinKinfit.so")
