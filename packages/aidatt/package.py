@@ -26,4 +26,4 @@ class Aidatt(CMakePackage):
     depends_on('lcio')
 
     def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
+        return ilc_url_for_version(self, version)
