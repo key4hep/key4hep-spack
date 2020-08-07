@@ -24,5 +24,13 @@ class Physsim(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPhysSim.so")
 
+    def cmake_args(self):
+        args = []
+        # C++ Standard
+        args.append('-DCMAKE_CXX_STANDARD=%s'
+                    % self.spec['root'].variants['cxxstd'].value)
+        args.append('-DBUILD_TESTING=%s' % self.run_tests)
+        return args
+
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)

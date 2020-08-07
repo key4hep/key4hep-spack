@@ -24,7 +24,7 @@ class Fcalclusterer(CMakePackage):
     depends_on('gear')
     depends_on('marlin')
     depends_on('marlinutil')
-    depends_on('root +unuran +mathmore')
+    depends_on('root +unuran +math')
     depends_on('dd4hep')
 
     def cmake_args(self):
