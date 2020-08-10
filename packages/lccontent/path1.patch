@@ -1,0 +1,14 @@
+diff --git a/cmake/LCContentConfig.cmake.in b/cmake/LCContentConfig.cmake.in
+index d16bd8d..aa1e347 100644
+--- a/cmake/LCContentConfig.cmake.in
++++ b/cmake/LCContentConfig.cmake.in
+@@ -42,7 +42,7 @@ FIND_PATH( LCContent_INCLUDE_DIRS
+
+
+ # ---------- libraries --------------------------------------------------------
+-INCLUDE( "@PANDORA_CMAKE_MODULES_PATH@/MacroCheckPackageLibs.cmake" )
++INCLUDE( "MacroCheckPackageLibs" )
+
+ # only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
+ # additional components are set by cmake in variable PKG_FIND_COMPONENTS
+
