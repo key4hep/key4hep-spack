@@ -1,0 +1,13 @@
+diff --git a/cmake/LArPandoraContentConfigVersion.cmake.in b/cmake/LArPandoraContentConfigVersion.cmake.in
+index b444ffd7..ac0ae061 100644
+--- a/cmake/LArPandoraContentConfigVersion.cmake.in
++++ b/cmake/LArPandoraContentConfigVersion.cmake.in
+@@ -10,6 +10,6 @@ SET( ${PACKAGE_FIND_NAME}_VERSION_MINOR @LArPandoraContent_VERSION_MINOR@ )
+ SET( ${PACKAGE_FIND_NAME}_VERSION_PATCH @LArPandoraContent_VERSION_PATCH@ )
+ 
+ 
+-INCLUDE( "@PANDORA_CMAKE_MODULES_PATH@/MacroCheckPackageVersion.cmake" )
++INCLUDE( "MacroCheckPackageVersion" )
+ CHECK_PACKAGE_VERSION( ${PACKAGE_FIND_NAME} @LArPandoraContent_VERSION@ )
+ 
+

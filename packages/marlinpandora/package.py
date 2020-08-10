@@ -24,6 +24,8 @@ class Marlinpandora(CMakePackage):
     depends_on('marlin')
     depends_on('marlinutil')
     depends_on('pandorapfa')
+    depends_on('pandorasdk')
+    depends_on('lccontent')
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinPandora.so")

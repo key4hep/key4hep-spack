@@ -7,10 +7,10 @@
 from spack import *
 
 
-class Pandorapfa(CMakePackage):
+class Pandorapfa(Package):
     """Metadata package to bring together and build multiple Pandora libraries.
-       NOTE: for proper version control with spack, this should be broken up and
-       the subpackages installed individually."""
+       NOTE: this recipe is not used to install  other pandora packages, for which
+       separate recipes exist. It only installs the cmakemodules directory."""
 
     url      = "https://github.com/PandoraPFA/PandoraPFA/archive/v03-14-00.tar.gz"
     hompage  = "https://github.com/PandoraPFA/PandoraPFA"
@@ -21,11 +21,10 @@ class Pandorapfa(CMakePackage):
     version('master', branch='master')
     version('3.14.0', sha256='1490f2504bdbd2960cba35fc552b762e3842d77ed5227f84ddabfde546fe6810')
 
-    def cmake_args(self):
-        args = ['-DLC_PANDORA_CONTENT=ON',
-                '-DLAR_PANDORA_CONTENT=ON',
-                "-DCMAKE_CXX_FLAGS=-std=c++17"]
-        return args
+    patch("path.patch")
+
+    def install(self, a, b):
+        install_tree('.', self.prefix)
 
     def url_for_version(self, version):
         # contrary to ilcsoftpackages, here the patch version is kept when 0
