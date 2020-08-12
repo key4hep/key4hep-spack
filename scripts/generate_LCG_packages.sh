@@ -44,12 +44,9 @@ function detect-compiler-path-gcc() {
 
     if [[ $path == $(lcg-release-top-dir)* ]] ; then
         info: "this is a lcg gcc $path"
-        echo yes
-    else
-        echo no
     fi
 
-
+    echo ${path}
 
 }
 function detect-compiler-version-gcc() {
@@ -57,6 +54,13 @@ function detect-compiler-version-gcc() {
     echo $ver
 }
 
+function detect-os() {
+    (source /etc/os-release && echo ${ID}${VERSION_ID})
+}
+
+##############################################################################
+# Generate packages.yaml
+##############################################################################
 function list-lcg-packages() {
     local callbackfn=${1:-echo}; shift
 
@@ -99,7 +103,7 @@ function list-lcg-packages() {
 }
 
 function yaml-format-package-header() {
-    echo "packages"
+    echo "packages:"
 }
 
 function yaml-format-package() {
@@ -119,12 +123,63 @@ function generate-yaml-lcg-packages() {
     list-lcg-packages yaml-format-package
 }
 
+##############################################################################
+# Generate compilers.yaml
+##############################################################################
+
+function list-compilers() {
+    local callbackfn=${1:-echo}; shift
+
+    local osver=$(detect-os)
+    local ccver=$(detect-compiler-version-gcc)
+    local ccdir=$(detect-compiler-path-gcc)
+    ccdir=$(dirname $(dirname $ccdir))
+
+    ${callbackfn} $osver $ccdir $ccver
+}
+
+function yaml-format-compiler-header() {
+    echo "compilers:"
+}
+
+function yaml-format-compiler() {
+    local osver=$1; shift
+    local ccdir=$1; shift
+    local ccver=$1; shift
+
+    echo "- compiler:"
+    echo "    environment:"
+    echo "      set: {LD_LIBRARY_PATH: ${ccdir}/lib64}"
+    echo "    modules: []"
+    echo "    operating_system: ${osver}"
+    echo "    paths: {cc: ${ccdir}/bin/gcc,"
+    echo "      cxx: ${ccdir}/bin/g++,"
+    echo "      f77: ${ccdir}/bin/gfortran,"
+    echo "      fc: ${ccdir}/bin/gfortran}"
+    echo "    spec: gcc@${ccver}"
+
+}
+
+function generate-yaml-compilers() {
+    yaml-format-compiler-header
+    list-compilers yaml-format-compiler
+}
+
+##############################################################################
+# Main
+##############################################################################
+
 function main() {
     setup-lcg
 
     local pkgyaml=packages.yaml
 
     generate-yaml-lcg-packages > ${pkgyaml}
+
+    local compileryaml=compilers.yaml
+
+    generate-yaml-compilers > ${compileryaml}
+
 }
 
 main
