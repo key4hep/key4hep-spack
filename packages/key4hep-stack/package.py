@@ -27,7 +27,7 @@ class Key4hepStack(BundlePackage):
     depends_on('lcgeo', when="@0.1")
 
     depends_on('marlin', when="@0.1")
-    depends_on('gmp', when="@0.1")
+    depends_on('gaudimarlinwrapper', when="@0.1")
     depends_on('marlinutil', when="@0.1")
     depends_on('aidatt', when="@0.1")
     depends_on('physsim', when="@0.1")
