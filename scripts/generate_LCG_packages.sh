@@ -165,6 +165,32 @@ function generate-yaml-compilers() {
     list-compilers yaml-format-compiler
 }
 
+
+##############################################################################
+# Create a spack custom scope config files
+##############################################################################
+
+function generate-custom-scope() {
+
+    local pkgyaml=packages.yaml
+    local compileryaml=compilers.yaml
+
+    local lcgver=$(lcg-version)
+    local lcgarch=$(lcg-arch)
+
+    [ -d "${lcgver}" ] || mkdir ${lcgver} || exit -1
+    [ -d "${lcgver}/${lcgarch}" ] || mkdir ${lcgver}/${lcgarch} || exit -1
+
+    pushd ${lcgver}/${lcgarch}
+
+    generate-yaml-lcg-packages > ${pkgyaml}
+    generate-yaml-compilers > ${compileryaml}
+
+    popd
+
+}
+
+
 ##############################################################################
 # Main
 ##############################################################################
@@ -172,14 +198,7 @@ function generate-yaml-compilers() {
 function main() {
     setup-lcg
 
-    local pkgyaml=packages.yaml
-
-    generate-yaml-lcg-packages > ${pkgyaml}
-
-    local compileryaml=compilers.yaml
-
-    generate-yaml-compilers > ${compileryaml}
-
-}
+    generate-custom-scope
+} 
 
 main
