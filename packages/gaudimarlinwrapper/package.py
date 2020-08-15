@@ -6,7 +6,7 @@
 from spack import *
 from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
-class gaudimarlinwrapper(CMakePackage):
+class Gaudimarlinwrapper(CMakePackage):
     """GMP Wrapper"""
 
     homepage = "https://github.com/key4hep/GMP"
