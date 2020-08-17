@@ -22,7 +22,7 @@ class Physsim(CMakePackage):
     depends_on('root')
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPhysSim.so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPhyssim.so")
 
     def cmake_args(self):
         args = []
