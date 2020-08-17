@@ -30,7 +30,7 @@ class K4fwcore(CMakePackage):
         # Setting this bypasses the get_binary_tag.py script
         # and a check for BINARY_TAG which is not used in this build system
         # should become obsolete with the cmake modernisation in gaudi v34
-        if self.spec.satisfies('^gaudi@:33.99'):
+        if self.spec.satisfies('^gaudi@:34.99'):
           args.append('-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt')
         return args
 
