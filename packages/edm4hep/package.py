@@ -26,6 +26,8 @@ class Edm4hep(CMakePackage):
 
     variant('ddg4_edm4hep_plugin', default=True,
             description="build the ddg4 plugin for edm4hep output")
+    variant('delphes', default=True,
+            description="build the delphes plugin for edm4hep output")
 
     variant('delphes', default=True,
             description="build the delphes plugin for edm4hep output")
