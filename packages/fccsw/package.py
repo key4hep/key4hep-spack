@@ -35,7 +35,7 @@ class Fccsw(CMakePackage):
     depends_on('fastjet')
 
     depends_on('fcc-edm@0.5.5', when="@:0.12")
-    depends_on('fcc-edm@0.5.6', when="@0.13:")
+    depends_on('fcc-edm@0.5.6:', when="@0.13:")
 
     depends_on('gaudi', when="@0.13:")
     depends_on('gaudi@32.2', when="@:0.12")
