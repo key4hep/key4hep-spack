@@ -47,7 +47,7 @@ class Fccsw(CMakePackage):
     depends_on('papas', when="@:0.12")
 
     depends_on('podio@0.9.2', when="@:0.12")
-    depends_on('podio@0.10.0', when="@0.13:")
+    depends_on('podio@0.10.0:', when="@0.13:")
     depends_on('pythia8', when="@:0.12")
     depends_on('evtgen+pythia8', when="@0.13:")
     depends_on('root')
