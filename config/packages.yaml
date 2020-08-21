@@ -1,0 +1,24 @@
+packages:
+  all:
+    target: [broadwell]
+  range-v3:
+    # avoid building doxygen
+    variants: ~doc
+  geant4:
+    variants: ~qt~opengl
+  marlin:
+    # avoid building mariadb
+    variants: ~lccd
+  mesa:
+    # avoid building llvm
+    variants: ~llvm+glx+opengl
+  boost:
+    variants: +python
+  dd4hep:
+    variants: +geant4
+  xercesc:
+    variants: cxxstd=11
+  root:
+    version: [6.20.04]
+    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7
+
