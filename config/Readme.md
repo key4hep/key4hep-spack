@@ -1,0 +1,1 @@
+This directory contains config files for spack. `packages.yaml` sets some more optimal variants and the build target microarchitecture, and `cvmfs_build/config.yaml` controls the directory structure for builds intended for cvmfs.
