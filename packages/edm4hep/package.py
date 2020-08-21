@@ -10,6 +10,7 @@ class Edm4hep(CMakePackage):
     git = "https://github.com/key4hep/EDM4hep.git"
 
     version('master', branch='master')
+    version('0.2.0', sha256='1d5bcded774c4fa960df8b7450f49c320f603fc399bef296fcf5415fa9a3f155')
     version('0.1.0', sha256='16a042def0cd064240df1fbf9dca2dc255f3006d94abbb1a11615a3c98d3a505')
 
 
@@ -19,27 +20,31 @@ class Edm4hep(CMakePackage):
 
     variant('cxxstd',
             default='17',
-            values=('14', '17'),
+            values=('17'),
             multi=False,
             description='Use the specified C++ standard when building.')
 
     variant('ddg4_edm4hep_plugin', default=True,
             description="build the ddg4 plugin for edm4hep output")
 
+    variant('delphes', default=True,
+            description="build the delphes plugin for edm4hep output")
+
 
     # the cpack configuration fails with an error on some platforms (arch)
     # since it is not used for spack builds, disable
-    patch("cpack.patch")
+    patch("cpack.patch", when="@0.1.0")
 
     patch("rootmap.patch", when='@0.1.0')
 
     depends_on('cmake@3.3:', type='build')
     depends_on('python', type='build')
     depends_on('root@6.08:')
-    depends_on('podio@0.10.0:')
+    depends_on('podio@0.11.0:')
 
 
     depends_on('dd4hep@1.12.1: +geant4', when='+ddg4_edm4hep_plugin')
+    depends_on("delphes", when="+delphes")
 
     depends_on('hepmc@:2.99.99', type='test')
     depends_on('heppdt', type='test')
@@ -52,6 +57,7 @@ class Edm4hep(CMakePackage):
         args.append(self.define('CMAKE_CXX_STANDARD', self.spec.variants['cxxstd'].value))
         args.append(self.define('BUILD_TESTING', self.run_tests))
         args.append(self.define_from_variant("BUILD_DDG4EDM4HEP", 'ddg4_edm4hep_plugin'))
+        args.append(self.define_from_variant("BUILD_DELPHESEDM4HEP", 'delphes'))
         return args
 
 
