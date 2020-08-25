@@ -19,7 +19,9 @@ class Gear(CMakePackage):
     version('master', branch='master')
     version('1.9.0', sha256='18564d50bc4863441bd4b5b72dda565065f8b7f5821e30c804c7e93c7afe84ae')
 
-    variant('tgeo', default=False,
+    patch("build_testing.patch", when="@1.9.0")
+
+    variant('tgeo', default=True,
             description="builds with ROOT tgeo")
 
     variant('doc', default=False,
@@ -28,8 +30,11 @@ class Gear(CMakePackage):
 
     depends_on("ilcutil")
     depends_on("clhep")
+
     depends_on("root", when="+tgeo")
     depends_on("doxygen", when="+doc")
+
+    depends_on("root", type="test")
 
 
     def cmake_args(self):
