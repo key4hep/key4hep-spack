@@ -39,7 +39,7 @@ class Gear(CMakePackage):
 
     def cmake_args(self):
         args = []  
-        # todo: add variant
+        args.append(self.define('BUILD_TESTING', self.run_tests))
         args.append(self.define_from_variant('GEAR_TGEO', 'tgeo'))
         args.append(self.define_from_variant('INSTALL_DOC', 'doc'))
         args.append('-DCMAKE_CXX_STANDARD=17')
