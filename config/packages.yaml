@@ -21,4 +21,9 @@ packages:
   root:
     version: [6.20.04]
     variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7
+  # avoid issue https://github.com/spack/spack/issues/16803
+  # and use variant that allows to install older versions of whizard
+  ocaml:
+    version: [4.10.0]
+    variants: ~force-safe-string
 
