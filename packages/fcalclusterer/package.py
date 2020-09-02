@@ -27,6 +27,9 @@ class Fcalclusterer(CMakePackage):
     depends_on('root +unuran +math')
     depends_on('dd4hep')
 
+    # CMAKE_INSTALL_PREFIX is overwritten by the package
+    patch("install.patch")
+
     def cmake_args(self):
         args = []
         # C++ Standard
@@ -35,10 +38,10 @@ class Fcalclusterer(CMakePackage):
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
 
-    def install(self, spec, prefix):
+    @run_after('install')
+    def install_source(self):
         #make('install')
         install_tree('.', self.prefix)
-
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libFCalClusterer.so")
