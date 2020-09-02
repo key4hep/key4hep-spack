@@ -29,7 +29,7 @@ class Marlindd4hep(CMakePackage):
         return args
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so.so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so")
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)

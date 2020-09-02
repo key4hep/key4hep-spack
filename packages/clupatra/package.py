@@ -30,7 +30,7 @@ class Clupatra(CMakePackage):
 
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libClupatra  .so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libClupatra.so")
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
