@@ -28,7 +28,7 @@ class Ddmarlinpandora(CMakePackage):
     depends_on('marlintrk')
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so")
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libDDMarlinPandora.so")
 
 
     def url_for_version(self, version):
