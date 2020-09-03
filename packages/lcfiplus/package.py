@@ -25,15 +25,20 @@ class Lcfiplus(CMakePackage):
     depends_on('lcfivertex')
     depends_on('root +tmva')
 
+    patch("dict.patch")
+
     def cmake_args(self):
         args = []  
         # todo: add variant
         args.append(self.define('INSTALL_DOC', False))
         return args
 
+    @run_after('install')
+    def install_source(self):
+        install_tree('include', self.prefix.include)
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCFIPlus.so")
 
     def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
+        return ilc_url_for_version(self, version)
