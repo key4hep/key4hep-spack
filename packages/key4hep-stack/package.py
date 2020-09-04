@@ -70,7 +70,7 @@ class Key4hepStack(BundlePackage):
 
 
     depends_on("fccsw", when='@0.1')
-    depends_on("podio@master", when="@0.1")
+    depends_on("podio@0.12.0", when="@0.1")
 
     # be explicit to avoid concretizer errors
     depends_on('root cxxstd=17 +root7 +ssl')
