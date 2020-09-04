@@ -40,7 +40,8 @@ class FccEdm(CMakePackage):
     depends_on('dag')
     depends_on('root@6.08:')
     depends_on('podio@:0.9.2', when='@:0.5.5')
-    depends_on('podio@0.10.0:', when='@0.5.6:')
+    depends_on('podio@0.10.0:', when='@0.5.6')
+    depends_on('podio@0.12.0:', when='@0.5.7:')
 
     def cmake_args(self):
         args = []
