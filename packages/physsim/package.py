@@ -21,8 +21,14 @@ class Physsim(CMakePackage):
     depends_on('ilcutil')
     depends_on('root')
 
+    patch("dict.patch")
+
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPhyssim.so")
+
+    def setup_run_environment(self, spack_env):
+        # The dictionary headers require physsim to be in CPATH or ROOT_INCLUDE_PATH
+        spack_env.prepend_path('CPATH', self.prefix.include.physsim)
 
     def cmake_args(self):
         args = []

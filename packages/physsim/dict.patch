@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9345ca8..61dcd01 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,7 +32,7 @@ FIND_PACKAGE( ROOT REQUIRED )
+
+
+ # macros for generating root dict sources with rootcint
+-SET( ROOT_DICT_CINT_DEFINITIONS "-DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT" )
++SET( ROOT_DICT_CINT_DEFINITIONS -DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT -noIncludePaths -inlineInputHeader )
+ INCLUDE( "${ILCUTIL_ROOT}/cmakemodules/MacroRootDict.cmake" )
+
