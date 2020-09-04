@@ -28,6 +28,8 @@ class Kaltest(CMakePackage):
     depends_on('ilcutil')
     depends_on('root')
 
+    patch("dict.patch")
+
     def cmake_args(self):
         args = []
         # C++ Standard
@@ -36,5 +38,10 @@ class Kaltest(CMakePackage):
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
 
+    def setup_run_environment(self, spack_env):
+        # The dictionary headers required kaltest to be in CPATH or ROOT_INCLUDE_PATH
+        # other libraries require include to be searchable (which is automatic)
+        spack_env.prepend_path('CPATH', self.prefix.include.kaltest)
+
     def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
+        return ilc_url_for_version(self, version)

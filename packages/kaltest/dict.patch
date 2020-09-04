@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4abcabb..a0418f1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,7 +29,7 @@ INCLUDE( ilcsoft_default_settings )
+
+
+ # macros for generating root dict sources with rootcint
+-SET( ROOT_DICT_CINT_DEFINITIONS "-DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT" )
++SET( ROOT_DICT_CINT_DEFINITIONS -DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT -inlineInputHeader -noIncludePaths )
+
+ #  ROOTConfig.cmake uses a different name for rootcint than we used to in FINDROOT.cmake
+ #SET( ROOT_CINT_EXECUTABLE ${ROOT_rootcint_CMD} )
