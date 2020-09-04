@@ -28,7 +28,7 @@ class Fcalclusterer(CMakePackage):
     depends_on('dd4hep')
 
     # CMAKE_INSTALL_PREFIX is overwritten by the package
-    patch("install.patch")
+    patch("install.patch", when="@:1.0.1")
 
     def cmake_args(self):
         args = []
