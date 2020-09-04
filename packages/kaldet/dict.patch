@@ -1,0 +1,11 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c72fd9d..8be04af 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,7 +55,7 @@ ADD_DEFINITIONS( "-Wno-effc++ -Wno-unused-parameter" )
+
+
+ # macros for generating root dict sources with rootcint
+-SET( ROOT_DICT_CINT_DEFINITIONS "-DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT" )
++SET( ROOT_DICT_CINT_DEFINITIONS -DHANDLE_DICT_EXCEPTIONS=IGNORED_FOR_CINT -inlineInputHeader -noIncludePaths)
+ INCLUDE( "${ILCUTIL_ROOT}/cmakemodules/MacroRootDict.cmake" )

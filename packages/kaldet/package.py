@@ -30,6 +30,8 @@ class Kaldet(CMakePackage):
     depends_on('kaltest')
     depends_on('root')
 
+    patch("dict.patch")
+
     def cmake_args(self):
         args = []
         # C++ Standard
@@ -37,6 +39,9 @@ class Kaldet(CMakePackage):
                     % self.spec['root'].variants['cxxstd'].value)
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
+
+    def setup_run_environment(self, spack_env):
+        spack_env.prepend_path('CPATH', self.prefix.include.kaldet)
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
