@@ -117,10 +117,79 @@ function yaml-format-package() {
     echo "      ${pkg}@${pkgver}: ${pkgpath}"
 }
 
+function yaml-format-package-match-name-in-spack() {
+    local pkglcg=$1; shift
+    local pkgver=$1; shift
+    local pkgpath=$1; shift
+
+    # As Valentin pointed (https://github.com/key4hep/k4-spack/pull/30#issuecomment-688690197),
+    # some names in lcg are different from the names in spack, so we need to
+    # re-mapping them.
+
+    local pkg=$pkglcg
+    local buildable=false
+
+    case $pkg in
+        acts_core) pkg=acts;;
+        C50)       pkg=c50;;
+        CMake)     pkg=cmake;;
+        COOL)      pkg=cool;;
+        CORAL)     pkg=coral;;
+        CouchDB)   pkg=couchdb;;
+        CppUnit)   pkg=cppunit;;
+        Davix)     pkg=davix;;
+        DD4hep)    pkg=dd4hep
+                   buildable=true;;
+        fftw3)     pkg=fftw;;
+        FORM)      pkg=form;;
+        Garfield++)pkg=garfield++;;
+        Gaudi)     pkg=gaudi;;
+        Geant4)    pkg=geant4;;
+        GSL)       pkg=gsl;;
+        HeapDict)  pkg=heapdict;;
+        HepMC)     pkg=hepmc;;
+        HepPDT)    pkg=heppdt;;
+        herwig++)  pkg=herwig3;;
+        java)      pkg=jdk;;
+        Jinja2)    pkg=jinja2;;
+        LCIO)      pkg=lcio;;
+        MarkupSafe)pkg=markupsafe;;
+        OWSLib)    pkg=owslib;;
+        podio)
+                   buildable=true;;
+        PyHEADTAIL)pkg=py-pyheadtail;;
+        PyJWT)     pkg=py-pyjwt;;
+        PyRDF)     pkg=py-pyrdf;;
+        QMtest)    pkg=py-qmtest;;
+        pythia6)   pkg=pythia6;;
+        pythia8)   pkg=pythia8;;
+        python)    pkg=python;;
+        py*)       pkg=py-${pkg};; # BE CAREFUL: exclude "pythia8", "pythia6", "python", so put them before this line
+        R)         pkg=R;;
+        recola_SM) pkg=recola_sm;;
+        RELAX)     pkg=relax;;
+        ROOT)      pkg=root;;
+        # FIXME: sherpa-openmpi
+        srm-ifce)  pkg=srm_ifce;;
+        tbb)       pkg=intel-tbb;;
+        Vc)        pkg=vc;;
+        VecGeom)   pkg=vecgeom;;
+        XercesC)   pkg=xerces-c;;
+    esac
+        
+
+    echo "  $pkg:"
+    echo "    buildable: ${buildable}"
+    echo "    paths:"
+    echo "      ${pkg}@${pkgver}: ${pkgpath}"
+}
+
+
 function generate-yaml-lcg-packages() {
     yaml-format-package-header
     # using call back to format the packages
-    list-lcg-packages yaml-format-package
+    # list-lcg-packages yaml-format-package
+    list-lcg-packages yaml-format-package-match-name-in-spack
 }
 
 ##############################################################################
