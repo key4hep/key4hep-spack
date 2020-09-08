@@ -26,4 +26,9 @@ packages:
   ocaml:
     version: [4.10.0]
     variants: ~force-safe-string
+  # gaudi v34 does not work with python 3.8
+  # setting the version explicitly avoids concretizer errors
+  python:
+    version: [3.7.8]
+
 
