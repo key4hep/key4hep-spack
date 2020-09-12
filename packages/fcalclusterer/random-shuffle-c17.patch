@@ -1,0 +1,21 @@
+diff --git source/BeamCalReco/src/BeamCalBkgPregen.cpp source/BeamCalReco/src/BeamCalBkgPregen.cpp
+index 80b217e..839cf13 100644
+--- a/source/BeamCalReco/src/BeamCalBkgPregen.cpp
++++ b/source/BeamCalReco/src/BeamCalBkgPregen.cpp
+@@ -29,6 +29,7 @@
+ #include <map>
+ #include <set>
+ #include <stdexcept>
++#include <random>
+ 
+ using std::vector;
+ using std::string;
+@@ -67,7 +67,7 @@ void BeamCalBkgPregen::init(vector<string> &bg_files, const int n_bx)
+   m_backgroundBX = new TChain("bcTree");
+ 
+   //mix up the files, because the random numbers are ordered to avoid repeating
+-  std::random_shuffle(bg_files.begin(), bg_files.end());
++  std::shuffle(bg_files.begin(), bg_files.end(), std::mt19937(std::random_device()()));
+ 
+   for (std::vector<std::string>::iterator file = bg_files.begin(); file != bg_files.end(); ++file) {
+     streamlog_out(DEBUG1) << *file << std::endl;
