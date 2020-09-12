@@ -23,14 +23,18 @@ class Lccontent(CMakePackage):
     patch("path2.patch")
     patch("path3.patch")
     patch("path4.patch")
+    patch("bool-int.patch")
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
 
     def cmake_args(self):
         args = [
-                '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules,
-                "-DCMAKE_CXX_FLAGS=-std=c++17"]
+                '-DCMAKE_CXX_STANDARD=17',
+                '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules
+        ]
+        if self.spec.satisfies('%gcc@10:'):
+            args.append('-DCMAKE_CXX_FLAGS=-Wno-int-in-bool-context')
         return args
 
     def url_for_version(self, version):

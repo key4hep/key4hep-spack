@@ -1,0 +1,35 @@
+diff --git a/include/LCUtility/KDTreeLinkerAlgoT.h b/include/LCUtility/KDTreeLinkerAlgoT.h
+index 896d946..6e50819 100644
+--- a/include/LCUtility/KDTreeLinkerAlgoT.h
++++ b/include/LCUtility/KDTreeLinkerAlgoT.h
+@@ -272,7 +272,7 @@ inline void KDTreeLinkerAlgo<DATA, DIM>::recSearch(const KDTreeNodeT<DATA, DIM>
+         for (unsigned i = 0; i < DIM; ++i)
+         {
+             const auto thedim = current->info.dims[i];
+-            isInside *= thedim >= trackBox.dimmin[i] && thedim <= trackBox.dimmax[i];
++            isInside = isInside && thedim >= trackBox.dimmin[i] && thedim <= trackBox.dimmax[i];
+         }
+ 
+         if (isInside)
+@@ -289,8 +289,8 @@ inline void KDTreeLinkerAlgo<DATA, DIM>::recSearch(const KDTreeNodeT<DATA, DIM>
+         {
+             const auto regionmin = current->left->region.dimmin[i];
+             const auto regionmax = current->left->region.dimmax[i];
+-            isFullyContained *= (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
+-            hasIntersection *= (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
++            isFullyContained = isFullyContained && (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
++            hasIntersection = hasIntersection && (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
+         }
+ 
+         if (isFullyContained)
+@@ -310,8 +310,8 @@ inline void KDTreeLinkerAlgo<DATA, DIM>::recSearch(const KDTreeNodeT<DATA, DIM>
+         {
+             const auto regionmin = current->right->region.dimmin[i];
+             const auto regionmax = current->right->region.dimmax[i];
+-            isFullyContained *= (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
+-            hasIntersection *= (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
++            isFullyContained = isFullyContained && (regionmin >= trackBox.dimmin[i] && regionmax <= trackBox.dimmax[i]);
++            hasIntersection = hasIntersection && (regionmin < trackBox.dimmax[i] && regionmax > trackBox.dimmin[i]);
+         }
+ 
+         if (isFullyContained)
