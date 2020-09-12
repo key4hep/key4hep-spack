@@ -74,7 +74,7 @@ class Key4hepStack(BundlePackage):
 
     # be explicit to avoid concretizer errors
     # lcfiplus requires root variant +tmva, but spec asked for ~tmva
-    depends_on('root cxxstd=17 +root7 +ssl +tmva +mlp')
+    depends_on('root@6.22.0: cxxstd=17 +root7 +ssl +tmva +mlp')
     depends_on('boost +python')
     # gaudi needs 3.7.99
     depends_on('python@:3.7.99')
