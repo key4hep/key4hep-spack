@@ -47,4 +47,7 @@ class K4fwcore(CMakePackage):
             url = "https://github.com/key4hep/K4FWCore/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
         return url
     
+    def setup_run_environment(self, spack_env):
+        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+        spack_env.prepend_path("PATH", self.prefix.scripts)
 	
