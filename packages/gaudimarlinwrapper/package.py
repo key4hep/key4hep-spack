@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+import os
+
 from spack import *
 from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
 
@@ -32,6 +34,14 @@ class Gaudimarlinwrapper(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
+
+    @run_after('install')
+    def install_example(self):
+        install_tree('runit', os.path.join(self.prefix, 'runit'))
+
+    @run_after('install')
+    def install_scripts(self):
+        install_tree('scripts', self.prefix.scripts)
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
