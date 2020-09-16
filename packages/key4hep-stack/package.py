@@ -16,7 +16,7 @@ class Key4hepStack(BundlePackage):
     depends_on('K4FWCore@master', when="@nightly")
     depends_on('guinea-pig@master', when="@nightly")
     depends_on('lcgeo', when="@nightly")
-    depends_on("dd4hep@master", when="@nightly")
+    depends_on("dd4hep@master +lcio", when="@nightly")
     
     depends_on("edm4hep@0.2.0", when="@0.1")
     depends_on("K4FWCore@0.1.0", when="@0.1")
@@ -24,6 +24,7 @@ class Key4hepStack(BundlePackage):
     depends_on('whizard +lcio +openloops', when="@0.1")
 
     depends_on('lcio', when="@0.1")
+    depends_on('dd4hep +lcio', when="@0.1")
     depends_on('lcgeo', when="@0.1")
 
     depends_on('marlin', when="@0.1")
