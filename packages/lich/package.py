@@ -17,6 +17,7 @@ class Lich(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('0.1', sha256='9c5358f76c64b9f28734b82cca31101e09faa67b6ffd340889488c761aea918c')
 
     depends_on('ilcutil')

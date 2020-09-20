@@ -17,6 +17,7 @@ class Kitrack(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('1.10', sha256='e89e0553ba76946749e422aa470bbe20456b085efe523fb42f97565201376870')
 
     depends_on('ilcutil')

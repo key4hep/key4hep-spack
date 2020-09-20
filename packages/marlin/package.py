@@ -23,7 +23,7 @@ class Marlin(CMakePackage):
     variant('gui', default=False,
             description="builds with qt gui")
 
-    variant('lccd', default=True,
+    variant('lccd', default=False,
             description="builds with lccd")
 
     variant('clhep', default=True,

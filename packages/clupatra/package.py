@@ -17,6 +17,7 @@ class Clupatra(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('1.3', sha256='5256d1b120157e9a6916f86249e589d0ea386c4e6dac83fec0294b753a779c25')
 
     depends_on('ilcutil')
