@@ -11,6 +11,7 @@ class Dag(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch='master')
     version('0.1', '764c915de4ff36f8e195a28d6aa084a6')
 
     variant('build_type', default='Release',

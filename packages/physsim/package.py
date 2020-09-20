@@ -16,6 +16,7 @@ class Physsim(CMakePackage):
 
     maintainers = ['vvolkl']
 
+    version('master', branch="master")
     version('0.4.1', sha256='4c22eee5dcccb764a5ff90850aeb33563c45a14af8939a3ebea736c7d92ac1c1')
 
     depends_on('ilcutil')
