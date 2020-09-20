@@ -29,7 +29,7 @@ class Fcalclusterer(CMakePackage):
 
     # CMAKE_INSTALL_PREFIX is overwritten by the package
     patch("install.patch", when="@:1.0.1")
-    patch("random-shuffle-c17.patch")
+    patch("random-shuffle-c17.patch", when="@:1.0.1")
 
     def cmake_args(self):
         args = []
