@@ -51,6 +51,7 @@ class Lcgeo(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
+        env.set('lcgeo_DIR', self.prefix)
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
