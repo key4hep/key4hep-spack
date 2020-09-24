@@ -34,7 +34,7 @@ class Gaudimarlinwrapper(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("GMPWRAPPER", self.prefix.share.GMPWrapper)
+        spack_env.set("GMPWRAPPER", self.prefix.share.GMPWrapper)
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
