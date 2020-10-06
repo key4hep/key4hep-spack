@@ -1,6 +1,7 @@
 from spack import *
 from spack.package import PackageBase
 from datetime import datetime
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
 
 
 class Key4hepStack(BundlePackage):
@@ -22,7 +23,7 @@ class Key4hepStack(BundlePackage):
     #######################################################
     variant('devtools', default=True,
             description="add tools necessary for software masterment to the stack")
-    variant('generators', default=True,
+    variant('generators', default=False,
             description="add some standalone generators to the stack")
     variant('fccsw', default=True,
             description="build fcc packages")
@@ -35,22 +36,25 @@ class Key4hepStack(BundlePackage):
     ##################### common key4hep packages #########
     #######################################################
     depends_on('edm4hep')
-    depends_on('edm4hep@master', when="@master")
+    k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
 
     depends_on('podio')
-    depends_on('podio@master', when="@master")
+    k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
 
-    depends_on("K4FWCore")
-    depends_on('K4FWCore@master', when="@master")
+    depends_on("k4fwcore")
+    k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
     
     depends_on("guinea-pig")
+    # todo: figure out the api for the cern gitlab instance
     depends_on('guinea-pig@master', when="@master")
 
     depends_on('whizard +lcio +openloops hepmc=2')
+    # todo: figure out the api for the whizard gitlab instance
     depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("delphes")
-    depends_on("delphes@master", when="@master")
+    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
+
     ##################### general purpose generators ######
     #######################################################
     depends_on("madgraph5amc", when="+generators")
@@ -63,143 +67,142 @@ class Key4hepStack(BundlePackage):
     ############################### ilcsoft ###############
     #######################################################
     depends_on('aidatt')
-    depends_on('aidatt@master', when="@master")
+    k4_add_latest_commit_as_dependency("aidatt", "aidasoft/aidatt", when="@master")
 
     depends_on('cedviewer')
-    depends_on('cedviewer@master', when="@master")
+    k4_add_latest_commit_as_dependency("cedviewer", "ilcsoft/cedviewer", when="@master")
 
     depends_on('conformaltracking')
-    depends_on('conformaltracking@master', when="@master")
+    k4_add_latest_commit_as_dependency("conformaltracking", "ilcsoft/conformaltracking", when="@master")
 
     depends_on('clicperformance')
-    depends_on('clicperformance@master', when="@master")
+    k4_add_latest_commit_as_dependency("clicperformance", "ilcsoft/clicperformance", when="@master")
 
     depends_on('clupatra')
-    depends_on('clupatra@master', when='@master')
+    k4_add_latest_commit_as_dependency("clupatra", "ilcsoft/clupatra", when="@master")
 
     depends_on('ced')
-    depends_on('ced@master', when='@master')
+    k4_add_latest_commit_as_dependency("ced", "ilcsoft/ced", when="@master")
 
     depends_on('ddkaltest')
-    depends_on('ddkaltest@master', when='@master')
-
+    k4_add_latest_commit_as_dependency("ddkaltest", "ilcsoft/ddkaltest", when="@master")
 
     depends_on('ddmarlinpandora')
-    depends_on('ddmarlinpandora@master', when='@master')
+    k4_add_latest_commit_as_dependency("ddmarlinpandora", "ilcsoft/ddmarlinpandora", when="@master")
 
     depends_on('fcalclusterer')
-    depends_on('fcalclusterer@master', when="@master")
+    k4_add_latest_commit_as_dependency("fcalclusterer", "fcalsw/fcalclusterer", when="@master")
 
     depends_on('forwardtracking')
-    depends_on('forwardtracking@master', when="@master")
+    k4_add_latest_commit_as_dependency("forwardtracking", "ilcsoft/forwardtracking", when="@master")
 
     depends_on('garlic')
-    depends_on('garlic@master', when="@master")
+    k4_add_latest_commit_as_dependency("garlic", "ilcsoft/garlic", when="@master")
 
     depends_on('gaudimarlinwrapper')
-    depends_on('gaudimarlinwrapper@master', when="@master")
+    k4_add_latest_commit_as_dependency("gaudimarlinwrapper", "key4hep/gmp", when="@master")
 
     depends_on('generalbrokenlines')
-    depends_on('generalbrokenlines@master', when='@master')
+    k4_add_latest_commit_as_dependency("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines", when="@master")
 
     depends_on('gear')
-    depends_on('gear@master', when='@master')
+    k4_add_latest_commit_as_dependency("gear", "ilcsoft/gear", when="@master")
 
     depends_on('ilcutil')
-    depends_on('ilcutil@master', when='@master')
+    k4_add_latest_commit_as_dependency("ilcutil", "ilcsoft/ilcutil", when="@master")
 
     depends_on('ildperformance')
-    depends_on('ildperformance@master', when='@master')
+    k4_add_latest_commit_as_dependency("ildperformance", "ilcsoft/ildperformance", when="@master")
 
     depends_on('kaldet')
-    depends_on('kaldet@master', when="@master")
+    k4_add_latest_commit_as_dependency("kaldet", "ilcsoft/kaldet", when="@master")
 
     depends_on('kitrackmarlin')
-    depends_on('kitrackmarlin@master', when="@master")
+    k4_add_latest_commit_as_dependency("kitrackmarlin", "ilcsoft/kitrackmarlin", when="@master")
 
     depends_on('kaltest')
-    depends_on('kaltest@master', when='@master')
+    k4_add_latest_commit_as_dependency("kaltest", "ilcsoft/kaltest", when="@master")
 
     depends_on('kitrack')
-    depends_on('kitrack@master', when='@master')
+    k4_add_latest_commit_as_dependency("kitrack", "ilcsoft/kitrack", when="@master")
 
     depends_on('lcfiplus')
-    depends_on('lcfiplus@master', when='@master')
+    k4_add_latest_commit_as_dependency("lcfiplus", "ilcsoft/lcfiplus", when="@master")
 
     depends_on('lctuple')
-    depends_on('lctuple@master', when='@master')
+    k4_add_latest_commit_as_dependency("lctuple", "ilcsoft/lctuple", when="@master")
 
     depends_on('lcfivertex')
-    depends_on('lcfivertex@master', when='@master')
+    k4_add_latest_commit_as_dependency("lcfivertex", "ilcsoft/lcfivertex", when="@master")
 
     depends_on('lich')
-    depends_on('lich@master', when='@master')
+    k4_add_latest_commit_as_dependency("lich", "danerdaner/lich", when="@master")
 
     depends_on('lccd')
-    depends_on('lccd@master', when='@master')
+    k4_add_latest_commit_as_dependency("lccd", "ilcsoft/lccd", when="@master")
 
     depends_on('lcio')
-    depends_on('lcio@master', when="@master")
+    k4_add_latest_commit_as_dependency("lcio", "ilcsoft/lcio", when="@master")
 
     depends_on('lcgeo')
-    depends_on('lcgeo@master', when="@master")
+    k4_add_latest_commit_as_dependency("lcgeo", "ilcsoft/lcgeo", when="@master")
 
     depends_on('marlin')
-    depends_on('marlin@master', when="@master")
+    k4_add_latest_commit_as_dependency("marlin", "ilcsoft/marlin", when="@master")
 
     depends_on('marlinutil')
-    depends_on('marlinutil@master', when="@master")
+    k4_add_latest_commit_as_dependency("marlinutil", "ilcsoft/marlinutil", when="@master")
 
     depends_on('marlinpandora')
-    depends_on('marlinpandora@master', when="@master")
+    k4_add_latest_commit_as_dependency("marlinpandora", "pandorapfa/marlinpandora", when="@master")
 
     depends_on("marlindd4hep")
-    depends_on('marlindd4hep@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlindd4hep", "ilcsoft/marlindd4hep", when="@master")
 
     depends_on('marlinreco')
-    depends_on('marlinreco@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlinreco", "ilcsoft/marlinreco", when="@master")
 
     depends_on('marlinfastjet')
-    depends_on('marlinfastjet@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlinfastjet", "ilcsoft/marlinfastjet", when="@master")
 
     depends_on('marlinkinfit')
-    depends_on('marlinkinfit@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlinkinfit", "ilcsoft/marlinkinfit", when="@master")
 
     depends_on('marlintrkprocessors')
-    depends_on('marlintrkprocessors@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlintrkprocessors", "ilcsoft/marlintrkprocessors", when="@master")
 
     depends_on('marlintrk')
-    depends_on('marlintrk@master', when='@master')
+    k4_add_latest_commit_as_dependency("marlintrk", "ilcsoft/marlintrk", when="@master")
 
     depends_on('overlay')
-    depends_on('overlay@master', when='@master')
+    k4_add_latest_commit_as_dependency("overlay", "ilcsoft/overlay", when="@master")
 
     depends_on('pandoraanalysis')
-    depends_on('pandoraanalysis@master', when='@master')
+    k4_add_latest_commit_as_dependency("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", when="@master")
 
     depends_on('pandorapfa')
-    depends_on('pandorapfa@master', when="@master")
+    k4_add_latest_commit_as_dependency("pandorapfa", "pandorapfa/pandorapfa", when="@master")
 
     depends_on('physsim')
-    depends_on('physsim@master', when="@master")
+    k4_add_latest_commit_as_dependency("physsim", "ilcsoft/physsim", when="@master")
 
     depends_on("raida")
-    depends_on('raida@master', when='@master')
+    k4_add_latest_commit_as_dependency("raida", "ilcsoft/raida", when="@master")
 
     depends_on('sio')
-    depends_on('sio@master', when='@master')
+    k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
 
 
     ############################### fccsw #################
     #######################################################
     depends_on("fccsw")
-    depends_on("fccsw@master", when='@master')
+    k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
 
     depends_on("fcc-edm")
-    depends_on("fcc-edm@master", when="@master")
+    k4_add_latest_commit_as_dependency("fcc-edm", "hep-fcc/fcc-edm", when="@master")
 
     depends_on("dual-readout")
-    depends_on("dual-readout@master", when="@master")
+    k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
 
     ##################### developer tools #################
     #######################################################
