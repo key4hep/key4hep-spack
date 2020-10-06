@@ -48,6 +48,7 @@ class Edm4hep(CMakePackage):
 
     depends_on('dd4hep@1.12.1: +geant4', when='+ddg4_edm4hep_plugin')
     depends_on("delphes", when="+delphes")
+    depends_on("pythia8@:8299", when="@:0.2.0+delphes")
 
     depends_on('hepmc@:2.99.99', type='test')
     depends_on('heppdt', type='test')
