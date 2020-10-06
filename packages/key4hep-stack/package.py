@@ -1,5 +1,7 @@
 from spack import *
 from spack.package import PackageBase
+from datetime import datetime
+
 
 class Key4hepStack(BundlePackage):
     """Bundle package to install the Key4hep software stack."""
@@ -12,9 +14,8 @@ class Key4hepStack(BundlePackage):
     # used for master builds
     version('master')
     # builds the latest stable version of each package
-    # this is added so the default version is not master
     # the preferred usage is to use the date as version, see below
-    version('rolling')
+    version(datetime.today().strftime('%Y-%m-%d'))
     #version('2020-10-06') # example, no need to add them here
 
     ##################### variants ########################
