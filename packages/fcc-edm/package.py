@@ -10,6 +10,7 @@ class FccEdm(CMakePackage):
     git =      "https://github.com/HEP-FCC/fcc-edm.git"
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.5.7', sha256='8fe7f45014a401d635c00bad12c8fd251e2cabbabdfea0304c06c3ac926c60ca')
     version('0.5.6', sha256='aaf4ff58dfbdf9dfc3f755ad8b14d5e5701ed875f4031b1f7538deaf0f027705')
     version('0.5.5', sha256='a07a2f1304ce08a6d9819200c77e4a739f1e96f2ebb59715ebc27992e6a014e0')
@@ -23,7 +24,6 @@ class FccEdm(CMakePackage):
     version('0.2.2', '14ab88993995311f45e6927228fb8738')
     version('0.2.1', 'c68d0ab3c07d7f5c885b6d2be7a3be74')
     version('0.2', 'fe014e238e8afc76523f2e1ada9bc087')
-    k4_add_latest_commit_as_version("fcc-edm", "hep-fcc/fcc-edm")
 
     variant('build_type', default='Release',
             description='The build type to build',

@@ -1,5 +1,6 @@
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Edm4hep(CMakePackage):
@@ -10,6 +11,7 @@ class Edm4hep(CMakePackage):
     git = "https://github.com/key4hep/EDM4hep.git"
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.2.0', sha256='1d5bcded774c4fa960df8b7450f49c320f603fc399bef296fcf5415fa9a3f155')
     version('0.1.0', sha256='16a042def0cd064240df1fbf9dca2dc255f3006d94abbb1a11615a3c98d3a505')
 

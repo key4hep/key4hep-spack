@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Forwardtracking(CMakePackage):
@@ -17,6 +17,7 @@ class Forwardtracking(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('1.14', sha256='99149d170a1ae179500b2c47ec79dca227ff96c0bdf0cd69f2075eb468177a5e')
 
     patch('testing.patch', when="@:1.15")

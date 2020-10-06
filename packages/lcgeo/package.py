@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Lcgeo(CMakePackage):
@@ -17,6 +17,7 @@ class Lcgeo(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.16.6', sha256='0eef7137ad69b771e5cf8a3f4a71e060e9d57ee825d8d944fa6a0dec8c2dad60')
     version('0.16.5', sha256='a46738b2479c0469b06584f82801bf2dd546623180300753de0b5684abd12a05')
 

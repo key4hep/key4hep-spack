@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Physsim(CMakePackage):
@@ -16,7 +16,8 @@ class Physsim(CMakePackage):
 
     maintainers = ['vvolkl']
 
-    version('master', branch="master")
+    version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.4.1', sha256='4c22eee5dcccb764a5ff90850aeb33563c45a14af8939a3ebea736c7d92ac1c1')
 
     depends_on('ilcutil')

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Ildperformance(CMakePackage):
@@ -17,6 +17,7 @@ class Ildperformance(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('1.8', sha256='bcf19d3a6f425fa5eea228676d07558635881a0329c4d66ffda4230dfe9617c1')
 
 

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Lccd(CMakePackage):
@@ -17,6 +17,7 @@ class Lccd(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('1.5.0', sha256='876f751bebab760303b8dc3b7c6d4fe7d47ddd5aa19af9338f6565c5b817229b')
 
     variant('conddbmysql', default=False,

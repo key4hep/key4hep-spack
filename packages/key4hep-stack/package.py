@@ -14,8 +14,10 @@ class Key4hepStack(BundlePackage):
     # tries to build the HEAD of each package.
     # used for master builds
     version('master')
+    # the preferred usage is to use the date as versio, like: 
     # builds the latest stable version of each package
     # the preferred usage is to use the date as version, see below
+    #version('master-2020-10-06')
     version(datetime.today().strftime('%Y-%m-%d'))
     #version('2020-10-06') # example, no need to add them here
 
@@ -39,21 +41,23 @@ class Key4hepStack(BundlePackage):
     k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
 
     depends_on('podio')
-    k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
+    #k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
+    depends_on("podio@master", when="@master")
 
     depends_on("k4fwcore")
     k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
     
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
-    depends_on('guinea-pig@master', when="@master")
+    #depends_on('guinea-pig@master', when="@master")
 
     depends_on('whizard +lcio +openloops hepmc=2')
     # todo: figure out the api for the whizard gitlab instance
-    depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
+    #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("delphes")
-    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
+    #k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
+    depends_on("delphes@master", when="@master")
 
     ##################### general purpose generators ######
     #######################################################
@@ -127,7 +131,7 @@ class Key4hepStack(BundlePackage):
     k4_add_latest_commit_as_dependency("kitrack", "ilcsoft/kitrack", when="@master")
 
     depends_on('lcfiplus')
-    k4_add_latest_commit_as_dependency("lcfiplus", "ilcsoft/lcfiplus", when="@master")
+    k4_add_latest_commit_as_dependency("lcfiplus", "lcfiplus/lcfiplus", when="@master")
 
     depends_on('lctuple')
     k4_add_latest_commit_as_dependency("lctuple", "ilcsoft/lctuple", when="@master")
@@ -142,7 +146,8 @@ class Key4hepStack(BundlePackage):
     k4_add_latest_commit_as_dependency("lccd", "ilcsoft/lccd", when="@master")
 
     depends_on('lcio')
-    k4_add_latest_commit_as_dependency("lcio", "ilcsoft/lcio", when="@master")
+    #k4_add_latest_commit_as_dependency("lcio", "ilcsoft/lcio", when="@master")
+    #depends_on("lcio@master", when="@master")
 
     depends_on('lcgeo')
     k4_add_latest_commit_as_dependency("lcgeo", "ilcsoft/lcgeo", when="@master")
@@ -182,6 +187,7 @@ class Key4hepStack(BundlePackage):
 
     depends_on('pandorapfa')
     k4_add_latest_commit_as_dependency("pandorapfa", "pandorapfa/pandorapfa", when="@master")
+
 
     depends_on('physsim')
     k4_add_latest_commit_as_dependency("physsim", "ilcsoft/physsim", when="@master")

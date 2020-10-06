@@ -5,7 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Garlic(CMakePackage):
@@ -18,6 +18,7 @@ class Garlic(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('3.1', sha256='a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940')
 
     depends_on('ilcutil')

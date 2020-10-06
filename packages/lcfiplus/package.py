@@ -5,7 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Lcfiplus(CMakePackage):
@@ -17,7 +17,8 @@ class Lcfiplus(CMakePackage):
 
     maintainers = ['vvolkl']
 
-    version('master', branch="master")
+    version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.10',       sha256='0d4d27cd0d9407cd2f13e5a978be8c9389bc86c78c2eefd0ae7c060c4b7196c3')
 
     depends_on('marlin')

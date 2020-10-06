@@ -5,7 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Ddkaltest(CMakePackage):
@@ -18,6 +18,7 @@ class Ddkaltest(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('1.6',     sha256='e668242d84eb94e59edca18e524b1a928fcf7ae7c4b79f76f0338a0a4e835d8f')
     version('1.5',     sha256='4ef6fea7527dbb5f9a12322e92e27d80f2c29b115aae13987f55cb6cf02f31f5')
     version('1.4',     sha256='c5cefd23366c47087a6b04b5d48ab28ac88e8855446d782cfb8a954088fd4207')
