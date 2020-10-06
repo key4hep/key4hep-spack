@@ -5,18 +5,14 @@
 
 from spack import *
 
-from urllib.request import urlopen
-import json
+import os
 
-
-def k4_lookup_latest_commit(name, repoinfo, giturl):
+def k4_lookup_latest_commit(repoinfo, giturl):
       """
       Use a github-like api to fetch the commit hash of the master branch.
 
       Parameters:
 
-      name: string
-        spack name of the package, p.ex: "edm4hep"
       repoinfo: string
          description of the owner and repository names, p.ex: "key4hep/edm4hep"
       giturl: string
@@ -25,14 +21,23 @@ def k4_lookup_latest_commit(name, repoinfo, giturl):
          p.ex.: "https://api.github.com/repos/%s/commits/master"
         
       """
-      # todo: change to only fetch sha
-      # (need to create a request object for this)
-      with urlopen(giturl % repoinfo) as response: 
-        json_response = json.loads(response.read())
-        commit = json_response["sha"]
+      # construct command of the form
+      # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/master -H "Accept: application/vnd.github.VERSION.sha"
+      curl_command = ["curl -s "]
+      github_user = os.environ.get("GITHUB_USER", "")
+      github_token = os.environ.get("GITHUB_TOKEN", "")
+      if github_user and github_token:
+        curl_command += [" -u %s:%s " % (github_user, github_token)]
+      final_giturl = giturl % repoinfo
+      curl_command += [final_giturl]
+      curl_command += [' -H "Accept: application/vnd.github.VERSION.sha" ']
+      curl_command = ' '.join(curl_command)
+      commit = os.popen(curl_command).read()
+      print(curl_command)
+      print(commit)
       return commit
 
-def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", when="@master"):
+def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", variants="", when="@master"):
       """
       Helper function that adds a 'depends_on' with the latest commit to a spack recipe.
 
@@ -47,17 +52,20 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
          url that will return a json response with the commit sha when queried with urllib.
          should contain a %s which will be substituted by repoinfo.
          p.ex.: "https://api.github.com/repos/%s/commits/master"
+      variants: string, optional
+        argument that will be forwarded to depends_on
+        example: "+lcio"
       when: string, optional
         argument that will be forwarded to depends_on
         example: "@master"
       """
       try:
-        commit = k4_lookup_latest_commit(name, repoinfo, giturl)
-        depends_on(name + "@develop-" + str(commit), when=when)
+        commit = k4_lookup_latest_commit(repoinfo, giturl)
+        depends_on(name + "@develop-" + str(commit) + " " + variants, when=when)
       except:
         print("Warning: could not fetch latest commit for " + name)
 
-def k4_add_latest_commit_as_version(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master"):
+def k4_add_latest_commit_as_version(repoinfo, giturl="https://api.github.com/repos/%s/commits/master"):
       """
       Helper function that adds a 'version' with the latest commit to a spack recipe.
 
@@ -76,10 +84,20 @@ def k4_add_latest_commit_as_version(name, repoinfo, giturl="https://api.github.c
          p.ex.: "https://api.github.com/repos/%s/commits/master"
       """
       try:
-        commit = k4_lookup_latest_commit(name, repoinfo, giturl)
+        commit = k4_lookup_latest_commit(repoinfo, giturl)
         version("develop-"+str(commit), commit=commit, preferred=False)
       except:
         print("Warning: could not fetch latest commit for " + name)
+
+def ilc_add_latest_commit_as_version(self):
+    repoinfo = '/'.join(self.git.rsplit('.', 1)[0].rsplit('/')[-2:]) 
+    print(repoinfo)
+    #try:
+    commit = k4_lookup_latest_commit(repoinfo, "https://api.github.com/repos/%s/commits/master")
+    version("develop-"+str(commit), commit=commit, preferred=False)
+    #except:
+    #  print("Warning: could not fetch latest commit")
+    
 
 
 def ilc_url_for_version(self, version):
@@ -113,5 +131,10 @@ class Ilcsoftpackage(Package):
     # needs to be present to allow spack to import this file.
     # the above function could also be a member here, but there is an
     # issue with the logging of packages that use custom base classes.
-    pass
+    def url_for_version(self, version):
+      return ilc_url_for_version(self, version)
+    def __init__(self, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      ilc_add_latest_commit_as_version(self)
+
 

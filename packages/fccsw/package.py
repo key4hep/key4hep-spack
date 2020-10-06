@@ -55,7 +55,7 @@ class Fccsw(CMakePackage):
     depends_on('root')
 
 
-    depends_on("K4FWCore", when="@0.13:")
+    depends_on("k4fwcore", when="@0.13:")
     depends_on("edm4hep", when="@0.13:")
 
     depends_on("g4ensdfstate")
