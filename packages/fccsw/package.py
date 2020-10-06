@@ -1,5 +1,6 @@
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
 
 class Fccsw(CMakePackage):
     """software framework of the FCC project"""
@@ -17,6 +18,7 @@ class Fccsw(CMakePackage):
     version('0.9', 'fbbfc1deeaab40757d05ebfcbfa7b0f5')
     version('0.5.1', 'e2e6e6fa40373c3a14ea823bb9bc0810')
     version('0.5', 'f2c849608ac1ab175f432a5e55dbe673')
+    k4_add_latest_commit_as_version("fccsw", "hep-fcc/fccsw")
 
     variant('build_type', default='Release',
             description='CMake build type',

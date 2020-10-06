@@ -1,5 +1,6 @@
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
 
 class FccEdm(CMakePackage):
     """Event data model of FCC"""
@@ -22,6 +23,7 @@ class FccEdm(CMakePackage):
     version('0.2.2', '14ab88993995311f45e6927228fb8738')
     version('0.2.1', 'c68d0ab3c07d7f5c885b6d2be7a3be74')
     version('0.2', 'fe014e238e8afc76523f2e1ada9bc087')
+    k4_add_latest_commit_as_version("fcc-edm", "hep-fcc/fcc-edm")
 
     variant('build_type', default='Release',
             description='The build type to build',
