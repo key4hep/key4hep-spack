@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, Ilcsoftpackage
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Sio(CMakePackage):
@@ -16,10 +16,9 @@ class Sio(CMakePackage):
 
     maintainers = ['vvolkl']
 
-    version('master', branch="master")
+    version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.0.2', sha256='e4cd2aeaeaa23c1da2c20c5c08a9b72a31b16b7a8f5aa6d480dcd561ef667657')
-
-
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)

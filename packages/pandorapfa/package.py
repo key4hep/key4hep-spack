@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Pandorapfa(Package):
@@ -13,12 +14,13 @@ class Pandorapfa(Package):
        separate recipes exist. It only installs the cmakemodules directory."""
 
     url      = "https://github.com/PandoraPFA/PandoraPFA/archive/v03-14-00.tar.gz"
-    hompage  = "https://github.com/PandoraPFA/PandoraPFA"
+    homepage  = "https://github.com/PandoraPFA/PandoraPFA"
     git      = "https://github.com/PandoraPFA/PandoraPFA.git"
 
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('3.14.0', sha256='1490f2504bdbd2960cba35fc552b762e3842d77ed5227f84ddabfde546fe6810')
 
     patch("path.patch")

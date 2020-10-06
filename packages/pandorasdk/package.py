@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Pandorasdk(CMakePackage):
@@ -13,12 +14,13 @@ class Pandorasdk(CMakePackage):
        the subpackages installed individually."""
 
     url      = "https://github.com/PandoraPFA/PandoraSDK/archive/v03-04-00.tar.gz"
-    hompage  = "https://github.com/PandoraPFA/PandoraSDK"
+    homepage  = "https://github.com/PandoraPFA/PandoraSDK"
     git      = "https://github.com/PandoraPFA/PandoraSDK.git"
 
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('3.4.0', sha256='1e30db056d4a43f8659fccdda00270af14593425d933f91e91d5c97f1e124c6b')
 
     patch("path.patch")

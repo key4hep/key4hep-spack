@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Lcfivertex(CMakePackage):
@@ -16,7 +16,8 @@ class Lcfivertex(CMakePackage):
 
     maintainers = ['vvolkl']
     
-    version('master',  branch="master")
+    version('master',  branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.8', sha256='37f3ea8754cefb60073471c298b4c1926ef9858e8edb4c51affa1ff7de4e2fb8')
 
     depends_on('lcio')

@@ -1,4 +1,5 @@
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 class K4fwcore(CMakePackage):
     """Core framework components of the Key4HEP project"""
@@ -7,6 +8,7 @@ class K4fwcore(CMakePackage):
     git = "https://github.com/key4hep/K4FWCore.git"
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.1.0', sha256='05326d0f3d222f4a195baebf9c9fc60651621ec293e4384de3aaa81281cbea7a')
 
     variant('build_type', default='Release',

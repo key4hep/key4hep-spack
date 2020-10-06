@@ -5,6 +5,7 @@
 
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class DualReadout(CMakePackage):
@@ -12,17 +13,18 @@ class DualReadout(CMakePackage):
 
     url      = "https://github.com/HEP-FCC/dual-readout/archive/v0.0.2.tar.gz"
     homepage      = "https://github.com/HEP-FCC/dual-readout"
-    git      = "https://github.com/HEP-FCC/dual-readout"
+    git      = "https://github.com/HEP-FCC/dual-readout.git"
 
     maintainers = ['vvolkl', 'SanghyunKo']
 
-    version('master', branch="master") 
+    version('master', branch='master') 
+    k4_add_latest_commit_as_version(git)
     version('0.0.2', sha256='f76c1febf3d8e29d5287ba03eacbc244f8c615502295f7471579245376da91ad')
 
 
     depends_on('dd4hep+geant4')
-    depends_on("hepmc3+rootio")
-    depends_on("fccsw")
+    depends_on('hepmc3+rootio')
+    depends_on('fccsw')
     depends_on('fastjet')
     depends_on('root')
     depends_on('pythia8')

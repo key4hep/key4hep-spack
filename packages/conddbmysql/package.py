@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Conddbmysql(CMakePackage):
@@ -16,6 +17,7 @@ class Conddbmysql(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0-9-7', sha256='7cbf9e06e2b3d131939ac0b66816814738e8c5021449f19921b4071c1979ef5a')
 
 

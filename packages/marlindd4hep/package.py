@@ -5,17 +5,20 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Marlindd4hep(CMakePackage):
     """Provides one processor to initialize a DD4hep detector geometry from a compact file for a Marlin job."""
 
     url      = "https://github.com/iLCSoft/MarlinDD4hep/archive/v00-06.tar.gz"
+    homepage   = "https://github.com/iLCSoft/MarlinDD4hep"
+    git      = "https://github.com/iLCSoft/MarlinDD4hep.git"
 
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.6', sha256='1cf8eb03bbdf6da8fbf277d8168d97f77e1675850a7e66d0e9f90684e3a2f077')
 
     depends_on('ilcutil')

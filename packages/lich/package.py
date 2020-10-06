@@ -5,7 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version
+from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class Lich(CMakePackage):
@@ -18,6 +18,7 @@ class Lich(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.1', sha256='9c5358f76c64b9f28734b82cca31101e09faa67b6ffd340889488c761aea918c')
 
     depends_on('ilcutil')
