@@ -5,6 +5,83 @@
 
 from spack import *
 
+from urllib.request import urlopen
+import json
+
+
+def k4_lookup_latest_commit(name, repoinfo, giturl):
+      """
+      Use a github-like api to fetch the commit hash of the master branch.
+
+      Parameters:
+
+      name: string
+        spack name of the package, p.ex: "edm4hep"
+      repoinfo: string
+         description of the owner and repository names, p.ex: "key4hep/edm4hep"
+      giturl: string
+         url that will return a json response with the commit sha when queried with urllib.
+         should contain a %s which will be substituted by repoinfo.
+         p.ex.: "https://api.github.com/repos/%s/commits/master"
+        
+      """
+      # todo: change to only fetch sha
+      # (need to create a request object for this)
+      with urlopen(giturl % repoinfo) as response: 
+        json_response = json.loads(response.read())
+        commit = json_response["sha"]
+      return commit
+
+def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", when="@master"):
+      """
+      Helper function that adds a 'depends_on' with the latest commit to a spack recipe.
+
+      Parameters:
+
+
+      name: string
+        spack name of the package, p.ex: "edm4hep"
+      repoinfo: string
+         description of the owner and repository names, p.ex: "key4hep/edm4hep"
+      giturl: string, optional
+         url that will return a json response with the commit sha when queried with urllib.
+         should contain a %s which will be substituted by repoinfo.
+         p.ex.: "https://api.github.com/repos/%s/commits/master"
+      when: string, optional
+        argument that will be forwarded to depends_on
+        example: "@master"
+      """
+      try:
+        commit = k4_lookup_latest_commit(name, repoinfo, giturl)
+        depends_on(name + "@develop-" + str(commit), when=when)
+      except:
+        print("Warning: could not fetch latest commit for " + name)
+
+def k4_add_latest_commit_as_version(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master"):
+      """
+      Helper function that adds a 'version' with the latest commit to a spack recipe.
+
+      Note that the 'develop' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
+
+      Parameters:
+
+
+      name: string
+        spack name of the package, p.ex: "edm4hep"
+      repoinfo: string
+         description of the owner and repository names, p.ex: "key4hep/edm4hep"
+      giturl: string, optional
+         url that will return a json response with the commit sha when queried with urllib.
+         should contain a %s which will be substituted by repoinfo.
+         p.ex.: "https://api.github.com/repos/%s/commits/master"
+      """
+      try:
+        commit = k4_lookup_latest_commit(name, repoinfo, giturl)
+        version("develop-"+str(commit), commit=commit, preferred=False)
+      except:
+        print("Warning: could not fetch latest commit for " + name)
+
+
 def ilc_url_for_version(self, version):
         # translate version numbers to ilcsoft conventions.
         # in spack, the convention is: 0.1 (or 0.1.0) 0.1.1, 0.2, 0.2.1 ...
