@@ -1,4 +1,6 @@
 
+
+# for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
 
@@ -6,40 +8,60 @@ stages:
     - compilation
     - deployment
 
-build-spack:
+
+# this job expects the following setup on the runner:
+# * environment variables GITHUB_TOKEN and GITHUB_USER
+#   set in .bashrc - to be able to query lates commits
+# * existing installation of key4hep-stack (stable version) in /cvmfs/sw.hsf.org/spackages
+#   (or whatever is defined in upstreams.yaml)
+#   this may be read-only - could be delivered by cvmfs
+# * writeable directory in /cvmfs/sw-nightlies.hsf.org 
+#   (or whatever is defined in config.yaml)
+
+# for the cvmfs deployment:
+# * the gitlab-runner user must be able to ssh into the cvmfs publisher
+# * the cvmfs publisher must be able to rsync with the build machine
+
+
+
+# note that currently the hash of the installed dd4hep is hardcoded
+# to avoid rebuilds of everything.
+
+build-spack-nightlies:
     stage: compilation
     tags:
-        - key4hep-deploy
+        - k4-build-spack-nightlies
     only:
         - tags
         - schedules # Only execute this on scheduled "nightly" pipelines
     script:
-        - kinit sftnight@CERN.CH -5 -V -k -t /home/gitlab-runner/eos3.keytab
-        - eosfusebind
+          # set up spack inside the k4-spack repo
         - git clone --depth 1 https://github.com/spack/spack
         - source spack/share/spack/setup-env.sh
+          # register k4 package recipes with spack
         - spack repo add --scope site .
-        - echo $PWD
-        - ls /eos/project/k/key4hep/www/key4hep/spack_build
-        - export BINARY_TAG=x86_64-centos7-gcc8-opt
-        - export LCG_VERSION=LCG_97_FCC_2
-        - source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.3.0-cebb0/x86_64-centos7/setup.sh
-        - export SPACKCMD="spack -C config/$LCG_VERSION/$BINARY_TAG/"
-        - $SPACKCMD uninstall -y --all
-        - $SPACKCMD repo list
-        - $SPACKCMD spec -I key4hep-stack@nightly
-        - $SPACKCMD install --no-cache key4hep-stack@nightly
-        - $SPACKCMD buildcache create -m eos_buildcache -u -a -f key4hep-stack@nightly
+          # get the right config files to the right places
+        - cp config/packages.yaml spack/etc/spack/
+        - cp config/cvmfs_build/upstreams.yaml spack/etc/spack/
+        - cp config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
+          # compiler setup 
+        - spack load gcc
+        - spack compiler find --scope site
+          # compile onwards and upwards
+          # use hash of currently installed dd4hep to avoid rebuilding everything 
+        - spack install key4hep-stack@master-`date -I` ^/pnixyp3tfmn
+
+
 
 deploy-cvmfs:
     stage: deployment
     needs: ["build-spack"]
     tags:
-        - key4hep-deploy
+        - k4-build-spack-nightlies
     only:
         - tags
         - schedules # Only execute this on scheduled "nightly" pipelines
     script:
-        - ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
+        - #ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
 
 
