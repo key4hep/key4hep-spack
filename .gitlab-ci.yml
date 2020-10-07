@@ -35,33 +35,31 @@ build-spack-nightlies:
         - tags
         - schedules # Only execute this on scheduled "nightly" pipelines
     script:
-          # set up spack inside the k4-spack repo
+        # set up spack inside the k4-spack repo
         - git clone --depth 1 https://github.com/spack/spack
         - source spack/share/spack/setup-env.sh
-          # register k4 package recipes with spack
+        # register k4 package recipes with spack
         - spack repo add --scope site .
-          # get the right config files to the right places
+        # get the right config files to the right places
         - cp config/packages.yaml spack/etc/spack/
         - cp config/cvmfs_build/upstreams.yaml spack/etc/spack/
         - cp config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
-          # compiler setup 
+        # compiler setup 
         - spack load gcc
         - spack compiler find --scope site
-          # compile onwards and upwards
-          # use hash of currently installed dd4hep to avoid rebuilding everything 
+        # compile onwards and upwards
+        # use hash of currently installed dd4hep to avoid rebuilding everything 
         - spack install key4hep-stack@master-`date -I` ^/pnixyp3tfmn
 
 
 
 deploy-cvmfs:
     stage: deployment
-    needs: ["build-spack"]
+    needs: ["build-spack-nightlies"]
     tags:
         - k4-build-spack-nightlies
     only:
         - tags
         - schedules # Only execute this on scheduled "nightly" pipelines
     script:
-        - #ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
-
-
+        - echo "ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh' #todo"
