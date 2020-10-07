@@ -8,21 +8,26 @@ from spack import *
 import os
 
 def k4_lookup_latest_commit(repoinfo, giturl):
-      """
-      Use a github-like api to fetch the commit hash of the master branch.
+      """Use a github-like api to fetch the commit hash of the master branch.
+      Constructs and runs a command of the form:
+      # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/master -H "Accept: application/vnd.github.VERSION.sha"
+      The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
+      The envrionment variables 
+        GITHUB_USER
+        GITHUB_TOKEN
+      can be used for authentication.
 
       Parameters:
 
-      repoinfo: string
-         description of the owner and repository names, p.ex: "key4hep/edm4hep"
-      giturl: string
-         url that will return a json response with the commit sha when queried with urllib.
+      :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
+      :type repoinfo: str
+      :param giturl: url that will return a json response with the commit sha when queried with urllib.
          should contain a %s which will be substituted by repoinfo.
          p.ex.: "https://api.github.com/repos/%s/commits/master"
+      :return: The commit sha of the latest commit for the repo.
+      :rtype: str
         
       """
-      # construct command of the form:
-      # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/master -H "Accept: application/vnd.github.VERSION.sha"
       curl_command = ["curl -s "]
       github_user = os.environ.get("GITHUB_USER", "")
       github_token = os.environ.get("GITHUB_TOKEN", "")
@@ -37,26 +42,24 @@ def k4_lookup_latest_commit(repoinfo, giturl):
       return commit
 
 def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", variants="", when="@master"):
-      """
-      Helper function that adds a 'depends_on' with the latest commit to a spack recipe.
-
-      Parameters:
+      """ Helper function that adds a 'depends_on' with the latest commit to a spack recipe.
 
 
-      name: string
-        spack name of the package, p.ex: "edm4hep"
-      repoinfo: string
-         description of the owner and repository names, p.ex: "key4hep/edm4hep"
-      giturl: string, optional
-         url that will return a json response with the commit sha when queried with urllib.
+
+      :param name: spack name of the package, p.ex: "edm4hep"
+      :type name: str
+      :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
+      :type repoinfo: str
+      :param giturl: url that will return a json response with the commit sha when queried with urllib.
          should contain a %s which will be substituted by repoinfo.
          p.ex.: "https://api.github.com/repos/%s/commits/master"
-      variants: string, optional
-        argument that will be forwarded to depends_on
+      :type giturl:, str, optional
+      :param variants: argument that will be forwarded to depends_on
         example: "+lcio"
-      when: string, optional
-        argument that will be forwarded to depends_on
+      :type variants: str, optional
+      :param when: argument that will be forwarded to depends_on
         example: "@master"
+      :type when: str, optional
       """
       try:
         commit = k4_lookup_latest_commit(repoinfo, giturl)
@@ -65,24 +68,23 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
         print("Warning: could not fetch latest commit for " + name)
 
 def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com/repos/%s/commits/master"):
-      """
-      Helper function that adds a 'version' with the latest commit to a spack recipe.
-
-      Note that the 'develop' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
-
-      Parameters:
+      """ Helper function that adds a 'version' with the latest commit to a spack recipe.
+        Note that the 'develop' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
 
 
-      repoinfo: string
-         description of the owner and repository names, p.ex: "key4hep/edm4hep"
-      giturl: string, optional
-         url that will return a json response with the commit sha when queried with urllib.
+      :param git_url: url of a git repository. Needs to end in .git.
+        example: "https://github.com/HSF/prmon.git"
+      :type git_url: str
+      :param giturl: url that will return a json response with the commit sha when queried with urllib.
          should contain a %s which will be substituted by repoinfo.
          p.ex.: "https://api.github.com/repos/%s/commits/master"
+      :type giturl: str, optional
       """
       try:
+        # extract "owner/repo" string from url
         repoinfo = '/'.join(git_url.rsplit('.', 1)[0].rsplit('/')[-2:])
         commit = k4_lookup_latest_commit(repoinfo, git_api_url)
+        # call to the spack version directive
         version("develop."+str(commit), commit=commit, preferred=False)
       except:
         print("Warning: could not fetch latest commit for " + git_url)
@@ -90,11 +92,17 @@ def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com
 
 
 def ilc_url_for_version(self, version):
-        # translate version numbers to ilcsoft conventions.
-        # in spack, the convention is: 0.1 (or 0.1.0) 0.1.1, 0.2, 0.2.1 ...
-        # in ilcsoft, releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
+        """Translate version numbers to ilcsoft conventions.
+          in spack, the convention is: 0.1 (or 0.1.0) 0.1.1, 0.2, 0.2.1 ...
+          in ilcsoft, releases are dashed and padded with a leading zero
+          the patch version is omitted when 0
+          so for example v01-12-01, v01-12 ...
+
+        :param self: spack package class that has a url
+        :type self: class: `spack.PackageBase`
+        :param version: version 
+        :type param: str
+        """
         base_url = self.url.rsplit('/', 1)[0]
         major = str(version[0]).zfill(2)
         minor = str(version[1]).zfill(2)
@@ -117,8 +125,9 @@ def ilc_url_for_version(self, version):
         return url
 
 class Ilcsoftpackage(Package):
-    # needs to be present to allow spack to import this file.
-    # the above function could also be a member here, but there is an
-    # issue with the logging of packages that use custom base classes.
+    """needs to be present to allow spack to import this file.
+      the above function could also be a member here, but there is an
+      issue with the logging of packages that use custom base classes.
+    """
     pass
 
