@@ -1,5 +1,4 @@
 from spack import *
-from spack.package import PackageBase
 from datetime import datetime
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
 
@@ -227,4 +226,3 @@ class Key4hepStack(BundlePackage):
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
     
-
