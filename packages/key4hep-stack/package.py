@@ -27,10 +27,6 @@ class Key4hepStack(BundlePackage):
             description="add tools necessary for software masterment to the stack")
     variant('generators', default=False,
             description="add some standalone generators to the stack")
-    variant('fccsw', default=True,
-            description="build fcc packages")
-    variant('ilcsoft', default=True,
-            description="build ilcsoft packages")
     variant('bootstrap', default=True,
             description="install some spack setup tools")
     
