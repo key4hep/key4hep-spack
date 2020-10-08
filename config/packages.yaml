@@ -26,6 +26,12 @@ packages:
   ocaml:
     version: [4.10.0]
     variants: ~force-safe-string
+  # Newer versions currently do not build
+  whizard:
+    version: [2.8.4]
+  # Avoid concretizer conflict for edm4hep
+  pythia8:
+    version: [8244]
   # gaudi v34 does not work with python 3.8
   # setting the version explicitly avoids concretizer errors
   python:
