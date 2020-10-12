@@ -62,4 +62,4 @@ deploy-cvmfs:
         - tags
         - schedules # Only execute this on scheduled "nightly" pipelines
     script:
-        - echo "ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh' #todo"
+        - echo "ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'" #todo
