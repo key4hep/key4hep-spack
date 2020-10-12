@@ -1,15 +1,5 @@
-# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
-# Spack Project Developers. See the top-level COPYRIGHT file for details.
-#
-# SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
 # ----------------------------------------------------------------------------
-# If you submit this package back to Spack as a pull request,
-# please first remove this boilerplate and all FIXME comments.
-#
-# This is a template package file for Spack.  We've put "FIXME"
-# next to all the things you'll want to change. Once you've handled
-# them, you can save this file and test your package like this:
+# Install CEPCSW via spack
 #
 #     spack install cepcsw
 #
@@ -24,15 +14,12 @@ from spack import *
 
 
 class Cepcsw(CMakePackage):
-    """FIXME: Put a proper description of your package here."""
+    """CEPC offline experiment software based on Key4hep."""
 
-    # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://github.com/cepc/CEPCSW"
-    url      = "https://github.com/cepc/CEPCSW/archive/master.zip"
+    url      = "https://github.com/cepc/CEPCSW/archive/v0.1.tar.gz"
     git      = "https://github.com/cepc/CEPCSW.git"
 
-    # FIXME: Add a list of GitHub accounts to
-    # notify when the package is updated.
     maintainers = ['mirguest']
 
 
@@ -42,11 +29,9 @@ class Cepcsw(CMakePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    # FIXME: Add proper versions here.
-    # version('1.2.4')
+    k4_add_latest_commit_as_version(git)
     version('master', branch='master')
 
-    # FIXME: Add dependencies if required.
     depends_on('clhep')
     depends_on('dd4hep +geant4')
     depends_on('edm4hep')
