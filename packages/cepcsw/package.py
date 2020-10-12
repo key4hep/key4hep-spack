@@ -43,7 +43,6 @@ class Cepcsw(CMakePackage):
     depends_on('lccontent')
     depends_on('pandorasdk')
     depends_on('pandorapfa')
-    depends_on('podio')
     depends_on('root')
 
     def cmake_args(self):
