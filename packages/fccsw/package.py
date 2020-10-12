@@ -30,10 +30,13 @@ class Fccsw(CMakePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    depends_on('acts@0.10.5 +identification +dd4hep +tgeo +digitization', when="@0.12:")
+    depends_on('acts', when='@0.15:')
+    depends_on('acts@0.10.5 +identification +dd4hep +tgeo +digitization', when="@0.12:0.14")
     depends_on('clhep')
     depends_on('dd4hep +geant4')
+    depends_on('delphes@3.4.3pre05:', when="@0.15:")
     depends_on('delphes')
+    depends_on('eigen')
     depends_on('fastjet')
 
     depends_on('fcc-edm@0.5.5', when="@:0.12")
@@ -80,5 +83,6 @@ class Fccsw(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("FCCSWBASEDIR", self.prefix)
-        spack_env.prepend_path("FCC_DETECTORS", self.prefix.share.FCCSW)
+        spack_env.set_path("FCCSWBASEDIR", self.prefix)
+        spack_env.set_path("FCC_DETECTORS", self.prefix.share.FCCSW)
+        spack_env.set_path("FCCSW", self.prefix.share.FCCSW)

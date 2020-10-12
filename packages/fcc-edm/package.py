@@ -29,17 +29,12 @@ class FccEdm(CMakePackage):
             description='The build type to build',
             values=('Debug', 'Release'))
 
-    variant('cxxstd',
-            default='17',
-            values=('17'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
 
     patch('cpack.patch', when="@:0.5.6")
 
     depends_on('cmake', type='build')
     depends_on('python', type='build')
-    depends_on('dag')
+    depends_on('dag', when="@:0.5.6")
     depends_on('root@6.08:')
     depends_on('podio@:0.9.2', when='@:0.5.5')
     depends_on('podio@0.10.0:', when='@0.5.6')
