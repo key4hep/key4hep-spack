@@ -43,7 +43,7 @@ class FccEdm(CMakePackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=17')
         return args
 
     # Override pre-defined test step
