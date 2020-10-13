@@ -1,14 +1,4 @@
 # ----------------------------------------------------------------------------
-# Install CEPCSW via spack
-#
-#     spack install cepcsw
-#
-# You can edit this file again by typing:
-#
-#     spack edit cepcsw
-#
-# See the Spack documentation for more information on packaging.
-# ----------------------------------------------------------------------------
 
 from spack import *
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
