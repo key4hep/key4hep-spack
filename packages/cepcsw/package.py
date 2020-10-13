@@ -52,10 +52,6 @@ class Cepcsw(CMakePackage):
         if self.spec.satisfies('^gaudi@:34.99'):
             args.append('-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt')
 
-        clhep_prefix = self.spec["clhep"].prefix
-        clhep_include = clhep_prefix + "/include"
-        args.append('-DCLHEP_INCLUDE_DIR=%s'%clhep_include)
-
         pandorapfa_prefix = self.spec["pandorapfa"].prefix
         pandorapfa_cmake_modules = pandorapfa_prefix + "/cmakemodules"
 
