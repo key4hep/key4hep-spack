@@ -5,7 +5,7 @@ packages:
     # avoid building doxygen
     variants: ~doc
   geant4:
-    variants: ~qt~opengl
+    variants: ~qt~opengl+vecgeom
   marlin:
     # avoid building mariadb
     variants: ~lccd
