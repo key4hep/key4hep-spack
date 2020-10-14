@@ -218,6 +218,7 @@ class Key4hepStack(BundlePackage):
     depends_on("emacs+X toolkit=athena", when="+devtools")
     depends_on("ninja", when="+devtools")
     depends_on("py-ipython", when="+devtools")
+    depends_on("doxygen", when="+devtools")
 
     ##################### environment boostrap ############
     #######################################################
