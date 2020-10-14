@@ -12,6 +12,7 @@ class Edm4hep(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.2.1', sha256='a63bc39f301a9adb0b51bae3f2a8c38e06aa380c1eb0012de7ea16872cc22f8d')
     version('0.2.0', sha256='1d5bcded774c4fa960df8b7450f49c320f603fc399bef296fcf5415fa9a3f155')
     version('0.1.0', sha256='16a042def0cd064240df1fbf9dca2dc255f3006d94abbb1a11615a3c98d3a505')
 
