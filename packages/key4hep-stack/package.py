@@ -245,7 +245,8 @@ class Key4hepStack(BundlePackage):
           env_mod.extend(uenv.environment_modifications_for_spec(spec))
           env_mod.prepend_path(uenv.spack_loaded_hashes_var, spec.dag_hash())
       cmds = key4hep_setup_script(env_mod)
-      print(cmds)
+      with open(os.path.join(prefix, "setup.sh")) as f:
+        f.write(cmds)
 
 
    
