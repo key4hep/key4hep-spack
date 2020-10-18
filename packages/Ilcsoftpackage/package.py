@@ -7,6 +7,54 @@ from spack import *
 
 import os
 
+import llnl.util.tty as tty
+import spack.cmd
+import spack.cmd.common.arguments as arguments
+import spack.environment as ev
+import spack.util.environment
+from  spack.util.environment import *
+import spack.user_environment as uenv
+import spack.store
+import os
+
+k4_shell_set_strings = {
+    'sh': 'export {0}={1};\n',
+}
+k4_shell_prepend_strings = {
+    'sh': 'export {0}={1}:${0};\n',
+}
+
+
+
+
+
+def key4hep_setup_script(self, shell='sh'):
+    """Return shell code to apply the modifications and clears the list."""
+    modifications = self.group_by_name()
+    new_env = {} # os.environ.copy()
+
+    env_set_not_prepend = {}
+
+    for name, actions in sorted(modifications.items()):
+        for x in actions:
+            if isinstance(x, SetPath) or isinstance(x, SetEnv):
+              env_set_not_prepend[name] = True
+            else:
+              env_set_not_prepend[name] = False
+            
+            x.execute(new_env)
+
+    cmds = ''
+
+    for name in set(new_env):
+      if env_set_not_prepend[name]:
+                cmds += k4_shell_set_strings[shell].format(
+                    name, cmd_quote(new_env[name]))
+      else:
+                cmds += k4_shell_prepend_strings[shell].format(
+                    name, cmd_quote(new_env[name]))
+    return cmds
+
 def k4_lookup_latest_commit(repoinfo, giturl):
     """Use a github-like api to fetch the commit hash of the master branch.
     Constructs and runs a command of the form:
