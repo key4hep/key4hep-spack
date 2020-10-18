@@ -1,0 +1,18 @@
+diff --git a/Reconstruction/Tracking/src/Clupatra/NNClusterer.h b/Reconstruction/Tracking/src/Clupatra/NNClusterer.h
+index 2055d99..990169c 100644
+--- a/Reconstruction/Tracking/src/Clupatra/NNClusterer.h
++++ b/Reconstruction/Tracking/src/Clupatra/NNClusterer.h
+@@ -15,11 +15,11 @@
+ namespace nnclu {
+ 
+    /** fast check if integer is in a given range [Min,Max] */
+-  template <unsigned Min,unsigned Max >
++  template <int Min, int Max >
+   inline bool inRange( int i){   return ( (unsigned int) ( i - Min )  <= (unsigned int) ( Max - Min ) ); }
+ 
+   /** fast check if integer is not in a given range [Min,Max] */
+-  template <unsigned Min,unsigned Max >
++  template <int Min, int Max >
+   inline bool notInRange( int i){   return ( (unsigned int) ( i - Min )  > (unsigned int) ( Max - Min ) ); }
+ 
+ 

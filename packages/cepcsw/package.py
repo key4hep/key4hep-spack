@@ -34,6 +34,8 @@ class Cepcsw(CMakePackage):
     depends_on('pandorasdk')
     depends_on('pandorapfa')
     depends_on('root')
+    # pull request cepc/CEPCSW#65
+    patch('fix-not-in-range-template.patch')
 
     def cmake_args(self):
         args = []
