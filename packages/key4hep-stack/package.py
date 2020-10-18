@@ -1,6 +1,9 @@
 from spack import *
 from datetime import datetime
+import os
+import spack.user_environment as uenv
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
+from spack.pkg.k4.Ilcsoftpackage import k4_generate_setup_script 
 
 
 class Key4hepStack(BundlePackage):
@@ -30,6 +33,10 @@ class Key4hepStack(BundlePackage):
             description="add some standalone generators to the stack")
     variant('bootstrap', default=True,
             description="install some spack setup tools")
+    variant('load_gcc', default=True,
+            description="set up gcc in the setup file")
+    variant('key4hep_symlink', default=True,
+            description="create a symlink to the setup file")
     
 
     ##################### common key4hep packages #########
@@ -237,16 +244,30 @@ class Key4hepStack(BundlePackage):
     def install(self, spec, prefix):
       specs = [spec]
       with spack.store.db.read_transaction():
-               specs = [dep for spec in specs
+               specs = [dep for _spec in specs
                         for dep in
-                        spec.traverse( order='post')]
+                        _spec.traverse( order='post')]
+              
+               if "+load_gcc" in spec:
+                 gcc_specs = [spack.cmd.disambiguate_spec("gcc", None, first=True)]
+                 gcc_specs = [dep for _spec in gcc_specs
+                          for dep in
+                          _spec.traverse( order='post')]
+                 specs = specs + gcc_specs
       env_mod = spack.util.environment.EnvironmentModifications()
-      for spec in specs:
-          env_mod.extend(uenv.environment_modifications_for_spec(spec))
-          env_mod.prepend_path(uenv.spack_loaded_hashes_var, spec.dag_hash())
-      cmds = key4hep_setup_script(env_mod)
-      with open(os.path.join(prefix, "setup.sh")) as f:
+      for _spec in specs:
+          env_mod.extend(uenv.environment_modifications_for_spec(_spec))
+          env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
+      cmds = k4_generate_setup_script(env_mod)
+      with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
+      if "+key4hep_symlink" in spec:
+          symlink_path = os.environ.get("K4_LATEST_SETUP", "/cvmfs/sw.hsf.org/spackages/latest/setup.sh")
+          if not os.path.exists(os.path.dirname(symlink_path)):
+            os.makedirs(os.path.dirname(symlink_path))
+          if os.path.exists(symlink_path):
+            os.remove(symlink_path)
+          os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
 
 
    

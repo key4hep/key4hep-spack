@@ -28,24 +28,27 @@ k4_shell_prepend_strings = {
 
 
 
-def key4hep_setup_script(self, shell='sh'):
+def k4_generate_setup_script(self, shell='sh'):
     """Return shell code to apply the modifications and clears the list."""
+    # first, deduplecate paths
+    #modifications = self.group_by_name()
+    #for name, actions in sorted(modifications.items()):
+    #  self.prune_duplicate_paths(name)
+    # second, keep track if the paths should be set or prepended
     modifications = self.group_by_name()
-    new_env = {} # os.environ.copy()
-
+    new_env = {}
     env_set_not_prepend = {}
-
     for name, actions in sorted(modifications.items()):
         for x in actions:
             if isinstance(x, SetPath) or isinstance(x, SetEnv):
               env_set_not_prepend[name] = True
             else:
               env_set_not_prepend[name] = False
-            
+            # third, actually set an environment
             x.execute(new_env)
 
+    # fourth, get shell commands
     cmds = ''
-
     for name in set(new_env):
       if env_set_not_prepend[name]:
                 cmds += k4_shell_set_strings[shell].format(
