@@ -84,6 +84,6 @@ class Fccsw(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.set_path("FCCSWBASEDIR", self.prefix)
-        spack_env.set_path("FCC_DETECTORS", self.prefix.share.FCCSW)
-        spack_env.set_path("FCCSW", self.prefix.share.FCCSW)
+        spack_env.set("FCCSWBASEDIR", self.prefix)
+        spack_env.set("FCC_DETECTORS", self.prefix.share.FCCSW)
+        spack_env.set("FCCSW", self.prefix.share.FCCSW)
