@@ -20,6 +20,8 @@ class Key4hepStack(BundlePackage):
     version(datetime.today().strftime('%Y-%m-%d'))
     #version('2020-10-06') # example, no need to add them here
 
+    phases = ['install']
+
     ##################### variants ########################
     #######################################################
     variant('devtools', default=True,
@@ -231,5 +233,21 @@ class Key4hepStack(BundlePackage):
               msg="There are known issues with compilers from redhat's devtoolsets" \
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
+
+    def install(self, spec, prefix):
+      specs = [spec]
+      with spack.store.db.read_transaction():
+               specs = [dep for spec in specs
+                        for dep in
+                        spec.traverse( order='post')]
+      env_mod = spack.util.environment.EnvironmentModifications()
+      for spec in specs:
+          env_mod.extend(uenv.environment_modifications_for_spec(spec))
+          env_mod.prepend_path(uenv.spack_loaded_hashes_var, spec.dag_hash())
+      cmds = key4hep_setup_script(env_mod)
+      print(cmds)
+
+
+   
 
     
