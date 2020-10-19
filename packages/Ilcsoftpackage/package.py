@@ -17,25 +17,31 @@ import spack.user_environment as uenv
 import spack.store
 import os
 
-k4_shell_set_strings = {
-    'sh': 'export {0}={1};\n',
-}
-k4_shell_prepend_strings = {
-    'sh': 'export {0}={1}:${0};\n',
-}
 
 
 
 
 
-def k4_generate_setup_script(self, shell='sh'):
-    """Return shell code to apply the modifications and clears the list."""
-    # first, deduplecate paths
+def k4_generate_setup_script(env_mod, shell='sh'):
+    """Return shell code corresponding to a EnvironmentModifications object.
+    Contrary to the spack environment_modifications() method, this does not evaluate
+    the current environment, but generates shell code like:
+    export PATH=/new/path:$PATH
+    instead of:
+    export PATH=/new/path:/current/contents/of/PATH;
+    if `/new/path` is to be prepended.
+
+    :param env_mod: spack EnvironmentModifications object
+    :type env_mod: class: `spack.EnvironmentModifications`
+    :return: Shell code corresponding to the environment modifications.
+    :rtype: str
+    """
+    # first, deduplicate paths # TODO
     #modifications = self.group_by_name()
     #for name, actions in sorted(modifications.items()):
     #  self.prune_duplicate_paths(name)
     # second, keep track if the paths should be set or prepended
-    modifications = self.group_by_name()
+    modifications = env_mod.group_by_name()
     new_env = {}
     env_set_not_prepend = {}
     for name, actions in sorted(modifications.items()):
@@ -48,6 +54,12 @@ def k4_generate_setup_script(self, shell='sh'):
             x.execute(new_env)
 
     # fourth, get shell commands
+    k4_shell_set_strings = {
+        'sh': 'export {0}={1};\n',
+    }
+    k4_shell_prepend_strings = {
+        'sh': 'export {0}={1}:${0};\n',
+    }
     cmds = ''
     for name in set(new_env):
       if env_set_not_prepend[name]:
