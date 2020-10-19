@@ -9,6 +9,7 @@ class K4fwcore(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.1.1', sha256='3a8b8267dc16691dbfef10d8faa8c0ec84ebf2d243069401db07a6706125d3a4')
     version('0.1.0', sha256='05326d0f3d222f4a195baebf9c9fc60651621ec293e4384de3aaa81281cbea7a')
 
     variant('build_type', default='Release',
