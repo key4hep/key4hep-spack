@@ -7,7 +7,6 @@ from spack import *
 
 import os
 
-import llnl.util.tty as tty
 import spack.cmd
 import spack.cmd.common.arguments as arguments
 import spack.environment as ev
@@ -33,25 +32,25 @@ def k4_generate_setup_script(env_mod, shell='sh'):
 
     :param env_mod: spack EnvironmentModifications object
     :type env_mod: class: `spack.EnvironmentModifications`
+    :param str shell: type of the shell. Only 'sh' possible at the moment
     :return: Shell code corresponding to the environment modifications.
     :rtype: str
     """
-    # first, deduplicate paths # TODO
-    #modifications = self.group_by_name()
-    #for name, actions in sorted(modifications.items()):
-    #  self.prune_duplicate_paths(name)
-    # second, keep track if the paths should be set or prepended
     modifications = env_mod.group_by_name()
     new_env = {}
     env_set_not_prepend = {}
     for name, actions in sorted(modifications.items()):
         for x in actions:
-            if isinstance(x, SetPath) or isinstance(x, SetEnv):
-              env_set_not_prepend[name] = True
-            else:
-              env_set_not_prepend[name] = False
-            # third, actually set an environment
+            env_set_not_prepend[name] = isinstance(x, (SetPath, SetEnv))
+            # set a dictionary with the environment variables
             x.execute(new_env)
+  
+    # deduplicate paths
+    for name in  new_env:
+      path_list = new_env[name].split(":")
+      pruned_path_list = prune_duplicate_paths(path_list)
+      new_env[name] = ":".join(pruned_path_list) 
+
 
     # fourth, get shell commands
     k4_shell_set_strings = {
@@ -60,15 +59,15 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     k4_shell_prepend_strings = {
         'sh': 'export {0}={1}:${0};\n',
     }
-    cmds = ''
+    cmds = []
     for name in set(new_env):
-      if env_set_not_prepend[name]:
-                cmds += k4_shell_set_strings[shell].format(
-                    name, cmd_quote(new_env[name]))
-      else:
-                cmds += k4_shell_prepend_strings[shell].format(
-                    name, cmd_quote(new_env[name]))
-    return cmds
+        if env_set_not_prepend[name]:
+            cmds += [k4_shell_set_strings[shell].format(
+                name, cmd_quote(new_env[name]))]
+        else:
+            cmds += [k4_shell_prepend_strings[shell].format(
+                name, cmd_quote(new_env[name]))]
+    return ''.join(cmds)
 
 def k4_lookup_latest_commit(repoinfo, giturl):
     """Use a github-like api to fetch the commit hash of the master branch.
@@ -195,4 +194,3 @@ class Ilcsoftpackage(Package):
     issue with the logging of packages that use custom base classes.
     """
     pass
-
