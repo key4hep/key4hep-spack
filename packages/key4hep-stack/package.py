@@ -262,12 +262,15 @@ class Key4hepStack(BundlePackage):
       with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
       if "+key4hep_symlink" in spec:
+        try:
           symlink_path = os.environ.get("K4_LATEST_SETUP", "/cvmfs/sw.hsf.org/spackages/latest/setup.sh")
           if not os.path.exists(os.path.dirname(symlink_path)):
             os.makedirs(os.path.dirname(symlink_path))
           if os.path.exists(symlink_path):
             os.remove(symlink_path)
           os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
+        except:
+          print("Could not create symlink")
 
 
    
