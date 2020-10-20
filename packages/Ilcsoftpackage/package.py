@@ -8,6 +8,7 @@ from spack import *
 import os
 
 import spack.cmd
+import llnl.util.tty as tty
 import spack.cmd.common.arguments as arguments
 import spack.environment as ev
 import spack.util.environment
@@ -40,10 +41,13 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     new_env = {}
     env_set_not_prepend = {}
     for name, actions in sorted(modifications.items()):
+        env_prepend_not_set[name] = True 
         for x in actions:
-            env_set_not_prepend[name] = isinstance(x, (SetPath, SetEnv))
+            env_prepend_not_set[name] = env_prepend_not_set[name] and isinstance(x, (SetPath, SetEnv))
             # set a dictionary with the environment variables
             x.execute(new_env)
+        if env_prepend_not_set[name] and len(actions) > 1:
+            tty.warn("Var " + name + "is set multiple times!" )
   
     # deduplicate paths
     for name in  new_env:
@@ -61,7 +65,7 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     }
     cmds = []
     for name in set(new_env):
-        if env_set_not_prepend[name]:
+        if not env_prepend_not_set[name]:
             cmds += [k4_shell_set_strings[shell].format(
                 name, cmd_quote(new_env[name]))]
         else:
