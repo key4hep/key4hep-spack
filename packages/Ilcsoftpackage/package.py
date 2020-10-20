@@ -40,14 +40,14 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     modifications = env_mod.group_by_name()
     new_env = {}
     # keep track wether this variable is supposed to be a list of paths, or set to a single value
-    env_prepend_not_set = {} 
+    env_set_not_prepend = {} 
     for name, actions in sorted(modifications.items()):
-        env_prepend_not_set[name] = True 
+        env_set_not_prepend[name] = False
         for x in actions:
-            env_prepend_not_set[name] = env_prepend_not_set[name] and isinstance(x, (SetPath, SetEnv))
+            env_set_not_prepend[name] = env_set_not_prepend[name] or isinstance(x, (SetPath, SetEnv))
             # set a dictionary with the environment variables
             x.execute(new_env)
-        if env_prepend_not_set[name] and len(actions) > 1:
+        if env_set_not_prepend[name] and len(actions) > 1:
             tty.warn("Var " + name + "is set multiple times!" )
   
     # deduplicate paths
@@ -66,7 +66,7 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     }
     cmds = []
     for name in set(new_env):
-        if not env_prepend_not_set[name]:
+        if env_set_not_prepend[name]:
             cmds += [k4_shell_set_strings[shell].format(
                 name, cmd_quote(new_env[name]))]
         else:
