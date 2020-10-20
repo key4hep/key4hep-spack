@@ -1,6 +1,7 @@
 from spack import *
 from datetime import datetime
 import os
+import llnl.util.tty as tty
 import spack.user_environment as uenv
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
 from spack.pkg.k4.Ilcsoftpackage import k4_generate_setup_script 
@@ -31,12 +32,8 @@ class Key4hepStack(BundlePackage):
             description="add tools necessary for software masterment to the stack")
     variant('generators', default=False,
             description="add some standalone generators to the stack")
-    variant('bootstrap', default=True,
+    variant('bootstrap', default=False,
             description="install some spack setup tools")
-    variant('load_gcc', default=True,
-            description="set up gcc in the setup file")
-    variant('key4hep_symlink', default=True,
-            description="create a symlink to the setup file")
     
 
     ##################### common key4hep packages #########
@@ -242,18 +239,20 @@ class Key4hepStack(BundlePackage):
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
     def install(self, spec, prefix):
+      """ Create bash setup script in prefix."""
       specs = [spec]
       with spack.store.db.read_transaction():
                specs = [dep for _spec in specs
                         for dep in
                         _spec.traverse( order='post')]
-              
-               if "+load_gcc" in spec:
-                 gcc_specs = [spack.cmd.disambiguate_spec("gcc", None, first=True)]
-                 gcc_specs = [dep for _spec in gcc_specs
-                          for dep in
-                          _spec.traverse( order='post')]
-                 specs = specs + gcc_specs
+               try: 
+                   gcc_specs = [spack.cmd.disambiguate_spec(str(spec.compiler), None, first=True)]
+                   gcc_specs = [dep for _spec in gcc_specs
+                            for dep in
+                            _spec.traverse( order='post')]
+                   specs = specs + gcc_specs
+               except:
+                   tty.warn("No spec found for " + str(spec.compiler) + " Assuming it is a system compiler and not adding it to the setup.")
       env_mod = spack.util.environment.EnvironmentModifications()
       for _spec in specs:
           env_mod.extend(uenv.environment_modifications_for_spec(_spec))
@@ -261,16 +260,16 @@ class Key4hepStack(BundlePackage):
       cmds = k4_generate_setup_script(env_mod)
       with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
-      if "+key4hep_symlink" in spec:
         try:
-          symlink_path = os.environ.get("K4_LATEST_SETUP", "/cvmfs/sw.hsf.org/spackages/latest/setup.sh")
-          if not os.path.exists(os.path.dirname(symlink_path)):
-            os.makedirs(os.path.dirname(symlink_path))
-          if os.path.exists(symlink_path):
-            os.remove(symlink_path)
-          os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
+          symlink_path = os.environ.get("K4_LATEST_SETUP_PATH", "")
+          if symlink_path:
+              if not os.path.exists(os.path.dirname(symlink_path)):
+                os.makedirs(os.path.dirname(symlink_path))
+              if os.path.exists(symlink_path):
+                os.remove(symlink_path)
+              os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
         except:
-          print("Could not create symlink")
+          tty.warn("Could not create symlink")
 
 
    
