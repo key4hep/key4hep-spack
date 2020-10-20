@@ -39,7 +39,8 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     """
     modifications = env_mod.group_by_name()
     new_env = {}
-    env_set_not_prepend = {}
+    # keep track wether this variable is supposed to be a list of paths, or set to a single value
+    env_prepend_not_set = {} 
     for name, actions in sorted(modifications.items()):
         env_prepend_not_set[name] = True 
         for x in actions:
