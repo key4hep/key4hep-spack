@@ -12,11 +12,12 @@ stages:
 
 # this job expects the following setup on the runner:
 # * environment variables GITHUB_TOKEN and GITHUB_USER
+
 #   set in .bashrc - to be able to query lates commits
-# * existing installation of key4hep-stack (stable version) in /cvmfs/sw.hsf.org/spackages
+# *  (for the nightlies) existing installation of key4hep-stack (stable version) in /cvmfs/sw.hsf.org/spackages
 #   (or whatever is defined in upstreams.yaml)
 #   this may be read-only - could be delivered by cvmfs
-# * writeable directory in /cvmfs/sw-nightlies.hsf.org 
+# * writeable directory in /cvmfs/sw-nightlies.hsf.org  / cvmfs/sw.hsf.org
 #   (or whatever is defined in config.yaml)
 
 # for the cvmfs deployment:
@@ -50,6 +51,7 @@ build-spack-nightlies:
         # compiler setup 
         - spack load gcc
         - spack compiler find --scope site
+        - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
         # compile onwards and upwards
         # use hash of currently installed dd4hep to avoid rebuilding everything 
         - spack install key4hep-stack@master-`date -I` ^/pnixyp3tfmn
@@ -71,8 +73,6 @@ deploy-cvmfs-nightlies:
         - ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
 
 
-# note that currently the hash of the installed dd4hep is hardcoded
-# to avoid rebuilds of everything.
 build-spack-release:
     stage: compilation
     tags:
@@ -98,6 +98,7 @@ build-spack-release:
         - spack compiler find --scope site
         # compile onwards and upwards
         # use hash of currently installed dd4hep to avoid rebuilding everything 
+        - export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/key4hep/setup.sh
         - spack install key4hep-stack@`date -I`
 
 deploy-cvmfs-release:
