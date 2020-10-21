@@ -25,7 +25,7 @@ class Lccontent(CMakePackage):
     patch("path2.patch")
     patch("path3.patch")
     patch("path4.patch")
-    patch("bool-int.patch")
+    patch("bool-int.patch", when="@:3.1.5")
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
