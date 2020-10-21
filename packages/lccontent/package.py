@@ -33,8 +33,6 @@ class Lccontent(CMakePackage):
                 '-DCMAKE_CXX_STANDARD=17',
                 '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules
         ]
-        if self.spec.satisfies('%gcc@10:'):
-            args.append('-DCMAKE_CXX_FLAGS=-Wno-int-in-bool-context')
         return args
 
     def url_for_version(self, version):
@@ -45,4 +43,3 @@ class Lccontent(CMakePackage):
         patch = (str(version[2]).zfill(2))
         url = base_url + "/v%s-%s-%s.tar.gz" % (major, minor, patch)
         return url
-
