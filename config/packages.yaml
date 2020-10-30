@@ -28,7 +28,7 @@ packages:
     variants: ~force-safe-string
   # Avoid concretizer conflict for edm4hep
   pythia8:
-    version: [8244]
+    version: [8303]
   # gaudi v34 does not work with python 3.8
   # setting the version explicitly avoids concretizer errors
   python:
