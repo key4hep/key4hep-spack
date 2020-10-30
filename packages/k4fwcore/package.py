@@ -3,14 +3,15 @@ from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 class K4fwcore(CMakePackage):
     """Core framework components of the Key4HEP project"""
-    homepage = "https://github.com/key4hep/K4FWCore"
-    url = "https://github.com/key4hep/K4FWCore/archive/v00-01.tar.gz"
-    git = "https://github.com/key4hep/K4FWCore.git"
+    homepage = "https://github.com/key4hep/k4FWCore"
+    url = "https://github.com/key4hep/k4FWCore/archive/v00-01.tar.gz"
+    git = "https://github.com/key4hep/k4FWCore.git"
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
-    version('0.1.1', sha256='3a8b8267dc16691dbfef10d8faa8c0ec84ebf2d243069401db07a6706125d3a4')
-    version('0.1.0', sha256='05326d0f3d222f4a195baebf9c9fc60651621ec293e4384de3aaa81281cbea7a')
+    version('0.1.1', sha256='9c4e4b487f7d9c982547c13570345399505e763fb369b76ceadb35c1d52bf6aa')
+    version('0.1.0', sha256='aef682649f3fcb1d72de897fbf6ec4ed421c8a4836bb3462c4b0049a709374e4')
+
 
     variant('build_type', default='Release',
             description='CMake build type',
