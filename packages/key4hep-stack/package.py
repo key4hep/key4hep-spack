@@ -265,7 +265,7 @@ class Key4hepStack(BundlePackage):
           if symlink_path:
               if not os.path.exists(os.path.dirname(symlink_path)):
                 os.makedirs(os.path.dirname(symlink_path))
-              if os.path.exists(symlink_path):
+              if os.path.exists(symlink_path) or os.path.islink(symlink_path):
                 os.remove(symlink_path)
               os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
         except:
