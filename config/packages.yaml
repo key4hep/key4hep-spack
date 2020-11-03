@@ -11,7 +11,7 @@ packages:
     variants: ~lccd
   mesa:
     # avoid building llvm
-    variants: ~llvm+glx+opengl
+    variants: ~llvm+glx+opengl swr=none
   boost:
     variants: +python
   dd4hep:
