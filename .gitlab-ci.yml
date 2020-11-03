@@ -4,6 +4,7 @@
 variables:
   GIT_STRATEGY: clone
   K4_JOBTYPE: Nightlies
+  SPACK_VERSION: 
 
 stages:
     - compilation
@@ -41,6 +42,7 @@ build-spack-nightlies:
     script:
         # set up spack inside the k4-spack repo
         - git clone --depth 1 https://github.com/key4hep/spack
+        - if [ -n "$SPACK_VERSION" ]; then cd spack; git checkout $SPACK_VERSION; cd ..; fi 
         - source spack/share/spack/setup-env.sh
         # register k4 package recipes with spack
         - spack repo add --scope site .
@@ -86,6 +88,7 @@ build-spack-release:
     script:
         # set up spack inside the k4-spack repo
         - git clone --depth 1 https://github.com/key4hep/spack
+        - if [ -n "$SPACK_VERSION" ]; then cd spack; git checkout $SPACK_VERSION; cd ..; fi 
         - source spack/share/spack/setup-env.sh
         # register k4 package recipes with spack
         - spack repo add --scope site .
