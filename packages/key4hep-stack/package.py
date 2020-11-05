@@ -211,6 +211,9 @@ class Key4hepStack(BundlePackage):
     #depends_on("dual-readout")
     #k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
 
+
+    depends_on("fccanalyses")
+
     ############################## cepcsw #################
     #######################################################
     depends_on("cepcsw")
