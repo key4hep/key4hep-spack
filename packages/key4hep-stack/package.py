@@ -1,6 +1,9 @@
 from spack import *
+from spack.main import get_version
+import spack.architecture as architecture
 from datetime import datetime
 import os
+import platform
 import llnl.util.tty as tty
 import spack.user_environment as uenv
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
@@ -243,6 +246,15 @@ class Key4hepStack(BundlePackage):
 
     def install(self, spec, prefix):
       """ Create bash setup script in prefix."""
+
+      # first, log spack version to build-out
+
+      tty.msg('* **Spack:**', get_version())
+      tty.msg('* **Python:**', platform.python_version())
+      tty.msg('* **Platform:**', architecture.Arch(
+          architecture.platform(), 'frontend', 'frontend'))
+
+
       specs = [spec]
       with spack.store.db.read_transaction():
                specs = [dep for _spec in specs
