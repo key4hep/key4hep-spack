@@ -10,5 +10,5 @@ class Fccanalyses(BundlePackage):
   depends_on('py-awkward1')
   depends_on('py-matplotlib')
   depends_on('py-uproot4')
-  depends_on('py-tensorflow')
+  #depends_on('py-tensorflow') # todo: check if we should integrate.
   #depends_on('py-zfit') # todo: add in spack
