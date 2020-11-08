@@ -40,7 +40,7 @@ build-spack-nightlies:
           - $K4_JOBTYPE == "Nightlies"
     script:
         # set up spack inside the k4-spack repo
-        - git clone --depth 1 https://github.com/spack/spack
+        - git clone --depth 1 https://github.com/key4hep/spack
         - source spack/share/spack/setup-env.sh
         # register k4 package recipes with spack
         - spack repo add --scope site .
@@ -85,7 +85,7 @@ build-spack-release:
           - $K4_JOBTYPE == "Release"
     script:
         # set up spack inside the k4-spack repo
-        - git clone --depth 1 https://github.com/spack/spack
+        - git clone --depth 1 https://github.com/key4hep/spack
         - source spack/share/spack/setup-env.sh
         # register k4 package recipes with spack
         - spack repo add --scope site .
