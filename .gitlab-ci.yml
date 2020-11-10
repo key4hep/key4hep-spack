@@ -4,7 +4,7 @@
 variables:
   GIT_STRATEGY: clone
   K4_JOBTYPE: Nightlies
-  SPACK_VERSION: 
+  SPACK_VERSION: ""
 
 stages:
     - compilation
