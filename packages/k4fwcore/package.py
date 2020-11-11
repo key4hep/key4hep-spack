@@ -46,9 +46,9 @@ class K4fwcore(CMakePackage):
         minor = (str(version[1]).zfill(2))
         patch = (str(version[2]).zfill(2))
         if version[2] == 0:
-            url = "https://github.com/key4hep/K4FWCore/archive/v%s-%s.tar.gz" % (major, minor)
+            url = "https://github.com/key4hep/k4FWCore/archive/v%s-%s.tar.gz" % (major, minor)
         else:
-            url = "https://github.com/key4hep/K4FWCore/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
+            url = "https://github.com/key4hep/k4FWCore/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
         return url
     
     def setup_run_environment(self, spack_env):
