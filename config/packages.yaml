@@ -36,7 +36,7 @@ packages:
   delphes:
     # includes some fixes to the trackcovariance module that are
     # needed in fccsw
-    version: [3.4.3pre05]
+    version: [3.4.3pre06]
   # for compatibility with tensorflow
   py-numpy:
     version: [1.18.5]
