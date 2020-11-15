@@ -18,24 +18,9 @@ jobs:
         cp var/spack/repos/$(basename ${GITHUB_REPOSITORY})/config/packages.yaml etc/spack
         source share/spack/setup-env.sh
         spack repo add --scope site ${PWD}/var/spack/repos/$(basename ${GITHUB_REPOSITORY})
-    - name: Create Zip file for upload
-      run: |
-        cd ${GITHUB_WORKSPACE}/../spack
-        rm -rf .* || true
-        rm -rf var/spack/repos/$(basename ${GITHUB_REPOSITORY})/.* || true
-        zip -rqy key4hep-spack.zip ../spack
-        mv key4hep-spack.zip ${GITHUB_WORKSPACE}/key4hep-spack.zip
-
     - name: Concretize key4hep-stack
       run: |
         cd ${GITHUB_WORKSPACE}/../spack
         source share/spack/setup-env.sh
         spack compiler find --scope site
         spack spec -I key4hep-stack
-        cd ${GITHUB_WORKSPACE}
-    - name: Upload configured key4hep-spack
-      uses: actions/upload-artifact@v2
-      with:
-        name: key4hep-spack
-        path: key4hep-spack.zip
-
