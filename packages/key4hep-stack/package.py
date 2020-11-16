@@ -200,7 +200,7 @@ class Key4hepStack(BundlePackage):
     k4_add_latest_commit_as_dependency("raida", "ilcsoft/raida", when="@master")
 
     depends_on('sio')
-    k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
+    #k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
 
 
     ############################### fccsw #################
