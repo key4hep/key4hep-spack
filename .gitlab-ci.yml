@@ -7,12 +7,11 @@ variables:
   SPACK_VERSION: ""
 
 stages:
-    - setup_spack
     - compilation
     - deployment
 
 setup_spack_push:
-    stage: setup_spack
+    stage: compilation
     tags:
         - k4-build-spack-nightlies
     only:
@@ -28,41 +27,6 @@ setup_spack_push:
             - key4hep-spack_centos7-cvmfs.tar.gz
             - key4hep-spack.tar.gz
         expire_in: 1 week
-
-
-setup_spack_nightly:
-    stage: setup_spack
-    tags:
-        - k4-build-spack-nightlies
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-      variables:
-          - $K4_JOBTYPE == "Nightlies"
-    script:
-        # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
-
-    artifacts:
-        paths:
-            - key4hep-spack_centos7-cvmfs.tar.gz
-            - key4hep-spack.tar.gz
-        expire_in: 1 week
-
-setup_spack_release:
-    stage: setup_spack
-    tags:
-        - k4-build-spack-release
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-      variables:
-          - $K4_JOBTYPE == "Release"
-    script:
-        # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
 
 
 # this job expects the following setup on the runner:
@@ -94,11 +58,18 @@ build-spack-nightlies:
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
+        # set up spack inside the k4-spack repo
+        - source scripts/ci_setup_spack.sh
         - source spack/share/spack/setup-env.sh
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
         # compile onwards and upwards
         - spack install key4hep-stack@master-`date -I` 
+    artifacts:
+        paths:
+            - key4hep-spack_centos7-cvmfs.tar.gz
+            - key4hep-spack.tar.gz
+        expire_in: 1 week
 
 
 
@@ -128,6 +99,8 @@ build-spack-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
+        # set up spack inside the k4-spack repo
+        - source scripts/ci_setup_spack.sh
         # get the right config files to the right places
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
