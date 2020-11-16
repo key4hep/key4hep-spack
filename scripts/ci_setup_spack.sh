@@ -4,7 +4,7 @@
 # get the right config files to the right places
  cp config/packages.yaml spack/etc/spack/
  mkdir spack/var/spack/repos/key4hep-spack
- cp * spack/var/spack/repos/key4hep-spack || true
+ cp -r * spack/var/spack/repos/key4hep-spack || true
 # clean up git directories for zip
  rm -rf spack/.git
 # register k4 package recipes with spack
