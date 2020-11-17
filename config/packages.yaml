@@ -47,5 +47,7 @@ packages:
   # build error on centos7 with version 7.1.0
   fmt:
     version: [6.1.2]
+  k4fwcore:
+    version: [0.1.1]
 
 
