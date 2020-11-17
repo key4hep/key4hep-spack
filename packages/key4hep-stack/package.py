@@ -107,8 +107,8 @@ class Key4hepStack(BundlePackage):
     depends_on('garlic')
     k4_add_latest_commit_as_dependency("garlic", "ilcsoft/garlic", when="@master")
 
-    depends_on('gaudimarlinwrapper')
-    k4_add_latest_commit_as_dependency("gaudimarlinwrapper", "key4hep/gmp", when="@master")
+    depends_on('k4marlinwrapper')
+    k4_add_latest_commit_as_dependency("k4marlinwrapper", "key4hep/k4marlinwrapper", when="@master")
 
     depends_on('generalbrokenlines')
     k4_add_latest_commit_as_dependency("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines", when="@master")
