@@ -22,14 +22,14 @@ class Cepcsw(CMakePackage):
 
     k4_add_latest_commit_as_version(git)
     version('master', branch='master')
-    version('0.1', sha256='9445b713f8559b5eb4708e221da34a31e2fb60df82eb83a092814fd312c9cf36')
+    version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
 
     depends_on('clhep')
     depends_on('dd4hep +geant4')
     depends_on('edm4hep')
     depends_on('k4fwcore@0.3.0:', when='@0.2:')
-    depends_on('k4fwcore@0.1.1', when='@0.1')
-    depends_on('gaudi@:34.99', when='@:0.1')
+    depends_on('k4fwcore@0.2.0', when='@:0.1.99')
+    depends_on('gaudi@:34.99', when='@:0.1.99')
     depends_on('gaudi@35.0:', when='@0.2:')
     depends_on('gear')
     depends_on('lcio')
