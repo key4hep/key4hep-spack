@@ -3,13 +3,14 @@
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
-  K4_JOBTYPE: Nightlies
+  K4_JOBTYPE: Release
   SPACK_VERSION: ""
 
 stages:
     - compilation
     - deployment
 
+### create an artifact with a pre-configured spack on each push
 setup_spack_push:
     stage: compilation
     tags:
@@ -28,32 +29,25 @@ setup_spack_push:
             - key4hep-spack.tar.gz
         expire_in: 1 week
 
-
+#### Nightly build of key4hep-stack
 # this job expects the following setup on the runner:
 # * environment variables GITHUB_TOKEN and GITHUB_USER
-
-#   set in .bashrc - to be able to query lates commits
+#   set in .bashrc or via gitlab ci - to be able to query the commits on github
 # *  (for the nightlies) existing installation of key4hep-stack (stable version) in /cvmfs/sw.hsf.org/spackages
 #   (or whatever is defined in upstreams.yaml)
 #   this may be read-only - could be delivered by cvmfs
-# * writeable directory in /cvmfs/sw-nightlies.hsf.org  / cvmfs/sw.hsf.org
+# * writeable directory in /cvmfs/sw-nightlies.hsf.org 
 #   (or whatever is defined in config.yaml)
-
+#  
 # for the cvmfs deployment:
 # * the gitlab-runner user must be able to ssh into the cvmfs publisher
 # * the cvmfs publisher must be able to rsync with the build machine
-
-
-
-# note that currently the hash of the installed dd4hep is hardcoded
-# to avoid rebuilds of everything.
 build-spack-nightlies:
     stage: compilation
     tags:
         - k4-build-spack-nightlies
     only:
       refs:
-          - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
       variables:
           - $K4_JOBTYPE == "Nightlies"
@@ -72,7 +66,7 @@ build-spack-nightlies:
         expire_in: 1 week
 
 
-
+### deploy the nightlies to cvmfs
 deploy-cvmfs-nightlies:
     stage: deployment
     needs: ["build-spack-nightlies"]
@@ -80,7 +74,6 @@ deploy-cvmfs-nightlies:
         - k4-build-spack-nightlies
     only:
       refs:
-          - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
       variables:
           - $K4_JOBTYPE == "Nightlies"
@@ -88,6 +81,15 @@ deploy-cvmfs-nightlies:
         - ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
 
 
+#### Release build of key4hep-stack
+# this job expects the following setup on the runner:
+
+# * writeable directory in /cvmfs/sw.hsf.org 
+#   (or whatever is defined in config.yaml)
+#  
+# for the cvmfs deployment:
+# * the gitlab-runner user must be able to ssh into the cvmfs publisher
+# * the cvmfs publisher must be able to rsync with the build machine
 build-spack-release:
     stage: compilation
     tags:
@@ -95,7 +97,7 @@ build-spack-release:
     only:
       refs:
           - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
+          - schedules # Only execute this on scheduled pipelines
       variables:
           - $K4_JOBTYPE == "Release"
     script:
@@ -105,8 +107,12 @@ build-spack-release:
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
+
+        # if this workflow has been started by a tag, use the tag version. if not, use todays date
+        - if [ -n "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
         # compile onwards and upwards
-        - spack install key4hep-stack@`date -I`
+        - echo $K4STACK_VERSION
+        - spack install key4hep-stack@$K4STACK_VERSION
 
 deploy-cvmfs-release:
     stage: deployment
