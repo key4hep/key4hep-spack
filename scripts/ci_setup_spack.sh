@@ -9,7 +9,7 @@
  rm -rf spack/.git
 # register k4 package recipes with spack
  echo "repos:" > spack/etc/spack/repos.yaml
- echo "- $SPACK_ROOT/var/spack/repos/key4hep-spack" >> spack/etc/spack/repos.yaml
+ echo ' - $SPACK_ROOT/var/spack/repos/key4hep-spack' >> spack/etc/spack/repos.yaml
  tar -czf key4hep-spack.tar.gz spack
  cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/upstreams.yaml spack/etc/spack/
 # compiler setup 
