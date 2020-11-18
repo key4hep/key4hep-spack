@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Ced(CMakePackage):
+class Ced(CMakePackage, Ilcsoftpackage):
     """CED is a server client application for OpenGL drawing"""
 
     homepage = "https://github.com/iLCSoft/CED"
@@ -39,7 +39,3 @@ class Ced(CMakePackage):
         #args = [self.define("BUILD_TESTING", self.run_tests)]
         args = []
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
-

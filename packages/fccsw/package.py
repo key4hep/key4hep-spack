@@ -1,8 +1,8 @@
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
-class Fccsw(CMakePackage):
+class Fccsw(CMakePackage, Key4hepPackage):
     """Software framework of the FCC project"""
     homepage = "https://github.com/HEP-FCC/FCCSW/"
     url      = "https://github.com/HEP-FCC/FCCSW/archive/v0.16.tar.gz"

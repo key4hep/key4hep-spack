@@ -1,7 +1,8 @@
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version,  ilc_url_for_version
 
-class K4fwcore(CMakePackage):
+
+class K4fwcore(CMakePackage, Key4hepPackage):
     """Core framework components of the Key4HEP project"""
     homepage = "https://github.com/key4hep/k4FWCore"
     url = "https://github.com/key4hep/k4FWCore/archive/v00-01.tar.gz"
@@ -42,17 +43,8 @@ class K4fwcore(CMakePackage):
         return args
 
     def url_for_version(self, version):
-        # releases are dashes and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        patch = (str(version[2]).zfill(2))
-        if version[2] == 0:
-            url = "https://github.com/key4hep/k4FWCore/archive/v%s-%s.tar.gz" % (major, minor)
-        else:
-            url = "https://github.com/key4hep/k4FWCore/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        return url
+        return ilc_url_for_version(self, version)
+
     
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)

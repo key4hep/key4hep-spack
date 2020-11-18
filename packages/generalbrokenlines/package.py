@@ -15,6 +15,8 @@ class Generalbrokenlines(CMakePackage):
     url      = "https://github.com/GeneralBrokenLines/GeneralBrokenLines/archive/V02-02-00.tar.gz"
     git      = "https://github.com/GeneralBrokenLines/GeneralBrokenLines.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

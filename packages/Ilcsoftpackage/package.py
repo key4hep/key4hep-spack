@@ -17,6 +17,7 @@ import spack.user_environment as uenv
 import spack.store
 import os
 
+from spack.package import PackageBase
 
 
 
@@ -193,9 +194,18 @@ def ilc_url_for_version(self, version):
         return
     return url
 
-class Ilcsoftpackage(Package):
+class Key4hepPackage(PackageBase):
+
+    tags = ['hep', 'key4hep']
+
+class Ilcsoftpackage(Key4hepPackage):
     """This class needs to be present to allow spack to import this file.
     the above function could also be a member here, but there is an
     issue with the logging of packages that use custom base classes.
     """
-    pass
+
+
+    
+    def url_for_version(self, version):
+        return ilc_url_for_version(self, version)
+

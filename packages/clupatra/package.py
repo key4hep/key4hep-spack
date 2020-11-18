@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Clupatra(CMakePackage):
+class Clupatra(CMakePackage, Ilcsoftpackage):
     """Topological pattern recognition (for the TPC)"""
 
     url      = "https://github.com/iLCSoft/Clupatra/archive/v01-03.tar.gz"
@@ -33,6 +33,3 @@ class Clupatra(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libClupatra.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

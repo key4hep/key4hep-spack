@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Kaldet(CMakePackage):
+class Kaldet(CMakePackage, Ilcsoftpackage):
     """Kaldet: part of ilcsoft tracking."""
 
     homepage = "https://github.com/iLCSoft/KalDet"
@@ -43,6 +43,3 @@ class Kaldet(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('CPATH', self.prefix.include.kaldet)
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

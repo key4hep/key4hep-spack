@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Lctuple(CMakePackage):
+class Lctuple(CMakePackage, Ilcsoftpackage):
     """Marlin package that creates a ROOT TTree with a column wise ntuple from LCIO collections."""
 
     url      = "https://github.com/iLCSoft/LCTuple/archive/v01-12.tar.gz"
@@ -35,6 +35,3 @@ class Lctuple(CMakePackage):
                     % self.spec['root'].variants['cxxstd'].value)
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

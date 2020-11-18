@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Raida(CMakePackage):
+class Raida(CMakePackage, Ilcsoftpackage):
     """ A utility package for the iLCSoft software framework """
 
     homepage = "https://github.com/iLCSoft/raida"
@@ -31,6 +31,3 @@ class Raida(CMakePackage):
                     % self.spec['root'].variants['cxxstd'].value)
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

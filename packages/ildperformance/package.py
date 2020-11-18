@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Ildperformance(CMakePackage):
+class Ildperformance(CMakePackage, Ilcsoftpackage):
     """Assembly of various Marlin processor for reconstruction."""
 
     url      = "https://github.com/iLCSoft/ILDPerformance/archive/v01-08.tar.gz"
@@ -33,6 +33,3 @@ class Ildperformance(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libILDPerformance.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

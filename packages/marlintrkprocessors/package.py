@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Marlintrkprocessors(CMakePackage):
+class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
     """A collection of Tracking Relelated Processors Based on MarlinTrk"""
 
     url      = "https://github.com/iLCSoft/MarlinTrkProcessors/archive/v02-11.tar.gz"
@@ -34,6 +34,3 @@ class Marlintrkprocessors(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinTrkProcessors.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
