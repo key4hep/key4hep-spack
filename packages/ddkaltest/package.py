@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Ddkaltest(CMakePackage):
+class Ddkaltest(CMakePackage, Ilcsoftpackage):
     """Interface between KalTest fitter and DD4hep based geometry"""
 
     homepage = "https://github.com/iLCSoft/DDKalTest"
@@ -39,6 +39,3 @@ class Ddkaltest(CMakePackage):
     def installheaders(self):
       #make('install')
       install_tree('.', self.prefix)
-    
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

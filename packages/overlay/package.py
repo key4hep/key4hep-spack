@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Overlay(CMakePackage):
+class Overlay(CMakePackage, Ilcsoftpackage):
     """The package Overlay provides code for event overlay with Marlin."""
 
     url      = "https://github.com/iLCSoft/Overlay/archive/v00-22.tar.gz"
@@ -38,6 +38,3 @@ class Overlay(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libOverlay.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

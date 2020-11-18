@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Cedviewer(CMakePackage):
+class Cedviewer(CMakePackage, Ilcsoftpackage):
     """CEDViewer processor for the CED event display."""
 
     url      = "https://github.com/iLCSoft/CEDViewer/archive/v01-17-01.tar.gz"
@@ -30,6 +30,3 @@ class Cedviewer(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libCEDViewer.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

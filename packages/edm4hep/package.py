@@ -1,9 +1,9 @@
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Edm4hep(CMakePackage):
+class Edm4hep(CMakePackage, Ilcsoftpackage):
     """Event data model of Key4HEP"""
 
     homepage = "https://github.com/key4hep/EDM4hep"
@@ -68,15 +68,3 @@ class Edm4hep(CMakePackage):
         return args
 
 
-    def url_for_version(self, version):
-        # releases are dashed and padded with a leading zero
-        # the patch version is omitted when 0
-        # so for example v01-12-01, v01-12 ...
-        major = (str(version[0]).zfill(2))
-        minor = (str(version[1]).zfill(2))
-        patch = (str(version[2]).zfill(2))
-        if version[2] == 0:
-            url = "https://github.com/key4hep/edm4hep/archive/v%s-%s.tar.gz" % (major, minor)
-        else:
-            url = "https://github.com/key4hep/edm4hep/archive/v%s-%s-%s.tar.gz" % (major, minor, patch)
-        return url

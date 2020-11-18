@@ -14,6 +14,8 @@ class Pandoraanalysis(CMakePackage):
     homepage = "https://github.com/PandoraPFA/LCPandoraAnalysis"
     git      = "https://github.com/PandoraPFA/LCPandoraAnalysis.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

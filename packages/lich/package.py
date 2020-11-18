@@ -15,6 +15,8 @@ class Lich(CMakePackage):
     homepage = "https://github.com/danerdaner/LICH"
     git      = "https://github.com/danerdaner/LICH.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

@@ -8,9 +8,10 @@ import llnl.util.tty as tty
 import spack.user_environment as uenv
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
 from spack.pkg.k4.Ilcsoftpackage import k4_generate_setup_script 
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
 
 
-class Key4hepStack(BundlePackage):
+class Key4hepStack(BundlePackage, Key4hepPackage):
     """Bundle package to install the Key4hep software stack."""
     
     homepage = 'https://cern.ch/key4hep'

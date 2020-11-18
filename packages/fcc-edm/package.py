@@ -1,8 +1,8 @@
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
-class FccEdm(CMakePackage):
+class FccEdm(CMakePackage, Key4hepPackage):
     """Event data model of FCC"""
 
     homepage = "https://github.com/HEP-FCC/fcc-edm"

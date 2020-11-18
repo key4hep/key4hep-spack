@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Kaltest(CMakePackage):
+class Kaltest(CMakePackage, Ilcsoftpackage):
     """ Kaltest tracking software. """
 
     homepage = "https://github.com/iLCSoft/KalTest"

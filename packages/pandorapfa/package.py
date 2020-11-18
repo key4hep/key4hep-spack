@@ -17,6 +17,8 @@ class Pandorapfa(Package):
     homepage  = "https://github.com/PandoraPFA/PandoraPFA"
     git      = "https://github.com/PandoraPFA/PandoraPFA.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

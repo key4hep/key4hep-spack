@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Kitrack(CMakePackage):
+class Kitrack(CMakePackage, Ilcsoftpackage):
     """Toolkit for Tracking. Consists of KiTrack (Cellular Automaton, a Hopfield Neural Network, the hit and track classes) and Criteria (the criteria classes)."""
 
     url      = "https://github.com/iLCSoft/KiTrack/archive/v01-10.tar.gz"
@@ -30,7 +30,4 @@ class Kitrack(CMakePackage):
         args.append('-DCMAKE_CXX_STANDARD=%s'
                     % self.spec['root'].variants['cxxstd'].value)
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
 

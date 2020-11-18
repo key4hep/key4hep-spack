@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Lcfiplus(CMakePackage):
+class Lcfiplus(CMakePackage, Ilcsoftpackage):
     """Flavor tagging code for ILC detectors, for documentation consult confluence at https://confluence.slac.stanford.edu/display/ilc/LCFIPlus"""
 
     url      = "https://github.com/lcfiplus/LCFIPlus/archive/v00-10.tar.gz"
@@ -40,6 +40,3 @@ class Lcfiplus(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCFIPlus.so")
-
-    def url_for_version(self, version):
-        return ilc_url_for_version(self, version)

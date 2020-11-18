@@ -10,6 +10,8 @@ class Tricktrack(CMakePackage):
     url      = "https://github.com/HSF/TrickTrack/archive/v1.0.8.tar.gz"
     git      = "https://github.com/HSF/TrickTrack.git"
 
+    tags = ['hep']
+
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
     version('1.0.9', sha256='988cedbb28ec8f5cc95b762aa8a38e36d75cfc47bd009c9dc4ef365e9751b80d')

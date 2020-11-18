@@ -15,6 +15,8 @@ class Larcontent(CMakePackage):
     homepage  = "https://github.com/PandoraPFA/larcontent"
     git      = "https://github.com/PandoraPFA/larcontent.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

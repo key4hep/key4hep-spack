@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Kitrackmarlin(CMakePackage):
+class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
     """Implementation of classes for the use of KiTrack by Marlin"""
 
     url      = "https://github.com/iLCSoft/KiTrackMarlin/archive/v01-13.tar.gz"
@@ -28,6 +28,3 @@ class Kitrackmarlin(CMakePackage):
     depends_on('gsl')
     depends_on('dd4hep')
     depends_on('clhep')
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

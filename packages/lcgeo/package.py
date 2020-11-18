@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Lcgeo(CMakePackage):
+class Lcgeo(CMakePackage, Ilcsoftpackage):
     """DD4hep geometry models for future colliders."""
 
     homepage = "https://github.com/iLCSoft/lcgeo"
@@ -53,6 +53,3 @@ class Lcgeo(CMakePackage):
     def setup_run_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
         env.set('lcgeo_DIR', self.prefix)
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

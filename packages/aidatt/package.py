@@ -4,10 +4,11 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage 
 from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
-class Aidatt(CMakePackage):
+class Aidatt(CMakePackage, Ilcsoftpackage):
     """Tracking toolkit developed in the AIDA project."""
 
     homepage = "https://github.com/AIDASoft/aidaTT"
@@ -25,6 +26,3 @@ class Aidatt(CMakePackage):
     depends_on('generalbrokenlines')
     depends_on('dd4hep')
     depends_on('lcio')
-
-    def url_for_version(self, version):
-        return ilc_url_for_version(self, version)

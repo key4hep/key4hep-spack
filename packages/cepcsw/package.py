@@ -1,10 +1,10 @@
 # ----------------------------------------------------------------------------
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
 
-class Cepcsw(CMakePackage):
+class Cepcsw(CMakePackage, Key4hepPackage):
     """CEPC offline experiment software based on Key4hep."""
 
     homepage = "https://github.com/cepc/CEPCSW"

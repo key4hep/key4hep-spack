@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Marlin(CMakePackage):
+class Marlin(CMakePackage, Ilcsoftpackage):
     """ Linear Collider framework"""
 
     homepage = "https://github.com/iLCSoft/marlin"
@@ -59,6 +59,3 @@ class Marlin(CMakePackage):
         if 'aida' in self.spec:
           args.append('-DAIDA_DIR=%s' % self.spec["aida"].prefix)
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

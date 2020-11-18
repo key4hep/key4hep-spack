@@ -15,6 +15,8 @@ class Lccontent(CMakePackage):
     homepage  = "https://github.com/PandoraPFA/lccontent"
     git      = "https://github.com/PandoraPFA/lccontent.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')

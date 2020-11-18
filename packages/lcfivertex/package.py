@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Lcfivertex(CMakePackage):
+class Lcfivertex(CMakePackage, Ilcsoftpackage):
     """Package for vertex finding as well as vertex charge determination in b- and c-jets."""
 
     url      = "https://github.com/iLCSoft/LCFIVertex/archive/v00-08.tar.gz"
@@ -32,6 +32,3 @@ class Lcfivertex(CMakePackage):
     def cmake_args(self):
         args = [self.define('INSTALL_DOC', False)]
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

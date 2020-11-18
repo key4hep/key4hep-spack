@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Conformaltracking(CMakePackage):
+class Conformaltracking(CMakePackage, Ilcsoftpackage):
     """Package for running pattern recognition based on conformal mapping
        and cellular automaton. This is not tied to a given geometry, but
        has been developed for the CLIC detector model 2015."""
@@ -42,6 +42,3 @@ class Conformaltracking(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libConformalTracking.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

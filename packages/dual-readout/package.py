@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version
 
 
-class DualReadout(CMakePackage):
+class DualReadout(CMakePackage, Key4hepPackage):
     """Repository for GEANT4 simulation & analysis of the dual-readout calorimeter """
 
     url      = "https://github.com/HEP-FCC/dual-readout/archive/v0.0.2.tar.gz"

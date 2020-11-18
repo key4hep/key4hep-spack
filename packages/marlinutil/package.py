@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Marlinutil(CMakePackage):
+class Marlinutil(CMakePackage, Ilcsoftpackage):
     """ Library that containes classes and functions that are used by more
     than one processor. In particular it contains the geometry classes that
     are used until we have the geometry for reconstruction package (GEAR)."""
@@ -30,6 +30,3 @@ class Marlinutil(CMakePackage):
     depends_on('ced')
     depends_on('dd4hep')
     depends_on('root')
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)

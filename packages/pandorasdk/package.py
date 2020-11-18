@@ -17,6 +17,8 @@ class Pandorasdk(CMakePackage):
     homepage  = "https://github.com/PandoraPFA/PandoraSDK"
     git      = "https://github.com/PandoraPFA/PandoraSDK.git"
 
+    tags = ['hep']
+
     maintainers = ['vvolkl']
 
     version('master', branch='master')
