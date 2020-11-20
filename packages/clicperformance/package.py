@@ -18,6 +18,7 @@ class Clicperformance(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('02-04', sha256='4e68230b558b3ba471b67d717bddabe609baa25f0228c18a2e8889ed9630f076')
 
     depends_on('ilcutil')
     depends_on('marlin')
