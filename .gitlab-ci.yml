@@ -109,7 +109,8 @@ build-spack-release:
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
 
         # if this workflow has been started by a tag, use the tag version. if not, use todays date
-        - if [ -n "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
+        - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
+        - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
         # compile onwards and upwards
         - echo $K4STACK_VERSION
         - spack install key4hep-stack@$K4STACK_VERSION
