@@ -1,0 +1,18 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b94bd77..e0f564b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,13 +27,6 @@ endif()
+ 
+ message (STATUS "C++ standard: ${CMAKE_CXX_STANDARD}")
+ 
+-#--- add version files ---------------------------------------------------------
+-
+-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/K4SIMDELPHESVersion.h
+-               ${CMAKE_CURRENT_BINARY_DIR}/K4SIMDELPHESVersion.h )
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/K4SIMDELPHESVersion.h
+-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/k4simdelphes )
+-
+ # - Use GNU-style hierarchy for installing build products
+ include(GNUInstallDirs)
+

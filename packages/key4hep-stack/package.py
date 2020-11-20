@@ -50,6 +50,9 @@ class Key4hepStack(BundlePackage):
 
     depends_on("k4fwcore")
     k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
+
+    depends_on("k4simdelphes")
+    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4simdelphes", when="@master")
     
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
