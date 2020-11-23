@@ -25,6 +25,7 @@ class K4gen(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
+    depends_on('ninja', type='build')
     depends_on('fastjet')
     depends_on("edm4hep")
     depends_on('k4fwcore@1:')
