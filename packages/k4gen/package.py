@@ -13,6 +13,8 @@ class K4gen(CMakePackage, Key4hepPackage):
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
 
+    generator = 'Ninja'
+
     variant('build_type', default='Release',
             description='CMake build type',
             values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
@@ -25,23 +27,17 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     depends_on('fastjet')
     depends_on("edm4hep")
-
-
-    depends_on('k4fwcore@1:'
+    depends_on('k4fwcore@1:')
     depends_on('hepmc@:2.99.99')
     depends_on('heppdt@:2.99.99')
-
     depends_on('pythia8', when="@:0.12")
     depends_on('evtgen+pythia8', when="@0.13:")
-
-
 
     def cmake_args(self):
         args = []
         # C++ Standard
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
         return args
-
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
