@@ -19,6 +19,7 @@ setup_spack_push:
       refs:
           - pushes
           - merge_requests
+          - schedules
     script:
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
@@ -59,11 +60,6 @@ build-spack-nightlies:
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
         # compile onwards and upwards
         - spack install key4hep-stack@master-`date -I` 
-    artifacts:
-        paths:
-            - key4hep-spack_centos7-cvmfs.tar.gz
-            - key4hep-spack.tar.gz
-        expire_in: 1 week
 
 
 ### deploy the nightlies to cvmfs
