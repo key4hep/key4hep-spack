@@ -18,7 +18,8 @@ class Marlin(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
-    version('1.17.0', sha256='076acc3a91b7e2e253f338395a8e56bf00498e6aa1a118d3e7bde84f1065d3d6')
+    version('1.17.1', sha256='b928c6072bbf8db5fdb3b9716227b8724dfc90182967212cd9f2f51ceb760dd0')
+    version('1.17', sha256='076acc3a91b7e2e253f338395a8e56bf00498e6aa1a118d3e7bde84f1065d3d6')
 
 
     variant('gui', default=False,
