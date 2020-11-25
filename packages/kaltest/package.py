@@ -5,7 +5,8 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, \
+    k4_add_latest_commit_as_version, ilc_url_for_version
 
 
 class Kaltest(CMakePackage, Ilcsoftpackage):
