@@ -22,6 +22,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on('dd4hep +geant4')
     depends_on('k4fwcore@1.0:')
     depends_on('geant4')
+    depends_on('k4simgeant4')
 
 
     depends_on("g4ensdfstate")
