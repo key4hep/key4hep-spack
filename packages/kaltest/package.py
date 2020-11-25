@@ -43,6 +43,3 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
         # The dictionary headers required kaltest to be in CPATH or ROOT_INCLUDE_PATH
         # other libraries require include to be searchable (which is automatic)
         spack_env.prepend_path('CPATH', self.prefix.include.kaltest)
-
-    def url_for_version(self, version):
-        return ilc_url_for_version(self, version)
