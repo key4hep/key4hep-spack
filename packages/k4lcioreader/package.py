@@ -22,7 +22,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
 
 
     depends_on('lcio')
-    depends_on('podio')
+    depends_on('podio@0.12:')
     depends_on('edm4hep')
 
     def cmake_args(self):
