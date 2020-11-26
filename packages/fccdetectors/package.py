@@ -10,7 +10,8 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
 
     maintainers = ['vvolkl']
 
-    version('master', branch='master')
+    version('main', branch='main')
+    version('master', branch='main')
 
     variant('build_type', default='Release',
             description='CMake build type',
