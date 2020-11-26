@@ -31,6 +31,9 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("dd4hep +geant4")
     depends_on("fccdetectors")
 
+    # todo: remove when ready
+    depends_on("fcc-edm")
+
     def cmake_args(self):
         args = []
         # C++ Standard
