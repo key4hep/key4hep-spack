@@ -225,6 +225,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #######################################################
     depends_on("cepcsw")
     k4_add_latest_commit_as_dependency("cepcsw", "cepc/cepcsw", when="@master")
+    depends_on("k4lcioreader")
 
 
     ##################### developer tools #################
