@@ -10,7 +10,7 @@ class K4fwcore(CMakePackage, Key4hepPackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
-    version('1.0pre02', tag="v01-00pre02") 
+    version('1.0pre03', tag="v01-00pre03") 
     version('0.2.0', sha256='7d1a6e7494f08c2b25901cab2138795f21b6c4e84f05c4f8b9a6839787874b72', preferred=True)
     version('0.1.1', sha256='9c4e4b487f7d9c982547c13570345399505e763fb369b76ceadb35c1d52bf6aa')
     version('0.1.0', sha256='aef682649f3fcb1d72de897fbf6ec4ed421c8a4836bb3462c4b0049a709374e4')
