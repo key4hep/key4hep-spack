@@ -31,6 +31,8 @@ class K4fwcore(CMakePackage, Key4hepPackage):
     depends_on('root@6.08:')
     depends_on('podio@0.10:')
 
+    depends_on('edm4hep', type='test')
+
     def cmake_args(self):
         args = []
         # C++ Standard
