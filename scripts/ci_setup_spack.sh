@@ -6,6 +6,7 @@
  mkdir spack/var/spack/repos/key4hep-spack
  cp -r * spack/var/spack/repos/key4hep-spack || true
 # clean up git directories for zip
+ rm -rf spack/var/spack/repos/key4hep-spack/spack || true
  rm -rf spack/.git
 # register k4 package recipes with spack
  echo "repos:" > spack/etc/spack/repos.yaml
