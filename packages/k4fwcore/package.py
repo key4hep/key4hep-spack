@@ -26,7 +26,7 @@ class K4fwcore(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    depends_on('gaudi@35.0', when='@0.3.0:')
+    depends_on('gaudi@35.0:', when='@0.3.0:')
     depends_on('gaudi@32.2:34.99', when='@:0.2.99')
     depends_on('root@6.08:')
     depends_on('podio@0.10:')
