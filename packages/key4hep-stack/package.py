@@ -238,6 +238,14 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("ninja", when="+devtools")
     depends_on("py-ipython", when="+devtools")
     depends_on("doxygen", when="+devtools")
+    depends_on('py-particle', when="+devtools")
+    depends_on('py-awkward1', when="+devtools")
+    depends_on('py-matplotlib', when="+devtools")
+    depends_on('py-uproot4', when="+devtools")
+    #depends_on('py-tensorflow') # todo: check if we should integrate.
+    #depends_on('py-zfit') # todo: add in spack
+
+
 
     ##################### environment boostrap ############
     #######################################################
