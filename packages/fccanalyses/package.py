@@ -10,7 +10,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'clementhelsens']
   
     version('master', branch='master')
-    version("0.2.0pre01", tag="v0.2.0pre01")
+    version("0.2.0pre02", tag="v0.2.0pre02")
     
     depends_on("root")
     depends_on("vdt")
