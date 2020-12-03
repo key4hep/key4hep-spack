@@ -15,7 +15,7 @@ packages:
   boost:
     variants: +python
   dd4hep:
-    variants: +geant4+lcio+hepmc3
+    variants: +geant4+lcio
   xercesc:
     variants: cxxstd=11
   root:
