@@ -25,7 +25,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     depends_on('lcio')
     depends_on('podio@0.12:')
     depends_on('edm4hep')
-    depends_on('k4fwcore')
+    depends_on('k4fwcore@0.2.0')
 
     def cmake_args(self):
         args = []
