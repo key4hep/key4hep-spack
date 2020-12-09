@@ -7,6 +7,15 @@ spack:
       variants: build_type=Release
       buildable: true
       version: []
+      providers:
+        gl: [mesa18]
+        glu: [mesa18]
+      compiler: []
+    mesa18:
+      variants: ~llvm+glx+opengl swr=none
+      buildable: true
+      version: []
+      target: []
       providers: {}
       compiler: []
     mesa:
@@ -67,6 +76,12 @@ spack:
       compiler: []
     gaudi:
       version: [35.0]
+      buildable: true
+      target: []
+      providers: {}
+      compiler: []
+    curl:
+      version: [7.72.0]
       buildable: true
       target: []
       providers: {}
@@ -134,10 +149,6 @@ spack:
       providers: {}
       compiler: []
   specs:
-  - g4photonevaporation@5.7
-  - geant4-data
   - key4hep-stack
   - boost +python
-#  specs:
-#
-#  - g4photonevaporation@5.7
+  concretization: together
