@@ -12,6 +12,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
 
     version('main', branch='main')
     version('master', branch='main')
+    version("0.1pre01", tag="v0.1pre01")
 
     variant('build_type', default='Release',
             description='CMake build type',

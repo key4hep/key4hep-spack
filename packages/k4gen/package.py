@@ -11,7 +11,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
+    version('0.1pre01', tag='0.1pre01')
 
     generator = 'Ninja'
 
