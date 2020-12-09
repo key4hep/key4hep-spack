@@ -16,6 +16,7 @@ setup_spack_push:
     tags:
         - k4-build-spack-nightlies
     only:
+        - release
       refs:
           - pushes
           - merge_requests
