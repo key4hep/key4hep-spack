@@ -19,8 +19,8 @@ packages:
   xercesc:
     variants: cxxstd=11
   root:
-    version: [6.20.04]
-    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd build_type=RelWithDebInfo cxxstd=17 patches=22af3471f3fd87c0fe8917bf9c811c6d806de6c8b9867d30a1e3d383a1b929d7
+    version: [6.22.06]
+    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+rootfit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd cxxstd=17
   # avoid issue https://github.com/spack/spack/issues/16803
   # and use variant that allows to install older versions of whizard
   ocaml:
@@ -30,7 +30,7 @@ packages:
   pythia8:
     version: [8303]
   gaudi:
-    version: [34.0]
+    version: [35.0]
   # gaudi v34 does not work with python 3.8
   # setting the version explicitly avoids concretizer errors
   python:
@@ -47,10 +47,5 @@ packages:
   # build error on centos7 with version 7.1.0
   fmt:
     version: [6.1.2]
-  k4fwcore:
-    version: [0.2.0]
-  # todo: remove at the next big rebuild
-  marlin:
-   version: [1.17]
 
 
