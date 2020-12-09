@@ -46,14 +46,26 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
 
     depends_on('podio')
-    #k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
-    depends_on("podio@master", when="@master")
+    k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
+
+    depends_on('dd4hep')
+    k4_add_latest_commit_as_dependency("dd4hep", "aidasoft/dd4hep", when="@master")
 
     depends_on("k4fwcore")
     k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
 
     depends_on("k4simdelphes")
-    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4simdelphes", when="@master")
+    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
+
+    depends_on("k4gen")
+    k4_add_latest_commit_as_dependency("k4gen", "hep-fcc/k4Gen", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
+
+    depends_on("k4simgeant4")
+    k4_add_latest_commit_as_dependency("k4simgeant4", "hep-fcc/k4simgeant4", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
+
     
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
@@ -64,8 +76,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("delphes")
-    #k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
-    depends_on("delphes@master", when="@master")
+    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
+    #depends_on("delphes@master", when="@master")
 
     ##################### general purpose generators ######
     #######################################################
@@ -111,8 +123,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('garlic')
     k4_add_latest_commit_as_dependency("garlic", "ilcsoft/garlic", when="@master")
 
-    depends_on('k4marlinwrapper')
-    k4_add_latest_commit_as_dependency("k4marlinwrapper", "key4hep/k4marlinwrapper", when="@master")
+    #depends_on('k4marlinwrapper')
+    #k4_add_latest_commit_as_dependency("k4marlinwrapper", "key4hep/k4marlinwrapper", when="@master")
 
     depends_on('generalbrokenlines')
     k4_add_latest_commit_as_dependency("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines", when="@master")
@@ -194,7 +206,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", when="@master")
 
     depends_on('pandorapfa')
-    k4_add_latest_commit_as_dependency("pandorapfa", "pandorapfa/pandorapfa", when="@master")
+    #k4_add_latest_commit_as_dependency("pandorapfa", "pandorapfa/pandorapfa", when="@master")
 
 
     depends_on('physsim')
@@ -204,30 +216,39 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("raida", "ilcsoft/raida", when="@master")
 
     depends_on('sio')
-    #k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
+    k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
 
 
     ############################### fccsw #################
     #######################################################
-    depends_on("fccsw")
-    k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
+    #depends_on("fccsw")
+    #k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
 
-    depends_on("fcc-edm")
-    k4_add_latest_commit_as_dependency("fcc-edm", "hep-fcc/fcc-edm", when="@master")
+    #depends_on("fcc-edm")
+    #k4_add_latest_commit_as_dependency("fcc-edm", "hep-fcc/fcc-edm", when="@master")
 
     #depends_on("dual-readout")
     #k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
 
 
     depends_on("fccanalyses")
+    k4_add_latest_commit_as_dependency("fccanalyses", "hep-fcc/fccanalyses", when="@master")
+
+    depends_on("fccdetectors")
+    k4_add_latest_commit_as_dependency("fccdetectors", "hep-fcc/fccdetectors", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
+
+    depends_on("k4reccalorimeter")
+    k4_add_latest_commit_as_dependency("k4reccalorimeter", "hep-fcc/k4reccalorimeter", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
 
     ############################## cepcsw #################
     #######################################################
-    depends_on("cepcsw")
-    k4_add_latest_commit_as_dependency("cepcsw", "cepc/cepcsw", when="@master")
+    #depends_on("cepcsw")
+    #k4_add_latest_commit_as_dependency("cepcsw", "cepc/cepcsw", when="@master")
     
-    depends_on("k4lcioreader")
-    k4_add_latest_commit_as_dependency("k4lcioreader", "key4hep/k4LCIOReader", when="@master")
+    #depends_on("k4lcioreader")
+    #k4_add_latest_commit_as_dependency("k4lcioreader", "key4hep/k4LCIOReader", when="@master")
 
 
     ##################### developer tools #################

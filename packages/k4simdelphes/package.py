@@ -17,7 +17,6 @@ class K4simdelphes(CMakePackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    k4_add_latest_commit_as_version(git)
     version('0.0.1', sha256='4bc414ac72cd03638e7f406381b41814f6e19f3425051f094ac0b539630cd698')
 
     patch('cmake2.patch', when="@0.0.1")
