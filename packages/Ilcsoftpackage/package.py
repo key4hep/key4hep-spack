@@ -130,13 +130,13 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
     if github_user and github_token:
       try:
         commit = k4_lookup_latest_commit(repoinfo, giturl)
-        depends_on(name + "@develop." + str(commit) + " " + variants, when=when)
+        depends_on(name + "@commit." + str(commit) + " " + variants, when=when)
       except:
         print("Warning: could not fetch latest commit for " + name)
 
 def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com/repos/%s/commits/master"):
     """ Helper function that adds a 'version' with the latest commit to a spack recipe.
-    Note that the 'develop' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
+    Note that the 'commit' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
 
 
     :param git_url: url of a git repository. Needs to end in .git.
@@ -147,17 +147,7 @@ def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com
        p.ex.: "https://api.github.com/repos/%s/commits/master"
     :type giturl: str, optional
     """
-    github_user = os.environ.get("GITHUB_USER", "")
-    github_token = os.environ.get("GITHUB_TOKEN", "")
-    if github_user and github_token:
-      try:
-        # extract "owner/repo" string from url
-        repoinfo = '/'.join(git_url.rsplit('.', 1)[0].rsplit('/')[-2:])
-        commit = k4_lookup_latest_commit(repoinfo, git_api_url)
-        # call to the spack version directive
-        version("develop."+str(commit), commit=commit, preferred=False)
-      except:
-        print("Warning: could not fetch latest commit for " + git_url)
+    pass
 
 
 
