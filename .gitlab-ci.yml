@@ -13,14 +13,16 @@ stages:
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
     stage: compilation
-    only:
-        - release
     tags:
         - k4-build-spack-nightlies
+    only:
       refs:
           - pushes
           - merge_requests
           - schedules
+      variables:
+        - $CI_COMMIT_BRANCH == "release"
+        
     script:
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
