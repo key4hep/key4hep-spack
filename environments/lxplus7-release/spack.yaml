@@ -1,4 +1,5 @@
 spack:
+  view: false
   include:
   - geant4-data.yaml
   packages:
