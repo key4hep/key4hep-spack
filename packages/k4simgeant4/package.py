@@ -36,7 +36,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
         return args
 
     def setup_build_environment(self, spack_env):
-        spack_env.set('G4ENSDFSTATEDATA', self.spec["g4ensdfstate"].prefix + "/share/data/G4ENSDFSTATE2.2/")
+        spack_env.set('G4ENSDFSTATEDATA', self.spec["g4ensdfstate"].prefix + "/share/data/G4ENSDFSTATE2.3/")
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)

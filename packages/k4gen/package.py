@@ -31,8 +31,8 @@ class K4gen(CMakePackage, Key4hepPackage):
     depends_on('k4fwcore@1:')
     depends_on('hepmc@:2.99.99')
     depends_on('heppdt@:2.99.99')
-    depends_on('pythia8', when="@:0.12")
-    depends_on('evtgen+pythia8', when="@0.13:")
+    depends_on('pythia8')
+    depends_on('evtgen+pythia8')
 
     def cmake_args(self):
         args = []
