@@ -1,6 +1,12 @@
 packages:
   all:
     target: [broadwell]
+    variants: build_type=Release
+    providers:
+      gl: [mesa18]
+      glu: [mesa18]
+  mesa18:
+    variants: ~llvm+glx+opengl swr=none
   range-v3:
     # avoid building doxygen
     variants: ~doc
@@ -47,5 +53,15 @@ packages:
   # build error on centos7 with version 7.1.0
   fmt:
     version: [6.1.2]
+  curl:
+    version: [7.72.0]
+  expat:
+    version: [2.2.9]
+  perl:
+    version: [5.30.3]
+  whizard:
+    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=2
+  cmake:
+    version: [3.18.4]
 
 
