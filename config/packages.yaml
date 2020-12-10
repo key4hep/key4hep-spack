@@ -44,14 +44,13 @@ packages:
     target: []
     providers: {}
     compiler: []
-  root:
-    version: [6.22.06]
-    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd
-      cxxstd=17
     buildable: true
     target: []
     providers: {}
     compiler: []
+    root:
+      version: [6.22.06]
+      variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd cxxstd=17
   marlin:
     variants: ~lccd
     buildable: true
