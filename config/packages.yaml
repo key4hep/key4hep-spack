@@ -146,7 +146,7 @@ packages:
     providers: {}
     compiler: []
   dd4hep:
-    variants: +lcio+xercesc+hepmc3+geant4
+    variants: +lcio+xercesc+hepmc3+geant4+edm4hep
     buildable: true
     version: []
     target: []
@@ -219,4 +219,3 @@ packages:
     - spec: "g4saiddata@2.0"
       prefix: /cvmfs/sw.hsf.org/share/data/g4saiddata-2.0-77yzjy4zeieavelx3vnef3ztm6uxyu2f
     buildable: False
-
