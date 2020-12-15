@@ -146,7 +146,7 @@ packages:
     providers: {}
     compiler: []
   dd4hep:
-    variants: +lcio+xercesc+hepmc3+geant4+edm4hep
+    variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
     buildable: true
     version: []
     target: []
