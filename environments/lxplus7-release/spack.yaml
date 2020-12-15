@@ -149,6 +149,13 @@ spack:
       target: []
       providers: {}
       compiler: []
+    dd4hep:
+      variants: +lcio+xercesc+hepmc3+geant4
+      buildable: true
+      version: []
+      target: []
+      providers: {}
+      compiler: []
   specs:
   - key4hep-stack
   - boost +python

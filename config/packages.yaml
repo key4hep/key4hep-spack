@@ -145,6 +145,13 @@ packages:
     target: []
     providers: {}
     compiler: []
+  dd4hep:
+    variants: +lcio+xercesc+hepmc3+geant4
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   g4photonevaporation:
     externals:
     - spec: "g4photonevaporation@5.7"
