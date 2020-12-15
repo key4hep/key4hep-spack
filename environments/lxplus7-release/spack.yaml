@@ -150,7 +150,7 @@ spack:
       providers: {}
       compiler: []
     dd4hep:
-      variants: +lcio+xercesc+hepmc3+geant4
+      variants: +lcio+xercesc+hepmc3+geant4+edm4hep
       buildable: true
       version: []
       target: []
