@@ -14,6 +14,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     k4_add_latest_commit_as_version(git)
     version('0.1.0', sha256='996d1ff78c0a8a2f7f358dd4ea19f955853ad0902ee86b99c484de58c5fc2e2c')
     version('0.2.0', sha256='346fc2ba4b4175895597e093f566ba6407be9eeb9cde0766304e0f19ad03e081')
+    version('0.3.0', sha256='ce6a5596a21bfa23e641eda84830d8aa7caf15fd47da35878ee61e7f555d0e51')
 
     variant('cxxstd',
             default='17',
@@ -25,7 +26,8 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     depends_on('lcio')
     depends_on('podio@0.12:')
     depends_on('edm4hep')
-    depends_on('k4fwcore@0.2.0')
+    depends_on('k4fwcore@0.2.0', when='@:0.2.0')
+    depends_on('k4fwcore@0.3.0:', when='@0.3:')
 
     def cmake_args(self):
         args = []
