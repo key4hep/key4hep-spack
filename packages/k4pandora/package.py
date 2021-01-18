@@ -44,8 +44,6 @@ class K4pandora(CMakePackage, Key4hepPackage):
         args = []
         # C++ Standard
         args.append('-DCMAKE_CXX_STANDARD=%s'%self.spec.variants['cxxstd'].value)
-        if self.spec.satisfies('^gaudi@:34.99'):
-            args.append('-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt')
 
         pandorapfa_prefix = self.spec["pandorapfa"].prefix
         pandorapfa_cmake_modules = pandorapfa_prefix + "/cmakemodules"
