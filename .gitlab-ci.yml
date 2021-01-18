@@ -58,8 +58,6 @@ build-spack-nightlies:
         - source spack/share/spack/setup-env.sh
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
-        # tmp to avoid error
-        - spack config  update config
         # compile onwards and upwards
         - spack install --no-checksum key4hep-stack@master-`date -I` 
 
