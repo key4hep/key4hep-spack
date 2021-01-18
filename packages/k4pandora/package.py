@@ -14,6 +14,8 @@ class K4pandora(CMakePackage, Key4hepPackage):
     url      = "https://github.com/key4hep/k4Pandora/archive/master.tar.gz"
     git      = "https://github.com/key4hep/k4Pandora.git"
 
+    tags = ['hep', 'key4hep']
+    
     maintainers = ['mirguest']
 
     variant('cxxstd',
@@ -51,4 +53,3 @@ class K4pandora(CMakePackage, Key4hepPackage):
         cmake_modules = pandorapfa_cmake_modules
         args.append('-DCMAKE_MODULE_PATH=%s'%cmake_modules)
         return args
-
