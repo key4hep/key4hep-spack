@@ -145,6 +145,12 @@ packages:
     target: []
     providers: {}
     compiler: []
+  assimp:
+    buildable: true
+    version: [master]
+    target: []
+    providers: {}
+    compiler: []
   dd4hep:
     variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
     buildable: true
