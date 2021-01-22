@@ -123,7 +123,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('garlic')
     k4_add_latest_commit_as_dependency("garlic", "ilcsoft/garlic", when="@master")
 
-    #depends_on('k4marlinwrapper')
+    depends_on('k4marlinwrapper')
     k4_add_latest_commit_as_dependency("k4marlinwrapper", "key4hep/k4marlinwrapper", when="@master")
 
     depends_on('generalbrokenlines')
