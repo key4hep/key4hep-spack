@@ -90,7 +90,7 @@ packages:
     providers: {}
     compiler: []
   delphes:
-    version: [3.4.3pre06]
+    version: [3.4.3pre08]
     buildable: true
     target: []
     providers: {}
