@@ -302,8 +302,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
                    specs = specs + gcc_specs
                except:
                    tty.warn("No spec found for " + str(spec.compiler) +
-                            ". Assuming it is a system compiler,  
-                            not adding it to the setup.")
+                            ". Assuming it is a system compiler,"
+                            "not adding it to the setup.")
       # record all changes to the environment by packages in the stack
       env_mod = spack.util.environment.EnvironmentModifications()
       for _spec in specs:
