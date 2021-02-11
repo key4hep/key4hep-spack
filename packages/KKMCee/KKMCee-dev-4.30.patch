@@ -1,0 +1,62 @@
+--- bornv/FoamC.f.orig	2020-10-09 13:54:46.000000000 +0200
++++ bornv/FoamC.f	2020-10-18 13:02:59.186760732 +0200
+@@ -343,7 +343,7 @@
+       DOUBLE PRECISION   funW
+       EXTERNAL           funW
+       INTEGER            perm(m_NdiMax),mask,iCeNew,iCell
+-      INTEGER            iCe,i,j,k,iVe,Vert(m_NdiMax),digit(m_NdiMax),factorial,NoMC !
++      INTEGER            iCe,i,j,k,iVe,Vert(m_NdiMax+1),digit(m_NdiMax),factorial,NoMC !
+       DOUBLE PRECISION   HcPosi(m_KdiMax),   HcSize(m_KdiMax)
+ *     -----------------------------------------------------------------------------
+       DO j=1,m_kDim
+--- ffbench/ProdMC.f.orig	2020-10-09 13:54:46.000000000 +0200
++++ ffbench/ProdMC.f	2020-10-18 16:18:13.889691224 +0200
+@@ -101,8 +101,8 @@
+       WRITE(   6,*)   nevt,' requested events '
+       WRITE(nout,*)   nevt,' requested events '
+ *
+-      CALL KK2f_ReaDataX('../../.KK2f_defaults', 1,imax,xpar)  ! reading general defaults
+-      CALL KK2f_ReaDataX(         './pro.input', 0,imax,xpar)  ! reading user input
++      CALL KK2f_ReaDataX('.KK2f_defaults', 1,imax,xpar)  ! reading general defaults
++      CALL KK2f_ReaDataX(   './pro.input', 0,imax,xpar)  ! reading user input
+ *
+       CALL KK2f_Initialize(xpar)                  ! initialize generator
+ *
+--- bornv/BornV_StartEW.f.orig	2020-10-09 13:54:46.000000000 +0200
++++ bornv/BornV_StartEW.f	2020-10-18 17:32:23.474524233 +0200
+@@ -29,25 +29,25 @@
+      $           KFtau   = 15,  KFtaunu = 16)
+       CHARACTER*40 TableFile
+ *----------------------------------------------------------------------
+-      TableFile= '../../dizet/table.down'
++      TableFile= 'dizet/table.down'
+       CALL BornV_ReadFile(TableFile,KFdown)
+-      TableFile= '../../dizet/table.up'
++      TableFile= 'dizet/table.up'
+       CALL BornV_ReadFile(TableFile,KFup)
+-      TableFile= '../../dizet/table.down'
++      TableFile= 'dizet/table.down'
+       CALL BornV_ReadFile(TableFile,KFstran)
+-      TableFile= '../../dizet/table.up'
++      TableFile= 'dizet/table.up'
+       CALL BornV_ReadFile(TableFile,KFcharm)
+-      TableFile= '../../dizet/table.botom'
++      TableFile= 'dizet/table.botom'
+       CALL BornV_ReadFile(TableFile,KFbotom)
+-      TableFile= '../../dizet/table.mu'
++      TableFile= 'dizet/table.mu'
+       CALL BornV_ReadFile(TableFile,KFmu)
+-      TableFile= '../../dizet/table.tau'
++      TableFile= 'dizet/table.tau'
+       CALL BornV_ReadFile(TableFile,KFtau)
+-      TableFile= '../../dizet/table.nue'
++      TableFile= 'dizet/table.nue'
+       CALL BornV_ReadFile(TableFile,KFelnu)
+-      TableFile= '../../dizet/table.numu'
++      TableFile= 'dizet/table.numu'
+       CALL BornV_ReadFile(TableFile,KFmunu)
+-      TableFile= '../../dizet/table.nutau'
++      TableFile= 'dizet/table.nutau'
+       CALL BornV_ReadFile(TableFile,KFtaunu)
+ 
+       END

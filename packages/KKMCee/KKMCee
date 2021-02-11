@@ -1,0 +1,169 @@
+#!/bin/bash
+
+# Wrapper around the KKMCee/ProdMC.exe executable
+# This script relies on the presence of CVMFS in the system and uses the KKMCee
+# provided by the LCG Releases
+
+help(){
+   echo ""
+   echo "+++ Wrapper around the KKMCee/ProdMC.exe executable +++"
+   echo ""
+   echo "Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]"
+   echo "       \tKKMCee -c config_file [-s seed_file]"
+   echo ""
+   echo "Options:"
+   echo -e "  -c, --config file \t\tPath to configuration file"
+   echo -e "  -f, --flavour flavour \tFlavour to be generated (Mu|Tau|UDS|C|B|Hadrons)"
+   echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
+   echo -e "  -n, --nevts energy \t\t Number of events to be generated"
+   echo -e "  -o, --outfile file \t\tFile with the generated events in LHE format"
+   echo -e "  -s, --seedfile file \t\tFile to be used for seeding (randomly generated, if missing)"
+   echo ""
+   echo "Examples:"
+   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE"
+   echo -e "KKMCee -c kkmc_ditau.input"
+   echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.LHE"
+   echo ""
+}
+
+_FLAVOUR="Mu"
+_ECMS="91.2"
+_NEVTS="100"
+_OUTFILE="KKMCee_OUT.LHE"
+# Read arguments
+while [[ $# -gt 0 ]]
+do
+    arg="$1"
+    case $arg in
+        -c | --config)
+            _CONFFILE="$2"
+            shift # past argument
+            shift # past value
+        ;;
+        -e | --ecms)
+            _ECMS="$2"
+            shift
+            shift
+        ;;
+        -f | --flavour)
+           _FLAVOUR="$2"
+           shift
+           shift
+        ;;
+        -n | --nevts)
+           _NEVTS="$2"
+           shift
+           shift
+        ;;
+        -s | --seedfile)
+           _SEEDFILE="$2"
+           shift
+           shift
+        ;;
+        -o | --outfile)
+           _OUTFILE="$2"
+           shift
+           shift
+        ;;
+        * | -h | --help)
+            help
+            exit 1
+    esac
+done
+
+KKMCEE_DIR=$(dirname $(dirname $0))
+KKMCEE_EXE=${KKMCEE_DIR}/bin/KKMCee.exe
+KKMCEE_SHARE=${KKMCEE_DIR}/share/KKMCee
+KKMCEE_ETC=${KKMCEE_DIR}/etc/KKMCee
+
+# Run existing config file
+if test ! "x$_CONFFILE" = "x" && test -f $_CONFFILE; then
+   ln -sf ${_CONFFILE} ./pro.input
+else
+# We create a config file based on the input switches: this is the initial common part
+cat > ./pro.input <<EOF
+ 1 1 0 0 0 0 0 0         KAT1-KAT8        <- Input for the main program
+    ${_NEVTS}      NEVT number of events
+----------cccccccccccccccccccccccccccccommentttttttttttttttttttttttttttttttttttt
+
+BeginX
+********************************************************************************
+*               ACTUAL DATA FOR THIS PARTICULAR RUN
+********************************************************************************
+*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
+*     Center-of-mass energy [GeV]
+    1        ${_ECMS}e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
+********************************************************************************
+*     Define process
+EOF
+   if test "x$_FLAVOUR" = "xMu"; then
+cat >> ./pro.input <<EOF
+  413              1      KFfin, muon
+EOF
+   elif test "x$_FLAVOUR" = "xTau"; then
+cat >> ./pro.input <<EOF
+  415              1      KFfin, tau
+EOF
+   elif test "x$_FLAVOUR" = "xUDS"; then
+cat >> ./pro.input <<EOF
+  401              1      KFfin, d
+  402              1      KFfin, u
+  403              1      KFfin, s
+EOF
+   elif test "x$_FLAVOUR" = "xC"; then
+cat >> ./pro.input <<EOF
+  404              1      KFfin, c
+EOF
+   elif test "x$_FLAVOUR" = "xB"; then
+cat >> ./pro.input <<EOF
+  405              1      KFfin, b
+EOF
+   elif test "x$_FLAVOUR" = "xHadrons"; then
+cat >> ./pro.input <<EOF
+  401              1      KFfin, d
+  402              1      KFfin, u
+  403              1      KFfin, s
+  404              1      KFfin, c
+  405              1      KFfin, b
+EOF
+   else
+     echo "Running mode not yet supported"
+     rm -fr ./pro.input  
+     exit 1
+   fi
+# Input file closing
+cat >> ./pro.input <<EOF
+  100              1      store lhe file to (${_OUTFILE})
+************************* one can change the lhf file name between brackets
+********************************************************************************
+EndX
+EOF
+fi
+
+# Create seed file
+if test ! "x$_SEEDFILE" = "x" && test -f $_SEEDFILE; then
+   ln -sf $_SEEDFILE ./iniseed
+else
+   _seed=`date +"%j%H%M%N"`
+   _seed1=`echo ${_seed:0:8}`
+   _seed2=`echo ${_seed:8:15}`
+   echo "Seeds: $_seed1 $_seed2"
+   cat > ./iniseed <<EOF
+  $_seed1      IJKLIN= $_seed1  $_seed2
+         0      NTOTIN= 0
+         0      NTOT2N= 0
+EOF
+fi
+cat ./iniseed
+
+# Run
+cat > ./semaphore <<EOF
+START
+
+EOF
+ln -sf ${KKMCEE_ETC}/KK2f_defaults   ./.KK2f_defaults
+ln -sf ${KKMCEE_ETC}/dizet   ./dizet
+time ${KKMCEE_EXE}
+
+# Clean-up
+rm -f ./.KK2f_defaults ./dizet
