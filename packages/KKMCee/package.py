@@ -11,16 +11,12 @@ class Kkmcee(AutotoolsPackage):
 
     """KKMCee is the state of art Monte Carlo for e+e- -> ffbar."""
 
-    # FIXME: Add a proper url for your package's homepage here.
-    #    homepage = "https://www.example.com"
-    #    url      = "https://lcgpackages.web.cern.ch/lcgpackages/tarFiles/sources/MCGeneratorsTarFiles//KKMCee-dev-4.30.tar.gz"
     homepage = "https://github.com/KrakowHEPSoft/KKMCee"
     url      = "https://github.com/KrakowHEPSoft/KKMCee/archive/v4.30.tar.gz"
     git      = "https://github.com/KrakowHEPSoft/KKMCee.git"
 
     tags = ['hep']
 
-#     version('4.30', sha256='4fadef97a548d2c7d49e74d4f015eb55541aaf4e9b8e8e9c2633ade00dd2cb22')
     version('4.30', sha256='5c650eb464a6d673858a2d4421084d90ccc30c90f35d9e46f18fc1167d5a5bdf')
 
     depends_on('autoconf', type='build')
@@ -94,4 +90,3 @@ class Kkmcee(AutotoolsPackage):
         mkdirp(prefix.share.KKMCee.utils)
         install(join_path('ffbench', 'semaphore.start'), prefix.share.KKMCee.utils)
         install(join_path('ffbench', 'semaphore.stop'), prefix.share.KKMCee.utils)
-
