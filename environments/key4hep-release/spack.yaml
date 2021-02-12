@@ -1,0 +1,13 @@
+spack:
+  config:
+    install_tree:
+      root: /cvmfs/sw.hsf.org/spackages
+    module_roots:
+          lmod: /cvmfs/sw.hsf.org/spackages/modules
+          tcl: /cvmfs/sw.hsf.org/spackages/modules
+  view: false
+  include:
+  - geant4-data.yaml
+  - key4hep-packages.yaml
+  specs:
+  - key4hep-stack@${KEY4HEP-RELEASE-VERSION}
