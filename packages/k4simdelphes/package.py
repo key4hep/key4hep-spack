@@ -35,8 +35,8 @@ class K4simdelphes(CMakePackage):
     depends_on('hepmc', when="+delphes_hepmc")
     depends_on('k4fwcore', when="+framework")
 
-    depends_on('catch2@3.0.1:', type=('test'))
-    depends_on('k4gen', when="+integration_tests", type=('test'))
+    depends_on('catch2@3.0.1:', type=('build', 'test'))
+    depends_on('k4gen', when="+integration_tests", type=('build','test'))
 
     def cmake_args(self):
         args = [
@@ -44,7 +44,8 @@ class K4simdelphes(CMakePackage):
             self.define_from_variant("BUILD_PYTHIA_READER", 'delphes_pythia'),
             self.define_from_variant("BUILD_HEPMC_READER", 'delphes_hepmc'),
             self.define_from_variant("BUILD_EVTGEN_READER", 'delphes_pythia_evtgen'),
-            self.define("USE_EXTERNAL_CATCH2", True),
+            "-DUSE_EXTERNAL_CATCH2=ON",
+            "-DBUILD_TESTING={0}".format(self.run_tests),
         ]
         return args
 
@@ -53,3 +54,4 @@ class K4simdelphes(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
+        env.set("PYTHONPATH", self.python)
