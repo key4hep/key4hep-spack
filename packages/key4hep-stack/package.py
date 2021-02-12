@@ -267,8 +267,13 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('py-awkward1', when="+devtools")
     depends_on('py-matplotlib', when="+devtools")
     depends_on('py-uproot4', when="+devtools")
+    depends_on('py-pandas', when="+devtools")
+    depends_on('py-scikit-learn', when="+devtools")
+    depends_on('py-scipy', when="+devtools")
+    depends_on('xgboost', when="+devtools")
     #depends_on('py-tensorflow') # todo: check if we should integrate.
     #depends_on('py-zfit') # todo: add in spack
+    #depends_on('py-root-pandas') # todo: add in spack
 
 
     ##################### environment boostrap ############
