@@ -7,6 +7,7 @@ variables:
   SPACK_VERSION: ""
 
 stages:
+    - prepare-spack
     - compilation
     - buildtest
     - deployment
@@ -15,8 +16,9 @@ stages:
 
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
-    stage: compilation
+    stage: prepare-spack
     tags:
+        - k4-build-spack-release
         - k4-build-spack-nightlies
     only:
       refs:
@@ -31,6 +33,7 @@ setup_spack_push:
         paths:
             - key4hep-spack_centos7-cvmfs.tar.gz
             - key4hep-spack.tar.gz
+            - spack 
         expire_in: 1 week
 
 #### Nightly build of key4hep-stack
@@ -50,19 +53,26 @@ build-spack-nightlies:
     stage: compilation
     tags:
         - k4-build-spack-nightlies
+    needs:
+        - "setup_spack_push"
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-nightlies
+            - key4hep-nightlies-debug
     only:
       refs:
           - schedules # Only execute this on scheduled "nightly" pipelines
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
-        # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
-        - source spack/share/spack/setup-env.sh
-        - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
-        - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
+        - export KEY4HEP_RELEASE_VERSION=master-`date -I`
+        - cd environments/$SPACKENV
+        - source pathsetup.sh
+        - spack env activate .
+        - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
-        - spack install --fail-fast --no-checksum key4hep-stack@master-`date -I` 
+        - spack install --fail-fast --no-checksum 
 
 
 
@@ -92,6 +102,12 @@ deploy-cvmfs-nightlies:
 # * the cvmfs publisher must be able to rsync with the build machine
 build-spack-release:
     stage: compilation
+    needs: ["setup_spack_push"]
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-release
+            - key4hep-debug
     tags:
         - k4-build-spack-release
     only:
@@ -102,26 +118,33 @@ build-spack-release:
           - $K4_JOBTYPE == "Release"
     script:
         # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
+        - source spack/share/spack/setup-env.sh
         # get the right config files to the right places
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
-        - export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
         # if this workflow has been started by a tag, use the tag version. if not, use todays date
         - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
         - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
         # compile onwards and upwards
         - echo $K4STACK_VERSION
-        - spack install --fail-fast key4hep-stack@$K4STACK_VERSION | tee -a key4hep-stack-install.log
-        - K4_FULL_SETUP_PATH=$(readlink -f ${K4_LATEST_SETUP_PATH})
-        - echo "K4_FULL_SETUP_PATH=${K4_FULL_SETUP_PATH}" > spackbuild.env
-    artifacts:
-      reports:
-        dotenv: spackbuild.env
+        - cd environments/${SPACKENV}
+        - source ./pathsetup.sh
+        - echo $K4_LATEST_SETUP_PATH
+        - spack env activate .
+        - spack add key4hep-stack@${K4STACK_VERSION}
+        - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
+
 
 buildtest-spack-release:
     stage: buildtest
-    needs: ["build-spack-release"]
+    needs:
+        - "build-spack-release"
+        - "setup_spack_push"
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-release
+            - key4hep-debug
     tags:
         - k4-build-spack-release
     only:
@@ -131,14 +154,18 @@ buildtest-spack-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
-        - echo ${K4_FULL_SETUP_PATH}
-        - source ${K4_FULL_SETUP_PATH}
+        - echo ${SPACKENV}
+        - ls environments/${SPACKENV}
+        - source environments/${SPACKENV}/pathsetup.sh
+        - echo ${K4_LATEST_SETUP_PATH}
+        - source ${K4_LATEST_SETUP_PATH}
         - ./scripts/ci_install_tests.sh
+
 
 
 deploy-cvmfs-release:
     stage: deployment
-    needs: ["build-spack-release", "buildtest-spack-release"]
+    needs: ["build-spack-release"]
     tags:
         - k4-build-spack-release
     only:
@@ -152,8 +179,16 @@ deploy-cvmfs-release:
 
 wait-cvmfs-release:
     stage: wait
-    needs: ["deploy-cvmfs-release", "build-spack-release"]
+    needs:
+        - "build-spack-release"
+        - "setup_spack_push"
+        - "deploy-cvmfs-release"
     timeout: 20m
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-release
+            - key4hep-debug
     tags:
         - k4-spack-test
     only:
@@ -163,12 +198,18 @@ wait-cvmfs-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
-        - echo ${K4_FULL_SETUP_PATH}
-        - while [ ! -f ${K4_FULL_SETUP_PATH} ]; do sleep 10; done
+        - source environments/${SPACKENV}/pathsetup.sh
+        - echo ${K4_LATEST_SETUP_PATH}
+        - while [ ! -f ${K4_LATEST_SETUP_PATH} ]; do sleep 10; done
 
 test-cvmfs-release:
     stage: installtest
-    needs: ["deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    needs: ["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-release
+            - key4hep-debug
     tags:
         - cvmfs
     only:
@@ -178,8 +219,9 @@ test-cvmfs-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
-        - echo ${K4_FULL_SETUP_PATH}
-        - source ${K4_FULL_SETUP_PATH}
+        - source environments/${SPACKENV}/pathsetup.sh
+        - echo ${K4_LATEST_SETUP_PATH}
+        - source ${K4_LATEST_SETUP_PATH}
         - ./scripts/ci_install_tests.sh
 
 

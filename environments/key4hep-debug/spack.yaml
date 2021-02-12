@@ -1,0 +1,27 @@
+spack:
+  config:
+    install_tree:
+      root: /cvmfs/sw.hsf.org/spackages
+    module_roots:
+          lmod: /cvmfs/sw.hsf.org/spackages/modules
+          tcl: /cvmfs/sw.hsf.org/spackages/modules
+  view: false
+  include:
+  - geant4-data.yaml
+  - key4hep-packages.yaml
+  packages:
+    all:
+      target: [broadwell]
+      variants: build_type=Debug
+      buildable: true
+      version: []
+      providers:
+        gl: [mesa18]
+        glu: [mesa18]
+      compiler: []
+    qhull:
+      variants: build_type=Release
+    ftgl:
+      variants: build_type=Release
+    cepcsw:
+      variants: build_type=Release
