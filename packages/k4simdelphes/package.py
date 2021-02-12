@@ -17,8 +17,8 @@ class K4simdelphes(CMakePackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    version('0.1.2', sha256='c36a123ace6150c05d4b1114b532cf2a3a1b63e96f706a84bed849fd61f0def7')
-    version('0.0.1', sha256='4bc414ac72cd03638e7f406381b41814f6e19f3425051f094ac0b539630cd698')
+    version('00-01-02', sha256='c36a123ace6150c05d4b1114b532cf2a3a1b63e96f706a84bed849fd61f0def7')
+    version('00-00-01', sha256='4bc414ac72cd03638e7f406381b41814f6e19f3425051f094ac0b539630cd698')
 
     patch('cmake2.patch', when="@0.0.1")
 
@@ -51,5 +51,5 @@ class K4simdelphes(CMakePackage):
     def setup_build_environment(self, env):
         env.set('PYTHIA8', self.spec["pythia8"].prefix)
 
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
+    def setup_run_environment(self, env):
+        env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
