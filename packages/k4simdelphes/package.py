@@ -54,4 +54,4 @@ class K4simdelphes(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
-        env.set("PYTHONPATH", self.python)
+        env.set("PYTHONPATH", self.prefix.python)
