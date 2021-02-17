@@ -61,15 +61,38 @@ build-spack-nightlies:
         - source spack/share/spack/setup-env.sh
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
+        - export KEY4HEP_RELEASE_VERSION=master-`date -I`
+        - cd environments/key4hep-nightlies
+        - spack env activate .
         # compile onwards and upwards
-        - spack install --fail-fast --no-checksum key4hep-stack@master-`date -I` 
+        - spack install --fail-fast --no-checksum 
 
 
+build-spack-nightlies-debug:
+    stage: compilation
+    tags:
+        - k4-build-spack-nightlies
+    only:
+      refs:
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "Nightlies"
+    script:
+        # set up spack inside the k4-spack repo
+        - source scripts/ci_setup_spack.sh
+        - source spack/share/spack/setup-env.sh
+        - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
+        - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
+        - export KEY4HEP_RELEASE_VERSION=master-`date -I`
+        - cd environments/key4hep-nightlies-debug 
+        - spack env activate .
+        # compile onwards and upwards
+        - spack install --no-checksum 
 
 ### deploy the nightlies to cvmfs
 deploy-cvmfs-nightlies:
     stage: deployment
-    needs: ["build-spack-nightlies"]
+    needs: ["build-spack-nightlies", "build-spack-nightlies-debug"]
     tags:
         - k4-build-spack-nightlies
     only:
@@ -136,9 +159,10 @@ buildtest-spack-release:
         - ./scripts/ci_install_tests.sh
 
 
+
 deploy-cvmfs-release:
     stage: deployment
-    needs: ["build-spack-release", "buildtest-spack-release"]
+    needs: ["build-spack-release", "build-spack-release-debug"]
     tags:
         - k4-build-spack-release
     only:
