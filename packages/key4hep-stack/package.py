@@ -73,6 +73,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("k4simgeant4", "hep-fcc/k4simgeant4", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
+    depends_on('k4actstracking')
+
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
     #depends_on('guinea-pig@master', when="@master")
