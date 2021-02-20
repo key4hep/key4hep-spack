@@ -59,7 +59,7 @@ build-spack-nightlies:
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config-nightlies.yaml spack/etc/spack/config.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw-nightlies.hsf.org/spackages/latest/setup.sh
         # compile onwards and upwards
-        - spack install --no-checksum key4hep-stack@master-`date -I` 
+        - spack install --fail-fast --no-checksum key4hep-stack@master-`date -I` 
 
 
 ### deploy the nightlies to cvmfs
@@ -109,7 +109,7 @@ build-spack-release:
         - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
         # compile onwards and upwards
         - echo $K4STACK_VERSION
-        - spack install key4hep-stack@$K4STACK_VERSION
+        - spack install --fail-fast key4hep-stack@$K4STACK_VERSION
 
 deploy-cvmfs-release:
     stage: deployment
