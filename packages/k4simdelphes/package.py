@@ -17,6 +17,7 @@ class K4simdelphes(CMakePackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version('00-01-03', sha256='47a13cb58acda5d52d9462ca85ddf33d72a3dad4d5f5394a4b7078fbe69c0ed1')
     version('00-01-02', sha256='c36a123ace6150c05d4b1114b532cf2a3a1b63e96f706a84bed849fd61f0def7')
     version('00-00-01', sha256='4bc414ac72cd03638e7f406381b41814f6e19f3425051f094ac0b539630cd698')
 
@@ -54,4 +55,4 @@ class K4simdelphes(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
-        env.set("PYTHONPATH", self.prefix.python)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
