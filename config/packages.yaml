@@ -9,6 +9,12 @@ packages:
       gl: [mesa18]
       glu: [mesa18]
     compiler: []
+  acts:
+    target: [x86_64]
+  eigen:
+    target: [x86_64]
+  fccanalyses:
+    target: [x86_64]
   mesa18:
     variants: ~llvm+glx+opengl swr=none
     buildable: true
