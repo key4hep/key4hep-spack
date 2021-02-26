@@ -26,7 +26,6 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['edm4hep'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['podio'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['fcc-edm'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
 
     def setup_run_environment(self, spack_env):
