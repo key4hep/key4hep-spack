@@ -11,7 +11,6 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    version('master', branch='main')
     version("0.1pre01", tag="v0.1pre01")
 
     variant('build_type', default='Release',
@@ -27,15 +26,11 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     depends_on('dd4hep +geant4')
     depends_on('edm4hep')
 
-
-
-
     def cmake_args(self):
         args = []
         # C++ Standard
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
         return args
-
 
     def setup_run_environment(self, spack_env):
         spack_env.set("FCCDETECTORS", self.prefix.share.fccDetectors)
