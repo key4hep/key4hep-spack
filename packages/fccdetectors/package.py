@@ -33,4 +33,4 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
         return args
 
     def setup_run_environment(self, spack_env):
-        spack_env.set("FCCDETECTORS", self.prefix.share.fccDetectors)
+        spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
