@@ -11,10 +11,12 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    # can be removed once the ci is fixed
     version('master', branch='main')
+    version("0.1pre03", tag="v0.1pre03")
     version("0.1pre01", tag="v0.1pre01")
 
-    variant('framework', default="True", description="Build framework components")
+    variant('framework', default=True, description="Build framework components")
 
     variant('cxxstd',
             default='17',
