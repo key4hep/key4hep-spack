@@ -11,20 +11,20 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version('master', branch='main')
     version("0.1pre01", tag="v0.1pre01")
 
-    variant('build_type', default='Release',
-            description='CMake build type',
-            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
+    variant('framework', default="True", description="Build framework components")
 
     variant('cxxstd',
             default='17',
-            values=('14', '17'),
+            values=('14', '17', '20'),
             multi=False,
             description='Use the specified C++ standard when building.')
 
     depends_on('dd4hep +geant4')
-    depends_on('edm4hep')
+    depends_on('edm4hep', when='+framework')
+    depends_on('k4fwcore', when='+framework')
 
     def cmake_args(self):
         args = []
