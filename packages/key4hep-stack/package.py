@@ -45,6 +45,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             description="add some standalone generators to the stack")
     variant('bootstrap', default=False,
             description="install some spack setup tools")
+    variant('build_type', default='Release',
+            description='CMake build type',
+            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
+
     
 
     ##################### common key4hep packages #########
