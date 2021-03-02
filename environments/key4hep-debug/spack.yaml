@@ -20,4 +20,4 @@ spack:
         glu: [mesa18]
       compiler: []
   specs:
-  - key4hep-stack@${KEY4HEP-RELEASE-VERSION}
+  - key4hep-stack
