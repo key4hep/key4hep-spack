@@ -30,7 +30,7 @@ class K4simdelphes(CMakePackage):
     variant('delphes_pythia_evtgen', default=True, description='Build standalone executable with Pythia+EvtGen input')
 
     depends_on('edm4hep')
-    depends_on('delphes@3.4.3pre09:')
+    depends_on('delphes@3.4.3pre10:')
     depends_on('pythia8', when="+delphes_pythia")
     depends_on('evtgen+pythia8', when="+delphes_pythia_evtgen")
     depends_on('hepmc', when="+delphes_hepmc")
