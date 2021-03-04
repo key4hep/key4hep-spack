@@ -1,4 +1,4 @@
-name: linux
+name: concretize-ubuntu
 
 on: [push, pull_request]
 
@@ -23,4 +23,4 @@ jobs:
         cd ${GITHUB_WORKSPACE}/../spack
         source share/spack/setup-env.sh
         spack compiler find --scope site
-        spack spec -I key4hep-stack
+        spack spec -I key4hep-stack | tee -a ${GITHUB_WORKSPACE}/key4hep-stack-concretization.log
