@@ -8,7 +8,10 @@ variables:
 
 stages:
     - compilation
+    - buildtest
     - deployment
+    - wait
+    - installtest
 
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
@@ -62,6 +65,7 @@ build-spack-nightlies:
         - spack install --fail-fast --no-checksum key4hep-stack@master-`date -I` 
 
 
+
 ### deploy the nightlies to cvmfs
 deploy-cvmfs-nightlies:
     stage: deployment
@@ -103,16 +107,20 @@ build-spack-release:
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
         - export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
-
         # if this workflow has been started by a tag, use the tag version. if not, use todays date
         - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
         - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
         # compile onwards and upwards
         - echo $K4STACK_VERSION
-        - spack install --fail-fast key4hep-stack@$K4STACK_VERSION
+        - spack install --fail-fast key4hep-stack@$K4STACK_VERSION | tee -a key4hep-stack-install.log
+        - K4_FULL_SETUP_PATH=$(readlink -f ${K4_LATEST_SETUP_PATH})
+        - echo "K4_FULL_SETUP_PATH=${K4_FULL_SETUP_PATH}" > spackbuild.env
+    artifacts:
+      reports:
+        dotenv: spackbuild.env
 
-deploy-cvmfs-release:
-    stage: deployment
+buildtest-spack-release:
+    stage: buildtest
     needs: ["build-spack-release"]
     tags:
         - k4-build-spack-release
@@ -123,4 +131,55 @@ deploy-cvmfs-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
+        - echo ${K4_FULL_SETUP_PATH}
+        - source ${K4_FULL_SETUP_PATH}
+        - ./scripts/ci_install_tests.sh
+
+
+deploy-cvmfs-release:
+    stage: deployment
+    needs: ["build-spack-release", "buildtest-spack-release"]
+    tags:
+        - k4-build-spack-release
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "Release"
+    script:
         - ssh cvswhsforg@cvmfs-sw-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
+
+wait-cvmfs-release:
+    stage: wait
+    needs: ["deploy-cvmfs-release", "build-spack-release"]
+    timeout: 20m
+    tags:
+        - k4-spack-test
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "Release"
+    script:
+        - echo ${K4_FULL_SETUP_PATH}
+        - while [ ! -f ${K4_FULL_SETUP_PATH} ]; do sleep 10; done
+
+test-cvmfs-release:
+    stage: installtest
+    needs: ["deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    tags:
+        - k4-spack-test
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "Release"
+    script:
+        - echo ${K4_FULL_SETUP_PATH}
+        - source ${K4_FULL_SETUP_PATH}
+        - ./scripts/ci_install_tests.sh
+
+
