@@ -1,0 +1,49 @@
+name: concretize-lxplus-comment-bot
+on: [pull_request_target]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check if workflow should be run
+      run: |
+        ismember=$(curl \
+            -o /dev/null --silent --head \
+            -H "Authorization: token ${{ secrets.COMMENT_TOKEN }}" \
+          --write-out '%{http_code}\n' \
+          https://api.github.com/orgs/key4hep/members/${GITHUB_ACTOR}\
+          )
+        echo "GITHUB_ACTOR:  ${GITHUB_ACTOR}" 
+        if [ "$ismember" = 204 ]
+        then 
+          echo "" 
+        else
+          exit 1
+        fi
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{github.event.pull_request.head.ref}}
+        repository: ${{github.event.pull_request.head.repo.full_name}}
+    - uses: cvmfs-contrib/github-action-cvmfs@v2
+      with:
+        cvmfs_repositories: 'sw.hsf.org,sw-nightlies.hsf.org,sft-nightlies.cern.ch,sft.cern.ch,geant4.cern.ch'
+    - name: Start container
+      run: |
+        docker run -it --name CI_container -e GITHUB_ENV=${GITHUB_ENV}  -v ${GITHUB_WORKSPACE}:/Package -v /cvmfs:/cvmfs:shared -d clicdp/cc7-lcg /bin/bash
+    - name: Setup container
+      run: |
+        docker exec CI_container /bin/bash -c ' ln -s /usr/lib64/liblzma.so.5.2.2 /usr/lib64/liblzma.so;'
+    - name: Setup Spack
+      run: |
+        docker exec CI_container /bin/bash -c 'cd ./Package;\
+        source scripts/ci_setup_spack2.sh;'
+    - name: Concretize
+      run: |
+        docker exec CI_container /bin/bash -c 'cd ./Package;\
+        source spack/share/spack/setup-env.sh;\
+        spack spec -I key4hep-stack | tee -a key4hep-stack-concretization.log;'
+    - name: Comment PR 
+      env:
+        KEY4HEP_COMMENT_BOT_TOKEN: ${{ secrets.KEY4HEP_COMMENT_BOT_TOKEN }}
+      run: |
+        ${GITHUB_WORKSPACE}/.github/scripts/generate_pr_comment.sh
+        ${GITHUB_WORKSPACE}/.github/scripts/post_pr_comment.sh

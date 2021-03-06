@@ -25,10 +25,8 @@ jobs:
         docker exec CI_container /bin/bash -c 'cd ./Package;\
         source spack/share/spack/setup-env.sh;\
         spack spec -I key4hep-stack | tee -a key4hep-stack-concretization.log;'
-    - name: Comment PR 
-      if: github.event_name == 'pull_request'
-      env:
-        KEY4HEP_COMMENT_BOT_TOKEN: ${{ secrets.KEY4HEP_COMMENT_BOT_TOKEN }}
-      run: |
-        ${GITHUB_WORKSPACE}/.github/scripts/generate_pr_comment.sh
-        ${GITHUB_WORKSPACE}/.github/scripts/post_pr_comment.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: concretization-log-artifact
+        path: key4hep-stack-concretization.log
+        retention-days: 5
