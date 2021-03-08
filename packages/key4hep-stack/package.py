@@ -297,6 +297,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
 
+    def setup_run_environment(self, spack_env):
+        # set locale to avoid certain issues with xerces-c
+        # (see https://github.com/key4hep/key4hep-spack/issues/170)
+        spack_env.set("LC_ALL", "C")
+
+
     def install(self, spec, prefix):
       """ Create bash setup script in prefix."""
       # first, log spack version to build-out
