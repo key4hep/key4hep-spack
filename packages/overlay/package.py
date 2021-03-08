@@ -18,6 +18,7 @@ class Overlay(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.22.2', sha256='305bdf568dc5fd221d6bd5d499cc25f7c567cc3ae21ff2954409a66549e4150f')
     version('0.22.1',   sha256='2f3ca472fe6aae44cdae0553f0e65b3c086a0d887d9cf53fd19468fb6107155b')
     version('0.22',     sha256='fa03e2870b8f072fd9c1cd68354274437050ce6ed30d0db9a816a3cbdee54cb1')
     version('0.21',     sha256='b64bac24d8218f33b871aa232e994a3e12c8a0c7862789b09f9ca189ae20d8c4')
