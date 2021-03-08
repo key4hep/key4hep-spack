@@ -233,11 +233,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     ############################### fccsw #################
     #######################################################
-    #depends_on("fccsw")
-    #k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
+    depends_on("fccsw")
+    k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
 
-    #depends_on("fcc-edm")
-    #k4_add_latest_commit_as_dependency("fcc-edm", "hep-fcc/fcc-edm", when="@master")
 
     #depends_on("dual-readout")
     #k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
