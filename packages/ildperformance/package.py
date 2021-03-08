@@ -18,6 +18,7 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('1.9', sha256='3a8187036eee39b35e4a58d874fa906182a7b83e1d143811ec7d721ea405f3dc')
     version('1.8', sha256='bcf19d3a6f425fa5eea228676d07558635881a0329c4d66ffda4230dfe9617c1')
 
 
