@@ -35,4 +35,4 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
       spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-      spack_env.set_path("FCCANALYSES", self.prefix.share.FCCAnalyses)
+      spack_env.set("FCCANALYSES", self.prefix.share.FCCAnalyses)
