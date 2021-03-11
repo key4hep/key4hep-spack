@@ -36,6 +36,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
+        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
 
     def test(self):
         self.run_test('geoDisplay', options=["$FCCDETECTORS/Detector/DetFCChhBaseline1/compact/FCChh_DectMaster.xml"], purpose="Construct FCChh Detector Geometry.")
