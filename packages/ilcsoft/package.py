@@ -57,7 +57,8 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("k4lcioreader", "key4hep/k4LCIOReader", when="@master")
 
     depends_on("k4simdelphes")
-    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4simdelphes", when="@master")
+    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
+				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("delphes")
     k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
