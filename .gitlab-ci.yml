@@ -170,7 +170,7 @@ test-cvmfs-release:
     stage: installtest
     needs: ["deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
     tags:
-        - k4-spack-test
+        - cvmfs
     only:
       refs:
           - tags
