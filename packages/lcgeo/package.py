@@ -42,14 +42,14 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
 
     @run_after('install')
     def install_compact(self):
-        install_tree('CaloTB', self.prefix.share.lcgeo.CaloTB)
-        install_tree('CLIC', self.prefix.share.lcgeo.CLIC)
-        install_tree('FCalTB', self.prefix.share.lcgeo.FCalTB)
-        install_tree('FCCee', self.prefix.share.lcgeo.FCCee)
-        install_tree('fieldmaps', self.prefix.share.lcgeo.fieldmaps)
-        install_tree('ILD', self.prefix.share.lcgeo.ILD)
-        install_tree('SiD', self.prefix.share.lcgeo.Sid)
+        install_tree('CaloTB', self.prefix.share.lcgeo.compact.CaloTB)
+        install_tree('CLIC', self.prefix.share.lcgeo.compact.CLIC)
+        install_tree('FCalTB', self.prefix.share.lcgeo.compact.FCalTB)
+        install_tree('FCCee', self.prefix.share.lcgeo.compact.FCCee)
+        install_tree('fieldmaps', self.prefix.share.lcgeo.compact.fieldmaps)
+        install_tree('ILD', self.prefix.share.lcgeo.compact.ILD)
+        install_tree('SiD', self.prefix.share.lcgeo.compact.Sid)
 
     def setup_run_environment(self, env):
-        env.set('LCGEO', self.prefix.share.lcgeo)
-        env.set('lcgeo_DIR', self.prefix.share.lcgeo)
+        env.set('LCGEO', self.prefix.share.lcgeo.compact)
+        env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
