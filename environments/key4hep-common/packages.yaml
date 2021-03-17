@@ -152,6 +152,3 @@ packages:
     target: []
     providers: {}
     compiler: []
-specs:
-- key4hep-stack
-#concretization: together

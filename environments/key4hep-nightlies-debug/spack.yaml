@@ -13,5 +13,3 @@ spack:
     all:
       target: [broadwell]
       variants: build_type=Debug
-  specs:
-  - key4hep-stack@{KEY4HEP-NIGHTLIES-VERSION}

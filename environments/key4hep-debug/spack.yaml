@@ -19,5 +19,3 @@ spack:
         gl: [mesa18]
         glu: [mesa18]
       compiler: []
-  specs:
-  - key4hep-stack

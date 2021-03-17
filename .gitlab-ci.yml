@@ -64,6 +64,7 @@ build-spack-nightlies:
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - cd environments/key4hep-nightlies
         - spack env activate .
+        - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
         - spack install --fail-fast --no-checksum 
 
@@ -86,6 +87,7 @@ build-spack-nightlies-debug:
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - cd environments/key4hep-nightlies-debug 
         - spack env activate .
+        - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
         - spack install --no-checksum 
 
@@ -135,7 +137,9 @@ build-spack-release:
         - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
         # compile onwards and upwards
         - echo $K4STACK_VERSION
-        - spack install --fail-fast key4hep-stack@$K4STACK_VERSION | tee -a key4hep-stack-install.log
+        - cd environments/key4hep-release
+        - spack add key4hep-stack@${K4STACK_VERSION}
+        - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
         - K4_FULL_SETUP_PATH=$(readlink -f ${K4_LATEST_SETUP_PATH})
         - echo "K4_FULL_SETUP_PATH=${K4_FULL_SETUP_PATH}" > spackbuild.env
     artifacts:

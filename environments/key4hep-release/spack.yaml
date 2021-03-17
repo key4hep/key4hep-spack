@@ -9,5 +9,3 @@ spack:
   include:
   - geant4-data.yaml
   - key4hep-packages.yaml
-  specs:
-  - key4hep-stack@${KEY4HEP-RELEASE-VERSION}
