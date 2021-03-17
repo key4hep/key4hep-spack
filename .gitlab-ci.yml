@@ -7,6 +7,7 @@ variables:
   SPACK_VERSION: ""
 
 stages:
+    - prepare-spack
     - compilation
     - buildtest
     - deployment
@@ -15,9 +16,9 @@ stages:
 
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
-    stage: compilation
+    stage: prepare-spack
     tags:
-        - k4-build-spack-nightlies
+        - k4-build-spack
     only:
       refs:
           - pushes
@@ -117,6 +118,7 @@ deploy-cvmfs-nightlies:
 # * the cvmfs publisher must be able to rsync with the build machine
 build-spack-release:
     stage: compilation
+    needs: ["setup_spack_push"]
     tags:
         - k4-build-spack-release
     only:
@@ -149,6 +151,7 @@ build-spack-release:
 
 build-spack-release-debug:
     stage: compilation
+    needs: ["setup_spack_push"]
     tags:
         - k4-build-spack-release
     only:
