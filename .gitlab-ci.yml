@@ -18,7 +18,8 @@ stages:
 setup_spack_push:
     stage: prepare-spack
     tags:
-        - k4-build-spack
+        - k4-build-spack-release
+        - k4-build-spack-nightlies
     only:
       refs:
           - pushes
@@ -32,6 +33,7 @@ setup_spack_push:
         paths:
             - key4hep-spack_centos7-cvmfs.tar.gz
             - key4hep-spack.tar.gz
+            - spack 
         expire_in: 1 week
 
 #### Nightly build of key4hep-stack
