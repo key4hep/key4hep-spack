@@ -131,7 +131,7 @@ build-spack-release:
           - $K4_JOBTYPE == "Release"
     script:
         # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
+        - source spack/share/spack/setup-env.sh
         # get the right config files to the right places
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
@@ -164,7 +164,7 @@ build-spack-release-debug:
           - $K4_JOBTYPE == "Release"
     script:
         # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
+        - source spack/share/spack/setup-env.sh
         # get the right config files to the right places
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
