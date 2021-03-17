@@ -146,6 +146,32 @@ build-spack-release:
       reports:
         dotenv: spackbuild.env
 
+build-spack-release-debug:
+    stage: compilation
+    tags:
+        - k4-build-spack-release
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled pipelines
+      variables:
+          - $K4_JOBTYPE == "Release"
+    script:
+        # set up spack inside the k4-spack repo
+        - source scripts/ci_setup_spack.sh
+        # get the right config files to the right places
+        - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
+        - rm spack/etc/spack/upstreams.yaml
+        - #export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
+        # if this workflow has been started by a tag, use the tag version. if not, use todays date
+        - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
+        - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
+        # compile onwards and upwards
+        - echo $K4STACK_VERSION
+        - cd environments/key4hep-debug
+        - spack add key4hep-stack@${K4STACK_VERSION}
+        - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-debug-install.log
+
 buildtest-spack-release:
     stage: buildtest
     needs: ["build-spack-release"]
