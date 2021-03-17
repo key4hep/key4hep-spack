@@ -162,7 +162,6 @@ build-spack-release-debug:
         # get the right config files to the right places
         - cp ${PWD}/spack/var/spack/repos/key4hep-spack/config/cvmfs_build/config.yaml spack/etc/spack/config.yaml
         - rm spack/etc/spack/upstreams.yaml
-        - #export K4_LATEST_SETUP_PATH=/cvmfs/sw.hsf.org/spackages/latest/setup.sh
         # if this workflow has been started by a tag, use the tag version. if not, use todays date
         - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
         - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
