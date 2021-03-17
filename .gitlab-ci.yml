@@ -138,6 +138,7 @@ build-spack-release:
         # compile onwards and upwards
         - echo $K4STACK_VERSION
         - cd environments/key4hep-release
+        - spack env activate .
         - spack add key4hep-stack@${K4STACK_VERSION}
         - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
         - K4_FULL_SETUP_PATH=$(readlink -f ${K4_LATEST_SETUP_PATH})
@@ -168,6 +169,7 @@ build-spack-release-debug:
         # compile onwards and upwards
         - echo $K4STACK_VERSION
         - cd environments/key4hep-debug
+        - spack env activate .
         - spack add key4hep-stack@${K4STACK_VERSION}
         - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-debug-install.log
 
