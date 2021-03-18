@@ -19,3 +19,5 @@ spack:
         gl: [mesa18]
         glu: [mesa18]
       compiler: []
+    qhull:
+      variants: build_type=Release
