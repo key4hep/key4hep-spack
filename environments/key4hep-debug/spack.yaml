@@ -21,3 +21,5 @@ spack:
       compiler: []
     qhull:
       variants: build_type=Release
+    ftgl:
+      variants: build_type=Release
