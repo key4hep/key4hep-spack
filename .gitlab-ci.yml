@@ -147,6 +147,7 @@ build-spack-release:
         - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
         - K4_FULL_SETUP_PATH=$(readlink -f ${K4_LATEST_SETUP_PATH})
         - echo ${K4_FULL_SETUP_PATH}
+        - cd ../..
         - echo "K4_FULL_SETUP_PATH=${K4_FULL_SETUP_PATH}" > spackbuild.env
     artifacts:
       reports:
