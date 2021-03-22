@@ -238,8 +238,8 @@ test-cvmfs-release:
           - $K4_JOBTYPE == "Release"
     script:
         - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_FULL_SETUP_PATH}
-        - source ${K4_FULL_SETUP_PATH}
+        - echo ${K4_LATEST_SETUP_PATH}
+        - source ${K4_LATEST_SETUP_PATH}
         - ./scripts/ci_install_tests.sh
 
 
