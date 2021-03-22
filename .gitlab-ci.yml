@@ -169,9 +169,11 @@ buildtest-spack-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
+        - echo ${SPACKENV}
+        - ls environments/${SPACKENV}
         - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_FULL_SETUP_PATH}
-        - source ${K4_FULL_SETUP_PATH}
+        - echo ${K4_LATEST_SETUP_PATH}
+        - source ${K4_LATEST_SETUP_PATH}
         - ./scripts/ci_install_tests.sh
 
 
@@ -209,8 +211,8 @@ wait-cvmfs-release:
           - $K4_JOBTYPE == "Release"
     script:
         - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_FULL_SETUP_PATH}
-        - while [ ! -f ${$K4_FULL_SETUP_PATH} ]; do sleep 10; done
+        - echo ${K4_LATEST_SETUP_PATH}
+        - while [ ! -f ${$K4_LATEST_SETUP_PATH} ]; do sleep 10; done
 
 test-cvmfs-release:
     stage: installtest
