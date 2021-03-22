@@ -154,7 +154,9 @@ build-spack-release:
 
 buildtest-spack-release:
     stage: buildtest
-    needs: ["build-spack-release"]
+    needs:
+        - "build-spack-release"
+        - "setup_spack_push"
     parallel:
         matrix:
           - SPACKENV: 
@@ -194,7 +196,10 @@ deploy-cvmfs-release:
 
 wait-cvmfs-release:
     stage: wait
-    needs: ["deploy-cvmfs-release", "build-spack-release"]
+    needs:
+        - "build-spack-release"
+        - "setup_spack_push"
+        - "deploy-cvmfs-release"
     timeout: 20m
     parallel:
         matrix:
@@ -216,7 +221,7 @@ wait-cvmfs-release:
 
 test-cvmfs-release:
     stage: installtest
-    needs: ["deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    needs: ["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
     parallel:
         matrix:
           - SPACKENV: 
