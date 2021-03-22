@@ -217,7 +217,7 @@ wait-cvmfs-release:
     script:
         - source environments/${SPACKENV}/pathsetup.sh
         - echo ${K4_LATEST_SETUP_PATH}
-        - while [ ! -f ${$K4_LATEST_SETUP_PATH} ]; do sleep 10; done
+        - while [ ! -f ${K4_LATEST_SETUP_PATH} ]; do sleep 10; done
 
 test-cvmfs-release:
     stage: installtest
