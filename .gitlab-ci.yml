@@ -146,7 +146,8 @@ build-spack-release:
         # compile onwards and upwards
         - echo $K4STACK_VERSION
         - cd environments/${SPACKENV}
-        - source pathsetup.sh
+        - source ./pathsetup.sh
+        - echo $K4_LATEST_SETUP_PATH
         - spack env activate .
         - spack add key4hep-stack@${K4STACK_VERSION}
         - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
