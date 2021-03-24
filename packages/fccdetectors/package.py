@@ -13,10 +13,8 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     version('main', branch='main')
     # can be removed once the ci is fixed
     version('master', branch='main')
-    version("0.1pre03", tag="v0.1pre03")
-    version("0.1pre01", tag="v0.1pre01")
+    version("0.1pre04", tag="v0.1pre04")
 
-    variant('framework', default=True, description="Build framework components")
 
     variant('cxxstd',
             default='17',
@@ -25,8 +23,6 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
             description='Use the specified C++ standard when building.')
 
     depends_on('dd4hep +geant4')
-    depends_on('edm4hep', when='+framework')
-    depends_on('k4fwcore', when='+framework')
 
     def cmake_args(self):
         args = []
