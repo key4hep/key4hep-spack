@@ -9,6 +9,13 @@ packages:
       glu: [mesa18]
     compiler: []
   mesa18:
+    variants: +fftw3
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  mesa18:
     variants: ~llvm+glx+opengl swr=none
     buildable: true
     version: []
