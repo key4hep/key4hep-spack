@@ -8,6 +8,13 @@ packages:
       gl: [mesa18]
       glu: [mesa18]
     compiler: []
+  guinea-pig:
+    variants: +fftw3
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   mesa18:
     variants: ~llvm+glx+opengl swr=none
     buildable: true

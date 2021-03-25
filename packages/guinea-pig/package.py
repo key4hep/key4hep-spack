@@ -21,7 +21,7 @@ class GuineaPig(CMakePackage):
 
     variant('fftw2', default=False, 
         description="Enable Fast Fourier Transform support")
-    variant('fftw3', default=False,
+    variant('fftw3', default=True,
         description="Enable Fast Fourier Transfrom support")
 
     depends_on('fftw@2.0.0:2.9.9', when="+fftw2")
