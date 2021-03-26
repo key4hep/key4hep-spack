@@ -8,6 +8,12 @@ packages:
       gl: [mesa18]
       glu: [mesa18]
     compiler: []
+  fftw:
+    variants: ~mpi
+    buildable: true
+    version: []
+    target: []
+    providers: {}
   guinea-pig:
     variants: +fftw3
     buildable: true
