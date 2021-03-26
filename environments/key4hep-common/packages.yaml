@@ -8,7 +8,7 @@ packages:
       gl: [mesa18]
       glu: [mesa18]
     compiler: []
-  mesa18:
+  guinea-pig:
     variants: +fftw3
     buildable: true
     version: []
