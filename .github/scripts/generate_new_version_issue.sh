@@ -12,7 +12,7 @@ for p in ${package_list}; do
   # ignore pre and rc versions
   v=$(echo $v | sed 's/\S*\(rc\|pre\|alpha\)\S*//g')
   if [[ ! -z "$v" ]]; then
-    echo $p: $v >> gh-new-version.log
+    echo "- [ ] \`$p\`: \`$v\` " >> gh-new-version.log
   fi
 done
 
