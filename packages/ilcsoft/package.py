@@ -168,6 +168,9 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on('marlinkinfit')
     k4_add_latest_commit_as_dependency("marlinkinfit", "ilcsoft/marlinkinfit", when="@master")
 
+    depends_on('marlinkinfitprocessors')
+    k4_add_latest_commit_as_dependency('marlinkinfitprocessors', 'ilcsoft/marlinkinfitprocessors', when='@master')
+
     depends_on('marlintrkprocessors')
     k4_add_latest_commit_as_dependency("marlintrkprocessors", "ilcsoft/marlintrkprocessors", when="@master")
 
