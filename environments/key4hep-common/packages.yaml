@@ -15,6 +15,13 @@ packages:
     target: []
     providers: {}
     compiler: []
+  fftw3:
+    variants: ~mpi
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   mesa18:
     variants: ~llvm+glx+opengl swr=none
     buildable: true
