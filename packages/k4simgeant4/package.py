@@ -11,11 +11,11 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    version("0.1.0pre03", tag="v0.1.0pre03")
+    version("0.1.0pre04", tag="v0.1.0pre04")
 
     variant('cxxstd',
             default='17',
-            values=('14', '17'),
+            values=('14', '17', '20'),
             multi=False,
             description='Use the specified C++ standard when building.')
 
