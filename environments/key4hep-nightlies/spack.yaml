@@ -13,3 +13,10 @@ spack:
   include:
   - geant4-data.yaml
   - key4hep-packages.yaml
+  packages:
+    qhull:
+      variants: build_type=Release
+    ftgl:
+      variants: build_type=Release
+    cepcsw:
+      variants: build_type=Release

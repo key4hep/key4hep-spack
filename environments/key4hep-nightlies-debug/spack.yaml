@@ -17,3 +17,9 @@ spack:
     all:
       target: [broadwell]
       variants: build_type=Debug
+    qhull:
+      variants: build_type=Release
+    ftgl:
+      variants: build_type=Release
+    cepcsw:
+      variants: build_type=Release
