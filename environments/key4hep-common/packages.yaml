@@ -15,7 +15,7 @@ packages:
     target: []
     providers: {}
     compiler: []
-  fftw3:
+  fftw:
     variants: ~mpi
     buildable: true
     version: []
