@@ -28,6 +28,9 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on('marlin')
     depends_on('gaudi@35.0:', when="@0.2.2:")
     depends_on('gaudi@:34.99', when="@:0.2.1")
+    depends_on('k4fwcore')
+    depends_on('edm4hep')
+    depends_on('k4lcioreader')
 
     def cmake_args(self):
         args = []
