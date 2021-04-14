@@ -35,4 +35,4 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
         ]
 
     def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + '/libMarlinKinFitProcessors.so')
+        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + '/libMarlinKinfitProcessors.so')
