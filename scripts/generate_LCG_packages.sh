@@ -155,6 +155,7 @@ function yaml-format-package-match-name-in-spack() {
         LCIO)      pkg=lcio;;
         MarkupSafe)pkg=markupsafe;;
         OWSLib)    pkg=owslib;;
+        oracle)    pkg=oracle-instant-client;;
         podio)
                    buildable=true;;
         PyHEADTAIL)pkg=py-pyheadtail;;
