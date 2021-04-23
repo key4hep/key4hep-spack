@@ -1,0 +1,19 @@
+spack:
+  include:
+    - compilers_centos7_cvmfs.yaml
+  config:
+    install_tree:
+      root: /cvmfs/sw.hsf.org/share
+      projections:
+        all: data/${PACKAGE}-${VERSION}-${HASH}
+    module_roots:
+      lmod: /cvmfs/sw.hsf.org/spackages/modules
+      tcl: /cvmfs/sw.hsf.org/spackages/modules
+  view: false
+  packages:
+    all:
+      target: [broadwell]
+      variants: build_type=Release
+  specs:
+  - geant4-data@10.7.0
+  - geant4-data@10.7.1
