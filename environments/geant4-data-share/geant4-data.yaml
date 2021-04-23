@@ -37,6 +37,8 @@ packages:
     buildable: False
   g4particlexs:
     externals:
+    - spec: "g4particlexs@3.1.1"
+      prefix: /cvmfs/sw.hsf.org/share/data/g4particlexs-3.1.1-mwscy6aw2gctraaqd5mm5senrolomf7t
     - spec: "g4particlexs@3.1"
       prefix: /cvmfs/sw.hsf.org/share/data/g4particlexs-3.1-sj23ktyy4n62tyo2vf2igm2avkblu65f
     - spec: "g4particlexs@2.1"
