@@ -5,14 +5,13 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""
 
     url      = "https://github.com/PandoraPFA/larcontent/archive/v03-04-00.tar.gz"
-    homepage  = "https://github.com/PandoraPFA/larcontent"
+    homepage = "https://github.com/PandoraPFA/larcontent"
     git      = "https://github.com/PandoraPFA/larcontent.git"
 
     tags = ['hep']
@@ -20,7 +19,6 @@ class Larcontent(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('3.22.9', sha256='44ca286faa93fc77dd78010261f06b85ba512b1135fe6bc40659accb9385104f')
     version('3.19.0', sha256='21f52e9d512842e3413967c6b326a8a9fa68e2ac54f39a542c4e31c80dfac3eb')
 
