@@ -5,14 +5,13 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
 
 
 class Lccontent(CMakePackage):
     """Pandora algorithms and tools for Linear Collider event reconstruction."""
 
     url      = "https://github.com/PandoraPFA/lccontent/archive/v03-01-05.tar.gz"
-    homepage  = "https://github.com/PandoraPFA/lccontent"
+    homepage = "https://github.com/PandoraPFA/lccontent"
     git      = "https://github.com/PandoraPFA/lccontent.git"
 
     tags = ['hep']
@@ -20,7 +19,6 @@ class Lccontent(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('3.1.6', sha256='d332c37f5bbc182ac4f90435c2b708152d32c233a1dbc2d71b99b8a5212a1bfa')
     version('3.1.5', sha256='876a49ac79344a55e3bc611dd9668c7c1d90915e66b7fbe0e93c29460d23984b')
 
