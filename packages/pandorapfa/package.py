@@ -26,7 +26,7 @@ class Pandorapfa(Package):
     patch("path.patch")
 
     def install(self, a, b):
-        install_tree('.', self.prefix)
+        install_tree('cmakemodules', self.prefix.cmakemodules)
 
     def url_for_version(self, version):
         # contrary to ilcsoftpackages, here the patch version is kept when 0
