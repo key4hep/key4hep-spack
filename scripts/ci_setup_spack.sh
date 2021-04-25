@@ -2,7 +2,7 @@
  if [ -n "$SPACK_VERSION" ]; then git clone  https://github.com/key4hep/spack ; cd spack; git checkout $SPACK_VERSION; cd ..; else git clone --depth 1 https://github.com/key4hep/spack; fi 
  source spack/share/spack/setup-env.sh
 # get the right config files to the right places
- cp config/packages.yaml spack/etc/spack/
+ cp environments/key4hep-common/packages.yaml spack/etc/spack/
  mkdir spack/var/spack/repos/key4hep-spack
  cp -r * spack/var/spack/repos/key4hep-spack || true
 # clean up git directories for zip

@@ -25,7 +25,7 @@ jobs:
         cd ${GITHUB_WORKSPACE}/../spack
         git clone --depth 1 https://github.com/key4hep/spack .
         cp -r ${GITHUB_WORKSPACE} var/spack/repos/
-        cp var/spack/repos/$(basename ${GITHUB_REPOSITORY})/config/packages.yaml etc/spack
+        cp var/spack/repos/$(basename ${GITHUB_REPOSITORY})/environments/key4hep-common/packages.yaml etc/spack
         source share/spack/setup-env.sh
         spack repo add --scope site ${PWD}/var/spack/repos/$(basename ${GITHUB_REPOSITORY})
     - name: Check for new versions
