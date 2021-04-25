@@ -12,7 +12,7 @@ spack:
   packages:
     all:
       target: [broadwell]
-      variants: build_type=Debug
+      variants: build_type=Debug cxxstd=17
       buildable: true
       version: []
       providers:
