@@ -11,8 +11,8 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     maintainers = ['mirguest']
 
     version('master', branch='master')
-    version('0.3.2', sha256='dac76172d484faa23ca170fc89b4cfec6ce56777cd0c20b2b608838824582447')
-    version('0.3.1', sha256='cb7614db76972f8b22ccb69cfaa19931b8fdb60f8a506d2b8ff524dd6fcbf0a9')
+    version('0.3.2', sha256='7886350cb7598f229bea7d58da602f39d739720f593c254a066bd254cda3a4f5')
+    version('0.3.1', sha256='c646673fa4a8acb52a5e7680c7e3918aceee3d20769b921673f8ad951b90926a')
     version('0.3.0', sha256='ce6a5596a21bfa23e641eda84830d8aa7caf15fd47da35878ee61e7f555d0e51')
     version('0.2.0', sha256='346fc2ba4b4175895597e093f566ba6407be9eeb9cde0766304e0f19ad03e081')
     version('0.1.0', sha256='996d1ff78c0a8a2f7f358dd4ea19f955853ad0902ee86b99c484de58c5fc2e2c')
