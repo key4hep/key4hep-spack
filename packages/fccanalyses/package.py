@@ -20,7 +20,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('python')
     depends_on('edm4hep')
     depends_on('fcc-edm', when="@:0.2.9")
-    depends_on('acts@5.00.0:', when="@0.3.0:")
+    depends_on('acts@5.00.0', when="@0.3.0:")
     depends_on('eigen', when="@0.3.0:")
 
     # todo: update the cmake config to remove this
