@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage
 
 
 class Clicperformance(CMakePackage, Ilcsoftpackage):
@@ -17,7 +17,6 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('02-04-01', sha256='78fb40435eff722e81e29aaa7ad437cb17ee6f986d97242217a2fc66fbe1bf78')
     version('02-04', sha256='4e68230b558b3ba471b67d717bddabe609baa25f0228c18a2e8889ed9630f076')
 
