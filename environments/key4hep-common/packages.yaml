@@ -130,6 +130,8 @@ packages:
     target: []
     providers: {}
     compiler: []
+  acts:
+    version: [5.00.0]
   dd4hep:
     variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
     buildable: true
