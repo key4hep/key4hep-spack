@@ -145,6 +145,6 @@ packages:
     buildable: true
     version: []
     providers:
-      gl: [mesa18]
-      glu: [mesa18]
+      gl: [mesa]
+      glu: [mesa]
     compiler: []
