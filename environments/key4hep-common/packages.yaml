@@ -28,7 +28,7 @@ packages:
     providers: {}
     compiler: []
   geant4:
-    variants: ~qt~opengl+vecgeom
+    variants: ~qt~opengl+vecgeom cxxstd=17
     buildable: true
     version: []
     target: []
