@@ -58,7 +58,7 @@ packages:
     providers: {}
     compiler: []
   root:
-    version: [6.22.06]
+    version: [6.24.00]
     variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd
       cxxstd=17
     buildable: true
