@@ -1,7 +1,7 @@
 packages:
   all:
     target: [broadwell]
-    variants: build_type=Release
+    variants: build_type=Release cxxstd=17
     buildable: true
     version: []
     providers:
@@ -50,17 +50,9 @@ packages:
     target: []
     providers: {}
     compiler: []
-  xercesc:
-    variants: cxxstd=11
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
   root:
     version: [6.24.00]
     variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd
-      cxxstd=17
     buildable: true
     target: []
     providers: {}
