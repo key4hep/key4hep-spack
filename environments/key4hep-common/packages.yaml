@@ -1,4 +1,13 @@
 packages:
+  all:
+    target: [broadwell]
+    variants: build_type=Release cxxstd=17
+    buildable: true
+    version: []
+    providers:
+      gl: [mesa]
+      glu: [mesa]
+    compiler: []
   guinea-pig:
     variants: +fftw3
     buildable: true
@@ -132,19 +141,12 @@ packages:
     compiler: []
   acts:
     version: [5.00.0]
+  binutils:
+    variants: +plugins       
   dd4hep:
     variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
     buildable: true
     version: []
     target: []
     providers: {}
-    compiler: []
-  all:
-    target: [broadwell]
-    variants: build_type=Release cxxstd=17
-    buildable: true
-    version: []
-    providers:
-      gl: [mesa]
-      glu: [mesa]
     compiler: []
