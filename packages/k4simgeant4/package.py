@@ -5,13 +5,13 @@ from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_
 class K4simgeant4(CMakePackage, Key4hepPackage):
     """Software framework of the FCC project"""
     homepage = "https://github.com/HEP-FCC/k4SimGeant4/"
-    url      = "https://github.com/HEP-FCC/k4SimGeant4/archive/v0.16.tar.gz"
+    url      = "https://github.com/HEP-FCC/k4SimGeant4/archive/v0.1.0pre05.tar.gz"
     git      = "https://github.com/HEP-FCC/k4SimGeant4.git"
 
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    version("0.1.0pre04", tag="v0.1.0pre04")
+    version("0.1.0pre05", tag="v0.1.0pre05")
 
     variant('cxxstd',
             default='17',
