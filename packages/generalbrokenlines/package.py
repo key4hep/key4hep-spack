@@ -21,6 +21,7 @@ class Generalbrokenlines(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('2.2.1', sha256='4200837687c8eb03f7ba719787a2af35691366da258a045f9bb372f8fc69e120')
     version('2.2.0', sha256='81237239415d9c0ee05223c035f22353880084121b587c384ebd0a5754677dfc')
     version('2.1.3', sha256='f96bc7ae5e5d1199517598a44c293b793e5d8e987e1737fae0b67ffc1f8c4f9f')
     version('2.1.2', sha256='a0a81c0682501016df8a0760234138e4546c88dbafa40ef29050d2929bdc9827')
