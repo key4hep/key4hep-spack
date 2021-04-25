@@ -18,6 +18,7 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('02-04-01', sha256='78fb40435eff722e81e29aaa7ad437cb17ee6f986d97242217a2fc66fbe1bf78')
     version('02-04', sha256='4e68230b558b3ba471b67d717bddabe609baa25f0228c18a2e8889ed9630f076')
 
     depends_on('ilcutil')
