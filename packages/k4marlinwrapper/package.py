@@ -17,6 +17,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.3.1',  sha256='a8ef66f6500b9a709b950cdfd3bcb0c775d7fa42336b2aa5c80e2efef7c95b19')
     version('0.3',    sha256='381fd96e2ede03bec048afaeef13b8efffe80030fc097fe18fae62b03c0fba94')
     version('0.2.1',  sha256='7aeb0cfff97fe67bb046ea80e7ed219a51c31add2b7770cdb9fd022a1b1497b9')
     version('0.2',    sha256='15809cbc141364c5856c58f8b21e954bde29479703b79020e8b47dbd55f41f73')
