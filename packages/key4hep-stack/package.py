@@ -65,6 +65,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4fwcore")
     k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
 
+    depends_on("k4projecttemplate")
+    k4_add_latest_commit_as_dependency("k4projecttemplate", "key4hep/k4-project-template", when="@master")
+
+
     depends_on("k4simdelphes")
     k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
