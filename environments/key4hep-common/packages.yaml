@@ -1,6 +1,6 @@
 packages:
   all:
-    target: [broadwell]
+    target: [x86_64]
     variants: build_type=Release cxxstd=17
     buildable: true
     version: []
@@ -150,3 +150,7 @@ packages:
     target: []
     providers: {}
     compiler: []
+  gcc:
+    target: [haswell]
+  groff:
+    variants: ~pdf

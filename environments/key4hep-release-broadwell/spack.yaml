@@ -1,0 +1,15 @@
+spack:
+  include:
+  - key4hep-config.yaml
+  - geant4-data.yaml
+  - key4hep-packages.yaml
+  packages:
+    all:
+      target: [broadwell]
+      variants: build_type=Release cxxstd=17
+      buildable: true
+      version: []
+      providers:
+        gl: [mesa]
+        glu: [mesa]
+      compiler: []
