@@ -154,3 +154,5 @@ packages:
     target: [haswell]
   groff:
     variants: ~pdf
+  evtgen:
+    variants: +photos
