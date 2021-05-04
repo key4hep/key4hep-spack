@@ -1,0 +1,22 @@
+spack:
+  include:
+  - key4hep-config.yaml
+  - geant4-data.yaml
+  - key4hep-packages.yaml
+  view: false
+  modules:
+    enable: []
+  upstreams:
+    spack-instance-2:
+      install_tree: /cvmfs/sw.hsf.org/spackages2/
+    spack-instance-1:
+      install_tree: /cvmfs/sw.hsf.org/spackages/
+    spack-instance-sft:
+      install_tree: /cvmfs/sw.hsf.org/sft-spack/
+  config:
+    install_tree:
+      root: ~/.spack/opt/spack
+    module_roots:
+      lmod: ~/.spack/modules
+      tcl:  ~/.spack/modules
+
