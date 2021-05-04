@@ -52,7 +52,7 @@ packages:
     compiler: []
   root:
     version: [6.24.00]
-    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd
+    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd cxxstd=17
     buildable: true
     target: []
     providers: {}
@@ -84,7 +84,7 @@ packages:
     providers: {}
     compiler: []
   delphes:
-    version: [3.4.3pre08]
+    version: [3.4.3pre10]
     buildable: true
     target: []
     providers: {}
@@ -124,12 +124,6 @@ packages:
     variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=2
     buildable: true
     version: []
-    target: []
-    providers: {}
-    compiler: []
-  k4fwcore:
-    version: [1.0pre05]
-    buildable: true
     target: []
     providers: {}
     compiler: []
