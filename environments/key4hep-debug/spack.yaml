@@ -3,9 +3,6 @@ spack:
   - key4hep-config.yaml
   - geant4-data.yaml
   - key4hep-packages.yaml
-  config:
-      projections:
-        all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH}
   packages:
     all:
       variants: build_type=Debug cxxstd=17
