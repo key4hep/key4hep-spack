@@ -15,11 +15,10 @@ spack:
   - key4hep-packages.yaml
   packages:
     all:
-      target: [broadwell]
-      variants: build_type=Debug
+      variants: build_type=Debug cxxstd=17
     qhull:
-      variants: build_type=Release
+      variants: build_type=Release cxxstd=17
     ftgl:
-      variants: build_type=Release
+      variants: build_type=Release cxxstd=17
     cepcsw:
-      variants: build_type=Release
+      variants: build_type=Release cxxstd=17

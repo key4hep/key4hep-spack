@@ -5,14 +5,7 @@ spack:
   - key4hep-packages.yaml
   packages:
     all:
-      target: [broadwell]
       variants: build_type=Debug cxxstd=17
-      buildable: true
-      version: []
-      providers:
-        gl: [mesa18]
-        glu: [mesa18]
-      compiler: []
     qhull:
       variants: build_type=Release
     ftgl:
