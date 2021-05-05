@@ -9,4 +9,3 @@ spack:
   upstreams:
     spack-instance-21:
       install_tree: /cvmfs/sw.hsf.org/spackages/
-  specs: [key4hep-stack@2021-04-30]
