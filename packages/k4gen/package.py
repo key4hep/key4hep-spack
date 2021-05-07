@@ -5,12 +5,13 @@ from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_
 class K4gen(CMakePackage, Key4hepPackage):
     """Generator components for the Key4hep framework"""
     homepage = "https://github.com/HEP-FCC/k4Gen/"
-    url      = "https://github.com/HEP-FCC/k4Gen/archive/v0.16.tar.gz"
+    url      = "https://github.com/HEP-FCC/k4Gen/archive/refs/tags/v0.1pre02.tar.gz"
     git      = "https://github.com/HEP-FCC/k4Gen.git"
 
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.1pre02', tag='0.1pre02')
     version('0.1pre01', tag='0.1pre01')
 
     generator = 'Ninja'

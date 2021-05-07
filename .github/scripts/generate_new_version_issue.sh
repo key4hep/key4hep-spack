@@ -8,6 +8,10 @@ package_list=$(spack maintainers --by-user vvolkl mirguest tmadlener)
 #package_list=$(echo ${package_list} | tr ' ' '\n' | sort | uniq | tr '\n' ' ' | sed -e 's/[[:space:]]*$//')
 
 for p in ${package_list}; do
+  # ignore deprecated packages
+  if [[ "$p" == "py-awkward1" ]] || [[ "$p" == "py-uproot4" ]]; then
+    continue
+  fi
   v=$(spack versions --new $p)
   # ignore pre and rc versions
   v=$(echo $v | sed 's/\S*\(rc\|pre\|alpha\)\S*//g')
