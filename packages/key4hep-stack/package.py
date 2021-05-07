@@ -193,18 +193,21 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
       # get all dependency specs, including compiler
       with spack.store.db.read_transaction():
                specs = [dep for dep in spec.traverse(order='post')]
-               try: 
-                   gcc_spec = spack.cmd.disambiguate_spec(str(spec.compiler), 
-                                                          None,
-                                                          first=True)
-                   gcc_specs = [dep for dep in gcc_spec.traverse( order='post')]
-                   specs = specs + gcc_specs
-               except:
-                   tty.warn("No spec found for " + str(spec.compiler) +
-                            ". Assuming it is a system compiler,"
-                            "not adding it to the setup.")
       # record all changes to the environment by packages in the stack
       env_mod = spack.util.environment.EnvironmentModifications()
+      # first setup compiler, similar to build_environment.py in spack
+      compiler = self.compiler
+      if compiler.cc:
+          env_mod.set('CC', compiler.cc)
+      if compiler.cxx:
+          env_mod.set('CXX', compiler.cxx)
+      if compiler.f77:
+          env_mod.set('F77', compiler.f77)
+      if compiler.fc:
+          env_mod.set('FC',  compiler.fc)
+      compiler.setup_custom_environment(self, env_mod)
+      env_mod.prepend_path('PATH', os.path.dirname(compiler.cxx))
+      # now setup all other packages
       for _spec in specs:
           env_mod.extend(uenv.environment_modifications_for_spec(_spec))
           env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
