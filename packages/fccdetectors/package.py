@@ -4,9 +4,9 @@ from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_
 
 class Fccdetectors(CMakePackage, Key4hepPackage):
     """Software framework of the FCC project"""
-    homepage = "https://github.com/HEP-FCC/fccDetectors/"
-    url      = "https://github.com/HEP-FCC/fccDetectors/archive/v0.16.tar.gz"
-    git      = "https://github.com/HEP-FCC/fccDetectors.git"
+    homepage = "https://github.com/HEP-FCC/FCCDetectors/"
+    url      = "https://github.com/HEP-FCC/FCCDetectors/archive/refs/tags/v0.1pre03.tar.gz"
+    git      = "https://github.com/HEP-FCC/FCCDetectors.git"
 
     maintainers = ['vvolkl']
 
