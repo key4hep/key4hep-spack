@@ -42,7 +42,7 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     depends_on("gear")
     depends_on("lcio")
     depends_on("doxygen", when="+doc")
-    depends_on("qt4", when="+gui")
+    depends_on("qt@:4.99.99", when="+gui")
     depends_on("lccd", when="+lccd")
     depends_on("clhep", when="+clhep")
     depends_on("raida", when="+aida")
