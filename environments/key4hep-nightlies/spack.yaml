@@ -19,6 +19,7 @@ spack:
   include:
   - geant4-data.yaml
   - key4hep-packages.yaml
+  - compilers.yaml
   packages:
     qhull:
       variants: build_type=Release

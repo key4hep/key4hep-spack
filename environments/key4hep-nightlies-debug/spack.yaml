@@ -17,6 +17,7 @@ spack:
   include:
   - geant4-data.yaml
   - key4hep-packages.yaml
+  - compilers.yaml
   packages:
     all:
       variants: build_type=Debug cxxstd=17

@@ -3,6 +3,7 @@ spack:
   - key4hep-config.yaml
   - geant4-data.yaml
   - key4hep-packages.yaml
+  - compilers.yaml
   upstreams:
     spack-instance-21:
       install_tree: /cvmfs/sw.hsf.org/spackages/
