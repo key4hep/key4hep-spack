@@ -144,9 +144,9 @@ packages:
     target: []
     providers: {}
     compiler: []
-  gcc:
-    target: [haswell]
   groff:
     variants: ~pdf
   evtgen:
     variants: +photos
+  gdb:
+    variants: ~python
