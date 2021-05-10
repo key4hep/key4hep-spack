@@ -145,7 +145,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #######################################################
     depends_on("cmake", when="+devtools")
     depends_on('man-db', when="+devtools")
-    depends_on("gdb", "when=+devtools")
+    depends_on("gdb", when="+devtools")
     depends_on("emacs+X toolkit=athena", when="+devtools")
     depends_on("ninja", when="+devtools")
     depends_on("py-ipython", when="+devtools")
