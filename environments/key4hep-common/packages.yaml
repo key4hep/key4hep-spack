@@ -150,3 +150,5 @@ packages:
     variants: +photos
   gdb:
     variants: ~python
+  gaudi:
+    variants: +optional
