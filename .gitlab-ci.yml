@@ -71,6 +71,8 @@ build-spack-nightlies:
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - cd environments/$SPACKENV
         - source pathsetup.sh
+        # avoid bootstrapping clingo
+        - source setup_clingo_centos7.sh
         - spack env activate .
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
