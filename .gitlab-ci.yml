@@ -76,7 +76,7 @@ build-spack-nightlies:
         - spack env activate .
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
-        - spack install --test=all --fail-fast 
+        - spack install  --fail-fast 
 
 
 
