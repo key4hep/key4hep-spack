@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bcc1896..804afef 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -131,7 +131,7 @@ else()
+ 
+     #-------------------------------------------------------------------------------------------------------------------------------------------
+     # Low level settings - compiler etc
+-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -pedantic -Wno-long-long -Wshadow -fno-strict-aliasing -std=c++17 ${CMAKE_CXX_FLAGS}")
++    set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wno-long-long -Wshadow -fno-strict-aliasing -std=c++17 ${CMAKE_CXX_FLAGS}")
+ 
+     include(CheckCXXCompilerFlag)
+     unset(COMPILER_SUPPORTS_CXX_FLAGS CACHE)
+diff --git a/Makefile b/Makefile
+index 343423b..00a5d3d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -10,7 +10,7 @@ ifndef EIGEN_INC
+ endif
+ 
+ CC = g++
+-CFLAGS = -c -g -fPIC -O2 -Wall -Wextra -Werror -pedantic -Wno-long-long -Wno-sign-compare -Wshadow -fno-strict-aliasing -std=c++17
++CFLAGS = -c -g -fPIC -O2 -Wall -Werror -pedantic -Wno-long-long -Wno-sign-compare -Wshadow -fno-strict-aliasing -std=c++17
+ ifdef BUILD_32BIT_COMPATIBLE
+     CFLAGS += -m32
+ endif

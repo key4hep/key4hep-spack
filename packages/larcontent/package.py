@@ -26,6 +26,7 @@ class Larcontent(CMakePackage):
     patch("path2.patch")
     patch("path3.patch")
     patch("path4.patch")
+    patch("allow_unused.patch", when='@3.22.9: %clang@12.0.0:')
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
