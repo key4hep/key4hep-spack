@@ -6,10 +6,8 @@ spack:
   include:
   - key4hep-packages.yaml
   # add package specs to the `specs` list
-  specs: [cmake, root, python, edm4hep, dd4hep, k4simdelphes, whizard, delphes, madgraph5amc,
-    herwigpp, thepeg, thepeg@1.9.2%clang@12.0.0 hepmc=2 patches=cb8014f29f171da8ba45b34aaee3aa377c81b48fcfd91ff40e65b2ed55f391b3,
-    lhapdf@6.2.3, ilcsoft, fccsw, fccanalyses, fccdetectors]
-  view: true
+  specs: []
+  view: false
   compilers:
   - compiler:
       paths:
