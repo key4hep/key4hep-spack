@@ -19,6 +19,7 @@ class Larcontent(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('3.22.11', sha256='4985435c9ca85b6bf5c37be5956fba68c8b3be32b73015118df421496e68e80e')
     version('3.22.9', sha256='44ca286faa93fc77dd78010261f06b85ba512b1135fe6bc40659accb9385104f')
     version('3.19.0', sha256='21f52e9d512842e3413967c6b326a8a9fa68e2ac54f39a542c4e31c80dfac3eb')
 
@@ -26,6 +27,7 @@ class Larcontent(CMakePackage):
     patch("path2.patch")
     patch("path3.patch")
     patch("path4.patch")
+    patch("range_construct_01.patch")
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
