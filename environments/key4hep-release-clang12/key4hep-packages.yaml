@@ -1,0 +1,152 @@
+packages:
+  all:
+    target: [x86_64]
+    variants: build_type=Release cxxstd=17
+    buildable: true
+    version: []
+    providers:
+      gl: [mesa]
+      glu: [mesa]
+    compiler: [clang@12.0.0]
+  guinea-pig:
+    variants: +fftw3
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  fftw:
+    variants: ~mpi
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  mesa18:
+    variants: ~llvm+glx+opengl swr=none
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  mesa:
+    variants: ~llvm+glx+opengl swr=none
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  geant4:
+    variants: ~qt~opengl+vecgeom cxxstd=17
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  boost:
+    variants: +python
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  root:
+    version: [6.24.00]
+    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+vmc+x+xml+xrootd cxxstd=17
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  marlin:
+    variants: ~lccd
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  ocaml:
+    version: [4.10.0]
+    variants: ~force-safe-string
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  curl:
+    version: [7.72.0]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  python:
+    version: [3.7.8]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  delphes:
+    version: [3.4.3pre10]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  py-numpy:
+    version: [1.18.5]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  py-tensorflow:
+    variants: [~cuda~nccl]
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  fmt:
+    version: [6.1.2]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  expat:
+    version: [2.2.9]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  perl:
+    version: [5.30.3]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  whizard:
+    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=2
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  cmake:
+    version: [3.18.4]
+    buildable: true
+    target: []
+    providers: {}
+    compiler: []
+  acts:
+    version: [5.00.0]
+  binutils:
+    variants: +plugins
+  dd4hep:
+    variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  groff:
+    variants: ~pdf
+  evtgen:
+    variants: +photos
+  gdb:
+    variants: ~python
