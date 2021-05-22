@@ -48,7 +48,12 @@ class Kkmcee(AutotoolsPackage):
         elif name == 'cxxflags':
             flags.append('-O2')
             flags.append('-g0')
-        return (None, None, flags)
+        elif name == 'fflags':
+            if self.spec.satisfies('%gcc@10:'):
+                if flags is None:
+                    flags = []
+                flags.append('-fallow-argument-mismatch')
+        return (flags, None, flags)
 
     def build(self, spec, prefix):
         with working_dir('ffbench'):
