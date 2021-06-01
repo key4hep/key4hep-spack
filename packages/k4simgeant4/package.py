@@ -11,7 +11,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-    version("0.1.0pre05", tag="v0.1.0pre05")
+    version("0.1.0pre06", tag="v0.1.0pre06")
 
     variant('cxxstd',
             default='17',
