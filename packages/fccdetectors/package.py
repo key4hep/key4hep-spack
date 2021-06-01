@@ -13,7 +13,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     version('main', branch='main')
     # can be removed once the ci is fixed
     version('master', branch='main')
-    version("0.1pre04", tag="v0.1pre04")
+    version("0.1pre05", tag="v0.1pre05")
 
 
     variant('cxxstd',
