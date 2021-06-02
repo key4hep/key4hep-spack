@@ -94,7 +94,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('KKMCee')
 
     depends_on("delphes")
-    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
+    # wait for issues in delphes master to be fixed
+    #k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
 
     ##################### general purpose generators ######
     #######################################################
