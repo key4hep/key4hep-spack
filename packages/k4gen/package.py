@@ -11,8 +11,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    version('0.1pre02', tag='v0.1pre02')
-    version('0.1pre01', tag='0.1pre01')
+    version('0.1pre03', tag='v0.1pre03')
 
     generator = 'Ninja'
 
