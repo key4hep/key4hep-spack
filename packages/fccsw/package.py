@@ -11,8 +11,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
-    version('1.0pre01', tag="v1.0pre01")
+    version('1.0pre02', tag="v1.0pre02")
 
     variant('cxxstd',
             default='17',
