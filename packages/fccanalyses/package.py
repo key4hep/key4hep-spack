@@ -10,6 +10,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'clementhelsens']
   
     version('master', branch='master')
+    version('0.3.3', sha256='04d947517ace952f4bb4b2a9479883b22dce5229084ae4ff037ae299d23e1d2c')
     version('0.3.2', sha256='32a238ebf9019440e81da01e52d3109d32d51c80f7c67a5a456860eb67e42221')
     version('0.3.1', sha256='736e4243493d32744ef5b974ae4e60e43c1ab467ba58df6afdf495fccb165dc3')
     version('0.3.0', sha256='b9ad4f3d9a587f4a1666c9ff5880020f43564a4a0e615d2ce7169bc751134dcf')
@@ -36,4 +37,6 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
       spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-      spack_env.set("FCCANALYSES", self.prefix.share.FCCAnalyses)
+      # this should point to share/ by key4hep convention
+      #  but we want to make it work with the tutorials
+      spack_env.set("FCCANALYSES", self.prefix.python)
