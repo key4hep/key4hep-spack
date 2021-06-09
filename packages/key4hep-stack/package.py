@@ -57,7 +57,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
 
     depends_on('podio')
-    k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
+    # TODO: temporarily disable due to known issue with https://github.com/AIDASoft/podio/pull/193
+    #k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
 
     depends_on('dd4hep')
     k4_add_latest_commit_as_dependency("dd4hep", "aidasoft/dd4hep", when="@master")
