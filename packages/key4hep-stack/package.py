@@ -41,7 +41,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #######################################################
     variant('devtools', default=True,
             description="add tools necessary for software development to the stack")
-    variant('generators', default=False,
+    variant('generators', default=True,
             description="add some standalone generators to the stack")
     variant('bootstrap', default=False,
             description="install some spack setup tools")
