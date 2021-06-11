@@ -40,4 +40,4 @@ jobs:
         cd ${GITHUB_WORKSPACE}/../spack
         source share/spack/setup-env.sh
         ${GITHUB_WORKSPACE}/.github/scripts/generate_new_version_issue.sh
-        ${GITHUB_WORKSPACE}/.github/scripts/post_new_version_issue.sh
+        ${GITHUB_WORKSPACE}/.github/scripts/post_new_version_issue_comment.sh
