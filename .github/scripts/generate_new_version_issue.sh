@@ -13,8 +13,16 @@ for p in ${package_list}; do
     continue
   fi
   v=$(spack versions --new $p)
-  # ignore pre and rc versions
+  # ignore pre and rc versions (for all packages)
   v=$(echo $v | sed 's/\S*\(rc\|pre\|alpha\)\S*//g')
+  # ignore alpha and beta versions for py-kubernetes
+  if [[ "$p" == "py-kubernetes" ]] ; then
+    v=$(echo $v | sed 's/\S*\(a\|b\)\S*//g')
+  fi
+  # ignore version 00-03-02 for edm4hep which has no code changes
+  if [[ "$p" == "edm4hep" ]] ; then
+    v=$(echo $v | sed 's/\S*\(00-03-02\)\S*//g')
+  fi
   if [[ ! -z "$v" ]]; then
     echo "- [ ] \`$p\`: \`$v\` " >> gh-new-version.log
   fi
