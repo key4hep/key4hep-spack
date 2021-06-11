@@ -144,6 +144,13 @@ packages:
     target: []
     providers: {}
     compiler: []
+  k4simdelphes:
+    variants: ~delphes_hepmc
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   groff:
     variants: ~pdf
   evtgen:
