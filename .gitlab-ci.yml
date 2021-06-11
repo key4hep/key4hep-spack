@@ -1,5 +1,4 @@
 
-
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
@@ -70,7 +69,8 @@ build-spack-nightlies:
         - source spack/share/spack/setup-env.sh
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - cd environments/$SPACKENV
-        - source pathsetup.sh
+        # symlink to latest now handled by deploy step
+        #- source pathsetup.sh
         # avoid bootstrapping clingo
         - source setup_clingo_centos7.sh
         - spack env activate .
@@ -132,11 +132,19 @@ build-spack-release:
         # compile onwards and upwards
         - echo $K4STACK_VERSION
         - cd environments/${SPACKENV}
-        - source ./pathsetup.sh
-        - echo $K4_LATEST_SETUP_PATH
+        # symlink to latest now handled by deploy step
+        #- source ./pathsetup.sh
+        #- echo $K4_LATEST_SETUP_PATH
         - spack env activate .
         - spack add key4hep-stack@${K4STACK_VERSION}
         - spack install --fail-fast key4hep-stack | tee -a key4hep-stack-install.log
+        - SPACKENV_PATH = tail -n 1 key4hep-stack-install.log | cut --delimiter " " --fields 2
+        - echo "${SPACKENV}_PATH=${SPACKENV_PATH}" >> build.env
+    artifacts:
+        paths:
+          - environments/${SPACKENV}/key4hep-stack-install.log
+        reports:
+          dotenv: build.env
 
 
 buildtest-spack-release:
@@ -160,9 +168,9 @@ buildtest-spack-release:
     script:
         - echo ${SPACKENV}
         - ls environments/${SPACKENV}
-        - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_LATEST_SETUP_PATH}
-        - source ${K4_LATEST_SETUP_PATH}
+        - K4_LATEST_SETUP_PATH=${SPACKENV}_PATH
+        - echo ${!K4_LATEST_SETUP_PATH}
+        - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
 
 
@@ -202,9 +210,10 @@ wait-cvmfs-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
-        - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_LATEST_SETUP_PATH}
-        - while [ ! -f ${K4_LATEST_SETUP_PATH} ]; do sleep 10; done
+        - K4_LATEST_SETUP_PATH=${SPACKENV}_PATH
+        - echo ${!K4_LATEST_SETUP_PATH}
+        - source ${!K4_LATEST_SETUP_PATH}/setup.sh
+        - while [ ! -f ${!K4_LATEST_SETUP_PATH} ]; do sleep 10; done
 
 test-cvmfs-release:
     stage: installtest
@@ -223,9 +232,9 @@ test-cvmfs-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
-        - source environments/${SPACKENV}/pathsetup.sh
-        - echo ${K4_LATEST_SETUP_PATH}
-        - source ${K4_LATEST_SETUP_PATH}
+        - K4_LATEST_SETUP_PATH=${SPACKENV}_PATH
+        - echo ${!K4_LATEST_SETUP_PATH}
+        - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
 
 
