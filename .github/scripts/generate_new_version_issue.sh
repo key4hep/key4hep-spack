@@ -23,7 +23,8 @@ for p in ${package_list}; do
   if [[ "$p" == "edm4hep" ]] ; then
     v=$(echo $v | sed 's/\S*\(00-03-02\)\S*//g')
   fi
-  if [[ ! -z "$v" ]]; then
+  # using `echo $v` instead of "$v" will handle v=" " correctly
+  if [[ ! -z `echo $v` ]]; then
     echo "- [ ] \`$p\`: \`$v\` " >> gh-new-version.log
   fi
 done
