@@ -31,3 +31,7 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     depends_on('ced')
     depends_on('dd4hep')
     depends_on('root')
+
+    def cmake_args(self):
+        # Make sure that we pick the right GSL
+        return ['-DGSL_DIR={}'.format(self.spec['gsl'].prefix)]
