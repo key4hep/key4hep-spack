@@ -1,4 +1,3 @@
-
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
@@ -76,7 +75,7 @@ build-spack-nightlies:
         - spack env activate .
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         # compile onwards and upwards
-        - spack install  --fail-fast 
+        - spack install  --fail-fast --test=all 
 
 
 
