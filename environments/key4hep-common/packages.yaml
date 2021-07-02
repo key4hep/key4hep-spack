@@ -159,3 +159,5 @@ packages:
     variants: ~python
   gaudi:
     variants: +optional
+  py-setuptools-scm:
+    variants: +toml
