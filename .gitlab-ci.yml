@@ -1,3 +1,4 @@
+
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone

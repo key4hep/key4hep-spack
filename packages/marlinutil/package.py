@@ -21,6 +21,7 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('1.16', sha256='7f80a726e3b08653a88487b87618fca277d59fe22a448ce15043f8495f1108e9')
     version('1.15.1',  sha256='05e878c9aae4a675e37ad2c63abc0b1c4c2a45dcb2e3c9ae5c31e7e6f64118bf')
 
     depends_on('ilcutil')
@@ -30,3 +31,7 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     depends_on('ced')
     depends_on('dd4hep')
     depends_on('root')
+
+    def cmake_args(self):
+        # Make sure that we pick the right GSL
+        return ['-DGSL_DIR={}'.format(self.spec['gsl'].prefix)]
