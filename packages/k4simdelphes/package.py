@@ -55,7 +55,15 @@ class K4simdelphes(CMakePackage):
 
     def setup_build_environment(self, env):
         env.set('PYTHIA8', self.spec["pythia8"].prefix)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
 
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
         env.prepend_path("PYTHONPATH", self.prefix.python)
+
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        spack_env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
+        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)

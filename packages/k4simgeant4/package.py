@@ -35,10 +35,12 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
         return args
 
-    def setup_build_environment(self, spack_env):
-        spack_env.set('G4ENSDFSTATEDATA', self.spec["g4ensdfstate"].prefix + "/share/data/G4ENSDFSTATE2.3/")
-
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4SIMGEANT4", self.prefix.share.k4SimGeant4)
+
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
