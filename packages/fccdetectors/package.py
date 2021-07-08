@@ -23,6 +23,8 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
             description='Use the specified C++ standard when building.')
 
     depends_on('dd4hep +geant4')
+    depends_on('lcgeo')
+    depends_on('lcio')
 
     def cmake_args(self):
         args = []
@@ -32,6 +34,20 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
+        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+
+    def setup_build_environment(self, spack_env):
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
         spack_env.prepend_path("PYTHONPATH", self.prefix.python)
 
     def test(self):

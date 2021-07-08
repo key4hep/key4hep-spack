@@ -53,3 +53,11 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
         env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
+
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        spack_env.set('LCGEO', self.prefix.share.lcgeo.compact)
+        spack_env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib64)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')

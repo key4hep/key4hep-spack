@@ -19,12 +19,15 @@ class Fccsw(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
+    depends_on("gaudi", type=("test", "run"))
     depends_on("k4fwcore", type=("test", "run"))
     depends_on("k4gen", type=("test", "run"))
     depends_on("k4simdelphes", type=("test", "run"))
     depends_on("fccdetectors", type=("test", "run"))
     depends_on("k4simgeant4", type=("test", "run"))
     depends_on("k4reccalorimeter", type=("test", "run"))
+    depends_on("fcc-edm", type=("test", "run"))
+    depends_on("lcgeo", type=("test", "run"))
 
     def cmake_args(self):
         args = []
@@ -32,5 +35,14 @@ class Fccsw(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
         return args
 
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        spack_env.set("FCCSW", self.prefix.share.FCCSW)
+        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+
     def setup_run_environment(self, spack_env):
         spack_env.set("FCCSW", self.prefix.share.FCCSW)
+        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+
+    def setup_build_environment(self, spack_env):
+        spack_env.set("FCCSW", self.prefix.share.FCCSW)
+        spack_env.prepend_path("PYTHONPATH", self.prefix.python)

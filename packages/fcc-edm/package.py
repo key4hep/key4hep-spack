@@ -52,3 +52,9 @@ class FccEdm(CMakePackage, Key4hepPackage):
     def check(self):
         with working_dir(self.build_directory):
             make("test", "CTEST_OUTPUT_ON_FAIL=1")
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+            env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include)
+
+    def setup_run_environment(self, env):
+            env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include)

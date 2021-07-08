@@ -45,6 +45,12 @@ class K4fwcore(CMakePackage, Key4hepPackage):
     def url_for_version(self, version):
         return ilc_url_for_version(self, version)
 
+    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+        # needed to set up the runtime dependencies for tests
+        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+        spack_env.prepend_path("PATH", self.prefix.scripts)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
     
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)

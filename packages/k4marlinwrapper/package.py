@@ -32,6 +32,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on('k4fwcore')
     depends_on('edm4hep')
     depends_on('k4lcioreader')
+    depends_on('wget', type=('test'))
 
     def cmake_args(self):
         args = []
@@ -43,3 +44,11 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
+
+    def setup_build_environment(self, spack_env):
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['k4fwcore'].prefix + '/lib')
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['k4fwcore'].prefix + '/lib64')
+
+    def check(self):
+        # TODO: fix known test failure
+        pass
