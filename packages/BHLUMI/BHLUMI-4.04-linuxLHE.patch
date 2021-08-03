@@ -1,0 +1,103 @@
+--- ./4.x-cpc/makefile.orig	2021-08-03 17:20:37.672824726 +0200
++++ ./4.x-cpc/makefile	2021-08-03 16:40:45.000000000 +0200
+@@ -44,8 +44,8 @@
+ #
+ #	For more see figs/makefile
+ ###########################################################################
+-FFLAGS  =  -fno-automatic -ffixed-line-length-132 -fbackslash -C -O
+-LDFLAGS = 
++FFLAGS  = -g -fno-automatic -ffixed-line-length-132 -fbackslash -C -O2
++LDFLAGS = -g -O2
+ F77 = gfortran
+ LD  = $(F77)
+ #-----------------------------------------------------------------------
+@@ -138,6 +138,8 @@
+ #-----------------------------------------------------------------------
+ #                   MC Production
+ #-----------------------------------------------------------------------
++prod1-run:  $(COMMAND2)
++	(cd prod1;  make run)
+ prod1-start:  $(COMMAND2)
+ 	(cd prod1;  make start)
+ prod1-stop:
+@@ -250,4 +252,4 @@
+ #### tags: v404a (12sept), v404b (13sept) v404c (16sept) v404d (17sept)
+ #### tags: v404e (18sept), v404f (20sept) v404g (20sept) v404h (20sept)
+ #### tags: v404i (20sept), v404j (21sept) v404k (21sept) v404l (23sept) 
+-#### tags: v404m (25sept) 
+\ No newline at end of file
++#### tags: v404m (25sept) 
+--- ./4.x-cpc/figs/makefile.orig	2021-08-03 17:20:44.082903170 +0200
++++ ./4.x-cpc/figs/makefile	2021-08-03 17:17:43.000000000 +0200
+@@ -38,8 +38,8 @@
+ # FFLAGS  =  -C -qextchk -qinitauto=FF -bloadmap:lmap -qflttrap=overflow:underflow:zerodivide:invalid:enable
+ # LDFLAGS =  -C -qextchk -qinitauto=FF -bloadmap:lmap -qflttrap=overflow:underflow:zerodivide:invalid:enable
+ ########### actual flags
+-FFLAGS  =  -fno-automatic -ffixed-line-length-132 -fbackslash -C -O
+-LDFLAGS = -O
++FFLAGS  = -g -fno-automatic -ffixed-line-length-132 -fbackslash -C -O2
++LDFLAGS = -g -O2
+ #----------------------------------------------------------------------
+ F77 = gfortran
+ LD  = $(F77)
+--- ./400/makefile.orig	2021-08-03 17:20:51.423993008 +0200
++++ ./400/makefile	2021-08-03 16:30:26.000000000 +0200
+@@ -10,7 +10,7 @@
+ LD = $(F77)
+ AR = ar
+ RANLIB = ranlib
+-FFLAGS  =  -fno-automatic -ffixed-line-length-132 -fbackslash -C -O
++FFLAGS  =  -g -fno-automatic -ffixed-line-length-132 -fbackslash -C -O2
+ ########### collection of ibm  flags ###########
+ #FFLAGS  =  -O   -C -qextchk  -bloadmap:lmap
+ #FFLAGS  =  -C -qextchk -qinitauto=FF -bloadmap:lmap -qflttrap=overflow:underflow:zerodivide:invalid:enable
+--- ./lib/makefile.orig	2021-08-03 17:20:55.462042424 +0200
++++ ./lib/makefile	2021-08-03 16:30:17.000000000 +0200
+@@ -14,7 +14,7 @@
+ #FFLAGS  = -C -qextchk -qinitauto=FF  -bloadmap:lmap -qflttrap=overflow:underflow:zerodivide:invalid:enable
+ ###############################################
+ # actual flags
+-FFLAGS  =  -fno-automatic -ffixed-line-length-132 -fbackslash -C -O
++FFLAGS  =  -g -fno-automatic -ffixed-line-length-132 -fbackslash -C -O2
+ ##############################################################################
+ .f.o:
+ 	$(F77) $(FFLAGS) -c $<
+--- 400/bhlum4.f.orig	2021-08-03 17:39:59.142038917 +0200
++++ 400/bhlum4.f	2021-08-03 17:37:41.995360067 +0200
+@@ -1345,7 +1345,7 @@
+       SAVE   / MOMSET /
+       REAL*8 SUM(4)
+ 
+-      DO J=1,5
++      DO J=1,4
+          SUM(J)=0.
+       ENDDO
+       
+@@ -1353,7 +1353,7 @@
+ 
+       
+       DO I=1,NPHOT
+-         DO J=1,5
++         DO J=1,4
+             SUM(J)= SUM(J)+ PHOT(I,J)
+          ENDDO
+       ENDDO
+--- 4.x-cpc/makefile.orig	2021-08-03 16:40:45.000000000 +0200
++++ 4.x-cpc/makefile	2021-08-03 18:45:40.233350839 +0200
+@@ -78,6 +78,7 @@
+ demo: $(COMMAND)
+ 	(cd demo;   time ../demo.exe )
+ 	(cd demo;   latex demo.tex;  xdvi demo; dvips demo.dvi -o )
++lhemain: $(COMMAND2)
+ demo-diff-rs:
+ 	(cd demo; diff demo.output.100k.keypia.eq.2.keywgt.eq.0.rs demo.output)
+ 	(cd demo; diff demo.tex.100k.keypia.eq.2.keywgt.eq.0.rs    demo.tex)
+@@ -138,8 +139,6 @@
+ #-----------------------------------------------------------------------
+ #                   MC Production
+ #-----------------------------------------------------------------------
+-prod1-run:  $(COMMAND2)
+-	(cd prod1;  make run)
+ prod1-start:  $(COMMAND2)
+ 	(cd prod1;  make start)
+ prod1-stop:
