@@ -7,7 +7,7 @@ from spack import *
 import os
 
 
-class Bhlumi(AutotoolsPackage):
+class Bhlumi(MakefilePackage):
 
     """BHLUMI is the state of art Monte Carlo for e+e- -> e+e- gamma (gamma ...)."""
 
@@ -19,12 +19,6 @@ class Bhlumi(AutotoolsPackage):
 
     version('4.04-linuxLHE', sha256='266042ce18166807c45d4d9f6e543f8571a8479cf87f0da6b87312ed3129ef0f')
 
-#     depends_on('autoconf', type='build')
-#     depends_on('automake', type='build')
-#     depends_on('libtool',  type='build')
-#     depends_on('m4',       type='build')
-#     depends_on('root')
-
     patch('BHLUMI-4.04-linuxLHE.patch', level=0)
 
     variant('cxxstd',
@@ -32,28 +26,6 @@ class Bhlumi(AutotoolsPackage):
             values=('11', '14', '17'),
             multi=False,
             description='Use the specified C++ standard when building.')
-
-#    @run_before('autoreconf')
-#    def create_symlink(self):
-#        os.symlink('dizet-6.45', 'dizet')
-#
-#
-#    def autoreconf(self, spec, prefix):
-#        autoreconf('--install', '--force')
-#
-#    def flag_handler(self, name, flags):
-#        if name == 'cflags':
-#            flags.append('-O2')
-#            flags.append('-g0')
-#        elif name == 'cxxflags':
-#            flags.append('-O2')
-#            flags.append('-g0')
-#        elif name == 'fflags':
-#            if self.spec.satisfies('%gcc@10:'):
-#                if flags is None:
-#                    flags = []
-#                flags.append('-fallow-argument-mismatch')
-#        return (flags, None, flags)
 
     def build(self, spec, prefix):
         with working_dir('4.x-cpc'):
@@ -72,23 +44,3 @@ class Bhlumi(AutotoolsPackage):
         install(script_sh, script)
         chmod('755', script)
 
-        mkdirp(prefix.etc.BHLUMI)
-
-#         install('.KK2f_defaults', join_path(prefix.etc.KKMCee, 'KK2f_defaults'))
-# 
-#         mkdirp(prefix.etc.KKMCee.dizet)
-#         for fn in ('mu', 'tau', 'nue', 'numu', 'nutau', 'up', 'down', 'botom'):
-#             install(join_path('dizet', 'table.' + fn), prefix.etc.KKMCee.dizet)
-# 
-#         mkdirp(prefix.share.KKMCee.examples)
-#         for fn in ('Mu', 'Tau', 'Up', 'Down', 'Botom', 'Beast', 'Inclusive'):
-#             fo = 'Bottom' if fn == 'Botom' else fn
-#             install(join_path('ffbench', fn, fn + '.input'), 
-#                     join_path(prefix.share.KKMCee.examples, fo + '.input'))
-
-        mkdirp(prefix.share.BHLUMI.iniseed)
-        install_tree(join_path('4.x-cpc', 'iniseed'), prefix.share.BHLUMI.iniseed)
-
-        mkdirp(prefix.share.BHLUMI.utils)
-        install(join_path('4.x-cpc', 'semaphore.start'), prefix.share.BHLUMI.utils)
-        install(join_path('4.x-cpc', 'semaphore.stop'), prefix.share.BHLUMI.utils)

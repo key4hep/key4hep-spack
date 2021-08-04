@@ -1,35 +1,40 @@
 #!/bin/bash
 
-# Wrapper around the KKMCee/ProdMC.exe executable
-# This script relies on the presence of CVMFS in the system and uses the KKMCee
-# provided by the LCG Releases
+# Wrapper around the BHLUMI/BHLUMI.exe executable
 
 help(){
    echo ""
-   echo "+++ Wrapper around the KKMCee/ProdMC.exe executable +++"
+   echo "+++ Wrapper around the BHLUMI.exe executable +++"
    echo ""
-   echo "Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]"
+   echo "Usage: \tBHLUMI -e Ecms -n Nevts -f Thmin -t Thmax -x epscms -o output_file [-s seed_file]"
    echo "       \tKKMCee -c config_file [-s seed_file]"
    echo ""
-   echo "Options:"
+   echo "Switches:"
    echo -e "  -c, --config file \t\tPath to configuration file"
-   echo -e "  -f, --flavour flavour \tFlavour to be generated (Mu|Tau|UDS|C|B|Hadrons)"
    echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
    echo -e "  -n, --nevts energy \t\t Number of events to be generated"
+   echo -e "  -k, --keyopt options \t\t Technical parameters switch (KEYOPT, for experts) [default 3021]"
+   echo -e "  -r, --keyrad options \t\t Physics parameters switch (KEYRAD, for experts) [default 1021]"   
+   echo -e "  -f, --Thmin theta \tMinimum theta [rad]"
+   echo -e "  -t, --Thmax theta \tMaximum theta [rad]"
+   echo -e "  -x, --epscms fraction \tEnergy cut-off in  fraction of Ecms"
    echo -e "  -o, --outfile file \t\tFile with the generated events in LHE format"
    echo -e "  -s, --seedfile file \t\tFile to be used for seeding (randomly generated, if missing)"
    echo ""
    echo "Examples:"
-   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE"
-   echo -e "KKMCee -c kkmc_ditau.input"
-   echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.LHE"
+   echo -e "BHLUMI -f 0.022 -t 0.082 -x 0.001 -e 91.2 -n 10000 -o kkmu_10000.LHE"
+   echo -e "BHLUMI -c bhlumi.input"
    echo ""
 }
 
-_FLAVOUR="Mu"
 _ECMS="91.2"
 _NEVTS="100"
-_OUTFILE="KKMCee_OUT.LHE"
+_THMIN=".022768344"
+_THMAX=".082035891"
+_EPSCMS="1D-3"
+_KEYOPT="3021"
+_KEYRAD="1021"
+_OUTFILE="BHLUMI_OUT.LHE"
 # Read arguments
 while [[ $# -gt 0 ]]
 do
@@ -45,8 +50,28 @@ do
             shift
             shift
         ;;
-        -f | --flavour)
-           _FLAVOUR="$2"
+        -f | --thmin)
+           _THMIN="$2"
+           shift
+           shift
+        ;;
+        -t | --thmax)
+           _THMAX="$2"
+           shift
+           shift
+        ;;
+        -x | --epscms)
+           _EPSCMS="$2"
+           shift
+           shift
+        ;;
+        -k | --keyopt)
+           _KEYOPT="$2"
+           shift
+           shift
+        ;;
+        -r | --keyrad)
+           _KEYRAD="$2"
            shift
            shift
         ;;
@@ -71,72 +96,40 @@ do
     esac
 done
 
-KKMCEE_DIR=$(dirname $(dirname $0))
-KKMCEE_EXE=${KKMCEE_DIR}/bin/KKMCee.exe
-KKMCEE_SHARE=${KKMCEE_DIR}/share/KKMCee
-KKMCEE_ETC=${KKMCEE_DIR}/etc/KKMCee
+BHLUMI_DIR=$(dirname $(dirname $0))
+BHLUMI_EXE=${BHLUMI_DIR}/bin/BHLUMI.exe
 
 # Run existing config file
+BHLUMIINPUT="./bhlumi.input"
+if test -f $BHLUMIINPUT ; then
+   echo "Existing input file saved to ${BHLUMIINPUT}.last ... "
+   cp -rp $BHLUMIINPUT "${BHLUMIINPUT}.last"
+   rm -f $BHLUMIINPUT
+fi
 if test ! "x$_CONFFILE" = "x" && test -f $_CONFFILE; then
-   ln -sf ${_CONFFILE} ./pro.input
+   ln -sf ${_CONFFILE} $BHLUMIINPUT
 else
 # We create a config file based on the input switches: this is the initial common part
-cat > ./pro.input <<EOF
- 1 1 0 0 0 0 0 0         KAT1-KAT8        <- Input for the main program
-    ${_NEVTS}      NEVT number of events
-----------cccccccccccccccccccccccccccccommentttttttttttttttttttttttttttttttttttt
-
-BeginX
-********************************************************************************
-*               ACTUAL DATA FOR THIS PARTICULAR RUN
-********************************************************************************
-*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
-*     Center-of-mass energy [GeV]
-    1        ${_ECMS}e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
-********************************************************************************
-*     Define process
-EOF
-   if test "x$_FLAVOUR" = "xMu"; then
-cat >> ./pro.input <<EOF
-  413              1      KFfin, muon
-EOF
-   elif test "x$_FLAVOUR" = "xTau"; then
-cat >> ./pro.input <<EOF
-  415              1      KFfin, tau
-EOF
-   elif test "x$_FLAVOUR" = "xUDS"; then
-cat >> ./pro.input <<EOF
-  401              1      KFfin, d
-  402              1      KFfin, u
-  403              1      KFfin, s
-EOF
-   elif test "x$_FLAVOUR" = "xC"; then
-cat >> ./pro.input <<EOF
-  404              1      KFfin, c
-EOF
-   elif test "x$_FLAVOUR" = "xB"; then
-cat >> ./pro.input <<EOF
-  405              1      KFfin, b
-EOF
-   elif test "x$_FLAVOUR" = "xHadrons"; then
-cat >> ./pro.input <<EOF
-  401              1      KFfin, d
-  402              1      KFfin, u
-  403              1      KFfin, s
-  404              1      KFfin, c
-  405              1      KFfin, b
-EOF
-   else
-     echo "Running mode not yet supported"
-     rm -fr ./pro.input  
-     exit 1
-   fi
-# Input file closing
-cat >> ./pro.input <<EOF
-  100              1      store lhe file to (${_OUTFILE})
-************************* one can change the lhf file name between brackets
-********************************************************************************
-EndX
+cat > $BHLUMIINPUT <<EOF
++++========= Input Data set for BHLUMI ===============================
+ 0 1 0 0 0 0 0 0    KAT1,KAT2,KAT3,KAT4,KAT5,KAT6,KAT7,KAT8
+ ${_NEVTS}      NEVT
+ ${_KEYOPT}     KEYOPT = 1000*KEYGEN +100*KEYREM +10*KEYWGT +KEYRND
+ ${_KEYRAD}     KEYRAD =              100*KEYUPD +10*KEYMOD +KEYPIA
+         2      KEYTRI  Obsolete!!!
+ ${_ECMS}D0     CMSENE
+ ${_THMIN}      Tming   theta_min [rad]    genaration
+ ${_THMAX}      Tmaxg   theta_max [rad]    generation
+  0.9999D0      VMAXG   v_max              generation
+ ${_EPSCMS}      XK0     eps_CMS            generation
+      .024      TminW   theta_min sical    trigger wide
+      .058      TmaxW   theta_max sical    trigger wide
+      .024      TminN   theta_min          trigger narrow
+      .058      TminN   theta_max          trigger narrow
+     0.5D0      VMAXE   v_max              trigger maximum v
+        32      NPHI    nphi      sical    trigger no of phi   sect.
+        16      NTHE    ntheta    sical    trigger no of theta sect.
+================= the end of input data set for BHLUMI ================
 EOF
 fi
 
@@ -149,7 +142,7 @@ else
    _seed2=`echo ${_seed:8:15}`
    echo "Seeds: $_seed1 $_seed2"
    cat > ./iniseed <<EOF
-  $_seed1      IJKLIN= $_seed1  $_seed2
+  $_seed1      IJKLIN= $_seed2
          0      NTOTIN= 0
          0      NTOT2N= 0
 EOF
@@ -161,9 +154,20 @@ cat > ./semaphore <<EOF
 START
 
 EOF
-ln -sf ${KKMCEE_ETC}/KK2f_defaults   ./.KK2f_defaults
-ln -sf ${KKMCEE_ETC}/dizet   ./dizet
-time ${KKMCEE_EXE}
 
-# Clean-up
-rm -f ./.KK2f_defaults ./dizet
+# Save existing output file
+DEFOUTFILE="out.lhe"
+if test -f $DEFOUTFILE ; then
+   echo "Existing LHE output file saved to ${DEFOUTFILE}.last ... "
+   mv $DEFOUTFILE "${DEFOUTFILE}.last"
+fi
+
+time ${BHLUMI_EXE} < $BHLUMIINPUT
+
+# Set output file
+if test -f $DEFOUTFILE ; then
+   mv $DEFOUTFILE ${_OUTFILE}
+else
+   echo "==== LHE output file $DEFOUTFILE was not produced!"
+fi
+
