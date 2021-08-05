@@ -94,7 +94,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on('kkmcee')
 
-    depends_on('hblumi')
+    depends_on('bhlumi')
 
     depends_on("delphes")
     # wait for issues in delphes master to be fixed
