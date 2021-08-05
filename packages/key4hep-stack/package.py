@@ -92,7 +92,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # todo: figure out the api for the whizard gitlab instance
     #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
-    depends_on('KKMCee')
+    depends_on('kkmcee')
+
+    depends_on('hblumi')
 
     depends_on("delphes")
     # wait for issues in delphes master to be fixed
