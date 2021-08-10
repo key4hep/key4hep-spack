@@ -5,8 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_version
-
+from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage
 
 class Cedviewer(CMakePackage, Ilcsoftpackage):
     """CEDViewer processor for the CED event display."""
@@ -18,7 +17,7 @@ class Cedviewer(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
+    version('1.18', sha256='46d188d102cbb414b4534e357e506c370644f2df8eada5565a2bcf234a282141')
     version('1.17.1', sha256='e778396dc6d9c106888c30bc11695a2283be68a5ced155df72cd5ec7d3c3f648')
 
     depends_on('ced')
