@@ -96,6 +96,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on('bhlumi')
 
+    depends_on('babayaga')
+
     depends_on("delphes")
     # wait for issues in delphes master to be fixed
     k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
