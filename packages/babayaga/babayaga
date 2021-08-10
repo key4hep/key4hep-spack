@@ -1,0 +1,206 @@
+#!/bin/bash
+
+# Wrapper around the babayaga-fcc.exe executable
+
+help(){
+   echo ""
+   echo "+++ Wrapper around the babayaga-fcc.exe executable +++"
+   echo ""
+   echo "+++ Process: e+e- -> gamma gamma"
+   echo ""
+   echo -e "Usage: \tbabayaga -e Ecms -n Nevts -f Thmin -t Thmax -x epscms -o output_file [-s seed]"
+   echo -e "       \tbabayaga -c config_file [-s seed]"
+   echo ""
+   echo "Switches:"
+   echo -e "  -c, --config file \t\tPath to configuration file"
+   echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
+   echo -e "  -n, --nevts energy \t\tNumber of events to be generated"
+   echo -e "  -f, --Thmin angle \t\tMinimum theta [deg]"
+   echo -e "  -t, --Thmax angle \t\tMaximum theta [deg]"
+   echo -e "  -a, --acolmax angle \t\tMax acollinearity [deg]"
+   echo -e "  -m, --emin energy \t\tMin energy in GeV"
+   echo -e "  -x, --eps fraction \t\tSoft-photon cut-off"
+   echo -e "  -o, --outfile file \t\tFile with the generated events in LHE format"
+   echo -e "  -w, --outdir path \t\tPath with working space (and residual files)"
+   echo -e "  -s, --seed number \t\tNumber used for seeding (randomly generated, if missing)"
+   echo -e "  -d, --debug number \t\tDebug level (0, 1, 2, ...)"
+   echo ""
+   echo "Examples:"
+   echo -e "babayaga -f 15. -t 165. -e 91.2 -n 10000 -o bbyg_10000.LHE"
+   echo -e "babayaga -c babayaga.input -o bbyg.LHE"
+   echo ""
+}
+
+_PROC="gg"
+_ECMS="91.2"
+_NEVTS="100"
+_THMIN="10."
+_THMAX="170."
+_EPS="0.0002"
+_EMIN="30."
+_ACOLMAX="180."
+_OUTDIR=""
+_OUTPUT="no"
+_OUTFILE=""
+_SEED="1001"
+_DEBUGLEVEL="0"
+# Read arguments
+while [[ $# -gt 0 ]]
+do
+    arg="$1"
+    case $arg in
+        -c | --config)
+            _CONFFILE="$2"
+            shift # past argument
+            shift # past value
+        ;;
+        -e | --ecms)
+            _ECMS="$2"
+            shift
+            shift
+        ;;
+        -f | --thmin)
+           _THMIN="$2"
+           shift
+           shift
+        ;;
+        -t | --thmax)
+           _THMAX="$2"
+           shift
+           shift
+        ;;
+        -a | --acolmax)
+           _ACOLMAX="$2"
+           shift
+           shift
+        ;;
+        -x | --eps)
+           _EPS="$2"
+           shift
+           shift
+        ;;
+        -m | --emin)
+           _EMIN="$2"
+           shift
+           shift
+        ;;
+        -n | --nevts)
+           _NEVTS="$2"
+           shift
+           shift
+        ;;
+        -s | --seed)
+           _SEED="$2"
+           shift
+           shift
+        ;;
+        -o | --outfile)
+           _OUTPUT="yes"
+           _OUTFILE="$2"
+           shift
+           shift
+        ;;
+        -w | --outdir)
+           _OUTDIR="$2"
+           shift
+           shift
+        ;;
+        -d | --debug)
+           _DEBUGLEVEL="$2"
+           shift
+           shift
+        ;;
+        * | -h | --help)
+            help
+            exit 1
+    esac
+done
+
+if test "x${_OUTDIR}" = "x" ; then
+   _OUTDIR="./.bbyg-${_PROC}-${_NEVTS}"
+fi
+
+BABAYAGA_DIR=$(dirname $(dirname $0))
+BABAYAGA_EXE=${BABAYAGA_DIR}/bin/babayaga-fcc.exe
+
+# Create seed if needed
+if test "x${_SEED}" = "x" ; then
+   ln -sf $_SEEDFILE ./iniseed
+   _SEED=`date +"%j%H%M%N"`
+fi
+
+# Run existing config file
+BBYGINPUT="./bbyg.input"
+if test "x${_CONFFILE}" = "x" && test -f $BBYGINPUT ; then
+   echo "Existing default input file saved to ${BBYGINPUT}.last ... "
+   cp -rp $BBYGINPUT "${BBYGINPUT}.last"
+   rm -f $BBYGINPUT
+fi
+if test ! "x${_CONFFILE}" = "x" && test -f ${_CONFFILE}; then
+   if test ! "x${_CONFFILE}" = "x$BBYGINPUT";  then
+      echo "Existing default input file saved to ${BBYGINPUT}.last ... "
+      cp -rp $BBYGINPUT "${BBYGINPUT}.last"
+      ln -sf ${_CONFFILE} $BBYGINPUT
+   fi
+   # Retrieve some crucial values
+   _NEVTS=`grep nev ${_CONFFILE} | awk '{split($0,a," "); print a[2] }'`
+   _OUTDIR=`grep path ${_CONFFILE} | awk '{split($0,a," "); print a[2] }'`
+   if test "x${_OUTDIR}" = "x" ; then
+      _OUTDIR="./.bbyg-${_PROC}-${_NEVTS}"
+   fi
+   _OUTPUT=`grep store ${_CONFFILE} | awk '{split($0,a," "); print a[2] }'`
+else
+# We create a config file based on the input switches: this is the initial common part
+cat > $BBYGINPUT <<EOF
+fs ${_PROC}
+ecms ${_ECMS}
+thmin ${_THMIN}
+thmax ${_THMAX}
+zmax ${_ACOLMAX}
+emin ${_EMIN}
+sprb1 0.0000000
+sprb2 0.0000000
+nev ${_NEVTS}
+mode weighted
+path ${_OUTDIR}/
+store ${_OUTPUT}
+ord alpha
+EWKc on
+seed ${_SEED}
+menu2 on
+arun off
+eps ${_EPS}
+model matched
+nphot -1
+nwrite 5000000
+nsearch 5000000
+verbose ${_DEBUGLEVEL}
+sdmax 0.100E-17
+run
+EOF
+fi
+
+# Check outdir
+if test "x${_OUTDIR}" = "x" ; then
+   _OUTDIR="./.bbyg-${_PROC}-${_NEVTS}"
+fi
+
+# Save existing output file
+if test "x${_OUTPUT}" = "xyes" ; then
+   DEFOUTFILE="${_OUTDIR}/events.lhe"
+   if test -f $DEFOUTFILE ; then
+      echo "Existing LHE output file saved to ${DEFOUTFILE}.last ... "
+      mv $DEFOUTFILE "${DEFOUTFILE}.last"
+   fi
+fi
+echo "OUTPUT: ${_OUTPUT} ${_OUTFILE} ${DEFOUTFILE}"
+
+time ${BABAYAGA_EXE} < $BBYGINPUT
+
+# Set output file
+if test -f $DEFOUTFILE ; then
+   mv $DEFOUTFILE ${_OUTFILE}
+else
+   echo "==== LHE output file $DEFOUTFILE was not produced!"
+fi
+
