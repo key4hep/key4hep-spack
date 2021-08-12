@@ -24,6 +24,9 @@ class Babayaga(MakefilePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
+    # babayaga bundles recola version 1.4 and needs cmake for that
+    depends_on('cmake', type=('build'))
+
     def build(self, spec, prefix):
         with working_dir('.'):
             make('-f', 'Makefile', 'babayaga-fcc')
