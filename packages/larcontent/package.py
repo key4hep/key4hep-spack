@@ -19,10 +19,10 @@ class Larcontent(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    version('3.24.01', sha256='2cd11a05e87b32af06c27f1fea8d54d67141881b1ae4be72b2068a4f546fde5a')
-    version('3.24.00', sha256='02cb1533787f341823763de81478a6cb9be8971fc69be4cb1999f711fbb32f73')
-    version('3.23.05', sha256='013c883b174a81dcf1ef3d20171e24c75fb90aace179752969345ad9f0a8eb02')
-    version('3.23.04', sha256='0a731a31b84abdaa63a10e1e61e5b6d121a63ba80f67d00edd20e7721cc0bb46')
+    version('3.24.1', sha256='2cd11a05e87b32af06c27f1fea8d54d67141881b1ae4be72b2068a4f546fde5a')
+    version('3.24.0', sha256='02cb1533787f341823763de81478a6cb9be8971fc69be4cb1999f711fbb32f73')
+    version('3.23.5', sha256='013c883b174a81dcf1ef3d20171e24c75fb90aace179752969345ad9f0a8eb02')
+    version('3.23.4', sha256='0a731a31b84abdaa63a10e1e61e5b6d121a63ba80f67d00edd20e7721cc0bb46')
     version('3.22.11', sha256='4985435c9ca85b6bf5c37be5956fba68c8b3be32b73015118df421496e68e80e')
     version('3.22.9', sha256='44ca286faa93fc77dd78010261f06b85ba512b1135fe6bc40659accb9385104f')
     version('3.19.0', sha256='21f52e9d512842e3413967c6b326a8a9fa68e2ac54f39a542c4e31c80dfac3eb')
@@ -31,7 +31,7 @@ class Larcontent(CMakePackage):
     patch("path2.patch")
     patch("path3.patch")
     patch("path4.patch")
-    patch("range_construct_01.patch")
+    patch("range_construct_01.patch", when="@:3.23.0")
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
