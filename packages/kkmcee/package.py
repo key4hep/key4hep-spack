@@ -49,7 +49,7 @@ class Kkmcee(AutotoolsPackage):
             flags.append('-O2')
             flags.append('-g0')
         elif name == 'fflags':
-            if self.spec.satisfies('%gcc@10:'):
+            if self.spec.satisfies('%gcc@10:') or self.spec.satisfies('%clang@11:') or self.spec.satisfies('%apple-clang@11:'):
                 if flags is None:
                     flags = []
                 flags.append('-fallow-argument-mismatch')
