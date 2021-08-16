@@ -27,6 +27,11 @@ class Babayaga(MakefilePackage):
     # babayaga bundles recola version 1.4 and needs cmake for that
     depends_on('cmake', type=('build'))
 
+    patch('makefile_compiler1.patch')
+
+    # there seems to be a race condition that leads to build failures
+    parallel = False
+
     def build(self, spec, prefix):
         with working_dir('.'):
             make('-f', 'Makefile', 'babayaga-fcc')
