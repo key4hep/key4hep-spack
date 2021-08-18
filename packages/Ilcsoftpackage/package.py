@@ -75,6 +75,19 @@ def k4_generate_setup_script(env_mod, shell='sh'):
                 name, cmd_quote(new_env[name]))]
     return ''.join(cmds)
 
+def k4_lookup_latest_commit_gitlab(repoinfo, giturl):
+    """Use a gitlab api to fetch the commit hash of the master branch.
+      
+    """
+    curl_command = ["curl -s "]
+    final_giturl = giturl % repoinfo
+    curl_command += [final_giturl]
+    curl_command += [" |  jq '.[0]  .id'"]
+    curl_command = ' '.join(curl_command)
+    commit = os.popen(curl_command).read().replace('"', '')
+    test = int(commit, 16)
+    return commit
+
 def k4_lookup_latest_commit(repoinfo, giturl):
     """Use a github-like api to fetch the commit hash of the master branch.
     Constructs and runs a command of the form:
@@ -129,7 +142,10 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
     github_token = os.environ.get("GITHUB_TOKEN", "")
     if github_user and github_token:
       try:
-        commit = k4_lookup_latest_commit(repoinfo, giturl)
+        if 'gitlab' in giturl:
+          commit = k4_lookup_latest_commit_gitlab(repoinfo, giturl)
+        else:
+          commit = k4_lookup_latest_commit(repoinfo, giturl)
         depends_on(name + "@commit." + str(commit) + " " + variants, when=when)
       except:
         print("Warning: could not fetch latest commit for " + name)
