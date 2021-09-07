@@ -31,6 +31,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     depends_on('edm4hep')
     depends_on('k4fwcore@0.3.0:', when='@0.2:')
     depends_on('k4fwcore@0.2.0', when='@:0.1.99')
+    depends_on('garfieldpp', when='@0.2.1:'
     depends_on('gaudi@:34.99', when='@:0.1.99')
     depends_on('gaudi@35.0:', when='@0.2:')
     depends_on('gear')
