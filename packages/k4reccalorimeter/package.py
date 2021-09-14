@@ -3,7 +3,7 @@ from spack import *
 from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
 class K4reccalorimeter(CMakePackage, Key4hepPackage):
-    """Generator components for the Key4hep framework"""
+    """Calorimeter reconstruction components for the Key4hep framework"""
     homepage = "https://github.com/HEP-FCC/k4RecCalorimeter/"
     url      = "https://github.com/HEP-FCC/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
     git      = "https://github.com/HEP-FCC/k4RecCalorimeter.git"
