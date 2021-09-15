@@ -8,7 +8,7 @@ from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_
 
 
 class Marlinpandora(CMakePackage, Ilcsoftpackage):
-    """Assembly of various Marlin processor for reconstruction."""
+    """Pandora app for Marlin"""
 
     url      = "https://github.com/PandoraPFA/MarlinPandora/archive/v03-00-01.tar.gz"
     homepage = "https://github.com/PandoraPFA/MarlinPandora"
