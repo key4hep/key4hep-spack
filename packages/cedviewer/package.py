@@ -5,7 +5,7 @@
 
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 class Cedviewer(CMakePackage, Ilcsoftpackage):
     """CEDViewer processor for the CED event display."""

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack.pkg.k4.Ilcsoftpackage import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import ilc_url_for_version, k4_add_latest_commit_as_version
 
 
 class K4simdelphes(CMakePackage):

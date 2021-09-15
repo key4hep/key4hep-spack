@@ -1,6 +1,6 @@
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4projecttemplate(CMakePackage, Key4hepPackage):
     """Template for Key4hep framework projects"""

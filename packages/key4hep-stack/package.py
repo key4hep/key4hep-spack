@@ -5,10 +5,13 @@ import llnl.util.tty as tty
 import spack.architecture as architecture
 from spack.main import get_version
 import spack.user_environment as uenv
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
-from spack.pkg.k4.Ilcsoftpackage import k4_generate_setup_script 
-from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
-
+# import common methods for use in recipe from common.py
+# (so other recipe can import from spack.pkg.k4.key4hep_stack)
+# (which is the most convenient way to make that code available
+#  without creation of a new module
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from common import *
 
 class Key4hepStack(BundlePackage, Key4hepPackage):
     """Bundle package to install the Key4hep software stack."""

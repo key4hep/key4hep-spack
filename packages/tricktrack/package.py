@@ -1,5 +1,5 @@
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import k4_add_latest_commit_as_version
 
 
 class Tricktrack(CMakePackage):
