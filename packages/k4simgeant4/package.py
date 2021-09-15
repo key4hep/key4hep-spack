@@ -3,7 +3,7 @@ from spack import *
 from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
 class K4simgeant4(CMakePackage, Key4hepPackage):
-    """Software framework of the FCC project"""
+    """Geant4 components of the Key4HEP software """
     homepage = "https://github.com/HEP-FCC/k4SimGeant4/"
     url      = "https://github.com/HEP-FCC/k4SimGeant4/archive/v0.1.0pre05.tar.gz"
     git      = "https://github.com/HEP-FCC/k4SimGeant4.git"

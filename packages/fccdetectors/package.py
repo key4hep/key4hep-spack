@@ -3,7 +3,7 @@ from spack import *
 from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage, k4_add_latest_commit_as_version 
 
 class Fccdetectors(CMakePackage, Key4hepPackage):
-    """Software framework of the FCC project"""
+    """FCC Detector Descriptions"""
     homepage = "https://github.com/HEP-FCC/FCCDetectors/"
     url      = "https://github.com/HEP-FCC/FCCDetectors/archive/refs/tags/v0.1pre03.tar.gz"
     git      = "https://github.com/HEP-FCC/FCCDetectors.git"

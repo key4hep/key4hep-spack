@@ -9,7 +9,7 @@ from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage, k4_add_latest_commit_as_
 
 
 class Marlinutil(CMakePackage, Ilcsoftpackage):
-    """ Library that containes classes and functions that are used by more
+    """ Library that contains classes and functions that are used by more
     than one processor. In particular it contains the geometry classes that
     are used until we have the geometry for reconstruction package (GEAR)."""
 
