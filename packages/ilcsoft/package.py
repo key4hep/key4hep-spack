@@ -5,9 +5,9 @@ import llnl.util.tty as tty
 import spack.architecture as architecture
 from spack.main import get_version
 import spack.user_environment as uenv
-from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_dependency 
-from spack.pkg.k4.Ilcsoftpackage import k4_generate_setup_script 
-from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import k4_add_latest_commit_as_dependency 
+from spack.pkg.k4.key4hep_stack import k4_generate_setup_script 
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
 class Ilcsoft(BundlePackage, Key4hepPackage):

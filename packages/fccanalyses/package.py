@@ -1,4 +1,4 @@
-from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class Fccanalyses(CMakePackage, Key4hepPackage):
     """ RDF Analysers for the FCC. """

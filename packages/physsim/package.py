@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Ilcsoftpackage 
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage 
 class Physsim(CMakePackage, Ilcsoftpackage):
     """Physsim is a matrix element package."""
 

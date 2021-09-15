@@ -1,6 +1,6 @@
 
 from spack import *
-from spack.pkg.k4.Ilcsoftpackage import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4actstracking(BundlePackage, Key4hepPackage):
     """Acts tracking components for the key4hep project"""
