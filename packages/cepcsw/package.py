@@ -25,6 +25,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
     version('0.1.2', sha256='2caaf0723fa2561e97eb303e245b6a5e25185d4195b48c6a30dcc8d315951f42')
     version('0.2.0', sha256='1ca9823ef4492c25e776de9f2f4884ed9068f907b4e080342276d92ad4071af6')
+    version('0.2.1', sha256='32ca07da4e655094c1a861f86a7766f197dd4a3e8a7a82bd9dd2f2539188ad8e')
 
     depends_on('clhep')
     depends_on('dd4hep +geant4')
