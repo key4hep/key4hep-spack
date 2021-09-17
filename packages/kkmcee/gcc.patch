@@ -1,0 +1,91 @@
+diff --git a/MaMar/KKMakefile b/MaMar/KKMakefile
+index 72fea59..efcb1d7 100755
+--- a/MaMar/KKMakefile
++++ b/MaMar/KKMakefile
+@@ -58,7 +58,7 @@ F77 = gfortran
+ #CXXFLAGS    = -O  -ansi -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ #CXXFLAGS    =  -g  -ansi -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ CXXFLAGS    =  -g  -I$(ROOTINCDIR)
+-CXX         =  g++
++CXX         =  c++
+ #CXX         =  insure
+ #CXX         =  codewizard
+ CLD         =  $(CXX)
+diff --git a/MaMar/Plots/KKMakefile b/MaMar/Plots/KKMakefile
+index bd39eba..6d16267 100755
+--- a/MaMar/Plots/KKMakefile
++++ b/MaMar/Plots/KKMakefile
+@@ -46,7 +46,7 @@ F77 = gfortran
+ #CXXFLAGS    = -O  -ansi -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ #CXXFLAGS    =  -g
+ CXXFLAGS    =  -g  -I$(ROOTINCDIR)
+-CXX         =  g++
++CXX         =  c++
+ #CXX         =  insure
+ #CXX         =  codewizard
+ CLD         =  $(CXX)
+diff --git a/RHadr/KKMakefile b/RHadr/KKMakefile
+index a42b035..e915175 100755
+--- a/RHadr/KKMakefile
++++ b/RHadr/KKMakefile
+@@ -71,7 +71,7 @@ F77 = g77
+ #CXXFLAGS    = -O -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ #CXXFLAGS    = -O  -ansi -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ CXXFLAGS    =  -g -O -I$(ROOTINCDIR)
+-CXX         =  g++
++CXX         =  c++
+ #CXX         =  insure
+ #CXX         =  codewizard
+ CLD         =  $(CXX)
+diff --git a/RHadr/Plots/KKMakefile b/RHadr/Plots/KKMakefile
+index a493bb3..1454c9b 100755
+--- a/RHadr/Plots/KKMakefile
++++ b/RHadr/Plots/KKMakefile
+@@ -56,7 +56,7 @@ F77 = g77
+ #CXXFLAGS    = -O  -ansi -Wall -fPIC -D_REENTRANT -I$(RPATH)/include
+ #CXXFLAGS    =  -g
+ CXXFLAGS    =  -g -O -I$(ROOTINCDIR)
+-CXX         =  g++
++CXX         =  c++
+ #CXX         =  insure
+ #CXX         =  codewizard
+ CLD         =  $(CXX)
+diff --git a/tauola/Makefile.am b/tauola/Makefile.am
+index 0c152d3..c6c18af 100644
+--- a/tauola/Makefile.am
++++ b/tauola/Makefile.am
+@@ -6,7 +6,7 @@ lib_LIBRARIES = libTauola.a
+ ########## copied blindly from KKMakefile #################
+ # KKMC doesn't have 'make.inc' and does not set C++ flags
+ # so we have to hard-code them here
+-CC      = g++
++CC      = c++
+ AM_CFLAGS  = -fPIC -Wall -Wno-write-strings
+ .c.o:
+  $(CC) $(CFLAGS) -c $< -o $@
+diff --git a/tauola/make.inc b/tauola/make.inc
+index 99f4616..bef7bb0 100644
+--- a/tauola/make.inc
++++ b/tauola/make.inc
+@@ -2,7 +2,7 @@
+ #F77     = g77
+ F77 = gfortran
+ FFLAGS  = -fno-automatic -g -ffixed-line-length-132 -fno-backslash
+-CC      = g++
++CC      = c++
+ CFLAGS  = -fPIC -Wall -Wno-write-strings
+ LD      = $(F77)
+ LDFLAGS = -fno-automatic -g -lstdc++
+diff --git a/tauola/makefile.templ b/tauola/makefile.templ
+index cdaa8c9..2956b93 100644
+--- a/tauola/makefile.templ
++++ b/tauola/makefile.templ
+@@ -17,7 +17,7 @@ RANLIB = ranlib
+ 
+ # KKMC doesn't have 'make.inc' and does not set C++ flags
+ # so we have to hard-code them here
+-CC      = g++
++CC      = c++
+ CFLAGS  = -fPIC -Wall -Wno-write-strings
+ 
+ LOCAL_LIB   =  glib.a 
