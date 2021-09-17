@@ -26,6 +26,9 @@ class Kkmcee(AutotoolsPackage):
     depends_on('root')
 
     patch('KKMCee-dev-4.30.patch', level=0)
+    patch('gcc4.patch')
+    patch('gcc6.patch')
+    patch('gcc5.patch')
 
     variant('cxxstd',
             default='11',
@@ -41,6 +44,13 @@ class Kkmcee(AutotoolsPackage):
     def autoreconf(self, spec, prefix):
         autoreconf('--install', '--force')
 
+    def configure_args(self):
+        args = []
+        args += ["CXX=c++"]
+        args += ["CC=cc"]
+        return args
+
+
     def flag_handler(self, name, flags):
         if name == 'cflags':
             flags.append('-O2')
@@ -52,7 +62,8 @@ class Kkmcee(AutotoolsPackage):
             if self.spec.satisfies('%gcc@10:') or self.spec.satisfies('%clang@11:') or self.spec.satisfies('%apple-clang@11:'):
                 if flags is None:
                     flags = []
-                flags.append('-fallow-argument-mismatch')
+                #flags.append('-fallow-argument-mismatch')
+                flags.append('-Wno-argument-mismatch')
         return (flags, None, flags)
 
     def build(self, spec, prefix):

@@ -168,7 +168,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('py-scikit-learn', when="+devtools")
     depends_on('py-scipy', when="+devtools")
     depends_on('xgboost', when="+devtools")
-    depends_on('py-pyg4ometry', when="+devtools")
+    #depends_on('py-pyg4ometry', when="+devtools")
     #depends_on('py-tensorflow') # todo: check if we should integrate.
     #depends_on('py-zfit') # todo: add in spack
     #depends_on('py-root-pandas') # todo: add in spack

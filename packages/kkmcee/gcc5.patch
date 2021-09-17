@@ -1,0 +1,70 @@
+diff --git a/RHadr/Plots/KKMakefile b/RHadr/Plots/KKMakefile
+index a493bb3..497ee76 100755
+--- a/RHadr/Plots/KKMakefile
++++ b/RHadr/Plots/KKMakefile
+@@ -68,7 +68,7 @@ CLD         =  $(CXX)
+ .f.o:
+ 	$(F77) $(FFLAGS) -c $<
+ .c.o:
+-	gcc -c $<
++	cc -c $<
+ #================================================================================
+ SRCLIST= "../KK2f ../glibk ../jetset ../bornv "
+ #----------------------
+@@ -120,49 +120,49 @@ EXT_LIBRARY3 = $(EXT_LIB0) $(EXT_LIB1) $(EXT_LIB2) $(EXT_LIB3) $(EXT_LIB4t) $(EX
+ MAIN1 = SkyLine
+ OBJECTS1 = $(MAIN1).o
+ $(MAIN1).exe:                $(OBJECTS1) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN1).exe $(OBJECTS1) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN1).exe $(OBJECTS1) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN1):	$(MAIN1).exe
+ 	./$(MAIN1).exe
+ #=======================================================================================
+ MAIN2 = Plot2b
+ OBJECTS2 = $(MAIN2).o
+ $(MAIN2).exe:                $(OBJECTS2) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN2).exe $(OBJECTS2) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN2).exe $(OBJECTS2) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN2):	$(MAIN2).exe
+ 	./$(MAIN2).exe
+ #=======================================================================================
+ MAIN3 = Plot2c
+ OBJECTS3 = $(MAIN3).o
+ $(MAIN3).exe:                $(OBJECTS3) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN3).exe $(OBJECTS3) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN3).exe $(OBJECTS3) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN3):	$(MAIN3).exe
+ 	./$(MAIN3).exe
+ #=======================================================================================
+ MAIN4 = Plot3a
+ OBJECTS4 = $(MAIN4).o
+ $(MAIN4).exe:                $(OBJECTS4) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN4).exe $(OBJECTS4) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN4).exe $(OBJECTS4) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN4):	$(MAIN4).exe
+ 	./$(MAIN4).exe
+ #=======================================================================================
+ MAIN5 = Plot3b
+ OBJECTS5 = $(MAIN5).o
+ $(MAIN5).exe:                $(OBJECTS5) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN5).exe $(OBJECTS5) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN5).exe $(OBJECTS5) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN5):	$(MAIN5).exe
+ 	./$(MAIN5).exe
+ #=======================================================================================
+ MAIN6 = Plot3m
+ OBJECTS6 = $(MAIN6).o
+ $(MAIN6).exe:                $(OBJECTS6) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN6).exe $(OBJECTS6) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN6).exe $(OBJECTS6) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN6):	$(MAIN6).exe
+ 	./$(MAIN6).exe
+ #=======================================================================================
+ MAIN7 = Plot3f
+ OBJECTS7 = $(MAIN7).o
+ $(MAIN7).exe:                $(OBJECTS7) $(EXT_LIBRARY3)
+-	g++ -o  $(MAIN7).exe $(OBJECTS7) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
++	$(CXX) -o  $(MAIN7).exe $(OBJECTS7) $(EXT_LIBRARY3)  $(RLIB) $(FLIB)
+ $(MAIN7):	$(MAIN7).exe
+ 	./$(MAIN7).exe
+ #=====================================================================
