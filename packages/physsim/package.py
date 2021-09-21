@@ -23,7 +23,7 @@ class Physsim(CMakePackage, Ilcsoftpackage):
     depends_on('root')
 
     patch("dict.patch")
-    patch("TString_include.patch")
+    patch("TString_include.patch", when="@:0.4.1")
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPhyssim.so")
