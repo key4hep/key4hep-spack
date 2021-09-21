@@ -17,8 +17,7 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.6.1', sha256='cb51f110c0c7b6e5732ab66d49b4658c56bb5944c1540f1563612ac56bb70823')
     version('1.6', sha256='09083890721704f39a3e902dc660db5326027cc38446b813233d04ec3233ba2e')
 
-    patch("installdoc.patch")
+    patch("installdoc.patch", when="@:1.6.1")
