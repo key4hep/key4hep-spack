@@ -35,3 +35,8 @@ class Pandoraanalysis(CMakePackage):
 
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
+
+    def cmake_args(self):
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

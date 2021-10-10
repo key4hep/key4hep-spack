@@ -35,7 +35,7 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = []  
-        args.append(self.define('CMAKE_CXX_STANDARD', self.spec.variants['cxxstd'].value))
+        args.append(self.define_from_variant('CMAKE_CXX_STANDARD', 'cxxstd'))
         args.append(self.define('BUILD_TESTING', self.run_tests))
         return args
 
