@@ -12,7 +12,7 @@ class Kkmcee(AutotoolsPackage):
     """KKMCee is the state of art Monte Carlo for e+e- -> ffbar."""
 
     homepage = "https://github.com/KrakowHEPSoft/KKMCee"
-    url      = "https://github.com/KrakowHEPSoft/KKMCee/archive/v4.30.tar.gz"
+    url      = "https://github.com/KrakowHEPSoft/KKMCee/archive/V4.30.tar.gz"
     git      = "https://github.com/KrakowHEPSoft/KKMCee.git"
 
     tags = ['hep']
