@@ -31,3 +31,8 @@ class Marlinpandora(CMakePackage, Ilcsoftpackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinPandora.so")
+
+    def cmake_args(self):
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

@@ -33,5 +33,9 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     depends_on('root')
 
     def cmake_args(self):
+        spec = self.spec
+        cxxstd = spec['root'].variants['cxxstd'].value
         # Make sure that we pick the right GSL
-        return ['-DGSL_DIR={}'.format(self.spec['gsl'].prefix)]
+        return [
+            '-DCMAKE_CXX_STANDARD={0}'.format(cxxstd),
+            '-DGSL_DIR={}'.format(self.spec['gsl'].prefix)]

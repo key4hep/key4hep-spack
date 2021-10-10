@@ -30,5 +30,7 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
     patch('tixml.patch', when="@0.8")
 
     def cmake_args(self):
-        args = [self.define('INSTALL_DOC', False)]
+        args = [self.define('INSTALL_DOC', False),
+                '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]
         return args

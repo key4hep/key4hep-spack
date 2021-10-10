@@ -37,6 +37,8 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         args = []
         args.append(self.define('BUILD_TESTING', self.run_tests))
+        args.append(self.define('CMAKE_CXX_STANDARD',
+                                self.spec['root'].variants['cxxstd'].value))
         return args
 
 

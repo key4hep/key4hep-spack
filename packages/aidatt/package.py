@@ -26,3 +26,9 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
     depends_on('generalbrokenlines')
     depends_on('dd4hep')
     depends_on('lcio')
+
+    def cmake_args(self):
+        # C++ Standard
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

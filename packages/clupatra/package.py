@@ -33,3 +33,9 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libClupatra.so")
+
+    def cmake_args(self):
+        # C++ Standard
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

@@ -39,3 +39,8 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
     def installheaders(self):
       #make('install')
       install_tree('.', self.prefix)
+    def cmake_args(self):
+        # C++ Standard
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

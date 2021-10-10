@@ -28,3 +28,9 @@ class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
     depends_on('gsl')
     depends_on('dd4hep')
     depends_on('clhep')
+
+    def cmake_args(self):
+        # C++ Standard
+        return [
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+        ]

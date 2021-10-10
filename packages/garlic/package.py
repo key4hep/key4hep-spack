@@ -28,3 +28,9 @@ class Garlic(CMakePackage, Ilcsoftpackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libGarlic.so")
+
+    def cmake_args(self):
+        args = []
+        # C++ Standard
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
+        return args

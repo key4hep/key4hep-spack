@@ -45,8 +45,9 @@ class Marlintrk(CMakePackage):
     depends_on('generalbrokenlines')
 
     def cmake_args(self):
-        args = [self.define_from_variant("MARLINTRK_USE_GEAR", "gear")]
+        args = [self.define_from_variant("MARLINTRK_USE_GEAR", "gear"),
+                '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value]
         return args
-        
+
     def url_for_version(self, version):
        return ilc_url_for_version(self, version)
