@@ -24,8 +24,6 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on('k4fwcore@1.0:')
     depends_on('geant4')
     depends_on('edm4hep')
-
-
     depends_on("g4ensdfstate")
 
 
@@ -39,6 +37,16 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4SIMGEANT4", self.prefix.share.k4SimGeant4)
+        install_path = join_path(self.spec['g4ensdfstate'].prefix.share,
+                                 'data', 'G4ENSDFSTATE{0}'
+                                 .format(self.spec['g4ensdfstate'].version))
+        spack_env.set('G4ENSDFSTATEDATA', install_path)
+
+    def setup_build_environment(self, spack_env):
+        install_path = join_path(self.spec['g4ensdfstate'].prefix.share,
+                                 'data', 'G4ENSDFSTATE{0}'
+                                 .format(self.spec['g4ensdfstate'].version))
+        spack_env.set('G4ENSDFSTATEDATA', install_path)
 
     def setup_dependent_build_environment(self, spack_env, dependent_spec):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
