@@ -2,7 +2,8 @@ from datetime import datetime
 import os
 import platform
 import llnl.util.tty as tty
-import spack.architecture as architecture
+import spack.spec
+import spack.platforms
 from spack.main import get_version
 import spack.user_environment as uenv
 from spack.pkg.k4.key4hep_stack import k4_add_latest_commit_as_dependency 
@@ -223,8 +224,8 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
       # first, log spack version to build-out
       tty.msg('* **Spack:**', get_version())
       tty.msg('* **Python:**', platform.python_version())
-      tty.msg('* **Platform:**', architecture.Arch(
-          architecture.platform(), 'frontend', 'frontend'))
+      tty.msg('* **Platform:**', spack.spec.ArchSpec(
+          spack.platforms.host(), 'frontend', 'frontend'))
       # get all dependency specs, including compiler
       with spack.store.db.read_transaction():
                specs = [dep for dep in spec.traverse(order='post')]
