@@ -1,14 +1,6 @@
 from datetime import datetime
-import os
-import platform
-import llnl.util.tty as tty
-import spack.spec
-import spack.platforms
-from spack.main import get_version
-import spack.user_environment as uenv
-from spack.pkg.k4.key4hep_stack import k4_add_latest_commit_as_dependency 
-from spack.pkg.k4.key4hep_stack import k4_generate_setup_script 
-from spack.pkg.k4.key4hep_stack import Key4hepPackage
+
+from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_dependency, install_setup_script
 
 
 class Ilcsoft(BundlePackage, Key4hepPackage):
@@ -212,54 +204,10 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
-
     def setup_run_environment(self, spack_env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         spack_env.set("LC_ALL", "C")
 
-
     def install(self, spec, prefix):
-      """ Create bash setup script in prefix."""
-      # first, log spack version to build-out
-      tty.msg('* **Spack:**', get_version())
-      tty.msg('* **Python:**', platform.python_version())
-      tty.msg('* **Platform:**', spack.spec.ArchSpec(
-          spack.platforms.host(), 'frontend', 'frontend'))
-      # get all dependency specs, including compiler
-      with spack.store.db.read_transaction():
-               specs = [dep for dep in spec.traverse(order='post')]
-               try: 
-                   gcc_spec = spack.cmd.disambiguate_spec(str(spec.compiler), 
-                                                          None,
-                                                          first=True)
-                   gcc_specs = [dep for dep in gcc_spec.traverse( order='post')]
-                   specs = specs + gcc_specs
-               except:
-                   tty.warn("No spec found for " + str(spec.compiler) +
-                            ". Assuming it is a system compiler,"
-                            "not adding it to the setup.")
-      # record all changes to the environment by packages in the stack
-      env_mod = spack.util.environment.EnvironmentModifications()
-      for _spec in specs:
-          env_mod.extend(uenv.environment_modifications_for_spec(_spec))
-          env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
-      # transform to bash commands, and write to file
-      cmds = k4_generate_setup_script(env_mod)
-      with open(os.path.join(prefix, "setup.sh"), "w") as f:
-        f.write(cmds)
-        # optionally add a symlink (location configurable via environment variable
-        # K4_LATEST_SETUP_PATH. Step will be skipped if it is empty)
-        try:
-          symlink_path = os.environ.get("ILCSOFT_LATEST_SETUP_PATH", "")
-          if symlink_path:
-              # make sure that the path exists, create if not
-              if not os.path.exists(os.path.dirname(symlink_path)):
-                os.makedirs(os.path.dirname(symlink_path))
-              # make sure that an existing file will be overwritten,
-              # even if it is a symlink (for which 'exists' is false!)
-              if os.path.exists(symlink_path) or os.path.islink(symlink_path):
-                os.remove(symlink_path)
-              os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
-        except:
-          tty.warn("Could not create symlink")
+        return install_setup_script(self, spec, prefix, 'ILCSOFT_LATEST_SETUP_PATH')
