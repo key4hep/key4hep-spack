@@ -22,8 +22,14 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
 
     patch("installdoc.patch", when="@:1.6.1")
 
+    variant('cxxstd',
+            default='11',
+            values=('11', '14', '17'),
+            multi=False,
+            description='Use the specified C++ standard when building.')
+
     def cmake_args(self):
         # C++ Standard
         return [
-            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+            self.define_from_variant('CMAKE_CXX_STANDARD', 'cxxstd')
         ]
