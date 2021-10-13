@@ -5,16 +5,17 @@ Common methods for use in Key4hep recipes
 from spack import *
 
 import os
+import platform
 
 import spack.cmd
 import llnl.util.tty as tty
-import spack.cmd.common.arguments as arguments
-import spack.environment as ev
+import spack.platforms
+import spack.spec
 import spack.util.environment
 from  spack.util.environment import *
+from spack.main import get_version
 import spack.user_environment as uenv
 import spack.store
-import os
 
 from spack.package import PackageBase
 
@@ -179,9 +180,61 @@ def ilc_url_for_version(self, version):
         version_str = 'v%02d-%02d-%02d.tar.gz' % (major, minor, patch)
     return base_url + '/' + version_str
 
+
+def install_setup_script(self, spec, prefix, env_var):
+    """Create a bash setup script that includes all the dependent packages while
+    respecting the PATH variable of the user"""
+    # first, log spack version to build-out
+    tty.msg('* **Spack:**', get_version())
+    tty.msg('* **Python:**', platform.python_version())
+    tty.msg('* **Platform:**', spack.spec.ArchSpec(
+        (str(spack.platforms.host()), 'frontend', 'frontend')))
+    # get all dependency specs, including compiler
+    with spack.store.db.read_transaction():
+      specs = [dep for dep in spec.traverse(order='post')]
+    # record all changes to the environment by packages in the stack
+    env_mod = spack.util.environment.EnvironmentModifications()
+    # first setup compiler, similar to build_environment.py in spack
+    compiler = self.compiler
+    if compiler.cc:
+        env_mod.set('CC', compiler.cc)
+    if compiler.cxx:
+        env_mod.set('CXX', compiler.cxx)
+    if compiler.f77:
+        env_mod.set('F77', compiler.f77)
+    if compiler.fc:
+        env_mod.set('FC',  compiler.fc)
+    compiler.setup_custom_environment(self, env_mod)
+    env_mod.prepend_path('PATH', os.path.dirname(compiler.cxx))
+    # now setup all other packages
+    for _spec in specs:
+        env_mod.extend(uenv.environment_modifications_for_spec(_spec))
+        env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
+    # transform to bash commands, and write to file
+    cmds = k4_generate_setup_script(env_mod)
+    with open(os.path.join(prefix, "setup.sh"), "w") as f:
+      f.write(cmds)
+      # optionally add a symlink (location configurable via environment variable
+      try:
+        symlink_path = os.environ.get(env_var, "")
+        if symlink_path:
+            # make sure that the path exists, create if not
+            if not os.path.exists(os.path.dirname(symlink_path)):
+              os.makedirs(os.path.dirname(symlink_path))
+            # make sure that an existing file will be overwritten,
+            # even if it is a symlink (for which 'exists' is false!)
+            if os.path.exists(symlink_path) or os.path.islink(symlink_path):
+              os.remove(symlink_path)
+            os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
+      except:
+        tty.warn("Could not create symlink")
+
+
 class Key4hepPackage(PackageBase):
 
     tags = ['hep', 'key4hep']
+
+
 
 class Ilcsoftpackage(Key4hepPackage):
     """This class needs to be present to allow spack to import this file.
@@ -190,7 +243,6 @@ class Ilcsoftpackage(Key4hepPackage):
     """
 
 
-    
+
     def url_for_version(self, version):
         return ilc_url_for_version(self, version)
-

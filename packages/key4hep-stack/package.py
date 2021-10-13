@@ -1,11 +1,6 @@
 from datetime import datetime
 import os
-import platform
-import llnl.util.tty as tty
-import spack.spec
-import spack.platforms
-from spack.main import get_version
-import spack.user_environment as uenv
+
 # import common methods for use in recipe from common.py
 # (so other recipe can import from spack.pkg.k4.key4hep_stack)
 # (which is the most convenient way to make that code available
@@ -188,57 +183,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
-
     def setup_run_environment(self, spack_env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         spack_env.set("LC_ALL", "C")
 
-
     def install(self, spec, prefix):
-      """ Create bash setup script in prefix."""
-      # first, log spack version to build-out
-      tty.msg('* **Spack:**', get_version())
-      tty.msg('* **Python:**', platform.python_version())
-      tty.msg('* **Platform:**', spack.spec.ArchSpec(
-          spack.platforms.host(), 'frontend', 'frontend'))
-      # get all dependency specs, including compiler
-      with spack.store.db.read_transaction():
-               specs = [dep for dep in spec.traverse(order='post')]
-      # record all changes to the environment by packages in the stack
-      env_mod = spack.util.environment.EnvironmentModifications()
-      # first setup compiler, similar to build_environment.py in spack
-      compiler = self.compiler
-      if compiler.cc:
-          env_mod.set('CC', compiler.cc)
-      if compiler.cxx:
-          env_mod.set('CXX', compiler.cxx)
-      if compiler.f77:
-          env_mod.set('F77', compiler.f77)
-      if compiler.fc:
-          env_mod.set('FC',  compiler.fc)
-      compiler.setup_custom_environment(self, env_mod)
-      env_mod.prepend_path('PATH', os.path.dirname(compiler.cxx))
-      # now setup all other packages
-      for _spec in specs:
-          env_mod.extend(uenv.environment_modifications_for_spec(_spec))
-          env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
-      # transform to bash commands, and write to file
-      cmds = k4_generate_setup_script(env_mod)
-      with open(os.path.join(prefix, "setup.sh"), "w") as f:
-        f.write(cmds)
-        # optionally add a symlink (location configurable via environment variable
-        # K4_LATEST_SETUP_PATH. Step will be skipped if it is empty)
-        try:
-          symlink_path = os.environ.get("K4_LATEST_SETUP_PATH", "")
-          if symlink_path:
-              # make sure that the path exists, create if not
-              if not os.path.exists(os.path.dirname(symlink_path)):
-                os.makedirs(os.path.dirname(symlink_path))
-              # make sure that an existing file will be overwritten,
-              # even if it is a symlink (for which 'exists' is false!)
-              if os.path.exists(symlink_path) or os.path.islink(symlink_path):
-                os.remove(symlink_path)
-              os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
-        except:
-          tty.warn("Could not create symlink")
+        return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
