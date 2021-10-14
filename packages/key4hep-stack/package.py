@@ -153,6 +153,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     ##################### developer tools #################
     #######################################################
+    depends_on("catch2@3.0.1:", when="+devtools")
     depends_on("cmake", when="+devtools")
     depends_on('man-db', when="+devtools")
     depends_on("gdb", when="+devtools")
