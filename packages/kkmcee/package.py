@@ -17,6 +17,7 @@ class Kkmcee(AutotoolsPackage):
 
     tags = ['hep']
 
+    version('4.32.01', sha256='d62fa06754a449c5fa0d126b2ddb371881b06d4eb86fcb84fec1081b3c8dd318')
     version('4.30', sha256='5c650eb464a6d673858a2d4421084d90ccc30c90f35d9e46f18fc1167d5a5bdf')
 
     depends_on('autoconf', type='build')
@@ -25,10 +26,10 @@ class Kkmcee(AutotoolsPackage):
     depends_on('m4',       type='build')
     depends_on('root')
 
-    patch('KKMCee-dev-4.30.patch', level=0)
     patch('gcc4.patch')
     patch('gcc6.patch')
     patch('gcc5.patch')
+    patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
 
     variant('cxxstd',
             default='11',
@@ -106,3 +107,9 @@ class Kkmcee(AutotoolsPackage):
         mkdirp(prefix.share.KKMCee.utils)
         install(join_path('ffbench', 'semaphore.start'), prefix.share.KKMCee.utils)
         install(join_path('ffbench', 'semaphore.stop'), prefix.share.KKMCee.utils)
+
+    def url_for_version(self, version):
+        # contrary to ilcsoftpackages, here the patch version is kept when 0
+        base_url = self.url[:self.url.rfind("/")]
+        url = base_url + "/v%s.tar.gz" % (version)
+        return url
