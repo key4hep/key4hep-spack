@@ -30,6 +30,7 @@ class Kkmcee(AutotoolsPackage):
     patch('gcc6.patch')
     patch('gcc5.patch')
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
+    patch('KKMCee-dev-4.32.01.patch', level=0, when='@4.31:4.32.01')
 
     variant('cxxstd',
             default='11',
