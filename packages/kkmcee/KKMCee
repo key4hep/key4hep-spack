@@ -15,12 +15,17 @@ help(){
    echo -e "  -c, --config file \t\tPath to configuration file"
    echo -e "  -f, --flavour flavour \tFlavour to be generated (Mu|Tau|UDS|C|B|Hadrons)"
    echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
-   echo -e "  -n, --nevts energy \t\t Number of events to be generated"
+   echo -e "  -n, --nevts energy \t\tNumber of events to be generated"
    echo -e "  -o, --outfile file \t\tFile with the generated events in LHE format"
    echo -e "  -s, --seedfile file \t\tFile to be used for seeding (randomly generated, if missing)"
+   echo -e "  -b, --bessig bessig \t\tBeam-Energy-Spread of both beams (or of the first beam, if bessig2<0.) "
+   echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread)]"
+   echo -e "  -g, --bessig2 bessig2 \tBeam-Energy-Spread of the second beam if different from the first beam; fraction of Ecms/2."
+   echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread or equal to first beam)]"
+   echo -e "  -r, --besrho rho \t\tBeam-Energy-Spread correlation [default 0.]"
    echo ""
    echo "Examples:"
-   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE"
+   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE -b 0.001"
    echo -e "KKMCee -c kkmc_ditau.input"
    echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.LHE"
    echo ""
@@ -29,6 +34,11 @@ help(){
 _FLAVOUR="Mu"
 _ECMS="91.2"
 _NEVTS="100"
+_DOBES="no"
+_HAVEBESTWO="no"
+_BESONE=-1.
+_BESTWO=-1.
+_BESRHO=0.
 _OUTFILE="KKMCee_OUT.LHE"
 # Read arguments
 while [[ $# -gt 0 ]]
@@ -55,6 +65,23 @@ do
            shift
            shift
         ;;
+        -b | --bessig)
+            _BESONE="$2"
+	    _DOBES="yes"
+            shift
+            shift
+        ;;
+        -g | --bessig2)
+            _BESTWO="$2"
+	    _HAVEBESTWO="yes"
+            shift
+            shift
+        ;;
+        -r | --besrho)
+            _BESRHO="$2"
+            shift
+            shift
+        ;;
         -s | --seedfile)
            _SEEDFILE="$2"
            shift
@@ -70,6 +97,14 @@ do
             exit 1
     esac
 done
+
+# Case with symmetric beam spread 
+if test "x${_DOBES}" = "xyes" && test "x${_HAVEBESTWO}" = "xno" ; then
+   _BESTWO=${_BESONE}
+fi
+echo -e "********************************************************************************"
+echo -e "*  BES enabled with: \tSigma1= $_BESONE \tSigma2: $_BESTWO \tRho: $_BESRHO"
+echo -e "********************************************************************************"
 
 KKMCEE_DIR=$(dirname $(dirname $0))
 KKMCEE_EXE=${KKMCEE_DIR}/bin/KKMCee.exe
@@ -93,6 +128,19 @@ BeginX
 *indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
 *     Center-of-mass energy [GeV]
     1        ${_ECMS}e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
+EOF
+   if test "x${_DOBES}" = "xyes"; then
+cat >> ./pro.input <<EOF
+   25              4      =0 normal, =2 beamsstrahlung =3,4 for gaussian BES
+*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
+   80       0.0e0         ParBES(0) E1=0 will be replaced by CMSene/2
+   81       0.0e0         ParBES(1) E2=0 will be replaced by CMSene/2
+   82       ${_BESONE}e0         ParBES(2) sigma1/E1
+   83       ${_BESTWO}e0         ParBES(3) sigma2/E2
+   84       ${_BESRHO}e0         ParBES(4) rho correlation parameter [dimensionles]
+EOF
+   fi
+cat >> ./pro.input <<EOF
 ********************************************************************************
 *     Define process
 EOF
