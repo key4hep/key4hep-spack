@@ -26,7 +26,6 @@ class Kkmcee(AutotoolsPackage):
     depends_on('m4',       type='build')
     depends_on('root')
 
-    patch('gcc4.patch')
     patch('gcc6.patch')
     patch('gcc5.patch')
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
