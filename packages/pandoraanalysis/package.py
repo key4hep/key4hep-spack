@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-from spack.pkg.k4.key4hep_stack import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Pandoraanalysis(CMakePackage):
+class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
     """Pandora calibration and analysis tools in iLCSoft / Marlin framework"""
 
     url      = "https://github.com/PandoraPFA/LCPandoraAnalysis/archive/v02-00-01.tar.gz"
@@ -32,9 +32,6 @@ class Pandoraanalysis(CMakePackage):
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPandoraAnalysis.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
 
     def cmake_args(self):
         return [

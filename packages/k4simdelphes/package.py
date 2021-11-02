@@ -3,11 +3,9 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
 
-from spack.pkg.k4.key4hep_stack import ilc_url_for_version, k4_add_latest_commit_as_version
-
-
-class K4simdelphes(CMakePackage):
+class K4simdelphes(CMakePackage, Ilcsoftpackage):
     """EDM4HEP output for Delphes."""
 
     homepage = "https://github.com/key4hep/k4SimDelphes"
@@ -17,7 +15,7 @@ class K4simdelphes(CMakePackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
-
+    k4_add_latest_commit_as_version(git)
     version('00-01-06', sha256='44072ee6fab87ea120481fce6838444467c3c8a00da0ddbfc51a663e119f8f27')
     version('00-01-05', sha256='49aa0942fd80bcef67386eb2a86d2b1bb4bdf2eeb6092c040d2d5c90e63feb3e')
     version('00-01-03', sha256='47a13cb58acda5d52d9462ca85ddf33d72a3dad4d5f5394a4b7078fbe69c0ed1')

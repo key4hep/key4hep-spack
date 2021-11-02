@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.key4hep_stack import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Lich(CMakePackage):
+class Lich(CMakePackage, Ilcsoftpackage):
     """A marlin processor applied on PFOs for charged particle PID."""
 
     url      = "https://github.com/danerdaner/LICH/archive/v00-01.tar.gz"
@@ -30,9 +30,6 @@ class Lich(CMakePackage):
     
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLICH.so")
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
 
     def cmake_args(self):
         return [
