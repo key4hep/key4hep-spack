@@ -5,10 +5,10 @@
 
 
 from spack import *
-from spack.pkg.k4.key4hep_stack import ilc_url_for_version, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
 
 
-class Marlintrk(CMakePackage):
+class Marlintrk(CMakePackage, Ilcsoftpackage):
     """Tracking Package based on LCIO and GEAR,
        primarily aimed at providing track fitting in Marlin."""
 
@@ -48,6 +48,3 @@ class Marlintrk(CMakePackage):
         args = [self.define_from_variant("MARLINTRK_USE_GEAR", "gear"),
                 '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value]
         return args
-
-    def url_for_version(self, version):
-       return ilc_url_for_version(self, version)
