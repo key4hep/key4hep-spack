@@ -190,8 +190,6 @@ def install_setup_script(self, spec, prefix, env_var):
     tty.msg('* **Platform:**', spack.spec.ArchSpec(
         (str(spack.platforms.host()), 'frontend', 'frontend')))
     # get all dependency specs, including compiler
-    with spack.store.db.read_transaction():
-      specs = [dep for dep in spec.traverse(order='post')]
     # record all changes to the environment by packages in the stack
     env_mod = spack.util.environment.EnvironmentModifications()
     # first setup compiler, similar to build_environment.py in spack
@@ -207,9 +205,13 @@ def install_setup_script(self, spec, prefix, env_var):
     compiler.setup_custom_environment(self, env_mod)
     env_mod.prepend_path('PATH', os.path.dirname(compiler.cxx))
     # now setup all other packages
-    for _spec in specs:
-        env_mod.extend(uenv.environment_modifications_for_spec(_spec))
-        env_mod.prepend_path(uenv.spack_loaded_hashes_var, _spec.dag_hash())
+
+    # now walk over the dependencies
+    with spack.store.db.read_transaction():
+        for dep in spec.traverse(order='post'):
+            env_mod.extend(uenv.environment_modifications_for_spec(dep))
+            env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
+
     # transform to bash commands, and write to file
     cmds = k4_generate_setup_script(env_mod)
     with open(os.path.join(prefix, "setup.sh"), "w") as f:
@@ -217,6 +219,7 @@ def install_setup_script(self, spec, prefix, env_var):
       # optionally add a symlink (location configurable via environment variable
       try:
         symlink_path = os.environ.get(env_var, "")
+        tty.debug('Trying to symlink setup script to: {}'.format(env_var))
         if symlink_path:
             # make sure that the path exists, create if not
             if not os.path.exists(os.path.dirname(symlink_path)):
