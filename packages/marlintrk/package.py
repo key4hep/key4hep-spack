@@ -20,6 +20,7 @@ class Marlintrk(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('2.9',     sha256='a1ccec25aea02d62f22d98cffc870ac199e455aa31100b6fa8795a8dc34cdcc0')
     version('2.8',     sha256='bd3b0074c06e2b778c74d1aeb2c989c39100a8adf5018792db599f84cb946c14')
     version('2.7',     sha256='c6e556d18ae6f2f3ae6c0fd8aa4322ce866e08b54b48ce95d09636443eff53ea')
     version('2.6',     sha256='a7be303a775eeb1a7b91f17710669878da9a6d4cca16aed1d251e63a8885c7fd')

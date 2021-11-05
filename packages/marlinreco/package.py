@@ -18,6 +18,7 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('1.32', sha256='0ea3bee03e2bec1924b5876675043b592a942bc8cf306eb7056eaf03ac1748f6')
     version('1.31', sha256='eeb823f2476e1d31a54997b1a09fcc20cc8f3555a9f677054eacd5f44d4f59ee')
     version('1.30', sha256='e3b22a3f974232e4cc785326ad0dfd283b377cffda3245166f419b170276b6ff')
     version('1.29', sha256='45a36bb98f26580c182848d73ef0423290f99eae380f0cb27eea48f4ef48e459')
