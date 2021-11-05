@@ -18,6 +18,7 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.12', sha256='4f90c2ef240c2fa1f293498bf35201d1337651f8847d53da7124a61091bb504e')
     version('0.11', sha256='92410186209508091e0a8e330986283ffb32e40fd7195d10aad1a6a2e953f3ee')
 
     depends_on('ilcutil')
