@@ -36,6 +36,8 @@ class Lccontent(CMakePackage):
                 '-DCMAKE_CXX_STANDARD=17',
                 '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules
         ]
+        if self.spec.satisfies('%clang'):
+            args.append('-DCMAKE_CXX_FLAGS=-Wno-error')
         return args
 
     def url_for_version(self, version):

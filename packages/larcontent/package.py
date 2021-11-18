@@ -41,6 +41,8 @@ class Larcontent(CMakePackage):
         args = [
                 '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules,
                 "-DCMAKE_CXX_FLAGS=-std=c++17"]
+        if self.spec.satisfies('%clang'):
+            args.append('-DCMAKE_CXX_FLAGS=-Wno-error')
         return args
 
     def url_for_version(self, version):
