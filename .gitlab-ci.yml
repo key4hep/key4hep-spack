@@ -67,6 +67,7 @@ build-spack-nightlies:
         # set up spack inside the k4-spack repo
         - source spack/share/spack/setup-env.sh
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
+        - python scripts/fetch_nightly_versions.py > environments/$SPACKENV/packages_nightlies.yaml
         - cd environments/$SPACKENV
         # symlink to latest now handled by deploy step
         #- source pathsetup.sh
@@ -74,8 +75,9 @@ build-spack-nightlies:
         - source setup_clingo_centos7.sh
         - spack env activate .
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
+        - spack concretize -f --reuse
         # compile onwards and upwards
-        - spack install  --fail-fast --test=all 
+        - spack install  --fail-fast
 
 
 

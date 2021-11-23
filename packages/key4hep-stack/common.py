@@ -3,6 +3,7 @@ Common methods for use in Key4hep recipes
 """
 
 from spack import *
+from spack.directives import *
 
 import os
 import platform
@@ -108,44 +109,13 @@ def k4_lookup_latest_commit(repoinfo, giturl):
     return commit
 
 def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", variants="", when="@master"):
-    """ Helper function that adds a 'depends_on' with the latest commit to a spack recipe.
+    """ Helper function that adds a 'depends_on' with the latest commit to a spack recipe. [DEPRECATED]
 
-    :param name: spack name of the package, p.ex: "edm4hep"
-    :type name: str
-    :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
-    :type repoinfo: str
-    :param giturl: url that will return a json response with the commit sha when queried with urllib.
-       should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/master"
-    :type giturl:, str, optional
-    :param variants: argument that will be forwarded to depends_on
-      example: "+lcio"
-    :type variants: str, optional
-    :param when: argument that will be forwarded to depends_on
-      example: "@master"
-    :type when: str, optional
     """
-    github_user = os.environ.get("GITHUB_USER", "")
-    github_token = os.environ.get("GITHUB_TOKEN", "")
-    if github_user and github_token:
-      try:
-        commit = k4_lookup_latest_commit(repoinfo, giturl)
-        depends_on(name + "@commit." + str(commit) + " " + variants, when=when)
-      except:
-        print("Warning: could not fetch latest commit for " + name)
+    pass
 
 def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com/repos/%s/commits/master"):
-    """ Helper function that adds a 'version' with the latest commit to a spack recipe.
-    Note that the 'commit' part of the version is needed to ensure that version comparisons in spack will judge this as the newest version.
-
-
-    :param git_url: url of a git repository. Needs to end in .git.
-      example: "https://github.com/HSF/prmon.git"
-    :type git_url: str
-    :param giturl: url that will return a json response with the commit sha when queried with urllib.
-       should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/master"
-    :type giturl: str, optional
+    """ Helper function that adds a 'version' with the latest commit to a spack recipe. [DEPRECATED]
     """
     pass
 
@@ -238,14 +208,11 @@ class Key4hepPackage(PackageBase):
     tags = ['hep', 'key4hep']
 
 
-
 class Ilcsoftpackage(Key4hepPackage):
     """This class needs to be present to allow spack to import this file.
     the above function could also be a member here, but there is an
     issue with the logging of packages that use custom base classes.
     """
-
-
 
     def url_for_version(self, version):
         return ilc_url_for_version(self, version)
