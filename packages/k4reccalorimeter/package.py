@@ -11,7 +11,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    version("0.1.0pre05", tag="v0.1.0pre05")
+    version("0.1.0pre07", tag="v0.1.0pre07")
 
     generator = 'Ninja'
 
