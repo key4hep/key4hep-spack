@@ -35,6 +35,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on('k4lcioreader')
     depends_on('wget', type=('test'))
     depends_on('catch2@3.0.1:', when='@0.3.2:', type=('test'))
+    # for the doctest:
+    depends_on('jupytext', type=('test')
+    depends_on('py-ipykernel', type=('test'))
+    depends_on('py-nbconvert', type=('test'))
 
     def cmake_args(self):
         args = []
