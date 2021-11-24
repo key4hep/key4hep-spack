@@ -173,6 +173,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #depends_on('py-zfit') # todo: add in spack
     #depends_on('py-root-pandas') # todo: add in spack
 
+    # tools for doctests
+    depends_on('py-jupytext', when='+devtools')
+    depends_on('py-nbconvert', when='+devtools')
+    depends_on('py-ipykernel', when='+devtools')
+
 
     ##################### environment boostrap ############
     #######################################################
