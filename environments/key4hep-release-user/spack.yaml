@@ -9,11 +9,11 @@ spack:
     enable: []
   upstreams:
     spack-instance-2:
+      install_tree: /cvmfs/sw.hsf.org/spackages3/
+    spack-instance-2:
       install_tree: /cvmfs/sw.hsf.org/spackages2/
     spack-instance-1:
       install_tree: /cvmfs/sw.hsf.org/spackages/
-    spack-instance-sft:
-      install_tree: /cvmfs/sw.hsf.org/sft-spack/
   config:
     install_tree:
       root: ~/.spack/opt/spack
