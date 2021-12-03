@@ -23,7 +23,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('edm4hep')
     depends_on('py-awkward')
     depends_on('fcc-edm', when="@:0.2.9")
-    depends_on('acts+dd4hep+tgeo+identification', when="@0.3.0:")
+    depends_on('acts@5.00.0', when="@0.3.0:")
     depends_on('eigen', when="@0.3.0:")
 
     # todo: update the cmake config to remove this
@@ -32,10 +32,9 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       spack_env.prepend_path('CPATH', self.spec['edm4hep'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['podio'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include,
-                             when="@0.3.0:")
-      spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include,
-                             when="@0.3.0:")
+      if spec.satisfied("@0.3.0:"):
+        spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include)
+        spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include)
 
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
