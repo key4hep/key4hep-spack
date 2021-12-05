@@ -40,7 +40,7 @@ class Larcontent(CMakePackage):
     def cmake_args(self):
         args = [
                 '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules,
-                "-DCMAKE_CXX_FLAGS=-std=c++17"]
+                "-DCMAKE_CXX_FLAGS=-std=c++17 -Wno-unused-private-field"]
         return args
 
     def url_for_version(self, version):
