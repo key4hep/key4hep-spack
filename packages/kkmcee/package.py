@@ -12,13 +12,15 @@ class Kkmcee(AutotoolsPackage):
     """KKMCee is the state of art Monte Carlo for e+e- -> ffbar."""
 
     homepage = "https://github.com/KrakowHEPSoft/KKMCee"
-    url      = "https://github.com/KrakowHEPSoft/KKMCee/archive/V4.30.tar.gz"
+    url      = "https://github.com/KrakowHEPSoft/KKMCee/archive/refs/tags/V4.30.tar.gz"
     git      = "https://github.com/KrakowHEPSoft/KKMCee.git"
 
     tags = ['hep']
 
+    version('main', branch='FCC_release')
     version('4.32.01', sha256='d62fa06754a449c5fa0d126b2ddb371881b06d4eb86fcb84fec1081b3c8dd318')
-    version('4.30', sha256='5c650eb464a6d673858a2d4421084d90ccc30c90f35d9e46f18fc1167d5a5bdf')
+    # the typo in the release version (uppercase 'V') confuses the fetcher of spack - go via tag
+    version('4.30', tag='V4.30')
 
     depends_on('autoconf', type='build')
     depends_on('automake', type='build')
@@ -26,9 +28,11 @@ class Kkmcee(AutotoolsPackage):
     depends_on('m4',       type='build')
     depends_on('root')
 
-    patch('gcc4.patch')
+    patch('gcc4.patch', when="@:4.32.0")
+    patch('gcc4a.patch', when="@4.32.01:")
     patch('gcc6.patch')
     patch('gcc5.patch')
+    patch('clang01.patch', when="@4.32.1:")
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
     patch('KKMCee-dev-4.32.01.patch', level=0, when='@4.31:4.32.01')
 
@@ -64,8 +68,8 @@ class Kkmcee(AutotoolsPackage):
             if self.spec.satisfies('%gcc@10:') or self.spec.satisfies('%clang@11:') or self.spec.satisfies('%apple-clang@11:'):
                 if flags is None:
                     flags = []
-                #flags.append('-fallow-argument-mismatch')
-                flags.append('-Wno-argument-mismatch')
+                # setting the flags here is not effective, need to patch ffbench/KKMakefile (see patch clang01.patch) 
+                #flags.append('-w -fallow-argument-mismatch')
         return (flags, None, flags)
 
     def build(self, spec, prefix):

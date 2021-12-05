@@ -1,0 +1,15 @@
+diff --git a/ffbench/KKMakefile b/ffbench/KKMakefile
+index 64ca7de..f374d2b 100755
+--- a/ffbench/KKMakefile
++++ b/ffbench/KKMakefile
+@@ -41,7 +41,7 @@ all:  demo-start
+ #FFLAGS  =  -fno-automatic -ffixed-line-length-132 -fbackslash -C -O
+ # sometime under linux g77 has to be used
+ F77     = gfortran
+-FFLAGS  = -O -g -fno-second-underscore -fno-automatic -ffixed-line-length-132 -fbackslash
++FFLAGS  = -O -g -fno-second-underscore -fno-automatic -ffixed-line-length-132 -fbackslash -fallow-argument-mismatch
+ LD      = $(F77)
+ AR      = ar cru
+ LDFLAGS = -lstdc++
+
+
