@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Conformaltracking(CMakePackage, Ilcsoftpackage):
@@ -21,7 +20,6 @@ class Conformaltracking(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.11',    sha256='297790748e211c7c8e52d70a283d6a9477ea0318db6c8521e640d41e4006520a')
     version('1.10',    sha256='7e0f5774a0ea80147b67db6c218de6001e83e46abc14396564a0a552725dbcce')
     version('1.9',     sha256='c9ae5bd4f833b4542c8e2df01698c1a40ed8bdfc7330eb0e06ec9c3304b2bbca')

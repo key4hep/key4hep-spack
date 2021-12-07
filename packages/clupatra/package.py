@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Clupatra(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.3', sha256='5256d1b120157e9a6916f86249e589d0ea386c4e6dac83fec0294b753a779c25')
 
     depends_on('ilcutil')

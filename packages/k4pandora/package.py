@@ -3,8 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_version 
+from spack.pkg.k4.key4hep_stack import Key4hepPackage 
 
 
 class K4pandora(CMakePackage, Key4hepPackage):
@@ -24,7 +23,6 @@ class K4pandora(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    k4_add_latest_commit_as_version(git)
     version('master', branch='master')
 
     depends_on('clhep')

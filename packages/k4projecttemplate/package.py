@@ -1,5 +1,4 @@
 
-from spack import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4projecttemplate(CMakePackage, Key4hepPackage):

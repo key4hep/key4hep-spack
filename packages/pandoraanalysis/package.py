@@ -3,8 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
@@ -19,7 +18,6 @@ class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('2.0.1', sha256='cab082096921d60390054bb0da6afc5eaee4df28411266d4404f9b3f50048e39')
 
 

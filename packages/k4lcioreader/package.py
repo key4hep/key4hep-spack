@@ -1,6 +1,5 @@
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4lcioreader(CMakePackage, Key4hepPackage):
     """LCIO reader based on PODIO and EDM4hep"""

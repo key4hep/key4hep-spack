@@ -1,4 +1,3 @@
-from spack import *
 
 
 class Dag(CMakePackage):

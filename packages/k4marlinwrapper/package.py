@@ -3,8 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     """Gaudify Marlin Processors in order to run them in the Key4HEP framework"""
@@ -16,7 +15,6 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     maintainers = ['fdplacido']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('0.4', sha256='6609dacb158f8fd2f8532e0881b0acb73ea23f31578eab44085876a8a59a5946')
     version('0.3.1',  sha256='a8ef66f6500b9a709b950cdfd3bcb0c775d7fa42336b2aa5c80e2efef7c95b19')
     version('0.3',    sha256='381fd96e2ede03bec048afaeef13b8efffe80030fc097fe18fae62b03c0fba94')

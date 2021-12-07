@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Kaldet(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.14.1',  sha256='39386f8d9648ebfd9771d99f2d318c5214a5560ad4135a12b90b0f3662681e6d')
     version('1.14',     sha256='67eb70874f9cd1d85d0a192e40e3e2ec3ecd03b6e2746bb2e1bdcf1b40c9c32a')
     version('1.13',     sha256='3d299dae6622560881365acc5e9b572faefc39dbeee453562d0d9b9ab2795633')

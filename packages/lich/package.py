@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Lich(CMakePackage, Ilcsoftpackage):
@@ -20,7 +19,6 @@ class Lich(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('0.1', sha256='9c5358f76c64b9f28734b82cca31101e09faa67b6ffd340889488c761aea918c')
 
     depends_on('ilcutil')

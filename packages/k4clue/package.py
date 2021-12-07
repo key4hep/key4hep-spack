@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 

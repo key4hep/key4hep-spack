@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Garlic(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Garlic(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('3.1', sha256='a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940')
 
     depends_on('ilcutil')

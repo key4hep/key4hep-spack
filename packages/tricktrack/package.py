@@ -1,5 +1,3 @@
-from spack import *
-from spack.pkg.k4.key4hep_stack import k4_add_latest_commit_as_version
 
 
 class Tricktrack(CMakePackage):
@@ -13,7 +11,6 @@ class Tricktrack(CMakePackage):
     tags = ['hep']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.0.9', sha256='988cedbb28ec8f5cc95b762aa8a38e36d75cfc47bd009c9dc4ef365e9751b80d')
     version('1.0.8', sha256='fe5f8d178f8a0a28ac423ad6e9c449772ba547ec3ef7e365c4644d9b5b44cf85')
     version('1.0.7', sha256='e567de7c3c6e8096bd77873ac59fc4667661cdb380d089dcd6443a9d9834f3ef')

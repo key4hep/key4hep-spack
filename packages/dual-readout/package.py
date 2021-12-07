@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
 class DualReadout(CMakePackage, Key4hepPackage):
@@ -18,7 +17,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'SanghyunKo']
 
     version('master', branch='master') 
-    k4_add_latest_commit_as_version(git)
     version('0.0.3', sha256='d35e7193c11385505494f11328d54a595b3ff953563bae06b8954c1ef24209b3')
     version('0.0.2', sha256='f76c1febf3d8e29d5287ba03eacbc244f8c615502295f7471579245376da91ad')
 

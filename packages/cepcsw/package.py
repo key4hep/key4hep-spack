@@ -1,7 +1,6 @@
 # ----------------------------------------------------------------------------
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_version 
+from spack.pkg.k4.key4hep_stack import Key4hepPackage 
 
 
 class Cepcsw(CMakePackage, Key4hepPackage):
@@ -20,7 +19,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    k4_add_latest_commit_as_version(git)
     version('master', branch='master')
     version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
     version('0.1.2', sha256='2caaf0723fa2561e97eb303e245b6a5e25185d4195b48c6a30dcc8d315951f42')

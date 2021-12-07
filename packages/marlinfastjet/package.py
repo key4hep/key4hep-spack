@@ -3,8 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlinfastjet(CMakePackage, Ilcsoftpackage):
@@ -17,7 +16,6 @@ class Marlinfastjet(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('0.5.2', sha256='abdffa6c2c9328bb094456f6003920d0c860e7faa5c76aea650da9e47e698bdf')
 
 
