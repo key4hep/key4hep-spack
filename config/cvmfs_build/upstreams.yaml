@@ -1,5 +1,0 @@
-upstreams:
-  spack-instance-2:
-      install_tree: /cvmfs/sw.hsf.org/spackages2/
-  spack-instance-1:
-      install_tree: /cvmfs/sw.hsf.org/spackages/
