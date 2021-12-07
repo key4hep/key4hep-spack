@@ -63,13 +63,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
 
     depends_on("k4simdelphes")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4gen")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4simgeant4")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4clue")
 
@@ -118,10 +115,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccanalyses")
 
     depends_on("fccdetectors")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4reccalorimeter")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     ############################## cepcsw #################
     #######################################################
