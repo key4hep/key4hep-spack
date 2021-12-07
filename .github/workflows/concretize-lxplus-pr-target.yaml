@@ -35,7 +35,7 @@ jobs:
     - name: Setup Spack
       run: |
         docker exec CI_container /bin/bash -c 'cd ./Package;\
-        source scripts/ci_setup_spack2.sh;'
+        source scripts/ci_setup_spack.sh;'
     - name: Concretize
       run: |
         docker exec CI_container /bin/bash -c 'cd ./Package;\

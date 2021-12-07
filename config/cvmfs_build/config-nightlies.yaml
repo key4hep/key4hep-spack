@@ -1,7 +1,0 @@
-config:
-  install_tree:
-    root: /cvmfs/sw-nightlies.hsf.org/spackages
-  module_roots:
-        lmod: /cvmfs/sw-nightlies.hsf.org/spackages/modules
-        tcl: /cvmfs/sw-nightlies.hsf.org/spackages/modules
-
