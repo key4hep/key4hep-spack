@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlindd4hep(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('0.6', sha256='1cf8eb03bbdf6da8fbf277d8168d97f77e1675850a7e66d0e9f90684e3a2f077')
 
     depends_on('ilcutil')

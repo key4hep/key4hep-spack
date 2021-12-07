@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from spack.pkg.k4.key4hep_stack import Key4hepPackage, k4_add_latest_commit_as_dependency, install_setup_script
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import install_setup_script
 
 
 class Ilcsoft(BundlePackage, Key4hepPackage):
@@ -11,8 +12,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     ##################### versions ########################
     #######################################################
     ###  nightly builds
-    # builds the HEAD of each package for which 
-    # k4_add_latest_commit_as_dependency is called below
     version('master')
     # this version can be extended with additional version
     # fields to differentiate it, like 'master-2020-10-10'
@@ -47,147 +46,101 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("k4lcioreader")
-    k4_add_latest_commit_as_dependency("k4lcioreader", "key4hep/k4LCIOReader", when="@master")
 
     depends_on("k4simdelphes")
-    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("delphes")
-    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
 
 
     ############################### ilcsoft ###############
     #######################################################
     depends_on('aidatt')
-    k4_add_latest_commit_as_dependency("aidatt", "aidasoft/aidatt", when="@master")
 
     depends_on('cedviewer')
-    k4_add_latest_commit_as_dependency("cedviewer", "ilcsoft/cedviewer", when="@master")
 
     depends_on('conformaltracking')
-    k4_add_latest_commit_as_dependency("conformaltracking", "ilcsoft/conformaltracking", when="@master")
 
     depends_on('clicperformance')
-    k4_add_latest_commit_as_dependency("clicperformance", "ilcsoft/clicperformance", when="@master")
 
     depends_on('clupatra')
-    k4_add_latest_commit_as_dependency("clupatra", "ilcsoft/clupatra", when="@master")
 
     depends_on('ced')
-    k4_add_latest_commit_as_dependency("ced", "ilcsoft/ced", when="@master")
 
     depends_on('ddkaltest')
-    k4_add_latest_commit_as_dependency("ddkaltest", "ilcsoft/ddkaltest", when="@master")
 
     depends_on('ddmarlinpandora')
-    k4_add_latest_commit_as_dependency("ddmarlinpandora", "ilcsoft/ddmarlinpandora", when="@master")
 
     depends_on('fcalclusterer')
-    k4_add_latest_commit_as_dependency("fcalclusterer", "fcalsw/fcalclusterer", when="@master")
 
     depends_on('forwardtracking')
-    k4_add_latest_commit_as_dependency("forwardtracking", "ilcsoft/forwardtracking", when="@master")
 
     depends_on('garlic')
-    k4_add_latest_commit_as_dependency("garlic", "ilcsoft/garlic", when="@master")
 
     depends_on('k4marlinwrapper')
-    k4_add_latest_commit_as_dependency("k4marlinwrapper", "key4hep/k4marlinwrapper", when="@master")
 
     depends_on('generalbrokenlines')
-    k4_add_latest_commit_as_dependency("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines", when="@master")
 
     depends_on('gear')
-    k4_add_latest_commit_as_dependency("gear", "ilcsoft/gear", when="@master")
 
     depends_on('ilcutil')
-    k4_add_latest_commit_as_dependency("ilcutil", "ilcsoft/ilcutil", when="@master")
 
     depends_on('ildperformance')
-    k4_add_latest_commit_as_dependency("ildperformance", "ilcsoft/ildperformance", when="@master")
 
     depends_on('kaldet')
-    k4_add_latest_commit_as_dependency("kaldet", "ilcsoft/kaldet", when="@master")
 
     depends_on('kitrackmarlin')
-    k4_add_latest_commit_as_dependency("kitrackmarlin", "ilcsoft/kitrackmarlin", when="@master")
 
     depends_on('kaltest')
-    k4_add_latest_commit_as_dependency("kaltest", "ilcsoft/kaltest", when="@master")
 
     depends_on('kitrack')
-    k4_add_latest_commit_as_dependency("kitrack", "ilcsoft/kitrack", when="@master")
 
     depends_on('lcfiplus')
-    k4_add_latest_commit_as_dependency("lcfiplus", "lcfiplus/lcfiplus", when="@master")
 
     depends_on('lctuple')
-    k4_add_latest_commit_as_dependency("lctuple", "ilcsoft/lctuple", when="@master")
 
     depends_on('lcfivertex')
-    k4_add_latest_commit_as_dependency("lcfivertex", "ilcsoft/lcfivertex", when="@master")
 
     depends_on('lich')
-    k4_add_latest_commit_as_dependency("lich", "danerdaner/lich", when="@master")
 
     depends_on('lccd')
-    k4_add_latest_commit_as_dependency("lccd", "ilcsoft/lccd", when="@master")
 
     depends_on('lcio')
-    k4_add_latest_commit_as_dependency("lcio", "ilcsoft/lcio", when="@master")
 
     depends_on('lcgeo')
-    k4_add_latest_commit_as_dependency("lcgeo", "ilcsoft/lcgeo", when="@master")
 
     depends_on('marlin')
-    k4_add_latest_commit_as_dependency("marlin", "ilcsoft/marlin", when="@master")
 
     depends_on('marlinutil')
-    k4_add_latest_commit_as_dependency("marlinutil", "ilcsoft/marlinutil", when="@master")
 
     depends_on('marlinpandora')
-    k4_add_latest_commit_as_dependency("marlinpandora", "pandorapfa/marlinpandora", when="@master")
 
     depends_on("marlindd4hep")
-    k4_add_latest_commit_as_dependency("marlindd4hep", "ilcsoft/marlindd4hep", when="@master")
 
     depends_on('marlinreco')
-    k4_add_latest_commit_as_dependency("marlinreco", "ilcsoft/marlinreco", when="@master")
 
     depends_on('marlinfastjet')
-    k4_add_latest_commit_as_dependency("marlinfastjet", "ilcsoft/marlinfastjet", when="@master")
 
     depends_on('marlinkinfit')
-    k4_add_latest_commit_as_dependency("marlinkinfit", "ilcsoft/marlinkinfit", when="@master")
 
     depends_on('marlinkinfitprocessors')
-    k4_add_latest_commit_as_dependency('marlinkinfitprocessors', 'ilcsoft/marlinkinfitprocessors', when='@master')
 
     depends_on('marlintrkprocessors')
-    k4_add_latest_commit_as_dependency("marlintrkprocessors", "ilcsoft/marlintrkprocessors", when="@master")
 
     depends_on('marlintrk')
-    k4_add_latest_commit_as_dependency("marlintrk", "ilcsoft/marlintrk", when="@master")
 
     depends_on('overlay')
-    k4_add_latest_commit_as_dependency("overlay", "ilcsoft/overlay", when="@master")
 
     depends_on('pandoraanalysis')
-    k4_add_latest_commit_as_dependency("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", when="@master")
 
     depends_on('pandorapfa')
-    #k4_add_latest_commit_as_dependency("pandorapfa", "pandorapfa/pandorapfa", when="@master")
 
 
     depends_on('physsim')
-    k4_add_latest_commit_as_dependency("physsim", "ilcsoft/physsim", when="@master")
 
     depends_on("raida")
-    k4_add_latest_commit_as_dependency("raida", "ilcsoft/raida", when="@master")
 
     depends_on('sio')
-    k4_add_latest_commit_as_dependency("sio", "ilcsoft/sio", when="@master")
 
 
 

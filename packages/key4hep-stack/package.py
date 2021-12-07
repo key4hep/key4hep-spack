@@ -17,8 +17,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     ##################### versions ########################
     #######################################################
     ###  nightly builds
-    # builds the HEAD of each package for which 
-    # k4_add_latest_commit_as_dependency is called below
     version('master')
     # this version can be extended with additional version
     # fields to differentiate it, like 'master-2020-10-10'
@@ -53,36 +51,27 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     ##################### common key4hep packages #########
     #######################################################
     depends_on('edm4hep')
-    k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
 
     depends_on('podio')
     # TODO: temporarily disable due to known issue with https://github.com/AIDASoft/podio/pull/193
-    #k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
 
     depends_on('dd4hep')
-    k4_add_latest_commit_as_dependency("dd4hep", "aidasoft/dd4hep", when="@master")
 
     depends_on("k4fwcore")
-    k4_add_latest_commit_as_dependency("k4fwcore", "key4hep/k4fwcore", when="@master")
 
     depends_on("k4projecttemplate")
-    k4_add_latest_commit_as_dependency("k4projecttemplate", "key4hep/k4-project-template", when="@master")
 
 
     depends_on("k4simdelphes")
-    k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4gen")
-    k4_add_latest_commit_as_dependency("k4gen", "hep-fcc/k4Gen", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4simgeant4")
-    k4_add_latest_commit_as_dependency("k4simgeant4", "hep-fcc/k4simgeant4", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4clue")
-    k4_add_latest_commit_as_dependency("k4clue", "key4hep/k4clue", when="@master")
 
     depends_on('k4actstracking')
 
@@ -102,7 +91,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on("delphes")
     # wait for issues in delphes master to be fixed
-    k4_add_latest_commit_as_dependency("delphes", "delphes/delphes", when="@master")
 
     ##################### general purpose generators ######
     #######################################################
@@ -122,31 +110,24 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     ############################### fccsw #################
     #######################################################
     depends_on("fccsw")
-    k4_add_latest_commit_as_dependency("fccsw", "hep-fcc/fccsw", when="@master")
 
 
     #depends_on("dual-readout")
-    #k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
 
 
     depends_on("fccanalyses")
-    k4_add_latest_commit_as_dependency("fccanalyses", "hep-fcc/fccanalyses", when="@master")
 
     depends_on("fccdetectors")
-    k4_add_latest_commit_as_dependency("fccdetectors", "hep-fcc/fccdetectors", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("k4reccalorimeter")
-    k4_add_latest_commit_as_dependency("k4reccalorimeter", "hep-fcc/k4reccalorimeter", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
     ############################## cepcsw #################
     #######################################################
     depends_on("cepcsw")
-    k4_add_latest_commit_as_dependency("cepcsw", "cepc/cepcsw", when="@master")
     
     depends_on("k4lcioreader")
-    k4_add_latest_commit_as_dependency("k4lcioreader", "key4hep/k4LCIOReader", when="@master")
 
 
     ##################### developer tools #################

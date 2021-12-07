@@ -3,8 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Lctuple(CMakePackage, Ilcsoftpackage):
@@ -17,7 +16,6 @@ class Lctuple(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.13', sha256='35f2ff3d4b89a3fd7e87f6f5c9fec2178afec26ae8c89d30a5b0bcf113d2107f')
     version('1.12', sha256='e0e7c4c86f257027a7e9b1c42438087a7b0919964f9719080be25df8a0f95968')
 

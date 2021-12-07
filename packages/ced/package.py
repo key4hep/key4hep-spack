@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Ced(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Ced(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('1.9.3', sha256='60addba214b3d2ad65a3aacdcfc7d02fe697da0f3aefb0f6229370f08280ed3d')
     version('1.9.2', sha256='39a0cce64af74b915c128dcad5f4c91c634b1d35d646405aff0b72c6491f6161')
     version('1.9.1', sha256='62fd4265c57918a8b9891a033fd5f10f868dc52a068233e0325f7892cf1c1fd0')

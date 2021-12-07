@@ -108,18 +108,6 @@ def k4_lookup_latest_commit(repoinfo, giturl):
     test = int(commit, 16)
     return commit
 
-def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", variants="", when="@master"):
-    """ Helper function that adds a 'depends_on' with the latest commit to a spack recipe. [DEPRECATED]
-
-    """
-    pass
-
-def k4_add_latest_commit_as_version(git_url, git_api_url="https://api.github.com/repos/%s/commits/master"):
-    """ Helper function that adds a 'version' with the latest commit to a spack recipe. [DEPRECATED]
-    """
-    pass
-
-
 
 def ilc_url_for_version(self, version):
     """Translate version numbers to ilcsoft conventions.

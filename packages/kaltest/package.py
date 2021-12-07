@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Kaltest(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('2.5',      sha256='8753ecf5ed7819744cc66a652cf8ddcd0d783a25ee19b5387212f70dd9abbce5')
     version('2.4',      sha256='8cd089a51c499cc807dda196150a3da124b4a2a192bcc6b2d55b9c8b5481e5d5')
     version('2.3',      sha256='fa09a8e4a29c18b7b7b094d5d675a70b15eca1a9871c64141bafb9da0b893d3e')

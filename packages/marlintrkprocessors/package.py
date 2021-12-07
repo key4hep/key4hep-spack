@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage, k4_add_latest_commit_as_version
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
@@ -18,7 +17,6 @@ class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    k4_add_latest_commit_as_version(git)
     version('2.12', sha256='ac1a3af380c837868649c8b7767e7641d25a1ecf40690726d55a9bcc58a54640')
     version('2.11', sha256='49a567831e2b7a0c43ded955ce31fbe7d467a59960f4bcc2c2120e20762639b0')
 
