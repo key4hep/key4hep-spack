@@ -76,37 +76,6 @@ def k4_generate_setup_script(env_mod, shell='sh'):
                 name, cmd_quote(new_env[name]))]
     return ''.join(cmds)
 
-def k4_lookup_latest_commit(repoinfo, giturl):
-    """Use a github-like api to fetch the commit hash of the master branch.
-    Constructs and runs a command of the form:
-    # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/master -H "Accept: application/vnd.github.VERSION.sha"
-    The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
-    The envrionment variables 
-      GITHUB_USER
-      GITHUB_TOKEN
-    can be used for authentication.
-
-    :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
-    :type repoinfo: str
-    :param giturl: url that will return a json response with the commit sha when queried with urllib.
-       should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/master"
-    :return: The commit sha of the latest commit for the repo.
-    :rtype: str
-      
-    """
-    curl_command = ["curl -s "]
-    github_user = os.environ.get("GITHUB_USER", "")
-    github_token = os.environ.get("GITHUB_TOKEN", "")
-    if github_user and github_token:
-      curl_command += [" -u %s:%s " % (github_user, github_token)]
-    final_giturl = giturl % repoinfo
-    curl_command += [final_giturl]
-    curl_command += [' -H "Accept: application/vnd.github.VERSION.sha" ']
-    curl_command = ' '.join(curl_command)
-    commit = os.popen(curl_command).read()
-    test = int(commit, 16)
-    return commit
 
 
 def ilc_url_for_version(self, version):
