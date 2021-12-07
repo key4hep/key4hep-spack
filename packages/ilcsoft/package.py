@@ -48,7 +48,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("k4lcioreader")
 
     depends_on("k4simdelphes")
-				 giturl="https://api.github.com/repos/%s/commits/main")
 
     depends_on("delphes")
 
