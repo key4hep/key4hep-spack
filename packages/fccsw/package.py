@@ -27,7 +27,6 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("fccdetectors", type=("test", "run"))
     depends_on("k4simgeant4", type=("test", "run"))
     depends_on("k4reccalorimeter", type=("test", "run"))
-    depends_on("fcc-edm", type=("test", "run"))
     depends_on("lcgeo", type=("test", "run"))
 
     def cmake_args(self):
