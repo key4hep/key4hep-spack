@@ -30,6 +30,7 @@ class Ced(CMakePackage, Ilcsoftpackage):
 
     depends_on('freeglut')
     depends_on('ilcutil')
+    patch('glut-link.patch')
 
     def cmake_args(self):
         # install error if build_testing is on
