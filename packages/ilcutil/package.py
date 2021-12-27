@@ -21,6 +21,8 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
     version('1.6', sha256='09083890721704f39a3e902dc660db5326027cc38446b813233d04ec3233ba2e')
 
     patch("installdoc.patch", when="@:1.6.1")
+    # Remove use_cxx11 patch since this conflicts with cxxstd
+    patch("remove-set-cxx-standard.patch")
 
     variant('cxxstd',
             default='17',
