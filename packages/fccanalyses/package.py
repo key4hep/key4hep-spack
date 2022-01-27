@@ -10,6 +10,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'clementhelsens']
   
     version('master', branch='master')
+    version('0.3.5', sha256='efc08ea107d2fe10c24486d549e8ad8f6457c9c9003d2d12d1c44ebcdbd9664c')
     version('0.3.3', sha256='04d947517ace952f4bb4b2a9479883b22dce5229084ae4ff037ae299d23e1d2c')
     version('0.3.2', sha256='32a238ebf9019440e81da01e52d3109d32d51c80f7c67a5a456860eb67e42221')
     version('0.3.1', sha256='736e4243493d32744ef5b974ae4e60e43c1ab467ba58df6afdf495fccb165dc3')
