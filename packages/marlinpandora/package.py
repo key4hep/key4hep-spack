@@ -7,7 +7,7 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlinpandora(CMakePackage, Ilcsoftpackage):
-    """Pandora app for Marlin"""
+    """Pandora app for Marlin. NOTE: This package is deprecated in favor of ddmarlinpandora!"""
 
     url      = "https://github.com/PandoraPFA/MarlinPandora/archive/v03-00-01.tar.gz"
     homepage = "https://github.com/PandoraPFA/MarlinPandora"

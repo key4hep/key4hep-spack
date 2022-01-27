@@ -112,8 +112,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
 
     depends_on('marlinutil')
 
-    depends_on('marlinpandora')
-
     depends_on("marlindd4hep")
 
     depends_on('marlinreco')
