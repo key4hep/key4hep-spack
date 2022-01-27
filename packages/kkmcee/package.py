@@ -68,7 +68,7 @@ class Kkmcee(AutotoolsPackage):
                 if flags is None:
                     flags = []
                 # setting the flags here is not effective, need to patch ffbench/KKMakefile (see patch clang01.patch) 
-                #flags.append('-w -fallow-argument-mismatch')
+                flags.append('-std=legacy')
         return (flags, None, flags)
 
     def build(self, spec, prefix):
