@@ -42,3 +42,10 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       # this should point to share/ by key4hep convention
       #  but we want to make it work with the tutorials
       spack_env.set("FCCANALYSES", self.prefix.python)
+      # libawkward.so is in prefix/lib/pythonX.Y/site-packages
+      python_version = self.spec['python'].version.up_to(2)
+      awk_lib_dir = self.spec['py-awkward'].prefix.lib
+      awk_pydir = join_path(awk_lib_dir,
+                           'python{0}'.format(python_version),
+                           'site-packages')
+      spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
