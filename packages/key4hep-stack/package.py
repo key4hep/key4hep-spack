@@ -171,6 +171,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         spack_env.set("LC_ALL", "C")
+        spack_env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, 'setup.sh'))
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
