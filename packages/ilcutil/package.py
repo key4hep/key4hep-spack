@@ -36,5 +36,6 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
         # C++ Standard
         return [
             self.define_from_variant('CMAKE_CXX_STANDARD', 'cxxstd'),
-            self.define_from_variant('INSTALL_DOC', 'doc')
+            self.define_from_variant('INSTALL_DOC', 'doc'),
+            self.define('USE_CXX11', False),
         ]
