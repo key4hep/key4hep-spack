@@ -32,7 +32,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       spack_env.prepend_path('CPATH', self.spec['edm4hep'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['podio'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
-      if spec.satisfied("@0.3.0:"):
+      if self.spec.satisfies("@0.3.0:"):
         spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include)
         spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include)
 
