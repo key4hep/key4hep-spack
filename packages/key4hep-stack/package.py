@@ -93,8 +93,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #######################################################
     depends_on("madgraph5amc", when="+generators")
     depends_on("herwig3", when="+generators")
-    # todo: investigate build failure with newer versions
-    depends_on("lhapdf@6.2.3", when="+generators")
+    depends_on("lhapdf", when="+generators")
 
 
     ############################### ilcsoft ###############
