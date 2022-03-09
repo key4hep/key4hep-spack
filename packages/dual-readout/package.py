@@ -27,6 +27,9 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on('root')
     depends_on('pythia8')
     depends_on('hsf-cmaketools')
+    depends_on('k4fwcore', when='@0.1.0:')
+    depends_on('simsipm', when='@0.1.0:')
+
 
     def cmake_args(self):
         args = []
@@ -38,4 +41,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
 
     def setup_build_environment(self, env):
         env.set('PYTHIA8_ROOT_DIR', self.spec["pythia8"].prefix)
+        
+    def setup_run_environment(self, env):
+        env.set('DUALREADOUT', self.spec.prefix)
 
