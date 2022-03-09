@@ -19,7 +19,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
             description='Use the specified C++ standard when building.')
 
     depends_on('clhep')
-    depends_on('dd4hep')
+    depends_on('dd4hep +ddg4')
     depends_on('k4fwcore@1.0:')
     depends_on('geant4')
     depends_on('edm4hep')

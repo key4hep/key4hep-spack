@@ -29,7 +29,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
           sha256='87bf94536f5fd7fb675ca4eff25277331b7de94ef541f2bd8ea178a5e61fd20d', when="@0.2.1")
 
     depends_on('clhep')
-    depends_on('dd4hep')
+    depends_on('dd4hep +ddg4')
     depends_on('edm4hep')
     depends_on('k4fwcore@0.3.0:', when='@0.2:')
     depends_on('k4fwcore@0.2.0', when='@:0.1.99')
