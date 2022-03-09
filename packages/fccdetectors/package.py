@@ -21,7 +21,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    depends_on('dd4hep +geant4')
+    depends_on('dd4hep')
     depends_on('lcgeo')
     depends_on('lcio')
 

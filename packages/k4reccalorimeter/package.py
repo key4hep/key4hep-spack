@@ -27,7 +27,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on('ninja', type='build')
     depends_on("edm4hep")
     depends_on('k4fwcore@1:')
-    depends_on("dd4hep +geant4")
+    depends_on("dd4hep +ddg4")
     depends_on("fccdetectors")
 
     # todo: remove when ready

@@ -26,7 +26,7 @@ class K4pandora(CMakePackage, Key4hepPackage):
     version('master', branch='master')
 
     depends_on('clhep')
-    depends_on('dd4hep +geant4')
+    depends_on('dd4hep +ddg4')
     depends_on('edm4hep')
     depends_on('k4fwcore@0.3.0:')
     depends_on('gaudi@35.0:')

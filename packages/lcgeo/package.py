@@ -27,7 +27,7 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
             description='Use the specified C++ standard when building.')
 
     depends_on('lcio')
-    depends_on('dd4hep +geant4')
+    depends_on('dd4hep')
     depends_on('boost')
     depends_on('root')
 
