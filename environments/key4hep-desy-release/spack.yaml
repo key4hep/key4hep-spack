@@ -1,0 +1,20 @@
+spack:
+  config:
+    install_tree:
+      root: $CVMFS_INSTALL_DIR/spackages
+      projections:
+        all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH}
+        build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH}
+    module_roots:
+      lmod: $CVMFS_INSTALL_DIR/spackages/modules
+      tcl: $CVMFS_INSTALL_DIR/spackages/modules
+
+  view: false
+  # More configuration in other config files
+  include:
+  - desy-packages.yaml
+  modules:
+    enable: []
+  concretization: together
+  specs:
+    - key4hep-stack
