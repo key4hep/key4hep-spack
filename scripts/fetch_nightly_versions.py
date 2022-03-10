@@ -55,8 +55,10 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
     if github_user and github_token:
       #try:
       commit = k4_lookup_latest_commit(repoinfo, giturl)
-      print('  %s: ' % name)
-      print('    version: [commit.%s]' % commit)
+      #print('  %s: ' % name)
+      #print('    version: [commit.%s]' % commit)
+      print('    - %s@commit.%s' % (name, commit))
+
       #depends_on(name + "@commit." + str(commit) + " " + variants, when=when)
       #except:
       #  print("Warning: could not fetch latest commit for " + name)
@@ -65,7 +67,7 @@ def k4_add_latest_commit_as_dependency(name, repoinfo, giturl="https://api.githu
 
 
 if __name__ == "__main__":
-    print('packages:')
+    print('  specs:')
     k4_add_latest_commit_as_dependency("edm4hep", "key4hep/edm4hep", when="@master")
     k4_add_latest_commit_as_dependency("podio", "aidasoft/podio", when="@master")
     k4_add_latest_commit_as_dependency("dd4hep", "aidasoft/dd4hep", when="@master")
@@ -168,7 +170,7 @@ if __name__ == "__main__":
 
     k4_add_latest_commit_as_dependency("marlinutil", "ilcsoft/marlinutil", when="@master")
 
-    k4_add_latest_commit_as_dependency("marlinpandora", "pandorapfa/marlinpandora", when="@master")
+    #k4_add_latest_commit_as_dependency("marlinpandora", "pandorapfa/marlinpandora", when="@master")
 
     k4_add_latest_commit_as_dependency("marlindd4hep", "ilcsoft/marlindd4hep", when="@master")
 

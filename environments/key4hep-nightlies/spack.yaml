@@ -1,19 +1,16 @@
 spack:
   upstreams:
     spack-instance-2:
-        install_tree: /cvmfs/sw.hsf.org/spackages2/
-    spack-instance-1:
-        install_tree: /cvmfs/sw.hsf.org/spackages/
+      install_tree: /cvmfs/sw.hsf.org/spackages4/
   config:
-    #concretizer: clingo
     checksum: false
     install_tree:
-      root: /cvmfs/sw-nightlies.hsf.org/spackages2
+      root: /cvmfs/sw-nightlies.hsf.org/spackages4
       projections:
         all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH}
     module_roots:
-          lmod: /cvmfs/sw-nightlies.hsf.org/spackages/modules
-          tcl:  /cvmfs/sw-nightlies.hsf.org/spackages/modules
+      lmod: /cvmfs/sw-nightlies.hsf.org/spackages/modules
+      tcl: /cvmfs/sw-nightlies.hsf.org/spackages/modules
   view: false
   include:
   - geant4-data.yaml
@@ -26,3 +23,4 @@ spack:
       variants: build_type=Release
     cepcsw:
       variants: build_type=Release
+  concretization: together
