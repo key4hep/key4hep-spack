@@ -39,6 +39,11 @@ class FccEdm(CMakePackage, Key4hepPackage):
     depends_on('podio@0.10.0:', when='@0.5.6')
     depends_on('podio@0.12.0:', when='@0.5.7:')
 
+    # Make podio build dependencies explicit until we make podio bring them
+    # along properly
+    depends_on('py-jinja2@2.10.1:', type='build')
+    depends_on('py-pyyaml', type='build')
+
     def cmake_args(self):
         args = []
         # C++ Standard
