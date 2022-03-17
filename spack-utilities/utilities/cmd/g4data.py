@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-import yaml
+import ruamel.yaml as yaml
 
 import spack
 import spack.cmd
