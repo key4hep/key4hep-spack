@@ -114,8 +114,7 @@ def install_setup_script(self, spec, prefix, env_var):
     # first, log spack version to build-out
     tty.msg('* **Spack:**', get_version())
     tty.msg('* **Python:**', platform.python_version())
-    tty.msg('* **Platform:**', spack.spec.ArchSpec(
-        (str(spack.platforms.host()), 'frontend', 'frontend')))
+    tty.msg('* **Platform:**', spack.platforms.host())
     # get all dependency specs, including compiler
     # record all changes to the environment by packages in the stack
     env_mod = spack.util.environment.EnvironmentModifications()
