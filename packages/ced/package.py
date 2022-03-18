@@ -28,6 +28,8 @@ class Ced(CMakePackage, Ilcsoftpackage):
     version('1.4.1', sha256='13ecc8d3a2449423b7e776cee8bd2d7af9a76ff1792ca2158bb61084bcb9683e')
     version('1.4',   sha256='f693a070eb1d8ad8ca6bd997eb735cb4c47f6ea09d207c57b25e295b84584e46')
 
+    patch('glut-link.patch', when='@:1.9.3')
+
     depends_on('freeglut')
     depends_on('ilcutil')
 
