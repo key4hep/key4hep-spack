@@ -22,16 +22,16 @@ import spack.store
 from spack.package import PackageBase
 
 
-def k4_setup_env_for_framework_tests(env):
+def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment.
     """
-    runenv = environment_modifications_for_spec(self.spec)
+    runenv = environment_modifications_for_spec(spec)
     env.extend(runenv)
-    for dspec in self.spec.traverse(root=False, order='post'):
+    for dspec in spec.traverse(root=False, order='post'):
       dspec.package.setup_run_environment(env)
       # make sure that ROOT_INCLUDE_PATH is set
       if (dspec.satisfies('^root')):
-        self.spec['root'].package.setup_dependent_run_environment(env, dspec)
+        spec['root'].package.setup_dependent_run_environment(env, dspec)
 
 
 def k4_generate_setup_script(env_mod, shell='sh'):
