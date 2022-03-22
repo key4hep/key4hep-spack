@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 class K4simdelphes(CMakePackage, Ilcsoftpackage):
     """EDM4HEP output for Delphes."""
@@ -30,15 +31,17 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     variant('delphes_hepmc', default=True, description='Build standalone executable with Hepmc input.')
     variant('delphes_pythia_evtgen', default=True, description='Build standalone executable with Pythia+EvtGen input')
 
-    depends_on('edm4hep')
-    depends_on('delphes@3.4.3pre10:')
+    depends_on('edm4hep', type=('build', 'link', 'run'))
+    depends_on('podio', type=('build', 'link', 'run'))
+    depends_on('delphes@3.4.3pre10:', type=('build', 'link', 'run'))
     depends_on('pythia8', when="+delphes_pythia")
     depends_on('evtgen+pythia8', when="+delphes_pythia_evtgen")
     depends_on('hepmc', when="+delphes_hepmc")
+    depends_on('hepmc3', when="+framework")
     depends_on('k4fwcore', when="+framework")
 
-    depends_on('catch2@3.0.1:', type=('test'))
-    depends_on('k4gen', when="+integration_tests", type=('test'))
+    depends_on('catch2@3.0.1:', type=('build', 'test'))
+    depends_on('k4gen', when="+integration_tests", type=('build', 'test', 'run'))
 
     def cmake_args(self):
         args = [
@@ -51,17 +54,9 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
         ]
         return args
 
-    def setup_build_environment(self, env):
-        env.set('PYTHIA8', self.spec["pythia8"].prefix)
-        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
-
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
         env.prepend_path("PYTHONPATH", self.prefix.python)
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
-        spack_env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+    def setup_build_environment(self, env):
+        k4_setup_env_for_framework_tests(env)
