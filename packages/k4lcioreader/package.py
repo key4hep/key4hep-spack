@@ -17,6 +17,10 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     version('0.2.0', sha256='346fc2ba4b4175895597e093f566ba6407be9eeb9cde0766304e0f19ad03e081')
     version('0.1.0', sha256='996d1ff78c0a8a2f7f358dd4ea19f955853ad0902ee86b99c484de58c5fc2e2c')
 
+    patch('https://github.com/key4hep/k4LCIOReader/commit/81f4f47ecc7ce904189986e08b949d477c0e4f08.patch',
+          sha256='5c88414128ccc9af6b53669f79ac5e4a61c4841d7de5b00a56400c9e92b7d37d',
+          when='@0.4.0:')
+
     variant('cxxstd',
             default='17',
             values=('14', '17', '20'),
