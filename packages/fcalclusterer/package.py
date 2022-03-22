@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class Fcalclusterer(CMakePackage, Ilcsoftpackage):
@@ -28,6 +29,11 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     depends_on('root +unuran +math')
     depends_on('dd4hep')
 
+    # testing
+    depends_on('lcgeo')
+    depends_on('marlindd4hep')
+
+
     # CMAKE_INSTALL_PREFIX is overwritten by the package
     patch("install.patch", when="@:1.0.1")
     patch("random-shuffle-c17.patch", when="@:1.0.1")
@@ -42,8 +48,16 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
 
     @run_after('install')
     def install_source(self):
-        #make('install')
-        install_tree('.', self.prefix)
+        install_tree('.', self.prefix,
+                     ignore=lambda x: x in ('README.md',
+                                    'CMakeLists.xt',
+                                    'LICENSE',
+                                    '.clang-format',
+                                    'doc',
+                                    ))
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libFCalClusterer.so")
+
+    def setup_build_environment(self, env):
+        k4_setup_env_for_framework_tests(env)
