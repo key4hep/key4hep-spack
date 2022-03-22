@@ -1,4 +1,3 @@
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4lcioreader(CMakePackage, Key4hepPackage):
@@ -19,7 +18,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
 
     patch('https://github.com/key4hep/k4LCIOReader/commit/81f4f47ecc7ce904189986e08b949d477c0e4f08.patch',
           sha256='5c88414128ccc9af6b53669f79ac5e4a61c4841d7de5b00a56400c9e92b7d37d',
-          when='@0.4.0:')
+          when='@0.4.0')
 
     variant('cxxstd',
             default='17',

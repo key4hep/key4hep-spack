@@ -59,5 +59,14 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libFCalClusterer.so")
 
-    def setup_build_environment(self, env):
-        k4_setup_env_for_framework_tests(self.spec, env)
+    def setup_build_environment(self, spack_env):
+        k4_setup_env_for_framework_tests(self.spec, spack_env)
+        spack_env.prepend_path('MARLIN_DLL', self.spec['marlindd4hep'].prefix.lib + "/libMarlinDD4hep.so"    )   
+        spack_env.prepend_path('ROOT_INCLUDE_PATH', self.spec['dd4hep'].prefix.include) 
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
+        # used p.ex. in ddsim to find DDDetectors dir
+        spack_env.set("DD4hepINSTALL", self.spec['dd4hep'].prefix)
+        spack_env.set("DD4HEP", self.spec['dd4hep'].prefix.examples)
+        spack_env.set("DD4hep_DIR", self.spec['dd4hep'].prefix)
+        spack_env.set("DD4hep_ROOT", self.spec['dd4hep'].prefix)
+ 

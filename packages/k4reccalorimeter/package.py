@@ -1,4 +1,3 @@
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage 
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
@@ -41,6 +40,8 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
         return args
 
     def setup_run_environment(self, spack_env):
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib64)
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)

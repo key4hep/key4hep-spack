@@ -1,5 +1,5 @@
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 class K4projecttemplate(CMakePackage, Key4hepPackage):
     """Template for Key4hep framework projects"""
@@ -38,3 +38,7 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.set("K4PROJECTTEMPLATE", self.prefix.share.k4ProjectTemplate)
+    
+
+    def setup_build_environment(self, env):
+        k4_setup_env_for_framework_tests(self.spec, env)

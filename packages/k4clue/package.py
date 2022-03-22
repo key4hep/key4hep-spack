@@ -5,6 +5,7 @@
 
 
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class K4clue(CMakePackage, Key4hepPackage):
@@ -32,4 +33,8 @@ class K4clue(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
         spack_env.set("K4CLUE", self.prefix.share.k4Clue)
         spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+
+    
+    def setup_build_environment(self, env):
+        k4_setup_env_for_framework_tests(self.spec, env)
 

@@ -77,8 +77,9 @@ if __name__ == "__main__":
     k4_add_latest_commit_as_dependency("k4simdelphes", "key4hep/k4SimDelphes", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
-    k4_add_latest_commit_as_dependency("k4clue", "key4hep/k4clue", when="@master",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+    # needs to fix tests
+    #k4_add_latest_commit_as_dependency("k4clue", "key4hep/k4clue", when="@master",
+		#		 giturl="https://api.github.com/repos/%s/commits/main")
 
     k4_add_latest_commit_as_dependency("k4gen", "hep-fcc/k4Gen", when="@master",
 				 giturl="https://api.github.com/repos/%s/commits/main")

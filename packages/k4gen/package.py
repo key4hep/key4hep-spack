@@ -1,5 +1,5 @@
-
-from spack.pkg.k4.key4hep_stack import Key4hepPackage 
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests 
 
 class K4gen(CMakePackage, Key4hepPackage):
     """Generator components for the Key4hep framework"""
@@ -50,3 +50,20 @@ class K4gen(CMakePackage, Key4hepPackage):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4GEN", self.prefix.share.k4Gen)
+
+
+    def setup_build_environment(self, env):
+        k4_setup_env_for_framework_tests(self.spec, env)
+        env.set("K4GEN", self.prefix.share.k4Gen)
+    
+    def check(self):
+        pass
+    
+  
+    # ... and  add custom check step that runs after installation instead
+    @run_after('install')
+    def install_check(self):
+        with working_dir(self.build_directory):
+            if self.run_tests:
+                ninja('test')
+        
