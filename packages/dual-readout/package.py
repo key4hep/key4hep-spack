@@ -22,7 +22,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
 
     depends_on('dd4hep')
     depends_on('hepmc3+rootio')
-    depends_on('fccsw')
     depends_on('fastjet')
     depends_on('root')
     depends_on('pythia8')
