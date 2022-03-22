@@ -29,7 +29,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("podio")
     depends_on('k4fwcore@1:')
-    depends_on("dd4hep +ddg4")
+    depends_on("dd4hep")
     depends_on("fccdetectors")
     depends_on('k4gen')
     depends_on('k4simgeant4')
