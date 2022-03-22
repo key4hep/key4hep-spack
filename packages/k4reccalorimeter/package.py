@@ -1,5 +1,6 @@
 
 from spack.pkg.k4.key4hep_stack import Key4hepPackage 
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 class K4reccalorimeter(CMakePackage, Key4hepPackage):
     """Calorimeter reconstruction components for the Key4hep framework"""
@@ -26,12 +27,12 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     depends_on('ninja', type='build')
     depends_on("edm4hep")
+    depends_on("podio")
     depends_on('k4fwcore@1:')
     depends_on("dd4hep +ddg4")
     depends_on("fccdetectors")
-
-    # todo: remove when ready
-    depends_on("fcc-edm")
+    depends_on('k4gen')
+    depends_on('k4simgeant4')
 
     def cmake_args(self):
         args = []
@@ -44,7 +45,15 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+    def setup_build_environment(self, env):
+        self.setup_run_environment(env)
+        k4_setup_env_for_framework_tests(env)
+
+    def check(self):
+        pass
+
+    @run_after('install')
+    def install_check(self):
+        with working_dir(self.build_directory):
+            if self.run_tests:
+                ninja('test')
