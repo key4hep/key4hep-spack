@@ -133,8 +133,6 @@ packages:
     target: []
     providers: {}
     compiler: []
-  acts:
-    version: [5.00.0]
   binutils:
     variants: +plugins       
   dd4hep:
