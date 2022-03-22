@@ -75,10 +75,11 @@ build-spack-nightlies:
         # avoid bootstrapping clingo
         - source setup_clingo_centos7.sh
         - spack env activate .
+        - spack repo add ../..
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
-        - spack concretize -f 
+        - spack concretize -f --test=root --reuse
         # compile onwards and upwards
-        - spack install --test=root
+        - spack install --test=root --reuse
 
 
 
@@ -132,6 +133,7 @@ build-spack-release:
         # activate environment
         - cd environments/${SPACKENV}
         - spack env activate .
+        - spack repo add ../..
         # config debug printouts
         - spack config blame config # debug printout
         - spack config blame packages # debug printout
