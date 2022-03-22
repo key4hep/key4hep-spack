@@ -54,4 +54,4 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
         spack_env.prepend_path("PATH", self.prefix.scripts)
 	
     def setup_build_environment(self, env):
-        k4_setup_env_for_framework_tests(env)
+        k4_setup_env_for_framework_tests(self.spec, env)

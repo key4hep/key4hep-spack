@@ -47,7 +47,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     def setup_build_environment(self, env):
         self.setup_run_environment(env)
-        k4_setup_env_for_framework_tests(env)
+        k4_setup_env_for_framework_tests(self.spec, env)
 
     def check(self):
         pass
