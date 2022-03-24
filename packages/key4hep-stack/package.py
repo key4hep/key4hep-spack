@@ -51,100 +51,68 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     ##################### common key4hep packages #########
     #######################################################
     depends_on('edm4hep')
-
     depends_on('podio')
-    # TODO: temporarily disable due to known issue with https://github.com/AIDASoft/podio/pull/193
-
     depends_on('dd4hep')
+    depends_on('k4fwcore')
+    depends_on('k4projecttemplate')
 
-    depends_on("k4fwcore")
-
-    depends_on("k4projecttemplate")
-
-
-    depends_on("k4simdelphes")
-
-    depends_on("k4gen")
-
-    depends_on("k4simgeant4")
-
-    depends_on("k4clue")
-
+    depends_on('k4simdelphes')
+    depends_on('lcgeo')
+    depends_on('k4gen')
+    depends_on('k4lcioreader')
+    depends_on('k4simgeant4')
+    depends_on('k4clue')
     depends_on('k4actstracking')
-
-    depends_on("guinea-pig")
-    # todo: figure out the api for the cern gitlab instance
-    #depends_on('guinea-pig@master', when="@master")
-
+    depends_on('guinea-pig')
     depends_on('whizard +lcio +openloops hepmc=2')
-    # todo: figure out the api for the whizard gitlab instance
-    #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
-
     depends_on('kkmcee')
-
     depends_on('bhlumi')
-
     depends_on('babayaga')
-
-    depends_on("delphes")
-    # wait for issues in delphes master to be fixed
+    depends_on('delphes')
 
     ##################### general purpose generators ######
     #######################################################
-    depends_on("madgraph5amc", when="+generators")
-    depends_on("herwig3", when="+generators")
-    depends_on("lhapdf", when="+generators")
-
+    depends_on('madgraph5amc', when='+generators')
+    depends_on('herwig3', when='+generators')
+    depends_on('lhapdf', when='+generators')
 
     ############################### ilcsoft ###############
     #######################################################
-
-    depends_on("ilcsoft")
-    depends_on("ilcsoft@master", when="@master")
-
+    depends_on('ilcsoft')
 
     ############################### fccsw #################
     #######################################################
-    depends_on("fccsw")
-
-
-    #depends_on("dual-readout")
-
-
-    depends_on("fccanalyses")
-
-    depends_on("fccdetectors")
-
-    depends_on("k4reccalorimeter")
+    depends_on('fccsw')
+    depends_on('dual-readout')
+    depends_on('fccanalyses')
+    depends_on('fccdetectors')
+    depends_on('k4reccalorimeter')
 
     ############################## cepcsw #################
     #######################################################
-    depends_on("cepcsw")
+    depends_on('cepcsw')
     
-    depends_on("k4lcioreader")
-
-
     ##################### developer tools #################
     #######################################################
-    depends_on("catch2@3.0.1:", when="+devtools")
-    depends_on("cmake", when="+devtools")
-    depends_on('man-db', when="+devtools")
-    depends_on("gdb", when="+devtools")
-    depends_on("emacs+X toolkit=athena", when="+devtools")
-    depends_on("ninja", when="+devtools")
-    depends_on("py-ipython", when="+devtools")
-    depends_on("doxygen", when="+devtools")
-    depends_on("prmon", when="+devtools")
-    depends_on("py-pip", when="+devtools")
-    depends_on('py-particle', when="+devtools")
-    depends_on('py-awkward', when="+devtools")
-    depends_on('py-matplotlib', when="+devtools")
-    depends_on('py-uproot', when="+devtools")
-    depends_on('py-pandas', when="+devtools")
-    depends_on('py-scikit-learn', when="+devtools")
-    depends_on('py-scipy', when="+devtools")
-    depends_on('xgboost', when="+devtools")
-    #depends_on('py-pyg4ometry', when="+devtools")
+    depends_on('catch2@3.0.1:', when='+devtools')
+    depends_on('cmake', when='+devtools')
+    depends_on('man-db', when='+devtools')
+    depends_on('gdb', when='+devtools')
+    depends_on('emacs+X toolkit=athena', when='+devtools')
+    depends_on('ninja', when='+devtools')
+    depends_on('py-ipython', when='+devtools')
+    depends_on('doxygen', when='+devtools')
+    depends_on('prmon', when='+devtools')
+    depends_on('py-pip', when='+devtools')
+    depends_on('py-particle', when='+devtools')
+    depends_on('py-awkward', when='+devtools')
+    depends_on('py-matplotlib', when='+devtools')
+    depends_on('py-uproot', when='+devtools')
+    depends_on('py-pandas', when='+devtools')
+    depends_on('py-scikit-learn', when='+devtools')
+    depends_on('py-scipy', when='+devtools')
+    depends_on('xgboost', when='+devtools')
+    #depends_on('py-pyg4ometry', when='+devtools')
     #depends_on('py-tensorflow') # todo: check if we should integrate.
     #depends_on('py-zfit') # todo: add in spack
     #depends_on('py-root-pandas') # todo: add in spack
@@ -157,21 +125,24 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     ##################### environment boostrap ############
     #######################################################
-    depends_on("environment-modules", when="+bootstrap")
+    depends_on('environment-modules', when='+bootstrap')
 
 
     ##################### conflicts #######################
     #######################################################
-    conflicts("%gcc@8.3.1",
+    conflicts('%gcc@8.3.1',
               msg="There are known issues with compilers from redhat's devtoolsets" \
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
+    ##################### other spack funcs################
+    #######################################################
+
     def setup_run_environment(self, spack_env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
-        spack_env.set("LC_ALL", "C")
-        spack_env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, 'setup.sh'))
+        spack_env.set('LC_ALL', 'C')
+        spack_env.set('KEY4HEP_STACK', os.path.join(self.spec.prefix, 'setup.sh'))
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
