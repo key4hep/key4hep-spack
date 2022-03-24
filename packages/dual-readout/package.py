@@ -35,7 +35,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        #args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         if self.spec.satisfies('^gaudi@:34.99'):
           args.append('-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt')
         return args
