@@ -16,6 +16,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version('00-01-08', sha256='a9c8dea6b2fd4bf81ad3421f12d1ce43f487a922e0533a832f459f6b3435f7d2')
     version('00-01-07', sha256='e348317a11de78244e864968c343d408f6a70f2cad96f99823e856ae4be9ef3b')
     version('00-01-06', sha256='44072ee6fab87ea120481fce6838444467c3c8a00da0ddbfc51a663e119f8f27')
     version('00-01-05', sha256='49aa0942fd80bcef67386eb2a86d2b1bb4bdf2eeb6092c040d2d5c90e63feb3e')
