@@ -20,7 +20,6 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
 
     patch('testing.patch', when="@:1.15")
 
-
     depends_on('ilcutil')
     depends_on('marlin')
     depends_on('marlinutil')
@@ -38,7 +37,6 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
         args.append(self.define('CMAKE_CXX_STANDARD',
                                 self.spec['root'].variants['cxxstd'].value))
         return args
-
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libForwardTracking.so")
