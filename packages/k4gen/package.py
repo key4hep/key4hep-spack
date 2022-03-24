@@ -15,12 +15,6 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     generator = 'Ninja'
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
     depends_on('ninja', type='build')
     depends_on('fastjet')
     depends_on('edm4hep')
@@ -32,11 +26,12 @@ class K4gen(CMakePackage, Key4hepPackage):
     depends_on('heppdt@:2.99.99')
     depends_on('pythia8')
     depends_on('evtgen+pythia8')
+    depends_on('root')
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
     def setup_dependent_build_environment(self, spack_env, dependent_spec):
