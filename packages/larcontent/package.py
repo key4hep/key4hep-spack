@@ -18,6 +18,7 @@ class Larcontent(CMakePackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('3.27.0', sha256='0aecf7e39fa96654bd19257e481997f0c9ee5871b97f587fa1b37046f909c4e0')
     version('3.24.1', sha256='2cd11a05e87b32af06c27f1fea8d54d67141881b1ae4be72b2068a4f546fde5a')
     version('3.24.0', sha256='02cb1533787f341823763de81478a6cb9be8971fc69be4cb1999f711fbb32f73')
     version('3.23.5', sha256='013c883b174a81dcf1ef3d20171e24c75fb90aace179752969345ad9f0a8eb02')
