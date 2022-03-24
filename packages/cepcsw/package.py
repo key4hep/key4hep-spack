@@ -12,7 +12,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
 
     maintainers = ['mirguest']
 
-
     variant('cxxstd',
             default='17',
             values=('14', '17'),
@@ -20,22 +19,26 @@ class Cepcsw(CMakePackage, Key4hepPackage):
             description='Use the specified C++ standard when building.')
 
     version('master', branch='master')
-    version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
-    version('0.1.2', sha256='2caaf0723fa2561e97eb303e245b6a5e25185d4195b48c6a30dcc8d315951f42')
-    version('0.2.0', sha256='1ca9823ef4492c25e776de9f2f4884ed9068f907b4e080342276d92ad4071af6')
-    version('0.2.1', sha256='32ca07da4e655094c1a861f86a7766f197dd4a3e8a7a82bd9dd2f2539188ad8e')
+    version('0.2.4', sha256='86802d09da1feca8fdfaf947ccad762e28dd91644669c1a057ac4df748e807c9')
     version('0.2.2', sha256='634bc0ce54a82ddaac43dd37d504bf1ea390dcdd30f9ebfd2264fc7073e37fea')
+    version('0.2.1', sha256='32ca07da4e655094c1a861f86a7766f197dd4a3e8a7a82bd9dd2f2539188ad8e')
+    version('0.2.0', sha256='1ca9823ef4492c25e776de9f2f4884ed9068f907b4e080342276d92ad4071af6')
+    version('0.1.2', sha256='2caaf0723fa2561e97eb303e245b6a5e25185d4195b48c6a30dcc8d315951f42')
+    version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
+
     patch('https://github.com/vvolkl/CEPCSW/commit/42f64d710fb25af363e2ed9a18b94bae1537a20f.patch',
           sha256='87bf94536f5fd7fb675ca4eff25277331b7de94ef541f2bd8ea178a5e61fd20d', when="@0.2.1")
 
     depends_on('clhep')
     depends_on('dd4hep')
     depends_on('edm4hep')
+    depends_on('podio')
+    depends_on('k4fwcore@1.0pre14:', when='@0.2.4:')
     depends_on('k4fwcore@0.3.0:', when='@0.2:')
     depends_on('k4fwcore@0.2.0', when='@:0.1.99')
     depends_on('garfieldpp', when='@0.2.1:')
-    depends_on('gaudi@:34.99', when='@:0.1.99')
     depends_on('gaudi@35.0:', when='@0.2:')
+    depends_on('gaudi@:34.99', when='@:0.1.99')
     depends_on('gear')
     depends_on('genfit')
     depends_on('lcio')
