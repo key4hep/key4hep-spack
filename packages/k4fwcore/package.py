@@ -15,10 +15,6 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version('0.1.1', sha256='9c4e4b487f7d9c982547c13570345399505e763fb369b76ceadb35c1d52bf6aa')
     version('0.1.0', sha256='aef682649f3fcb1d72de897fbf6ec4ed421c8a4836bb3462c4b0049a709374e4')
 
-    variant('build_type', default='Release',
-            description='CMake build type',
-            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
-
     variant('cxxstd',
             default='17',
             values=('14', '17'),
