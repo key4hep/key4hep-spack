@@ -7,7 +7,6 @@ import os
 
 
 class Kkmcee(AutotoolsPackage):
-
     """KKMCee is the state of art Monte Carlo for e+e- -> ffbar."""
 
     homepage = "https://github.com/KrakowHEPSoft/KKMCee"
@@ -15,6 +14,8 @@ class Kkmcee(AutotoolsPackage):
     git      = "https://github.com/KrakowHEPSoft/KKMCee.git"
 
     tags = ['hep']
+
+    maintainers = ['vvolkl']
 
     version('main', branch='FCC_release')
     version('4.32.01', sha256='d62fa06754a449c5fa0d126b2ddb371881b06d4eb86fcb84fec1081b3c8dd318')
