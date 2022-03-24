@@ -7,7 +7,7 @@
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 class Cedviewer(CMakePackage, Ilcsoftpackage):
-    """CEDViewer processor for the CED event display."""
+    """CEDViewer: Marlin processor for the CED event display."""
 
     url      = "https://github.com/iLCSoft/CEDViewer/archive/v01-17-01.tar.gz"
     homepage = "https://github.com/iLCSoft/CEDViewer"
