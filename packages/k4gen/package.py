@@ -15,10 +15,6 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     generator = 'Ninja'
 
-    variant('build_type', default='Release',
-            description='CMake build type',
-            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
-
     variant('cxxstd',
             default='17',
             values=('14', '17'),
