@@ -17,18 +17,20 @@ class DualReadout(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'SanghyunKo']
 
     version('master', branch='master') 
+    version('0.1.0', sha256='f4b9387ccae0d4d364b1340eb116c5b4b93a6bc74c896fcd221619ddec31d5f6')
     version('0.0.3', sha256='d35e7193c11385505494f11328d54a595b3ff953563bae06b8954c1ef24209b3')
     version('0.0.2', sha256='f76c1febf3d8e29d5287ba03eacbc244f8c615502295f7471579245376da91ad')
 
     depends_on('dd4hep')
+    depends_on('edm4hep@0.4.1:', when='@0.1.0:')
+    depends_on('podio@0.14.1:', when='@0.1.0:')
     depends_on('hepmc3+rootio')
     depends_on('fastjet')
     depends_on('root')
     depends_on('pythia8')
     depends_on('hsf-cmaketools')
-    depends_on('k4fwcore', when='@0.1.0:')
+    depends_on('k4fwcore@1.0pre014:', when='@0.1.0:')
     depends_on('simsipm', when='@0.1.0:')
-
 
     def cmake_args(self):
         args = []
@@ -43,4 +45,3 @@ class DualReadout(CMakePackage, Key4hepPackage):
         
     def setup_run_environment(self, env):
         env.set('DUALREADOUT', self.spec.prefix)
-
