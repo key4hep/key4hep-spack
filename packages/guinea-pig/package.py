@@ -15,6 +15,8 @@ class GuineaPig(CMakePackage):
 
     tags = ['hep']
 
+    maintainers = ['vvolkl']
+
     version('master', branch='master')
     version('1.2.2',   sha256='779f750fb8554feeb451e2cffbf332805624b91bf293694487437b0539782c0e', preferred=True)    
     version('1.2.2rc', 'fec0d1b6aa72523eec4e7c71bca2c1ff', )
