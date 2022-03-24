@@ -10,6 +10,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.1pre06', tag='v0.1pre06')
     version('0.1pre05', tag='v0.1pre05')
 
     generator = 'Ninja'
@@ -26,7 +27,9 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     depends_on('ninja', type='build')
     depends_on('fastjet')
-    depends_on("edm4hep")
+    depends_on('edm4hep')
+    depends_on('podio')
+    depends_on('k4fwcore@1.0pre14:', when='@0.1pre06')
     depends_on('k4fwcore@1:')
     depends_on('hepmc@:2.99.99', when='@:0.1pre05')
     depends_on('hepmc3', when='@0.1pre06:')
