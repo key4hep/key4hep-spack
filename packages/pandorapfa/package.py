@@ -20,6 +20,7 @@ class Pandorapfa(Package):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('3.24.0', sha256='a5a9d091e032a3bbdb383eb3bc5609fd3e57367907f3d07e3270f21ef6758074')
     version('3.21.01', sha256='36dd20235d924b975c167a450943d5f70c9e76d95eea0f55c68b0eead6c99e47')
     version('3.21.00', sha256='c36070916691bd4137a6a21aced2efd730cfe31a17819cf94511351b6edfec8d')
     version('3.20.05', sha256='dae829821dbc4d662818f5593e9899b482878c993c4fdebcd6e7bfd4b6e0a9fe')
