@@ -12,6 +12,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     version('main', branch='main')
     # can be removed once the ci is fixed
     version('master', branch='main')
+    version("0.1pre07", tag="v0.1pre07")
     version("0.1pre06", tag="v0.1pre06")
 
     depends_on('dd4hep')
