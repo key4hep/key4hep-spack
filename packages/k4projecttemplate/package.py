@@ -15,10 +15,6 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     generator = 'Ninja'
 
-    variant('build_type', default='Release',
-            description='CMake build type',
-            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
-
     depends_on('ninja', type='build')
     depends_on("edm4hep")
     depends_on('k4fwcore@1:')
