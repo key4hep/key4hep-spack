@@ -15,12 +15,6 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version('0.1.1', sha256='9c4e4b487f7d9c982547c13570345399505e763fb369b76ceadb35c1d52bf6aa')
     version('0.1.0', sha256='aef682649f3fcb1d72de897fbf6ec4ed421c8a4836bb3462c4b0049a709374e4')
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
     depends_on('gaudi@35.0:', when='@0.3.0:')
     depends_on('gaudi@32.2:34.99', when='@:0.2.99')
     depends_on('root@6.08:')
@@ -32,7 +26,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append(self.define('CMAKE_CXX_STANDARD', self.spec['root'].variants['cxxstd'].value))
         # Setting this bypasses the get_binary_tag.py script
         # and a check for BINARY_TAG which is not used in this build system
         # should become obsolete with the cmake modernisation in gaudi v34
