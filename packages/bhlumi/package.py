@@ -7,7 +7,6 @@ import os
 
 
 class Bhlumi(MakefilePackage):
-
     """BHLUMI is the state of art Monte Carlo for e+e- -> e+e- gamma (gamma ...)."""
 
     homepage = "https://github.com/KrakowHEPSoft/BHLUMI"
@@ -42,4 +41,3 @@ class Bhlumi(MakefilePackage):
         script = script = prefix.bin.BHLUMI
         install(script_sh, script)
         chmod('755', script)
-
