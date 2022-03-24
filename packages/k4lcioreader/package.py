@@ -20,20 +20,15 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
           sha256='5c88414128ccc9af6b53669f79ac5e4a61c4841d7de5b00a56400c9e92b7d37d',
           when='@0.4.0')
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17', '20'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
 
     depends_on('lcio')
     depends_on('podio@0.12:')
     depends_on('edm4hep')
     depends_on('k4fwcore@0.2.0', when='@:0.2.0')
     depends_on('k4fwcore@0.3.0:', when='@0.3:')
+    depends_on('root')
 
     def cmake_args(self):
         args = []
-        args.append('-DCMAKE_CXX_STANDARD=%s'%self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
