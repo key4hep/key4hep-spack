@@ -12,24 +12,18 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     version('main', branch='main')
     version("0.1.0pre08", tag="v0.1.0pre08")
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17', '20'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
     depends_on('clhep')
     depends_on('dd4hep')
     depends_on('k4fwcore@1.0:')
     depends_on('geant4')
     depends_on('edm4hep')
     depends_on("g4ensdfstate")
-
+    depends_on('root')
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
     def setup_run_environment(self, spack_env):
