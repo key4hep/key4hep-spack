@@ -19,20 +19,15 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
             description='CMake build type',
             values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17', '20'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
     depends_on('ninja', type='build')
     depends_on("edm4hep")
     depends_on('k4fwcore@1:')
+    depends_on('root')
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
     def setup_run_environment(self, spack_env):
