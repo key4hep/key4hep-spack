@@ -15,12 +15,6 @@ class Fccsw(CMakePackage, Key4hepPackage):
     version('1.0pre06', tag="v1.0pre06")
     version('1.0pre05', tag="v1.0pre05")
 
-    variant('cxxstd',
-            default='17',
-            values=('14', '17'),
-            multi=False,
-            description='Use the specified C++ standard when building.')
-
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4gen")
@@ -30,11 +24,12 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("k4reccalorimeter")
     depends_on("lcgeo")
     depends_on("fccanalyses")
+    depends_on('root')
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
+        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
     def setup_dependent_build_environment(self, spack_env, dependent_spec):
