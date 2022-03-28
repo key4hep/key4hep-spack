@@ -8,12 +8,8 @@ spack:
   modules:
     enable: []
   upstreams:
-    spack-instance-2:
-      install_tree: /cvmfs/sw.hsf.org/spackages3/
-    spack-instance-2:
-      install_tree: /cvmfs/sw.hsf.org/spackages2/
-    spack-instance-1:
-      install_tree: /cvmfs/sw.hsf.org/spackages/
+    spack-instance-5:
+      install_tree: /cvmfs/sw.hsf.org/spackages5/
   config:
     install_tree:
       root: ~/.spack/opt/spack
