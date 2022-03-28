@@ -65,32 +65,13 @@ packages:
     providers: {}
     compiler: []
   ocaml:
-    version: [4.10.0]
     variants: ~force-safe-string
     buildable: true
     target: []
     providers: {}
     compiler: []
-  curl:
-    version: [7.72.0]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  python:
-    version: [3.7.8]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
   delphes:
-    version: [3.4.3pre10]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  py-numpy:
-    version: [1.18.5]
+    version: [3.5.1pre02]
     buildable: true
     target: []
     providers: {}
@@ -102,34 +83,10 @@ packages:
     target: []
     providers: {}
     compiler: []
-  fmt:
-    version: [6.1.2]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  expat:
-    version: [2.2.9]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  perl:
-    version: [5.30.3]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
   whizard:
     variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=2
     buildable: true
     version: []
-    target: []
-    providers: {}
-    compiler: []
-  cmake:
-    version: [3.18.4]
-    buildable: true
     target: []
     providers: {}
     compiler: []
