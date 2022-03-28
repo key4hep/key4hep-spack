@@ -10,6 +10,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.1pre07', tag='v0.1pre07')
     version('0.1pre06', tag='v0.1pre06')
     version('0.1pre05', tag='v0.1pre05')
 
@@ -19,10 +20,10 @@ class K4gen(CMakePackage, Key4hepPackage):
     depends_on('fastjet')
     depends_on('edm4hep')
     depends_on('podio')
-    depends_on('k4fwcore@1.0pre14:', when='@0.1pre06')
+    depends_on('k4fwcore@1.0pre14:', when='@0.1pre06:')
     depends_on('k4fwcore@1:')
     depends_on('hepmc@:2.99.99', when='@:0.1pre05')
-    depends_on('hepmc3', when='@0.1pre06:')
+    depends_on('hepmc3')
     depends_on('heppdt@:2.99.99')
     depends_on('pythia8')
     depends_on('evtgen+pythia8')
@@ -49,6 +50,8 @@ class K4gen(CMakePackage, Key4hepPackage):
     def setup_build_environment(self, env):
         k4_setup_env_for_framework_tests(self.spec, env)
         env.set("K4GEN", self.prefix.share.k4Gen)
+        # todo: workaround, fix properly in cmake
+        env.prepend_path("CPATH", self.spec['heppdt'].prefix.include)
     
     def check(self):
         pass
