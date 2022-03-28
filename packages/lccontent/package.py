@@ -33,7 +33,9 @@ class Lccontent(CMakePackage):
     def cmake_args(self):
         args = [
                 '-DCMAKE_CXX_STANDARD=17',
-                '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules
+                '-DCMAKE_MODULE_PATH=%s' % self.spec["pandorapfa"].prefix.cmakemodules,
+                '-DCMAKE_CXX_FLAGS=-Wno-error'
+
         ]
         return args
 
