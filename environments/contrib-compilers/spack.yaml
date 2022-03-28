@@ -1,0 +1,14 @@
+spack:
+  config:
+    install_tree:
+      root: /cvmfs/sw.hsf.org/contrib
+      projections:
+        all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
+        build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
+  include:
+  - key4hep-packages.yaml
+  view: false
+  modules:
+    enable: []
+  specs:
+  - gcc@11.2.0
