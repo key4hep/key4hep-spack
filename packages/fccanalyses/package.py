@@ -30,6 +30,12 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('eigen', when="@0.3.0:")
     depends_on('dd4hep', when="@0.3.3: +dd4hep")
 
+    def cmake_args(self):
+      args = [
+              self.define('CMAKE_CXX_STANDARD', self.spec[root].variants['cxxstd'].value),
+              ]
+      return args
+
     # todo: update the cmake config to remove this
     def setup_build_environment(self, spack_env):
       spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
