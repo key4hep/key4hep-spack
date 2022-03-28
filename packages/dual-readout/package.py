@@ -24,12 +24,15 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on('dd4hep')
     depends_on('edm4hep@0.4.1:', when='@0.1.0:')
     depends_on('podio@0.14.1:', when='@0.1.0:')
+    depends_on('py-jinja2', type=('build'))
+    depends_on('py-pyyaml', type=('build'))
     depends_on('hepmc3+rootio')
     depends_on('fastjet')
     depends_on('root')
     depends_on('pythia8')
     depends_on('hsf-cmaketools')
-    depends_on('k4fwcore@1.0pre014:', when='@0.1.0:')
+    depends_on('k4fwcore')
+    depends_on('k4fwcore@1.0pre14:', when='@0.1.0:')
     depends_on('simsipm', when='@0.1.0:')
 
     def cmake_args(self):
