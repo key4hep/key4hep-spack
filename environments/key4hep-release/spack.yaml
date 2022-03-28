@@ -1,7 +1,6 @@
 spack:
   include:
   - key4hep-config.yaml
-  - geant4-data.yaml
   - key4hep-packages.yaml
   - compilers.yaml
   view: false

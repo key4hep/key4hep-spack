@@ -4,7 +4,6 @@ spack:
     enable: []
   include:
   - key4hep-config-nightlies.yaml
-  - geant4-data.yaml
   - key4hep-packages.yaml
   - compilers.yaml
   packages:
