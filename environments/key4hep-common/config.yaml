@@ -1,9 +1,6 @@
 config:
   install_tree:
-    root: /cvmfs/sw.hsf.org/spackages2
+    root: /cvmfs/sw.hsf.org/spackages5
     projections:
-      all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH}
-      build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH}
-  module_roots:
-    lmod: /cvmfs/sw.hsf.org/spackages/modules
-    tcl: /cvmfs/sw.hsf.org/spackages/modules
+      all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
+      build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
