@@ -10,6 +10,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version("0.1.0pre09", tag="v0.1.0pre09")
     version("0.1.0pre07", tag="v0.1.0pre07")
 
     generator = 'Ninja'
@@ -28,6 +29,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("podio")
     depends_on('k4fwcore@1:')
+    depends_on('gaudi')
     depends_on("dd4hep")
     depends_on("fccdetectors")
     depends_on('k4gen')
