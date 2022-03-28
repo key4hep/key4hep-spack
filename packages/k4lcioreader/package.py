@@ -9,6 +9,8 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     maintainers = ['mirguest']
 
     version('master', branch='master')
+    version('0.4.1', sha256='bb93892bb38d4bb3176706f1fc55da8a21742a6fe7d5571914e9cfbc3478a847',
+            url='https://github.com/key4hep/k4LCIOReader/archive/refs/tags/v00.04.01.tar.gz')
     version('0.4.0', sha256='aa1f2bcfabc5b5e3a09cab5408af1402b8a4ddf0927f2f69e62084f568306174')
     version('0.3.2', sha256='7886350cb7598f229bea7d58da602f39d739720f593c254a066bd254cda3a4f5')
     version('0.3.1', sha256='c646673fa4a8acb52a5e7680c7e3918aceee3d20769b921673f8ad951b90926a')
@@ -18,7 +20,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
 
     patch('https://github.com/key4hep/k4LCIOReader/commit/81f4f47ecc7ce904189986e08b949d477c0e4f08.patch',
           sha256='5c88414128ccc9af6b53669f79ac5e4a61c4841d7de5b00a56400c9e92b7d37d',
-          when='@0.4.0')
+          when='@0.4.1')
 
 
     depends_on('lcio')
