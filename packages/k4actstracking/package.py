@@ -13,4 +13,4 @@ class K4actstracking(BundlePackage, Key4hepPackage):
 
     version('main', branch='main')
 
-    depends_on('acts+dd4hep+tgeo+identification')
+    depends_on('acts+dd4hep+tgeo+identification+json')
