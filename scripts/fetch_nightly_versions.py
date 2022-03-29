@@ -71,9 +71,8 @@ if __name__ == "__main__":
     k4_add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes",
 				 giturl="https://api.github.com/repos/%s/commits/main")
 
-    # needs to fix tests
-    #k4_add_latest_commit("k4clue", "key4hep/k4clue",
-		#		 giturl="https://api.github.com/repos/%s/commits/main")
+    k4_add_latest_commit("k4clue", "key4hep/k4clue",
+				 giturl="https://api.github.com/repos/%s/commits/main")
 
     k4_add_latest_commit("k4gen", "hep-fcc/k4Gen",
 				 giturl="https://api.github.com/repos/%s/commits/main")
