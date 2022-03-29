@@ -170,7 +170,7 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit")
 
-    k4_add_latest_commit('marlinkinfitprocessors', 'ilcsoft/marlinkinfitprocessors', when='@master')
+    k4_add_latest_commit('marlinkinfitprocessors', 'ilcsoft/marlinkinfitprocessors')
 
     k4_add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors")
 
