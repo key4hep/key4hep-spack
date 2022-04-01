@@ -24,11 +24,6 @@ class FccEdm(CMakePackage, Key4hepPackage):
     version('0.2.1', 'c68d0ab3c07d7f5c885b6d2be7a3be74')
     version('0.2', 'fe014e238e8afc76523f2e1ada9bc087')
 
-    variant('build_type', default='Release',
-            description='The build type to build',
-            values=('Debug', 'Release'))
-
-
     patch('cpack.patch', when="@:0.5.6")
 
     depends_on('cmake', type='build')
