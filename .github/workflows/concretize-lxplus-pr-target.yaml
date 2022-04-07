@@ -1,5 +1,5 @@
 name: concretize-lxplus-comment-bot
-on: [pull_request_target]
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest

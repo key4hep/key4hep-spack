@@ -9,18 +9,13 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - name: Setup spack
-      run: |
-        mkdir ${GITHUB_WORKSPACE}/../spack
-        cd ${GITHUB_WORKSPACE}/../spack
-        git clone --depth 1 https://github.com/key4hep/spack .
-        cp -r ${GITHUB_WORKSPACE} var/spack/repos/
-        cp var/spack/repos/$(basename ${GITHUB_REPOSITORY})/environments/key4hep-common/packages.yaml etc/spack
-        source share/spack/setup-env.sh
-        spack repo add --scope site ${PWD}/var/spack/repos/$(basename ${GITHUB_REPOSITORY})
     - name: Concretize key4hep-stack
       run: |
-        cd ${GITHUB_WORKSPACE}/../spack
-        source share/spack/setup-env.sh
-        spack compiler find --scope site
-        spack spec -I key4hep-stack | tee -a ${GITHUB_WORKSPACE}/key4hep-stack-concretization.log
+        git clone --depth 1 https://github.com/key4hep/spack .
+        source spack/share/spack/setup-env.sh
+        spack env create testenv
+        spack env activate testenv
+        spack repo add .
+        spack compiler find 
+        spack add key4hep-stack 
+        spack concretize  | tee -a ${GITHUB_WORKSPACE}/key4hep-stack-concretization.log
