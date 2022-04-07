@@ -19,25 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup spack
-      run: |
-        mkdir ${GITHUB_WORKSPACE}/../spack
-        cd ${GITHUB_WORKSPACE}/../spack
-        git clone --depth 1 https://github.com/key4hep/spack .
-        cp -r ${GITHUB_WORKSPACE} var/spack/repos/
-        cp var/spack/repos/$(basename ${GITHUB_REPOSITORY})/environments/key4hep-common/packages.yaml etc/spack
-        source share/spack/setup-env.sh
-        spack repo add --scope site ${PWD}/var/spack/repos/$(basename ${GITHUB_REPOSITORY})
-    - name: Check for new versions
-      run: |
-        cd ${GITHUB_WORKSPACE}/../spack
-        source share/spack/setup-env.sh
-
     - name: Check for New Versions and Create Issue 
       env:
         KEY4HEP_COMMENT_BOT_TOKEN: ${{ secrets.KEY4HEP_COMMENT_BOT_TOKEN }}
       run: |
-        cd ${GITHUB_WORKSPACE}/../spack
-        source share/spack/setup-env.sh
+        git clone --depth 1 https://github.com/key4hep/spack .
+        source spack/share/spack/setup-env.sh
+        spack repo add .
         ${GITHUB_WORKSPACE}/.github/scripts/generate_new_version_issue.sh
         ${GITHUB_WORKSPACE}/.github/scripts/post_new_version_issue_comment.sh
