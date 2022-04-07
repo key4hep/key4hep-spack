@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Concretize key4hep-stack
       run: |
-        git clone --depth 1 https://github.com/key4hep/spack .
+        git clone --depth 1 https://github.com/key4hep/spack
         source spack/share/spack/setup-env.sh
         spack env create testenv
         spack env activate testenv
