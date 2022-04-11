@@ -37,7 +37,7 @@ packages:
     providers: {}
     compiler: []
   geant4:
-    variants: ~qt~opengl+vecgeom cxxstd=17
+    variants: ~qt+opengl+vecgeom cxxstd=17
     buildable: true
     version: []
     target: []
@@ -51,39 +51,29 @@ packages:
     providers: {}
     compiler: []
   root:
-    variants: +davix+gsl+asimage+math~memstat+minuit+mlp~mysql+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17
+    variants: +davix+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
     buildable: true
     target: []
     providers: {}
     compiler: []
   marlin:
-    variants: ~lccd
+    variants: +lccd
     buildable: true
     version: []
     target: []
     providers: {}
     compiler: []
-  ocaml:
-    variants: ~force-safe-string
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  delphes:
-    version: [3.5.1pre02]
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
+  podio:
+    variants: +sio
   py-tensorflow:
-    variants: [~cuda~nccl]
+    variants: ~cuda~nccl
     buildable: true
     version: []
     target: []
     providers: {}
     compiler: []
   whizard:
-    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=2
+    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
     buildable: true
     version: []
     target: []
@@ -92,7 +82,7 @@ packages:
   binutils:
     variants: +plugins       
   dd4hep:
-    variants: +assimp+lcio+xercesc+hepmc3+geant4+edm4hep
+    variants: +lcio+xercesc+hepmc3+edm4hep
     buildable: true
     version: []
     target: []
@@ -110,7 +100,7 @@ packages:
   evtgen:
     variants: +photos
   gdb:
-    variants: ~python
+    variants: +python+tui+source-highlight
   gaudi:
     variants: +optional
   py-setuptools-scm:

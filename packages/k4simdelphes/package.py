@@ -34,7 +34,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
 
     depends_on('edm4hep', type=('build', 'link', 'run'))
     depends_on('podio', type=('build', 'link', 'run'))
-    depends_on('delphes@3.4.3pre10:', type=('build', 'link', 'run'))
+    depends_on('delphes@3.4.3pre10:', when='@:00-01-07', type=('build', 'link', 'run'))
+    depends_on('delphes@3.5:', when='@00-01-08:', type=('build', 'link', 'run'))
     depends_on('pythia8', when="+delphes_pythia")
     depends_on('evtgen+pythia8', when="+delphes_pythia_evtgen")
     depends_on('hepmc', when="+delphes_hepmc")
