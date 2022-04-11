@@ -9,10 +9,22 @@ spack:
       lmod: $CVMFS_INSTALL_DIR/spackages/modules
       tcl: $CVMFS_INSTALL_DIR/spackages/modules
 
-  view: false
-  # More configuration in other config files
   include:
   - desy-packages.yaml
+
+  packages:
+    all:
+      target: [x86_64]
+      variants: build_type=RelWithDebInfo cxxstd=17
+      buildable: true
+      version: []
+      providers:
+        gl: [mesa]
+        glu: [mesa]
+      compiler: [gcc@11.2.0]
+
+  view: false
+  concretization: together
   modules:
     enable: []
   concretization: together
