@@ -20,8 +20,7 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
     version('0.10.1', sha256='4eac91718b29de926f7cd5bc7aa879d157bfec8f4306ccd1d74785813569fde0')
     version('0.10',       sha256='0d4d27cd0d9407cd2f13e5a978be8c9389bc86c78c2eefd0ae7c060c4b7196c3')
 
-    patch('dict_0.10.1.patch', when='@0.10.1:')
-    patch('dict.patch', when='@0.10')
+    patch('dict.patch', when='@0.10:')
     
 
     depends_on('marlin')
