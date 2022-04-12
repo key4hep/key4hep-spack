@@ -81,6 +81,10 @@ packages:
     compiler: []
   binutils:
     variants: +plugins       
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   dd4hep:
     variants: +lcio+xercesc+hepmc3+edm4hep
     buildable: true
@@ -97,11 +101,39 @@ packages:
     compiler: []
   groff:
     variants: ~pdf
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   evtgen:
     variants: +photos
+    buildable: true
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   gdb:
     variants: +python+tui+source-highlight
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   gaudi:
     variants: +optional
+    version: []
+    target: []
+    providers: {}
+    compiler: []
   py-setuptools-scm:
     variants: +toml
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  photos:
+    variants: +hepmc3
+    version: []
+    target: []
+    providers: {}
+    compiler: []
