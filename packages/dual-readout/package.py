@@ -35,6 +35,9 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on('k4fwcore@1.0pre14:', when='@0.1.0:')
     depends_on('simsipm', when='@0.1.0:')
 
+    # fix ambiguous issue on clang
+    # https://stackoverflow.com/questions/40221969/overloaded-operator-ambiguity-on-clang-but-not-on-gcc-which-one-is-correct
+    patch('clang.patch')
     def cmake_args(self):
         args = []
         # C++ Standard
