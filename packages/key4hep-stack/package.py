@@ -69,6 +69,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('bhlumi')
     depends_on('babayaga')
     depends_on('delphes')
+    depends_on('xrootd +krb5')
 
     ##################### general purpose generators ######
     #######################################################
