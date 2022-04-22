@@ -22,6 +22,8 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on('podio@0.14.1:', when='@1.0pre14:')
     depends_on('edm4hep')
     depends_on('edm4hep@0.4.1:', when='@1.0pre14:')
+    # needed via gaudi
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []
