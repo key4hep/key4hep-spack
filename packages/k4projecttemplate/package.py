@@ -18,7 +18,7 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     depends_on('ninja', type='build')
     depends_on("edm4hep")
-    depends_on('k4fwcore@1.0pre014:', when='@0.3.0:')
+    depends_on('k4fwcore@1.0pre14:', when='@0.3.0:')
     depends_on('k4fwcore@1:')
     depends_on('root')
 
