@@ -114,7 +114,7 @@ build-spack-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
-            - key4hep-debug
+            #- key4hep-debug
     tags:
         - k4-build-spack-release
     only:
@@ -179,7 +179,7 @@ buildtest-spack-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
-            - key4hep-debug
+            #- key4hep-debug
     tags:
         - k4-build-spack-release
     only:
@@ -226,9 +226,9 @@ wait-cvmfs-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
-            - key4hep-debug
+            #- key4hep-debug
     tags:
-        - k4-spack-test
+        - cvmfs
     only:
       refs:
           - tags
@@ -251,7 +251,7 @@ test-cvmfs-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
-            - key4hep-debug
+            #- key4hep-debug
     tags:
         - cvmfs
     only:
