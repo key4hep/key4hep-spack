@@ -3,29 +3,12 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-# ----------------------------------------------------------------------------
-# If you submit this package back to Spack as a pull request,
-# please first remove this boilerplate and all FIXME comments.
-#
-# This is a template package file for Spack.  We've put "FIXME"
-# next to all the things you'll want to change. Once you've handled
-# them, you can save this file and test your package like this:
-#
-#     spack install k4edm4hep2lcioconv
-#
-# You can edit this file again by typing:
-#
-#     spack edit k4edm4hep2lcioconv
-#
-# See the Spack documentation for more information on packaging.
-# ----------------------------------------------------------------------------
-
 from spack import *
 
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
-    """."""
+    """Converter library between EDM4hep and LCIO"""
 
     homepage = "https://github.com/key4hep/k4EDM4hep2LcioConv"
     git      = "https://github.com/key4hep/k4EDM4hep2LcioConv.git"
