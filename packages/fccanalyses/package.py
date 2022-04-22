@@ -47,6 +47,13 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include)
+      python_version = self.spec['python'].version.up_to(2)
+      awk_lib_dir = self.spec['py-awkward'].prefix.lib
+      awk_pydir = join_path(awk_lib_dir,
+                           'python{0}'.format(python_version),
+                           'site-packages/awkward/include')
+      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
+      spack_env.prepend_path('CPATH', awk_pydir)
 
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
