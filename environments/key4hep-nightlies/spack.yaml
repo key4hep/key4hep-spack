@@ -1,4 +1,7 @@
 spack:
+  upstreams:
+    spack-instance-1:
+      install_tree: /cvmfs/sw.hsf.org/spackages5
   view: false
   modules:
     enable: []
