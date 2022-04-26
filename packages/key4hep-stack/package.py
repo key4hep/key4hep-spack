@@ -55,6 +55,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('dd4hep')
     depends_on('k4fwcore')
     depends_on('k4projecttemplate')
+    depends_on('opendatadetector@main')
 
     depends_on('k4simdelphes')
     depends_on('lcgeo')
