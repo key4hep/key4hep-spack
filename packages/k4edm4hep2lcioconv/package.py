@@ -31,9 +31,3 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, spack_env):
       spack_env.set("K4EDM4HEP2LCIOCONV", self.prefix.share.k4EDM4hep2LcioConv)
-
-    # def setup_build_environment(self, spack_env):
-      # spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['k4edm4hep2lcioconv'].prefix + '/lib')
-      # spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['k4edm4hep2lcioconv'].prefix + '/lib64')
-      # Try without, if missing then putit
-      # k4_setup_env_for_framework_tests(self.spec, env)
