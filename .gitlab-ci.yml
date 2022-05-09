@@ -158,11 +158,11 @@ build-spack-release:
         - echo ${SPACKENV_PATH} # debug printout
         # we want to use the environment name as a variable name
         # so need to remove some special characters (right now only the hyphen)
-        - echo ${SPACKENV/-/} # debug printout
+        - echo ${SPACKENV//-/} # debug printout
         # make the path available to downstream jobs 
         # for example:
         #key4hepdebug_PATH=/cvmfs/sw.hsf.org/spackages2/key4hep-stack/2021-06-16/x86_64-centos7-gcc8.3.0-dbg/a7xzrrsha54w4mewe43b4bmxaqxnvg2x
-        - echo "${SPACKENV/-/}_PATH=${SPACKENV_PATH}" >> build.env
+        - echo "${SPACKENV//-/}_PATH=${SPACKENV_PATH}" >> build.env
         - cat build.env # debug printout
     artifacts:
         # the log could be saved as an artifact, but does not really have more info than stdout
@@ -194,7 +194,7 @@ buildtest-spack-release:
         - echo ${SPACKENV} # debug printout
         - ls environments/${SPACKENV} # debug printout
         # resolve dynamic variable name
-        - K4_SETUP_PATH=${SPACKENV/-/}_PATH
+        - K4_SETUP_PATH=${SPACKENV//-/}_PATH
         - echo ${!K4_SETUP_PATH} # debug printout
         # run tests, to fail early, even before publishing
         - source ${!K4_SETUP_PATH}/setup.sh
@@ -239,7 +239,7 @@ wait-cvmfs-release:
           - $K4_JOBTYPE == "Release"
     script:
         # resolve dynamic variable name
-        - K4_LATEST_SETUP_PATH=${SPACKENV/-/}_PATH
+        - K4_LATEST_SETUP_PATH=${SPACKENV//-/}_PATH
         - echo ${!K4_LATEST_SETUP_PATH} # debug printout
         # wait for the new release to be present on cvmfs
         # both to be sure that it is available once the pipeline finishes
@@ -264,7 +264,7 @@ test-cvmfs-release:
           - $K4_JOBTYPE == "Release"
     script:
         # resolve dynamic variable name
-        - K4_LATEST_SETUP_PATH=${SPACKENV/-/}_PATH
+        - K4_LATEST_SETUP_PATH=${SPACKENV//-/}_PATH
         - echo ${!K4_LATEST_SETUP_PATH} # debug printout
         - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
