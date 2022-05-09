@@ -20,7 +20,10 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     version('0.2.0', sha256='a4a9965751ae489495f8583129f4f0be4e55e8e676a66a08be35181f2395b955')
 
     variant('dd4hep', default=True, description="Build DD4hep-dependent analyzers.")
+
+    generator = 'Ninja'
     
+    depends_on('ninja', type='build')
     depends_on("root")
     depends_on("vdt")
     depends_on("fastjet")
@@ -32,6 +35,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('acts@6.00.0:', when='@0.3.5:')
     depends_on('eigen', when="@0.3.0:")
     depends_on('dd4hep', when="@0.3.3: +dd4hep")
+    depends_on('py-pyyaml', type=('build', 'run'))
 
     def cmake_args(self):
       args = [
@@ -47,13 +51,21 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include)
       spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include)
+      spack_env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
       python_version = self.spec['python'].version.up_to(2)
       awk_lib_dir = self.spec['py-awkward'].prefix.lib
       awk_pydir = join_path(awk_lib_dir,
                            'python{0}'.format(python_version),
                            'site-packages/awkward/include')
-      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
       spack_env.prepend_path('CPATH', awk_pydir)
+      # todo: workaround for awkward header issue
+      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
+      awk_pydir = join_path(awk_lib_dir,
+                           'python{0}'.format(python_version),
+                           'site-packages')
+      spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+
+      
 
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
@@ -68,3 +80,16 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
                            'python{0}'.format(python_version),
                            'site-packages')
       spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
+
+    # tests need installation, so skip here ...
+    def check(self):
+        pass
+
+    # ... and  add custom check step that runs after installation instead
+    @run_after('install')
+    def install_check(self):
+        with working_dir(self.build_directory):
+            if self.run_tests:
+                ninja('test')
+

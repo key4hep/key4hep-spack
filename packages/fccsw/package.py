@@ -1,4 +1,3 @@
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage 
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
@@ -25,6 +24,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("lcgeo")
     depends_on("fccanalyses")
     depends_on('root')
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []

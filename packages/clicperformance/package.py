@@ -52,6 +52,7 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
 
     def setup_build_environment(self, env):
         k4_setup_env_for_framework_tests(self.spec, env)
+        env.prepend_path('ROOT_INCLUDE_PATH', self.spec['lcfiplus'].prefix.include)
         env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
         env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
 

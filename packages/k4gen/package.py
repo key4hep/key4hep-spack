@@ -28,6 +28,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     depends_on('pythia8')
     depends_on('evtgen+pythia8')
     depends_on('root')
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []

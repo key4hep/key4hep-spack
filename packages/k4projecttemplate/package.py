@@ -21,6 +21,7 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
     depends_on('k4fwcore@1.0pre14:', when='@0.3.0:')
     depends_on('k4fwcore@1:')
     depends_on('root')
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []

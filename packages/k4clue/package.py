@@ -23,7 +23,21 @@ class K4clue(CMakePackage, Key4hepPackage):
     depends_on('alpaka')
     depends_on('k4fwcore')
     depends_on('dd4hep')
+    depends_on('py-six', type=('build', 'run'))
 
+    # todo: fix type='test'
+    depends_on('marlindd4hep')
+    depends_on('kaltest')
+    depends_on('conformaltracking')
+    depends_on('overlay')
+    depends_on('marlinreco')
+    depends_on('marlintrkprocessors')
+    depends_on('ddmarlinpandora')
+    depends_on('fcalclusterer')
+    depends_on('lctuple')
+    depends_on('marlinfastjet')
+    depends_on('lcfiplus')
+    depends_on('k4marlinwrapper')
 
     def cmake_args(self):
         args = []
@@ -33,6 +47,8 @@ class K4clue(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
         spack_env.set("K4CLUE", self.prefix.share.k4Clue)
         spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+        spack_env.prepend_path("CPATH", self.spec['cupla'].prefix.include)
+        spack_env.prepend_path("CPATH", self.spec['alpaka'].prefix.include)
 
     
     def setup_build_environment(self, env):
