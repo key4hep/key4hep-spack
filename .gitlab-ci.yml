@@ -57,6 +57,7 @@ build-spack-nightlies:
         matrix:
           - SPACKENV: 
             - key4hep-nightlies
+            - key4hep-nightlies-clang
             #- key4hep-nightlies-debug
     only:
       refs:
@@ -114,6 +115,7 @@ build-spack-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
+            - key4hep-release-clang
             #- key4hep-debug
     tags:
         - k4-build-spack-release
@@ -141,7 +143,7 @@ build-spack-release:
         # environment now when we now it
         - spack add key4hep-stack@${K4STACK_VERSION}
         # compile onwards and upwards
-        - spack install --fail-fast | tee -a key4hep-stack-install.log
+        - spack install --reuse | tee -a key4hep-stack-install.log
         # note the path of the just installed package
         # so that downstream jobs can source its setup
         # in an environment, this command should just find the specs  
