@@ -1,13 +1,4 @@
 packages:
-  all:
-    target: [x86_64]
-    variants: build_type=Release cxxstd=17
-    buildable: true
-    version: []
-    providers:
-      gl: [mesa]
-      glu: [mesa]
-    compiler: []
   guinea-pig:
     variants: +fftw3
     buildable: true
@@ -136,4 +127,31 @@ packages:
     version: []
     target: []
     providers: {}
+    compiler: []
+  xrootd:
+    variants: +krb5
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  xgboost:
+    variants: ~openmp
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  gperftools:
+    variants: ~libunwind
+    version: []
+    target: []
+    providers: {}
+    compiler: []
+  all:
+    target: [x86_64]
+    variants: build_type=Release cxxstd=17
+    buildable: true
+    version: []
+    providers:
+      gl: [mesa]
+      glu: [mesa]
     compiler: []
