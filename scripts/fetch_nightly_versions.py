@@ -153,7 +153,8 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("lccd", "ilcsoft/lccd")
 
-    k4_add_latest_commit("lcio", "ilcsoft/lcio")
+    # temporarily disabled while investigating build failure
+    #k4_add_latest_commit("lcio", "ilcsoft/lcio")
 
     k4_add_latest_commit("lcgeo", "ilcsoft/lcgeo")
 

@@ -34,6 +34,8 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("fccdetectors")
     depends_on('k4gen')
     depends_on('k4simgeant4')
+    # via gaudi
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []
