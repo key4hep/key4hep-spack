@@ -8,4 +8,4 @@ spack:
     enable: []
   packages:
     all:
-      compiler: [gcc@11.2.0]
+      compiler: [clang@13.0.0]
