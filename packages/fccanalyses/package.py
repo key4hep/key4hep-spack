@@ -58,8 +58,6 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
                            'python{0}'.format(python_version),
                            'site-packages/awkward/include')
       spack_env.prepend_path('CPATH', awk_pydir)
-      # todo: workaround for awkward header issue
-      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
       awk_pydir = join_path(awk_lib_dir,
                            'python{0}'.format(python_version),
                            'site-packages')
@@ -79,8 +77,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       awk_pydir = join_path(awk_lib_dir,
                            'python{0}'.format(python_version),
                            'site-packages')
+      spack_env.prepend_path('CPATH', join_path(awk_pydir, 'include'))
       spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
-      spack_env.prepend_path('CPATH', '/cvmfs/sw.hsf.org/spackages5/py-awkward/1.4.0/x86_64-centos7-gcc11.2.0-opt/43jqv/lib/python3.9/site-packages/awkward/include/')
 
     # tests need installation, so skip here ...
     def check(self):
