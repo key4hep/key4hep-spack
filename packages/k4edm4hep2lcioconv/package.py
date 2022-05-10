@@ -12,11 +12,12 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     homepage = "https://github.com/key4hep/k4EDM4hep2LcioConv"
     git      = "https://github.com/key4hep/k4EDM4hep2LcioConv.git"
-    url      = "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/refs/heads/master.zip"
+    url      = "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/v00-01.zip"
 
     maintainers = ['fdplacido']
 
     version('master', branch='master')
+    version('00-01', sha256='a1eb60337033658888c637af7c4c57622513a708834fb8a67e6b984614b45748')
 
     depends_on('lcio')
     depends_on('podio')
