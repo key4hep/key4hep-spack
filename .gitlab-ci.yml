@@ -83,6 +83,42 @@ build-spack-nightlies:
         - spack install --test=root --reuse
 
 
+### Test lcg release in spack  on the key4hep infrastructure
+build-lcg-release:
+    stage: compilation
+    tags:
+        - k4-build-spack-release
+    needs:
+        - "setup_spack_push"
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "LCG_Release"
+    script:
+        - source spack/share/spack/setup-env.sh
+        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
+        - cd sft-spack-repo
+        - spack env activate -d environments/lcg-release/
+        - spack repo add .
+        - spack concretize -f --test=root --reuse
+        - spack install --test=root --reuse
+
+### Test deployment of lcg-release
+deploy-cvmfs-lcg:
+    stage: deployment
+    tags:
+        - k4-build-spack-release
+    needs: "build-lcg-release"
+    only:
+      refs:
+          - tags
+          - schedules # Only execute this on scheduled "nightly" pipelines
+      variables:
+          - $K4_JOBTYPE == "LCG_Release"
+    script:
+        - ssh cvswhsforg@cvmfs-sw-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
 
 ### deploy the nightlies to cvmfs
 deploy-cvmfs-nightlies:
