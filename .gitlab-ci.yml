@@ -73,8 +73,6 @@ build-spack-nightlies:
         - cd environments/$SPACKENV
         # symlink to latest now handled by deploy step
         #- source pathsetup.sh
-        # avoid bootstrapping clingo
-        - source setup_clingo_centos7.sh
         - spack env activate .
         - spack repo add ../..
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
