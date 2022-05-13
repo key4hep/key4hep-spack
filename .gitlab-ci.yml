@@ -108,7 +108,7 @@ deploy-cvmfs-lcg:
     stage: deployment
     tags:
         - k4-build-spack-release
-    needs: "build-lcg-release"
+    needs: ["build-lcg-release"]
     only:
       refs:
           - tags
