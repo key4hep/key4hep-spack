@@ -67,6 +67,7 @@ build-spack-nightlies:
     script:
         # set up spack inside the k4-spack repo
         - source spack/share/spack/setup-env.sh
+        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - python scripts/fetch_nightly_versions.py >> environments/$SPACKENV/spack.yaml
 
@@ -75,6 +76,7 @@ build-spack-nightlies:
         #- source pathsetup.sh
         - spack env activate .
         - spack repo add ../..
+        - spack repo add ../../../sft-spack-repo
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         - spack concretize -f --test=root --reuse
         # compile onwards and upwards
@@ -160,6 +162,7 @@ build-spack-release:
       variables:
           - $K4_JOBTYPE == "Release"
     script:
+        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         # set up spack inside the k4-spack repo
         - source spack/share/spack/setup-env.sh
         # if this workflow has been started by a tag, use the tag version. if not, use todays date
@@ -170,6 +173,7 @@ build-spack-release:
         - cd environments/${SPACKENV}
         - spack env activate .
         - spack repo add ../..
+        - spack repo add ../../../sft-spack-repo
         # config debug printouts
         - spack config blame config # debug printout
         - spack config blame packages # debug printout
