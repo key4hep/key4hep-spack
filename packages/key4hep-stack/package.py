@@ -71,6 +71,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('delphes')
     depends_on('xrootd +krb5')
     depends_on('python~debug')
+    depends_on('k4edm4hep2lcioconv')
 
     ##################### general purpose generators ######
     #######################################################
