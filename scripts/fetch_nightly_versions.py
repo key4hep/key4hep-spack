@@ -125,6 +125,8 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("garlic", "ilcsoft/garlic")
 
+    k4_add_latest_commit('k4edm4hep2lcioconv', 'key4hep/k4edm4hep2lcioconv')
+
     k4_add_latest_commit("k4marlinwrapper", "key4hep/k4marlinwrapper")
 
     k4_add_latest_commit("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines")
