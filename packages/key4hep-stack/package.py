@@ -106,7 +106,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('ninja', when='+devtools')
     depends_on('py-ipython', when='+devtools')
     depends_on('doxygen', when='+devtools')
-    depends_on('prmon', when='+devtools')
+    #depends_on('prmon', when='+devtools')
     depends_on('py-pip', when='+devtools')
     depends_on('py-particle', when='+devtools')
     depends_on('py-awkward', when='+devtools')
