@@ -80,7 +80,7 @@ build-spack-nightlies:
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
         - spack concretize -f --test=root --reuse
         # compile onwards and upwards
-        - spack install --test=root --reuse
+        - spack install --test=root --reuse --no-check-signature
 
 
 ### Test lcg release in spack  on the key4hep infrastructure
@@ -103,7 +103,7 @@ build-lcg-release:
         - spack env activate -d environments/lcg-release/
         - spack repo add .
         - spack concretize -f --test=root --reuse
-        - spack install --test=root --reuse
+        - spack install --test=root --reuse --no-check-signature
 
 ### Test deployment of lcg-release
 deploy-cvmfs-lcg:
@@ -181,7 +181,7 @@ build-spack-release:
         # environment now when we now it
         - spack add key4hep-stack@${K4STACK_VERSION}
         # compile onwards and upwards
-        - spack install --reuse | tee -a key4hep-stack-install.log
+        - spack install --reuse --no-check-signature | tee -a key4hep-stack-install.log
         # note the path of the just installed package
         # so that downstream jobs can source its setup
         # in an environment, this command should just find the specs  
