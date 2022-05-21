@@ -20,6 +20,9 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     version('0.3.0', sha256='b9ad4f3d9a587f4a1666c9ff5880020f43564a4a0e615d2ce7169bc751134dcf')
     version('0.2.0', sha256='a4a9965751ae489495f8583129f4f0be4e55e8e676a66a08be35181f2395b955')
 
+    patch('https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/176.patch', when='@0.4.0',
+          sha256='bff4be96d0c177caccc3642bc1b3538004a8d3e5a19b472563ac867281a65bd6')
+
     variant('dd4hep', default=True, description="Build DD4hep-dependent analyzers.")
 
     generator = 'Ninja'
