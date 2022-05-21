@@ -34,8 +34,7 @@ class Ced(CMakePackage, Ilcsoftpackage):
     depends_on('ilcutil')
 
     def cmake_args(self):
-        # install error if build_testing is on
+        # install error if build_testing is off
         # see https://github.com/iLCSoft/CED/issues/7
-        #args = [self.define("BUILD_TESTING", self.run_tests)]
-        args = []
+        args = [self.define("BUILD_TESTING", True)]
         return args
