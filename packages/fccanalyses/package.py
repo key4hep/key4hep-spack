@@ -28,7 +28,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     generator = 'Ninja'
     
     depends_on('ninja', type='build')
-    depends_on("root")
+    depends_on("root +tmva+xrootd")
     depends_on("vdt")
     depends_on("fastjet")
     depends_on('python')
