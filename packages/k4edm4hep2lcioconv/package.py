@@ -25,7 +25,8 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
       args = [
-        self.define("BUILD_TESTING", self.run_tests)
+        self.define("BUILD_TESTING", self.run_tests),
+        self.define("FORCE_COLORED_OUTPUT", False),
       ]
       args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
       return args
