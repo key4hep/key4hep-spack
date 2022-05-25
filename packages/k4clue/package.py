@@ -19,6 +19,9 @@ class K4clue(CMakePackage, Key4hepPackage):
 
     version('main', branch='main')
 
+    patch('https://github.com/vvolkl/k4Clue/commit/278740f7eb0074ebb0e72e51da3ccefec1fbba13.patch',
+          sha256='f806279323bd56cb3b58a05ee4873efa8c2395b16b18cbaeb3bda12ee6510052')
+
     depends_on('cupla')
     depends_on('alpaka')
     depends_on('k4fwcore')
