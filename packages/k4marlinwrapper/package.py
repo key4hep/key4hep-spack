@@ -24,6 +24,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     version('0.1',    sha256='d3048178b2f9b721a64ee296019435cbbbce5a65ad956ec733cdb203730db188')
 
 
+    patch('https://github.com/vvolkl/k4MarlinWrapper/commit/16153968a7e801af20f9bdc65d09f9b58403abb3.patch',
+          sha256='a60df93183a187e685d7b3021b19e2eb46e31d2e450ed0ba223b69ff938d2a6a', when='@0.4.1:')
+
+
     depends_on('root')
     depends_on('lcio')
     depends_on('marlin')
@@ -41,7 +45,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on('py-nbconvert', type=('test'))
 
     def cmake_args(self):
-        args = []
+        args = [self.define('FORCE_COLORED_OUTPUT', False)]
         if self.spec.satisfies('^gaudi@:34.99'):
             args += [ self.define('HOST_BINARY_TAG','x86_64-linux-gcc9-opt') ]
         return args
