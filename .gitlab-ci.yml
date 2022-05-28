@@ -57,7 +57,7 @@ build-spack-nightlies:
         matrix:
           - SPACKENV: 
             - key4hep-nightlies
-            - key4hep-nightlies-clang
+            #- key4hep-nightlies-clang
             #- key4hep-nightlies-debug
     only:
       refs:
@@ -151,7 +151,7 @@ build-spack-release:
         matrix:
           - SPACKENV: 
             - key4hep-release
-            - key4hep-release-clang
+            #- key4hep-release-clang
             #- key4hep-debug
     tags:
         - k4-build-spack-release
