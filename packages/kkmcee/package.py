@@ -28,10 +28,6 @@ class Kkmcee(AutotoolsPackage):
     depends_on('m4',       type='build')
     depends_on('root')
 
-    patch('gcc4.patch', when="@:4.32.0")
-    patch('gcc4a.patch', when="@4.32.01:")
-    patch('gcc6.patch')
-    patch('gcc5.patch')
     #patch('clang01.patch', when="@4.32.1:")
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
     patch('KKMCee-dev-4.32.01.patch', level=0, when='@4.31:4.32.01')
@@ -41,6 +37,24 @@ class Kkmcee(AutotoolsPackage):
             values=('11', '14', '17'),
             multi=False,
             description='Use the specified C++ standard when building.')
+
+
+    def patch(self):
+        _makefiles = [
+                      'RHadr/Plots/KKMakefile',
+                      'MaMar/Plots/KKMakefile',
+                     ]
+
+        for f in _makefiles:
+            filter_file(r'gcc -c $<',
+                        '$(CC) -c $<',
+                        f,
+                        string=True)
+            filter_file(r'g++',
+                        '$(CXX)',
+                        f,
+                        string=True)
+
 
     @run_before('autoreconf')
     def create_symlink(self):
