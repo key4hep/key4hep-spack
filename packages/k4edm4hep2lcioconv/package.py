@@ -19,7 +19,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     version('master', branch='master')
     version('00-01', sha256='a1eb60337033658888c637af7c4c57622513a708834fb8a67e6b984614b45748')
 
-    patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4EDM4hep2LcioConv/pull/2.patch', when='@00-01:',
+    patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4EDM4hep2LcioConv/pull/2.patch', when='@00-01',
           sha256='09dda24dc561b8b3eb7336c69fec7535ba2e1cd44b4470e3fe655e3c00a79d86')
 
     depends_on('lcio')
