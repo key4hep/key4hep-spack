@@ -17,6 +17,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     maintainers = ['fdplacido']
 
     version('master', branch='master')
+    version('00-02', sha256='b9478ed8811bb99103df387db1e2a2cc97bb8d31a6d7b9bf17e6ba6f8ebef153')
     version('00-01', sha256='a1eb60337033658888c637af7c4c57622513a708834fb8a67e6b984614b45748')
 
     patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4EDM4hep2LcioConv/pull/2.patch', when='@00-01',
