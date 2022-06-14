@@ -4,8 +4,8 @@ spack:
   - key4hep-packages.yaml
   - compilers.yaml
   view: false
-  modules:
-    enable: []
   packages:
     all:
       compiler: [gcc@11.2.0]
+  specs:
+  - key4hep-stack
