@@ -32,6 +32,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on('edm4hep')
     depends_on('edm4hep@0.4.1:', when='@0.4.1:')
     depends_on('k4lcioreader')
+    depends_on('k4edm4hep2lcioconv', when='@0.4.2:')
     depends_on('wget', type=('test'))
     depends_on('catch2@3.0.1:', when='@0.3.2:', type=('test'))
     # for the doctest:
