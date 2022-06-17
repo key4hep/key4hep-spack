@@ -30,4 +30,3 @@ class Bdsim(CMakePackage):
     depends_on('clhep')
     depends_on('flex')
     depends_on('bison')
-
