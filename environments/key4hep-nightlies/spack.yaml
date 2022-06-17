@@ -3,8 +3,6 @@ spack:
     spack-instance-1:
       install_tree: /cvmfs/sw.hsf.org/spackages5
   view: false
-  modules:
-    enable: []
   include:
   - key4hep-config-nightlies.yaml
   - key4hep-packages.yaml

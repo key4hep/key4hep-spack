@@ -8,7 +8,5 @@ spack:
   include:
   - key4hep-packages.yaml
   view: false
-  modules:
-    enable: []
   specs:
   - gcc@11.2.0

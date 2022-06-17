@@ -1,14 +1,11 @@
 spack:
   include:
-    - compilers_centos7_cvmfs.yaml
+    - compilers.yaml
   config:
     install_tree:
       root: /cvmfs/sw.hsf.org/share
       projections:
         all: data/${PACKAGE}-${VERSION}-${HASH}
-    module_roots:
-      lmod: /cvmfs/sw.hsf.org/spackages/modules
-      tcl: /cvmfs/sw.hsf.org/spackages/modules
   view: false
   packages:
     all:
