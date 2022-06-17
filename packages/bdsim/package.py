@@ -9,8 +9,8 @@ from spack import *
 
 class Bdsim(CMakePackage):
     """Beam Delivery Simulation (BDSIM) is a C++ program that utilises the Geant4 toolkit
-       to simulate both the transport of particles in an accelerator and their interaction
-       with the accelerator material"""
+       to simulate both the transport of particles in an accelerator and their 
+       interaction with the accelerator material"""
 
     homepage = "http://www.pp.rhul.ac.uk/bdsim/manual/index.html"
     url      = "https://bitbucket.org/jairhul/bdsim/get/v1.6.0.tar.gz"
