@@ -19,6 +19,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
             description='Use the specified C++ standard when building.')
 
     version('master', branch='master')
+    version('0.2.5', sha256='fb0aa15a3895fe822f936936b810205e9330a9ffe763be16a225fc5e9580bd2c')
     version('0.2.4', sha256='86802d09da1feca8fdfaf947ccad762e28dd91644669c1a057ac4df748e807c9')
     version('0.2.3', sha256='38254b2beeb8eb6de81e2dfa94b7c9f1b307fe512dc4fec9c3691f359509d008')
     version('0.2.2', sha256='634bc0ce54a82ddaac43dd37d504bf1ea390dcdd30f9ebfd2264fc7073e37fea')
