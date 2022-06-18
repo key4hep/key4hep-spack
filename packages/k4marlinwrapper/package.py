@@ -23,6 +23,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     version('0.2',    sha256='15809cbc141364c5856c58f8b21e954bde29479703b79020e8b47dbd55f41f73')
     version('0.1',    sha256='d3048178b2f9b721a64ee296019435cbbbce5a65ad956ec733cdb203730db188')
 
+
+    patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4MarlinWrapper/pull/81.diff',
+          sha256='86348f9e346decb70e88fc0aa071630b97b155660314a01eed3e44e447d00d10', when='@0.4.1:')
+
     depends_on('root')
     depends_on('lcio')
     depends_on('marlin')
