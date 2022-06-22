@@ -60,8 +60,7 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
 
-    #k4_add_latest_commit("podio", "aidasoft/podio")
-    print('    - podio@0.14.1')
+    k4_add_latest_commit("podio", "aidasoft/podio")
 
     k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
 
