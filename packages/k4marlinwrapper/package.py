@@ -25,7 +25,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
 
     patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4MarlinWrapper/pull/81.diff',
-          sha256='86348f9e346decb70e88fc0aa071630b97b155660314a01eed3e44e447d00d10', when='@0.4.1:')
+          sha256='86348f9e346decb70e88fc0aa071630b97b155660314a01eed3e44e447d00d10', when='@0.4.1')
 
     depends_on('root')
     depends_on('lcio')
