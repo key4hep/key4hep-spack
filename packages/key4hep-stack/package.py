@@ -65,6 +65,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('k4actstracking')
     depends_on('k4edm4hep2lcioconv')
 
+    depends_on('bdsim')
     depends_on('guinea-pig')
     depends_on('whizard +lcio +openloops hepmc=2')
     depends_on('kkmcee')
