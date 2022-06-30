@@ -1,0 +1,40 @@
+# An example develop environment for acts for key4hep
+# tested on centos7 
+# needs cvmfs
+# use with:
+#   - spack env activate .
+#   - git clone https://github.com/acts-project/acts
+#   - git clone https://github.com/key4hep/k4actstracking
+#   - #1 modifiy locally as needed
+#   - spack concretize --reuse -f
+#   - spack install
+#   - spack load .
+#   -  # goto #1
+
+spack:
+  upstreams:
+    up1:
+      install_tree: /cvmfs/sw.hsf.org/spackages6
+  include:
+    - compilers.yaml
+  config:
+    install_tree: $HOME/.spack/opt
+  packages:
+    all:
+      target: [linux-centos7-x86_64]
+  specs:
+  - k4actstracking 
+  - acts@main+dd4hep+tgeo
+  concretization: together
+  develop:
+    k4actstracking:
+      path: ./k4actstracking
+      spec: k4actstracking@main
+    acts:
+      path: ./acts
+      spec: acts@main+dd4hep+tgeo
+  repos:
+    - ../..
+
+
+
