@@ -63,15 +63,17 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('k4simgeant4')
     depends_on('k4clue')
     depends_on('k4actstracking')
+    depends_on('k4edm4hep2lcioconv')
+
     depends_on('guinea-pig')
     depends_on('whizard +lcio +openloops hepmc=2')
     depends_on('kkmcee')
     depends_on('bhlumi')
     depends_on('babayaga')
     depends_on('delphes')
+
     depends_on('xrootd +krb5')
     depends_on('python~debug')
-    depends_on('k4edm4hep2lcioconv')
 
     ##################### general purpose generators ######
     #######################################################
