@@ -5,11 +5,11 @@
 #   - spack env activate .
 #   - git clone https://github.com/acts-project/acts
 #   - git clone https://github.com/key4hep/k4actstracking
-#   - #1 modifiy locally as needed
+#   - # modifiy locally as needed
 #   - spack concretize --reuse -f
 #   - spack install
-#   - spack load .
-#   -  # goto #1
+#   - spack load /<hash>
+#   -  # rinse and repeat
 
 spack:
   upstreams:
