@@ -125,14 +125,15 @@ deploy-cvmfs-nightlies:
     stage: deployment
     needs: ["build-spack-nightlies"]
     tags:
-        - k4-build-spack-nightlies
+        - sw-nightlies-hsf-org-cvmfs-publisher
     only:
       refs:
           - schedules # Only execute this on scheduled "nightly" pipelines
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
-        - ssh cvswnighthsforg@cvmfs-sw-nightlies-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
+        - cd scripts/deploy-cvmfs-nightlies
+        - ./cvmfs_deploy.sh
 
 
 #### Release build of key4hep-stack
