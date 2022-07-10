@@ -19,7 +19,10 @@ from spack.main import get_version
 import spack.user_environment as uenv
 import spack.store
 
-from spack.package import PackageBase
+try:
+    from spack.package import PackageBase
+except ImportError:
+    from spack.package_base import PackageBase
 
 
 def k4_setup_env_for_framework_tests(spec, env):
