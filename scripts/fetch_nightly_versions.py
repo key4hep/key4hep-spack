@@ -79,7 +79,9 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4",
 				 giturl="https://api.github.com/repos/%s/commits/main")
-    k4_add_latest_commit("delphes", "delphes/delphes")
+
+    # todo: fix test failures in master
+    #k4_add_latest_commit("delphes", "delphes/delphes")
 
     k4_add_latest_commit("fccsw", "hep-fcc/fccsw")
 
