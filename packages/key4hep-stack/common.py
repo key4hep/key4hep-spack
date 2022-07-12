@@ -19,6 +19,7 @@ from spack.main import get_version
 import spack.user_environment as uenv
 import spack.store
 
+#TODO: can be removed when spack versions prior to v0.18.1 are no longer needed.
 try:
     from spack.package import PackageBase
 except ImportError:
