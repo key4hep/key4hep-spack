@@ -1,9 +1,15 @@
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
-  K4_JOBTYPE: Release
-  K4_CI_URLS: ""
-  SPACK_VERSION: ""
+  K4_JOBTYPE:
+    value: CI
+    description: "Possible Values: Release, Nighlies, CI. A Release job is deployed to sw.hsf.org and uses the latest tags. A Nightlies job is deployed to sw-nightlies.hsf.org and uses the HEAD of the defined repos. A CI build is like a nightly build, but not deployed, and builds local checkouts of the PRs given in K4_CI_URLS"
+  K4_CI_URLS:
+    value: ""
+    description: "A whitespace-separated list of urls for github prs (for repositories for which there is a spack recipe). Example: https://github.com/iLCSoft/SIO/pull/17/ https://github.com/AIDASoft/podio/pull/287"
+  SPACK_VERSION:
+    value: ""
+    description: "A git ref to check out after cloning the spack repository. Leaving this blank will use the latest HEAD (recommended)."
 
 stages:
     - prepare-spack
