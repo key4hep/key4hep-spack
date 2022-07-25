@@ -5,10 +5,6 @@ spack:
       projections:
         all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH}
         build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH}
-    module_roots:
-      lmod: $CVMFS_INSTALL_DIR/spackages/modules
-      tcl: $CVMFS_INSTALL_DIR/spackages/modules
-
   include:
   - desy-packages.yaml
 
@@ -22,8 +18,7 @@ spack:
         gl: [mesa]
         glu: [mesa]
       compiler: [gcc@11.2.0]
-
   view: false
   concretization: together
   specs:
-    - key4hep-stack
+  - key4hep-stack
