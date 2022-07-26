@@ -18,6 +18,7 @@ class Marlintrk(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('2.9.1',   sha256='3a4d8f3208423cae414e40cd359d73d366445d30ccb24574574bd29443c914f2')
     version('2.9',     sha256='a1ccec25aea02d62f22d98cffc870ac199e455aa31100b6fa8795a8dc34cdcc0')
     version('2.8',     sha256='bd3b0074c06e2b778c74d1aeb2c989c39100a8adf5018792db599f84cb946c14')
     version('2.7',     sha256='c6e556d18ae6f2f3ae6c0fd8aa4322ce866e08b54b48ce95d09636443eff53ea')

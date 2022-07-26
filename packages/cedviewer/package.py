@@ -16,6 +16,7 @@ class Cedviewer(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.19.1', sha256='aaa5317ae35d11a2850d623667607fc130181ea500a596e3073f744deae0f8b6')
     version('1.19', sha256='3446ce55b93de37a84b022c0a3a33097f2089c75dd91b4b5c84c6183ddeb5a01')
     version('1.18', sha256='46d188d102cbb414b4534e357e506c370644f2df8eada5565a2bcf234a282141')
     version('1.17.1', sha256='e778396dc6d9c106888c30bc11695a2283be68a5ced155df72cd5ec7d3c3f648')

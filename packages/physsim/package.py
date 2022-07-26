@@ -16,6 +16,7 @@ class Physsim(CMakePackage, Ilcsoftpackage):
     tags = ['hep']
 
     version('master', branch='master')
+    version('0.4.2', sha256='fc3aa07b498e24c878c13937207d59baefd73ce36707203d3856ee0aae6459e4')
     version('0.4.1', sha256='4c22eee5dcccb764a5ff90850aeb33563c45a14af8939a3ebea736c7d92ac1c1')
 
     depends_on('ilcutil')

@@ -16,6 +16,7 @@ class Gear(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.9.1', sha256='75f7123cb5136fe1bd504c4c08816a37e8c6faaf090e30df0497f9ec9aa56d21')
     version('1.9.0', sha256='18564d50bc4863441bd4b5b72dda565065f8b7f5821e30c804c7e93c7afe84ae')
 
     patch("build_testing.patch", when="@1.9.0")

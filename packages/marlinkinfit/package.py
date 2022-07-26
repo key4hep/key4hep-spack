@@ -16,6 +16,7 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.6.1', sha256='06732df9e8f5f17841ae6de2f7a6cf1b6e80de1064e9cb013906cdd015c00f61')
     version('0.6', sha256='e22127f3d349c5b5a6a1c95585f5bf410d77cf598b3432b188f781436632372a')
 
     depends_on('ilcutil')

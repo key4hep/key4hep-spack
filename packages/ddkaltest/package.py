@@ -17,6 +17,7 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.7',     sha256='5126404bcad2f6f669ef8f02c80de097196e346f5945e7f6249820f8cd5fd86c')
     version('1.6',     sha256='e668242d84eb94e59edca18e524b1a928fcf7ae7c4b79f76f0338a0a4e835d8f')
     version('1.5',     sha256='4ef6fea7527dbb5f9a12322e92e27d80f2c29b115aae13987f55cb6cf02f31f5')
     version('1.4',     sha256='c5cefd23366c47087a6b04b5d48ab28ac88e8855446d782cfb8a954088fd4207')
