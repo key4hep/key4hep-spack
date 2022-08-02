@@ -1,0 +1,549 @@
+--- ProdRun/KKMCee.cxx.orig	1970-01-01 01:00:00.000000000 +0100
++++ ProdRun/KKMCee.cxx	2022-07-29 11:19:36.968395035 +0200
+@@ -0,0 +1,172 @@
++// ---------------------------------------------------------- //
++// kkmcee.cxx : main program steering generation of 2f events //
++//              saving the result in HEPMC3 format for FCCee  //
++//              studies                                       //
++//                                                            //
++// Author: G Ganis / CERN (inspired from ProdMini.cxx)        //
++// Initial date: 14 July 2022                                 //
++// Update:
++// ---------------------------------------------------------- //
++#include <string>
++#include "TRandom3.h"
++#include "TH1.h"
++#include "TTimeStamp.h"
++#include "KKee2f.h"
++#include "HepMC3/WriterAscii.h"
++
++// ---- Utility functions protototype ----------------------- //
++int argparser(int argc, char **argv);
++void printhelp();
++void printstatvar();
++
++// ---- Static variables ------------------------------------ //
++static std::string sFileLog = "pro.output";
++static std::string sMCgen = "mcgen.root";
++static std::string sFileOut = "kkmcee.hepmc3";
++static long sInitSeed = -1;
++static int sNbin = -1;
++static long sNGenEvt = -1;
++
++// ---- Main Program ---------------------------------------- //
++int main(int argc, char **argv)
++{
++    int rc = 0;
++    // Parse arguments
++    if ((rc = argparser(argc, argv)) < 0) {
++        cout << "argv[0]: problem parsing arguments" << endl;
++        exit(1);
++    }
++    cout << argv[0] <<": command line arguments processed: " << rc << endl;
++
++//    printstatvar();
++//    if (1) exit(0);
++
++    // Logfile output
++    ofstream fileOut(sFileLog, ios::out);
++
++    // Summary file in ROOT format
++    TFile* fileMCgen = new TFile(sMCgen.c_str(), "RECREATE", "Generators");
++    fileMCgen->cd();
++
++    // HepMC3 output
++    HepMC3::WriterAscii* hepMCWriter = new HepMC3::WriterAscii(sFileOut);
++
++    // Random generation (TODO: set random seed)
++    TRandom3* genRN = new TRandom3();
++    if (sInitSeed < 0) {
++       TTimeStamp ts;
++       sInitSeed = ts.GetSec() * 10000 + ts.GetNanoSec();
++    }
++    genRN->SetSeed(sInitSeed);
++
++    // MC generator object initialization
++    KKee2f* genKKMC = new KKee2f("MCgen");
++    if (sNbin < 0) sNbin = 1000;
++    TH1D* hNorm= new TH1D("genKKMC_NORMA", "Normalization histo", sNbin, 0, sNbin);
++    genKKMC->Initialize(genRN, &fileOut, hNorm);
++
++    // Number of events to be generated
++    if (sNGenEvt < 0) {
++       cout << "argv[0]: ********************************** "<<endl;
++       cout << "argv[0]: enter number of MC events: [" << sNGenEvt << "] ";
++       cin >> sNGenEvt; cout<<" requested "<< sNGenEvt <<" events"<<endl;
++    }
++
++    // Loop over MC events
++    for (long iev = 1; iev <= sNGenEvt; iev++) {
++        genKKMC->Generate();
++        if ((iev/100)*100 == iev || iev<=10) {
++           cout<<"argv[0]: iev = "<<iev<<endl;
++           genKKMC->m_Event->EventPrintAll();
++        }
++        // Dump event to file in HepMC3 ascii format
++        hepMCWriter->write_event(*(genKKMC->m_Hvent));
++        // genKKMC->m_Hvent->EventPrintAll(&fileHepMC);
++    }
++
++    // Finalize generation
++    genKKMC->Finalize(); // final printout
++    cout << "  |--------------------| "<<endl<<flush;
++    cout << "  |  kkmcee ended      | "<<endl<<flush;
++    cout << "  |--------------------| "<<endl<<flush;
++
++    // Finalize files
++    genKKMC->Write("MCgen",TObject::kOverwrite);
++    genRN->Write("RN_gen",TObject::kOverwrite);
++    fileMCgen->Write();
++    fileMCgen->Close();
++
++    // Done
++    return 0;
++}
++
++
++// ---- Utility functions ------------------------------------- //
++int argparser(int argc, char **argv)
++{
++    // Parse command line arguments
++
++    int rc = 0;
++    if (argc <= 1) return rc;
++
++    for ( int ia = 1; ia < argc ; ia++) {
++        char *c = argv[ia];
++        if ( *c == '-') {
++           ++rc;
++           ++c;
++           if ( *c == 'h') {
++               printhelp();
++               exit(0);
++           } else if (*c == 'l') {
++               ++ia;
++               sFileLog = argv[ia];
++           } else if (*c == 'm') {
++               ++ia;
++               sMCgen = argv[ia];
++           } else if (*c == 'o') {
++               ++ia;
++               sFileOut = argv[ia];
++           } else if (*c == 's') {
++               ++ia;
++               sInitSeed = std::stol(argv[ia]);
++           } else if (*c == 'b') {
++               ++ia;
++               sNbin = std::stoi(argv[ia]);
++           } else if (*c == 'n') {
++               ++ia;
++               sNGenEvt = std::stol(argv[ia]);
++           }
++        }
++    }
++
++    return rc;
++}
++
++void printhelp()
++{
++    // Dump the static vars
++    
++    cout << " -D file with defaults  [./KKMCee_Defaults]"<< endl;
++    cout << " -c config file         [./pro.input]  "  << endl;
++    cout << " -l log file            [pro.output]" << endl;
++    cout << " -m MC root file        [mcgen.root] " << endl;
++    cout << " -o HEPMC3 output file  [kkmcee.hepmc3]" << endl;
++    cout << " -s initial Seed        [derived from current time]" << endl;
++    cout << " -b normalization bins  [1000]" << endl;
++    cout << " -n number of events    [10]" << endl;
++    cout << " -h print this help " << endl;
++
++}
++
++void printstatvar()
++{
++    // Dump the static vars
++    
++    cout << " Log file:           " << sFileLog << endl;
++    cout << " MC root file:       " << sMCgen << endl;
++    cout << " HEPMC3 output file: " << sFileOut << endl;
++    cout << " Initial Seed:       " << sInitSeed << endl;
++    cout << " Normalization bins: " << sNbin << endl;
++    cout << " Number of Events:   " << sNGenEvt << endl;
++
++}
+\ No newline at end of file
+--- ProdRun/kkmchepmc/KKMCee-5.orig	1970-01-01 01:00:00.000000000 +0100
++++ ProdRun/kkmchepmc/KKMCee-5	2022-07-29 12:39:43.980998450 +0200
+@@ -0,0 +1,280 @@
++#!/bin/bash
++
++# Wrapper around the KKMCee executable
++# This script relies on the presence of CVMFS in the system and uses the KKMCee
++# provided by the LCG Releases
++
++help(){
++   echo ""
++   echo "+++ Wrapper around the KKMCee executable  +++"
++   echo ""
++   echo "Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s initial_seed] [OPTIONS]"
++   echo "       \tKKMCee -c config_file [-s initial_seed]"
++   echo ""
++   echo "Options:"
++   echo -e "  -c, --config file \t\tPath to configuration file"
++   echo -e "  -f, --flavour flavour \tFlavour to be generated (Mu|Tau|UDS|C|B|Hadrons)"
++   echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
++   echo -e "  -n, --nevts events \t\tNumber of events to be generated"
++   echo -e "  -o, --outfile file \t\tFile with the generated events in HEPMCv3 format [kkmcee.hepmc]"
++   echo -e "  -s, --initialseed \t\tLong number to be used for initial seeding (randomly generated, if missing)"
++   echo -e "  -b, --bessig bessig \t\tBeam-Energy-Spread of both beams (or of the first beam, if bessig2<0.) "
++   echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread)]"
++   echo -e "  -g, --bessig2 bessig2 \tBeam-Energy-Spread of the second beam if different from the first beam; fraction of Ecms/2."
++   echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread or equal to first beam)]"
++   echo -e "  -r, --besrho rho \t\tBeam-Energy-Spread correlation [default 0.]"
++   echo -e "  -d, --debug lvl \t\t PrintOut Level 0,1,2 [default 1]"
++   echo ""
++   echo "Special options for taus only:"
++   echo -e "  -t, --taudec t1*1000+t2 \tdecay channel for the first (t1) and second tau (t2)"
++   echo -e "                      \t\t 0        Inclusive"
++   echo -e "                      \t\t 1,2,3    electron,mu,pi"
++   echo -e "                      \t\t 4,5,6,7  rho,a1,K,K*"
++   echo -e "                      \t\t 8,9,10,11,12,13  3pip0,pi3pi0,3pi2pi0,5pi,5pip0,3pi3p0"
++   echo -e "                      \t\t 14, ... (other rare decays see tauola++)"
++   echo -e "  --tauopt file \t\tFile with tau options (see Tauola section in KKMCee_defaults)"
++   echo -e "                      \t\t the file is included as it is and overwrites other settings"
++   echo ""
++   echo "Examples:"
++   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.hepmc -b 0.001"
++   echo -e "KKMCee -c kkmc_ditau.input"
++   echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.hepmc"
++   echo ""
++   echo "  NB: (1) This wrapper works only for KKMCee versions 5 or newer"
++   echo "      (2) Output is HEPMC v3"
++   echo ""
++}
++
++_DBGLVL=1
++_FLAVOUR="Mu"
++_ECMS="91.2"
++_NEVTS="100"
++_DOBES="no"
++_HAVEBESTWO="no"
++_BESONE=-1.
++_BESTWO=-1.
++_BESRHO=0.
++_OUTFILE="kkmcee.hepmc"
++_TAUDEC=0
++_JAK1=0
++_JAK2=0
++_TAUOPT=""
++# Read arguments
++while [[ $# -gt 0 ]]
++do
++    arg="$1"
++    case $arg in
++        -c | --config)
++            _CONFFILE="$2"
++            shift # past argument
++            shift # past value
++        ;;
++        -e | --ecms)
++            _ECMS="$2"
++            shift
++            shift
++        ;;
++        -f | --flavour)
++           _FLAVOUR="$2"
++           shift
++           shift
++        ;;
++        -n | --nevts)
++           _NEVTS="$2"
++           shift
++           shift
++        ;;
++        -b | --bessig)
++            _BESONE="$2"
++	    _DOBES="yes"
++            shift
++            shift
++        ;;
++        -g | --bessig2)
++            _BESTWO="$2"
++	    _HAVEBESTWO="yes"
++            shift
++            shift
++        ;;
++        -r | --besrho)
++            _BESRHO="$2"
++            shift
++            shift
++        ;;
++        -s | --initialseed)
++           _INITSEED="$2"
++           shift
++           shift
++        ;;
++        -o | --outfile)
++           _OUTFILE="$2"
++           shift
++           shift
++        ;;
++        -t | --taudec)
++            _TAUDEC="$2"
++            shift
++            shift
++        ;;
++        --tauopt)
++           _TAUOPT="$2"
++           shift
++           shift
++        ;;
++        -d | --debug)
++           _DBGLVL="$2"
++           shift
++           shift
++        ;;
++        * | -h | --help)
++            help
++            exit 1
++    esac
++done
++
++# Case with symmetric beam spread 
++if test "x${_DOBES}" = "xyes" && test "x${_HAVEBESTWO}" = "xno" ; then
++   _BESTWO=${_BESONE}
++fi
++echo -e "********************************************************************************"
++echo -e "*  BES enabled with: \tSigma1= $_BESONE \tSigma2: $_BESTWO \tRho: $_BESRHO"
++echo -e "********************************************************************************"
++
++KKMCEE_DIR=$(dirname $(dirname $0))
++KKMCEE_EXE=${KKMCEE_DIR}/bin/KKMCee.exe
++TABMAIN_EXE=${KKMCEE_DIR}/bin/TabMainC
++TABMAIN_OUTPUT=./TabMainC.output
++KKMCEE_ETC=${KKMCEE_DIR}/etc/KKMCee
++
++# Run existing config file
++if test "x$_CONFFILE" = "x" || test ! -f $_CONFFILE; then
++# We create a config file based on the input switches: this is the initial common part
++cat > ./pro.input <<EOF
++********************** THIS IS INPUT FILE FOR DEMO PROGRAM *********************
++*  This is input data for CEEX matrix element
++BeginX
++********************************************************************************
++*               ACTUAL DATA FOR THIS PARTICULAR RUN
++*-------------------------------------------------------------------------------
++*indx_____data______ccccccccc0cccc__________General_____ccc0ccccccccc0ccccccccc0
++    0           1000      1k   NEVT = number of events, OBSOLETE!!!
++* Center-of-mass energy [GeV]
++    1        ${_ECMS}e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
++*     PrintOut from generator
++    5           ${_DBGLVL}  LevPri =xpar( 5)  PrintOut Level 0,1,2
++    6              1        Ie1Pri =xpar( 6)  PrintOut Start point
++    7              5        Ie2Pri =xpar( 7)  PrintOut End   point
++EOF
++   if test "x${_DOBES}" = "xyes"; then
++cat >> ./pro.input <<EOF
++   25              4      KeyBES BES, =0 none, =2 beamsstrahlung =3,4 for gaussian BES
++*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
++   80       0.0e0         ParBES(0) E1=0 will be replaced by CMSene/2
++   81       0.0e0         ParBES(1) E2=0 will be replaced by CMSene/2
++   82       ${_BESONE}e0         ParBES(2) sigma1/E1
++   83       ${_BESTWO}e0         ParBES(3) sigma2/E2
++   84       ${_BESRHO}e0         ParBES(4) rho correlation parameter [dimensionles]
++EOF
++   else
++cat >> ./pro.input <<EOF
++   25              0      KeyBES BES, =0 none, =2 beamsstrahlung =3,4 for gaussian BES
++EOF
++   fi
++cat >> ./pro.input <<EOF
++********************************************************************************
++**     Define process
++**     Beam flavour code
++  400             11      KFini = xpar(400) dont change it                |<<<<|
++EOF
++   if test "x$_FLAVOUR" = "xMu"; then
++cat >> ./pro.input <<EOF
++  413              1      KFfin, muon
++EOF
++   elif test "x$_FLAVOUR" = "xTau"; then
++      # Decays
++      if test ! "x${_TAUOPT}" = "x" && test -f ${_TAUOPT}; then
++cat ${_TAUOPT} >> ./pro.input
++      else
++         if test ! "x${_TAUDEC}" = "x0" ; then
++            _JAK2=$((${_TAUDEC}/1000))
++            _JAK1=$(((${_TAUDEC}-${_JAK2})/1000))
++         fi
++      fi
++cat >> ./pro.input <<EOF
++  415              1      KFfin, tau
++*********************  Tau decays ***********************************************
++ 2001              ${_JAK1}     Jak1,  all inclusive
++ 2002              ${_JAK2}      Jak2,  all inclusive
++*****   PhotosC adding photons in tau decays in HEPMC3 event record
++   35              1   KeyPhts =0 for off; =1 in non-leptonic; =2 in all decays
++********************************************************************************
++EOF
++   elif test "x$_FLAVOUR" = "xUDS"; then
++cat >> ./pro.input <<EOF
++  401              1      KFfin, d
++  402              1      KFfin, u
++  403              1      KFfin, s
++EOF
++   elif test "x$_FLAVOUR" = "xC"; then
++cat >> ./pro.input <<EOF
++  404              1      KFfin, c
++EOF
++   elif test "x$_FLAVOUR" = "xB"; then
++cat >> ./pro.input <<EOF
++  405              1      KFfin, b
++EOF
++   elif test "x$_FLAVOUR" = "xHadrons"; then
++cat >> ./pro.input <<EOF
++  401              1      KFfin, d
++  402              1      KFfin, u
++  403              1      KFfin, s
++  404              1      KFfin, c
++  405              1      KFfin, b
++EOF
++   else
++     echo "Running mode not yet supported"
++     rm -fr ./pro.input  
++     exit 1
++   fi
++
++# Initial seed switch
++_SSEED=""
++_FSEED=`date +%N`
++if test ! "x$_INITSEED" = "x"; then
++   _FSEED=$((${_SSEED}+1))
++   _SSEED="-s $_INITSEED"
++fi
++cat >> ./pro.input <<EOF
++********************************************************************************
++* FOAM GENERATION PARAMETERS
++ 3020       ${_FSEED}     Ranmar initial random number seed (KKMC and FOAM)
++EOF
++
++# Input file closing
++cat >> ./pro.input <<EOF
++********************************************************************************
++EndX
++EOF
++fi
++
++ln -sf ${KKMCEE_ETC}/KKMCee_defaults
++# Make EW tables
++time ${TABMAIN_EXE} > ${TABMAIN_OUTPUT}
++
++# Run
++time ${KKMCEE_EXE} ${_SSEED} -o ${_OUTFILE} -n ${_NEVTS}
++if test ! "x$?" = "x0" ; then 
++    exit 1;
++else
++    echo "event generation ok" ;
++    # Cleanup
++    rm -f KKMCee_defaults
++    # Run files under KKMCee-datetime
++    _rundir="KKMCee-`date +%d%b%Y-%H%m%S`"
++    mkdir ${_rundir}
++    _runfiles="DIZET-table1 TabMain77.output TabMainC.output mcgen.root
++               pro.input pro.output pro77.output"
++    for f in ${_runfiles}; do
++       mv $f ${_rundir}
++    done
++fi
+--- ProdRun/kkmchepmc/kkmc-tauola.input.orig	1970-01-01 01:00:00.000000000 +0100
++++ ProdRun/kkmchepmc/kkmc-tauola.input	2022-07-27 15:54:19.743550514 +0200
+@@ -0,0 +1,87 @@
++********************************************************************************
++*****                                                                       ****
++*****                Entries 2000-2999 reserved for Tauola                  ****
++*****                                                                       ****
++********************************************************************************
++**  Jak=-1       No decay
++**  Jak=0        Inclusive, 1.e. Jak=1,2,3,4,5,6,7,8...
++**  Jak=1,2,3    electron,mu,pi  decays
++**  Jak=4,5,6,7  rho,a1,K,K*     decays
++**  Jak=8...     see list of branchings below
++ 2001            0e0      Jak1   =xpar(71)  First  Tau decay mask
++ 2002            0e0      Jak2   =xpar(72)  Second Tau decay mask
++ 2003           15e0      idff   =xpar(72)  PDG ident of the first tau
++ 2004            1e0      itdkRC =xpar(74)  QED rad. switch in tau decays (photos etc)
++ 2005        0.001e0      xk0dec =xpar(75)  IR-cut for QED rad. in leptonic decays
++ 2006            1e0      KeyA1  =xpar(76)  Type of a1 current
++ 2007        0.975e0\\\\\\Cosine of  Cabibo angle, dont change it\\\\\\\\\\\\\\
++ 2008            1e0      GV in tau decay
++ 2009           -1e0      GA in tau decay
++**  Coefficients to fix ratio of:
++**    BRA1  -- A1 3CHARGED/ A1 1CHARGED 2 NEUTRALS MATRIX ELEMENTS (MASLESS LIM.)
++**    BRKS  -- PROBABILITY OF K0 TO BE KS
++**    BRK0  -- PROBABILITY OF K0B TO BE KS
++**    BRK0B -- RATIO OF COEFFICIENTS FOR K*--> K0 PI-
++**  All coefficents should be in the range (0.0,1.0)
++**  They meaning is probability of the first choice only if one
++**  neglects mass-phase space effects
++ 2010          0.5e0      BRA1   in 3 pion tau dec. BR of PI+PI-PI- (vs PI-PI0PI0
++ 2011       0.6667e0      BRKS   in K* tau dec. BR of BR of K+PI0 (vs PI+K0
++ 2012          0.5e0      BRK0   Probability of K0 to be KS
++ 2013          0.5e0      BRK0B  Probability of K0B to be KS
++**  Tau branching ratios for selection of decay chanel in MC series.
++**  Data below are from PDG July 1998. 
++**  They do not need to summ up to unity. MC corrects for this.
++**  !!! WARNING!!!  They do not match the model actually used in the present version of Tauola, 
++**                  however, for many applications they might be sufficiently good.
++**  !!! IMPORTANT HINT !!!!
++**           Entry 2101 set smaller than -1e0 will activate internal defaults of Tauola.
++**           In such a case all input from 2008-2122 will be IGNORED
++ 2101      17.810e-2      TAU-  -->   E-               
++ 2102      17.370e-2      TAU-  -->  MU-               
++ 2103      11.080e-2      TAU-  -->  PI-
++ 2104      25.320e-2      TAU-  -->  PI-, PI0
++ 2105      18.380e-2      TAU-  -->  A1-(two subch: 2PI-PI+= 9.23%, PI-2PI0=9.15%)
++ 2106       0.710e-2      TAU-  -->   K-
++ 2107       1.350e-2      TAU-  -->  K*- (two subch:  K-PI0= 0.52%, K0PI- =0.83%)
++ 2108       4.350e-2      TAU-  --> 2PI-,  PI0,  PI+   
++ 2109       1.110e-2      TAU-  --> 3PI0,        PI-   
++ 2110       0.011e-2      TAU-  --> 2PI-,  PI+, 2PI0   
++ 2111       0.075e-2      TAU-  --> 3PI-, 2PI+,        
++ 2112       0.022e-2      TAU-  --> 3PI-, 2PI+,  PI0   
++ 2113       0.029e-2      TAU-  --> 2PI-,  PI+, 3PI0   
++ 2114       0.161e-2      TAU-  -->  K-, PI-,  K+      
++ 2115       0.121e-2      TAU-  -->  K0, PI-, K0B      
++ 2116       0.151e-2      TAU-  -->  K-,  K0, PI0      
++ 2117       0.080e-2      TAU-  --> PI0, PI0,  K-      
++ 2118       0.180e-2      TAU-  -->  K-, PI-, PI+      
++ 2119       0.390e-2      TAU-  --> PI-, K0B, PI0      
++ 2120       0.174e-2      TAU-  --> ETA, PI-, PI0      
++ 2121       0.050e-2      TAU-  --> PI-, PI0, GAM      ???? from MC
++ 2122       0.159e-2      TAU-  -->  K-,  K0           
++** !!! Tau branching ratios all equal!!! for starting the true work on br. ratios
++*2101       1.0000e0      TAU-  -->   E-               
++*2102       1.0000e0      TAU-  -->  MU-               
++*2103       1.0000e0      TAU-  -->  PI-               
++*2104       1.0000e0      TAU-  -->  PI-, PI0          
++*2105       1.0000e0      TAU-  -->  A1- (two subch)   
++*2106       1.0000e0      TAU-  -->   K-               
++*2107       1.0000e0      TAU-  -->  K*- (two subch)   
++*2108       1.0000e0      TAU-  --> 2PI-,  PI0,  PI+   
++*2109       1.0000e0      TAU-  --> 3PI0,        PI-   
++*2110       1.0000e0      TAU-  --> 2PI-,  PI+, 2PI0   
++*2111       1.0000e0      TAU-  --> 3PI-, 2PI+,        
++*2112       1.0000e0      TAU-  --> 3PI-, 2PI+,  PI0   
++*2113       1.0000e0      TAU-  --> 2PI-,  PI+, 3PI0   
++*2114       1.0000e0      TAU-  -->  K-, PI-,  K+      
++*2115       1.0000e0      TAU-  -->  K0, PI-, K0B      
++*2116       1.0000e0      TAU-  -->  K-,  K0, PI0      
++*2117       1.0000e0      TAU-  --> PI0, PI0,  K-      
++*2118       1.0000e0      TAU-  -->  K-, PI-, PI+      
++*2119       1.0000e0      TAU-  --> PI-, K0B, PI0      
++*2120       1.0000e0      TAU-  --> ETA, PI-, PI0      
++*2121       1.0000e0      TAU-  --> PI-, PI0, GAM      
++*2122       1.0000e0      TAU-  -->  K-,  K0           
++********************************************************************************
++*****                   End of data for Tauola                              ****
++********************************************************************************

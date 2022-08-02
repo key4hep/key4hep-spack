@@ -1,0 +1,49 @@
+--- ProdRun/Makefile.am.orig	2022-05-17 12:46:31.000000000 +0200
++++ ProdRun/Makefile.am	2022-07-14 19:28:20.427376666 +0200
+@@ -58,7 +58,7 @@
+ 
+ #/////////////////////////////////////////////////////////////
+ # Local executables with ROOT persistency
+-bin_PROGRAMS = MainKKMC MainFoam MainMini MainPers
++bin_PROGRAMS = MainKKMC MainFoam MainMini MainPers KKMCee
+ #/////////////////////////////////////////////////////////
+ #-------------------------------------------------------------------------
+ # option -no-install needed for debuger
+@@ -84,4 +84,9 @@
+ MainPers_LDADD   = \
+ 			$(top_builddir)/SRCee/libKKee.la
+ MainPers_LDFLAGS = -R $(PHOTOS_LIBDIR) $(PHOTOS_LDFLAGS) $(LDFLAGS_HEPMC) -no-install -g
++#/////////////////////////////////////////////////////////
++KKMCee_SOURCES = KKMCee.cxx
++KKMCee_LDADD   = \
++			$(top_builddir)/SRCee/libKKee.la
++KKMCee_LDFLAGS = -R $(PHOTOS_LIBDIR) $(PHOTOS_LDFLAGS) $(LDFLAGS_HEPMC) -no-install -g
+ #-------------------------------------------------------------------------
+--- ProdRun/kkmchepmc/Makefile.am.orig	1970-01-01 01:00:00.000000000 +0100
++++ ProdRun/kkmchepmc/Makefile.am	2022-07-14 19:23:12.614730288 +0200
+@@ -0,0 +1,14 @@
++DSET = kkmchepmc
++
++##############
++KKMCee_defaults:
++	(ln -s ../../SRCee/KKMCee_defaults ./)
++
++EWtables: KKMCee_defaults
++	(cd $(top_builddir); make)
++	cp ./$(DSET).input ./pro.input
++	($(top_builddir)/DZface/TabMainC;)
++
++start: EWtables
++	../KKMCee
++	
+\ No newline at end of file
+--- configure.ac.orig	2022-05-17 12:46:31.000000000 +0200
++++ configure.ac	2022-07-14 19:57:42.559073064 +0200
+@@ -64,6 +64,6 @@
+ SRCee/Makefile \
+ DZface/Makefile \
+ ProdRun/Makefile  ProdRun/workMini/Makefile  ProdRun/work1/Makefile ProdRun/workFoam/Makefile \
+-                  ProdRun/workNU/Makefile ProdRun/workTau/Makefile ProdDigest/Makefile
++                  ProdRun/workNU/Makefile ProdRun/workTau/Makefile ProdRun/kkmchepmc/Makefile ProdDigest/Makefile
+ ])
+ AC_OUTPUT
