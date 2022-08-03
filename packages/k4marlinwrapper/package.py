@@ -15,6 +15,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     maintainers = ['fdplacido']
 
     version('master', branch='master')
+    version('0.4.2', sha256='8ec51ba4e0348d67377179e9d3e9043267a42a0d360d884c331ce52c51b61b03')
     version('0.4.1', sha256='7e3c76bd21a2f2bea196fcae270e29e26ed2abc8d70a4c3d37ce88bacbd22528')
     version('0.4', sha256='6609dacb158f8fd2f8532e0881b0acb73ea23f31578eab44085876a8a59a5946')
     version('0.3.1',  sha256='a8ef66f6500b9a709b950cdfd3bcb0c775d7fa42336b2aa5c80e2efef7c95b19')
