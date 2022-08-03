@@ -10,6 +10,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'clementhelsens']
   
     version('master', branch='master')
+
+    version('0.6.0', sha256='a740c1818cc9e02ce44306b9a4f828b3ce85d2afaed1fc06d8f8a41f89f9abe2')
     version('0.5.1', sha256='2d5493340e21e8a24cbbfec9a465616fca736c5058bd27acf79eb07f8948ea2b')
     version('0.5.0', sha256='6c4b68d15fbae3793473dc4475f216b65c1962ed5de7979e75b024cb6d05d541')    
     version('0.4.1', sha256='60db645152326775e9ce0f8c5017bd68d83d0024ac71e3266dac2f83d96ffce3')
@@ -26,6 +28,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     patch('https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/176.patch', when='@0.4.0',
           sha256='bff4be96d0c177caccc3642bc1b3538004a8d3e5a19b472563ac867281a65bd6')
 
+    variant('onnx', default=True, description="Build ONNX-dependent analyzers.")
+    variant('acts', default=True, description="Build Acts-dependent analyzers.")
     variant('dd4hep', default=True, description="Build DD4hep-dependent analyzers.")
 
     generator = 'Ninja'
@@ -38,26 +42,25 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('edm4hep')
     depends_on('py-awkward@1.4.0')
     depends_on('fcc-edm', when="@:0.2.9")
-    depends_on('acts@5.00.0', when="@0.3.0:0.3.4")
-    depends_on('acts@6.00.0:', when='@0.3.5:')
+    depends_on('acts@5.00.0', when="@0.3.0:0.3.4 +acts")
+    depends_on('acts@6.00.0:', when='@0.3.5: +acts')
     depends_on('eigen', when="@0.3.0:")
     depends_on('dd4hep', when="@0.3.3: +dd4hep")
     depends_on('py-pyyaml', type=('build', 'run'))
+    depends_on('py-onnx-runtime', when='+onnx')
 
     def cmake_args(self):
       args = [
               self.define('CMAKE_CXX_STANDARD', self.spec['root'].variants['cxxstd'].value),
+
+              self.define_from_variant('WITH_ACTS',   'acts')
+              self.define_from_variant('WITH_DD4HEP', 'dd4hep')
+              self.define_from_variant('WITH_ONNX',   'onnx')
               ]
       return args
 
     # todo: update the cmake config to remove this
     def setup_build_environment(self, spack_env):
-      spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['edm4hep'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['podio'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['fastjet'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['acts'].prefix.include)
-      spack_env.prepend_path('CPATH', self.spec['eigen'].prefix.include)
       spack_env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
       python_version = self.spec['python'].version.up_to(2)
       awk_lib_dir = self.spec['py-awkward'].prefix.lib
