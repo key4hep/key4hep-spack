@@ -37,6 +37,9 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     depends_on('python', type='build')
     depends_on('ninja', type='build')
 
+    patch('https://patch-diff.githubusercontent.com/raw/iLCSoft/lcgeo/pull/255.diff',
+          sha256='fc39117d3b579ab383077fd7274d321f1e954cefa9e481b45310cd36b35aa3dd',
+          when='@0.16.8')
     patch('https://github.com/iLCSoft/lcgeo/commit/cb87609446255c3a94da867ad7801a62ff3b6b05.patch',
           sha256='3e02ca5c89558342d8fd2489463c285af5a5500baeba2faf8d41f8ec3ae2f487',
           when='@0.16.7')
