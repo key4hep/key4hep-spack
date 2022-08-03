@@ -30,6 +30,7 @@ setup_spack_push:
           - pushes
           - merge_requests
           - schedules
+          - web
     script:
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
@@ -59,7 +60,7 @@ build-spack-ci:
             - key4hep-ci
     only:
       refs:
-          - schedules # Only execute this on scheduled pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "CI"
     script:
