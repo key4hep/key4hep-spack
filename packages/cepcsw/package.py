@@ -29,9 +29,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     version('0.1.1', sha256='0d56c2e63c0d91a64854c44ab4c0575fb0646cb566113721e3f35aee24e6a334')
 
 
-    patch('https://patch-diff.githubusercontent.com/raw/cepc/CEPCSW/pull/225.patch',
-          sha256='182563c6dd6a1d92692007d3626c69e1d7c3d281327b9b9052257f766201449b',
-          when='@0.2.5 ^dd4hep@1.21:')
     patch('https://github.com/vvolkl/CEPCSW/commit/42f64d710fb25af363e2ed9a18b94bae1537a20f.patch',
           sha256='87bf94536f5fd7fb675ca4eff25277331b7de94ef541f2bd8ea178a5e61fd20d', when="@0.2.1")
 
