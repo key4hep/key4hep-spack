@@ -16,6 +16,7 @@ class Marlinfastjet(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.5.3', sha256='bf88cdcea89bb5febe5e77176164ec0d1d0d61be2890978f66a7638ac248ef5b')
     version('0.5.2', sha256='abdffa6c2c9328bb094456f6003920d0c860e7faa5c76aea650da9e47e698bdf')
 
 

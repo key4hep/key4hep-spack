@@ -16,6 +16,7 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.14.1', sha256='39f2a858baaedd703dbc30f0c813c641d63dcac8e735716730bb3d46ca3e474f')
     version('1.14', sha256='99149d170a1ae179500b2c47ec79dca227ff96c0bdf0cd69f2075eb468177a5e')
 
     patch('testing.patch', when="@:1.15")

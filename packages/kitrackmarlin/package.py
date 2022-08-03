@@ -17,6 +17,7 @@ class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.13.1', sha256='3dabd7a0a9ba9aba7c5ef17809dbe6a6e55b1200b33cf12567d0e3e3e91dd15f')
     version('1.13', sha256='1307578313673fae159aa6fb4eacf3f22bfa085c61337d14a5895e078a8d7f70')
 
     depends_on('kitrack')

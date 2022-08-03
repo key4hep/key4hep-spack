@@ -19,6 +19,7 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.16.2', sha256='1dbed3ad127da340b816cda500515b267f26614ec21e9f70fa44ca52eb401803')
     version('1.16.1', sha256='f8e03cba4144b9797fa01321aeb1c2f01967d1fcb10089e7b1765c32e4346508')
     version('1.16', sha256='7f80a726e3b08653a88487b87618fca277d59fe22a448ce15043f8495f1108e9')
     version('1.15.1',  sha256='05e878c9aae4a675e37ad2c63abc0b1c4c2a45dcb2e3c9ae5c31e7e6f64118bf')

@@ -17,6 +17,7 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.6.1', sha256='1599ee85314d2d22286423092222d99d68ee09a304415f91babccdc8b44d338b')
     version('0.6', sha256='1cf8eb03bbdf6da8fbf277d8168d97f77e1675850a7e66d0e9f90684e3a2f077')
 
     depends_on('ilcutil')

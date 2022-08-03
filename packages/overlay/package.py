@@ -16,6 +16,7 @@ class Overlay(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('0.22.4', sha256='bd770f17e006d0cda99d233b64603c43920350695c1649391197cfe0c53628b2')
     version('0.22.3', sha256='4a26b407a9275735c6ae156fdf073cbc6ea820e474d8e5ccc051753429a01ae1')
     version('0.22.2', sha256='305bdf568dc5fd221d6bd5d499cc25f7c567cc3ae21ff2954409a66549e4150f')
     version('0.22.1',   sha256='2f3ca472fe6aae44cdae0553f0e65b3c086a0d887d9cf53fd19468fb6107155b')

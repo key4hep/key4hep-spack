@@ -16,6 +16,7 @@ class Lccd(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.5.1', sha256='0566b6d93e489bd6c1c4fe377f7e58dfa84a05de85bcce287505334aef21faef')
     version('1.5.0', sha256='876f751bebab760303b8dc3b7c6d4fe7d47ddd5aa19af9338f6565c5b817229b')
 
     variant('conddbmysql', default=False,
