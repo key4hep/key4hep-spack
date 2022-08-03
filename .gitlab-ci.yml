@@ -1,8 +1,15 @@
 # for compatibility with old git versions on centos
 variables:
   GIT_STRATEGY: clone
-  K4_JOBTYPE: Release
-  SPACK_VERSION: ""
+  K4_JOBTYPE:
+    value: CI
+    description: "Possible Values: Release, Nighlies, CI. A Release job is deployed to sw.hsf.org and uses the latest tags. A Nightlies job is deployed to sw-nightlies.hsf.org and uses the HEAD of the defined repos. A CI build is like a nightly build, but not deployed, and builds local checkouts of the PRs given in K4_CI_URLS"
+  K4_CI_URLS:
+    value: ""
+    description: "A whitespace-separated list of urls for github prs (for repositories for which there is a spack recipe). Example: https://github.com/iLCSoft/SIO/pull/17/ https://github.com/AIDASoft/podio/pull/287"
+  SPACK_VERSION:
+    value: ""
+    description: "A git ref to check out after cloning the spack repository. Leaving this blank will use the latest HEAD (recommended)."
 
 stages:
     - prepare-spack
@@ -23,6 +30,7 @@ setup_spack_push:
           - pushes
           - merge_requests
           - schedules
+          - web
     script:
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
@@ -33,6 +41,63 @@ setup_spack_push:
             - key4hep-spack_centos7-cvmfs.tar.gz
             - spack 
         expire_in: 1 month
+
+#### CI builds of key4hep-stack
+# This is intended to run more complex ci builds, possibly comprising PRs in several repos
+# this job expects the following setup on the runner:
+# * environment variables GITHUB_TOKEN and GITHUB_USER
+#   set in .bashrc or via gitlab ci - to be able to query the commits on github
+#  
+build-spack-ci:
+    stage: compilation
+    tags:
+        - cvmfs
+    needs:
+        - "setup_spack_push"
+    parallel:
+        matrix:
+          - SPACKENV: 
+            - key4hep-ci
+    only:
+      refs:
+          - web
+      variables:
+          - $K4_JOBTYPE == "CI"
+    script:
+        - |
+          #set up spack inside the k4-spack repo
+          source spack/share/spack/setup-env.sh
+          export KEY4HEP_RELEASE_VERSION=master-ci-`date -I`
+          python scripts/fetch_nightly_versions.py >> environments/$SPACKENV/spack.yaml
+          cd environments/$SPACKENV
+          source setup_clingo_centos7.sh
+          spack env activate .
+          spack repo add ../..
+          git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
+          spack repo add ./sft-spack-repo
+          spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
+          for K4_CI_URL in $K4_CI_URLS; do
+            # setup development repos
+            export PR_NUMBER=`echo $K4_CI_URL | grep -oP "pull/\K[0-9]*"`
+            export PR_REPO_URL=`echo $K4_CI_URL | grep -oP "\K.*/pull/"`
+            export PR_REPO_URL=`echo ${PR_REPO_URL/\/pull\//}`
+            export PACKAGE_NAME=`echo ${PR_REPO_URL} | rev | cut -d "/" -f -1 | rev `
+            export PACKAGE_NAME=`echo $PACKAGE_NAME |  tr '[:upper:]' '[:lower:]'`
+            echo "PACKAGE_NAME: ${PACKAGE_NAME}"
+            echo "PR_NUMBER: ${PR_NUMBER}"
+            echo "PR_REPO_URL: ${PR_REPO_URL}"
+            #sed -i "/${PACKAGE_NAME}@commit/d" ./spack.yaml
+            mkdir $PACKAGE_NAME; cd $PACKAGE_NAME
+            git clone $PR_REPO_URL .
+            #spack add ${PACKAGE_NAME}@commit.`git rev-parse HEAD`
+            spack develop -p $PWD ${PACKAGE_NAME}@commit.`git rev-parse HEAD`
+            git fetch origin pull/${PR_NUMBER}/head:testbranch${PR_NUMBER}
+            git checkout testbranch${PR_NUMBER}
+            cd ..
+          done;
+          spack concretize -f --test=root --reuse
+          # compile onwards and upwards
+          spack install --test=root --reuse --no-check-signature
 
 #### Nightly build of key4hep-stack
 # this job expects the following setup on the runner:
