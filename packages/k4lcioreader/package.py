@@ -9,6 +9,8 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     maintainers = ['mirguest']
 
     version('master', branch='master')
+    version('0.4.2', sha256='2bb8383d95b973676b87b4c8af00fdbd8bb84c2d4e45cacf98490d1946f909b0',
+            url='https://github.com/key4hep/k4LCIOReader/archive/refs/tags/v00.04.02.tar.gz')
     version('0.4.1', sha256='bb93892bb38d4bb3176706f1fc55da8a21742a6fe7d5571914e9cfbc3478a847',
             url='https://github.com/key4hep/k4LCIOReader/archive/refs/tags/v00.04.01.tar.gz')
     version('0.4.0', sha256='aa1f2bcfabc5b5e3a09cab5408af1402b8a4ddf0927f2f69e62084f568306174')
