@@ -13,7 +13,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     version('main', branch='main')
 
-    depends_on('acts+dd4hep+tgeo+identification+json')
+    depends_on('acts+dd4hep+tgeo+identification+json@v19.6.9')
     depends_on('gaudi')
     depends_on('root')
     depends_on('edm4hep')
