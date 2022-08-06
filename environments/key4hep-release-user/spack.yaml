@@ -6,8 +6,8 @@ spack:
   - /cvmfs/sw.hsf.org/contrib/spack/var/spack/repos/key4hep-spack/environments/key4hep-common/compilers.yaml
   view: false
   upstreams:
-    spack-instance-5:
-      install_tree: /cvmfs/sw.hsf.org/spackages5/
+    spack-instance-6:
+      install_tree: /cvmfs/sw.hsf.org/spackages6/
   config:
     install_tree:
       root: ~/.spack/opt/spack

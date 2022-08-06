@@ -1,7 +1,7 @@
 spack:
   upstreams:
     spack-instance-1:
-      install_tree: /cvmfs/sw.hsf.org/spackages5
+      install_tree: /cvmfs/sw.hsf.org/spackages6
   view: false
   include:
   - key4hep-config-nightlies.yaml

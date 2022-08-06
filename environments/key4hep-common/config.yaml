@@ -1,6 +1,6 @@
 config:
   install_tree:
-    root: /cvmfs/sw.hsf.org/spackages5
+    root: /cvmfs/sw.hsf.org/spackages6
     projections:
       all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
       build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
