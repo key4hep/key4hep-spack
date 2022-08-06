@@ -233,7 +233,6 @@ build-spack-release:
         # activate environment
         - cd environments/${SPACKENV}
         - spack env activate .
-        - spack repo add ../..
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - spack repo add ./sft-spack-repo
         # config debug printouts
