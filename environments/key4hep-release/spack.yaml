@@ -8,9 +8,5 @@ spack:
     all:
       compiler: [gcc@11.2.0]
   concretization: together
-  specs:
-  - fccanalyses
-  - key4hep-stack
-  - k4lcioreader@0.4.2
   repos:
   - ../..
