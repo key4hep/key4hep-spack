@@ -72,7 +72,6 @@ build-spack-ci:
           cd environments/$SPACKENV
           source setup_clingo_centos7.sh
           spack env activate .
-          spack repo add ../..
           git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
           spack repo add ./sft-spack-repo
           spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
@@ -139,7 +138,6 @@ build-spack-nightlies:
         # symlink to latest now handled by deploy step
         #- source pathsetup.sh
         - spack env activate .
-        - spack repo add ../..
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - spack repo add ./sft-spack-repo
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
