@@ -1,4 +1,5 @@
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 class Fccanalyses(CMakePackage, Key4hepPackage):
     """ RDF Analysers for the FCC. """
@@ -71,6 +72,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
                            'python{0}'.format(python_version),
                            'site-packages')
       spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+      k4_setup_env_for_framework_tests(self.spec, spack_env)
 
       
 
