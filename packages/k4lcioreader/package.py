@@ -28,6 +28,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     depends_on('lcio')
     depends_on('podio@0.12:')
     depends_on('edm4hep')
+    depends_on('edm4hep@0.5:', when='@0.4.2:')
     depends_on('k4fwcore@0.2.0', when='@:0.2.0')
     depends_on('k4fwcore@0.3.0:', when='@0.3:')
     depends_on('root')
