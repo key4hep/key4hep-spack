@@ -164,8 +164,6 @@ build-lcg-release:
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - cd sft-spack-repo
         - spack env activate -d environments/lcg-release/
-        - spack repo add .
-        - spack concretize -f --test=root --reuse
         - spack install --test=root --reuse --no-check-signature
 
 ### Test deployment of lcg-release
