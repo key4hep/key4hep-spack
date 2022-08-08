@@ -62,7 +62,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('k4lcioreader')
     depends_on('k4simgeant4')
     depends_on('k4clue')
-    depends_on('k4actstracking')
+    #depends_on('k4actstracking')
     depends_on('k4edm4hep2lcioconv')
 
     depends_on('bdsim')
