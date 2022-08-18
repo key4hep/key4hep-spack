@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 import os
+import glob
 
 
 class Kkmcee(AutotoolsPackage):
@@ -113,6 +114,21 @@ class Kkmcee(AutotoolsPackage):
     @when("@5")
     def install(self, spec, prefix):
         make('install')
+        mkdirp(prefix + "/etc/KKMCee")
+        install("SRCee/KKMCee_defaults", prefix.etc.KKMCee)
+        install("SRCee/KKee2f.h", prefix.include)
+        mkdirp(prefix + "/share/KKMCee")
+        install('ProdRun/kkmchepmc/kkmc-tauola.input', prefix.share.KKMCee)
+        mv = which('mv')
+        mv(prefix + '/bin/KKMCee', prefix + '/bin/KKMCee.exe')
+        install('ProdRun/kkmchepmc/KKMCee-5', prefix + '/bin/KKMCee')
+        chmod = which('chmod')
+        chmod('a+x', prefix + '/bin/KKMCee')
+        pcm_files = glob.glob('*_rdict.pcm')
+        for f in pcm_files:
+            install(f, prefix.lib)
+
+
 
     @when("@4")
     def install(self, spec, prefix):
