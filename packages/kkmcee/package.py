@@ -18,6 +18,7 @@ class Kkmcee(AutotoolsPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='FCC_release')
+    version('5.00.01', sha256='22b9897af9ea32ca89059924ee56d2cc34bd49c4394191aaa67ecfe480ee441b')
     version('4.32.01', sha256='d62fa06754a449c5fa0d126b2ddb371881b06d4eb86fcb84fec1081b3c8dd318')
     # the typo in the release version (uppercase 'V') confuses the fetcher of spack - go via tag
     version('4.30', tag='V4.30')
@@ -27,8 +28,13 @@ class Kkmcee(AutotoolsPackage):
     depends_on('libtool',  type='build')
     depends_on('m4',       type='build')
     depends_on('root')
+    depends_on('photos+hepmc3', when='@5:')
+    depends_on('hepmc3', when='@5:')
 
-    #patch('clang01.patch', when="@4.32.1:")
+    patch('KKMCee-5.00.01.patch1', level=0, when='@5:')
+    patch('KKMCee-5.00.01.patch2', level=0, when='@5:')
+    patch('KKMCee-5.00.01.patch3', level=0, when='@5:')
+
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
     patch('KKMCee-dev-4.32.01.patch', level=0, when='@4.31:4.32.01')
 
@@ -39,6 +45,8 @@ class Kkmcee(AutotoolsPackage):
             description='Use the specified C++ standard when building.')
 
 
+
+    @when("@4")
     def patch(self):
         _makefiles = [
                       'RHadr/Plots/KKMakefile',
@@ -68,6 +76,8 @@ class Kkmcee(AutotoolsPackage):
         args = []
         args += ["CXX=c++"]
         args += ["CC=cc"]
+        with when("@5:"):
+          args += ["--with-photos=%s" % self.spec['photos'].prefix]
         return args
 
 
@@ -86,6 +96,8 @@ class Kkmcee(AutotoolsPackage):
                 flags.append('-std=legacy')
         return (flags, None, flags)
 
+
+    @when("@4")
     def build(self, spec, prefix):
         with working_dir('ffbench'):
             make('-f', 'KKMakefile', 'makflag')
@@ -93,6 +105,16 @@ class Kkmcee(AutotoolsPackage):
             make('-f', 'KKMakefile', 'EWtables')
             make('-f', 'KKMakefile', 'ProdMC.exe')
 
+
+    @when("@5")
+    def build(self, spec, prefix):
+        make()
+
+    @when("@5")
+    def install(self, spec, prefix):
+        make('install')
+
+    @when("@4")
     def install(self, spec, prefix):
         chmod = which('chmod')
 
