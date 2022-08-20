@@ -124,7 +124,7 @@ class Kkmcee(AutotoolsPackage):
         install('ProdRun/kkmchepmc/KKMCee-5', prefix + '/bin/KKMCee')
         chmod = which('chmod')
         chmod('a+x', prefix + '/bin/KKMCee')
-        pcm_files = glob.glob('*_rdict.pcm')
+        pcm_files = glob.glob('*/*_rdict.pcm')
         for f in pcm_files:
             install(f, prefix.lib)
 
