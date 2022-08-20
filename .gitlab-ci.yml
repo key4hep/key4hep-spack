@@ -10,6 +10,9 @@ variables:
   SPACK_VERSION:
     value: ""
     description: "A git ref to check out after cloning the spack repository. Leaving this blank will use the latest HEAD (recommended)."
+  SPACK_INSTALL_ARGUMENTS:
+    value: "--test=root --reuse --no-check-signature"
+    description: "Arguments to be passed to spack install"
 
 stages:
     - prepare-spack
@@ -157,6 +160,7 @@ build-lcg-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "LCG_Release"
     script:
@@ -164,7 +168,7 @@ build-lcg-release:
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - cd sft-spack-repo
         - spack env activate -d environments/lcg-release/
-        - spack install --test=root --reuse --no-check-signature
+        - spack install ${SPACK_INSTALL_ARGUMENTS}
 
 ### Test deployment of lcg-release
 deploy-cvmfs-lcg:
@@ -176,6 +180,7 @@ deploy-cvmfs-lcg:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "LCG_Release"
     script:
@@ -221,6 +226,7 @@ build-spack-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Release"
     script:
@@ -242,7 +248,7 @@ build-spack-release:
         # environment now when we now it
         - spack add key4hep-stack@${K4STACK_VERSION}
         # compile onwards and upwards
-        - spack install --reuse --no-check-signature | tee -a key4hep-stack-install.log
+        - spack install ${SPACK_INSTALL_ARGUMENTS}| tee -a key4hep-stack-install.log
         # note the path of the just installed package
         # so that downstream jobs can source its setup
         # in an environment, this command should just find the specs  
@@ -287,6 +293,7 @@ buildtest-spack-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Release"
     script:
@@ -310,6 +317,7 @@ deploy-cvmfs-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Release"
     script:
@@ -334,6 +342,7 @@ wait-cvmfs-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Release"
     script:
@@ -359,6 +368,7 @@ test-cvmfs-release:
       refs:
           - tags
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Release"
     script:
