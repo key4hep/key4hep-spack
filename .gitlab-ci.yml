@@ -35,6 +35,11 @@ setup_spack_push:
           - schedules
           - web
     script:
+        # log all variables
+        - echo "SPACK_INSTALL_ARGUMENTS: ${SPACK_INSTALL_ARGUMENTS}"
+        - echo "K4_CI_URLS: ${K4_CI_URLS}"
+        - echo "K4_JOBTYPE: ${K4_JOBTYPE}"
+        - echo "SPACK_VERSION: ${SPACK_VERSION}"
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
 
@@ -97,9 +102,8 @@ build-spack-ci:
             git checkout testbranch${PR_NUMBER}
             cd ..
           done;
-          spack concretize -f --test=root --reuse
           # compile onwards and upwards
-          spack install --test=root --reuse --no-check-signature
+          spack install ${SPACK_INSTALL_ARGUMENTS
 
 #### Nightly build of key4hep-stack
 # this job expects the following setup on the runner:
@@ -144,9 +148,8 @@ build-spack-nightlies:
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - spack repo add ./sft-spack-repo
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
-        - spack concretize -f --test=root --reuse
         # compile onwards and upwards
-        - spack install --test=root --reuse --no-check-signature
+        - spack install ${SPACK_INSTALL_ARGUMENTS}
 
 
 ### Test lcg release in spack  on the key4hep infrastructure
