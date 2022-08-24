@@ -36,10 +36,10 @@ setup_spack_push:
           - web
     script:
         # log all variables
-        - echo "SPACK_INSTALL_ARGUMENTS: ${SPACK_INSTALL_ARGUMENTS}"
-        - echo "K4_CI_URLS: ${K4_CI_URLS}"
-        - echo "K4_JOBTYPE: ${K4_JOBTYPE}"
-        - echo "SPACK_VERSION: ${SPACK_VERSION}"
+        - echo "SPACK_INSTALL_ARGUMENTS ... ${SPACK_INSTALL_ARGUMENTS}"
+        - echo "K4_CI_URLS ... ${K4_CI_URLS}"
+        - echo "K4_JOBTYPE ... ${K4_JOBTYPE}"
+        - echo "SPACK_VERSION ... ${SPACK_VERSION}"
         # set up spack inside the k4-spack repo
         - source scripts/ci_setup_spack.sh
 
