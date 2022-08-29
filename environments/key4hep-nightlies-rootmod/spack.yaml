@@ -20,3 +20,4 @@ spack:
   repos:
   - ../..
   specs:
+    - root@6.26.06 cxxflags="-O2 -g -fno-omit-frame-pointer" +davix+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
