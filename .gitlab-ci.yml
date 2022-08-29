@@ -133,6 +133,7 @@ build-spack-nightlies:
     only:
       refs:
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
@@ -198,6 +199,7 @@ deploy-cvmfs-nightlies:
     only:
       refs:
           - schedules # Only execute this on scheduled "nightly" pipelines
+          - web
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
