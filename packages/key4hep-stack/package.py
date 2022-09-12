@@ -83,6 +83,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('lhapdf', when='+generators')
     depends_on('sherpa', when='+generators')
     depends_on('photos+hepmc3', when='+generators')
+    depends_on('evtgen+pythia8+tauola', when='+generators')
 
     ############################### ilcsoft ###############
     #######################################################

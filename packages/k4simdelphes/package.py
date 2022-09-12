@@ -39,7 +39,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on('delphes@3.4.3pre10:', when='@:00-01-07', type=('build', 'link', 'run'))
     depends_on('delphes@3.5:', when='@00-01-08:', type=('build', 'link', 'run'))
     depends_on('pythia8', when="+delphes_pythia")
-    depends_on('evtgen+pythia8', when="+delphes_pythia_evtgen")
+    depends_on('evtgen+pythia8+tauola', when="+delphes_pythia_evtgen")
     depends_on('hepmc', when="+delphes_hepmc")
     depends_on('hepmc3', when="+framework")
     depends_on('k4fwcore', when="+framework")
