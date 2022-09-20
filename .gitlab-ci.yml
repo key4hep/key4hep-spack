@@ -103,7 +103,7 @@ build-spack-ci:
             cd ..
           done;
           # compile onwards and upwards
-          spack install ${SPACK_INSTALL_ARGUMENTS
+          spack install ${SPACK_INSTALL_ARGUMENTS}
 
 #### Nightly build of key4hep-stack
 # this job expects the following setup on the runner:
