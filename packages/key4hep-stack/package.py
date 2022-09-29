@@ -122,6 +122,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on('py-scikit-learn', when='+devtools')
     depends_on('xgboost', when='+devtools')
+    depends_on('py-xgboost', when='+devtools')
     depends_on('onnx', when='+devtools')
     depends_on('py-onnx', when='+devtools')
     depends_on('py-onnx-runtime', when='+devtools')
