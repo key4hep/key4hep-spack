@@ -128,7 +128,7 @@ build-spack-nightlies:
         matrix:
           - SPACKENV: 
             - key4hep-nightlies
-            - key4hep-nightlies-rootmod
+            #- key4hep-nightlies-rootmod
             #- key4hep-nightlies-debug
     only:
       refs:
@@ -140,7 +140,7 @@ build-spack-nightlies:
         # set up spack inside the k4-spack repo
         - source spack/share/spack/setup-env.sh
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
-        if [ $SPACKENV == "key4hep-nightlies-rootmod" ]; then export KEY4HEP_RELEASE_VERSION=master-rootmod-`date -I`; fi
+        - if [ $SPACKENV == "key4hep-nightlies-rootmod" ]; then export KEY4HEP_RELEASE_VERSION=master-rootmod-`date -I`; fi
         - python scripts/fetch_nightly_versions.py >> environments/$SPACKENV/spack.yaml
 
         - cd environments/$SPACKENV
