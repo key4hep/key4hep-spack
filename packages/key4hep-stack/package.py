@@ -99,8 +99,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     ############################## cepcsw #################
     #######################################################
-    # disabled until 0.2.6
-    #depends_on('cepcsw')
+    depends_on('cepcsw')
     
     ##################### developer tools #################
     #######################################################
