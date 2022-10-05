@@ -11,7 +11,7 @@ variables:
     value: ""
     description: "A git ref to check out after cloning the spack repository. Leaving this blank will use the latest HEAD (recommended)."
   SPACK_INSTALL_ARGUMENTS:
-    value: "--test=root --reuse --no-check-signature"
+    value: "--test=root --fresh --no-check-signature"
     description: "Arguments to be passed to spack install"
 
 stages:
