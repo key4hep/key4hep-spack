@@ -16,6 +16,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version("00-02", sha256="ffef851a6726b401ac43a7195d76a4d918ea135795eb1b5baff041c7f10ab105")
     version('00-01-09', sha256='4f91742f0be9bdb01f25ab8ee9c6650267f8a1b587762cb4cc10aacd16dc30f3')
     version('00-01-08', sha256='a9c8dea6b2fd4bf81ad3421f12d1ce43f487a922e0533a832f459f6b3435f7d2')
     version('00-01-07', sha256='e348317a11de78244e864968c343d408f6a70f2cad96f99823e856ae4be9ef3b')
@@ -36,6 +37,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on('edm4hep', type=('build', 'link', 'run'))
     depends_on('edm4hep@0.5:', when='@00-01-09:', type=('build', 'link', 'run'))
     depends_on('podio', type=('build', 'link', 'run'))
+    depends_on('podio@0.16:', when='@00-02:', type=('build', 'link', 'run'))
     depends_on('delphes@3.4.3pre10:', when='@:00-01-07', type=('build', 'link', 'run'))
     depends_on('delphes@3.5:', when='@00-01-08:', type=('build', 'link', 'run'))
     depends_on('pythia8', when="+delphes_pythia")
