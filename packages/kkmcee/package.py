@@ -19,6 +19,7 @@ class Kkmcee(AutotoolsPackage):
     maintainers = ['vvolkl']
 
     version('main', branch='FCC_release')
+    version("5.00.02", sha256="149578aac6ecfa5d9e43bcfabe2a10119058b9092596d2f3b61063d0b4b3c0af")
     version('5.00.01', sha256='22b9897af9ea32ca89059924ee56d2cc34bd49c4394191aaa67ecfe480ee441b')
     version('4.32.01', sha256='d62fa06754a449c5fa0d126b2ddb371881b06d4eb86fcb84fec1081b3c8dd318')
     # the typo in the release version (uppercase 'V') confuses the fetcher of spack - go via tag
