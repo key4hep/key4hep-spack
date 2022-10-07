@@ -35,6 +35,7 @@ class Kkmcee(AutotoolsPackage):
     patch('KKMCee-5.00.01.patch1', level=0, when='@5:')
     patch('KKMCee-5.00.01.patch2', level=0, when='@5:')
     patch('KKMCee-5.00.01.patch3', level=0, when='@5:')
+    patch('KKMCee-5.00.01.patch4', level=0, when='@5:')
 
     patch('KKMCee-dev-4.30.patch', level=0, when='@:4.30')
     patch('KKMCee-dev-4.32.01.patch', level=0, when='@4.31:4.32.01')

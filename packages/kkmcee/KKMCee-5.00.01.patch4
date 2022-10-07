@@ -1,0 +1,27 @@
+--- SRCee/TauPair.cxx.orig	2022-05-17 12:46:31.000000000 +0200
++++ SRCee/TauPair.cxx	2022-08-04 17:46:06.285344362 +0200
+@@ -193,6 +193,24 @@
+   wt = wt1;                         // why not wt2???
+   rn = m_RNgen->Rndm();
+   if (wt < wtmax*rn  && loop<100) goto e1099;
++  // Save helicity information in the HepMC3 record as particle (Tau, Tau-) attributes
++  if (m_Hvent) {
++    std::vector<float> hel;
++    for (auto p: m_Hvent->particles()){
++      if (p->pid() == 15){ // Tau-
++        hel.clear(); for(int i=0; i<3;i++) hel.push_back(m_HvClone2[i]);
++        // Create attribute
++        p->add_attribute("spin", std::make_shared<VectorFloatAttribute>(hel));
++      } else if (p->pid() == -15){ // Tau+
++        hel.clear(); for(int i=0; i<3;i++) hel.push_back(m_HvClone1[i]);
++        // Create attribute
++        p->add_attribute("spin", std::make_shared<VectorFloatAttribute>(hel));
++      }
++    }// end loop over particles
++  } else {
++     cout << "m_Hvent not defined! Cannot save helicity information" << endl;
++  }
++
+ }//ImprintSpin
+ 
+ ///______________________________________________________________________________________
