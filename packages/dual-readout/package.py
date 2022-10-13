@@ -17,6 +17,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     maintainers = ['vvolkl', 'SanghyunKo']
 
     version('master', branch='master') 
+    version("0.1.1", sha256="8d856b47b0b834ac0a53920434da210639c55a1ef375f7e0341731ad14a25318")
     version('0.1.0', sha256='f4b9387ccae0d4d364b1340eb116c5b4b93a6bc74c896fcd221619ddec31d5f6')
     version('0.0.3', sha256='d35e7193c11385505494f11328d54a595b3ff953563bae06b8954c1ef24209b3')
     version('0.0.2', sha256='f76c1febf3d8e29d5287ba03eacbc244f8c615502295f7471579245376da91ad')
@@ -29,6 +30,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on('dd4hep')
     depends_on('edm4hep@0.4.1:', when='@0.1.0:')
     depends_on('podio@0.14.1:', when='@0.1.0:')
+    depends_on('podio@0.15:', when='@0.1.1:')
     depends_on('py-jinja2', type=('build'))
     depends_on('py-pyyaml', type=('build'))
     depends_on('hepmc3+rootio')
