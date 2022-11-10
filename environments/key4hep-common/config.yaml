@@ -1,4 +1,6 @@
 config:
+  # fixes installation errors on afs
+  allow_sgid: false
   install_tree:
     root: /cvmfs/sw.hsf.org/spackages6
     projections:
