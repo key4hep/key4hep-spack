@@ -78,6 +78,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, spack_env):
       spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
+      if self.spec.satisfies('@0.7:'):
+          spack_env.prepend_path('ROOT_INCLUDE_PATH', self.spec["fastjet"].prefix.include)
       spack_env.prepend_path('PYTHONPATH', self.prefix.python)
       # this should point to share/ by key4hep convention
       #  but we want to make it work with the tutorials
