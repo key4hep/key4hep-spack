@@ -15,7 +15,7 @@ on:
     - cron: "0 13 * * 1" # Every Monday at 1PM UTC (9AM EST)
 
 jobs:
-  test:
+  check-new-versions:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
       env:
         KEY4HEP_COMMENT_BOT_TOKEN: ${{ secrets.KEY4HEP_COMMENT_BOT_TOKEN }}
       run: |
-        git clone --depth 1 https://github.com/key4hep/spack .
+        git clone --depth 1 https://github.com/key4hep/spack
         source spack/share/spack/setup-env.sh
         spack repo add .
         ${GITHUB_WORKSPACE}/.github/scripts/generate_new_version_issue.sh
