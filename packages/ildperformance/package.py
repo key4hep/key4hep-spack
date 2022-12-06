@@ -16,6 +16,7 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version("1.11", sha256="8445e68fd1a20d76f15d615dcc3a9044d1829d91e3b7cedac3eafdf098c957ee")
     version('1.10', sha256='5dc9b20af8018d2268df02d05a7245ca8087365a404fd9c3a110484235f7d383')
     version('1.9', sha256='3a8187036eee39b35e4a58d874fa906182a7b83e1d143811ec7d721ea405f3dc')
     version('1.8', sha256='bcf19d3a6f425fa5eea228676d07558635881a0329c4d66ffda4230dfe9617c1')

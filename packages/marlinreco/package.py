@@ -16,6 +16,7 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version("1.33.1", sha256="2c89954a3a83909e5da069ce223c3d5bd25bd911b7415a219456fbbed13953b8")
     version('1.33', sha256='4f5a9c091c26d67b6be6b1cf2fc1fd57445302a4f817a4aea021c51a3fdc7424')
     version('1.32', sha256='0ea3bee03e2bec1924b5876675043b592a942bc8cf306eb7056eaf03ac1748f6')
     version('1.31', sha256='eeb823f2476e1d31a54997b1a09fcc20cc8f3555a9f677054eacd5f44d4f59ee')
