@@ -16,6 +16,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version('00-03-00', sha256='f2dc577738a3819b33b23ee829a1123f283293512a09c62de166d95e55232776')
     version('00-02-01', sha256='2a8fc1ce97fcdbafc0af0b1e13df8005695f92bffe8f0029be952ec6a9eeeb76')
     version("00-02", sha256="ffef851a6726b401ac43a7195d76a4d918ea135795eb1b5baff041c7f10ab105")
     version('00-01-09', sha256='4f91742f0be9bdb01f25ab8ee9c6650267f8a1b587762cb4cc10aacd16dc30f3')
@@ -41,6 +42,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on('podio@0.16:', when='@00-02:', type=('build', 'link', 'run'))
     depends_on('delphes@3.4.3pre10:', when='@:00-01-07', type=('build', 'link', 'run'))
     depends_on('delphes@3.5:', when='@00-01-08:', type=('build', 'link', 'run'))
+    depends_on('delphes@3.5.1pre04:', when='@00-03-00:', type=('build', 'link', 'run'))
+
     depends_on('pythia8', when="+delphes_pythia")
     depends_on('evtgen+pythia8+tauola+photos', when="+delphes_pythia_evtgen")
     depends_on('hepmc', when="+delphes_hepmc")
