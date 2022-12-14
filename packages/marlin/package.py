@@ -16,6 +16,8 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version("1.19", sha256="e3a109da04efb6f0ce904aba864fe8ce4dcfaaa6f910a68374ca499efc4a14dd")
+    version("1.18", sha256="e556302fb6cc48b999a011122479dd51c9e99f6a256771e4a5a154040c7fa2dc")
     version('1.17.1', sha256='b928c6072bbf8db5fdb3b9716227b8724dfc90182967212cd9f2f51ceb760dd0')
     version('1.17', sha256='076acc3a91b7e2e253f338395a8e56bf00498e6aa1a118d3e7bde84f1065d3d6')
 
@@ -39,6 +41,7 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     depends_on("ilcutil")
     depends_on("gear")
     depends_on("lcio")
+    depends_on("lcio@2.19:", when="@1.19:")
     depends_on("doxygen", when="+doc")
     depends_on("qt@:4.99.99", when="+gui")
     depends_on("lccd", when="+lccd")

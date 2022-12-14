@@ -16,6 +16,7 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version("1.7", sha256="08148c374d0b204999bc02c61448a0273489f5031d7a027f2881796c94e040bf")
     version('1.6.2', sha256='2bb018f8cca4ca2480ba00c1f16100e62094fa6f9a0f07d2ba3a3dc274e32f3c')
     version('1.6.1', sha256='cb51f110c0c7b6e5732ab66d49b4658c56bb5944c1540f1563612ac56bb70823')
     version('1.6', sha256='09083890721704f39a3e902dc660db5326027cc38446b813233d04ec3233ba2e')
