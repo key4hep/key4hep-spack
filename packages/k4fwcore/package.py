@@ -10,6 +10,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4FWCore.git"
 
     version('master', branch='master')
+    version('1.0pre16', tag="v01-00pre16")
     version('1.0pre15', tag="v01-00pre15")
     version('1.0pre14', tag="v01-00pre14")
     version('0.2.0', sha256='7d1a6e7494f08c2b25901cab2138795f21b6c4e84f05c4f8b9a6839787874b72')
@@ -23,7 +24,8 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on('gaudi@32.2:34.99', when='@:0.2.99')
     depends_on('root@6.08:')
     depends_on('podio@0.10:')
-    depends_on('podio@0.14.1:', when='@1.0pre14:')
+    depends_on('podio@0.14.1', when='@1.0pre14:1.0pre15')
+    depends_on('podio@0.14.2:', when='@1.0pre16:')
     depends_on('edm4hep')
     depends_on('edm4hep@0.4.1:', when='@1.0pre14:')
     # needed via gaudi
