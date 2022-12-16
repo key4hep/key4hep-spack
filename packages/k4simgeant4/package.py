@@ -1,5 +1,6 @@
 
 from spack.pkg.k4.key4hep_stack import Key4hepPackage 
+from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 class K4simgeant4(CMakePackage, Key4hepPackage):
     """Geant4 components of the Key4HEP software """
@@ -43,6 +44,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
                                  'data', 'G4ENSDFSTATE{0}'
                                  .format(self.spec['g4ensdfstate'].version))
         spack_env.set('G4ENSDFSTATEDATA', install_path)
+        k4_setup_env_for_framework_tests(self.spec, spack_env)
 
     def setup_dependent_build_environment(self, spack_env, dependent_spec):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
