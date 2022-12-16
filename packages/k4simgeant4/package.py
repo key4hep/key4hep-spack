@@ -23,6 +23,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on('edm4hep')
     depends_on("g4ensdfstate")
     depends_on('root')
+    depends_on('py-six', type=('build', 'run'))
 
     def cmake_args(self):
         args = []
