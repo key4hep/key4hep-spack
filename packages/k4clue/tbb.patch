@@ -1,0 +1,22 @@
+diff --git a/src/main.cc b/src/main.cc
+index 40fda4e..214091d 100644
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -10,7 +10,7 @@
+ #else
+ #include "CLUEAlgoCupla.h"
+ #ifdef FOR_TBB
+-#include "tbb/task_scheduler_init.h"
++#include "tbb/global_control.h"
+ #endif
+ #endif
+ 
+@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
+   if (verbose) {
+     std::cout << "Setting up " << TBBNumberOfThread << " TBB Threads" << std::endl;
+   }
+-  tbb::task_scheduler_init init(TBBNumberOfThread);
++  tbb::global_control(tbb::global_control::max_allowed_parallelism, TBBNumberOfThread);
+ #endif
+ 
+   //////////////////////////////

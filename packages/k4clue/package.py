@@ -38,6 +38,7 @@ class K4clue(CMakePackage, Key4hepPackage):
     depends_on('marlinfastjet')
     depends_on('lcfiplus')
     depends_on('k4marlinwrapper')
+    patch('tbb.patch')
 
     def cmake_args(self):
         args = []
