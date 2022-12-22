@@ -17,7 +17,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     maintainers = ['fdplacido']
 
     version('master', branch='master')
-    version("00-03", sha256="381fd96e2ede03bec048afaeef13b8efffe80030fc097fe18fae62b03c0fba94")
+    version("00-03", sha256="0b7fffbe1a07aae4b5b7523e855e944fe90f6e072dae9a460a07134025bf1cf8")
     version('00-02-01', sha256='747066a7f060c4ce6136c1636f90f5f8a20cfb0c474258cbf92cd1a1c28ee394')
     version('00-02', sha256='b9478ed8811bb99103df387db1e2a2cc97bb8d31a6d7b9bf17e6ba6f8ebef153')
     version('00-01', sha256='a1eb60337033658888c637af7c4c57622513a708834fb8a67e6b984614b45748')
