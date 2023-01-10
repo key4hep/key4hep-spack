@@ -75,6 +75,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on('xrootd +krb5')
     depends_on('python~debug')
+    depends_on('geant4+qt')
 
     ##################### general purpose generators ######
     #######################################################
