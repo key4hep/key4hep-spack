@@ -9,9 +9,9 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 class Lcgeo(CMakePackage, Ilcsoftpackage):
     """DD4hep geometry models for future colliders."""
 
-    homepage = "https://github.com/iLCSoft/lcgeo"
-    git      = "https://github.com/iLCSoft/lcgeo.git"
-    url      = "https://github.com/iLCSoft/lcgeo/archive/v00-16-07.tar.gz"
+    homepage = "https://github.com/key4hep/k4geo"
+    git      = "https://github.com/key4hep/k4geo.git"
+    url      = "https://github.com/key4hep/k4geo/archive/v00-16-07.tar.gz"
 
     generator = 'Ninja'
 
@@ -39,10 +39,10 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     depends_on('python', type='build')
     depends_on('ninja', type='build')
 
-    patch('https://patch-diff.githubusercontent.com/raw/iLCSoft/lcgeo/pull/255.diff',
+    patch('https://patch-diff.githubusercontent.com/raw/key4hep/k4geo/pull/255.diff',
           sha256='fc39117d3b579ab383077fd7274d321f1e954cefa9e481b45310cd36b35aa3dd',
           when='@0.16.8')
-    patch('https://github.com/iLCSoft/lcgeo/commit/cb87609446255c3a94da867ad7801a62ff3b6b05.patch',
+    patch('https://github.com/key4hep/k4geo/commit/cb87609446255c3a94da867ad7801a62ff3b6b05.patch',
           sha256='3e02ca5c89558342d8fd2489463c285af5a5500baeba2faf8d41f8ec3ae2f487',
           when='@0.16.7')
 
