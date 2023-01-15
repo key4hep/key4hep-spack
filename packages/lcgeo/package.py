@@ -18,12 +18,12 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
-    version("0.18", sha256="04e13129cb3ebcba5ad43b5c001a4049d91da0fe6c24e352e75f49f74e623526")
-    version("0.17", sha256="97b18a877304b34d38af333a4817c16602888d36220e21eba74f0f82aae25f2a")
-    version('0.16.8', sha256='e729e678a2a2105b58b30b0110cc910edb95e02c8b6babbb9f8d74041d5a0c55')
+    version("0.18",   sha256="50cd058e80baba21748156f3603a45a2388c6f3a8823d9aaa3f419eb58038fc9")
+    version("0.17",   sha256="4b515895df7a65b0c1f4061a8947b1bbb4c727b924ad73a1f03722de31327c3f")
+    version('0.16.8', sha256='6ce3ec018aa2b86a50f7c2dd868c0bd9d46b413bdde70139fcbe2f8167bb835a')
     version('0.16.7', tag='v00-16-07')
-    version('0.16.6', sha256='0eef7137ad69b771e5cf8a3f4a71e060e9d57ee825d8d944fa6a0dec8c2dad60')
-    version('0.16.5', sha256='a46738b2479c0469b06584f82801bf2dd546623180300753de0b5684abd12a05')
+    version('0.16.6', sha256='76593d4f339c5e89acdb878de1f48eb46d9a9faf9c7e1bcac8346c235c2508c6')
+    version('0.16.5', sha256='e6d88dcca5440632241c30cab7bc0d314afef42a7a7ff15b68fc59cf997cda08')
 
     variant('cxxstd',
             default='17',
