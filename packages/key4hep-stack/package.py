@@ -120,6 +120,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('py-uproot', when='+devtools')
     depends_on('py-pandas', when='+devtools')
     depends_on('py-scipy', when='+devtools')
+    depends_on('py-h5py', when='+devtools')
 
     depends_on('py-scikit-learn', when='+devtools')
     depends_on('xgboost', when='+devtools')
