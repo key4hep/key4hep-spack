@@ -41,7 +41,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("fastjet")
     depends_on('python')
     depends_on('edm4hep')
-    depends_on('py-awkward@1.4.0')
+    depends_on('py-awkward@1.4.0', when='@:0.6.0')
     depends_on('fcc-edm', when="@:0.2.9")
     depends_on('acts@5.00.0', when="@0.3.0:0.3.4 +acts")
     depends_on('acts@6.00.0:', when='@0.3.5: +acts')
