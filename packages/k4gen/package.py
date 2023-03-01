@@ -9,7 +9,8 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     maintainers = ['vvolkl']
 
-    version('master', branch='master')
+    version('main', branch='main')
+    version('master', branch='main')
     version('0.1pre09', tag='v0.1pre09')
     version('0.1pre08', tag='v0.1pre08')
     version('0.1pre07', tag='v0.1pre07')
