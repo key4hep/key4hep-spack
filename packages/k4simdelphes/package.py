@@ -16,6 +16,9 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('main', branch='main')
+    version('00-03-01',
+            url='https://github.com/key4hep/k4SimDelphes/archive/v00-03-01.tar.gz',
+            sha256='b4d441225ca2bef8f2c506baeb16ef7b0e5117dabc38f8028009e7cfa3e21a8a')
     version('00-03-00',
             url='https://github.com/key4hep/k4SimDelphes/archive/v00-03-00.tar.gz',
             sha256='f2dc577738a3819b33b23ee829a1123f283293512a09c62de166d95e55232776')
