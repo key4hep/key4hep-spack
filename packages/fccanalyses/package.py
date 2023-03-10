@@ -62,16 +62,17 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     # todo: update the cmake config to remove this
     def setup_build_environment(self, spack_env):
       spack_env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
-      python_version = self.spec['python'].version.up_to(2)
-      awk_lib_dir = self.spec['py-awkward'].prefix.lib
-      awk_pydir = join_path(awk_lib_dir,
-                           'python{0}'.format(python_version),
-                           'site-packages/awkward/include')
-      spack_env.prepend_path('CPATH', awk_pydir)
-      awk_pydir = join_path(awk_lib_dir,
-                           'python{0}'.format(python_version),
-                           'site-packages')
-      spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+      with when("@:0.6.0"):
+          python_version = self.spec['python'].version.up_to(2)
+          awk_lib_dir = self.spec['py-awkward'].prefix.lib
+          awk_pydir = join_path(awk_lib_dir,
+                               'python{0}'.format(python_version),
+                               'site-packages/awkward/include')
+          spack_env.prepend_path('CPATH', awk_pydir)
+          awk_pydir = join_path(awk_lib_dir,
+                               'python{0}'.format(python_version),
+                               'site-packages')
+          spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
       k4_setup_env_for_framework_tests(self.spec, spack_env)
 
       
