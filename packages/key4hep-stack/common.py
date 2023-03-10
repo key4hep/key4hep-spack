@@ -25,6 +25,7 @@ try:
 except ImportError:
     from spack.package_base import PackageBase
 
+from shlex import quote as cmd_quote
 
 def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment.
