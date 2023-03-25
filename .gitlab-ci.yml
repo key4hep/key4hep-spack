@@ -8,7 +8,7 @@ variables:
     value: ""
     description: "A whitespace-separated list of urls for github prs (for repositories for which there is a spack recipe). Example: https://github.com/iLCSoft/SIO/pull/17/ https://github.com/AIDASoft/podio/pull/287"
   SPACK_VERSION:
-    value: ""
+    value: "key4hep-update"
     description: "A git ref to check out after cloning the spack repository. Leaving this blank will use the latest HEAD (recommended)."
   SPACK_INSTALL_ARGUMENTS:
     value: "--test=root --fresh --no-check-signature --show-log-on-error"
@@ -383,5 +383,3 @@ test-cvmfs-release:
         - echo ${!K4_LATEST_SETUP_PATH} # debug printout
         - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
-
-
