@@ -17,6 +17,7 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version('1.0.5', sha256='34c687e9d98c24c92569e2d1e391ef7be731a2800071e823b4359b7e8a5e8194')
     version('1.0.4', sha256='048199be72f575abfb3bacddfd84a1870244b861e207efa66dc433c67f62e56b')
     version('1.0.3', sha256='5360ccb85f8742d9f4b84c7a3bb3ed3574b534f1b08240100c5b4e48e8ffa35e')
     version('1.0.2', sha256='6c6898f8641743a7654b1c1e7b3a52643be9d23f8bb3624e415c51549ac64cbe')
