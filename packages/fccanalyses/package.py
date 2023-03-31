@@ -12,6 +12,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
   
     version('master', branch='master')
 
+    version('0.7.0', sha256='3cc38d623fc5a17dfc41b3ef8a76b42bd2e9d74860a4adafb6e32f282d8a25fa')
     version('0.6.0', sha256='a740c1818cc9e02ce44306b9a4f828b3ce85d2afaed1fc06d8f8a41f89f9abe2')
     version('0.5.1', sha256='2d5493340e21e8a24cbbfec9a465616fca736c5058bd27acf79eb07f8948ea2b')
     version('0.5.0', sha256='6c4b68d15fbae3793473dc4475f216b65c1962ed5de7979e75b024cb6d05d541')    
@@ -44,11 +45,13 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on('py-awkward@1.4.0', when='@:0.6.0')
     depends_on('fcc-edm', when="@:0.2.9")
     depends_on('acts@5.00.0', when="@0.3.0:0.3.4 +acts")
-    depends_on('acts@6.00.0:', when='@0.3.5: +acts')
+    depends_on('acts@6.00.0:19.5.0', when='@0.3.5:0.6.0 +acts')
+    depends_on('acts@19.6.0:', when='@0.7.0: +acts')
     depends_on('eigen', when="@0.3.0:")
     depends_on('dd4hep', when="@0.3.3: +dd4hep")
     depends_on('py-pyyaml', type=('build', 'run'))
     depends_on('py-onnx-runtime', when='+onnx')
+    depends_on('delphes@3.5.1pre07:', when='@0.7.0:')
 
     def cmake_args(self):
       args = [
