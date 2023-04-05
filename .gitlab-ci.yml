@@ -137,20 +137,16 @@ build-spack-nightlies:
       variables:
           - $K4_JOBTYPE == "Nightlies"
     script:
-        # set up spack inside the k4-spack repo
         - source spack/share/spack/setup-env.sh
         - export KEY4HEP_RELEASE_VERSION=master-`date -I`
         - if [ $SPACKENV == "key4hep-nightlies-rootmod" ]; then export KEY4HEP_RELEASE_VERSION=master-rootmod-`date -I`; fi
         - python scripts/fetch_nightly_versions.py >> environments/$SPACKENV/spack.yaml
 
         - cd environments/$SPACKENV
-        # symlink to latest now handled by deploy step
-        #- source pathsetup.sh
         - spack env activate .
         - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
         - spack repo add ./sft-spack-repo
         - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
-        # compile onwards and upwards
         - spack install ${SPACK_INSTALL_ARGUMENTS}
 
 
