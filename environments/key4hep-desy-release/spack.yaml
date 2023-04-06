@@ -19,6 +19,5 @@ spack:
         glu: [mesa]
       compiler: [gcc@11.2.0]
   view: false
-  concretization: together
   specs:
   - key4hep-stack

@@ -7,6 +7,5 @@ spack:
   packages:
     all:
       compiler: [gcc@11.2.0]
-  concretization: together
   repos:
   - ../..

@@ -16,7 +16,6 @@ spack:
       variants: build_type=Release
     all:
       compiler: [gcc@11.2.0]
-  concretization: together
   repos:
   - ../..
   specs:
