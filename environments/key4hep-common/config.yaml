@@ -2,7 +2,7 @@ config:
   # fixes installation errors on afs
   allow_sgid: false
   install_tree:
-    root: /cvmfs/sw.hsf.org/spackages6
+    root: /fake_cvmfs/sw.hsf.org/spackages7
     projections:
       all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
       build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
