@@ -25,6 +25,5 @@ spack:
       projections:
         all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
         build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
-  concretization: together
   repos:
     - ../..
