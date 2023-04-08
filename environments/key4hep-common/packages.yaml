@@ -110,12 +110,6 @@ packages:
     target: []
     providers: {}
     compiler: []
-  gaudi:
-    variants: +optional
-    version: []
-    target: []
-    providers: {}
-    compiler: []
   py-setuptools-scm:
     variants: +toml
     version: []
