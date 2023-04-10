@@ -46,7 +46,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on('podio', type=('build', 'link', 'run'))
     depends_on('podio@0.16:', when='@00-02:', type=('build', 'link', 'run'))
     depends_on('delphes@3.4.3pre10:', when='@:00-01-07', type=('build', 'link', 'run'))
-    depends_on('delphes@3.5:', when='@00-01-08:', type=('build', 'link', 'run'))
+    depends_on('delphes@3.5:', when='@00-01-08', type=('build', 'link', 'run'))
+    depends_on('delphes@3.5.1pre02:', when='@00-01-09:', type=('build', 'link', 'run'))
     depends_on('delphes@3.5.1pre04:', when='@00-03-00:', type=('build', 'link', 'run'))
 
     depends_on('pythia8', when="+delphes_pythia")
