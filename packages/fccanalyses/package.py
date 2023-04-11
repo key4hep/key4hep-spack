@@ -65,6 +65,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     # todo: update the cmake config to remove this
     def setup_build_environment(self, spack_env):
       spack_env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
+      spack_env.prepend_path('ROOT_INCLUDE_PATH', self.spec['vdt'].prefix.include)
+
       if self.spec.satisfies("@:0.6.0"):
           python_version = self.spec['python'].version.up_to(2)
           awk_lib_dir = self.spec['py-awkward'].prefix.lib
