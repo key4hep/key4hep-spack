@@ -26,5 +26,6 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         # C++ Standard
         return [
-            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value
+            '-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value,
+            "-DUSE_CXX11=FALSE",  # avoid overriding the root standard
         ]
