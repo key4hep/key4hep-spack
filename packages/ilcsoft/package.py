@@ -46,100 +46,54 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("k4lcioreader")
-
     depends_on("k4simdelphes")
-
     depends_on("delphes")
 
 
     ############################### ilcsoft ###############
     #######################################################
-    depends_on('aidatt')
-
-    depends_on('cedviewer')
-
-    depends_on('conformaltracking')
-
-    depends_on('clicperformance')
-
-    depends_on('clupatra')
-
-    depends_on('ced')
-
-    depends_on('ddkaltest')
-
-    depends_on('ddmarlinpandora')
-
-    depends_on('fcalclusterer')
-
-    depends_on('forwardtracking')
-
-    depends_on('garlic')
-
-    depends_on('k4marlinwrapper')
-
-    depends_on('generalbrokenlines')
-
-    depends_on('gear')
-
-    depends_on('ilcutil')
-
-    depends_on('ildperformance')
-
-    depends_on('kaldet')
-
-    depends_on('kitrackmarlin')
-
-    depends_on('kaltest')
-
-    depends_on('kitrack')
-
-    depends_on('lcfiplus')
-
-    depends_on('lctuple')
-
-    depends_on('lcfivertex')
-
-    depends_on('lich')
-
-    depends_on('lccd')
-
-    depends_on('lcio')
-
-    depends_on('lcgeo')
-
-    depends_on('marlin')
-
-    depends_on('marlinutil')
-
+    depends_on("aidatt")
+    depends_on("cedviewer")
+    depends_on("conformaltracking")
+    depends_on("clicperformance")
+    depends_on("clupatra")
+    depends_on("ced")
+    depends_on("ddkaltest")
+    depends_on("ddmarlinpandora")
+    depends_on("fcalclusterer")
+    depends_on("forwardtracking")
+    depends_on("garlic")
+    depends_on("k4marlinwrapper")
+    depends_on("generalbrokenlines")
+    depends_on("gear")
+    depends_on("ilcutil")
+    depends_on("ildperformance")
+    depends_on("kaldet")
+    depends_on("kitrackmarlin")
+    depends_on("kaltest")
+    depends_on("kitrack")
+    depends_on("lcfiplus")
+    depends_on("lctuple")
+    depends_on("lcfivertex")
+    depends_on("lich")
+    depends_on("lccd")
+    depends_on("lcio")
+    depends_on("lcgeo")
+    depends_on("marlin")
+    depends_on("marlinutil")
     depends_on("marlindd4hep")
-
-    depends_on('marlinreco')
-
-    depends_on('marlinfastjet')
-
-    depends_on('marlinkinfit')
-
-    depends_on('marlinkinfitprocessors')
-
-    depends_on('marlintrkprocessors')
-
-    depends_on('marlintrk')
-
-    depends_on('overlay')
-
-    depends_on('pandoraanalysis')
-
-    depends_on('pandorapfa')
-
-
-    depends_on('physsim')
-
+    depends_on("marlinreco")
+    depends_on("marlinfastjet")
+    depends_on("marlinkinfit")
+    depends_on("marlinkinfitprocessors")
+    depends_on("marlintrkprocessors")
+    depends_on("marlintrk")
+    depends_on("overlay")
+    depends_on("pandoraanalysis")
+    depends_on("pandorapfa")
+    depends_on("physsim")
     depends_on("raida")
-
-    depends_on('sio')
-
-
+    depends_on("sio")
 
 
     ##################### developer tools #################
