@@ -21,22 +21,11 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     version('1.17.1', sha256='b928c6072bbf8db5fdb3b9716227b8724dfc90182967212cd9f2f51ceb760dd0')
     version('1.17', sha256='076acc3a91b7e2e253f338395a8e56bf00498e6aa1a118d3e7bde84f1065d3d6')
 
-
-    variant('gui', default=False,
-            description="builds with qt gui")
-
-    variant('lccd', default=False,
-            description="builds with lccd")
-
-    variant('clhep', default=True,
-            description="builds with clhep")
-
-    variant('aida', default=True,
-            description="builds with aida")
-
-    variant('doc', default=False,
-            description="build doxygen documentation")
-
+    variant('gui', default=False, description="builds with qt gui")
+    variant('lccd', default=False, description="builds with lccd")
+    variant('clhep', default=True, description="builds with clhep")
+    variant('aida', default=True, description="builds with aida")
+    variant('doc', default=False, description="build doxygen documentation")
 
     depends_on("ilcutil")
     depends_on("gear")
@@ -47,7 +36,6 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     depends_on("lccd", when="+lccd")
     depends_on("clhep", when="+clhep")
     depends_on("raida", when="+aida")
-
 
     def cmake_args(self):
         args = []  
