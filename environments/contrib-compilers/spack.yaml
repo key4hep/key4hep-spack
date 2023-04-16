@@ -3,8 +3,8 @@ spack:
     install_tree:
       root: /cvmfs/sw.hsf.org/contrib
       projections:
-        all: ${name}/${version}/${architecture.target}-${architecture.os}-${compiler.name}${compiler.version}-opt/${hash:5}
-        build_type=Debug: ${name}/${version}/${architecture.target}-${architecture.os}-${compiler.name}${compiler.version}-dbg/${hash:5}
+        all: {name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-opt/{hash:5}
+        build_type=Debug: {name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{hash:5}
   include:
   - key4hep-packages.yaml
   view: false
