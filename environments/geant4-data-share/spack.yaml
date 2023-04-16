@@ -5,7 +5,7 @@ spack:
     install_tree:
       root: /cvmfs/sw.hsf.org/share
       projections:
-        all: data/${PACKAGE}-${VERSION}-${HASH}
+        all: "data/{name}-{version}-{hash}"
   view: false
   packages:
     all:

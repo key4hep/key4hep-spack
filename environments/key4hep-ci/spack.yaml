@@ -23,7 +23,7 @@ spack:
     install_tree:
       root: $spack/opt/spack
       projections:
-        all: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-opt/${HASH:5}
-        build_type=Debug: ${PACKAGE}/${VERSION}/${target}-${os}-${COMPILERNAME}${COMPILERVER}-dbg/${HASH:5}
+        all: "{name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-opt/{hash:5}"
+        build_type=Debug: "{name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{hash:5}"
   repos:
     - ../..
