@@ -9,3 +9,5 @@ spack:
       compiler: [gcc@11.2.0]
   repos:
   - ../..
+  specs:
+  - gdb~debuginfod

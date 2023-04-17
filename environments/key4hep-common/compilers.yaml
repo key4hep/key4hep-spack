@@ -25,3 +25,16 @@ compilers:
     modules: []
     environment: {}
     extra_rpaths: []
+- compiler:
+    spec: gcc@12.2.0
+    paths:
+      cc: /cvmfs/sw.hsf.org/contrib/gcc/11.2.0/x86_64-centos7-gcc8.3.0-opt/d3epy/bin/gcc
+      cxx: /cvmfs/sw.hsf.org/contrib/gcc/11.2.0/x86_64-centos7-gcc8.3.0-opt/d3epy/bin/g++
+      f77: /cvmfs/sw.hsf.org/contrib/gcc/11.2.0/x86_64-centos7-gcc8.3.0-opt/d3epy/bin/gfortran
+      fc: /cvmfs/sw.hsf.org/contrib/gcc/11.2.0/x86_64-centos7-gcc8.3.0-opt/d3epy/bin/gfortran
+    flags: {}
+    operating_system: almalinux9
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
