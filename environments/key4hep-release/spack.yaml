@@ -11,3 +11,4 @@ spack:
   - ../..
   specs:
   - gdb~debuginfod
+  - lhapdf~python
