@@ -79,7 +79,7 @@ packages:
   dd4hep:
     variants: +lcio+xercesc+hepmc3+edm4hep
     buildable: true
-    version: [1.24]
+    version: []
     target: []
     providers: {}
     compiler: []
