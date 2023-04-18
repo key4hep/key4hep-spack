@@ -15,9 +15,11 @@ class K4clue(CMakePackage, Key4hepPackage):
     git      = "https://github.com/key4hep/k4Clue.git"
     homepage = "https://github.com/key4hep/k4Clue"
 
-    maintainers = ['vvolkl']
+    maintainers = ("vvolkl", "jmcarcell")
 
     version('main', branch='main')
+
+    version("1.0", sha256="b1b1c871a2425305e56c1923c31eded300a28cd1a97c55e8b440caaefcafc7d1")
 
     depends_on('cupla')
     depends_on('alpaka')
