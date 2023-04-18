@@ -17,6 +17,9 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.6", sha256="8f276fe5246c12e3ccf460a03a5621a129f172a5047cf7321957f1eeb807f821"
+    )
+    version(
         "0.5", sha256="080f86700fd141b288878688a5c8f14fe48f1247a4fa1ce37147f528484e826a"
     )
     version(
@@ -62,6 +65,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("k4fwcore")
     depends_on("edm4hep")
     depends_on("edm4hep@0.4.1:", when="@0.4.1:")
+    depends_on("edm4hep@0.8:", when="@0.6:")
     depends_on("k4lcioreader")
     depends_on("k4edm4hep2lcioconv", when="@0.4.2:")
     depends_on("wget", type=("test"))
