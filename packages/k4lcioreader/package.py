@@ -12,6 +12,11 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
     version(
+        "0.5",
+        sha256="bdd97befeba4caa3ee2fcaea99a1f3b8cc2cb53dedf8e11f3c23a0b9f012b7f7",
+        url="https://github.com/key4hep/k4LCIOReader/archive/refs/tags/v00.05.tar.gz",
+    )
+    version(
         "0.4.3",
         sha256="58e7cf2f47b71e0645ff90b24b6746561a6993377ef752901cd901a6cf8fe643",
         url="https://github.com/key4hep/k4LCIOReader/archive/refs/tags/v00.04.03.tar.gz",
@@ -60,6 +65,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     depends_on("lcio")
     depends_on("podio@0.12:")
     depends_on("edm4hep")
+    depends_on("edm4hep@0.8:", when="@0.5:")
     depends_on("edm4hep@0.5:", when="@0.4.2:")
     depends_on("k4fwcore@0.2.0", when="@:0.2.0")
     depends_on("k4fwcore@0.3.0:", when="@0.3:")
