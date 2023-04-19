@@ -46,8 +46,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             description='CMake build type',
             values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
 
-    
-
     ##################### common key4hep packages #########
     #######################################################
     depends_on('edm4hep')
