@@ -377,3 +377,25 @@ test-cvmfs-release:
         - echo ${!K4_LATEST_SETUP_PATH} # debug printout
         - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
+
+
+.build_script: &build_script |
+    git clone https://github.com/key4hep/key4hep-spack --depth 1
+    git clone https://github.com/key4hep/spack --depth 1
+    source spack/share/spack/setup-env.sh
+
+    cd key4hep-spack/environments/key4hep-release
+    spack env activate .
+    spack add key4hep-stack+devtools
+
+build-ubuntu:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    script: *build_script
+
+build-centos7:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
+    script: *build_script
+
+build-alma9:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
+    script: *build_script
