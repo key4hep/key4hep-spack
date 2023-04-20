@@ -123,8 +123,8 @@ build-spack-nightlies:
     stage: compilation
     tags:
         - k4-build-spack-nightlies
-    needs:
-        - "setup_spack_push"
+    # needs:
+    #     - "setup_spack_push"
     parallel:
         matrix:
           - SPACKENV: 
