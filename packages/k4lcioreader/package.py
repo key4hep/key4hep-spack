@@ -8,7 +8,7 @@ class K4lcioreader(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4LCIOReader/archive/v0.1.0.tar.gz"
     git = "https://github.com/key4hep/k4LCIOReader.git"
 
-    maintainers("mirguest")
+    maintainers = ["mirguest"]
 
     version("master", branch="master")
     version(
