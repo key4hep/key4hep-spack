@@ -21,6 +21,7 @@ stages:
     - deployment
     - wait
     - installtest
+    - not-used
 
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
@@ -57,7 +58,7 @@ setup_spack_push:
 #   set in .bashrc or via gitlab ci - to be able to query the commits on github
 #  
 build-spack-ci:
-    stage: compilation
+    stage: not-used
     tags:
         - cvmfs
     needs:
