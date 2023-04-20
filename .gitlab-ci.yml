@@ -25,7 +25,7 @@ stages:
 
 ### create an artifact with a pre-configured spack on each push
 setup_spack_push:
-    stage: prepare-spack
+    stage: not-used
     tags:
         - k4-build-spack-release
         - k4-build-spack-nightlies
@@ -394,6 +394,8 @@ build-ubuntu:
     tags:
         - build
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    artifacts:
+        expire_in: 1 month
     script: *build_script
 
 build-centos7:
