@@ -391,15 +391,18 @@ test-cvmfs-release:
 
 build-ubuntu:
     stage: compilation
+    tags: build
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
     script: *build_script
 
 build-centos7:
     stage: compilation
+    tags: build
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
     script: *build_script
 
 build-alma9:
     stage: compilation
+    tags: build
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
     script: *build_script
