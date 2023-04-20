@@ -389,13 +389,16 @@ test-cvmfs-release:
     spack add key4hep-stack+devtools
 
 build-ubuntu:
+    stage: compilation
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
     script: *build_script
 
 build-centos7:
+    stage: compilation
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
     script: *build_script
 
 build-alma9:
+    stage: compilation
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
     script: *build_script
