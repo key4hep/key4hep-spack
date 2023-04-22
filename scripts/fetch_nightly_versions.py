@@ -56,7 +56,6 @@ def k4_add_latest_commit(name, repoinfo, giturl="https://api.github.com/repos/%s
 
 
 if __name__ == "__main__":
-    #print('  specs:')
     print('    - geant4@11.0.2')
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
@@ -65,25 +64,25 @@ if __name__ == "__main__":
     k4_add_latest_commit("k4fwcore", "key4hep/k4fwcore")
     k4_add_latest_commit("k4projecttemplate", "key4hep/k4-project-template")
     k4_add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("k4clue", "key4hep/k4clue",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("k4gen", "hep-fcc/k4Gen",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("delphes", "delphes/delphes")
     k4_add_latest_commit("fccsw", "hep-fcc/fccsw")
     # todo: figure out the api for the cern gitlab instance
-    #depends_on('guinea-pig@master')
+    # depends_on('guinea-pig@master')
     # todo: figure out the api for the whizard gitlab instance
-    #depends_on('whizard@master +lcio +openloops hepmc=2')
+    # depends_on('whizard@master +lcio +openloops hepmc=2')
     k4_add_latest_commit("dual-readout", "hep-fcc/dual-readout")
     k4_add_latest_commit("fccanalyses", "hep-fcc/fccanalyses")
     k4_add_latest_commit("fccdetectors", "hep-fcc/fccdetectors",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("k4reccalorimeter", "hep-fcc/k4reccalorimeter",
-				 giturl="https://api.github.com/repos/%s/commits/main")
+                         giturl="https://api.github.com/repos/%s/commits/main")
     k4_add_latest_commit("cepcsw", "cepc/cepcsw")
     k4_add_latest_commit("k4lcioreader", "key4hep/k4LCIOReader")
     k4_add_latest_commit("aidatt", "aidasoft/aidatt")
