@@ -155,7 +155,7 @@ build-lcg-release:
     tags:
         - k4-build-spack-release
     needs:
-        - "setup_spack_push"
+        # - "setup_spack_push"
     only:
       refs:
           - tags
@@ -214,7 +214,7 @@ deploy-cvmfs-nightlies:
 # * the cvmfs publisher must be able to rsync with the build machine
 build-spack-release:
     stage: compilation
-    needs: ["setup_spack_push"]
+    # needs: ["setup_spack_push"]
     parallel:
         matrix:
           - SPACKENV: 
@@ -282,7 +282,7 @@ buildtest-spack-release:
     stage: buildtest
     needs:
         - "build-spack-release"
-        - "setup_spack_push"
+        # - "setup_spack_push"
     parallel:
         matrix:
           - SPACKENV: 
@@ -329,7 +329,7 @@ wait-cvmfs-release:
     stage: wait
     needs:
         - "build-spack-release"
-        - "setup_spack_push"
+        # - "setup_spack_push"
         - "deploy-cvmfs-release"
     timeout: 20m
     parallel:
@@ -357,7 +357,7 @@ wait-cvmfs-release:
 
 test-cvmfs-release:
     stage: installtest
-    needs: ["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    # needs: ["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
     parallel:
         matrix:
           - SPACKENV: 
@@ -380,34 +380,69 @@ test-cvmfs-release:
         - ./scripts/ci_install_tests.sh
 
 
-.build_script: &build_script |
+.clone-spack: &clone-spack |
     git clone https://github.com/key4hep/key4hep-spack --depth 1
-    git clone https://github.com/key4hep/spack --depth 1
+    git clone https://github.com/spack/spack
+    cd spack
+    git checkout $(cat /key4hep-spack/.latest-commit)
+    cd ..
     source spack/share/spack/setup-env.sh
 
+.build-release: &build-release |
     cd key4hep-spack/environments/key4hep-release
     spack env activate .
     spack add key4hep-stack+devtools
 
-build-ubuntu:
-    stage: compilation
-    tags:
-        - build
+.build-nightly: &build-nightly |
+    cd key4hep-spack/environments/key4hep-nightly
+    python3 /key4hep-spack/scripts/fetch_nightly_versions.py >> spack.yaml
+    spack env activate .
+    spack add key4hep-stack+devtools
+    echo $(date -I) > .date
+    spack config add "config: install_tree/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$(cat .date)"
+
+
+.template-build: &template-build
+     stage: compilation
+     tags:
+         - build
+     only:
+         refs:
+             - web
+             - schedules
+
+.template-build-release: &template-build-release
+  <<: *template-build
+  script:
+      - *clone-spack
+      - *build-release
+
+.template-build-nightly: &template-build-nightly
+  <<: *template-build
+  script:
+      - *clone-spack
+      - *build-release
+
+build-ubuntu-release:
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
-    artifacts:
-        expire_in: 1 month
-    script: *build_script
+    <<: *template-build-release
 
-build-centos7:
-    stage: compilation
-    tags:
-        - build
+build-centos7-release:
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
-    script: *build_script
+    <<: *template-build-release
 
-build-alma9:
-    stage: compilation
-    tags:
-        - build
+build-alma9-release:
     image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
-    script: *build_script
+    <<: *template-build-release
+
+build-nightly-ubuntu:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    <<: *template-build-nightly
+
+build-nightly-centos7:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
+    <<: *template-build-nightly
+
+build-nightly-alma9:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
+    <<: *template-build-nightly
