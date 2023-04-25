@@ -9,4 +9,4 @@ spack:
   - key4hep-packages.yaml
   view: false
   specs:
-  - gcc@11.2.0
+  - gcc@12.2.0
