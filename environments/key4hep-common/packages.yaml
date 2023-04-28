@@ -1,4 +1,6 @@
 packages:
+  gaudi:
+    variants: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   guinea-pig:
     variants: +fftw3
     buildable: true
