@@ -1,9 +1,11 @@
 packages:
   gaudi:
-    variants: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
+    # +examples seems not be compatible with newer versions of python
+    variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
   dd4hep:
     variants: +lcio+xercesc+hepmc3
-    require: "@1.23"
+    require: "@1.23" # temporary pinning until there is Frame reading since
+                     # newer versions of dd4hep save their output in the Frame format
   podio:
     variants: +sio
   fftw:
