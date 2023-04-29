@@ -52,7 +52,7 @@ def k4_add_latest_commit(name, repoinfo, giturl="https://api.github.com/repos/%s
     github_user = os.environ.get("GITHUB_USER", "")
     github_token = os.environ.get("GITHUB_TOKEN", "")
     commit = k4_lookup_latest_commit(repoinfo, giturl)
-    print('    - %s@%s=develop' % (name, commit))
+    print('  - %s@%s=develop' % (name, commit))
 
 
 if __name__ == "__main__":
