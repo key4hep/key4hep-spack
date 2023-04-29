@@ -18,6 +18,10 @@ spack:
       compiler: [gcc@11.2.0]
   repos:
   - ../..
+  modules:
+    prefix_inspections:
+      lib: [LD_LIBRARY_PATH]
+      lib64: [LD_LIBRARY_PATH]
   specs:
   - gdb~debuginfod
   - lhapdf~python
