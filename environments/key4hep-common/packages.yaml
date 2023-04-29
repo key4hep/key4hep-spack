@@ -4,13 +4,8 @@ packages:
   dd4hep:
     variants: +lcio+xercesc+hepmc3
     require: "@1.23"
-  guinea-pig:
-    variants: +fftw3
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
+  podio:
+    variants: +sio
   fftw:
     variants: ~mpi
     buildable: true
@@ -59,8 +54,6 @@ packages:
     target: []
     providers: {}
     compiler: []
-  podio:
-    variants: +sio
   py-tensorflow:
     variants: ~cuda~nccl
     buildable: true
@@ -75,21 +68,8 @@ packages:
     target: []
     providers: {}
     compiler: []
-  binutils:
-    variants: +plugins       
-    version: []
-    target: []
-    providers: {}
-    compiler: []
   k4simdelphes:
     variants: ~delphes_hepmc
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  groff:
-    variants: ~pdf
     buildable: true
     version: []
     target: []
