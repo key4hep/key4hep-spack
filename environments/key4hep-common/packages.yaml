@@ -2,7 +2,8 @@ packages:
   gaudi:
     variants: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   dd4hep:
-    version: [1.23]
+    variants: +lcio+xercesc+hepmc3+edm4hep
+    version: 1.23
   guinea-pig:
     variants: +fftw3
     buildable: true
@@ -76,13 +77,6 @@ packages:
     compiler: []
   binutils:
     variants: +plugins       
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  dd4hep:
-    variants: +lcio+xercesc+hepmc3+edm4hep
-    buildable: true
     version: []
     target: []
     providers: {}
