@@ -56,7 +56,7 @@ def k4_add_latest_commit(name, repoinfo, giturl="https://api.github.com/repos/%s
 
 
 if __name__ == "__main__":
-    print('    - geant4@11.0.2')
+    print()
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
     k4_add_latest_commit("podio", "aidasoft/podio")
