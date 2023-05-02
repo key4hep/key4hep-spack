@@ -1,11 +1,13 @@
 packages:
-  guinea-pig:
-    variants: +fftw3
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
+  gaudi:
+    # +examples seems not be compatible with newer versions of python
+    variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
+  dd4hep:
+    variants: +lcio+xercesc+hepmc3
+    require: "@1.23" # temporary pinning until there is Frame reading since
+                     # newer versions of dd4hep save their output in the Frame format
+  podio:
+    variants: +sio
   fftw:
     variants: ~mpi
     buildable: true
@@ -42,7 +44,7 @@ packages:
     providers: {}
     compiler: []
   root:
-    variants: +davix+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
+    variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
     buildable: true
     target: []
     providers: {}
@@ -54,8 +56,6 @@ packages:
     target: []
     providers: {}
     compiler: []
-  podio:
-    variants: +sio
   py-tensorflow:
     variants: ~cuda~nccl
     buildable: true
@@ -70,28 +70,8 @@ packages:
     target: []
     providers: {}
     compiler: []
-  binutils:
-    variants: +plugins       
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  dd4hep:
-    variants: +lcio+xercesc+hepmc3+edm4hep
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
   k4simdelphes:
     variants: ~delphes_hepmc
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  groff:
-    variants: ~pdf
     buildable: true
     version: []
     target: []
@@ -143,6 +123,8 @@ packages:
   py-torch:
     variants: ~cuda
     require: "@1.13.1"
+  py-matplotlib:
+    variants: backend=qt5agg
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17

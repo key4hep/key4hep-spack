@@ -52,15 +52,15 @@ def k4_add_latest_commit(name, repoinfo, giturl="https://api.github.com/repos/%s
     github_user = os.environ.get("GITHUB_USER", "")
     github_token = os.environ.get("GITHUB_TOKEN", "")
     commit = k4_lookup_latest_commit(repoinfo, giturl)
-    print('    - %s@%s=develop' % (name, commit))
+    print('  - %s@%s=develop' % (name, commit))
 
 
 if __name__ == "__main__":
-    print('    - geant4@11.0.2')
+    print()
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
     k4_add_latest_commit("podio", "aidasoft/podio")
-    k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
+    # k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
     k4_add_latest_commit("k4fwcore", "key4hep/k4fwcore")
     k4_add_latest_commit("k4projecttemplate", "key4hep/k4-project-template")
     k4_add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes",
