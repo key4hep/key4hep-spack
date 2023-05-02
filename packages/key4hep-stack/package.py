@@ -126,6 +126,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('onnx', when='+devtools')
     depends_on('py-onnx', when='+devtools')
     depends_on('py-onnxruntime', when='+devtools')
+    depends_on('py-torch', when='+devtools')
     #depends_on('py-pyg4ometry', when='+devtools')
     #depends_on('py-tensorflow') # todo: check if we should integrate.
     #depends_on('py-zfit') # todo: add in spack

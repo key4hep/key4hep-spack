@@ -120,6 +120,9 @@ packages:
     target: []
     providers: {}
     compiler: []
+  py-torch:
+    variants: ~cuda
+    require: "@1.13.1"
   py-matplotlib:
     variants: backend=qt5agg
   all:
