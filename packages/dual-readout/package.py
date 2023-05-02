@@ -35,7 +35,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on('py-pyyaml', type=('build'))
     depends_on('hepmc3+rootio')
     depends_on('fastjet')
-    depends_on('root')
+    depends_on('root+fftw')
     depends_on('pythia8')
     depends_on('hsf-cmaketools')
     depends_on('k4fwcore')
