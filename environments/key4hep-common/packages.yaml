@@ -140,6 +140,9 @@ packages:
     target: []
     providers: {}
     compiler: []
+  py-torch:
+    variants: ~cuda
+    version: [1.13.1]
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17
