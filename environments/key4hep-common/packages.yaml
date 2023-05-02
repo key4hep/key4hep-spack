@@ -1,130 +1,61 @@
 packages:
-  gaudi:
-    # +examples seems not be compatible with newer versions of python
-    variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
+  boost:
+    variants: +python
+    buildable: true
   dd4hep:
     variants: +lcio+xercesc+hepmc3
     require: "@1.23" # temporary pinning until there is Frame reading since
                      # newer versions of dd4hep save their output in the Frame format
+  gaudi:
+    # +examples seems not be compatible with newer versions of python
+    variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
   podio:
     variants: +sio
-  fftw:
-    variants: ~mpi
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  mesa18:
-    variants: ~llvm+glx+opengl swr=none
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  mesa:
-    variants: ~llvm+glx+opengl swr=none
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  geant4:
-    variants: +qt+opengl+vecgeom cxxstd=17
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  boost:
-    variants: +python
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  root:
-    variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
-    buildable: true
-    target: []
-    providers: {}
-    compiler: []
-  marlin:
-    variants: +lccd
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  py-tensorflow:
-    variants: ~cuda~nccl
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  whizard:
-    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  k4simdelphes:
-    variants: ~delphes_hepmc
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  evtgen:
-    variants: +photos
-    buildable: true
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  gdb:
-    variants: +python+tui+source-highlight
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  py-setuptools-scm:
-    variants: +toml
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  photos:
-    variants: +hepmc3
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  xrootd:
-    variants: +krb5
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  xgboost:
-    variants: ~openmp
-    version: []
-    target: []
-    providers: {}
-    compiler: []
-  gperftools:
-    variants: ~libunwind
-    version: []
-    target: []
-    providers: {}
-    compiler: []
+  py-matplotlib:
+    variants: backend=qt5agg
   py-torch:
     variants: ~cuda
     require: "@1.13.1"
-  py-matplotlib:
-    variants: backend=qt5agg
+
+  mesa18:
+    variants: ~llvm+glx+opengl swr=none
+    buildable: true
+  mesa:
+    variants: ~llvm+glx+opengl swr=none
+    buildable: true
+  geant4:
+    variants: +qt+opengl+vecgeom cxxstd=17
+    buildable: true
+  root:
+    variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
+    buildable: true
+  marlin:
+    variants: +lccd
+    buildable: true
+  py-tensorflow:
+    variants: ~cuda~nccl
+    buildable: true
+  whizard:
+    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    buildable: true
+  k4simdelphes:
+    variants: ~delphes_hepmc
+    buildable: true
+  evtgen:
+    variants: +photos
+    buildable: true
+  gdb:
+    variants: +python+tui+source-highlight
+  py-setuptools-scm:
+    variants: +toml
+  photos:
+    variants: +hepmc3
+  xrootd:
+    variants: +krb5
+  xgboost:
+    variants: ~openmp
+  gperftools:
+    variants: ~libunwind
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17
