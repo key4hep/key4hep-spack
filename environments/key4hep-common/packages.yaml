@@ -140,12 +140,8 @@ packages:
     target: []
     providers: {}
     compiler: []
-  matplotlib:
+  py-matplotlib:
     variants: backend=qt5agg
-    version: []
-    target: []
-    providers: {}
-    compiler: []
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17
