@@ -25,7 +25,7 @@ compilers:
     modules: []
     environment: {}
     extra_rpaths: []
-- compiler:
+- compiler: # built with 6476b2d79c142049fe7b82ecbacaee3a10c3bdb6
     spec: gcc@12.2.0
     paths:
       cc: /cvmfs/sw.hsf.org/contrib/x86_64-centos7-gcc4.8.5-opt/gcc/12.2.0-icg3ob/bin/gcc
