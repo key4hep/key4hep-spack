@@ -27,9 +27,6 @@ class Babayaga(MakefilePackage):
 
     patch('makefile_compiler1.patch')
 
-    # there seems to be a race condition that leads to build failures
-    parallel = False
-
     def build(self, spec, prefix):
         with working_dir('.'):
             make('-f', 'Makefile', 'babayaga-fcc')
