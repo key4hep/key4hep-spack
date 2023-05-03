@@ -1,17 +1,3 @@
-compilers:
-- compiler:
-    spec: gcc@8.3.0
-    paths:
-      cc:  /cvmfs/sw.hsf.org/contrib//gcc/8.3.0/x86_64-centos7-gcc4.8.5-opt/3tor3brwrrwwjs5jhvwrb5plauumwozz//bin/gcc
-      cxx: /cvmfs/sw.hsf.org/contrib//gcc/8.3.0/x86_64-centos7-gcc4.8.5-opt/3tor3brwrrwwjs5jhvwrb5plauumwozz//bin/g++
-      f77: /cvmfs/sw.hsf.org/contrib//gcc/8.3.0/x86_64-centos7-gcc4.8.5-opt/3tor3brwrrwwjs5jhvwrb5plauumwozz//bin/gfortran
-      fc:  /cvmfs/sw.hsf.org/contrib//gcc/8.3.0/x86_64-centos7-gcc4.8.5-opt/3tor3brwrrwwjs5jhvwrb5plauumwozz//bin/gfortran
-    operating_system: centos7
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
-    flags: {}
 - compiler:
     spec: gcc@11.2.0
     paths:
