@@ -9,6 +9,8 @@ parser.add_argument('path', help='path to the packages')
 def get_install_times(path):
     packages = os.listdir(path)
     for p in packages:
+        if p.startswith('.'):
+            continue
         hash_folder = os.listdir(os.path.join(path, p))[0]
         try:
             with open(os.path.join(path, p, hash_folder, '.spack', 'install_times.json'), 'r') as f:
