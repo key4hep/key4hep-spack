@@ -7,6 +7,5 @@ spack:
   repos:
   - ../..
   specs:
-  - gdb~debuginfod
   - lhapdf~python
   - key4hep-stack+devtools
