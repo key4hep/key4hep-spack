@@ -11,6 +11,7 @@ packages:
     variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
   podio:
     variants: +sio
+    require: "@509dd1a7220941aaf32eb356e06824a3fef9f204=develop"
   py-matplotlib:
     variants: backend=qt5agg
   py-torch:

@@ -59,7 +59,7 @@ if __name__ == "__main__":
     print()
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
-    k4_add_latest_commit("podio", "aidasoft/podio")
+    # k4_add_latest_commit("podio", "aidasoft/podio")
     # k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
     k4_add_latest_commit("k4fwcore", "key4hep/k4fwcore")
     k4_add_latest_commit("k4projecttemplate", "key4hep/k4-project-template")
@@ -111,7 +111,6 @@ if __name__ == "__main__":
     k4_add_latest_commit("lcfivertex", "ilcsoft/lcfivertex")
     k4_add_latest_commit("lich", "danerdaner/lich")
     k4_add_latest_commit("lccd", "ilcsoft/lccd")
-    # temporarily disabled while investigating build failure
     k4_add_latest_commit("lcio", "ilcsoft/lcio")
     k4_add_latest_commit("lcgeo", "key4hep/k4geo")
     k4_add_latest_commit("marlin", "ilcsoft/marlin")
