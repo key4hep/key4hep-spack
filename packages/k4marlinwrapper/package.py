@@ -40,16 +40,6 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     version(
         "0.3", sha256="381fd96e2ede03bec048afaeef13b8efffe80030fc097fe18fae62b03c0fba94"
     )
-    version(
-        "0.2.1",
-        sha256="7aeb0cfff97fe67bb046ea80e7ed219a51c31add2b7770cdb9fd022a1b1497b9",
-    )
-    version(
-        "0.2", sha256="15809cbc141364c5856c58f8b21e954bde29479703b79020e8b47dbd55f41f73"
-    )
-    version(
-        "0.1", sha256="d3048178b2f9b721a64ee296019435cbbbce5a65ad956ec733cdb203730db188"
-    )
 
     patch(
         "https://patch-diff.githubusercontent.com/raw/key4hep/k4MarlinWrapper/pull/81.diff",
@@ -60,8 +50,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("root")
     depends_on("lcio")
     depends_on("marlin")
-    depends_on("gaudi@35.0:", when="@0.2.2:")
-    depends_on("gaudi@:34.99", when="@:0.2.1")
+    depends_on("gaudi@35.0:")
     depends_on("k4fwcore")
     depends_on("edm4hep")
     depends_on("edm4hep@0.4.1:", when="@0.4.1:")
@@ -77,21 +66,13 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = [self.define("FORCE_COLORED_OUTPUT", False)]
-        if self.spec.satisfies("^gaudi@:34.99"):
-            args += [self.define("HOST_BINARY_TAG", "x86_64-linux-gcc9-opt")]
         return args
 
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path("PYTHONPATH", self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
         spack_env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
 
     def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix + "/lib")
-        spack_env.prepend_path(
-            "LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix + "/lib64"
-        )
-
-    def check(self):
-        # TODO: fix known test failure
-        pass
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix.lib)

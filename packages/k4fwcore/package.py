@@ -52,6 +52,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 	
     def setup_build_environment(self, env):
         env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib)

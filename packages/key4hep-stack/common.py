@@ -65,33 +65,29 @@ def k4_generate_setup_script(env_mod, shell='sh'):
             # set a dictionary with the environment variables
             x.execute(new_env)
         if env_set_not_prepend[name] and len(actions) > 1:
-            tty.warn("Var " + name + "is set multiple times!" )
+            tty.warn(f'Var {name} is set multiple times!')
   
     # deduplicate paths
-    for name in  new_env:
-      path_list = new_env[name].split(":")
-      pruned_path_list = prune_duplicate_paths(path_list)
-      new_env[name] = ":".join(pruned_path_list) 
+    for name in new_env:
+        path_list = new_env[name].split(":")
+        pruned_path_list = prune_duplicate_paths(path_list)
+        new_env[name] = ":".join(pruned_path_list)
 
 
-    # fourth, get shell commands
+    # get shell commands
     k4_shell_set_strings = {
-        'sh': 'export {0}={1};\n',
+        'sh': 'export {0}={1}\n',
     }
     k4_shell_prepend_strings = {
-        'sh': 'export {0}={1}:${0};\n',
+        'sh': 'export {0}={1}:${0}\n',
     }
     cmds = []
     for name in set(new_env):
         if env_set_not_prepend[name]:
-            cmds += [k4_shell_set_strings[shell].format(
-                name, cmd_quote(new_env[name]))]
+            cmds += [k4_shell_set_strings[shell].format(name, cmd_quote(new_env[name]))]
         else:
-            cmds += [k4_shell_prepend_strings[shell].format(
-                name, cmd_quote(new_env[name]))]
+            cmds += [k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))]
     return ''.join(cmds)
-
-
 
 def ilc_url_for_version(self, version):
     """Translate version numbers to ilcsoft conventions.
@@ -126,10 +122,6 @@ def ilc_url_for_version(self, version):
 def install_setup_script(self, spec, prefix, env_var):
     """Create a bash setup script that includes all the dependent packages while
     respecting the PATH variable of the user"""
-    # first, log spack version to build-out
-    tty.msg('* **Spack:**', get_version())
-    tty.msg('* **Python:**', platform.python_version())
-    tty.msg('* **Platform:**', spack.platforms.host())
     # get all dependency specs, including compiler
     # record all changes to the environment by packages in the stack
     env_mod = spack.util.environment.EnvironmentModifications()
