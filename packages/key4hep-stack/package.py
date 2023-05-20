@@ -66,8 +66,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('whizard +lcio +openloops hepmc=2')
     depends_on('xrootd +krb5')
 
-    ##################### general purpose generators ######
-    #######################################################
     depends_on('evtgen+pythia8+tauola+photos', when='+generators')
     depends_on('herwig3', when='+generators')
     depends_on('lhapdf', when='+generators')
@@ -75,25 +73,16 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('photos+hepmc3', when='+generators')
     depends_on('sherpa', when='+generators')
 
-    ############################### ilcsoft ###############
-    #######################################################
     depends_on('ilcsoft')
 
-    ############################### fccsw #################
-    #######################################################
     depends_on('fccsw')
     depends_on('dual-readout')
     depends_on('fccanalyses')
     depends_on('fccdetectors')
     depends_on('k4reccalorimeter')
 
-    ############################## cepcsw #################
-    #######################################################
     depends_on('cepcsw')
     
-    ##################### developer tools #################
-    #######################################################
-
     depends_on('catch2@3.0.1:', when='+devtools')
     depends_on('cmake', when='+devtools')
     depends_on('doxygen', when='+devtools')
@@ -138,6 +127,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         spack_env.set('LC_ALL', 'C')
         spack_env.set('KEY4HEP_STACK', os.path.join(self.spec.prefix, 'setup.sh'))
+        # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
+        spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
