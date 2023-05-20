@@ -1,9 +1,13 @@
-# for compatibility with old git versions on centos
 variables:
-  GIT_STRATEGY: clone
   K4_JOBTYPE:
-    value: CI
+    value: Nightly
     description: "Possible Values: Release, Nighlies, CI. A Release job is deployed to sw.hsf.org and uses the latest tags. A Nightlies job is deployed to sw-nightlies.hsf.org and uses the HEAD of the defined repos. A CI build is like a nightly build, but not deployed, and builds local checkouts of the PRs given in K4_CI_URLS"
+  K4_OS:
+    value: centos7
+    description: centos7, ubuntu or almalinux9
+  NIGHTLY_FROM_SCRATCH:
+    value: "no"
+    description: yes or no, whether the nightly build is done from scratch (all packages are compiled) or the previous build from scratch is used as upstream
   K4_CI_URLS:
     value: ""
     description: "A whitespace-separated list of urls for github prs (for repositories for which there is a spack recipe). Example: https://github.com/iLCSoft/SIO/pull/17/ https://github.com/AIDASoft/podio/pull/287"
@@ -23,46 +27,229 @@ stages:
     - installtest
     - not-used
 
-### create an artifact with a pre-configured spack on each push
-setup_spack_push:
-    stage: not-used
+test-build:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    stage: compilation
+    rules:
+      - if: '$K4_JOBTYPE == "Test"'
+        changes:
+            - never
+    script: |
+        echo test-build
+        rm nonexistent
     tags:
-        - k4-build-spack-release
-        - k4-build-spack-nightlies
-    only:
-      refs:
-          - pushes
-          - merge_requests
-          - schedules
-          - web
-    script:
-        # log all variables
-        - echo "SPACK_INSTALL_ARGUMENTS ... ${SPACK_INSTALL_ARGUMENTS}"
-        - echo "K4_CI_URLS ... ${K4_CI_URLS}"
-        - echo "K4_JOBTYPE ... ${K4_JOBTYPE}"
-        - echo "SPACK_VERSION ... ${SPACK_VERSION}"
-        # set up spack inside the k4-spack repo
-        - source scripts/ci_setup_spack.sh
+        - alma9
 
-    artifacts:
-        paths:
-            - key4hep-spack.tar.gz
-            - key4hep-spack_centos7-cvmfs.tar.gz
-            - spack 
-        expire_in: 1 month
+test-deploy:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    stage: deployment
+    rules:
+      - if: '$K4_JOBTYPE == "Test"'
+        changes:
+            - never
+    script:
+        echo test-build
+    tags:
+        - alma9
+    resource_group: test_group
+
+.clone-spack: &clone-spack |
+    cd /
+    git clone https://github.com/key4hep/key4hep-spack --depth 1
+    git clone https://github.com/spack/spack
+    cd spack
+    git checkout $(cat /key4hep-spack/.latest-commit)
+    cd ..
+    source spack/share/spack/setup-env.sh
+
+.build-release: &build-release |
+    cd /key4hep-spack/environments/key4hep-release
+    spack env activate .
+    spack add key4hep-stack+devtools
+
+.build-nightly: &build-nightly |
+    cd /key4hep-spack/environments/key4hep-nightly
+    python3 /key4hep-spack/scripts/fetch_nightly_versions.py >> spack.yaml
+    spack env activate .
+    echo $(TZ=Europe/Zurich date -I) > .date
+    spack config add "config:install_tree:root: /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$(cat .date)"
+
+    if [ $(echo "$NIGHTLY_FROM_SCRATCH" | tr '[:upper:]' '[:lower:]') = "no" ]; then
+        rel=$(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 3 -type f -wholename "*$K4_OS*/.scratch" | sort -r | head -1)
+        rel=$(dirname $rel)
+        echo "rel is $rel"
+        spack config add "upstreams:nightly-from-scratch:install_tree: $rel"
+    fi
+    cat spack.yaml
+    spack concretize
+    nohup spack install&
+    sleep 2
+    nohup spack install&
+    sleep 2
+    spack install
+
+.copy-cvmfs: &copy-cvmfs |
+    ls -lah /root/.ssh
+    rel=$(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$K4_OS*" | sort -r | head -1)
+    mkdir -p /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest/
+    ln -sf $rel /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest/
+    git clone https://github.com/key4hep/key4hep-spack --depth 1
+    cp key4hep-spack/.latest-commit $rel/.spack-commit
+    cd key4hep-spack; echo $(git rev-parse HEAD) > $rel/.key4hep-spack-commit
+    if [ $(echo "$NIGHTLY_FROM_SCRATCH" | tr '[:upper:]' '[:lower:]') = "yes" ]; then
+          touch $rel/.scratch
+    fi
+    if [ -d $rel/../.spack-db ]; then
+        mv $rel/../.spack-db $rel/
+    fi
+    ssh -o "StrictHostKeyChecking=no" cvswnighthsforg@lxcvmfs110.cern.ch './open_transaction.sh'
+
+    rsync -avuPq $rel cvswnighthsforg@lxcvmfs110.cern.ch:$(dirname $rel)
+    rsync -avuP  /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest cvswnighthsforg@lxcvmfs110.cern.ch:/cvmfs/sw-nightlies.hsf.org/key4hep/releases
+
+    ssh cvswnighthsforg@lxcvmfs110.cern.ch './close_transaction.sh'
+
+.template-deploy-cvmfs: &template-deploy-cvmfs
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    tags:
+        - build
+    stage: deployment
+    script:
+        -  *copy-cvmfs
+    resource_group: production
+
+.template-build: &template-build
+     stage: compilation
+     tags:
+         - build
+
+.template-build-release: &template-build-release
+  <<: *template-build
+  rules:
+      - if: '$K4_JOBTYPE =~ /Release/'
+        changes:
+            - never
+  script:
+      - *clone-spack
+      - *build-release
+
+.template-build-nightly: &template-build-nightly
+  <<: *template-build
+  tags:
+      - nightly
+  rules:
+      - if: '$K4_JOBTYPE =~ /Nightly/'
+        changes:
+            - never
+  script:
+      - *clone-spack
+      - *build-nightly
+
+build-ubuntu-release:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    tags:
+        - release
+        - ubuntu
+    <<: *template-build-release
+
+build-centos7-release:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
+    tags:
+        - release
+        - centos7
+    <<: *template-build-release
+
+build-alma9-release:
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
+    tags:
+        - release
+        - alma9
+    <<: *template-build-release
+
+build-nightly-ubuntu:
+    <<: *template-build-nightly
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
+    tags:
+        - ubuntu
+    rules:
+      - if: '$K4_JOBTYPE == "Nightly"  && ($K4_OS == "ubuntu" || $K4_OS == "all")'
+        changes:
+            - never
+
+build-nightly-centos7:
+    <<: *template-build-nightly
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
+    tags:
+        - centos7
+    rules:
+      - if: '$K4_JOBTYPE =~ /Nightly/ && ($K4_OS == "centos7" || $K4_OS == "all")'
+        changes:
+            - never
+
+build-nightly-alma9:
+    <<: *template-build-nightly
+    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
+    tags:
+        - alma9
+    rules:
+      - if: '$K4_JOBTYPE =~ /Nightly/ && ($K4_OS == "almalinux9" || $K4_OS == "all")' 
+        changes:
+            - never
+
+deploy-nightly-ubuntu:
+    <<: *template-deploy-cvmfs
+    needs:
+        - build-nightly-ubuntu
+    tags:
+        - ubuntu
+    rules:
+      - if: '$K4_OS == "ubuntu" || $K4_OS == "all"'
+        changes:
+            - never
+
+deploy-nightly-centos7:
+    <<: *template-deploy-cvmfs
+    needs:
+        - build-nightly-centos7
+    tags:
+        - centos7
+    rules:
+      - if: '$K4_OS == "centos7" || $K4_OS == "all"'
+        changes:
+            - never
+
+deploy-nightly-alma9:
+    <<: *template-deploy-cvmfs
+    needs:
+        - build-nightly-alma9
+    tags:
+        - alma9
+    rules:
+      - if: '$K4_OS == "almalinux9" || $K4_OS == "all"'
+        changes:
+            - never
+
+.delete-last-nightly:
+    script:
+        rel=$(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$K4_OS*" | sort -r | head -1)
+        mkdir -p /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest/
+        ln -sf $rel /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest/
+        ssh -o "StrictHostKeyChecking=no" cvswnighthsforg@lxcvmfs110.cern.ch './open_transaction.sh'
+        rsync -avuPq $rel cvswnighthsforg@lxcvmfs110.cern.ch:$(dirname $rel)
+        rsync -avuP  /cvmfs/sw-nightlies.hsf.org/key4hep/releases/latest cvswnighthsforg@lxcvmfs110.cern.ch:/cvmfs/sw-nightlies.hsf.org/key4hep/releases
+
+        ssh cvswnighthsforg@lxcvmfs110.cern.ch './close_transaction.sh'
 
 #### CI builds of key4hep-stack
 # This is intended to run more complex ci builds, possibly comprising PRs in several repos
-# this job expects the following setup on the runner:
-# * environment variables GITHUB_TOKEN and GITHUB_USER
+# this job expects the following setup on the runner: 
+# * environment variables GITHUB_TOKEN and GITHU B_USER
 #   set in .bashrc or via gitlab ci - to be able to query the commits on github
 #  
 build-spack-ci:
     stage: not-used
     tags:
         - cvmfs
-    needs:
-        - "setup_spack_push"
     parallel:
         matrix:
           - SPACKENV: 
@@ -119,89 +306,6 @@ build-spack-ci:
 # for the cvmfs deployment:
 # * the gitlab-runner user must be able to ssh into the cvmfs publisher
 # * the cvmfs publisher must be able to rsync with the build machine
-build-spack-nightlies:
-    stage: compilation
-    tags:
-        - k4-build-spack-nightlies
-    # needs:
-    #     - "setup_spack_push"
-    parallel:
-        matrix:
-          - SPACKENV: 
-            - key4hep-nightlies
-            #- key4hep-nightlies-debug
-    only:
-      refs:
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "Nightlies"
-    script:
-        - source spack/share/spack/setup-env.sh
-        - export KEY4HEP_RELEASE_VERSION=master-`date -I`
-        - python scripts/fetch_nightly_versions.py >> environments/$SPACKENV/spack.yaml
-
-        - cd environments/$SPACKENV
-        - spack env activate .
-        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
-        - spack repo add ./sft-spack-repo
-        - spack add key4hep-stack@${KEY4HEP_RELEASE_VERSION}
-        - spack install ${SPACK_INSTALL_ARGUMENTS}
-
-
-### Test lcg release in spack  on the key4hep infrastructure
-build-lcg-release:
-    stage: compilation
-    tags:
-        - k4-build-spack-release
-    needs:
-        # - "setup_spack_push"
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "LCG_Release"
-    script:
-        - source spack/share/spack/setup-env.sh
-        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
-        - cd sft-spack-repo
-        - spack env activate -d environments/lcg-release/
-        - spack install ${SPACK_INSTALL_ARGUMENTS}
-
-### Test deployment of lcg-release
-deploy-cvmfs-lcg:
-    stage: deployment
-    tags:
-        - k4-build-spack-release
-    needs: ["build-lcg-release"]
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "LCG_Release"
-    script:
-        - ssh cvswhsforg@cvmfs-sw-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
-
-### deploy the nightlies to cvmfs
-deploy-cvmfs-nightlies:
-    stage: deployment
-    needs: ["build-spack-nightlies"]
-    tags:
-        - sw-nightlies-hsf-org-cvmfs-publisher
-    only:
-      refs:
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "Nightlies"
-    script:
-        - cd scripts/deploy-cvmfs-nightlies
-        - ./cvmfs_deploy.sh
-
 
 #### Release build of key4hep-stack
 # this job expects the following setup on the runner:
@@ -212,77 +316,10 @@ deploy-cvmfs-nightlies:
 # for the cvmfs deployment:
 # * the gitlab-runner user must be able to ssh into the cvmfs publisher
 # * the cvmfs publisher must be able to rsync with the build machine
-build-spack-release:
-    stage: compilation
-    # needs: ["setup_spack_push"]
-    parallel:
-        matrix:
-          - SPACKENV: 
-            - key4hep-release
-            #- key4hep-release-clang
-            #- key4hep-debug
-    tags:
-        - k4-build-spack-release
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "Release"
-    script:
-        # set up spack inside the k4-spack repo
-        - source spack/share/spack/setup-env.sh
-        # if this workflow has been started by a tag, use the tag version. if not, use todays date
-        - if [ -z "$CI_COMMIT_TAG" ]; then export K4STACK_VERSION=`date -I`; else export K4STACK_VERSION=$CI_COMMIT_TAG;  fi 
-        - if [ ! -z "$CI_BUILD_TAG" ]; then export K4STACK_VERSION=$CI_BUILD_TAG;  fi 
-        - echo $K4STACK_VERSION
-        # activate environment
-        - cd environments/${SPACKENV}
-        - spack env activate .
-        - git clone https://gitlab.cern.ch/sft/sft-spack-repo.git
-        - spack repo add ./sft-spack-repo
-        # config debug printouts
-        - spack config blame config # debug printout
-        - spack config blame packages # debug printout
-        # in order to set the right version for the key4hep-stack spec, we add it to the
-        # environment now when we now it
-        - spack add key4hep-stack@${K4STACK_VERSION}
-        # compile onwards and upwards
-        - spack install ${SPACK_INSTALL_ARGUMENTS}| tee -a key4hep-stack-install.log
-        # note the path of the just installed package
-        # so that downstream jobs can source its setup
-        # in an environment, this command should just find the specs  
-        # installed in this environment
-        - spack find -p key4hep-stack@${K4STACK_VERSION} > spackfind.log
-        - cat spackfind.log # debug printout
-        # parse output of spack find
-        # the last line should be, p.ex.
-        # zlib@1.2.11  /cvmfs/sw.hsf.org/spackages/linux-ubuntu20.04-broadwell/gcc-9.3.0/zlib-1.2.11-emkoq3o2mtu377gy6plexktmkqchkgkb
-        # cut can only be used to get the first field - do a double reverse of the string to get the last
-        - SPACKENV_PATH=$(tail -n 1 spackfind.log  |  rev | cut -d " " -f1 | rev)
-        - echo ${SPACKENV_PATH} # debug printout
-        # we want to use the environment name as a variable name
-        # so need to remove some special characters (right now only the hyphen)
-        - echo ${SPACKENV//-/} # debug printout
-        # make the path available to downstream jobs 
-        # for example:
-        #key4hepdebug_PATH=/cvmfs/sw.hsf.org/spackages2/key4hep-stack/2021-06-16/x86_64-centos7-gcc8.3.0-dbg/a7xzrrsha54w4mewe43b4bmxaqxnvg2x
-        - echo "${SPACKENV//-/}_PATH=${SPACKENV_PATH}" >> build.env
-        - cat build.env # debug printout
-    artifacts:
-        # the log could be saved as an artifact, but does not really have more info than stdout
-        #paths:
-        #  - environments/${SPACKENV}/key4hep-stack-install.log
-        reports:
-          dotenv: environments/${SPACKENV}/build.env
 
 
 buildtest-spack-release:
     stage: buildtest
-    needs:
-        - "build-spack-release"
-        # - "setup_spack_push"
     parallel:
         matrix:
           - SPACKENV: 
@@ -308,56 +345,9 @@ buildtest-spack-release:
         - ./scripts/ci_install_tests.sh
 
 
-
-deploy-cvmfs-release:
-    stage: deployment
-    needs: ["build-spack-release"]
-    tags:
-        - k4-build-spack-release
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "Release"
-    script:
-        # todo: once the publisher is set up as a gitlab runner, use the script from the repo
-        - ssh cvswhsforg@cvmfs-sw-hsf-org.cern.ch ' bash -c ./cvmfs_deploy.sh'
-
-wait-cvmfs-release:
-    stage: wait
-    needs:
-        - "build-spack-release"
-        # - "setup_spack_push"
-        - "deploy-cvmfs-release"
-    timeout: 20m
-    parallel:
-        matrix:
-          - SPACKENV: 
-            - key4hep-release
-            #- key4hep-debug
-    tags:
-        - cvmfs
-    only:
-      refs:
-          - tags
-          - schedules # Only execute this on scheduled "nightly" pipelines
-          - web
-      variables:
-          - $K4_JOBTYPE == "Release"
-    script:
-        # resolve dynamic variable name
-        - K4_LATEST_SETUP_PATH=${SPACKENV//-/}_PATH
-        - echo ${!K4_LATEST_SETUP_PATH} # debug printout
-        # wait for the new release to be present on cvmfs
-        # both to be sure that it is available once the pipeline finishes
-        # and so the final install test can use it to check the publication
-        - while [ ! -f ${!K4_LATEST_SETUP_PATH}/setup.sh ]; do sleep 10; done
-
 test-cvmfs-release:
     stage: installtest
-    # needs: ["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
+    # needs:["setup_spack_push", "deploy-cvmfs-release", "build-spack-release", "wait-cvmfs-release"]
     parallel:
         matrix:
           - SPACKENV: 
@@ -378,71 +368,3 @@ test-cvmfs-release:
         - echo ${!K4_LATEST_SETUP_PATH} # debug printout
         - source ${!K4_LATEST_SETUP_PATH}/setup.sh
         - ./scripts/ci_install_tests.sh
-
-
-.clone-spack: &clone-spack |
-    git clone https://github.com/key4hep/key4hep-spack --depth 1
-    git clone https://github.com/spack/spack
-    cd spack
-    git checkout $(cat /key4hep-spack/.latest-commit)
-    cd ..
-    source spack/share/spack/setup-env.sh
-
-.build-release: &build-release |
-    cd key4hep-spack/environments/key4hep-release
-    spack env activate .
-    spack add key4hep-stack+devtools
-
-.build-nightly: &build-nightly |
-    cd key4hep-spack/environments/key4hep-nightly
-    python3 /key4hep-spack/scripts/fetch_nightly_versions.py >> spack.yaml
-    spack env activate .
-    spack add key4hep-stack+devtools
-    echo $(date -I) > .date
-    spack config add "config: install_tree/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$(cat .date)"
-
-
-.template-build: &template-build
-     stage: compilation
-     tags:
-         - build
-     only:
-         refs:
-             - web
-             - schedules
-
-.template-build-release: &template-build-release
-  <<: *template-build
-  script:
-      - *clone-spack
-      - *build-release
-
-.template-build-nightly: &template-build-nightly
-  <<: *template-build
-  script:
-      - *clone-spack
-      - *build-release
-
-build-ubuntu-release:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
-    <<: *template-build-release
-
-build-centos7-release:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
-    <<: *template-build-release
-
-build-alma9-release:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
-    <<: *template-build-release
-
-build-nightly-ubuntu:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/ubuntu-build
-    <<: *template-build-nightly
-
-build-nightly-centos7:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/centos7-build
-    <<: *template-build-nightly
-
-build-nightly-alma9:
-    image: gitlab-registry.cern.ch/key4hep/k4-deploy/alma9-build
-    <<: *template-build-nightly
