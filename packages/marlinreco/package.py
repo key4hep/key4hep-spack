@@ -19,11 +19,6 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
     version("1.33.1", sha256="2c89954a3a83909e5da069ce223c3d5bd25bd911b7415a219456fbbed13953b8")
     version('1.33', sha256='4f5a9c091c26d67b6be6b1cf2fc1fd57445302a4f817a4aea021c51a3fdc7424')
     version('1.32', sha256='0ea3bee03e2bec1924b5876675043b592a942bc8cf306eb7056eaf03ac1748f6')
-    version('1.31', sha256='eeb823f2476e1d31a54997b1a09fcc20cc8f3555a9f677054eacd5f44d4f59ee')
-    version('1.30', sha256='e3b22a3f974232e4cc785326ad0dfd283b377cffda3245166f419b170276b6ff')
-    version('1.29', sha256='45a36bb98f26580c182848d73ef0423290f99eae380f0cb27eea48f4ef48e459')
-    version('1.28', sha256='f0a6a081d9816502950e639bc209f8f264e63ff3ba555640eff3fb61fb4bdd1d')
-    version('1.27', sha256='097462b714e9a47c90154ae1a82de44946d6473b07a659c810263ae53dc8253c')
 
     depends_on('ilcutil')
     depends_on('marlin')
