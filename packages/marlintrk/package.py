@@ -22,12 +22,6 @@ class Marlintrk(CMakePackage, Ilcsoftpackage):
     version('2.9',     sha256='a1ccec25aea02d62f22d98cffc870ac199e455aa31100b6fa8795a8dc34cdcc0')
     version('2.8',     sha256='bd3b0074c06e2b778c74d1aeb2c989c39100a8adf5018792db599f84cb946c14')
     version('2.7',     sha256='c6e556d18ae6f2f3ae6c0fd8aa4322ce866e08b54b48ce95d09636443eff53ea')
-    version('2.6',     sha256='a7be303a775eeb1a7b91f17710669878da9a6d4cca16aed1d251e63a8885c7fd')
-    version('2.5',     sha256='b5174986160315a62adba29f64fad2a27c8a7f53754a6b55740ea74f212cf9da')
-    version('2.4',     sha256='f77556cee804ec4ddd74dd229685fac07a462178b33b629f26cacbf4336c7cb7')
-    version('2.3',     sha256='6240a09c259b4632658fa43bbb5e6d0248c0d8b706fb54cbac563ab3aa5a7d58')
-    version('2.2',     sha256='15515259f422ba23cb9f717834fb6d1e3e3ee9ca4ad17c04dd5efd8aa1c16113')
-    version('2.1',     sha256='a721c9b871b234be1decc88cabf5125b959a971ede74b9c2c368a505a1c6718e')
 
     variant('gear', default=False,
             description="Provide Gear backward compatibility")
