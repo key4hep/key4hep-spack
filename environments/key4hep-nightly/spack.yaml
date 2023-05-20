@@ -6,10 +6,6 @@ spack:
   - ../key4hep-common/compilers.yaml
   repos:
   - ../..
-  modules:
-    prefix_inspections:
-      lib: [LD_LIBRARY_PATH]
-      lib64: [LD_LIBRARY_PATH]
   specs:
   - gdb~debuginfod
   - lhapdf~python
