@@ -72,6 +72,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
         spack_env.prepend_path("PYTHONPATH", self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
         spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
         spack_env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
 
     def setup_build_environment(self, spack_env):

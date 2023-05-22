@@ -81,6 +81,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       # this should point to share/ by key4hep convention
       #  but we want to make it work with the tutorials
       spack_env.set("FCCANALYSES", self.prefix.python)
+      spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+      spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib64)
       if self.spec.satisfies("@:0.6.0"):
           # libawkward.so is in prefix/lib/pythonX.Y/site-packages
           python_version = self.spec['python'].version.up_to(2)
