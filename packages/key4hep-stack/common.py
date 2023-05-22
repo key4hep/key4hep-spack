@@ -7,7 +7,6 @@ from spack.directives import *
 from spack.user_environment import *
 
 import os
-import platform
 
 import spack.cmd
 import llnl.util.tty as tty
@@ -15,7 +14,6 @@ import spack.platforms
 import spack.spec
 import spack.util.environment
 from  spack.util.environment import *
-from spack.main import get_version
 import spack.user_environment as uenv
 import spack.store
 
@@ -33,10 +31,11 @@ def k4_setup_env_for_framework_tests(spec, env):
     runenv = environment_modifications_for_spec(spec)
     env.extend(runenv)
     for dspec in spec.traverse(root=False, order='post'):
-      dspec.package.setup_run_environment(env)
-      # make sure that ROOT_INCLUDE_PATH is set
-      if (dspec.satisfies('^root')):
-        spec['root'].package.setup_dependent_run_environment(env, dspec)
+        dspec.package.setup_run_environment(env)
+        # make sure that ROOT_INCLUDE_PATH is set
+        if dspec.satisfies('^root'):
+            spec['root'].package.setup_dependent_run_environment(env, dspec)
+
 
 
 def k4_generate_setup_script(env_mod, shell='sh'):

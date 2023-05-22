@@ -130,5 +130,13 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
         spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
 
+        # remove when https://github.com/spack/spack/pull/37821 is merged
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib64)
+
+        # remove when https://github.com/spack/spack/pull/37824 is merged
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
