@@ -125,19 +125,9 @@ def install_setup_script(self, spec, prefix, env_var):
     # get all dependency specs, including compiler
     # record all changes to the environment by packages in the stack
     env_mod = spack.util.environment.EnvironmentModifications()
+
     # first setup compiler, similar to build_environment.py in spack
-    compiler = self.compiler
-    if compiler.cc:
-        env_mod.set('CC', compiler.cc)
-    if compiler.cxx:
-        env_mod.set('CXX', compiler.cxx)
-    if compiler.f77:
-        env_mod.set('F77', compiler.f77)
-    if compiler.fc:
-        env_mod.set('FC',  compiler.fc)
-    compiler.setup_custom_environment(self, env_mod)
-    env_mod.prepend_path('PATH', os.path.dirname(compiler.cxx))
-    # now setup all other packages
+    env_mod.prepend_path('PATH', os.path.dirname(self.compiler.cxx))
 
     # now walk over the dependencies
     with spack.store.db.read_transaction():
@@ -145,25 +135,34 @@ def install_setup_script(self, spec, prefix, env_var):
             env_mod.extend(uenv.environment_modifications_for_spec(dep))
             env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
 
+    if self.compiler.cc:
+        env_mod.set('CC', self.compiler.cc)
+    if self.compiler.cxx:
+        env_mod.set('CXX', self.compiler.cxx)
+    if self.compiler.f77:
+        env_mod.set('F77', self.compiler.f77)
+    if self.compiler.fc:
+        env_mod.set('FC',  self.compiler.fc)
+
     # transform to bash commands, and write to file
     cmds = k4_generate_setup_script(env_mod)
     with open(os.path.join(prefix, "setup.sh"), "w") as f:
-      f.write(cmds)
-      # optionally add a symlink (location configurable via environment variable
-      try:
-        symlink_path = os.environ.get(env_var, "")
-        tty.debug('Trying to symlink setup script to: {}'.format(env_var))
-        if symlink_path:
-            # make sure that the path exists, create if not
-            if not os.path.exists(os.path.dirname(symlink_path)):
-              os.makedirs(os.path.dirname(symlink_path))
-            # make sure that an existing file will be overwritten,
-            # even if it is a symlink (for which 'exists' is false!)
-            if os.path.exists(symlink_path) or os.path.islink(symlink_path):
-              os.remove(symlink_path)
-            os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
-      except:
-        tty.warn("Could not create symlink")
+        f.write(cmds)
+        # optionally add a symlink (location configurable via environment variable
+        try:
+            symlink_path = os.environ.get(env_var, "")
+            tty.debug('Trying to symlink setup script to: {}'.format(env_var))
+            if symlink_path:
+                # make sure that the path exists, create if not
+                if not os.path.exists(os.path.dirname(symlink_path)):
+                    os.makedirs(os.path.dirname(symlink_path))
+                # make sure that an existing file will be overwritten,
+                # even if it is a symlink (for which 'exists' is false!)
+                if os.path.exists(symlink_path) or os.path.islink(symlink_path):
+                    os.remove(symlink_path)
+                os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
+        except:
+            tty.warn("Could not create symlink")
 
 
 class Key4hepPackage(PackageBase):
