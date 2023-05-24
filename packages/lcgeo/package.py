@@ -67,12 +67,14 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
         env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib64)
 
     def setup_build_environment(self, env):
         env.set('LCGEO', self.prefix.share.lcgeo.compact)
         env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix.lib64)
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 
     def setup_dependent_build_environment(self, spack_env, dependent_spec):
@@ -80,8 +82,8 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
         spack_env.set('lcgeo_DIR', self.prefix.share.lcgeo.compact)
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib)
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix.lib64)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix.lib64)
 
     # dd4hep tests need to run after install step:
     # disable the usual check
