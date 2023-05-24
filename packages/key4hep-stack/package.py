@@ -138,5 +138,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
 
+        # remove when https://github.com/spack/spack/pull/37881 is merged
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['podio'].prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['podio'].prefix.lib64)
+
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['edm4hep'].prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['edm4hep'].prefix.lib64)
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
