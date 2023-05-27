@@ -148,5 +148,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib)
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib64)
 
+        spack_env.prepend_path('GSL_ROOT_DIR', self.spec['gsl'].prefix)
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
