@@ -127,16 +127,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         spack_env.set('LC_ALL', 'C')
         spack_env.set('KEY4HEP_STACK', os.path.join(self.spec.prefix, 'setup.sh'))
+
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
         spack_env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
-
-        # remove when https://github.com/spack/spack/pull/37821 is merged
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib)
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib64)
-
-        # remove when https://github.com/spack/spack/pull/37824 is merged
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
 
         # remove when https://github.com/spack/spack/pull/37881 is merged
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['podio'].prefix.lib)
@@ -148,6 +141,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib)
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib64)
 
+        # Avoid picking up the system GSL, see https://github.com/key4hep/key4hep-spack/issues/489
         spack_env.prepend_path('GSL_ROOT_DIR', self.spec['gsl'].prefix)
 
     def install(self, spec, prefix):
