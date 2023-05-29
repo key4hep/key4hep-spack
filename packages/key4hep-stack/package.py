@@ -93,6 +93,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('onnx', when='+devtools')
     #depends_on('prmon', when='+devtools')
     depends_on('py-awkward', when='+devtools')
+    depends_on('py-boto3', when='+devtools')
     depends_on('py-gcovr', when='+devtools')
     depends_on('py-h5py', when='+devtools')
     depends_on('py-ipykernel', when='+devtools')
@@ -115,7 +116,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     #depends_on('py-tensorflow') # todo: check if we should integrate.
     #depends_on('py-zfit') # todo: add in spack
     #depends_on('py-root-pandas') # todo: add in spack
-
 
     conflicts('%gcc@8.3.1',
               msg="There are known issues with compilers from redhat's devtoolsets" \
