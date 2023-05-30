@@ -16,7 +16,7 @@ packages:
   podio:
     variants: +sio
   py-numpy:
-    spec: py-numpy^openblas
+    require: ^openblas
   py-matplotlib:
     variants: backend=qt5agg
   py-torch:
