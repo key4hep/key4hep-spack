@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-from spack.pkg.k4.key4hep_stack import Key4hepPackage
+from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
-class K4clue(CMakePackage, Key4hepPackage):
+class K4clue(CMakePackage, Ilcsoftpackage):
     """CLUE Clustering for Key4hep"""
 
     url      = "https://github.com/key4hep/k4Clue/archive/v01-00-01.tar.gz"
@@ -19,7 +19,7 @@ class K4clue(CMakePackage, Key4hepPackage):
 
     version('main', branch='main')
 
-    version("1.0.1", sha256="e6977ca0b4d841116a2c2d7755ce2373ff30624ecb66c1b3b4514b5127886616")
+    version("1.0.1", sha256="bf6c1c626bd21684bca8313525e7f6520bde2b7cd666ecce935209c741d93aec")
     version("1.0", sha256="b1b1c871a2425305e56c1923c31eded300a28cd1a97c55e8b440caaefcafc7d1")
 
     depends_on('cupla')
