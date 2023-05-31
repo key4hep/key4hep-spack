@@ -3,10 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
-
-
-class k4geo(CMakePackage):
+class K4geo(CMakePackage):
     """DD4hep geometry models for future colliders."""
 
     homepage = "https://github.com/key4hep/k4geo"
