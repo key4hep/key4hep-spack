@@ -141,6 +141,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib)
         spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].prefix.lib64)
 
+        # remove when https://github.com/spack/spack/pull/38015 is merged
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
+        spack_env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
+
         # Avoid picking up the system GSL, see https://github.com/key4hep/key4hep-spack/issues/489
         spack_env.prepend_path('GSL_ROOT_DIR', self.spec['gsl'].prefix)
 
