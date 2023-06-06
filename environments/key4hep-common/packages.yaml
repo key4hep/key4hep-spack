@@ -8,7 +8,7 @@ packages:
                      # newer versions of dd4hep save their output in the Frame format
   gaudi:
     # +examples seems not be compatible with newer versions of python
-    variants: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc
+    variants: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
     variants: +python+tui+source-highlight~debuginfod
   llvm:
