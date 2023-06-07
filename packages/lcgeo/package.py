@@ -18,6 +18,7 @@ class Lcgeo(CMakePackage, Ilcsoftpackage):
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    version("0.18.1", sha256="2bcdcbb772b9672994ac3cf8e9691f55f23a898d67c6f6c84ae0ae1b5416d893")
     version("0.18",   sha256="50cd058e80baba21748156f3603a45a2388c6f3a8823d9aaa3f419eb58038fc9")
     version("0.17",   sha256="4b515895df7a65b0c1f4061a8947b1bbb4c727b924ad73a1f03722de31327c3f")
     version('0.16.8', sha256='6ce3ec018aa2b86a50f7c2dd868c0bd9d46b413bdde70139fcbe2f8167bb835a')
