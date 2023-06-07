@@ -13,17 +13,18 @@ import llnl.util.tty as tty
 import spack.platforms
 import spack.spec
 import spack.util.environment
-from  spack.util.environment import *
+from spack.util.environment import *
 import spack.user_environment as uenv
 import spack.store
 
-#TODO: can be removed when spack versions prior to v0.18.1 are no longer needed.
+# TODO: can be removed when spack versions prior to v0.18.1 are no longer needed
 try:
     from spack.package import PackageBase
 except ImportError:
     from spack.package_base import PackageBase
 
 from shlex import quote as cmd_quote
+
 
 def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment.
@@ -35,7 +36,6 @@ def k4_setup_env_for_framework_tests(spec, env):
         # make sure that ROOT_INCLUDE_PATH is set
         if dspec.satisfies('^root'):
             spec['root'].package.setup_dependent_run_environment(env, dspec)
-
 
 
 def k4_generate_setup_script(env_mod, shell='sh'):
@@ -65,13 +65,12 @@ def k4_generate_setup_script(env_mod, shell='sh'):
             x.execute(new_env)
         if env_set_not_prepend[name] and len(actions) > 1:
             tty.warn(f'Var {name} is set multiple times!')
-  
+
     # deduplicate paths
     for name in new_env:
         path_list = new_env[name].split(":")
         pruned_path_list = prune_duplicate_paths(path_list)
         new_env[name] = ":".join(pruned_path_list)
-
 
     # get shell commands
     k4_shell_set_strings = {
@@ -88,6 +87,7 @@ def k4_generate_setup_script(env_mod, shell='sh'):
             cmds += [k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))]
     return ''.join(cmds)
 
+
 def ilc_url_for_version(self, version):
     """Translate version numbers to ilcsoft conventions.
     in spack, the convention is: 0.1 (or 0.1.0) 0.1.1, 0.2, 0.2.1 ...
@@ -97,7 +97,7 @@ def ilc_url_for_version(self, version):
 
     :param self: spack package class that has a url
     :type self: class: `spack.PackageBase`
-    :param version: version 
+    :param version: version
     :type param: str
     """
     base_url = self.url.rsplit('/', 1)[0]

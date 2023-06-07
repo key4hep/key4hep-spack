@@ -50,7 +50,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('edm4hep')
     depends_on('geant4+qt')
     depends_on('guinea-pig')
-    #depends_on('k4actstracking')
+    # depends_on('k4actstracking')
     depends_on('k4clue')
     depends_on('k4edm4hep2lcioconv')
     depends_on('k4fwcore')
