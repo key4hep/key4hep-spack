@@ -9,4 +9,3 @@ spack:
   specs:
   - lhapdf~python
   - key4hep-stack+devtools
-  - gaudi
