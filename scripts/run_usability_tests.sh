@@ -55,10 +55,11 @@ cat > macro.C <<EOF
 }
 EOF
 run_test "ROOT test" "root -b -q -l macro.C"
+run_test "clang-format test" "echo 'int main() { return 0 ; }' | clang-format | diff - <(echo 'int main() { return 0; }')"
 
 run_test "DD4hep test" "ddsim --compactFile DD4hep/DDDetectors/compact/SiD.xml -G -N 1 --gun.particle=mu- --gun.distribution uniform --gun.energy '1*GeV' -O muons.slcio"
 # run_test "podio test" "podio-dump muons.slcio"
-# run_test "edm4hep test" 
+# run_test "edm4hep test"
 # run_test "k4fwcore test" "k4run -n 10 --input muons.slcio --output output.slcio --processors k4FWCoreTestProcessor"
 # run_test "whizard test" "whizard -r 0 -N 10 -f $LCGEO/CLIC/models/CLIC_o3_v14/ee_ZH_Zmumu_Hbb.evt -o test.stdhep"
 
