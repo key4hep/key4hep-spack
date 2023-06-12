@@ -61,7 +61,14 @@ run_test "DD4hep test" "ddsim --compactFile DD4hep/DDDetectors/compact/SiD.xml -
 # run_test "podio test" "podio-dump muons.slcio"
 # run_test "edm4hep test"
 # run_test "k4fwcore test" "k4run -n 10 --input muons.slcio --output output.slcio --processors k4FWCoreTestProcessor"
-# run_test "whizard test" "whizard -r 0 -N 10 -f $LCGEO/CLIC/models/CLIC_o3_v14/ee_ZH_Zmumu_Hbb.evt -o test.stdhep"
+cat > ee.sin <<EOF
+    process ee = e1, E1 => e2, E2
+    sqrts = 360 GeV
+    n_events = 10
+    sample_format = lhef
+    simulate (ee)
+EOF
+run_test "whizard test" "whizard -r ee.sin"
 
 
 # Report results
