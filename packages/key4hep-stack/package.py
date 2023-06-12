@@ -83,7 +83,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on('cepcsw')
     
-    depends_on('catch2@3.1:', when='+devtools')
+    depends_on('catch2@3:', when='+devtools')
     depends_on('cmake', when='+devtools')
     depends_on('doxygen', when='+devtools')
     depends_on('gdb', when='+devtools')
