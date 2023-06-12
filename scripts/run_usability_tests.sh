@@ -33,6 +33,7 @@ int main() {
 }
 EOF
 run_test "c++ test" "g++ -o hello hello.cpp && ./hello"
+run_test "c++17 test" "g++ -std=c++17 -o hello hello.cpp && ./hello"
 cat <<EOF > hello.f
       program hello
       print *, "Hello, world!"
