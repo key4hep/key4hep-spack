@@ -72,30 +72,30 @@ EOF
 run_test "whizard test" "whizard -r ee.sin"
 
 cat > fcc.py <<EOF
-    import ROOT
+import ROOT
 
-    ROOT.gSystem.Load("libFCCAnalyses")
-    ROOT.gInterpreter.Declare("using namespace FCCAnalyses;")
-    _fcc  = ROOT.dummyLoader
+ROOT.gSystem.Load("libFCCAnalyses")
+ROOT.gInterpreter.Declare("using namespace FCCAnalyses;")
+_fcc  = ROOT.dummyLoader
 
-    ROOT.gInterpreter.Declare('''\
-    #include "edm4hep/MCParticleData.h"
+ROOT.gInterpreter.Declare('''\
+#include "edm4hep/MCParticleData.h"
 
-    ROOT::VecOps::RVec<edm4hep::MCParticleData> gen_particles() {
-    ROOT::VecOps::RVec<edm4hep::MCParticleData> result;
-    edm4hep::MCParticleData mcPart;
-    mcPart.momentum.x = 11;
-    result.push_back(mcPart);
+ROOT::VecOps::RVec<edm4hep::MCParticleData> gen_particles() {
+ROOT::VecOps::RVec<edm4hep::MCParticleData> result;
+edm4hep::MCParticleData mcPart;
+mcPart.momentum.x = 11;
+result.push_back(mcPart);
 
-    return result;
-    }
-    ''')
+return result;
+}
+''')
 
-    df = ROOT.RDataFrame(10)
-    df2 = df.Define("particles", "gen_particles()")
-    df3 = df2.Define("particles_pt", "MCParticle::get_pt(particles)")
-    hist = df3.Histo1D("particles_pt")
-    hist.Print()
+df = ROOT.RDataFrame(10)
+df2 = df.Define("particles", "gen_particles()")
+df3 = df2.Define("particles_pt", "MCParticle::get_pt(particles)")
+hist = df3.Histo1D("particles_pt")
+hist.Print()
 EOF
 run_test "FCCAnalyses test" "python fcc.py"
 
