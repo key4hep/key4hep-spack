@@ -47,6 +47,8 @@ class K4gen(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
         spack_env.set("K4GEN", self.prefix.share.k4Gen)
 
 
