@@ -34,6 +34,8 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
 
     def setup_build_environment(self, spack_env):
         spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
