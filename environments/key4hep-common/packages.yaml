@@ -60,6 +60,9 @@ packages:
     variants: ~openmp
   gperftools:
     variants: ~libunwind
+  hdf5:
+    variants: +cxx+hl
+    require: "+cxx+hl"
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17
