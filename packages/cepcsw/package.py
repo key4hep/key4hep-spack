@@ -67,5 +67,5 @@ class Cepcsw(CMakePackage, Key4hepPackage):
             flags.append('-Wno-c++11-narrowing')
         return (flags, None, flags)
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
+    def setup_run_environment(self, env):
+        env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)

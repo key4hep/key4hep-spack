@@ -28,25 +28,22 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+    def setup_run_environment(self, env):
+        env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['fccdetectors'].libs.directories[0])
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].prefix + '/lib')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib')
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].prefix + '/lib64')
+    def setup_build_environment(self, env):
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].libs.directories[0])
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
-        spack_env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
 
     def test(self):
         self.run_test('geoDisplay', options=["$FCCDETECTORS/Detector/DetFCChhBaseline1/compact/FCChh_DectMaster.xml"], purpose="Construct FCChh Detector Geometry.")

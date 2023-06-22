@@ -42,5 +42,5 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
         )
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.set("K4EDM4HEP2LCIOCONV", self.prefix.share.k4EDM4hep2LcioConv)
+    def setup_run_environment(self, env):
+        env.set("K4EDM4HEP2LCIOCONV", self.prefix.share.k4EDM4hep2LcioConv)

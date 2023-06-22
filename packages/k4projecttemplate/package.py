@@ -29,9 +29,9 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.set("K4PROJECTTEMPLATE", self.prefix.share.k4ProjectTemplate)
+    def setup_run_environment(self, env):
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.set("K4PROJECTTEMPLATE", self.prefix.share.k4ProjectTemplate)
     
 
     def setup_build_environment(self, env):

@@ -47,11 +47,11 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         args.append(self.define('cupla_DIR', self.spec['cupla'].prefix))
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.set("K4CLUE", self.prefix.share.k4Clue)
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
-        spack_env.prepend_path("CPATH", self.spec['cupla'].prefix.include)
-        spack_env.prepend_path("CPATH", self.spec['alpaka'].prefix.include)
+    def setup_run_environment(self, env):
+        env.set("K4CLUE", self.prefix.share.k4Clue)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("CPATH", self.spec['cupla'].prefix.include)
+        env.prepend_path("CPATH", self.spec['alpaka'].prefix.include)
 
     
     def setup_build_environment(self, env):

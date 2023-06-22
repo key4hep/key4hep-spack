@@ -33,5 +33,5 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
         args.append(self.define('INSTALL_DOC', False))
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinDD4hep.so")

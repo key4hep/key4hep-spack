@@ -33,7 +33,7 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
         args.append('-DBUILD_TESTING=%s' % self.run_tests)
         return args
 
-    def setup_run_environment(self, spack_env):
+    def setup_run_environment(self, env):
         # The dictionary headers required kaltest to be in CPATH or ROOT_INCLUDE_PATH
         # other libraries require include to be searchable (which is automatic)
-        spack_env.prepend_path('CPATH', self.prefix.include.kaltest)
+        env.prepend_path('CPATH', self.prefix.include.kaltest)

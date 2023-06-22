@@ -33,8 +33,8 @@ class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
     depends_on('raida')
 
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinTrkProcessors.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libMarlinTrkProcessors.so")
 
     def cmake_args(self):
         return [

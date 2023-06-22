@@ -33,8 +33,8 @@ class Conformaltracking(CMakePackage, Ilcsoftpackage):
     depends_on('raida')
     depends_on('boost')
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libConformalTracking.so")
+    def setup_run_environment(self, spack):
+        spack.prepend_path('MARLIN_DLL', self.prefix.lib + "/libConformalTracking.so")
 
     def cmake_args(self):
         # C++ Standard

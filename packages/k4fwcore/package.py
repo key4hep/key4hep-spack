@@ -42,20 +42,17 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
           args.append('-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt')
         return args
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
+    def setup_dependent_build_environment(self, env, dependent_spec):
         # needed to set up the runtime dependencies for tests
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.prepend_path("PATH", self.prefix.scripts)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4fwcore'].libs.directories[0])
     
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+    def setup_run_environment(self, env):
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.prepend_path("PATH", self.prefix.scripts)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4fwcore'].libs.directories[0])
 	
     def setup_build_environment(self, env):
-        env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib)
-        env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].prefix.lib64)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['gaudi'].libs.directories[0])
         k4_setup_env_for_framework_tests(self.spec, env)

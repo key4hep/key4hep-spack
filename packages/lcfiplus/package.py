@@ -41,5 +41,5 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
     def install_source(self):
         install_tree('include', self.prefix.include)
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCFIPlus.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCFIPlus.so")

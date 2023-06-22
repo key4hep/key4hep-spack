@@ -32,8 +32,8 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
     depends_on('root')
     depends_on('dd4hep')
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libILDPerformance.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libILDPerformance.so")
 
     def cmake_args(self):
         # C++ Standard

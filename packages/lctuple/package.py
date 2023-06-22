@@ -25,8 +25,8 @@ class Lctuple(CMakePackage, Ilcsoftpackage):
     depends_on('marlin')
     depends_on('root')
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCTuple.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLCTuple.so")
 
     def cmake_args(self):
         args = []

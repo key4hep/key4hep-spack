@@ -33,13 +33,13 @@ class Fccsw(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
-        spack_env.set("FCCSW", self.prefix.share.FCCSW)
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.set("FCCSW", self.prefix.share.FCCSW)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
 
-    def setup_run_environment(self, spack_env):
-        spack_env.set("FCCSW", self.prefix.share.FCCSW)
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
+    def setup_run_environment(self, env):
+        env.set("FCCSW", self.prefix.share.FCCSW)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
 
     def setup_build_environment(self, env):
         self.setup_run_environment(env)

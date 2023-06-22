@@ -28,8 +28,8 @@ class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
     depends_on('root')
     depends_on('dd4hep')
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPandoraAnalysis.so")
+    def setup_run_environment(self, spack):
+        spack.prepend_path('MARLIN_DLL', self.prefix.lib + "/libPandoraAnalysis.so")
 
     def cmake_args(self):
         return [

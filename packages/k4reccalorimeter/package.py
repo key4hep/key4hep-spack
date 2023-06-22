@@ -44,11 +44,11 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec.variants['cxxstd'].value)
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib64)
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)
+    def setup_run_environment(self, env):
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4reccalorimeter'].libs.directories[0])
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.prepend_path("PATH", self.prefix.scripts)
+        env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)
 
     def setup_build_environment(self, env):
         self.setup_run_environment(env)

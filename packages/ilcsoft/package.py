@@ -108,10 +108,10 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
-    def setup_run_environment(self, spack_env):
+    def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
-        spack_env.set("LC_ALL", "C")
+        env.set("LC_ALL", "C")
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'ILCSOFT_LATEST_SETUP_PATH')

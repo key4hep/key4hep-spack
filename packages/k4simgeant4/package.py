@@ -34,25 +34,23 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
         args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.set("K4SIMGEANT4", self.prefix.share.k4SimGeant4)
+    def setup_run_environment(self, env):
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.prepend_path("PATH", self.prefix.scripts)
+        env.set("K4SIMGEANT4", self.prefix.share.k4SimGeant4)
         install_path = join_path(self.spec['g4ensdfstate'].prefix.share,
                                  'data', 'G4ENSDFSTATE{0}'
                                  .format(self.spec['g4ensdfstate'].version))
-        spack_env.set('G4ENSDFSTATEDATA', install_path)
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-        spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib64)
+        env.set('G4ENSDFSTATEDATA', install_path)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].libs.directories[0])
 
-    def setup_build_environment(self, spack_env):
+    def setup_build_environment(self, env):
         install_path = join_path(self.spec['g4ensdfstate'].prefix.share,
                                  'data', 'G4ENSDFSTATE{0}'
                                  .format(self.spec['g4ensdfstate'].version))
-        spack_env.set('G4ENSDFSTATEDATA', install_path)
-        k4_setup_env_for_framework_tests(self.spec, spack_env)
+        env.set('G4ENSDFSTATEDATA', install_path)
+        k4_setup_env_for_framework_tests(self.spec, env)
 
-    def setup_dependent_build_environment(self, spack_env, dependent_spec):
-        spack_env.prepend_path('PYTHONPATH', self.prefix.python)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        env.prepend_path('PYTHONPATH', self.prefix.python)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].libs.directories[0])

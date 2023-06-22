@@ -68,12 +68,11 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
         args = [self.define("FORCE_COLORED_OUTPUT", False)]
         return args
 
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path("PYTHONPATH", self.prefix.python)
-        spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
-        spack_env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
+    def setup_run_environment(self, env):
+        env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("PATH", self.prefix.scripts)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4marlinwrapper'].libs.directories[0])
+        env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
 
-    def setup_build_environment(self, spack_env):
-        spack_env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix.lib)
+    def setup_build_environment(self, env):
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].libs.directories[0])

@@ -56,9 +56,9 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
       return args
 
     # todo: update the cmake config to remove this
-    def setup_build_environment(self, spack_env):
-      spack_env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
-      spack_env.prepend_path('ROOT_INCLUDE_PATH', self.spec['vdt'].prefix.include)
+    def setup_build_environment(self, env):
+      env.prepend_path('PYTHONPATH', self.prefix.python) # todo: remove
+      env.prepend_path('ROOT_INCLUDE_PATH', self.spec['vdt'].prefix.include)
 
       if self.spec.satisfies("@:0.6.0"):
           python_version = self.spec['python'].version.up_to(2)
@@ -66,23 +66,22 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
           awk_pydir = join_path(awk_lib_dir,
                                'python{0}'.format(python_version),
                                'site-packages/awkward/include')
-          spack_env.prepend_path('CPATH', awk_pydir)
+          env.prepend_path('CPATH', awk_pydir)
           awk_pydir = join_path(awk_lib_dir,
                                'python{0}'.format(python_version),
                                'site-packages')
-          spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
-      k4_setup_env_for_framework_tests(self.spec, spack_env)
+          env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+      k4_setup_env_for_framework_tests(self.spec, env)
 
       
 
-    def setup_run_environment(self, spack_env):
-      spack_env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
-      spack_env.prepend_path('PYTHONPATH', self.prefix.python)
+    def setup_run_environment(self, env):
+      env.prepend_path('ROOT_INCLUDE_PATH', self.prefix.include.FCCAnalyses)
+      env.prepend_path('PYTHONPATH', self.prefix.python)
       # this should point to share/ by key4hep convention
       #  but we want to make it work with the tutorials
-      spack_env.set("FCCANALYSES", self.prefix.python)
-      spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib)
-      spack_env.prepend_path('LD_LIBRARY_PATH', self.prefix.lib64)
+      env.set("FCCANALYSES", self.prefix.python)
+      env.prepend_path('LD_LIBRARY_PATH', self.spec['fccanalyses'].libs.directories[0])
       if self.spec.satisfies("@:0.6.0"):
           # libawkward.so is in prefix/lib/pythonX.Y/site-packages
           python_version = self.spec['python'].version.up_to(2)
@@ -90,8 +89,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
           awk_pydir = join_path(awk_lib_dir,
                                'python{0}'.format(python_version),
                                'site-packages')
-          spack_env.prepend_path('CPATH', join_path(awk_pydir, 'include'))
-          spack_env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
+          env.prepend_path('CPATH', join_path(awk_pydir, 'include'))
+          env.prepend_path('LD_LIBRARY_PATH', awk_pydir)
 
     # tests need installation, so skip here ...
     def check(self):

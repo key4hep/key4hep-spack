@@ -26,8 +26,8 @@ class Lich(CMakePackage, Ilcsoftpackage):
     depends_on('marlin')
     depends_on('root')
     
-    def setup_run_environment(self, spack_env):
-        spack_env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLICH.so")
+    def setup_run_environment(self, env):
+        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libLICH.so")
 
     def cmake_args(self):
         return [
