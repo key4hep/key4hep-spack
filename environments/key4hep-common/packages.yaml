@@ -1,70 +1,70 @@
 packages:
   boost:
-    variants: +python
+    require: +python
     buildable: true
   dd4hep:
-    variants: +lcio+xercesc+hepmc3
+    require: +lcio+xercesc+hepmc3
     require: "@1.23" # temporary pinning until there is Frame reading since
                      # newer versions of dd4hep save their output in the Frame format
   gaudi:
     # +examples seems not be compatible with newer versions of python
-    variants: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
+    require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
-    variants: +python+tui+source-highlight~debuginfod
+    require: +python+tui+source-highlight~debuginfod
   llvm:
-    variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
+    require: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   podio:
-    variants: +sio
+    require: +sio
   py-numpy:
     require: ^openblas
   py-matplotlib:
-    variants: backend=qt5agg
+    require: backend=qt5agg
   py-torch:
-    variants: ~cuda
+    require: ~cuda
     require: "@1.13.1"
 
   mesa18:
-    variants: ~llvm+glx+opengl swr=none
+    require: ~llvm+glx+opengl swr=none
     buildable: true
   mesa:
-    variants: ~llvm+glx+opengl swr=none
+    require: ~llvm+glx+opengl swr=none
     buildable: true
   geant4:
-    variants: +qt+opengl+vecgeom cxxstd=17
+    require: +qt+opengl+vecgeom cxxstd=17
     buildable: true
   root:
-    variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
+    require: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
     buildable: true
   marlin:
-    variants: +lccd
+    require: +lccd
     buildable: true
   py-tensorflow:
-    variants: ~cuda~nccl
+    require: ~cuda~nccl
     buildable: true
   whizard:
-    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
     buildable: true
   k4simdelphes:
-    variants: ~delphes_hepmc
+    require: ~delphes_hepmc
     buildable: true
   evtgen:
-    variants: +photos
+    require: +photos
     buildable: true
   py-setuptools-scm:
-    variants: +toml
+    require: +toml
   photos:
-    variants: +hepmc3
+    require: +hepmc3
   xrootd:
-    variants: +krb5
+    require: +krb5
   xgboost:
-    variants: ~openmp
+    require: ~openmp
   gperftools:
-    variants: ~libunwind
+    require: ~libunwind
   hdf5:
     require: +cxx+hl
   all:
     target: [x86_64]
-    variants: build_type=Release cxxstd=17
+    require: build_type=Release cxxstd=17
     buildable: true
     version: []
     providers:
