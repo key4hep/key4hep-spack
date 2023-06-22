@@ -18,8 +18,7 @@ packages:
   py-matplotlib:
     require: backend=qt5agg
   py-torch:
-    require: ~cuda
-    require: "@1.13.1"
+    require: @1.13.1~cuda
 
   mesa18:
     require: ~llvm+glx+opengl swr=none
