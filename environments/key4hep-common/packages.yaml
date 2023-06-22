@@ -3,9 +3,7 @@ packages:
     require: +python
     buildable: true
   dd4hep:
-    require: +lcio+xercesc+hepmc3
-    require: "@1.23" # temporary pinning until there is Frame reading since
-                     # newer versions of dd4hep save their output in the Frame format
+    require: +edm4hep+lcio+xercesc+hepmc3
   gaudi:
     # +examples seems not be compatible with newer versions of python
     require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
