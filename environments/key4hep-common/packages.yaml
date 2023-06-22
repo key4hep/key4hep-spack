@@ -21,16 +21,16 @@ packages:
     require: "@1.13.1~cuda"
 
   mesa18:
-    require: ~llvm+glx+opengl swr=none
+    variants: ~llvm+glx+opengl swr=none
     buildable: true
   mesa:
-    require: ~llvm+glx+opengl swr=none
+    variants: ~llvm+glx+opengl swr=none
     buildable: true
   geant4:
     require: +qt+opengl+vecgeom cxxstd=17
     buildable: true
   root:
-    require: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
+    variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
     buildable: true
   marlin:
     require: +lccd
@@ -39,7 +39,7 @@ packages:
     require: ~cuda~nccl
     buildable: true
   whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
     buildable: true
   k4simdelphes:
     require: ~delphes_hepmc
@@ -61,7 +61,7 @@ packages:
     require: +cxx+hl
   all:
     target: [x86_64]
-    require: build_type=Release cxxstd=17
+    variants: build_type=Release cxxstd=17
     buildable: true
     version: []
     providers:
