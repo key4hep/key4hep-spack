@@ -12,7 +12,7 @@ packages:
   gdb:
     variants: +python+tui+source-highlight~debuginfod
   llvm:
-    variants: ~flang~lldb~lld~mlir~internal_unwind~polly~libcxx~limomptarget~omp_debug~compiler-rt~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd targets="x86"
+    variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   podio:
     variants: +sio
   py-numpy:
