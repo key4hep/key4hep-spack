@@ -128,6 +128,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set('LC_ALL', 'C')
         env.set('KEY4HEP_STACK', os.path.join(self.spec.prefix, 'setup.sh'))
 
+        # this fixes loading the local emacs, see https://github.com/key4hep/key4hep-spack/issues/486
+        env.unset('XDG_DATA_DIRS')
+
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
         env.prepend_path('CPATH', self.spec['vdt'].prefix.include)
 
@@ -141,6 +144,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # remove when https://github.com/spack/spack/pull/38407 is merged
         env.prepend_path('PYTHONPATH', self.spec['edm4hep'].prefix.python)
+
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')
