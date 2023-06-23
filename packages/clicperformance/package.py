@@ -29,7 +29,7 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
     depends_on('root')
     depends_on('dd4hep')
     depends_on('raida')
-    depends_on('lcgeo')
+    depends_on('k4geo')
 
     depends_on('ninja', type='build')
 

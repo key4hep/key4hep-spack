@@ -32,7 +32,7 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     depends_on('dd4hep')
 
     # testing
-    depends_on('lcgeo')
+    depends_on('k4geo')
     depends_on('marlindd4hep')
 
 

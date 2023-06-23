@@ -22,7 +22,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("fccdetectors")
     depends_on("k4simgeant4")
     depends_on("k4reccalorimeter")
-    depends_on("lcgeo")
+    depends_on("k4geo")
     depends_on("fccanalyses")
     depends_on('root')
     depends_on('py-six', type=('build', 'run'))

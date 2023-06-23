@@ -60,7 +60,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on('k4simdelphes')
     depends_on('k4simgeant4')
     depends_on('kkmcee')
-    depends_on('lcgeo')
+    depends_on('k4geo')
     depends_on('podio')
     depends_on('python~debug')
     depends_on('whizard +lcio +openloops hepmc=2')
@@ -138,6 +138,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # remove when https://github.com/spack/spack/pull/38015 is merged
         env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].libs.directories[0])
+
+        # remove when https://github.com/spack/spack/pull/38407 is merged
+        env.prepend_path('PYTHONPATH', self.spec['edm4hep'].prefix.python)
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, 'K4_LATEST_SETUP_PATH')

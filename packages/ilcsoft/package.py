@@ -78,7 +78,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("lich")
     depends_on("lccd")
     depends_on("lcio")
-    depends_on("lcgeo")
+    depends_on("k4geo")
     depends_on("marlin")
     depends_on("marlinutil")
     depends_on("marlindd4hep")

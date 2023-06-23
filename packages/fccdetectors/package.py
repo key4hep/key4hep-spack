@@ -18,7 +18,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     version("0.1pre06", tag="v0.1pre06")
 
     depends_on('dd4hep')
-    depends_on('lcgeo')
+    depends_on('k4geo')
     depends_on('lcio')
     depends_on('root')
 
@@ -31,12 +31,12 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, env):
         env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4geo'].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.spec['fccdetectors'].libs.directories[0])
 
     def setup_build_environment(self, env):
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['lcgeo'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4geo'].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].libs.directories[0])
 
     def setup_dependent_build_environment(self, env, dependent_spec):

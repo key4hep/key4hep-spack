@@ -112,7 +112,7 @@ if __name__ == "__main__":
     k4_add_latest_commit("lich", "danerdaner/lich")
     k4_add_latest_commit("lccd", "ilcsoft/lccd")
     k4_add_latest_commit("lcio", "ilcsoft/lcio")
-    k4_add_latest_commit("lcgeo", "key4hep/k4geo")
+    k4_add_latest_commit("k4geo", "key4hep/k4geo")
     k4_add_latest_commit("marlin", "ilcsoft/marlin")
     k4_add_latest_commit("marlinutil", "ilcsoft/marlinutil")
     k4_add_latest_commit("marlindd4hep", "ilcsoft/marlindd4hep")
