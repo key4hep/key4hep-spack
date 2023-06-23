@@ -56,6 +56,28 @@ cat > macro.C <<EOF
 }
 EOF
 run_test "ROOT test" "root -b -q -l macro.C"
+cat > root_numpy.py <<EOF
+import ROOT
+df = ROOT.RDataFrame(10) \
+         .Define("x", "(int)rdfentry_") \
+         .Define("y", "1.f/(1.f+rdfentry_)")
+ROOT.gInterpreter.Declare("""
+// Inject the C++ class CustomObject in the C++ runtime.
+class CustomObject {
+public:
+    int x = 42;
+};
+// Create a function that returns such an object. This is called to fill the dataframe.
+CustomObject fill_object() { return CustomObject(); }
+""")
+
+df3 = df.Define("custom_object", "fill_object()")
+npy5 = df3.AsNumpy()
+print("Read-out of C++ objects:\n{}\n".format(npy5["custom_object"]))
+print("Access to all methods and data members of the C++ object:\nObject: {}\nAccess data member: custom_object.x = {}\n".format(
+    repr(npy5["custom_object"][0]), npy5["custom_object"][0].x))
+EOF
+run_test "ROOT_numpy test" "python root_numpy.py"
 run_test "clang-format test" "echo 'int main() { return 0 ; }' | clang-format | diff - <(echo 'int main() { return 0; }')"
 
 run_test "DD4hep test" "ddsim --compactFile DD4hep/DDDetectors/compact/SiD.xml -G -N 1 --gun.particle=mu- --gun.distribution uniform --gun.energy '1*GeV' -O muons.slcio"
@@ -98,6 +120,8 @@ hist = df3.Histo1D("particles_pt")
 hist.Print()
 EOF
 run_test "FCCAnalyses test" "python fcc.py"
+
+
 
 
 # Report results
