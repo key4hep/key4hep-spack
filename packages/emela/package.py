@@ -6,7 +6,7 @@
 class Emela(CMakePackage):
     """Library that implements the evolution in pure QED of the unpolarised electron parton distribution functions (PDFs) up to next-to-leading logarithmic (NLL) approximation"""
 
-    homepage = "https://github.com/gstagnit/eMELA"
+    homepage = "https://github.com/jmcarcell/eMELA"
     url = "https://github.com/gstagnit/eMELA/archive/refs/tags/v1.0.tar.gz"
 
     maintainers = ["jmcarcell"]
@@ -19,6 +19,7 @@ class Emela(CMakePackage):
     variant("lhapdf", default=True, description="Use LHAPDF")
     variant("shared", default=False, description="Build libraries as shared instead of static")
 
+    depends_on("boost")
     depends_on("lhapdf", when="+lhapdf")
 
     def cmake_args(self):
