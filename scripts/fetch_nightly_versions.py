@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
     k4_add_latest_commit("podio", "aidasoft/podio")
-    # k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
+    k4_add_latest_commit("dd4hep", "aidasoft/dd4hep")
     k4_add_latest_commit("k4fwcore", "key4hep/k4fwcore")
     k4_add_latest_commit("k4projecttemplate", "key4hep/k4-project-template")
     k4_add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes",
@@ -98,7 +98,6 @@ if __name__ == "__main__":
     k4_add_latest_commit("garlic", "ilcsoft/garlic")
     k4_add_latest_commit('k4edm4hep2lcioconv', 'key4hep/k4edm4hep2lcioconv')
     k4_add_latest_commit("k4marlinwrapper", "key4hep/k4marlinwrapper")
-    k4_add_latest_commit("generalbrokenlines", "GeneralBrokenLines/GeneralBrokenLines")
     k4_add_latest_commit("gear", "ilcsoft/gear")
     k4_add_latest_commit("ilcutil", "ilcsoft/ilcutil")
     k4_add_latest_commit("ildperformance", "ilcsoft/ildperformance")
@@ -109,7 +108,6 @@ if __name__ == "__main__":
     k4_add_latest_commit("lcfiplus", "lcfiplus/lcfiplus")
     k4_add_latest_commit("lctuple", "ilcsoft/lctuple")
     k4_add_latest_commit("lcfivertex", "ilcsoft/lcfivertex")
-    k4_add_latest_commit("lich", "danerdaner/lich")
     k4_add_latest_commit("lccd", "ilcsoft/lccd")
     k4_add_latest_commit("lcio", "ilcsoft/lcio")
     k4_add_latest_commit("k4geo", "key4hep/k4geo")
