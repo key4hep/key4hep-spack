@@ -28,3 +28,6 @@ class Emela(CMakePackage):
             self.define_from_variant("SHARED", "shared"),
         ]
         return args
+
+    def setup_run_environment(self, env):
+        env.prepend_path("PATH", self.prefix.bin)
