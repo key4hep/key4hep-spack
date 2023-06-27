@@ -42,7 +42,8 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
                                  'data', 'G4ENSDFSTATE{0}'
                                  .format(self.spec['g4ensdfstate'].version))
         env.set('G4ENSDFSTATEDATA', install_path)
-        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].libs.directories[0])
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].prefix.lib64)
 
     def setup_build_environment(self, env):
         install_path = join_path(self.spec['g4ensdfstate'].prefix.share,
@@ -53,4 +54,6 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.prepend_path('PYTHONPATH', self.prefix.python)
-        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].libs.directories[0])
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['k4simgeant4'].prefix.lib64)
+
