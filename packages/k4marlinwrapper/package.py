@@ -71,7 +71,8 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4marlinwrapper'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4marlinwrapper'].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['k4marlinwrapper'].prefix.lib64)
         env.set("K4MARLINWRAPPER", self.prefix.share.k4MarlinWrapper)
 
     def setup_build_environment(self, env):
