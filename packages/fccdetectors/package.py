@@ -34,7 +34,8 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec['k4geo'].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec['k4geo'].prefix.lib64)
         env.prepend_path("LD_LIBRARY_PATH", self.spec['lcio'].libs.directories[0])
-        env.prepend_path("LD_LIBRARY_PATH", self.spec['fccdetectors'].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['fccdetectors'].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec['fccdetectors'].prefix.lib64)
 
     def setup_build_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec['k4geo'].prefix.lib)
