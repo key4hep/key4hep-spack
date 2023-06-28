@@ -140,7 +140,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.prepend_path('LD_LIBRARY_PATH', self.spec['lcio'].libs.directories[0])
 
         # remove when https://github.com/spack/spack/pull/38015 is merged
-        env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].libs.directories[0])
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib)
+        env.prepend_path('LD_LIBRARY_PATH', self.spec['dd4hep'].prefix.lib64)
 
         # remove when https://github.com/spack/spack/pull/38407 is merged
         env.prepend_path('PYTHONPATH', self.spec['edm4hep'].prefix.python)
