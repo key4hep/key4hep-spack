@@ -10,19 +10,22 @@ class Conddbmysql(CMakePackage, Key4hepPackage):
     """Linear Collider MySQL Conditions Database."""
 
     homepage = "https://github.com/iLCSoft/conddbmysql"
-    git      = "https://github.com/iLCSoft/conddbmysql.git"
-    url      = "https://github.com/iLCSoft/CondDBMySQL/archive/CondDBMySQL_ILC-0-9-7.tar.gz"
+    git = "https://github.com/iLCSoft/conddbmysql.git"
+    url = "https://github.com/iLCSoft/CondDBMySQL/archive/CondDBMySQL_ILC-0-9-7.tar.gz"
 
-    maintainers = ['vvolkl']
+    maintainers = ["vvolkl"]
 
-    version('master', branch='master')
-    version('0-9-7', sha256='7cbf9e06e2b3d131939ac0b66816814738e8c5021449f19921b4071c1979ef5a')
+    version("master", branch="master")
+    version(
+        "0-9-7",
+        sha256="7cbf9e06e2b3d131939ac0b66816814738e8c5021449f19921b4071c1979ef5a",
+    )
 
     depends_on("mariadb")
     depends_on("ilcutil")
 
     def cmake_args(self):
-        args = []  
+        args = []
         # todo: add variant
-        #args.append(self.define('LCCD_CONDDBMYSQL', False))
+        # args.append(self.define('LCCD_CONDDBMYSQL', False))
         return args

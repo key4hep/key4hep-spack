@@ -6,49 +6,50 @@ from spack.pkg.k4.key4hep_stack import install_setup_script
 
 class Ilcsoft(BundlePackage, Key4hepPackage):
     """Bundle package to install Ilcsoft"""
-    
-    homepage = 'https://cern.ch/key4hep'
+
+    homepage = "https://cern.ch/key4hep"
 
     ##################### versions ########################
     #######################################################
     ###  nightly builds
-    version('master')
+    version("master")
     # this version can be extended with additional version
     # fields to differentiate it, like 'master-2020-10-10'
     #
     ### stable builds
     # builds the latest release of each package
     # the preferred usage is to use the date as version, like:
-    version(datetime.today().strftime('%Y-%m-%d'))
-    #version('2020-10-06') # example, no need to add here.
+    version(datetime.today().strftime("%Y-%m-%d"))
+    # version('2020-10-06') # example, no need to add here.
     # more complex version configurations should be added in an
     # environment
 
     # this bundle package installs a custom setup script, so
     # need to add the install phase (which normally does not
     # exist for a bundle package)
-    phases = ['install']
+    phases = ["install"]
 
-    variant('build_type', default='Release',
-            description='CMake build type',
-            values=('Debug', 'Release', 'RelWithDebInfo', 'MinSizeRel'))
+    variant(
+        "build_type",
+        default="Release",
+        description="CMake build type",
+        values=("Debug", "Release", "RelWithDebInfo", "MinSizeRel"),
+    )
 
     ############################### key4hep ###############
     #######################################################
-    
 
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
-    #depends_on('guinea-pig@master', when="@master")
+    # depends_on('guinea-pig@master', when="@master")
 
-    depends_on('whizard +lcio +openloops hepmc=2')
+    depends_on("whizard +lcio +openloops hepmc=2")
     # todo: figure out the api for the whizard gitlab instance
-    #depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
+    # depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("k4lcioreader")
     depends_on("k4simdelphes")
     depends_on("delphes")
-
 
     ############################### ilcsoft ###############
     #######################################################
@@ -95,7 +96,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("raida")
     depends_on("sio")
 
-
     ##################### developer tools #################
     #######################################################
     depends_on("cmake")
@@ -103,10 +103,12 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
 
     ##################### conflicts #######################
     #######################################################
-    conflicts("%gcc@8.3.1",
-              msg="There are known issues with compilers from redhat's devtoolsets" \
-              "which are therefore not supported." \
-              "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
+    conflicts(
+        "%gcc@8.3.1",
+        msg="There are known issues with compilers from redhat's devtoolsets"
+        "which are therefore not supported."
+        "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286",
+    )
 
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
@@ -114,4 +116,4 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
         env.set("LC_ALL", "C")
 
     def install(self, spec, prefix):
-        return install_setup_script(self, spec, prefix, 'ILCSOFT_LATEST_SETUP_PATH')
+        return install_setup_script(self, spec, prefix, "ILCSOFT_LATEST_SETUP_PATH")

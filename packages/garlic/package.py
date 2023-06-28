@@ -10,25 +10,29 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 class Garlic(CMakePackage, Ilcsoftpackage):
     """Garlic is a Marlin Processor to identify photons and electrons."""
 
-    url      = "https://github.com/iLCSoft/Garlic/archive/v03-01.tar.gz"
+    url = "https://github.com/iLCSoft/Garlic/archive/v03-01.tar.gz"
     homepage = "https://github.com/iLCSoft/Garlic"
-    git      = "https://github.com/iLCSoft/Garlic.git"
+    git = "https://github.com/iLCSoft/Garlic.git"
 
-    maintainers = ['vvolkl']
+    maintainers = ["vvolkl"]
 
-    version('master', branch='master')
-    version('3.1', sha256='a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940')
+    version("master", branch="master")
+    version(
+        "3.1", sha256="a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940"
+    )
 
-    depends_on('ilcutil')
-    depends_on('marlin')
-    depends_on('marlinutil')
-    depends_on('root')
+    depends_on("ilcutil")
+    depends_on("marlin")
+    depends_on("marlinutil")
+    depends_on("root")
 
     def setup_run_environment(self, env):
-        env.prepend_path('MARLIN_DLL', self.prefix.lib + "/libGarlic.so")
+        env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libGarlic.so")
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append('-DCMAKE_CXX_STANDARD=%s' % self.spec['root'].variants['cxxstd'].value)
+        args.append(
+            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+        )
         return args

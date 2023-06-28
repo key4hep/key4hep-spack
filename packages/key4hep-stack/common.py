@@ -27,18 +27,17 @@ from shlex import quote as cmd_quote
 
 
 def k4_setup_env_for_framework_tests(spec, env):
-    """Setup for tests that need the run environment.
-    """
+    """Setup for tests that need the run environment."""
     runenv = environment_modifications_for_spec(spec)
     env.extend(runenv)
-    for dspec in spec.traverse(root=False, order='post'):
+    for dspec in spec.traverse(root=False, order="post"):
         dspec.package.setup_run_environment(env)
         # make sure that ROOT_INCLUDE_PATH is set
-        if dspec.satisfies('^root'):
-            spec['root'].package.setup_dependent_run_environment(env, dspec)
+        if dspec.satisfies("^root"):
+            spec["root"].package.setup_dependent_run_environment(env, dspec)
 
 
-def k4_generate_setup_script(env_mod, shell='sh'):
+def k4_generate_setup_script(env_mod, shell="sh"):
     """Return shell code corresponding to a EnvironmentModifications object.
     Contrary to the spack environment_modifications() method, this does not evaluate
     the current environment, but generates shell code like:
@@ -56,15 +55,17 @@ def k4_generate_setup_script(env_mod, shell='sh'):
     modifications = env_mod.group_by_name()
     new_env = {}
     # keep track wether this variable is supposed to be a list of paths, or set to a single value
-    env_set_not_prepend = {} 
+    env_set_not_prepend = {}
     for name, actions in sorted(modifications.items()):
         env_set_not_prepend[name] = False
         for x in actions:
-            env_set_not_prepend[name] = env_set_not_prepend[name] or isinstance(x, (SetPath, SetEnv))
+            env_set_not_prepend[name] = env_set_not_prepend[name] or isinstance(
+                x, (SetPath, SetEnv)
+            )
             # set a dictionary with the environment variables
             x.execute(new_env)
         if env_set_not_prepend[name] and len(actions) > 1:
-            tty.warn(f'Var {name} is set multiple times!')
+            tty.warn(f"Var {name} is set multiple times!")
 
     # deduplicate paths
     for name in new_env:
@@ -74,18 +75,20 @@ def k4_generate_setup_script(env_mod, shell='sh'):
 
     # get shell commands
     k4_shell_set_strings = {
-        'sh': 'export {0}={1}\n',
+        "sh": "export {0}={1}\n",
     }
     k4_shell_prepend_strings = {
-        'sh': 'export {0}={1}:${0}\n',
+        "sh": "export {0}={1}:${0}\n",
     }
     cmds = []
     for name in set(new_env):
         if env_set_not_prepend[name]:
             cmds += [k4_shell_set_strings[shell].format(name, cmd_quote(new_env[name]))]
         else:
-            cmds += [k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))]
-    return ''.join(cmds)
+            cmds += [
+                k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))
+            ]
+    return "".join(cmds)
 
 
 def ilc_url_for_version(self, version):
@@ -100,7 +103,7 @@ def ilc_url_for_version(self, version):
     :param version: version
     :type param: str
     """
-    base_url = self.url.rsplit('/', 1)[0]
+    base_url = self.url.rsplit("/", 1)[0]
     if len(version) == 1:
         major = version[0]
         minor, patch = 0, 0
@@ -112,10 +115,10 @@ def ilc_url_for_version(self, version):
     # By now the data is normalized enough to handle it easily depending
     # on the value of the patch version
     if patch == 0:
-        version_str = 'v%02d-%02d.tar.gz' % (major, minor)
+        version_str = "v%02d-%02d.tar.gz" % (major, minor)
     else:
-        version_str = 'v%02d-%02d-%02d.tar.gz' % (major, minor, patch)
-    return base_url + '/' + version_str
+        version_str = "v%02d-%02d-%02d.tar.gz" % (major, minor, patch)
+    return base_url + "/" + version_str
 
 
 def install_setup_script(self, spec, prefix, env_var):
@@ -126,22 +129,22 @@ def install_setup_script(self, spec, prefix, env_var):
     env_mod = spack.util.environment.EnvironmentModifications()
 
     # first setup compiler, similar to build_environment.py in spack
-    env_mod.prepend_path('PATH', os.path.dirname(self.compiler.cxx))
+    env_mod.prepend_path("PATH", os.path.dirname(self.compiler.cxx))
 
     # now walk over the dependencies
     with spack.store.db.read_transaction():
-        for dep in spec.traverse(order='post'):
+        for dep in spec.traverse(order="post"):
             env_mod.extend(uenv.environment_modifications_for_spec(dep))
             env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
 
     if self.compiler.cc:
-        env_mod.set('CC', self.compiler.cc)
+        env_mod.set("CC", self.compiler.cc)
     if self.compiler.cxx:
-        env_mod.set('CXX', self.compiler.cxx)
+        env_mod.set("CXX", self.compiler.cxx)
     if self.compiler.f77:
-        env_mod.set('F77', self.compiler.f77)
+        env_mod.set("F77", self.compiler.f77)
     if self.compiler.fc:
-        env_mod.set('FC',  self.compiler.fc)
+        env_mod.set("FC", self.compiler.fc)
 
     # transform to bash commands, and write to file
     cmds = k4_generate_setup_script(env_mod)
@@ -150,7 +153,7 @@ def install_setup_script(self, spec, prefix, env_var):
         # optionally add a symlink (location configurable via environment variable
         try:
             symlink_path = os.environ.get(env_var, "")
-            tty.debug('Trying to symlink setup script to: {}'.format(env_var))
+            tty.debug("Trying to symlink setup script to: {}".format(env_var))
             if symlink_path:
                 # make sure that the path exists, create if not
                 if not os.path.exists(os.path.dirname(symlink_path)):
@@ -165,8 +168,7 @@ def install_setup_script(self, spec, prefix, env_var):
 
 
 class Key4hepPackage(PackageBase):
-
-    tags = ['hep', 'key4hep']
+    tags = ["hep", "key4hep"]
 
 
 class Ilcsoftpackage(Key4hepPackage):
