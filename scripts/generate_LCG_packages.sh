@@ -97,7 +97,7 @@ function list-lcg-packages() {
             # NOW: Format
 
             ${callbackfn} $pkg $pkgver $pkgpath
-            
+
         done
     done
 }
@@ -177,7 +177,7 @@ function yaml-format-package-match-name-in-spack() {
         VecGeom)   pkg=vecgeom;;
         XercesC)   pkg=xerces-c;;
     esac
-        
+
 
     echo "  $pkg:"
     echo "    buildable: ${buildable}"
@@ -269,6 +269,6 @@ function main() {
     setup-lcg
 
     generate-custom-scope
-} 
+}
 
 main

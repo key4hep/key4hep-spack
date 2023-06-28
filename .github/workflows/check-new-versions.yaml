@@ -2,15 +2,15 @@ name: check-new-versions
 
 
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level'     
+        description: 'Log level'
         required: true
         default: 'warning'
       tags:
-        description: 'Test scenario tags'  
+        description: 'Test scenario tags'
   schedule:
     - cron: "0 13 * * 1" # Every Monday at 1PM UTC (9AM EST)
 
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Check for New Versions and Create Issue 
+    - name: Check for New Versions and Create Issue
       env:
         KEY4HEP_COMMENT_BOT_TOKEN: ${{ secrets.KEY4HEP_COMMENT_BOT_TOKEN }}
       run: |
