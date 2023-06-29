@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+
 class Emela(CMakePackage):
     """Library that implements the evolution in pure QED of the unpolarised electron parton distribution functions (PDFs) up to next-to-leading logarithmic (NLL) approximation"""
 
@@ -17,7 +18,11 @@ class Emela(CMakePackage):
     )
 
     variant("lhapdf", default=True, description="Use LHAPDF")
-    variant("shared", default=False, description="Build libraries as shared instead of static")
+    variant(
+        "shared",
+        default=False,
+        description="Build libraries as shared instead of static",
+    )
 
     depends_on("boost")
     depends_on("lhapdf", when="+lhapdf")

@@ -16,6 +16,6 @@ jobs:
         spack env create testenv
         spack env activate testenv
         spack repo add .
-        spack compiler find 
-        spack add key4hep-stack 
+        spack compiler find
+        spack add key4hep-stack
         spack concretize  | tee -a ${GITHUB_WORKSPACE}/key4hep-stack-concretization.log

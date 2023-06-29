@@ -12,10 +12,10 @@ jobs:
           --write-out '%{http_code}\n' \
           https://api.github.com/orgs/key4hep/members/${GITHUB_ACTOR}\
           )
-        echo "GITHUB_ACTOR:  ${GITHUB_ACTOR}" 
+        echo "GITHUB_ACTOR:  ${GITHUB_ACTOR}"
         if [ "$ismember" = 204 ]
-        then 
-          echo "" 
+        then
+          echo ""
         else
           exit 1
         fi
