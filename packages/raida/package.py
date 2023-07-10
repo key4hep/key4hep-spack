@@ -17,6 +17,10 @@ class Raida(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.11",
+        sha256="20d6c5d79e7d813691d42ca03cfe139f0eac2e5398aeaa2a492bd500451eff71",
+    )
+    version(
         "1.10.0",
         sha256="de7023639efd6c05d72132fa322e7167d9c227a1964a06cfd8e144e478118ab1",
     )

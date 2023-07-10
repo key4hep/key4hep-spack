@@ -17,6 +17,10 @@ class Overlay(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.23",
+        sha256="683f80dd8eb6ee13433a20ceeba7a78fb03632a757dc0d23da77e735fb128e72",
+    )
+    version(
         "0.22.4",
         sha256="bd770f17e006d0cda99d233b64603c43920350695c1649391197cfe0c53628b2",
     )
