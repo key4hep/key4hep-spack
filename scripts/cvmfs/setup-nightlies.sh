@@ -57,9 +57,3 @@ echo "         source ${setup_actual}"
 echo " ... "
 echo " ...  If you have any issues, comments or requests open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
-
-if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' && ! ("$CPATH" =~ /vdt/) ]]; then
-    export CPATH=/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-04-25/x86_64-centos7-gcc12.2.0-opt/vdt/0.4.3-3gl6qx/include:$CPATH
-elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9* ]]; then
-    export CPATH=/cvmfs/sw-nightlies.hsf.org/key4hep/releases/2023-05-04/x86_64-almalinux9-gcc11.3.1-opt/vdt/0.4.3-w4m63d/include:$CPATH
-fi
