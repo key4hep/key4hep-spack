@@ -1,25 +1,28 @@
 #!/bin/bash
-if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]]; then
-    echo "Centos 7 detected"
-    if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/x86_64-centos7-gcc12.2.0-opt/key4hep-stack" ]]; then
+
+# This script sets up the Key4HEP software stack from CVMFS for the nightlies
+
+function check_release() {
+    if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/*$3*/key4hep-stack" ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
         find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" | \awk -F/ '{print $(NF-1)}' | sort -r
         echo "Aborting..."
         return 1
     fi
+}
+
+if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]]; then
+    echo "Centos 7 detected"
+    check_release $1 $2 centos7
     rel="latest"
     if [[ "$1" = "-r" && -n "$2" ]]; then
         rel="$2"
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-centos7-gcc12.2.0-opt"
-elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9* ]]; then
-    echo "AlmaLinux 9 detected"
-    if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/x86_64-almalinux9-gcc11.3.1-opt/key4hep-stack" ]]; then
-        echo "Release $2 not found, this is a list of the available releases:"
-        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*almalinux9*" | \awk -F/ '{print $(NF-1)}' | sort -r
-        echo "Aborting..."
-        return 1
-    fi
+elif [[ ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*)
+    || ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="rhel"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*) ]]; then
+    echo "AlmaLinux/RHEL 9 detected"
+    check_release $1 $2 almalinux9
     rel="latest"
     if [[ "$1" = "-r" && -n "$2" ]]; then
         rel="$2"
@@ -27,17 +30,15 @@ elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-almalinux9-gcc11.3.1-opt"
 elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID=ubuntu' ]]; then
     echo "Ubuntu detected"
-    if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/x86_64-ubuntu22.04-gcc11.3.0-opt/key4hep-stack" ]]; then
-        echo "Release $2 not found, this is a list of the available releases:"
-        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu*" | \awk -F/ '{print $(NF-1)}' | sort -r
-        echo "Aborting..."
-        return 1
-    fi
+    check_release $1 $2 ubuntu
     rel="latest"
     if [[ "$1" = "-r" && -n "$2" ]]; then
         rel="$2"
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-ubuntu22.04-gcc11.3.0-opt"
+else
+    echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
+    return 1
 fi
 
 
