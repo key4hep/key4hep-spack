@@ -2,6 +2,12 @@
 
 # This script sets up the Key4HEP software stack from CVMFS for the nightlies
 
+function usage() {
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>]"
+    echo "       -r <release> : setup a specific release, if not specified the latest release will be used"
+    echo "       -h           : print this help message"
+}
+
 function check_release() {
     if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/*$3*/key4hep-stack" ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
@@ -10,6 +16,11 @@ function check_release() {
         return 1
     fi
 }
+
+if [[ "$1" = "-h" ]]; then
+    usage
+    return 0
+fi
 
 if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]]; then
     echo "Centos 7 detected"
