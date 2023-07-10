@@ -17,6 +17,10 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.7.1",
+        sha256="bba86d5af24d6ae5d576f187a87cbcf92cb5ee693d3e76ce5f571a05a92c096d",
+    )
+    version(
         "1.7", sha256="08148c374d0b204999bc02c61448a0273489f5031d7a027f2881796c94e040bf"
     )
     version(

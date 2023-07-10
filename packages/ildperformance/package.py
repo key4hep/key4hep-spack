@@ -17,6 +17,10 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.12",
+        sha256="d606cc5d71dfb3b2a753000dc665187b2b9d937906d1611a789e7a19cd4edd2e",
+    )
+    version(
         "1.11",
         sha256="8445e68fd1a20d76f15d615dcc3a9044d1829d91e3b7cedac3eafdf098c957ee",
     )

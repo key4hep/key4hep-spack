@@ -17,6 +17,10 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.34",
+        sha256="d80a35307a1f4b0f94ae3c055b948b69d7686e33a194cd786e706631a11261f8",
+    )
+    version(
         "1.33.1",
         sha256="2c89954a3a83909e5da069ce223c3d5bd25bd911b7415a219456fbbed13953b8",
     )
@@ -32,6 +36,7 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")
+    depends_on("marlinutil@1.17.1:", when="@1.34:")
     depends_on("marlinkinfit")
     depends_on("marlintrk")
     depends_on("gsl")
