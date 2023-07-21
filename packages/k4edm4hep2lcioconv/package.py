@@ -32,10 +32,11 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     )
 
     depends_on("lcio")
+    depends_on("lcio@2.20:", when="@00-05:")
     depends_on("podio")
     depends_on("edm4hep@0.5:", when="@00-03")
     depends_on("edm4hep@0.8:", when="@00-04:")
-    depends_on("edm4hep@0.10", when="@00-05:")
+    depends_on("edm4hep@0.10:", when="@00-05:")
 
     def cmake_args(self):
         args = [
