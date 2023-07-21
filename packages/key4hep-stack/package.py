@@ -159,5 +159,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # remove when https://github.com/spack/spack/pull/38407 is merged
         env.prepend_path("PYTHONPATH", self.spec["edm4hep"].prefix.python)
 
+        # Issue on ubuntu, whizard fails to load libomega.so.0
+        if self.compiler.operating_system == "ubuntu22.04":
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
