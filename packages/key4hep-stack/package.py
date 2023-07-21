@@ -161,7 +161,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
+            )
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
