@@ -15,7 +15,12 @@ import spack.spec
 import spack.util.environment
 from spack.util.environment import *
 import spack.user_environment as uenv
-import spack.store
+
+try:
+    # https://github.com/spack/spack/pull/38944 renamed store -> STORE
+    from spack.store import STORE
+except ImportError:
+    from spack.store import store as STORE
 
 # TODO: can be removed when spack versions prior to v0.18.1 are no longer needed
 try:
@@ -132,7 +137,7 @@ def install_setup_script(self, spec, prefix, env_var):
     env_mod.prepend_path("PATH", os.path.dirname(self.compiler.cxx))
 
     # now walk over the dependencies
-    with spack.store.db.read_transaction():
+    with STORE.db.read_transaction():
         for dep in spec.traverse(order="post"):
             env_mod.extend(uenv.environment_modifications_for_spec(dep))
             env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
