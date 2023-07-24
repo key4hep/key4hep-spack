@@ -17,6 +17,10 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.14.2",
+        sha256="daa9ea4d837cba4ef337c63b439b3c25c7ae324bfc7b6bda2634e61dfc42c35f",
+    )
+    version(
         "1.14.1",
         sha256="39f2a858baaedd703dbc30f0c813c641d63dcac8e735716730bb3d46ca3e474f",
     )
