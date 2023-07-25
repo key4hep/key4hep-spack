@@ -20,7 +20,7 @@ try:
     # https://github.com/spack/spack/pull/38944 renamed store -> STORE
     from spack.store import STORE
 except ImportError:
-    from spack.store import store as STORE
+    from spack import store as STORE
 
 # TODO: can be removed when spack versions prior to v0.18.1 are no longer needed
 try:
