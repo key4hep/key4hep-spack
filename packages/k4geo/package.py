@@ -86,8 +86,8 @@ class K4geo(CMakePackage):
         install_tree("SiD", self.prefix.share.k4geo.compact.Sid)
 
     def setup_run_environment(self, env):
-        env.set("LCGEO", self.prefix.share.k4geo.compact)
-        env.set("K4GEO", self.prefix.share.k4geo.compact)
+        env.set("LCGEO", self.prefix.share.k4geo)
+        env.set("K4GEO", self.prefix.share.k4geo)
         env.set("lcgeo_DIR", self.prefix.share.k4geo.compact)
         env.set("k4geo_DIR", self.prefix.share.k4geo.compact)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
