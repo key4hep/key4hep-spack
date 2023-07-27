@@ -2,9 +2,9 @@ import os
 
 
 def k4_lookup_latest_commit(repoinfo, giturl):
-    """Use a github-like api to fetch the commit hash of the master branch.
+    """Use a github-like api to fetch the commit hash of the main branch.
     Constructs and runs a command of the form:
-    # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/master -H "Accept: application/vnd.github.VERSION.sha"
+    # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/main -H "Accept: application/vnd.github.VERSION.sha"
     The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
     The envrionment variables
       GITHUB_USER
@@ -15,7 +15,7 @@ def k4_lookup_latest_commit(repoinfo, giturl):
     :type repoinfo: str
     :param giturl: url that will return a json response with the commit sha when queried with urllib.
        should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/master"
+       p.ex.: "https://api.github.com/repos/%s/commits/main"
     :return: The commit sha of the latest commit for the repo.
     :rtype: str
 
@@ -37,7 +37,7 @@ def k4_lookup_latest_commit(repoinfo, giturl):
 
 
 def k4_add_latest_commit(
-    name, repoinfo, giturl="https://api.github.com/repos/%s/commits/master", variants=""
+    name, repoinfo, giturl="https://api.github.com/repos/%s/commits/main", variants=""
 ):
     """Helper function for adding a package versioned at the latest commit to a spack environment.
 
@@ -47,7 +47,7 @@ def k4_add_latest_commit(
     :type repoinfo: str
     :param giturl: url that will return a json response with the commit sha when queried with urllib.
        should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/master"
+       p.ex.: "https://api.github.com/repos/%s/commits/main"
     :type giturl:, str, optional
     :param variants: argument that will be forwarded to depends_on
       example: "+lcio"
@@ -88,9 +88,9 @@ if __name__ == "__main__":
     k4_add_latest_commit("delphes", "delphes/delphes")
     k4_add_latest_commit("fccsw", "hep-fcc/fccsw")
     # todo: figure out the api for the cern gitlab instance
-    # depends_on('guinea-pig@master')
+    # depends_on('guinea-pig@main')
     # todo: figure out the api for the whizard gitlab instance
-    # depends_on('whizard@master +lcio +openloops hepmc=2')
+    # depends_on('whizard@main +lcio +openloops hepmc=2')
     k4_add_latest_commit("dual-readout", "hep-fcc/dual-readout")
     k4_add_latest_commit("fccanalyses", "hep-fcc/fccanalyses")
     k4_add_latest_commit(
