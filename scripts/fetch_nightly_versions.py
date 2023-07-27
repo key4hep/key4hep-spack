@@ -32,7 +32,7 @@ def k4_lookup_latest_commit(repoinfo, giturl):
     curl_command = " ".join(curl_command)
     commit = os.popen(curl_command).read()
     # check that what we got looks like a hash
-    test = int(commit, 16)
+    int(commit, 16)
     return commit
 
 
@@ -53,8 +53,6 @@ def k4_add_latest_commit(
       example: "+lcio"
     :type variants: str, optional
     """
-    github_user = os.environ.get("GITHUB_USER", "")
-    github_token = os.environ.get("GITHUB_TOKEN", "")
     commit = k4_lookup_latest_commit(repoinfo, giturl)
     print("  - %s@%s=develop" % (name, commit))
 
