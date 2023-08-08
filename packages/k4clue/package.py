@@ -57,6 +57,8 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("CPATH", self.spec["cupla"].prefix.include)
         env.prepend_path("CPATH", self.spec["alpaka"].prefix.include)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].prefix.lib64)
 
     def setup_build_environment(self, env):
         k4_setup_env_for_framework_tests(self.spec, env)
