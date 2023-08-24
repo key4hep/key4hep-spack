@@ -37,8 +37,10 @@ def k4_lookup_latest_commit(repoinfo, giturl):
 
 
 def k4_add_latest_commit(
-        name, repoinfo, giturl="https://api.github.com/repos/%s/commits/main",
-        master=False,
+    name,
+    repoinfo,
+    giturl="https://api.github.com/repos/%s/commits/main",
+    master=False,
 ):
     """Helper function for adding a package versioned at the latest commit to a spack environment.
 
@@ -109,8 +111,12 @@ if __name__ == "__main__":
     k4_add_latest_commit("marlinreco", "ilcsoft/marlinreco", master=True)
     k4_add_latest_commit("marlinfastjet", "ilcsoft/marlinfastjet", master=True)
     k4_add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit", master=True)
-    k4_add_latest_commit("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors", master=True)
-    k4_add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors", master=True)
+    k4_add_latest_commit(
+        "marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors", master=True
+    )
+    k4_add_latest_commit(
+        "marlintrkprocessors", "ilcsoft/marlintrkprocessors", master=True
+    )
     k4_add_latest_commit("marlintrk", "ilcsoft/marlintrk", master=True)
     k4_add_latest_commit("overlay", "ilcsoft/overlay", master=True)
     k4_add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", master=True)
