@@ -1,125 +1,110 @@
 import os
+import requests
+import argparse
 
-
-def k4_lookup_latest_commit(repoinfo, giturl):
-    """Use a github-like api to fetch the commit hash of the main branch.
-    Constructs and runs a command of the form:
-    # curl -s -u user:usertoken https://api.github.com/repos/hep-fcc/fccsw/commits/main -H "Accept: application/vnd.github.VERSION.sha"
-    The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
-    The envrionment variables
-      GITHUB_USER
-      GITHUB_TOKEN
-    can be used for authentication.
-
-    :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
-    :type repoinfo: str
-    :param giturl: url that will return a json response with the commit sha when queried with urllib.
-       should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/main"
-    :return: The commit sha of the latest commit for the repo.
-    :rtype: str
-
-    """
-    curl_command = ["curl -s "]
-    github_user = os.environ.get("GITHUB_USER", "")
-    github_token = os.environ.get("GITHUB_TOKEN", "")
-    if github_user and github_token:
-        curl_command += [" -u %s:%s " % (github_user, github_token)]
-    final_giturl = giturl % repoinfo
-    curl_command += [final_giturl]
-    # request only the necessary information (commit hash)
-    curl_command += [' -H "Accept: application/vnd.github.VERSION.sha" ']
-    curl_command = " ".join(curl_command)
-    commit = os.popen(curl_command).read()
-    # check that what we got looks like a hash
-    int(commit, 16)
-    return commit
-
-
-def k4_add_latest_commit(
+def add_latest_commit(
     name,
     repoinfo,
-    giturl="https://api.github.com/repos/%s/commits/main",
-    master=False,
+    giturl="https://api.github.com/repos/%s/commits",
+    date=None,
 ):
     """Helper function for adding a package versioned at the latest commit to a spack environment.
+    The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
 
     :param name: spack name of the package, p.ex: "edm4hep"
-    :type name: str
     :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
-    :type repoinfo: str
     :param giturl: url that will return a json response with the commit sha when queried with urllib.
        should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits/main"
-    :type giturl:, str, optional
+       p.ex.: "https://api.github.com/repos/%s/commits"
     """
-    if master:
-        giturl = giturl.replace("main", "master")
-    commit = k4_lookup_latest_commit(repoinfo, giturl)
-    print("  - %s@%s=develop" % (name, commit))
+
+    headers = {'Accept': 'application/vnd.github+json'}
+
+    github_token = os.environ.get('GITHUB_TOKEN', None)
+    if github_token:
+        headers += {'Authorization': f'token {github_token}'}
+
+    search_params = {}
+    if date:
+        search_params = {
+            'until': f'{date}',
+        }
+
+    response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
+
+    commit = response[0].json()['sha']
+    int(commit, 16)
+
+    print(f'  - {name}@{commit}=develop')
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="Add latest commits to a spack environment")
+    parser.add_argument("date", help="date until which to search for commits, for example: 2021-01-01")
+    args = parser.parse_args()
+    date = args.date
+
     print()
 
-    k4_add_latest_commit("edm4hep", "key4hep/edm4hep")
-    k4_add_latest_commit("podio", "aidasoft/podio", master=True)
-    k4_add_latest_commit("dd4hep", "aidasoft/dd4hep", master=True)
-    k4_add_latest_commit("k4fwcore", "key4hep/k4fwcore")
-    k4_add_latest_commit("k4projecttemplate", "key4hep/k4-project-template")
-    k4_add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes")
-    k4_add_latest_commit("k4clue", "key4hep/k4clue")
-    k4_add_latest_commit("k4gen", "hep-fcc/k4Gen")
-    k4_add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4")
-    k4_add_latest_commit("delphes", "delphes/delphes", master=True)
-    k4_add_latest_commit("fccsw", "hep-fcc/fccsw", master=True)
+    add_latest_commit("edm4hep", "key4hep/edm4hep", date)
+    add_latest_commit("podio", "aidasoft/podio", date)
+    add_latest_commit("dd4hep", "aidasoft/dd4hep", date)
+    add_latest_commit("k4fwcore", "key4hep/k4fwcore", date)
+    add_latest_commit("k4projecttemplate", "key4hep/k4-project-template", date)
+    add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes", date)
+    add_latest_commit("k4clue", "key4hep/k4clue", date)
+    add_latest_commit("k4gen", "hep-fcc/k4Gen", date)
+    add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4", date)
+    add_latest_commit("delphes", "delphes/delphes", date)
+    add_latest_commit("fccsw", "hep-fcc/fccsw", date)
     # todo: figure out the api for the cern gitlab instance
     # depends_on('guinea-pig@main')
     # todo: figure out the api for the whizard gitlab instance
     # depends_on('whizard@main +lcio +openloops hepmc=2')
-    k4_add_latest_commit("dual-readout", "hep-fcc/dual-readout", master=True)
-    k4_add_latest_commit("fccanalyses", "hep-fcc/fccanalyses", master=True)
-    k4_add_latest_commit("fccdetectors", "hep-fcc/fccdetectors")
-    k4_add_latest_commit("k4reccalorimeter", "hep-fcc/k4reccalorimeter")
-    k4_add_latest_commit("cepcsw", "cepc/cepcsw", master=True)
-    k4_add_latest_commit("k4lcioreader", "key4hep/k4LCIOReader")
-    k4_add_latest_commit("aidatt", "aidasoft/aidatt", master=True)
-    k4_add_latest_commit("cedviewer", "ilcsoft/cedviewer", master=True)
-    k4_add_latest_commit("conformaltracking", "ilcsoft/conformaltracking", master=True)
-    k4_add_latest_commit("clicperformance", "ilcsoft/clicperformance", master=True)
-    k4_add_latest_commit("ced", "ilcsoft/ced", master=True)
-    k4_add_latest_commit("ddkaltest", "ilcsoft/ddkaltest", master=True)
-    k4_add_latest_commit("ddmarlinpandora", "ilcsoft/ddmarlinpandora", master=True)
-    k4_add_latest_commit("fcalclusterer", "fcalsw/fcalclusterer", master=True)
-    k4_add_latest_commit("forwardtracking", "ilcsoft/forwardtracking", master=True)
-    k4_add_latest_commit("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv")
-    k4_add_latest_commit("k4marlinwrapper", "key4hep/k4marlinwrapper")
-    k4_add_latest_commit("gear", "ilcsoft/gear", master=True)
-    k4_add_latest_commit("ilcutil", "ilcsoft/ilcutil", master=True)
-    k4_add_latest_commit("ildperformance", "ilcsoft/ildperformance", master=True)
-    k4_add_latest_commit("kitrackmarlin", "ilcsoft/kitrackmarlin", master=True)
-    k4_add_latest_commit("kaltest", "ilcsoft/kaltest", master=True)
-    k4_add_latest_commit("kitrack", "ilcsoft/kitrack", master=True)
-    k4_add_latest_commit("lcfiplus", "lcfiplus/lcfiplus", master=True)
-    k4_add_latest_commit("lctuple", "ilcsoft/lctuple", master=True)
-    k4_add_latest_commit("lccd", "ilcsoft/lccd", master=True)
-    k4_add_latest_commit("lcio", "ilcsoft/lcio", master=True)
-    k4_add_latest_commit("k4geo", "key4hep/k4geo", master=True)
-    k4_add_latest_commit("marlin", "ilcsoft/marlin", master=True)
-    k4_add_latest_commit("marlinutil", "ilcsoft/marlinutil", master=True)
-    k4_add_latest_commit("marlindd4hep", "ilcsoft/marlindd4hep", master=True)
-    k4_add_latest_commit("marlinreco", "ilcsoft/marlinreco", master=True)
-    k4_add_latest_commit("marlinfastjet", "ilcsoft/marlinfastjet", master=True)
-    k4_add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit", master=True)
-    k4_add_latest_commit(
-        "marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors", master=True
+    add_latest_commit("dual-readout", "hep-fcc/dual-readout", date)
+    add_latest_commit("fccanalyses", "hep-fcc/fccanalyses", date)
+    add_latest_commit("fccdetectors", "hep-fcc/fccdetectors", date)
+    add_latest_commit("k4reccalorimeter", "hep-fcc/k4reccalorimeter", date)
+    add_latest_commit("cepcsw", "cepc/cepcsw", date)
+    add_latest_commit("k4lcioreader", "key4hep/k4LCIOReader", date)
+    add_latest_commit("aidatt", "aidasoft/aidatt", date)
+    add_latest_commit("cedviewer", "ilcsoft/cedviewer", date)
+    add_latest_commit("conformaltracking", "ilcsoft/conformaltracking", date)
+    add_latest_commit("clicperformance", "ilcsoft/clicperformance", date)
+    add_latest_commit("ced", "ilcsoft/ced", date)
+    add_latest_commit("ddkaltest", "ilcsoft/ddkaltest", date)
+    add_latest_commit("ddmarlinpandora", "ilcsoft/ddmarlinpandora", date)
+    add_latest_commit("fcalclusterer", "fcalsw/fcalclusterer", date)
+    add_latest_commit("forwardtracking", "ilcsoft/forwardtracking", date)
+    add_latest_commit("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv", date)
+    add_latest_commit("k4marlinwrapper", "key4hep/k4marlinwrapper", date)
+    add_latest_commit("gear", "ilcsoft/gear", date)
+    add_latest_commit("ilcutil", "ilcsoft/ilcutil", date)
+    add_latest_commit("ildperformance", "ilcsoft/ildperformance", date)
+    add_latest_commit("kitrackmarlin", "ilcsoft/kitrackmarlin", date)
+    add_latest_commit("kaltest", "ilcsoft/kaltest", date)
+    add_latest_commit("kitrack", "ilcsoft/kitrack", date)
+    add_latest_commit("lcfiplus", "lcfiplus/lcfiplus", date)
+    add_latest_commit("lctuple", "ilcsoft/lctuple", date)
+    add_latest_commit("lccd", "ilcsoft/lccd", date)
+    add_latest_commit("lcio", "ilcsoft/lcio", date)
+    add_latest_commit("k4geo", "key4hep/k4geo", date)
+    add_latest_commit("marlin", "ilcsoft/marlin", date)
+    add_latest_commit("marlinutil", "ilcsoft/marlinutil", date)
+    add_latest_commit("marlindd4hep", "ilcsoft/marlindd4hep", date)
+    add_latest_commit("marlinreco", "ilcsoft/marlinreco", date)
+    add_latest_commit("marlinfastjet", "ilcsoft/marlinfastjet", date)
+    add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit", date)
+    add_latest_commit(
+        "marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors"
     )
-    k4_add_latest_commit(
-        "marlintrkprocessors", "ilcsoft/marlintrkprocessors", master=True
+    add_latest_commit(
+        "marlintrkprocessors", "ilcsoft/marlintrkprocessors"
     )
-    k4_add_latest_commit("marlintrk", "ilcsoft/marlintrk", master=True)
-    k4_add_latest_commit("overlay", "ilcsoft/overlay", master=True)
-    k4_add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", master=True)
-    k4_add_latest_commit("physsim", "ilcsoft/physsim", master=True)
-    k4_add_latest_commit("raida", "ilcsoft/raida", master=True)
-    k4_add_latest_commit("sio", "ilcsoft/sio", master=True)
+    add_latest_commit("marlintrk", "ilcsoft/marlintrk", date)
+    add_latest_commit("overlay", "ilcsoft/overlay", date)
+    add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", date)
+    add_latest_commit("physsim", "ilcsoft/physsim", date)
+    add_latest_commit("raida", "ilcsoft/raida", date)
+    add_latest_commit("sio", "ilcsoft/sio", date)
