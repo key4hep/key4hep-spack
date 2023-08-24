@@ -77,31 +77,31 @@ class K4geo(CMakePackage):
 
     @run_after("install")
     def install_compact(self):
-        install_tree("CaloTB", self.prefix.share.k4geo.compact.CaloTB)
-        install_tree("CLIC", self.prefix.share.k4geo.compact.CLIC)
-        install_tree("FCalTB", self.prefix.share.k4geo.compact.FCalTB)
-        install_tree("FCCee", self.prefix.share.k4geo.compact.FCCee)
-        install_tree("fieldmaps", self.prefix.share.k4geo.compact.fieldmaps)
-        install_tree("ILD", self.prefix.share.k4geo.compact.ILD)
-        install_tree("SiD", self.prefix.share.k4geo.compact.Sid)
+        install_tree("CaloTB", self.prefix.share.k4geo.CaloTB)
+        install_tree("CLIC", self.prefix.share.k4geo.CLIC)
+        install_tree("FCalTB", self.prefix.share.k4geo.FCalTB)
+        install_tree("FCCee", self.prefix.share.k4geo.FCCee)
+        install_tree("fieldmaps", self.prefix.share.k4geo.fieldmaps)
+        install_tree("ILD", self.prefix.share.k4geo.ILD)
+        install_tree("SiD", self.prefix.share.k4geo.Sid)
 
     def setup_run_environment(self, env):
         env.set("LCGEO", self.prefix.share.k4geo)
         env.set("K4GEO", self.prefix.share.k4geo)
-        env.set("lcgeo_DIR", self.prefix.share.k4geo.compact)
-        env.set("k4geo_DIR", self.prefix.share.k4geo.compact)
+        env.set("lcgeo_DIR", self.prefix.share.k4geo)
+        env.set("k4geo_DIR", self.prefix.share.k4geo)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
 
     def setup_build_environment(self, env):
-        env.set("LCGEO", self.prefix.share.k4geo.compact)
-        env.set("lcgeo_DIR", self.prefix.share.k4geo.compact)
+        env.set("LCGEO", self.prefix.share.k4geo)
+        env.set("lcgeo_DIR", self.prefix.share.k4geo)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 
     def setup_dependent_build_environment(self, env, dependent_spec):
-        env.set("LCGEO", self.prefix.share.k4geo.compact)
-        env.set("lcgeo_DIR", self.prefix.share.k4geo.compact)
+        env.set("LCGEO", self.prefix.share.k4geo)
+        env.set("lcgeo_DIR", self.prefix.share.k4geo)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
