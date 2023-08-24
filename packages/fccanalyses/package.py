@@ -111,11 +111,13 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, env):
         env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include.FCCAnalyses)
         env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("PYTHONPATH", self.prefix.share + '/examples')
         # this should point to share/ by key4hep convention
         #  but we want to make it work with the tutorials
         env.set("FCCANALYSES", self.prefix.python)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["fccanalyses"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["fccanalyses"].prefix.lib64)
+        env.set("FCCDICTSDIR", "/cvmfs/fcc.cern.ch/FCCDicts")
         if self.spec.satisfies("@:0.6.0"):
             # libawkward.so is in prefix/lib/pythonX.Y/site-packages
             python_version = self.spec["python"].version.up_to(2)
@@ -125,6 +127,10 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
             )
             env.prepend_path("CPATH", join_path(awk_pydir, "include"))
             env.prepend_path("LD_LIBRARY_PATH", awk_pydir)
+
+        if self.spec.variants["onnx"].value:
+            env.prepend_path("LD_LIBRARY_PATH",
+                             self.spec["py-onnxruntime"].libs.directories[0])
 
     # tests need installation, so skip here ...
     def check(self):
