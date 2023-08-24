@@ -9,6 +9,8 @@ packages:
     require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
     require: +python+tui+source-highlight~debuginfod
+  hdf5:
+    require: +cxx+hl
   llvm:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   podio:
@@ -19,46 +21,36 @@ packages:
     require: backend=qt5agg
   py-torch:
     require: "@1.13.1~cuda"
+  xrootd:
+    require: +krb5
 
   mesa18:
     variants: ~llvm+glx+opengl swr=none
     buildable: true
   mesa:
     variants: ~llvm+glx+opengl swr=none
-    buildable: true
   geant4:
     require: +qt+opengl+vecgeom cxxstd=17
-    buildable: true
   root:
     variants: +davix+fftw+gsl+math~memstat+minuit+mlp+opengl~postgres~pythia6+pythia8+python~qt4+r+root7+roofit+rpath~shadow+sqlite+ssl~table+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
-    buildable: true
   marlin:
     require: +lccd
-    buildable: true
   py-tensorflow:
     require: ~cuda~nccl
-    buildable: true
   whizard:
     variants: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
-    buildable: true
   k4simdelphes:
     require: ~delphes_hepmc
-    buildable: true
   evtgen:
     require: +photos
-    buildable: true
   py-setuptools-scm:
     require: +toml
   photos:
     require: +hepmc3
-  xrootd:
-    require: +krb5
   xgboost:
     require: ~openmp
   gperftools:
     require: ~libunwind
-  hdf5:
-    require: +cxx+hl
   all:
     target: [x86_64]
     variants: build_type=Release cxxstd=17
