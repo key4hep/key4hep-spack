@@ -50,10 +50,7 @@ class K4geo(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
-    variant("compact",
-            default=True,
-            description="Install compact files"
-    )
+    variant("compact", default=True, description="Install compact files")
 
     depends_on("lcio")
     depends_on("dd4hep")
