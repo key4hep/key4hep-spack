@@ -130,7 +130,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
 
         if self.spec.variants["onnx"].value:
             env.prepend_path("LD_LIBRARY_PATH",
-                             self.spec["py-onnxruntime"].prefix.lib)
+                             self.spec["py-onnxruntime"].libs.directories[0])
 
     # tests need installation, so skip here ...
     def check(self):
