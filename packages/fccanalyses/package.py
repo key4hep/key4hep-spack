@@ -117,7 +117,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         env.set("FCCANALYSES", self.prefix.python)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["fccanalyses"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["fccanalyses"].prefix.lib64)
-        env.prepend_path("FCCDICTSDIR", "/cvmfs/fcc.cern.ch/FCCDicts")
+        env.set("FCCDICTSDIR", "/cvmfs/fcc.cern.ch/FCCDicts")
         if self.spec.satisfies("@:0.6.0"):
             # libawkward.so is in prefix/lib/pythonX.Y/site-packages
             python_version = self.spec["python"].version.up_to(2)
