@@ -50,6 +50,8 @@ class K4geo(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    variant("compact", default=True, description="Install compact files")
+
     depends_on("lcio")
     depends_on("dd4hep")
     depends_on("lcio")
@@ -72,18 +74,9 @@ class K4geo(CMakePackage):
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"))
+        args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
-
-    @run_after("install")
-    def install_compact(self):
-        install_tree("CaloTB", self.prefix.share.k4geo.CaloTB)
-        install_tree("CLIC", self.prefix.share.k4geo.CLIC)
-        install_tree("FCalTB", self.prefix.share.k4geo.FCalTB)
-        install_tree("FCCee", self.prefix.share.k4geo.FCCee)
-        install_tree("fieldmaps", self.prefix.share.k4geo.fieldmaps)
-        install_tree("ILD", self.prefix.share.k4geo.ILD)
-        install_tree("SiD", self.prefix.share.k4geo.Sid)
 
     def setup_run_environment(self, env):
         env.set("LCGEO", self.prefix.share.k4geo)
