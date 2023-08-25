@@ -1,6 +1,6 @@
 packages:
   acts:
-    require: +dd4hep+edm4hep
+    require: +dd4hep
   boost:
     require: +python
     buildable: true
