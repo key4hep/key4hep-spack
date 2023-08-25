@@ -2,6 +2,7 @@ import os
 import requests
 import argparse
 
+
 def add_latest_commit(
     name,
     repoinfo,
@@ -18,30 +19,33 @@ def add_latest_commit(
        p.ex.: "https://api.github.com/repos/%s/commits"
     """
 
-    headers = {'Accept': 'application/vnd.github+json'}
+    headers = {"Accept": "application/vnd.github+json"}
 
-    github_token = os.environ.get('GITHUB_TOKEN', None)
+    github_token = os.environ.get("GITHUB_TOKEN", None)
     if github_token:
-        headers['Authorization'] = f'token {github_token}'
+        headers["Authorization"] = f"token {github_token}"
 
     search_params = {}
     if date:
         search_params = {
-            'until': f'{date}',
+            "until": f"{date}",
         }
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
 
-    commit = response.json()[0]['sha']
+    commit = response.json()[0]["sha"]
     int(commit, 16)
 
-    print(f'  - {name}@{commit}=develop')
+    print(f"  - {name}@{commit}=develop")
 
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="Add latest commits to a spack environment")
-    parser.add_argument("date", help="date until which to search for commits, for example: 2021-01-01")
+    parser = argparse.ArgumentParser(
+        description="Add latest commits to a spack environment"
+    )
+    parser.add_argument(
+        "date", help="date until which to search for commits, for example: 2021-01-01"
+    )
     args = parser.parse_args()
     date = args.date
 
@@ -96,12 +100,8 @@ if __name__ == "__main__":
     add_latest_commit("marlinreco", "ilcsoft/marlinreco", date=date)
     add_latest_commit("marlinfastjet", "ilcsoft/marlinfastjet", date=date)
     add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit", date=date)
-    add_latest_commit(
-        "marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors"
-    )
-    add_latest_commit(
-        "marlintrkprocessors", "ilcsoft/marlintrkprocessors"
-    )
+    add_latest_commit("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors")
+    add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors")
     add_latest_commit("marlintrk", "ilcsoft/marlintrk", date=date)
     add_latest_commit("overlay", "ilcsoft/overlay", date=date)
     add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", date=date)
