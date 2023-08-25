@@ -111,7 +111,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, env):
         env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include.FCCAnalyses)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("PYTHONPATH", self.prefix.share + '/examples')
+        env.prepend_path("PYTHONPATH", self.prefix.share + "/examples")
         # this should point to share/ by key4hep convention
         #  but we want to make it work with the tutorials
         env.set("FCCANALYSES", self.prefix.python)
@@ -130,7 +130,9 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
 
         if self.spec.variants["onnx"].value:
             env.prepend_path("LD_LIBRARY_PATH", self.spec["py-onnxruntime"].prefix.lib)
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["py-onnxruntime"].prefix.lib64)
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["py-onnxruntime"].prefix.lib64
+            )
 
     # tests need installation, so skip here ...
     def check(self):
