@@ -32,7 +32,7 @@ def add_latest_commit(
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
 
-    commit = response[0].json()['sha']
+    commit = response.json()[0]['sha']
     int(commit, 16)
 
     print(f'  - {name}@{commit}=develop')
