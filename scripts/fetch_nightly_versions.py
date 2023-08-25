@@ -22,7 +22,7 @@ def add_latest_commit(
 
     github_token = os.environ.get('GITHUB_TOKEN', None)
     if github_token:
-        headers += {'Authorization': f'token {github_token}'}
+        headers['Authorization'] = f'token {github_token}'
 
     search_params = {}
     if date:
