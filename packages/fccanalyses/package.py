@@ -129,8 +129,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
             env.prepend_path("LD_LIBRARY_PATH", awk_pydir)
 
         if self.spec.variants["onnx"].value:
-            env.prepend_path("LD_LIBRARY_PATH",
-                             self.spec["py-onnxruntime"].libs.directories[0])
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["py-onnxruntime"].prefix.lib)
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["py-onnxruntime"].prefix.lib64)
 
     # tests need installation, so skip here ...
     def check(self):
