@@ -22,6 +22,7 @@ packages:
     require: +sio
   py-numpy:
     require: ^openblas
+  # https://github.com/key4hep/key4hep-spack/issues/474
   py-matplotlib:
     require: backend=qt5agg
   py-torch:
