@@ -29,9 +29,6 @@ packages:
   xrootd:
     require: +krb5
 
-  mesa18:
-    variants: ~llvm+glx+opengl swr=none
-    buildable: true
   mesa:
     variants: ~llvm+glx+opengl swr=none
   geant4:
