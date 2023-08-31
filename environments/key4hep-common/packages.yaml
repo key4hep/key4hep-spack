@@ -25,6 +25,7 @@ packages:
   # https://github.com/key4hep/key4hep-spack/issues/474
   py-matplotlib:
     require: backend=qt5agg
+  # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
     require: "@1.13.1~cuda"
   xrootd:
