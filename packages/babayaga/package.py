@@ -47,6 +47,6 @@ class Babayaga(MakefilePackage):
         chmod("755", join_path(prefix.bin, "babayaga-fcc.exe"))
 
         script_sh = join_path(os.path.dirname(__file__), "babayaga")
-        script = script = prefix.bin.babayaga
+        script = prefix.bin.babayaga
         install(script_sh, script)
         chmod("755", script)
