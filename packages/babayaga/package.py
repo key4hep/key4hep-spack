@@ -30,7 +30,9 @@ class Babayaga(MakefilePackage):
     # babayaga bundles recola version 1.4 and needs cmake for that
     depends_on("cmake", type=("build"))
 
-    patch("makefile_compiler1.patch")
+    # Remove the stop statement in main.F
+    # See https://stackoverflow.com/questions/44308577/ieee-underflow-flag-ieee-denormal-in-fortran-77
+    patch("main_stop.patch")
 
     def build(self, spec, prefix):
         with working_dir("."):
