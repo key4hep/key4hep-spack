@@ -32,3 +32,19 @@ CentOS 7) and `/cvmfs/sw-nightlies.hsf.org` (for CentOS 7, AlmaLinux 9 and
 Ubuntu) see:
 
 https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html
+
+## Requirements
+
+To compile the key4hep stack some package systems are required; without these,
+the spack concretization or compilation can fail. The packages needed are an
+OpenGL implementation that can be installed:
+
+``` bash
+yum install -y mesa-libGL mesa-libGLU mesa-libGL-devel # Centos 7
+apt libgl1-mesa-glx libglu1-mesa libgl1-mesa-dev       # Ubuntu 
+dnf install -y mesa-libGL mesa-libGLU mesa-libGL-devel # AlmaLinux 9
+```
+
+The environments that make use of these libraries or headers expect them to be
+found under `/usr`, which is the typical location when they are installed
+system-wide (for example in `/usr/include` or `/usr/lib`).

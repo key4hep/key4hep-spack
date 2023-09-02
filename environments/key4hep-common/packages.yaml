@@ -11,6 +11,7 @@ packages:
     require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
     require: +python+tui+source-highlight~debuginfod
+  # https://github.com/key4hep/key4hep-spack/pull/501
   hdf5:
     require: +cxx+hl
   # https://github.com/key4hep/key4hep-spack/issues/517
@@ -20,6 +21,19 @@ packages:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   podio:
     require: +sio
+  # Use the system OpenGL as recommended by spack
+  # See https://github.com/key4hep/key4hep-spack/issues/318 and
+  # https://github.com/key4hep/key4hep-spack/issues/516
+  opengl:
+    buildable: False
+    externals:
+    - spec: opengl
+      prefix: /usr
+  openglu:
+    buildable: False
+    externals:
+    - spec: openglu
+      prefix: /usr
   py-numpy:
     require: ^openblas
   # https://github.com/key4hep/key4hep-spack/issues/474
@@ -31,8 +45,7 @@ packages:
   xrootd:
     require: +krb5
 
-  mesa:
-    variants: ~llvm+glx+opengl swr=none
+
   geant4:
     require: +qt+opengl+vecgeom cxxstd=17
   root:
@@ -60,7 +73,4 @@ packages:
     variants: build_type=Release cxxstd=17
     buildable: true
     version: []
-    providers:
-      gl: [mesa]
-      glu: [mesa]
     compiler: []
