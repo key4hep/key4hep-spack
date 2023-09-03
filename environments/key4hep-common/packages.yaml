@@ -21,19 +21,6 @@ packages:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   podio:
     require: +sio
-  # Use the system OpenGL as recommended by spack
-  # See https://github.com/key4hep/key4hep-spack/issues/318 and
-  # https://github.com/key4hep/key4hep-spack/issues/516
-  opengl:
-    buildable: False
-    externals:
-    - spec: opengl
-      prefix: /usr
-  openglu:
-    buildable: False
-    externals:
-    - spec: openglu
-      prefix: /usr
   py-numpy:
     require: ^openblas
   # https://github.com/key4hep/key4hep-spack/issues/474
@@ -44,6 +31,25 @@ packages:
     require: "@1.13.1~cuda"
   xrootd:
     require: +krb5
+
+  # Use the system OpenGL as recommended by spack
+  # See https://github.com/key4hep/key4hep-spack/issues/318 and
+  # https://github.com/key4hep/key4hep-spack/issues/516
+  opengl:
+    buildable: False
+    externals:
+    - spec: opengl@99
+      prefix: /usr
+  openglu:
+    buildable: False
+    externals:
+    - spec: openglu@99
+      prefix: /usr
+  mesa-glu:
+    buildable: False
+    externals:
+    - spec: mesa-glu@99
+      prefix: /usr
 
 
   geant4:
