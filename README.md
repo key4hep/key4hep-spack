@@ -40,9 +40,9 @@ the spack concretization or compilation can fail. The packages needed are an
 OpenGL implementation that can be installed:
 
 ``` bash
-yum install -y mesa-libGL mesa-libGLU mesa-libGL-devel # Centos 7
-apt libgl1-mesa-glx libglu1-mesa libgl1-mesa-dev       # Ubuntu 
-dnf install -y mesa-libGL mesa-libGLU mesa-libGL-devel # AlmaLinux 9
+yum install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel      # Centos 7
+apt install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa libglu1-mesa-dev  # Ubuntu 
+dnf install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel      # AlmaLinux 9
 ```
 
 The environments that make use of these libraries or headers expect them to be
