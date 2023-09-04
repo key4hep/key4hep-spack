@@ -1,5 +1,5 @@
---- main.f	2021-04-29 13:03:58.000000000 +0200
-+++ main.f	2023-09-02 15:42:31.291567234 +0200
+--- babayaga-fcc/main.f	2021-04-29 13:03:58.000000000 +0200
++++ babayaga-fcc/main.f	2023-09-04 09:01:45.128230317 +0200
 @@ -840,5 +840,4 @@
        call finalizestorageLHA(istore)
        call exitrecola
