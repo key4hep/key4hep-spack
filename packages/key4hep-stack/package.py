@@ -53,7 +53,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         values=("Debug", "Release", "RelWithDebInfo", "MinSizeRel"),
     )
 
-    depends_on("babayaga")
+    # depends_on("babayaga")
     depends_on("bdsim")
     depends_on("bhlumi")
     depends_on("dd4hep")

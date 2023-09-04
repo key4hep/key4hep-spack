@@ -50,4 +50,5 @@ found under `/usr`, which is the typical location when they are installed
 system-wide (for example in `/usr/include` or `/usr/lib`).
 
 Alternatively, one can install
-[HEP_OSlibs](https://gitlab.cern.ch/linuxsupport/rpms/HEP_OSlibs).
+[HEP_OSlibs](https://gitlab.cern.ch/linuxsupport/rpms/HEP_OSlibs), which will
+install the previous and more libraries.
