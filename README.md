@@ -48,3 +48,6 @@ dnf install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel      # 
 The environments that make use of these libraries or headers expect them to be
 found under `/usr`, which is the typical location when they are installed
 system-wide (for example in `/usr/include` or `/usr/lib`).
+
+Alternatively, one can install
+[HEP_OSlibs](https://gitlab.cern.ch/linuxsupport/rpms/HEP_OSlibs)
