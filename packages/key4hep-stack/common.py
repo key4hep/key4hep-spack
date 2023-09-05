@@ -68,7 +68,10 @@ def k4_generate_setup_script(env_mod, shell="sh"):
                 x, (SetPath, SetEnv)
             )
             # set a dictionary with the environment variables
-            x.execute(new_env)
+            try:
+                x.execute(new_env)
+            except TypeError:
+                tty.warn(f"Could not execute {x} for {name}")
         if env_set_not_prepend[name] and len(actions) > 1:
             tty.warn(f"Var {name} is set multiple times!")
 
