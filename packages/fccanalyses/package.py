@@ -92,6 +92,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def setup_build_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)  # todo: remove
         env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vdt"].prefix.include)
+        if "delphes" in self.spec:
+            env.set("DELPHES_DIR", self.spec["delphes"].prefix)
 
         if self.spec.satisfies("@:0.6.0"):
             python_version = self.spec["python"].version.up_to(2)
