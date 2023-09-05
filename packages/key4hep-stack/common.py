@@ -155,22 +155,6 @@ def install_setup_script(self, spec, prefix, env_var):
     cmds = k4_generate_setup_script(env_mod)
     with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
-        # optionally add a symlink (location configurable via environment variable
-        try:
-            symlink_path = os.environ.get(env_var, "")
-            tty.debug("Trying to symlink setup script to: {}".format(env_var))
-            if symlink_path:
-                # make sure that the path exists, create if not
-                if not os.path.exists(os.path.dirname(symlink_path)):
-                    os.makedirs(os.path.dirname(symlink_path))
-                # make sure that an existing file will be overwritten,
-                # even if it is a symlink (for which 'exists' is false!)
-                if os.path.exists(symlink_path) or os.path.islink(symlink_path):
-                    os.remove(symlink_path)
-                os.symlink(os.path.join(prefix, "setup.sh"), symlink_path)
-        except:
-            tty.warn("Could not create symlink")
-
 
 class Key4hepPackage(PackageBase):
     tags = ["hep", "key4hep"]
