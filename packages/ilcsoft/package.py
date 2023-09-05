@@ -76,7 +76,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("lcfiplus")
     depends_on("lctuple")
     depends_on("lcfivertex")
-    depends_on("lich")
     depends_on("lccd")
     depends_on("lcio")
     depends_on("k4geo")
