@@ -93,6 +93,11 @@ if __name__ == "__main__":
     add_latest_commit("lctuple", "ilcsoft/lctuple", date=date)
     add_latest_commit("lccd", "ilcsoft/lccd", date=date)
     add_latest_commit("lcio", "ilcsoft/lcio", date=date)
+
+    # Using wget to fetch the last tag seems to be very slow compared to doing a
+    # git clone, otherwise this package could be removed from the nightlies
+    add_latest_commit("lich", "danerdaner/LICH", date=date)
+
     add_latest_commit("k4geo", "key4hep/k4geo", date=date)
     add_latest_commit("marlin", "ilcsoft/marlin", date=date)
     add_latest_commit("marlinutil", "ilcsoft/marlinutil", date=date)
