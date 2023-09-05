@@ -56,7 +56,7 @@ class K4gen(CMakePackage, Key4hepPackage):
         env.set("K4GEN", self.prefix.share.k4Gen)
 
     def setup_build_environment(self, env):
-        k4_setup_env_for_framework_tests(self.spec, env)
+        # k4_setup_env_for_framework_tests(self.spec, env)
         env.set("K4GEN", self.prefix.share.k4Gen)
         # todo: workaround, fix properly in cmake
         env.prepend_path("CPATH", self.spec["heppdt"].prefix.include)

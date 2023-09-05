@@ -82,7 +82,7 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libFCalClusterer.so")
 
     def setup_build_environment(self, env):
-        k4_setup_env_for_framework_tests(self.spec, env)
+        # k4_setup_env_for_framework_tests(self.spec, env)
         env.prepend_path(
             "MARLIN_DLL", self.spec["marlindd4hep"].prefix.lib + "/libMarlinDD4hep.so"
         )

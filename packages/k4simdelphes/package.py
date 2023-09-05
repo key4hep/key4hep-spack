@@ -106,5 +106,5 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
         env.prepend_path("PYTHONPATH", self.prefix.python)
 
-    def setup_build_environment(self, env):
-        k4_setup_env_for_framework_tests(self.spec, env)
+    # def setup_build_environment(self, env):
+        # k4_setup_env_for_framework_tests(self.spec, env)

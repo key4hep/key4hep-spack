@@ -57,7 +57,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
             "G4ENSDFSTATE{0}".format(self.spec["g4ensdfstate"].version),
         )
         env.set("G4ENSDFSTATEDATA", install_path)
-        k4_setup_env_for_framework_tests(self.spec, env)
+        # k4_setup_env_for_framework_tests(self.spec, env)
 
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.prepend_path("PYTHONPATH", self.prefix.python)

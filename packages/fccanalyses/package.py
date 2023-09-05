@@ -106,7 +106,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
                 awk_lib_dir, "python{0}".format(python_version), "site-packages"
             )
             env.prepend_path("LD_LIBRARY_PATH", awk_pydir)
-        k4_setup_env_for_framework_tests(self.spec, env)
+        # k4_setup_env_for_framework_tests(self.spec, env)
 
     def setup_run_environment(self, env):
         env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include.FCCAnalyses)

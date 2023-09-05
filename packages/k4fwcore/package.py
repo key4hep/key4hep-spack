@@ -74,4 +74,4 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     def setup_build_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib64)
-        k4_setup_env_for_framework_tests(self.spec, env)
+        # k4_setup_env_for_framework_tests(self.spec, env)
