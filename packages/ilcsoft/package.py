@@ -114,5 +114,5 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
         env.set("LC_ALL", "C")
 
-    def install(self, spec, prefix):
-        return install_setup_script(self, spec, prefix, "ILCSOFT_LATEST_SETUP_PATH")
+    # def install(self, spec, prefix):
+    #     return install_setup_script(self, spec, prefix, "ILCSOFT_LATEST_SETUP_PATH")
