@@ -30,6 +30,8 @@ except ImportError:
 
 from shlex import quote as cmd_quote
 
+# List of env variables that will NOT be set
+IGNORE_VARS = set("BOOST_ROOT")
 
 def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment."""
@@ -62,6 +64,8 @@ def k4_generate_setup_script(env_mod, shell="sh"):
     # keep track wether this variable is supposed to be a list of paths, or set to a single value
     env_set_not_prepend = {}
     for name, actions in sorted(modifications.items()):
+        if name in IGNORE_VARS:
+            continue
         env_set_not_prepend[name] = False
         for x in actions:
             env_set_not_prepend[name] = env_set_not_prepend[name] or isinstance(
