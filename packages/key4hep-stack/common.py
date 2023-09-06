@@ -31,7 +31,7 @@ except ImportError:
 from shlex import quote as cmd_quote
 
 # List of env variables that will NOT be set
-IGNORE_VARS = set("BOOST_ROOT")
+IGNORE_VARS = set("BOOST_ROOT", "SPACK_LOADED_HASHES")
 
 def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment."""
