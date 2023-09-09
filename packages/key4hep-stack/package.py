@@ -143,9 +143,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set("LC_ALL", "C")
         env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, "setup.sh"))
 
-        # this fixes loading the local emacs, see https://github.com/key4hep/key4hep-spack/issues/486
-        env.unset("XDG_DATA_DIRS")
-
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
         env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
 

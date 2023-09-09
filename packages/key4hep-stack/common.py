@@ -31,7 +31,13 @@ except ImportError:
 from shlex import quote as cmd_quote
 
 # List of env variables that will NOT be set
-IGNORE_VARS = set(["BOOST_ROOT", "SPACK_LOADED_HASHES"])
+IGNORE_VARS = set([
+    # Fix CMP0144 warnings: https://github.com/key4hep/key4hep-spack/issues/525
+    "BOOST_ROOT",
+    "SPACK_LOADED_HASHES",
+    # this fixes loading the local emacs: https://github.com/key4hep/key4hep-spack/issues/486
+    "XDG_DATA_DIRS",
+])
 
 def k4_setup_env_for_framework_tests(spec, env):
     """Setup for tests that need the run environment."""
