@@ -163,6 +163,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
             )
+        # env variable for OpenDataDetector, see
+        # https://github.com/key4hep/key4hep-spack/issues/526
+        if "opendatadetector" in self.spec:
+            env.set("OPENDATADETECTOR", self.spec["opendatadetector"].prefix.share + "/OpenDataDetector")
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
