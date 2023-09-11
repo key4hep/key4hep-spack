@@ -76,6 +76,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("py-pyyaml", type=("build", "run"))
     depends_on("py-onnxruntime", when="+onnx")
     depends_on("delphes@3.5.1pre07:", when="@0.7.0:")
+    depends_on("catch2@3:", type=("test"), when="@0.4:")
 
     def cmake_args(self):
         args = [
@@ -85,6 +86,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
             self.define_from_variant("WITH_ACTS", "acts"),
             self.define_from_variant("WITH_DD4HEP", "dd4hep"),
             self.define_from_variant("WITH_ONNX", "onnx"),
+            self.define("BUILD_TESTING", self.run_tests),
         ]
         return args
 
