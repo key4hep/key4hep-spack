@@ -7,7 +7,11 @@ import os
 #  without creation of a new module
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'key4hep-stack'))
+sys.path.append(
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "key4hep-stack"
+    )
+)
 from common import *
 
 
@@ -62,7 +66,9 @@ class Key4hepStackTest(BundlePackage, Key4hepPackage):
         if "podio" in self.spec:
             env.prepend_path("LD_LIBRARY_PATH", self.spec["podio"].libs.directories[0])
         if "edm4hep" in self.spec:
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["edm4hep"].libs.directories[0])
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["edm4hep"].libs.directories[0]
+            )
         if "lcio" in self.spec:
             env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
 
