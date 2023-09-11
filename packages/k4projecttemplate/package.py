@@ -45,4 +45,4 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
         env.set("K4PROJECTTEMPLATE", self.prefix.share.k4ProjectTemplate)
 
     # def setup_build_environment(self, env):
-        # k4_setup_env_for_framework_tests(self.spec, env)
+    #     k4_setup_env_for_framework_tests(self.spec, env)

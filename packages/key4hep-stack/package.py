@@ -94,7 +94,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     depends_on("cepcsw")
 
-    depends_on('opendatadetector')
+    depends_on("opendatadetector")
 
     depends_on("catch2@3:", when="+devtools")
     depends_on("cmake", when="+devtools")
@@ -163,7 +163,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # env variable for OpenDataDetector, see
         # https://github.com/key4hep/key4hep-spack/issues/526
         if "opendatadetector" in self.spec:
-            env.set("OPENDATADETECTOR", self.spec["opendatadetector"].prefix.share + "/OpenDataDetector")
+            env.set(
+                "OPENDATADETECTOR",
+                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
+            )
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")

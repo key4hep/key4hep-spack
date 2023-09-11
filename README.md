@@ -41,7 +41,7 @@ OpenGL implementation that can be installed:
 
 ``` bash
 yum install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel      # Centos 7
-apt install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa libglu1-mesa-dev  # Ubuntu 
+apt install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa libglu1-mesa-dev  # Ubuntu
 dnf install -y mesa-libGL mesa-libGL-devel mesa-libGLU mesa-libGLU-devel      # AlmaLinux 9
 ```
 
