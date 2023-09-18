@@ -51,12 +51,14 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     depends_on("ced")
     depends_on("dd4hep")
     depends_on("root")
+    depends_on("catch2@3:", type=("test"), when="@1.17:")
 
     def cmake_args(self):
         spec = self.spec
         cxxstd = spec["root"].variants["cxxstd"].value
         # Make sure that we pick the right GSL
         return [
-            "-DCMAKE_CXX_STANDARD={0}".format(cxxstd),
-            "-DGSL_DIR={}".format(self.spec["gsl"].prefix),
+            self.define("CMAKE_CXX_STANDARD", cxxstd),
+            self.define("GSL_DIR", self.spec["gsl"].prefix),
+            self.define("BUILD_TESTING", self.run_tests),
         ]
