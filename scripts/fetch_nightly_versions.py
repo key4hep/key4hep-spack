@@ -6,25 +6,34 @@ import argparse
 def add_latest_commit(
     name,
     repoinfo,
-    giturl="https://api.github.com/repos/%s/commits",
+    # for now supporting only gitlab.cern.ch
+    gitlab=False,
     date=None,
 ):
     """Helper function for adding a package versioned at the latest commit to a spack environment.
-    The authentication is optional, but note that the api might be rate-limited quite strictly for unauthenticated access.
+    The authentication is optional, but note that the api might be rate-limited for unauthenticated access.
 
     :param name: spack name of the package, p.ex: "edm4hep"
     :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
-    :param giturl: url that will return a json response with the commit sha when queried with urllib.
-       should contain a %s which will be substituted by repoinfo.
-       p.ex.: "https://api.github.com/repos/%s/commits"
     """
 
+    if not gitlab:
+        giturl="https://api.github.com/repos/%s/commits"
+    else:
+        giturl="https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
+
+    if gitlab:
+        repoinfo = repoinfo.replace("/", "%2F")
+
+    # Apparently this is also fine for gitlab
     headers = {"Accept": "application/vnd.github+json"}
 
-    github_token = os.environ.get("GITHUB_TOKEN", None)
-    if github_token:
-        headers["Authorization"] = f"token {github_token}"
+    # gitlab doesn't seem to need a token, maybe there is some rate limiting without one
+    token = os.environ.get("GITHUB_TOKEN" if not gitlab else "CERN_GITLAB_TOKEN", None)
+    if token:
+        headers["Authorization" if not gitlab else "PRIVATE-TOKEN"] = f"token {token}"
 
+    # not tested for gitlab
     search_params = {}
     if date:
         search_params = {
@@ -33,7 +42,7 @@ def add_latest_commit(
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
 
-    commit = response.json()[0]["sha"]
+    commit = response.json()[0]['sha' if not gitlab else 'id']
     int(commit, 16)
 
     print(f"  - {name}@{commit}=develop")
@@ -103,6 +112,7 @@ if __name__ == "__main__":
     add_latest_commit("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors")
     add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors")
     add_latest_commit("marlintrk", "ilcsoft/marlintrk", date=date)
+    add_latest_commit("opendatadetector", "acts/OpenDataDetector", gitlab=True, date=date)
     add_latest_commit("overlay", "ilcsoft/overlay", date=date)
     add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", date=date)
     add_latest_commit("physsim", "ilcsoft/physsim", date=date)
