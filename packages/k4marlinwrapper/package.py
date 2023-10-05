@@ -9,9 +9,9 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     """Gaudify Marlin Processors in order to run them in the Key4HEP framework"""
 
-    homepage = "https://github.com/jmcarcell/k4MarlinWrapper"
-    git = "https://github.com/jmcarcell/k4MarlinWrapper.git"
-    url = "https://github.com/jmcarcell/k4MarlinWrapper/archive/v00-01.tar.gz"
+    homepage = "https://github.com/key4hep/k4MarlinWrapper"
+    git = "https://github.com/key4hep/k4MarlinWrapper.git"
+    url = "https://github.com/key4hep/k4MarlinWrapper/archive/v00-01.tar.gz"
 
     maintainers = ["tmadlener", "jmcarcell"]
 

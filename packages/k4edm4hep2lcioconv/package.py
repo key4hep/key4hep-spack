@@ -11,9 +11,9 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     """Converter library between EDM4hep and LCIO"""
 
-    homepage = "https://github.com/jmcarcell/k4EDM4hep2LcioConv"
-    git = "https://github.com/jmcarcell/k4EDM4hep2LcioConv.git"
-    url = "https://github.com/jmcarcell/k4EDM4hep2LcioConv/archive/v00-01.zip"
+    homepage = "https://github.com/key4hep/k4EDM4hep2LcioConv"
+    git = "https://github.com/key4hep/k4EDM4hep2LcioConv.git"
+    url = "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/v00-01.zip"
 
     maintainers = ["tmadlener"]
 
