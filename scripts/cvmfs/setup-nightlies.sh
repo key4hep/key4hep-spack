@@ -9,12 +9,14 @@ function usage() {
 }
 
 function check_release() {
-    if [[ "$1" = "-r" && -n "$2" && ! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2/*$3*/key4hep-stack" ]]; then
+if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" || -z "$(ls "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
-        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" | \awk -F/ '{print $(NF-1)}' | sort -r
+        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
+ \awk -F/ '{print $(NF-1)}' | sort -r
         echo "Aborting..."
         return 1
     fi
+    return 0
 }
 
 if [[ "$1" = "-h" ]]; then
@@ -22,29 +24,31 @@ if [[ "$1" = "-h" ]]; then
     return 0
 fi
 
+rel="latest"
+if [[ "$1" = "-r" && -n "$2" ]]; then
+    rel="$2"
+fi
+
 if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]]; then
     echo "Centos 7 detected"
     check_release $1 $2 centos7
-    rel="latest"
-    if [[ "$1" = "-r" && -n "$2" ]]; then
-        rel="$2"
+    if [ $? -ne 0 ]; then
+      return 1
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-centos7-gcc12.2.0-opt"
 elif [[ ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*)
     || ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="rhel"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*) ]]; then
     echo "AlmaLinux/RHEL 9 detected"
-    check_release $1 $2 almalinux9
-    rel="latest"
-    if [[ "$1" = "-r" && -n "$2" ]]; then
-        rel="$2"
+    check_release $1 $2 "almalinux9"
+    if [ $? -ne 0 ]; then
+      return 1
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-almalinux9-gcc11.3.1-opt"
 elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID=ubuntu' ]]; then
     echo "Ubuntu detected"
     check_release $1 $2 ubuntu
-    rel="latest"
-    if [[ "$1" = "-r" && -n "$2" ]]; then
-        rel="$2"
+    if [ $? -ne 0 ]; then
+      return 1
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-ubuntu22.04-gcc11.3.0-opt"
 else
@@ -67,5 +71,5 @@ echo " ...  Use the following command to reproduce the current environment: "
 echo " ... "
 echo "         source ${setup_actual}"
 echo " ... "
-echo " ...  If you have any issues, comments or requests open an issue at https://github.com/key4hep/key4hep-spack/issues"
+echo " ...  If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
