@@ -18,9 +18,9 @@ def add_latest_commit(
     """
 
     if not gitlab:
-        giturl="https://api.github.com/repos/%s/commits"
+        giturl = "https://api.github.com/repos/%s/commits"
     else:
-        giturl="https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
+        giturl = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
 
     if gitlab:
         repoinfo = repoinfo.replace("/", "%2F")
@@ -42,7 +42,7 @@ def add_latest_commit(
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
 
-    commit = response.json()[0]['sha' if not gitlab else 'id']
+    commit = response.json()[0]["sha" if not gitlab else "id"]
     int(commit, 16)
 
     print(f"  - {name}@{commit}=develop")
@@ -112,7 +112,9 @@ if __name__ == "__main__":
     add_latest_commit("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors")
     add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors")
     add_latest_commit("marlintrk", "ilcsoft/marlintrk", date=date)
-    add_latest_commit("opendatadetector", "acts/OpenDataDetector", gitlab=True, date=date)
+    add_latest_commit(
+        "opendatadetector", "acts/OpenDataDetector", gitlab=True, date=date
+    )
     add_latest_commit("overlay", "ilcsoft/overlay", date=date)
     add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", date=date)
     add_latest_commit("physsim", "ilcsoft/physsim", date=date)
