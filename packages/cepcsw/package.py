@@ -6,9 +6,9 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class Cepcsw(CMakePackage, Key4hepPackage):
     """CEPC offline experiment software based on Key4hep."""
 
-    homepage = "https://github.com/jmcarcell/CEPCSW"
-    url = "https://github.com/jmcarcell/CEPCSW/archive/v0.1.tar.gz"
-    git = "https://github.com/jmcarcell/CEPCSW.git"
+    homepage = "https://github.com/cepc/CEPCSW"
+    url = "https://github.com/cepc/CEPCSW/archive/v0.1.tar.gz"
+    git = "https://github.com/cepc/CEPCSW.git"
 
     maintainers = ["mirguest"]
 
