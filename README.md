@@ -58,7 +58,7 @@ so, for example, building in an image without `gcc` or `glibc` won't work. These
 commands should install most of the compilers and the development tools:
 
 ``` bash
-apt install -y build-essential gfortran
+apt install -y build-essential gfortran                            # Ubuntu
 dnf groupinstall -y "Development Tools" && dnf install -y gfortran # AlmaLinux 9
 ```
 
