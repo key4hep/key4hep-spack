@@ -35,7 +35,7 @@ https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html
 
 ## Requirements
 
-To compile the key4hep stack some package systems are required; without these,
+To compile the key4hep stack some system packages are required; without these,
 the spack concretization or compilation can fail. The packages needed are an
 OpenGL implementation that can be installed:
 
@@ -52,3 +52,15 @@ system-wide (for example in `/usr/include` or `/usr/lib`).
 Alternatively, one can install
 [HEP_OSlibs](https://gitlab.cern.ch/linuxsupport/rpms/HEP_OSlibs), which will
 install the previous and more libraries.
+
+In addition, for Ubuntu and Alma 9 the compilers are picked up from the system,
+so, for example, building in an image without `gcc` or `glibc` won't work. These
+commands should install most of the compilers and the development tools:
+
+``` bash
+apt install -y build-essential gfortran
+dnf groupinstall -y "Development Tools" && dnf install -y gfortran # AlmaLinux 9
+```
+
+Dockerfiles with the images that are used to build the key4hep stack can be
+found in https://github.com/key4hep/key4hep-images.
