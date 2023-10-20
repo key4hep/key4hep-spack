@@ -146,15 +146,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
         env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
 
-        # remove when https://github.com/spack/spack/pull/37881 is merged
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["podio"].libs.directories[0])
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["edm4hep"].libs.directories[0])
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
-
-        # remove when https://github.com/spack/spack/pull/38015 is merged
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["dd4hep"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["dd4hep"].prefix.lib64)
-
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
             env.prepend_path(

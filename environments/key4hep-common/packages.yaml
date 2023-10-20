@@ -50,6 +50,13 @@ packages:
     externals:
     - spec: mesa-glu@99
       prefix: /usr
+  # Use the system kerberos, otherwise the tickets obtained at login with the
+  # system version don't appear for the spack kerberos
+  krb5:
+    buildable: False
+    externals:
+    - spec: krb5@99
+      prefix: /usr
 
 
   geant4:
