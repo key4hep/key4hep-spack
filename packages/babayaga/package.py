@@ -50,3 +50,7 @@ class Babayaga(MakefilePackage):
         script = prefix.bin.babayaga
         install(script_sh, script)
         chmod("755", script)
+
+    @property
+    def parallel(self):
+        return not self.spec.satisfies("@fcc-1.0.0")
