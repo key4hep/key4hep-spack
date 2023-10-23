@@ -155,7 +155,12 @@ def install_setup_script(self, spec, prefix, env_var):
     # now walk over the dependencies
     with STORE.db.read_transaction():
         for dep in spec.traverse(order="post"):
-            env_mod.extend(uenv.environment_modifications_for_spec(dep))
+            # Between spack 0.20.2 and the next release environment_modifications_for_spec
+            # was renamed to environment_modifications_for_specs
+            try:
+                env_mod.extend(uenv.environment_modifications_for_spec(dep))
+            except AttributeError:
+                env_mod.extend(uenv.environment_modifications_for_specs(dep))
             env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
 
     if self.compiler.cc:
