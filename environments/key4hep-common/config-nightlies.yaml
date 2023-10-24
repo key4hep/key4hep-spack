@@ -7,3 +7,5 @@ config:
 concretizer:
   duplicates:
     strategy: none
+  unify: when_possible
+
