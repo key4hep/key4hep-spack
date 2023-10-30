@@ -20,6 +20,10 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.17.2",
+        sha256="9fbc3153d417b02d57917d64a2de1f569a3922540ed3fa7d87198d9406982997",
+    )
+    version(
         "1.17.1",
         sha256="088cd8db2bf0a11a8a0b0e27b7f4e2d982400a57016fbdb22a268c4b708f6fad",
     )
