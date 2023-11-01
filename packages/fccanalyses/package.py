@@ -70,7 +70,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("py-awkward@1.4.0", when="@:0.6.0")
     depends_on("acts@6.00.0:19.5.0", when="@0.3.5:0.6.0 +acts")
-    depends_on("acts@19.6.0:", when="@0.7.0: +acts")
+    depends_on("acts@19.6.0:28", when="@0.7.0: +acts")
     depends_on("eigen")
     depends_on("dd4hep", when="+dd4hep")
     depends_on("py-pyyaml", type=("build", "run"))
