@@ -80,7 +80,6 @@ if __name__ == "__main__":
     add_latest_commit("fccdetectors", "hep-fcc/fccdetectors", date=date)
     add_latest_commit("k4reccalorimeter", "hep-fcc/k4reccalorimeter", date=date)
     add_latest_commit("cepcsw", "cepc/cepcsw", date=date)
-    add_latest_commit("k4lcioreader", "key4hep/k4LCIOReader", date=date)
     add_latest_commit("aidatt", "aidasoft/aidatt", date=date)
     add_latest_commit("cedviewer", "ilcsoft/cedviewer", date=date)
     add_latest_commit("conformaltracking", "ilcsoft/conformaltracking", date=date)

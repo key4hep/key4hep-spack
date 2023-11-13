@@ -47,7 +47,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     # todo: figure out the api for the whizard gitlab instance
     # depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
-    depends_on("k4lcioreader")
     depends_on("k4simdelphes")
     depends_on("delphes")
 
