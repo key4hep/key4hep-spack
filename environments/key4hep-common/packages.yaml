@@ -37,6 +37,9 @@ packages:
   # Use the system OpenGL as recommended by spack
   # See https://github.com/key4hep/key4hep-spack/issues/318 and
   # https://github.com/key4hep/key4hep-spack/issues/516
+  # A version is needed and we set it to 99 so that spack thinks it's the latest
+  # (it may not work if the versions in the current system are not what's required
+  # but that hasn't happened yet)
   opengl:
     buildable: False
     externals:
@@ -53,7 +56,7 @@ packages:
     - spec: mesa-glu@99
       prefix: /usr
   # Use the system kerberos, otherwise the tickets obtained at login with the
-  # system version don't appear for the spack kerberos
+  # system version don't appear for the spack kerberos (happening on lxplus at least)
   krb5:
     buildable: False
     externals:
