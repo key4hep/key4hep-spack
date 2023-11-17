@@ -83,7 +83,6 @@ packages:
     require: ~libunwind
   all:
     target: [x86_64]
-    variants: build_type=Release cxxstd=17
+    variants: build_type=RelWithDebInfo cxxstd=17
     buildable: true
-    version: []
     compiler: []
