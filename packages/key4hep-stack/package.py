@@ -158,10 +158,5 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
                 self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
             )
 
-        for dep in self.spec.traverse(order="post"):
-            if dep.satisfies("^root"):
-                # add the root include path to ROOT_INCLUDE_PATH
-                env.prepend_path("ROOT_INCLUDE_PATH", dep.prefix.include)
-
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
