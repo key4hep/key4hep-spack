@@ -12,6 +12,8 @@ packages:
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
+  geant4:
+    require: +qt+opengl
   hdf5:
     require: +cxx+hl
   # https://github.com/key4hep/key4hep-spack/issues/517
@@ -64,8 +66,6 @@ packages:
       prefix: /usr
 
 
-  geant4:
-    require: +qt+opengl+vecgeom cxxstd=17
   root:
     require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
   py-tensorflow:
