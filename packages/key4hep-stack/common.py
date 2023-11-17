@@ -109,7 +109,7 @@ def k4_generate_setup_script(env_mod, shell="sh"):
             cmds += [
                 k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))
             ]
-    return "".join(cmds)
+    return "".join(sorted(cmds))
 
 
 def ilc_url_for_version(self, version):
@@ -154,14 +154,13 @@ def install_setup_script(self, spec, prefix, env_var):
 
     # now walk over the dependencies
     with STORE.db.read_transaction():
-        for dep in spec.traverse(order="post"):
-            # Between spack 0.20.2 and the next release environment_modifications_for_spec
-            # was renamed to environment_modifications_for_specs
-            try:
-                env_mod.extend(uenv.environment_modifications_for_spec(dep))
-            except AttributeError:
-                env_mod.extend(uenv.environment_modifications_for_specs(dep))
-            env_mod.prepend_path(uenv.spack_loaded_hashes_var, dep.dag_hash())
+        # Between spack 0.20.2 and the next release environment_modifications_for_spec
+        # was renamed to environment_modifications_for_specs
+        try:
+            env_mod.extend(uenv.environment_modifications_for_spec(spec))
+        except AttributeError:
+            env_mod.extend(uenv.environment_modifications_for_specs(spec))
+        env_mod.prepend_path(uenv.spack_loaded_hashes_var, spec.dag_hash())
 
     if self.compiler.cc:
         env_mod.set("CC", self.compiler.cc)
