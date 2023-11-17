@@ -19,6 +19,8 @@ packages:
     require: +conddbmysql
   llvm:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
+  marlin:
+    require: +lccd
   podio:
     require: +sio
   py-numpy:
@@ -63,8 +65,6 @@ packages:
     require: +qt+opengl+vecgeom cxxstd=17
   root:
     require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=17 build_type=RelWithDebInfo
-  marlin:
-    require: +lccd
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
