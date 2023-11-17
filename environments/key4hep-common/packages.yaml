@@ -32,7 +32,7 @@ packages:
     require: backend=qt5agg
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
-    require: "@1.13.1~cuda"
+    require: ~cuda
   xrootd:
     require: +krb5
 
