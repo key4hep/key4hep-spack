@@ -46,12 +46,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         default=True,
         description="add some standalone generators to the stack",
     )
-    variant(
-        "build_type",
-        default="Release",
-        description="CMake build type",
-        values=("Debug", "Release", "RelWithDebInfo", "MinSizeRel"),
-    )
 
     depends_on("babayaga")
     depends_on("bdsim")
