@@ -29,8 +29,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     # exist for a bundle package)
     phases = ["install"]
 
-    ############################### key4hep ###############
-    #######################################################
 
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
@@ -43,8 +41,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("k4simdelphes")
     depends_on("delphes")
 
-    ############################### ilcsoft ###############
-    #######################################################
     depends_on("aidatt")
     depends_on("cedviewer")
     depends_on("conformaltracking")
@@ -87,19 +83,8 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("raida")
     depends_on("sio")
 
-    ##################### developer tools #################
-    #######################################################
     depends_on("cmake")
     depends_on("ninja")
-
-    ##################### conflicts #######################
-    #######################################################
-    conflicts(
-        "%gcc@8.3.1",
-        msg="There are known issues with compilers from redhat's devtoolsets"
-        "which are therefore not supported."
-        "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286",
-    )
 
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
