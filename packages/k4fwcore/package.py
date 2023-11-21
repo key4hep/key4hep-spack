@@ -10,6 +10,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4FWCore.git"
 
     version("master", branch="master")
+    version("1.0pre17", tag="v01-00pre17")
     version("1.0pre16", tag="v01-00pre16")
     version("1.0pre15", tag="v01-00pre15")
     version("1.0pre14", tag="v01-00pre14")
@@ -40,6 +41,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("podio@0.14.2:", when="@1.0pre16:")
     depends_on("edm4hep")
     depends_on("edm4hep@0.4.1:", when="@1.0pre14:")
+    depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
     # needed via gaudi
     depends_on("py-six", type=("build", "run"))
 
