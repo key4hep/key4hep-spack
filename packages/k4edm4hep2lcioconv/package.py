@@ -19,6 +19,14 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
     version(
+        "00-07",
+        sha256="269d14c390f987fb3fdb0d2e952febfb639415bef50e5e1c8992f23e0cd4a5a6",
+    )
+    version(
+        "00-06",
+        sha256="c220604577d309bc11a5a4c147f55640fedef90375d1232439343362607a3906",
+    )
+    version(
         "00-05",
         sha256="6d352bacff6a16f8d2643cdb108794d02889c38b119442c3c260f9a75cb63e7a",
     )
