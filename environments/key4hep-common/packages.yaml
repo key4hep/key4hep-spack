@@ -13,7 +13,7 @@ packages:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
   geant4:
-    require: +qt+opengl
+    require: +opengl+qt~vecgeom
   hdf5:
     require: +cxx+hl
   # https://github.com/key4hep/key4hep-spack/issues/517
