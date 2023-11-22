@@ -115,3 +115,5 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=17
   sio:
     variants: build_type=RelWithDebInfo cxxstd=17
+  whizard:
+    variants: build_type=RelWithDebInfo cxxstd=17
