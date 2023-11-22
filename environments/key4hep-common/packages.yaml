@@ -76,8 +76,6 @@ packages:
     require: ~delphes_hepmc
   evtgen:
     require: +photos
-  py-setuptools-scm:
-    require: +toml
   photos:
     require: +hepmc3
   xgboost:
