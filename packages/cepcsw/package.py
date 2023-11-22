@@ -22,8 +22,8 @@ class Cepcsw(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
     version(
-        "0.2.7",
-        sha256="080da88664a725dbfb73284bf60418698e40ee9c95ee28752cda69e152eea7f4",
+        "0.2.8",
+        sha256="b155d079617f1f6514bae7123972ff6ce86f4568eba5d07789500d1a0497c1f8",
     )
     version(
         "0.2.6",
