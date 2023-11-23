@@ -1,19 +1,11 @@
 spack:
-  include:
-  - key4hep-config.yaml
-  - key4hep-packages.yaml
-  - compilers.yaml
   view: false
-  packages:
-    all:
-      compiler: [gcc@11.2.0]
-  modules:
-    prefix_inspections:
-      lib: [LD_LIBRARY_PATH]
-      lib64: [LD_LIBRARY_PATH]
+  include:
+  - ../key4hep-common/config-nightlies.yaml
+  - ../key4hep-common/packages.yaml
+  - ../key4hep-common/compilers.yaml
   repos:
   - ../..
   specs:
-  - gdb~debuginfod
   - lhapdf~python
   - key4hep-stack+devtools
