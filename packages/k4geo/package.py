@@ -17,7 +17,7 @@ class K4geo(CMakePackage):
 
     version("master", branch="master")
     version(
-        "0.19.0",
+        "0.19",
         sha256="6e8101e5991870484988f9fcb0299076a30f9b5f37e4e51141e50dfd30f32314",
     )
 
