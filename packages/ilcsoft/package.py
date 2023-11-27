@@ -29,7 +29,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     # exist for a bundle package)
     phases = ["install"]
 
-
     depends_on("guinea-pig")
     # todo: figure out the api for the cern gitlab instance
     # depends_on('guinea-pig@master', when="@master")

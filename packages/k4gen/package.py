@@ -12,8 +12,9 @@ class K4gen(CMakePackage, Key4hepPackage):
     maintainers = ["vvolkl"]
 
     version("main", branch="main")
-    version("0.1pre10",
-            sha256="803a796fa9a7fe43a04dfac95fa9143cb275796194012d5b283e062b4a7b8a12",
+    version(
+        "0.1pre10",
+        sha256="803a796fa9a7fe43a04dfac95fa9143cb275796194012d5b283e062b4a7b8a12",
     )
     version("0.1pre09", tag="v0.1pre09")
     version("0.1pre08", tag="v0.1pre08")
