@@ -121,6 +121,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-uproot", when="+devtools")
     depends_on("py-xgboost", when="+devtools")
     depends_on("xgboost", when="+devtools")
+    depends_on("benchmark", when="+devtools")
     # depends_on('py-pyg4ometry', when='+devtools')
     # depends_on('py-tensorflow') # todo: check if we should integrate.
     # depends_on('py-zfit') # todo: add in spack
