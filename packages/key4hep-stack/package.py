@@ -47,6 +47,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         description="add some standalone generators to the stack",
     )
 
+    depends_on("acts")
     depends_on("babayaga")
     depends_on("bdsim")
     depends_on("bhlumi")
