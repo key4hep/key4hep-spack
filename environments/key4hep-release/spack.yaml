@@ -1,7 +1,7 @@
 spack:
   view: false
   include:
-  - ../key4hep-common/config-nightlies.yaml
+  - ../key4hep-common/config.yaml
   - ../key4hep-common/packages.yaml
   - ../key4hep-common/compilers.yaml
   repos:

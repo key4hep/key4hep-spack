@@ -3,5 +3,5 @@ config:
   allow_sgid: false
   install_tree:
     projections:
-      all: "{name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-opt/{hash:5}"
-      build_type=Debug: "{name}/{version}/{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{hash:5}"
+      all: "{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-opt/{name}/{version}-{hash:6}"
+      build_type=Debug: "{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{name}/{version}-{hash:6}"
