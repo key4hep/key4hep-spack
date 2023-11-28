@@ -6,6 +6,8 @@ packages:
     buildable: true
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3
+  fccanalyses:
+    require: ~acts
   gaudi:
     # +examples seems not be compatible with newer versions of python
     require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
