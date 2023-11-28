@@ -132,7 +132,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         if "vdt" in self.spec:
             env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
             # When building podio with +rntuple there are warnings constantly without this
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].prefix.libs.directories[0])
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
