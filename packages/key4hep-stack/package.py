@@ -122,13 +122,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # depends_on('py-zfit') # todo: add in spack
     # depends_on('py-root-pandas') # todo: add in spack
 
-    conflicts(
-        "%gcc@8.3.1",
-        msg="There are known issues with compilers from redhat's devtoolsets"
-        "which are therefore not supported."
-        "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286",
-    )
-
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
@@ -136,9 +129,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, "setup.sh"))
 
         # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
-        env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
-        # When building podio with +rntuple there are warnings constantly without this
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].prefix.libs.directories[0])
+        if "vdt" in self.spec:
+            env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
+            # When building podio with +rntuple there are warnings constantly without this
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].prefix.libs.directories[0])
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
