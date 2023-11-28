@@ -60,6 +60,12 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         sha256="bff4be96d0c177caccc3642bc1b3538004a8d3e5a19b472563ac867281a65bd6",
     )
 
+    patch(
+        "https://github.com/HEP-FCC/FCCAnalyses/commit/f645584b81aacd0b0f8141b28bcbfa139aecad5c.patch?full_index=1",
+        when="@0.8.0",
+        sha256="0a324f913e515c0a12d3d799e4c924ad57eaad51cbeae2633417bb819d97d227",
+    )
+
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
     variant("acts", default=True, description="Build Acts-dependent analyzers.")
     variant("dd4hep", default=True, description="Build DD4hep-dependent analyzers.")
@@ -74,7 +80,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("py-awkward@1.4.0", when="@:0.6.0")
     depends_on("acts@6.00.0:19.5.0", when="@0.3.5:0.6.0 +acts")
-    depends_on("acts@19.6.0:28", when="@0.7.0:0.8.0 +acts")
+    depends_on("acts@19.6.0:28", when="@0.7.0 +acts")
     depends_on("acts@29:", when="+acts")
     depends_on("eigen")
     depends_on("dd4hep", when="+dd4hep")
