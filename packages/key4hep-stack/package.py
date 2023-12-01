@@ -141,7 +141,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # Add fastjet for FCCAnalyses (it's being loaded by ROOT)
         if "fastjet" in self.spec:
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0])
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0]
+            )
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
