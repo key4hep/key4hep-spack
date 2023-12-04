@@ -32,6 +32,8 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("py-jupytext", type=("test"))
     depends_on("py-ipykernel", type=("test"))
     depends_on("py-nbconvert", type=("test"))
+    # Uses GeoSvc from k4simgeant4
+    depends_on("k4simgeant4", type=("test"))
 
     def cmake_args(self):
         args = [self.define("FORCE_COLORED_OUTPUT", False)]
