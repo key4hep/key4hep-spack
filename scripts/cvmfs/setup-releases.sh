@@ -50,7 +50,7 @@ elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID=ubuntu' ]]; then
     if [ $? -ne 0 ]; then
       return 1
     fi
-    k4path="/cvmfs/sw.hsf.org/key4hep/releases/$rel/x86_64-ubuntu22.04-gcc11.3.0-opt"
+    k4path="/cvmfs/sw.hsf.org/key4hep/releases/$rel/x86_64-ubuntu22.04-gcc11.4.0-opt"
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     return 1
