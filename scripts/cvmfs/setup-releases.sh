@@ -29,8 +29,9 @@ if [[ "$1" = "-r" && -n "$2" ]]; then
     rel="$2"
 fi
 
-if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]]; then
-    echo "Centos 7 detected"
+if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]] ||
+   [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="rhel"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"7* ]]; then
+    echo "Centos/RHEL 7 detected"
     check_release $1 $2 centos7
     if [ $? -ne 0 ]; then
       return 1
