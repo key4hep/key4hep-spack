@@ -29,23 +29,23 @@ if [[ "$1" = "-r" && -n "$2" ]]; then
     rel="$2"
 fi
 
-if [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="centos"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = 'VERSION_ID="7"' ]] ||
-   [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID="rhel"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"7* ]]; then
+if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
+   [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
     echo "Centos/RHEL 7 detected"
     check_release $1 $2 centos7
     if [ $? -ne 0 ]; then
       return 1
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-centos7-gcc12.2.0-opt"
-elif [[ ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="almalinux"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*)
-    || ("$(cat /etc/os-release | grep -E '^ID=')" = 'ID="rhel"' && "$(cat /etc/os-release | grep -E 'VERSION_ID')" = VERSION_ID=\"9*) ]]; then
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]]; then
     echo "AlmaLinux/RHEL 9 detected"
-    check_release $1 $2 "almalinux9"
+    check_release $1 $2 almalinux9
     if [ $? -ne 0 ]; then
       return 1
     fi
     k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-almalinux9-gcc11.3.1-opt"
-elif [[ "$(cat /etc/os-release | grep -E '^ID=')" = 'ID=ubuntu' ]]; then
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' ]]; then
     echo "Ubuntu detected"
     check_release $1 $2 ubuntu
     if [ $? -ne 0 ]; then
