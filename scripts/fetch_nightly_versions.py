@@ -67,6 +67,7 @@ if __name__ == "__main__":
     add_latest_commit("k4projecttemplate", "key4hep/k4-project-template", date=date)
     add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes", date=date)
     add_latest_commit("k4clue", "key4hep/k4clue", date=date)
+    add_latest_commit("k4reco", "key4hep/k4Reco", date=date)
     add_latest_commit("k4gen", "hep-fcc/k4Gen", date=date)
     add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4", date=date)
     add_latest_commit("delphes", "delphes/delphes", date=date)
