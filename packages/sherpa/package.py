@@ -50,7 +50,7 @@ class Sherpa(AutotoolsPackage):
         deprecated=True,
     )
 
-    _cxxstd_values = ("11", "14", "17")
+    _cxxstd_values = ("11", "14", "17", "20")
     variant(
         "cxxstd",
         default="11",
