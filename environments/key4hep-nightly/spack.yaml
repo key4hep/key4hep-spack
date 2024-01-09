@@ -1,9 +1,10 @@
 spack:
   view: false
   include:
-  - ./packages.yaml
   - ../key4hep-common/config-nightlies.yaml
   - ../key4hep-common/packages.yaml
+  # Put packages after the common packages so that it doesn't get overwritten
+  - ./packages.yaml
   - ../key4hep-common/compilers.yaml
   repos:
   - ../..
