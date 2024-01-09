@@ -67,7 +67,7 @@ packages:
 
 
   root:
-    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd build_type=RelWithDebInfo
+    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20 build_type=RelWithDebInfo
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
