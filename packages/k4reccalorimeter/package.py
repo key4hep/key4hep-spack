@@ -40,6 +40,11 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     # via gaudi
     depends_on("py-six", type=("build", "run"))
 
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4RecCalorimeter/pull/62.diff",
+        "d2653c2dd358533f590b56cabc0ddf55b15284114cf73640790e873e97c2d9f2",
+    )
+
     def cmake_args(self):
         args = []
         # C++ Standard
