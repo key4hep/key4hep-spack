@@ -41,7 +41,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     # Temporary patch to allow C++20
     patch(
         "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4Gen/pull/26.diff",
-        sha256sum="9f8572eabd2f230d373801482349371873301e4d2efd017bdfea4631a5aeba43",
+        sha256="9f8572eabd2f230d373801482349371873301e4d2efd017bdfea4631a5aeba43",
     )
 
     def cmake_args(self):
