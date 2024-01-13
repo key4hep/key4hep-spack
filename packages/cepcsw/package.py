@@ -76,13 +76,12 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk")
     depends_on("pandorapfa")
     depends_on("root")
+    depends_on("py-onnxruntime")
 
     def cmake_args(self):
         args = []
         # C++ Standard
         args.append("-DCMAKE_CXX_STANDARD=%s" % self.spec.variants["cxxstd"].value)
-        if self.spec.satisfies("^gaudi@:34.99"):
-            args.append("-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt")
 
         pandorapfa_prefix = self.spec["pandorapfa"].prefix
         pandorapfa_cmake_modules = pandorapfa_prefix + "/cmakemodules"
