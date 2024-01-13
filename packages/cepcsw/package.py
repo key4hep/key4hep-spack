@@ -60,12 +60,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
         when="@0.2.1",
     )
 
-    # Temporary patch
-    patch(
-        "https://patch-diff.githubusercontent.com/raw/cepc/CEPCSW/pull/260.diff",
-        sha256="6ec2e84e1aaba338c2c6427bfe4e48f1a12bd17c2f3c5b87bc41d8caecbcd91e",
-    )
-
     depends_on("clhep")
     depends_on("dd4hep")
     depends_on("edm4hep")
