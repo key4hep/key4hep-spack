@@ -1,9 +1,10 @@
 import os
 import requests
 import argparse
+import re
 
 
-def add_latest_commit(
+def get_latest_commit(
     name,
     repoinfo,
     # for now supporting only gitlab.cern.ch
@@ -45,7 +46,7 @@ def add_latest_commit(
     commit = response.json()[0]["sha" if not gitlab else "id"]
     int(commit, 16)
 
-    print(f"  - {name}@{commit}=develop")
+    return commit
 
 
 if __name__ == "__main__":
@@ -53,69 +54,88 @@ if __name__ == "__main__":
         description="Add latest commits to a spack environment"
     )
     parser.add_argument(
-        "date", help="date until which to search for commits, for example: 2021-01-01"
+        "path", help="path to key4hep-spack", default="/key4hep-spack",
+    )
+    parser.add_argument(
+        "date", help="date until which to search for commits, for example: 2021-01-01",
+        default=None,
     )
     args = parser.parse_args()
     date = args.date
 
-    print()
+    try:
+        with open(os.path.join(args.path, "packages/key4hep-stack/package.py"), 'r') as recipe:
+            text = recipe.read()
+    except FileNotFoundError:
+        print("Please run this script from the key4hep-spack repository.")
+        raise
 
-    add_latest_commit("edm4hep", "key4hep/edm4hep", date=date)
-    add_latest_commit("podio", "aidasoft/podio", date=date)
-    add_latest_commit("dd4hep", "aidasoft/dd4hep", date=date)
-    add_latest_commit("k4fwcore", "key4hep/k4fwcore", date=date)
-    add_latest_commit("k4projecttemplate", "key4hep/k4-project-template", date=date)
-    add_latest_commit("k4simdelphes", "key4hep/k4SimDelphes", date=date)
-    add_latest_commit("k4clue", "key4hep/k4clue", date=date)
-    add_latest_commit("k4gen", "hep-fcc/k4Gen", date=date)
-    add_latest_commit("k4simgeant4", "hep-fcc/k4simgeant4", date=date)
-    add_latest_commit("delphes", "delphes/delphes", date=date)
-    add_latest_commit("fccsw", "hep-fcc/fccsw", date=date)
-    # todo: figure out the api for the cern gitlab instance
-    # depends_on('guinea-pig@main')
-    # todo: figure out the api for the whizard gitlab instance
-    # depends_on('whizard@main +lcio +openloops hepmc=2')
-    add_latest_commit("dual-readout", "hep-fcc/dual-readout", date=date)
-    add_latest_commit("fccanalyses", "hep-fcc/fccanalyses", date=date)
-    add_latest_commit("fccdetectors", "hep-fcc/fccdetectors", date=date)
-    add_latest_commit("k4reccalorimeter", "hep-fcc/k4reccalorimeter", date=date)
-    add_latest_commit("cepcsw", "cepc/cepcsw", date=date)
-    add_latest_commit("aidatt", "aidasoft/aidatt", date=date)
-    add_latest_commit("cedviewer", "ilcsoft/cedviewer", date=date)
-    add_latest_commit("conformaltracking", "ilcsoft/conformaltracking", date=date)
-    add_latest_commit("clicperformance", "ilcsoft/clicperformance", date=date)
-    add_latest_commit("ced", "ilcsoft/ced", date=date)
-    add_latest_commit("ddkaltest", "ilcsoft/ddkaltest", date=date)
-    add_latest_commit("ddmarlinpandora", "ilcsoft/ddmarlinpandora", date=date)
-    add_latest_commit("fcalclusterer", "fcalsw/fcalclusterer", date=date)
-    add_latest_commit("forwardtracking", "ilcsoft/forwardtracking", date=date)
-    add_latest_commit("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv", date=date)
-    add_latest_commit("k4marlinwrapper", "key4hep/k4marlinwrapper", date=date)
-    add_latest_commit("gear", "ilcsoft/gear", date=date)
-    add_latest_commit("ilcutil", "ilcsoft/ilcutil", date=date)
-    add_latest_commit("ildperformance", "ilcsoft/ildperformance", date=date)
-    add_latest_commit("kitrackmarlin", "ilcsoft/kitrackmarlin", date=date)
-    add_latest_commit("kaltest", "ilcsoft/kaltest", date=date)
-    add_latest_commit("kitrack", "ilcsoft/kitrack", date=date)
-    add_latest_commit("lcfiplus", "lcfiplus/lcfiplus", date=date)
-    add_latest_commit("lctuple", "ilcsoft/lctuple", date=date)
-    add_latest_commit("lccd", "ilcsoft/lccd", date=date)
-    add_latest_commit("lcio", "ilcsoft/lcio", date=date)
-    add_latest_commit("k4geo", "key4hep/k4geo", date=date)
-    add_latest_commit("marlin", "ilcsoft/marlin", date=date)
-    add_latest_commit("marlinutil", "ilcsoft/marlinutil", date=date)
-    add_latest_commit("marlindd4hep", "ilcsoft/marlindd4hep", date=date)
-    add_latest_commit("marlinreco", "ilcsoft/marlinreco", date=date)
-    add_latest_commit("marlinfastjet", "ilcsoft/marlinfastjet", date=date)
-    add_latest_commit("marlinkinfit", "ilcsoft/marlinkinfit", date=date)
-    add_latest_commit("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors")
-    add_latest_commit("marlintrkprocessors", "ilcsoft/marlintrkprocessors")
-    add_latest_commit("marlintrk", "ilcsoft/marlintrk", date=date)
-    add_latest_commit(
-        "opendatadetector", "acts/OpenDataDetector", gitlab=True, date=date
-    )
-    add_latest_commit("overlay", "ilcsoft/overlay", date=date)
-    add_latest_commit("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis", date=date)
-    add_latest_commit("physsim", "ilcsoft/physsim", date=date)
-    add_latest_commit("raida", "ilcsoft/raida", date=date)
-    add_latest_commit("sio", "ilcsoft/sio", date=date)
+    for package, location in [
+        ("aidatt", "aidasoft/aidatt"),
+        ("ced", "ilcsoft/ced"),
+        ("cedviewer", "ilcsoft/cedviewer"),
+        ("cepcsw", "cepc/cepcsw"),
+        ("clicperformance", "ilcsoft/clicperformance"),
+        ("conformaltracking", "ilcsoft/conformaltracking"),
+        ("dd4hep", "aidasoft/dd4hep"),
+        ("ddkaltest", "ilcsoft/ddkaltest"),
+        ("ddmarlinpandora", "ilcsoft/ddmarlinpandora"),
+        ("delphes", "delphes/delphes"),
+        ("dual-readout", "hep-fcc/dual-readout"),
+        ("edm4hep", "key4hep/edm4hep"),
+        ("fcalclusterer", "fcalsw/fcalclusterer"),
+        ("fccanalyses", "hep-fcc/fccanalyses"),
+        ("fccdetectors", "hep-fcc/fccdetectors"),
+        ("fccsw", "hep-fcc/fccsw"),
+        ("forwardtracking", "ilcsoft/forwardtracking"),
+        ("gear", "ilcsoft/gear"),
+        ("ilcutil", "ilcsoft/ilcutil"),
+        ("ildperformance", "ilcsoft/ildperformance"),
+        ("k4clue", "key4hep/k4clue"),
+        ("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv"),
+        ("k4fwcore", "key4hep/k4fwcore"),
+        ("k4gen", "hep-fcc/k4Gen"),
+        ("k4geo", "key4hep/k4geo"),
+        ("k4marlinwrapper", "key4hep/k4marlinwrapper"),
+        ("k4projecttemplate", "key4hep/k4-project-template"),
+        ("k4reccalorimeter", "hep-fcc/k4reccalorimeter"),
+        ("k4simdelphes", "key4hep/k4SimDelphes"),
+        ("k4simgeant4", "hep-fcc/k4simgeant4"),
+        ("kaltest", "ilcsoft/kaltest"),
+        ("kitrack", "ilcsoft/kitrack"),
+        ("kitrackmarlin", "ilcsoft/kitrackmarlin"),
+        ("lccd", "ilcsoft/lccd"),
+        ("lcfiplus", "lcfiplus/lcfiplus"),
+        ("lcio", "ilcsoft/lcio"),
+        ("lctuple", "ilcsoft/lctuple"),
+        ("marlindd4hep", "ilcsoft/marlindd4hep"),
+        ("marlinfastjet", "ilcsoft/marlinfastjet"),
+        ("marlin", "ilcsoft/marlin"),
+        ("marlinkinfit", "ilcsoft/marlinkinfit"),
+        ("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors"),
+        ("marlinreco", "ilcsoft/marlinreco"),
+        ("marlintrk", "ilcsoft/marlintrk"),
+        ("marlintrkprocessors", "ilcsoft/marlintrkprocessors"),
+        ("marlinutil", "ilcsoft/marlinutil"),
+        ("opendatadetector", "acts/OpenDataDetector"),
+        ("overlay", "ilcsoft/overlay"),
+        ("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis"),
+        ("physsim", "ilcsoft/physsim"),
+        ("podio", "aidasoft/podio"),
+        ("raida", "ilcsoft/raida"),
+        ("sio", "ilcsoft/sio"),]:
+
+        gitlab = False
+        if package in ["opendatadetector"]:
+            gitlab = True
+        commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
+        pattern = f"depends_on\s*\(\s*\"{package}.*\"\s*\)"
+        if not re.search(pattern, text):
+            print(f"Adding {package}@{commit} to the key4hep-stack package.py")
+            text += f"    depends_on(\"{package}@{commit}=develop\")\n"
+        else:
+            print(f"Updating {package}@{commit} in the key4hep-stack package.py")
+            text = re.sub(pattern, f"depends_on(\"{package}@{commit}=develop\")", text)
+
+    with open(os.path.join(args.path, "packages/key4hep-stack/package.py"), 'w') as recipe:
+        recipe.write(text)
