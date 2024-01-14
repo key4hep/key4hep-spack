@@ -2,6 +2,7 @@ import os
 import requests
 import argparse
 import re
+import yaml
 
 
 def get_latest_commit(
@@ -54,7 +55,7 @@ if __name__ == "__main__":
         description="Add latest commits to a spack environment"
     )
     parser.add_argument(
-        "path", help="path to key4hep-spack", default="/key4hep-spack",
+        "path", help="path to the current environment", default="/key4hep-spack",
     )
     parser.add_argument(
         "date", help="date until which to search for commits, for example: 2021-01-01",
@@ -64,8 +65,8 @@ if __name__ == "__main__":
     date = args.date
 
     try:
-        with open(os.path.join(args.path, "packages/key4hep-stack/package.py"), 'r') as recipe:
-            text = recipe.read()
+        with open(os.path.join(args.path, "packages.yaml"), 'r') as recipe:
+            text = yaml.safe_load(recipe)
     except FileNotFoundError:
         print("Please run this script from the key4hep-spack repository.")
         raise
@@ -130,12 +131,11 @@ if __name__ == "__main__":
             gitlab = True
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         pattern = f"depends_on\s*\(\s*\"{package}.*\"\s*\)"
-        if not re.search(pattern, text):
+        if not text['packages'][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
-            text += f"    depends_on(\"{package}@{commit}=develop\")\n"
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
-            text = re.sub(pattern, f"depends_on(\"{package}@{commit}=develop\")", text)
+        text['packages'][package]['require'] = f"@{commit}=develop"
 
-    with open(os.path.join(args.path, "packages/key4hep-stack/package.py"), 'w') as recipe:
-        recipe.write(text)
+    with open(os.path.join(args.path, "packages.yaml"), 'w') as recipe:
+        yaml.dump(text, recipe)
