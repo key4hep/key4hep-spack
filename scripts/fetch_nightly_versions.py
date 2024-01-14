@@ -1,7 +1,6 @@
 import os
 import requests
 import argparse
-import re
 import yaml
 
 
@@ -130,12 +129,14 @@ if __name__ == "__main__":
         if package in ["opendatadetector"]:
             gitlab = True
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
-        pattern = f"depends_on\s*\(\s*\"{package}.*\"\s*\)"
+        line = f"@{commit}"
+        if package not in ['cepcsw']:
+            line += "=develop"
         if not text['packages'][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
-        text['packages'][package]['require'] = f"@{commit}=develop"
+        text['packages'][package]['require'] = line
 
     with open(os.path.join(args.path, "packages.yaml"), 'w') as recipe:
         yaml.dump(text, recipe)
