@@ -1,7 +1,4 @@
-# ----------------------------------------------------------------------------
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
-
 
 class Cepcsw(CMakePackage, Key4hepPackage):
     """CEPC offline experiment software based on Key4hep."""
@@ -67,7 +64,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1.0pre14:", when="@0.2.4:")
     depends_on("k4fwcore@0.3.0:")
     depends_on("garfieldpp", when="@0.2.1:")
-    depends_on("gaudi@35.0:")
+    depends_on("gaudi")
     depends_on("gear")
     depends_on("genfit")
     depends_on("lcio")
