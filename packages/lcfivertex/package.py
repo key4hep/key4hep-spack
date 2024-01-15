@@ -29,11 +29,6 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
 
     patch("tixml.patch", when="@0.8")
 
-    patch(
-        "https://patch-diff.githubusercontent.com/raw/iLCSoft/LCFIVertex/pull/9.diff",
-        sha256="430e981aa48cf2b1392e9999aeae66a5a2ab5c1317bd46a300711cf03ebfcaf6",
-    )
-
     def cmake_args(self):
         args = [
             self.define("INSTALL_DOC", False),
