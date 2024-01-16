@@ -92,9 +92,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
         args = [
-            self.define(
-                "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
-            ),
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             self.define_from_variant("WITH_ACTS", "acts"),
             self.define_from_variant("WITH_DD4HEP", "dd4hep"),
             self.define_from_variant("WITH_ONNX", "onnx"),
