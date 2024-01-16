@@ -56,4 +56,4 @@ class Overlay(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         # C++ Standard
-        return ["-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value]
+        return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]
