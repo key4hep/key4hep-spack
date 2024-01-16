@@ -40,7 +40,9 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+        )
         return args
 
     def setup_run_environment(self, env):
