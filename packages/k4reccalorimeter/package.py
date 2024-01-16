@@ -20,14 +20,6 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     generator = "Ninja"
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
     depends_on("ninja", type="build")
     depends_on("edm4hep")
     depends_on("podio")
@@ -48,7 +40,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append("-DCMAKE_CXX_STANDARD=%s" % self.spec.variants["cxxstd"].value)
+        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
         return args
 
     def setup_run_environment(self, env):

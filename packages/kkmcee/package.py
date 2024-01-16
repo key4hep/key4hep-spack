@@ -50,14 +50,6 @@ class Kkmcee(AutotoolsPackage):
     patch("KKMCee-dev-4.30.patch", level=0, when="@:4.30")
     patch("KKMCee-dev-4.32.01.patch", level=0, when="@4.31:4.32.01")
 
-    variant(
-        "cxxstd",
-        default="11",
-        values=("11", "14", "17"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
     @when("@4")
     def patch(self):
         _makefiles = [

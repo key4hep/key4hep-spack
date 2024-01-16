@@ -9,14 +9,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
 
     maintainers = ["mirguest"]
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
     version("master", branch="master")
     version(
         "0.2.8",
@@ -78,7 +70,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append("-DCMAKE_CXX_STANDARD=%s" % self.spec.variants["cxxstd"].value)
+        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
 
         pandorapfa_prefix = self.spec["pandorapfa"].prefix
         pandorapfa_cmake_modules = pandorapfa_prefix + "/cmakemodules"
