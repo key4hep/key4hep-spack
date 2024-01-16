@@ -71,7 +71,9 @@ class K4geo(CMakePackage):
 
     def cmake_args(self):
         args = []
-        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+        )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
