@@ -38,7 +38,7 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         return [
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value,
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             self.define_from_variant("INSTALL_DOC", "doc"),
         ]
 

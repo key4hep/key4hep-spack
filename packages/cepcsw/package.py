@@ -1,5 +1,3 @@
-# ----------------------------------------------------------------------------
-
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -11,14 +9,6 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     git = "https://github.com/cepc/CEPCSW.git"
 
     maintainers = ["mirguest"]
-
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
 
     version("master", branch="master")
     version(
@@ -67,7 +57,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1.0pre14:", when="@0.2.4:")
     depends_on("k4fwcore@0.3.0:")
     depends_on("garfieldpp", when="@0.2.1:")
-    depends_on("gaudi@35.0:")
+    depends_on("gaudi")
     depends_on("gear")
     depends_on("genfit")
     depends_on("lcio")
@@ -76,13 +66,14 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk")
     depends_on("pandorapfa")
     depends_on("root")
+    depends_on("py-onnxruntime")
 
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append("-DCMAKE_CXX_STANDARD=%s" % self.spec.variants["cxxstd"].value)
-        if self.spec.satisfies("^gaudi@:34.99"):
-            args.append("-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt")
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+        )
 
         pandorapfa_prefix = self.spec["pandorapfa"].prefix
         pandorapfa_cmake_modules = pandorapfa_prefix + "/cmakemodules"

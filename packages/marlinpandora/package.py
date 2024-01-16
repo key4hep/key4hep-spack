@@ -33,6 +33,6 @@ class Marlinpandora(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         return [
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value,
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DCMAKE_CXX_FLAGS=-std=c++%s" % self.spec["root"].variants["cxxstd"].value,
         ]

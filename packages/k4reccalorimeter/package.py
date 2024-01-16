@@ -20,14 +20,6 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     generator = "Ninja"
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
     depends_on("ninja", type="build")
     depends_on("edm4hep")
     depends_on("podio")
@@ -40,10 +32,17 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     # via gaudi
     depends_on("py-six", type=("build", "run"))
 
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4RecCalorimeter/pull/62.diff",
+        sha256="d2653c2dd358533f590b56cabc0ddf55b15284114cf73640790e873e97c2d9f2",
+    )
+
     def cmake_args(self):
         args = []
         # C++ Standard
-        args.append("-DCMAKE_CXX_STANDARD=%s" % self.spec.variants["cxxstd"].value)
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+        )
         return args
 
     def setup_run_environment(self, env):

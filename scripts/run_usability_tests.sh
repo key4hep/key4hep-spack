@@ -84,11 +84,16 @@ run_test "DD4hep test" "ddsim --compactFile DD4hep/DDDetectors/compact/SiD.xml -
 # run_test "podio test" "podio-dump muons.slcio"
 # run_test "edm4hep test"
 # run_test "k4fwcore test" "k4run -n 10 --input muons.slcio --output output.slcio --processors k4FWCoreTestProcessor"
+
+# Produce more than one output to make sure that all of the desired output
+# formats are actually available
+# see: https://github.com/key4hep/key4hep-spack/issues/533
+#      https://github.com/key4hep/key4hep-spack/issues/549
 cat > ee.sin <<EOF
     process ee = e1, E1 => e2, E2
     sqrts = 360 GeV
     n_events = 10
-    sample_format = lhef
+    sample_format = lhef, lcio, hepmc
     simulate (ee)
 EOF
 run_test "whizard test" "whizard -r ee.sin"

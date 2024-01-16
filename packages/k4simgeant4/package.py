@@ -31,11 +31,16 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on("fccdetectors")
     depends_on("k4gen")
 
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4SimGeant4/pull/60.diff",
+        sha256="21bd1053eb06e651b370c4deda0cbe53bd1900a340213c142c65f5f9081a5c6b",
+    )
+
     def cmake_args(self):
         args = []
         # C++ Standard
         args.append(
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         return args
 

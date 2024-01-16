@@ -48,14 +48,6 @@ class K4geo(CMakePackage):
         sha256="e6d88dcca5440632241c30cab7bc0d314afef42a7a7ff15b68fc59cf997cda08",
     )
 
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
     variant("compact", default=True, description="Install compact files")
 
     depends_on("lcio")
@@ -79,7 +71,9 @@ class K4geo(CMakePackage):
 
     def cmake_args(self):
         args = []
-        args.append(self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"))
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+        )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args

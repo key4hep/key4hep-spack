@@ -68,7 +68,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4geo")
     depends_on("podio")
     depends_on("python~debug")
-    depends_on("whizard +lcio +openloops hepmc=2")
+    depends_on("whizard")
     depends_on("xrootd +krb5")
 
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
