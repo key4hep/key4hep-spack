@@ -29,6 +29,6 @@ class Kitrack(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         args = []
         args.append(
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         return args

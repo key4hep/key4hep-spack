@@ -37,7 +37,7 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
         args = []
         # C++ Standard
         args.append(
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         # todo: add variant
         args.append(self.define("INSTALL_DOC", False))

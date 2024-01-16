@@ -32,4 +32,4 @@ class Lich(CMakePackage, Ilcsoftpackage):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libLICH.so")
 
     def cmake_args(self):
-        return ["-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value]
+        return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]

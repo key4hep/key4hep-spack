@@ -50,7 +50,7 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
         args = []
         # C++ Standard
         args.append(
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append("-DBUILD_TESTING=%s" % self.run_tests)
         return args

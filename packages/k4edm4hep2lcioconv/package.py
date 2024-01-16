@@ -52,7 +52,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
             self.define("FORCE_COLORED_OUTPUT", False),
         ]
         args.append(
-            "-DCMAKE_CXX_STANDARD=%s" % self.spec["root"].variants["cxxstd"].value
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         return args
 
