@@ -39,6 +39,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("podio@0.10:")
     depends_on("podio@0.14.1", when="@1.0pre14:1.0pre15")
     depends_on("podio@0.14.2:", when="@1.0pre16:")
+    depends_on("podio@:0.17.3", when="@:1.0pre17")  # podio/EventStore.h removed
     depends_on("edm4hep")
     depends_on("edm4hep@0.4.1:", when="@1.0pre14:")
     depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
