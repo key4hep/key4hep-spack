@@ -15,7 +15,7 @@ class K4geo(CMakePackage):
 
     maintainers = ["jmcarcell"]
 
-    version("master", branch="master")
+    version("main", branch="main")
     version(
         "0.19",
         url="https://github.com/key4hep/k4geo/archive/v00-19-00.tar.gz",
