@@ -13,7 +13,7 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     maintainers = ["vvolkl"]
 
-    version("master", branch="master")
+    version("main", branch="main")
     version(
         "0.4.0",
         sha256="e1fb8992f85ba29918e1103d3472e4ca272a16b09819f7d1ed79e6d97c4445a4",

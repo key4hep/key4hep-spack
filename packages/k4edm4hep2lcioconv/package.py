@@ -17,7 +17,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     maintainers = ["tmadlener"]
 
-    version("master", branch="master")
+    version("main", branch="main")
     version(
         "00-07",
         sha256="269d14c390f987fb3fdb0d2e952febfb639415bef50e5e1c8992f23e0cd4a5a6",
