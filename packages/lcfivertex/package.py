@@ -17,6 +17,9 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.9", sha256="689c77186c48284b81e78ae9e7ac5b93614ab41344e4c75157143f033f0a45f7"
+    )
+    version(
         "0.8", sha256="37f3ea8754cefb60073471c298b4c1926ef9858e8edb4c51affa1ff7de4e2fb8"
     )
 
