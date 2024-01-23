@@ -48,6 +48,7 @@ def get_latest_commit(
 
     return commit
 
+
 def get_default_branch(
     name,
     repoinfo,
@@ -87,7 +88,9 @@ def get_default_branch(
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
 
-    default_branch = response.json()["default_branch" if not gitlab else "default_branch"]
+    default_branch = response.json()[
+        "default_branch" if not gitlab else "default_branch"
+    ]
 
     return default_branch
 
@@ -189,10 +192,13 @@ if __name__ == "__main__":
         # if package not in ["cepcsw"]:
         #     line += "=develop"
         original = " "
-        if package in text["packages"] and 'require' in text["packages"][package]:
+        if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
             text["packages"][package]["require"] = line + original
-        elif package in text_extra["packages"] and 'require' in text_extra["packages"][package]:
+        elif (
+            package in text_extra["packages"]
+            and "require" in text_extra["packages"][package]
+        ):
             original = text_extra["packages"][package]["require"]
             text_extra["packages"][package]["require"] = line + original
         else:
@@ -202,4 +208,3 @@ if __name__ == "__main__":
         yaml.dump(text, recipe)
     with open(args.extra_path, "w") as recipe:
         yaml.dump(text_extra, recipe)
-
