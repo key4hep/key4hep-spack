@@ -77,6 +77,8 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   lcfiplus:
     variants: build_type=RelWithDebInfo cxxstd=20
+  lcfivertex:
+    variants: build_type=RelWithDebInfo cxxstd=20
   lcio:
     variants: build_type=RelWithDebInfo cxxstd=20
   lctuple:
