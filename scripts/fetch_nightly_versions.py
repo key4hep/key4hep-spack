@@ -165,6 +165,7 @@ if __name__ == "__main__":
         ("kitrackmarlin", "ilcsoft/kitrackmarlin"),
         ("lccd", "ilcsoft/lccd"),
         ("lcfiplus", "lcfiplus/lcfiplus"),
+        ("lcfivertex", "ilcsoft/lcfivertex"),
         ("lcio", "ilcsoft/lcio"),
         ("lctuple", "ilcsoft/lctuple"),
         ("marlindd4hep", "ilcsoft/marlindd4hep"),
