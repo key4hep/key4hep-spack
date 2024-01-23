@@ -50,6 +50,15 @@ class Sherpa(AutotoolsPackage):
         deprecated=True,
     )
 
+    _cxxstd_values = ("11", "14", "17", "20")
+    variant(
+        "cxxstd",
+        default="11",
+        values=_cxxstd_values,
+        multi=False,
+        description="Use the specified C++ standard when building",
+    )
+
     variant("analysis", default=True, description="Enable analysis components")
     variant("mpi", default=False, description="Enable MPI")
     variant("python", default=False, description="Enable Python API")
@@ -174,7 +183,7 @@ class Sherpa(AutotoolsPackage):
     def flag_handler(self, name, flags):
         flags = list(flags)
         if name == "cxxflags":
-            flags.append("-std=c++" + self.spec["root"].variants["cxxstd"].value)
+            flags.append("-std=c++" + self.spec.variants["cxxstd"].value)
 
             if "+cms" in self.spec:
                 flags.extend(["-fuse-cxa-atexit", "-O2"])
