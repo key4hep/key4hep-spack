@@ -48,15 +48,61 @@ def get_latest_commit(
 
     return commit
 
+def get_default_branch(
+    name,
+    repoinfo,
+    # for now supporting only gitlab.cern.ch
+    gitlab=False,
+    date=None,
+):
+    """Helper function for adding a package versioned at the latest commit to a spack environment.
+    The authentication is optional, but note that the api might be rate-limited for unauthenticated access.
+
+    :param name: spack name of the package, p.ex: "edm4hep"
+    :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
+    """
+
+    if not gitlab:
+        giturl = "https://api.github.com/repos/%s"
+    else:
+        giturl = "https://gitlab.cern.ch/api/v4/projects/%s"
+
+    if gitlab:
+        repoinfo = repoinfo.replace("/", "%2F")
+
+    # Apparently this is also fine for gitlab
+    headers = {"Accept": "application/vnd.github+json"}
+
+    # gitlab doesn't seem to need a token, maybe there is some rate limiting without one
+    token = os.environ.get("GITHUB_TOKEN" if not gitlab else "CERN_GITLAB_TOKEN", None)
+    if token:
+        headers["Authorization" if not gitlab else "PRIVATE-TOKEN"] = f"token {token}"
+
+    # not tested for gitlab
+    search_params = {}
+    if date:
+        search_params = {
+            "until": f"{date}",
+        }
+
+    response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
+
+    default_branch = response.json()["default_branch" if not gitlab else "default_branch"]
+
+    return default_branch
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Add latest commits to a spack environment"
     )
     parser.add_argument(
-        "path",
-        help="path to the current environment",
-        default="/key4hep-spack",
+        "--path",
+        help="path to a yaml file with spack packages",
+    )
+    parser.add_argument(
+        "--extra-path",
+        help="path to a yaml file with spack packages",
     )
     parser.add_argument(
         "date",
@@ -67,8 +113,15 @@ if __name__ == "__main__":
     date = args.date
 
     try:
-        with open(os.path.join(args.path, "packages.yaml"), "r") as recipe:
+        with open(args.path, "r") as recipe:
             text = yaml.safe_load(recipe)
+    except FileNotFoundError:
+        print("Please run this script from the key4hep-spack repository.")
+        raise
+
+    try:
+        with open(args.extra_path, "r") as recipe:
+            text_extra = yaml.safe_load(recipe)
     except FileNotFoundError:
         print("Please run this script from the key4hep-spack repository.")
         raise
@@ -131,15 +184,22 @@ if __name__ == "__main__":
         gitlab = False
         if package in ["opendatadetector"]:
             gitlab = True
-        commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
-        line = f"@{commit}"
-        if package not in ["cepcsw"]:
-            line += "=develop"
-        if not text["packages"][package]:
-            print(f"Adding {package}@{commit} to the key4hep-stack package.py")
+        commit = get_default_branch(package, location, gitlab=gitlab, date=date)
+        line = f"@{commit} "
+        # if package not in ["cepcsw"]:
+        #     line += "=develop"
+        original = " "
+        if package in text["packages"] and 'require' in text["packages"][package]:
+            original = text["packages"][package]["require"]
+            text["packages"][package]["require"] = line + original
+        elif package in text_extra["packages"] and 'require' in text_extra["packages"][package]:
+            original = text_extra["packages"][package]["require"]
+            text_extra["packages"][package]["require"] = line + original
         else:
-            print(f"Updating {package}@{commit} in the key4hep-stack package.py")
-        text["packages"][package]["require"] = line
+            text_extra["packages"][package]["require"] = line
 
-    with open(os.path.join(args.path, "packages.yaml"), "w") as recipe:
+    with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)
+    with open(args.extra_path, "w") as recipe:
+        yaml.dump(text_extra, recipe)
+
