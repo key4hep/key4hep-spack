@@ -53,7 +53,7 @@ class Sherpa(AutotoolsPackage):
     _cxxstd_values = ("11", "14", "17", "20")
     variant(
         "cxxstd",
-        default="11",
+        default="17",
         values=_cxxstd_values,
         multi=False,
         description="Use the specified C++ standard when building",
