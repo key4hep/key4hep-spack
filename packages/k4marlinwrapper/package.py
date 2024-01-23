@@ -15,7 +15,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     maintainers = ["tmadlener", "jmcarcell"]
 
-    version("master", branch="master")
+    version("main", branch="main")
     version(
         "0.7", sha256="aff49b9885d3c5e0804d5bcd3752ac77f3e3bbce6910fa9277252b907656914a"
     )
