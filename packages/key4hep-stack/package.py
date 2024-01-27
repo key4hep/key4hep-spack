@@ -159,5 +159,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
                 self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
             )
 
+        # Don't use libtools from the system
+        if "libtool" in self.spec:
+            env.prepend_path("PATH", self.spec["libtool"].prefix.bin)
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["libtool"].prefix.lib)
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
