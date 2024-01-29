@@ -164,5 +164,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path("PATH", self.spec["libtool"].prefix.bin)
             env.prepend_path("LD_LIBRARY_PATH", self.spec["libtool"].prefix.lib)
 
+        if "autoconf" in self.spec:
+            env.prepend_path("PATH", self.spec["autoconf"].prefix.bin)
+        if "automake" in self.spec:
+            env.prepend_path("PATH", self.spec["automake"].prefix.bin)
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
