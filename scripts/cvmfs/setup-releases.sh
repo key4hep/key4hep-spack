@@ -57,6 +57,27 @@ else
     return 1
 fi
 
+k4_local_repo() {
+    # If $1 is not empty, it means that the user has a local repository
+    if [ -n "$1" ]; then
+        install=$1
+    else
+        install=install
+    fi
+    current_repo=$(basename $PWD | tr '[:upper:]' '[:lower:]' | tr -d -)
+    export PATH=$(echo $PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export PYTHONPATH=$(echo $PYTHONPATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export CMAKE_PREFIX_PATH=$(echo $CMAKE_PREFIX_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export ROOT_INCLUDE_PATH=$(echo $ROOT_INCLUDE_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
+    export PYTHONPATH=$PWD/$install/python:$PYTHONPATH
+    export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
+    export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
+    export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
+    echo "Added $PWD/$install to the environment and removed any path containing /${current_repo}/"
+}
 
 setup_script_path=$(ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
