@@ -39,22 +39,6 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
         url="https://github.com/key4hep/k4SimDelphes/archive/v00-03-00.tar.gz",
         sha256="f2dc577738a3819b33b23ee829a1123f283293512a09c62de166d95e55232776",
     )
-    version(
-        "00-02-01",
-        sha256="2a8fc1ce97fcdbafc0af0b1e13df8005695f92bffe8f0029be952ec6a9eeeb76",
-    )
-    version(
-        "00-02",
-        sha256="ffef851a6726b401ac43a7195d76a4d918ea135795eb1b5baff041c7f10ab105",
-    )
-    version(
-        "00-01-09",
-        sha256="4f91742f0be9bdb01f25ab8ee9c6650267f8a1b587762cb4cc10aacd16dc30f3",
-    )
-    version(
-        "00-01-08",
-        sha256="a9c8dea6b2fd4bf81ad3421f12d1ce43f487a922e0533a832f459f6b3435f7d2",
-    )
 
     variant("framework", default=True, description="Build Gaudi framework integration.")
     variant(
@@ -78,12 +62,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
         description="Build standalone executable with Pythia+EvtGen input",
     )
 
-    depends_on("edm4hep@0.5:", when="@00-01-09:", type=("build", "link", "run"))
     depends_on("edm4hep", type=("build", "link", "run"))
-    depends_on("podio@0.16:", when="@00-02:")
     depends_on("podio")
-    depends_on("delphes@3.5:", when="@00-01-08", type=("build", "link", "run"))
-    depends_on("delphes@3.5.1pre02:", when="@00-01-09:", type=("build", "link", "run"))
     depends_on("delphes@3.5.1pre04:", when="@00-03-00:", type=("build", "link", "run"))
 
     depends_on("pythia8", when="+delphes_pythia")
