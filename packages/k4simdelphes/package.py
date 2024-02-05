@@ -81,7 +81,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
             self.define_from_variant("BUILD_PYTHIA_READER", "delphes_pythia"),
             self.define_from_variant("BUILD_HEPMC_READER", "delphes_hepmc"),
             self.define_from_variant("BUILD_EVTGEN_READER", "delphes_pythia_evtgen"),
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DUSE_EXTERNAL_CATCH2=ON",
             "-DBUILD_TESTING={0}".format(self.run_tests),
         ]
