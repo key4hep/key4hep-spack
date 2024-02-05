@@ -2,12 +2,6 @@
 
 # This script sets up the Key4HEP software stack from CVMFS for the nightlies
 
-function usage() {
-    echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>]"
-    echo "       -r <release> : setup a specific release, if not specified the latest release will be used"
-    echo "       -h           : print this help message"
-}
-
 function check_release() {
 if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" || -z "$(ls "/cvmfs/sw.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
@@ -19,10 +13,18 @@ if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" ||
     return 0
 }
 
-if [[ "$1" = "-h" ]]; then
-    usage
-    return 0
-fi
+for arg in "$@"; do
+    case $arg in
+        -h|--help)
+            echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>]"
+            echo "       -r <release> : setup a specific release, if not specified the latest release will be used"
+            echo "       -h           : print this help message"
+            return 0
+            ;;
+        *)
+            ;;
+    esac
+done
 
 rel="latest"
 if [[ "$1" = "-r" && -n "$2" ]]; then
@@ -58,6 +60,20 @@ else
 fi
 
 k4_local_repo() {
+    for arg in "$@"; do
+        case $arg in
+            -h|--help)
+                echo "Usage: k4_local_repo [install]"
+                echo "       install : the directory where the software is installed (default: ./install)"
+                echo "       -h      : print this help message"
+                echo "Run the function from the directory where the repository is located."
+                return 0
+                ;;
+            *)
+                ;;
+        esac
+    done
+
     # If $1 is not empty, it means that the user has a local repository
     if [ -n "$1" ]; then
         install=$1
