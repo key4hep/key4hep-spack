@@ -19,6 +19,14 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-08-01",
+        sha256="4518e39a0c87182d394f213074344ed29724005cd0481a2555a1fe48fdb98d2b",
+    )
+    version(
+        "00-08",
+        sha256="e3bfcb611b78d8e457d7f68e25d5aabe21b4b87928b0de0fc61a09734c7adb4c",
+    )
+    version(
         "00-07",
         sha256="269d14c390f987fb3fdb0d2e952febfb639415bef50e5e1c8992f23e0cd4a5a6",
     )
@@ -41,6 +49,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     depends_on("lcio")
     depends_on("lcio@2.20:", when="@00-05:")
+    depends_on("lcio@2.20.1:", when="@00-08:")
     depends_on("podio")
     depends_on("edm4hep@0.5:", when="@00-03")
     depends_on("edm4hep@0.8:", when="@00-04:")
