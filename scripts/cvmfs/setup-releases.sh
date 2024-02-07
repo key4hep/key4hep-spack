@@ -87,12 +87,13 @@ k4_local_repo() {
     export CMAKE_PREFIX_PATH=$(echo $CMAKE_PREFIX_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export ROOT_INCLUDE_PATH=$(echo $ROOT_INCLUDE_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export MARLIN_DLL=$(echo $MARLIN_DLL | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
     export PYTHONPATH=$PWD/$install/python:$PYTHONPATH
     export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
-    echo "Added $PWD/$install to the environment and removed any path containing /${current_repo}/"
+    echo "Added $PWD/$install to the environment and removed any paths containing /${current_repo}/"
 }
 
 setup_script_path=$(ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
