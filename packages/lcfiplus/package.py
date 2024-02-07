@@ -35,7 +35,6 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = []
-        # todo: add variant
         args.append(self.define("INSTALL_DOC", False))
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
