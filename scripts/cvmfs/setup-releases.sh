@@ -34,11 +34,12 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VE
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]]; then
     os="almalinux9"
     k4path=$(echo /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9*)
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' ]]; then
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
     os="ubuntu22.04"
     k4path=$(echo /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22*)
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
+    echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RHEL 9, Ubuntu 22.04"
     return 1
 fi
 
@@ -61,12 +62,27 @@ while [[ $# -gt 0 ]]; do
                     \awk -F/ '{print $(NF-1)}' | sort
                     return 0
                     ;;
+                almalinux9)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*almalinux9*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
                 centos)
                     find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
                     \awk -F/ '{print $(NF-1)}' | sort
                     return 0
                     ;;
+                centos7)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
                 ubuntu)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu22*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
+                ubuntu22)
                     find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu22*" |
                     \awk -F/ '{print $(NF-1)}' | sort
                     return 0
@@ -85,11 +101,23 @@ while [[ $# -gt 0 ]]; do
                     find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
                     return 0
                     ;;
+                almalinux9)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
                 centos)
                     find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*centos7*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
                     return 0
                     ;;
+                centos7)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*centos7*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
                 ubuntu)
+                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
+                ubuntu22)
                     find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
                     return 0
                     ;;
@@ -169,6 +197,9 @@ else
     echo "Setting up the Key4hep software stack release ${rel} from CVMFS"
 fi
 echo "Use the following command to reproduce the current environment: "
-echo "\n        source ${setup_actual}\n"
+echo ""
+echo "        source ${setup_actual}"
+echo ""
+echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
