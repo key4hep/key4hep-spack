@@ -1,30 +1,25 @@
 #!/bin/bash
 
-# This script sets up the Key4HEP software stack from CVMFS for the nightlies
+# This script sets up the Key4hep software stack from CVMFS for the nightlies
 
 function check_release() {
 if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" || -z "$(ls "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
-        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
- \awk -F/ '{print $(NF-1)}' | sort -r
+        find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$3*" |
+ \awk -F/ '{print $(NF-1)}' | sort
         echo "Aborting..."
         return 1
     fi
     return 0
 }
 
-for arg in "$@"; do
-    case $arg in
-        -h|--help)
-            echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>]"
-            echo "       -r <release> : setup a specific release, if not specified the latest release will be used"
-            echo "       -h           : print this help message"
-            return 0
-            ;;
-        *)
-            ;;
-    esac
-done
+function usage() {
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
+    echo "       -h           : print this help message"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+}
 
 rel="latest"
 if [[ "$1" = "-r" && -n "$2" ]]; then
@@ -33,31 +28,99 @@ fi
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
    [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
-    echo "Centos/RHEL 7 detected"
-    check_release $1 $2 centos7
-    if [ $? -ne 0 ]; then
-      return 1
-    fi
-    k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-centos7-gcc12.2.0-opt"
+    os="centos7"
+    k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*centos7*)
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]]; then
-    echo "AlmaLinux/RHEL 9 detected"
-    check_release $1 $2 almalinux9
-    if [ $? -ne 0 ]; then
-      return 1
-    fi
-    k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-almalinux9-gcc11.3.1-opt"
+    os="almalinux9"
+    k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*almalinux9*)
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' ]]; then
-    echo "Ubuntu detected"
-    check_release $1 $2 ubuntu
-    if [ $? -ne 0 ]; then
-      return 1
-    fi
-    k4path="/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/x86_64-ubuntu22.04-gcc11.4.0-opt"
+    os="ubuntu22.04"
+    k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*ubuntu22*)
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     return 1
 fi
+
+check_release $1 $2 $os
+if [ $? -ne 0 ]; then
+  return 1
+fi
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            usage
+            return 0
+            ;;
+        --list-releases)
+            shift
+            case $1 in
+                almalinux)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*almalinux9*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
+                centos)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
+                ubuntu)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu22*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
+                *)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$os*" |
+                    \awk -F/ '{print $(NF-1)}' | sort
+                    return 0
+                    ;;
+            esac
+            ;;
+        --list-packages)
+            shift
+            case $1 in
+                almalinux)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*almalinux9*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
+                centos)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*centos7*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
+                ubuntu)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*ubuntu22*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
+                *)
+                    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+                    return 0
+                    ;;
+            esac
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+if [ -n "$KEY4HEP_STACK" ]; then
+    echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
+    return 1
+fi
+
+if [ "$os" = "centos7" ]; then
+    echo "Centos/RHEL 7 detected"
+    if [ "$rel" = "latest" ]; then
+        echo "This OS will reach the end of its maintenance support soon and won't have Key4hep builds in the future, consider upgrading to Alma 9"
+    fi
+elif [ "$os" = "almalinux9" ]; then
+    echo "AlmaLinux/RHEL 9 detected"
+elif [ "$os" = "ubuntu22.04" ]; then
+    echo "Ubuntu 22.04 detected"
+fi
+
 
 k4_local_repo() {
     for arg in "$@"; do
@@ -74,7 +137,6 @@ k4_local_repo() {
         esac
     done
 
-    # If $1 is not empty, it means that the user has a local repository
     if [ -n "$1" ]; then
         install=$1
     else
@@ -101,14 +163,13 @@ setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
 if [ "${rel}" = "latest" ]; then
-    echo "Setting up the latest Key4HEP software stack from CVMFS ..."
+    echo "Setting up the latest Key4hep software stack from CVMFS"
+    echo "Note that you are using the latest stack, which may point to a newer stack in the future"
 else
-    echo "Setting up the Key4HEP software stack release ${rel} from CVMFS ..."
+    echo "Setting up the Key4hep software stack nightly build ${rel} from CVMFS"
 fi
-echo " ...  Key4HEP release: ${key4hep_stack_version}"
-echo " ...  Use the following command to reproduce the current environment: "
-echo " ... "
-echo "         source ${setup_actual}"
-echo " ... "
-echo " ...  If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
+echo "Use the following command to reproduce the current environment: "
+echo "\n        source ${setup_actual}\n"
+echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
+echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
