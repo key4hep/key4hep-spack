@@ -85,6 +85,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccanalyses")
     depends_on("fccdetectors")
     depends_on("k4reccalorimeter")
+    depends_on("k4rectracker")
 
     depends_on("cepcsw")
 

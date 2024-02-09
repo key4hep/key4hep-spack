@@ -158,6 +158,7 @@ if __name__ == "__main__":
         ("k4marlinwrapper", "key4hep/k4marlinwrapper"),
         ("k4projecttemplate", "key4hep/k4-project-template"),
         ("k4reccalorimeter", "hep-fcc/k4reccalorimeter"),
+        ("k4retracker", "key4hep/k4rectracker"),
         ("k4simdelphes", "key4hep/k4SimDelphes"),
         ("k4simgeant4", "hep-fcc/k4simgeant4"),
         ("kaltest", "ilcsoft/kaltest"),
