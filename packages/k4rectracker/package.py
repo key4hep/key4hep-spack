@@ -1,7 +1,7 @@
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
-class K4reco(CMakePackage, Ilcsoftpackage):
+class K4rectracker(CMakePackage, Ilcsoftpackage):
     """Tracking detectors (and similar) digitization and reconstruction using Gaudi in native key4hep"""
 
     homepage = "https://github.com/key4hep/k4RecTracker"
