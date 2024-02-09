@@ -178,6 +178,7 @@ k4_local_repo() {
     export PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export ROOT_INCLUDE_PATH=$(echo $ROOT_INCLUDE_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export MARLIN_DLL=$(echo $MARLIN_DLL | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export PATH=$PWD/$install/bin:$PATH
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
     export PYTHONPATH=$PWD/$install/python:$PYTHONPATH
     export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
