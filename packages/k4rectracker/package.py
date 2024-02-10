@@ -1,15 +1,15 @@
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
-class K4rectracker(CMakePackage, Ilcsoftpackage):
+class K4rectracker(CMakePackage, Key4hepPackage):
     """Tracking detectors (and similar) digitization and reconstruction using Gaudi in native key4hep"""
 
     homepage = "https://github.com/key4hep/k4RecTracker"
     url = "https://github.com/key4hep/k4RecTracker/archive/refs/tags/v00-01.tar.gz"
     git = "https://github.com/key4hep/k4RecTracker.git"
 
-    version("master", branch="main")
+    version("master", branch="master")
 
     depends_on("root")
     depends_on("edm4hep")
