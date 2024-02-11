@@ -185,6 +185,7 @@ k4_local_repo() {
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
     echo "Added $PWD/$install to the environment and removed any paths containing /${current_repo}/"
+    echo "Some variables may have to be updated manually to point to the local installation"
 }
 
 setup_script_path=$(ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
