@@ -2,6 +2,14 @@
 
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
+function usage() {
+    echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
+    echo "       -h           : print this help message"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+}
+
 function check_release() {
 if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" || -z "$(ls "/cvmfs/sw.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
@@ -13,13 +21,39 @@ if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" ||
     return 0
 }
 
-function usage() {
-    echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
-    echo "       -h           : print this help message"
-    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
-    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+function list_release() {
+    os=$1
+    if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
+        name="almalinux9"
+    elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
+        name="centos7"
+    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
+        name="ubuntu22"
+    else
+        echo "Unsupported OS, aborting..."
+        usage
+        return 1
+    fi
+    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*" |
+    \awk -F/ '{print $(NF-1)}' | sort
 }
+
+function list_packages() {
+    local os=$1
+    if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
+        name="almalinux9"
+    elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
+        name="centos7"
+    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
+        name="ubuntu22"
+    else
+        echo "Unsupported OS, aborting..."
+        usage
+        return 1
+    fi
+    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$name*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+}
+
 
 rel="latest"
 if [[ "$1" = "-r" && -n "$2" ]]; then
@@ -48,87 +82,57 @@ if [ $? -ne 0 ]; then
   return 1
 fi
 
-while [[ $# -gt 0 ]]; do
-    case $1 in
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    case $arg in
         -h|--help)
             usage
             return 0
             ;;
+        *)
+            ;;
+    esac
+done
+
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    eval "argn=\${$((i+1))}"
+    case $arg in
         --list-releases)
-            shift
-            case $1 in
-                almalinux)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*almalinux9*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                almalinux9)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*almalinux9*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                centos)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                centos7)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*centos7*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                ubuntu)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu22*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                ubuntu22)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*ubuntu22*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-                *)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$os*" |
-                    \awk -F/ '{print $(NF-1)}' | sort
-                    return 0
-                    ;;
-            esac
+            if [ ! -n "$argn" ]; then
+                list_release $os
+                return 0
+            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
+                list_release $argn
+                return 0
+            else
+                echo "Unsupported OS $argn, aborting..."
+                usage
+                return 1
+            fi
             ;;
         --list-packages)
-            shift
-            case $1 in
-                almalinux)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                almalinux9)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                centos)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*centos7*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                centos7)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*centos7*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                ubuntu)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                ubuntu22)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-                *)
-                    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
-                    return 0
-                    ;;
-            esac
+            if [ ! -n "$argn" ]; then
+                list_packages $os
+                return 0
+            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
+                list_packages $argn
+                return 0
+            else
+                echo "Unsupported OS $argn, aborting..."
+                usage
+                return 1
+            fi
+            ;;
+        -r)
             ;;
         *)
-            shift
+            eval "prev=\${$((i-1))}"
+            if [ "$prev" != "-r" ]; then
+                echo "Unknown argument $arg, aborting..."
+                usage
+                return 1
+            fi
             ;;
     esac
 done
