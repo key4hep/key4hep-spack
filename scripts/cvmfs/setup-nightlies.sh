@@ -117,8 +117,8 @@ for ((i=1; i<=$#; i++)); do
             eval "prev=\${$((i-1))}"
             if [ "$prev" != "-r" ]; then
                 echo "Unknown argument $arg, aborting..."
-                usage
-                return 1
+                # usage
+                # return 1
             fi
             ;;
     esac
