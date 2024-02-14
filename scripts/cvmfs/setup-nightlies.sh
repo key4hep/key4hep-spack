@@ -116,7 +116,7 @@ for ((i=1; i<=$#; i++)); do
         *)
             eval "prev=\${$((i-1))}"
             if [ "$prev" != "-r" ]; then
-                echo "Unknown argument $arg, aborting..."
+                echo "Unknown argument $arg, it will be ignored"
                 # usage
                 # return 1
             fi
