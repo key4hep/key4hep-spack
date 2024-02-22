@@ -12,6 +12,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     maintainers = ["vvolkl"]
 
     version("master", branch="master")
+    version("1.0pre09", tag="v1.0pre09")
     version("1.0pre08", tag="v1.0pre08")
     version("1.0pre07", tag="v1.0pre07")
     version("1.0pre06", tag="v1.0pre06")

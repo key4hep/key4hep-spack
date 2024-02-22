@@ -12,6 +12,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     maintainers = ["vvolkl"]
 
     version("main", branch="main")
+    version("0.1.0pre13", tag="v0.1.0pre13")
     version("0.1.0pre12", tag="v0.1.0pre12")
     version("0.1.0pre11", tag="v0.1.0pre11")
     version("0.1.0pre10", tag="v0.1.0pre10")
