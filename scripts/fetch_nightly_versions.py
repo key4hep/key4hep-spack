@@ -133,7 +133,7 @@ if __name__ == "__main__":
         ("aidatt", "aidasoft/aidatt"),
         ("ced", "ilcsoft/ced"),
         ("cedviewer", "ilcsoft/cedviewer"),
-        ("cepcsw", "cepc/cepcsw"),
+        # ("cepcsw", "cepc/cepcsw"),
         ("clicperformance", "ilcsoft/clicperformance"),
         ("conformaltracking", "ilcsoft/conformaltracking"),
         ("dd4hep", "aidasoft/dd4hep"),
