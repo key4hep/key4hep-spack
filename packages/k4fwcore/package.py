@@ -1,5 +1,6 @@
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
+
 class K4fwcore(CMakePackage, Ilcsoftpackage):
     """Core framework components of the Key4HEP project"""
 
