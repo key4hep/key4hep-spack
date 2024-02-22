@@ -18,6 +18,10 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-06-02",
+        sha256="20aada60613df12760a1007974f1e1d0a8a248ef7d9c278097934221b08e712f",
+    )
+    version(
         "00-06-01",
         sha256="662ac032c20837d88a44dc8d09913063ec681322b04a952524b6e7c7e19874e8",
     )
