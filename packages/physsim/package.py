@@ -19,6 +19,10 @@ class Physsim(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.5",
+        sha256="f1313ceb5e13084e1f31a697086deaf626570d3e660aee58691e17f7000c7fe6",
+    )
+    version(
         "0.4.2",
         sha256="fc3aa07b498e24c878c13937207d59baefd73ce36707203d3856ee0aae6459e4",
     )

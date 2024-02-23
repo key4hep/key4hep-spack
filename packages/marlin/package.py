@@ -17,6 +17,10 @@ class Marlin(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.19.2",
+        sha256="13e51a1d46540df55596853612c13314860f8299e4caf356e2070780ecddc7c2",
+    )
+    version(
         "1.19.1",
         sha256="9737c21a6273d9939952a4fb2bae23fe9739a3381b1e2c98ede6d0124ae92fdf",
     )
