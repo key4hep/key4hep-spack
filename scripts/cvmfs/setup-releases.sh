@@ -188,6 +188,10 @@ k4_local_repo() {
     export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
+    if [ "$current_repo" "k4geo" ]; then
+        export K4GEO=$PWD
+        echo "Added K4GEO=$PWD"
+    fi
     echo "Added $PWD/$install to the environment and removed any paths containing /${current_repo}/"
     echo "Some variables may have to be updated manually to point to the local installation"
 }
