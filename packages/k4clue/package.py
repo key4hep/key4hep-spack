@@ -18,7 +18,10 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     maintainers = ("vvolkl", "jmcarcell")
 
     version("main", branch="main")
-
+    version(
+        "1.0.5",
+        sha256="1c848d72d1f74b057e37c00f6c4d120e5c3b2ba5720b766e5bb09bba8fbf508f",
+    )
     version(
         "1.0.4",
         sha256="2b18476ced196f64c2527ed8c68c660e87b4aefbb952de91d2658eb1e352a68a",

@@ -14,6 +14,10 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     version("master", branch="master")
 
     version(
+        "0.9.0",
+        sha256="205332e02051039878c026abb7e1d9005fe9f89c1c9d27d575531f006a113570",
+    )
+    version(
         "0.8.0",
         sha256="603ce7f506b706390dd9376c0a7c088b57879de632aaa4152e63e631eecaf95e",
     )

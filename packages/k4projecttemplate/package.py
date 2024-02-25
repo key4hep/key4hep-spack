@@ -15,6 +15,10 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.4.1",
+        sha256="02a6432e7661a16371bda87d4352cd92bc77168a7f28528353ade721e931984c",
+    )
+    version(
         "0.4.0",
         sha256="e1fb8992f85ba29918e1103d3472e4ca272a16b09819f7d1ed79e6d97c4445a4",
     )

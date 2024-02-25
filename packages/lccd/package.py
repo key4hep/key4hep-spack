@@ -17,6 +17,10 @@ class Lccd(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.5.2",
+        sha256="0e8929b0f390be112125a1ce12fd9695c7890b5cfef586b56304e4bd08a8ea49",
+    )
+    version(
         "1.5.1",
         sha256="0566b6d93e489bd6c1c4fe377f7e58dfa84a05de85bcce287505334aef21faef",
     )
@@ -29,6 +33,7 @@ class Lccd(CMakePackage, Ilcsoftpackage):
 
     depends_on("ilcutil")
     depends_on("lcio")
+    depends_on("lcio@2.20.1:", when="@1.5.2:")
     depends_on("conddbmysql", when="+conddbmysql")
 
     def cmake_args(self):
