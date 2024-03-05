@@ -57,7 +57,6 @@ class K4geo(CMakePackage):
 
     depends_on("lcio")
     depends_on("dd4hep")
-    depends_on("lcio")
     depends_on("boost")
     depends_on("root")
     depends_on("python", type="build")
