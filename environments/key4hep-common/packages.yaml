@@ -66,6 +66,14 @@ packages:
     externals:
     - spec: krb5@99
       prefix: /usr
+  # Use the system ssh, otherwise the configuration for the provided ssh will likely be
+  # different and things like ssh using kerberos won't work (by extension authentication
+  # for git with ssh with kerberos)
+  openssh:
+    buildable: False
+    externals:
+    - spec: openssh@99
+      prefix: /usr
 
 
   root:
