@@ -114,7 +114,7 @@ packages:
   raida:
     variants: build_type=RelWithDebInfo cxxstd=20
   root:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=Release cxxstd=20
     require: cxxstd=20
   sio:
     variants: build_type=RelWithDebInfo cxxstd=20
