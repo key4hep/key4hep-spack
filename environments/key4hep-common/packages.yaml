@@ -74,6 +74,13 @@ packages:
     externals:
     - spec: openssh@99
       prefix: /usr
+  # Use the system curl, this is not completely necessary but otherwise curl has to be compiled
+  # with kerberos while the system one seems to always come with kerberos
+  curl:
+    buildable: False
+    externals:
+    - spec: curl@99
+      prefix: /usr
 
 
   root:
