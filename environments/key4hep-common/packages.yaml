@@ -1,6 +1,6 @@
 packages:
   acts:
-    require: +dd4hep
+    require: +dd4hep cxxstd=20
   boost:
     require: +python
     buildable: true
@@ -9,22 +9,21 @@ packages:
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3
   gaudi:
-    # +examples seems not be compatible with newer versions of python
     require: +aida+cppunit+examples+gaudialg+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
   geant4:
-    require: +opengl+qt~vecgeom
+    require: +opengl+qt~vecgeom cxxstd=20
   hdf5:
     require: +cxx+hl
   # https://github.com/key4hep/key4hep-spack/issues/517
   lccd:
-    require: +conddbmysql
+    require: +conddbmysql cxxstd=20
   llvm:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   marlin:
-    require: +lccd
+    require: +lccd cxxstd=20
   podio:
     require: +rntuple+rpath+sio
   py-numpy:
@@ -83,9 +82,9 @@ packages:
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3 cxxstd=20
   k4simdelphes:
-    require: ~delphes_hepmc
+    require: ~delphes_hepmc cxxstd=20
   evtgen:
     require: +photos
   photos:
@@ -96,6 +95,107 @@ packages:
     require: ~libunwind
   all:
     target: [x86_64]
-    variants: cxxstd=17
+    variants: cxxstd=20
     buildable: true
     compiler: []
+
+
+  # C++20
+  aidatt:
+    variants: build_type=Release cxxstd=20
+  ced:
+    variants: build_type=Release cxxstd=20
+  cedviewer:
+    variants: build_type=Release cxxstd=20
+  cepcsw:
+    variants: build_type=Release cxxstd=20
+  clicperformance:
+    variants: build_type=Release cxxstd=20
+  conformaltracking:
+    variants: build_type=Release cxxstd=20
+  ddkaltest:
+    variants: build_type=Release cxxstd=20
+  ddmarlinpandora:
+    variants: build_type=Release cxxstd=20
+  delphes:
+    variants: build_type=Release cxxstd=20
+  dual-readout:
+    variants: build_type=Release cxxstd=20
+  edm4hep:
+    variants: build_type=Release cxxstd=20
+  fcalclusterer:
+    variants: build_type=Release cxxstd=20
+  fccanalyses:
+    variants: build_type=Release cxxstd=20
+  fccdetectors:
+    variants: build_type=Release cxxstd=20
+  fccsw:
+    variants: build_type=Release cxxstd=20
+  forwardtracking:
+    variants: build_type=Release cxxstd=20
+  gear:
+    variants: build_type=Release cxxstd=20
+  ilcutil:
+    variants: build_type=Release cxxstd=20
+  ildperformance:
+    variants: build_type=Release cxxstd=20
+  k4clue:
+    variants: build_type=Release cxxstd=20
+  k4edm4hep2lcioconv:
+    variants: build_type=Release cxxstd=20
+  k4fwcore:
+    variants: build_type=Release cxxstd=20
+  k4gen:
+    variants: build_type=Release cxxstd=20
+  k4geo:
+    variants: build_type=Release cxxstd=20
+  k4marlinwrapper:
+    variants: build_type=Release cxxstd=20
+  k4projecttemplate:
+    variants: build_type=Release cxxstd=20
+  k4reccalorimeter:
+    variants: build_type=Release cxxstd=20
+  k4rectracker:
+    variants: build_type=Release cxxstd=20
+  k4simgeant4:
+    variants: build_type=Release cxxstd=20
+  kaltest:
+    variants: build_type=Release cxxstd=20
+  kitrack:
+    variants: build_type=Release cxxstd=20
+  kitrackmarlin:
+    variants: build_type=Release cxxstd=20
+  lcfiplus:
+    variants: build_type=Release cxxstd=20
+  lcio:
+    variants: build_type=Release cxxstd=20
+  lctuple:
+    variants: build_type=Release cxxstd=20
+  marlindd4hep:
+    variants: build_type=Release cxxstd=20
+  marlinfastjet:
+    variants: build_type=Release cxxstd=20
+  marlinkinfit:
+    variants: build_type=Release cxxstd=20
+  marlinkinfitprocessors:
+    variants: build_type=Release cxxstd=20
+  marlinreco:
+    variants: build_type=Release cxxstd=20
+  marlintrk:
+    variants: build_type=Release cxxstd=20
+  marlintrkprocessors:
+    variants: build_type=Release cxxstd=20
+  marlinutil:
+    variants: build_type=Release cxxstd=20
+  opendatadetector:
+    variants: build_type=Release cxxstd=20
+  overlay:
+    variants: build_type=Release cxxstd=20
+  pandoraanalysis:
+    variants: build_type=Release cxxstd=20
+  physsim:
+    variants: build_type=Release cxxstd=20
+  raida:
+    variants: build_type=Release cxxstd=20
+  sio:
+    variants: build_type=Release cxxstd=20
