@@ -7,5 +7,4 @@ spack:
   repos:
   - ../..
   specs:
-  - lhapdf~python
   - key4hep-stack+devtools
