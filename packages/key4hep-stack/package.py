@@ -102,6 +102,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # depends_on('prmon', when='+devtools')
     depends_on("py-awkward", when="+devtools")
     depends_on("py-black", when="+devtools")
+    depends_on("py-flake8", when="+devtools")
+    depends_on("py-pylint", when="+devtools")
     depends_on("py-boto3", when="+devtools")
     depends_on("py-gcovr", when="+devtools")
     depends_on("py-h5py", when="+devtools")
