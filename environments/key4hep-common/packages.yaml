@@ -83,7 +83,7 @@ packages:
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
-    require: ~fastjet+latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
   k4simdelphes:
     require: ~delphes_hepmc
   evtgen:
