@@ -28,7 +28,6 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
     depends_on("lcio")
 
     def cmake_args(self):
-        # C++ Standard
         return [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DUSE_CXX11=FALSE",  # avoid overriding the root standard

@@ -19,11 +19,11 @@ packages:
     require: +cxx+hl
   # https://github.com/key4hep/key4hep-spack/issues/517
   lccd:
-    require: +conddbmysql cxxstd=20
+    require: +conddbmysql
   llvm:
     variants: ~flang~lldb~lld~mlir~internal_unwind~polly~limomptarget~omp_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   marlin:
-    require: +lccd cxxstd=20
+    require: +lccd
   podio:
     require: +rntuple+rpath+sio
   py-numpy:
@@ -82,9 +82,9 @@ packages:
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3 cxxstd=20
+    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
   k4simdelphes:
-    require: ~delphes_hepmc cxxstd=20
+    require: ~delphes_hepmc
   evtgen:
     require: +photos
   photos:
@@ -95,7 +95,7 @@ packages:
     require: ~libunwind
   all:
     target: [x86_64]
-    variants: cxxstd=20
+    variants: build_type=Release cxxstd=20
     buildable: true
     compiler: []
 
@@ -110,11 +110,11 @@ packages:
   cepcsw:
     variants: build_type=Release cxxstd=20
   clicperformance:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   conformaltracking:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   ddkaltest:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   ddmarlinpandora:
     variants: build_type=Release cxxstd=20
   delphes:
@@ -182,7 +182,7 @@ packages:
   marlinreco:
     variants: build_type=Release cxxstd=20
   marlintrk:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   marlintrkprocessors:
     variants: build_type=Release cxxstd=20
   marlinutil:
@@ -194,8 +194,8 @@ packages:
   pandoraanalysis:
     variants: build_type=Release cxxstd=20
   physsim:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   raida:
-    variants: build_type=Release cxxstd=20
+    variants: build_type=Release
   sio:
     variants: build_type=Release cxxstd=20

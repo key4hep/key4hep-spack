@@ -59,13 +59,12 @@ class Marlin(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = []
-        # todo: add variant
         args.append(self.define_from_variant("INSTALL_DOC", "doc"))
         args.append(self.define_from_variant("MARLIN_GUI", "gui"))
         args.append(self.define_from_variant("MARLIN_LCCD", "lccd"))
         args.append(self.define_from_variant("MARLIN_CLHEP", "clhep"))
         args.append(self.define_from_variant("MARLIN_AIDA", "aida"))
-        args.append("-DCMAKE_CXX_STANDARD=17")
+        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['lcio'].variants['cxxstd'].value}")
         if "aida" in self.spec:
             args.append("-DAIDA_DIR=%s" % self.spec["aida"].prefix)
         return args
