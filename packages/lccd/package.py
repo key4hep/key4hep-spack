@@ -39,5 +39,9 @@ class Lccd(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant("LCCD_CONDDBMYSQL", "conddbmysql"))
-        args.append(self.define("CMAKE_CXX_STANDARD", self.spec["lcio"].variants["cxxstd"].value))
+        args.append(
+            self.define(
+                "CMAKE_CXX_STANDARD", self.spec["lcio"].variants["cxxstd"].value
+            )
+        )
         return args

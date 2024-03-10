@@ -64,7 +64,9 @@ class Marlin(CMakePackage, Ilcsoftpackage):
         args.append(self.define_from_variant("MARLIN_LCCD", "lccd"))
         args.append(self.define_from_variant("MARLIN_CLHEP", "clhep"))
         args.append(self.define_from_variant("MARLIN_AIDA", "aida"))
-        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['lcio'].variants['cxxstd'].value}")
+        args.append(
+            f"-DCMAKE_CXX_STANDARD={self.spec['lcio'].variants['cxxstd'].value}"
+        )
         if "aida" in self.spec:
             args.append("-DAIDA_DIR=%s" % self.spec["aida"].prefix)
         return args
