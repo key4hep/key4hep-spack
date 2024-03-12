@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
-from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class K4simdelphes(CMakePackage, Ilcsoftpackage):
@@ -102,6 +101,5 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.set("K4SIMDELPHES", self.prefix.share.k4SimDelphes)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-
-    # def setup_build_environment(self, env):
-    #     k4_setup_env_for_framework_tests(self.spec, env)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
