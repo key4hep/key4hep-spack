@@ -27,36 +27,19 @@ function _k4_check_release() {
 }
 
 function _k4_setup_list_releases() {
+    # List the available release for the passed OS. Assumes that OS has been
+    # sanitized before
     local os=$1
-    if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
-        name="almalinux9"
-    elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
-        name="centos7"
-    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
-        name="ubuntu22"
-    else
-        echo "Unsupported OS, aborting..."
-        _setup_script_usage
-        return 1
-    fi
-    find ${SCRIPT_BASE_DIR}/releases/ -maxdepth 2 -type d -name "*$name*" |
+    find ${SCRIPT_BASE_DIR}/releases/ -maxdepth 2 -type d -name "*${os}*" |
     \awk -F/ '{print $(NF-1)}' | sort
 }
 
 function _k4_setup_list_packages() {
+    # List the available packages and their version for a given OS and release.
+    # Both of them are assumed to have been sanitized before
     local os=$1
-    if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
-        name="almalinux9"
-    elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
-        name="centos7"
-    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
-        name="ubuntu22"
-    else
-        echo "Unsupported OS, aborting..."
-        _setup_script_usage
-        return 1
-    fi
-    find ${SCRIPT_BASE_DIR}/releases/$rel/*$name*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+    local res=$2
+    find "${SCRIPT_BASE_DIR}"/releases/"$rel"/*"${os}"*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
 }
 
 function detect_os() {
@@ -87,6 +70,20 @@ function _k4_setup_print_os_info() {
     fi
 }
 
+function _k4_setup_get_release() {
+    while [ $# != 0 ]; do
+        case "$1" in
+            -r|--release)
+                echo "${2}"
+                return 0
+                ;;
+            *)
+                shift
+        esac
+    done
+    echo "latest"
+}
+
 os=$(detect_os)
 if [ "${os}" = "unknown" ]; then
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
@@ -94,7 +91,13 @@ if [ "${os}" = "unknown" ]; then
     return 1
 fi
 
-rel="latest"
+# We need to determine the release up-front as we might need it for listing
+# releases or packages
+rel=$(_k4_setup_get_release $@)
+if ! _k4_check_release ${rel} $os; then
+    return 1
+fi
+
 while [ $# != 0 ]; do
     case "$1" in
         -h|--help)
@@ -104,31 +107,19 @@ while [ $# != 0 ]; do
         --list-*)
             # Either we assume that the user has passed in a dedicated OS or we
             # use the one we discovered
-            list_arg="${2:-${os}}"
+            list_os="${2:-${os}}"
+            # We determine the list function to call dynamically from the argument name
+            list_func=_k4_setup_list_${1/--list-/}
             shift 2
-            ;&
-        --list-releases)
-            if ! _k4_setup_list_releases "${list_arg}"; then return 1; fi
+            if ! ${list_func} "${list_os}" "${rel}"; then return 1; fi
             return 0
             ;;
-        --list-packages)
-            if ! _k4_setup_list_packages "${list_arg}"; then return 1; fi
-            return 0
-            ;;
-       -r|--release)
-           rel="${2}"
-           shift 2
-           ;;
        *)
            "Unknown argument ${1}, it will be ignored"
            shift
            ;;
     esac
 done
-
-if ! _k4_check_release ${rel} $os; then
-    return 1
-fi
 
 k4path=$(echo ${SCRIPT_BASE_DIR}/releases/${rel}/*${os}*)
 
