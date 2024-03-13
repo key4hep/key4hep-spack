@@ -147,15 +147,10 @@ _replace_marlin_dll() {
     if echo ${MARLIN_DLL} | grep -qE "/${pkg_name}/"; then
         local old_lib=$(echo ${MARLIN_DLL} | tr ":" "\n" | grep -E "/${pkg_name}/")
         local lib_name=$(basename ${old_lib})
-        for d in lib lib64; do
-            local new_lib=$(pwd)/${install_prefix}/${d}/${lib_name}
-            if [ -f ${new_lib} ]; then
-                export MARLIN_DLL=$(echo ${MARLIN_DLL%:} | tr ":" "\n" | grep -Ev "/${pkg_name}/" | tr "\n" ":")${new_lib}
-                echo "Replaced library on MARLIN_DLL: old: '${old_lib}'"
-                echo "                                new: '${new_lib}'"
-                break;
-            fi
-        done
+        local new_lib=$(pwd)/${install_prefix}/lib/${lib_name}
+        export MARLIN_DLL=$(echo ${MARLIN_DLL%:} | tr ":" "\n" | grep -Ev "/${pkg_name}/" | tr "\n" ":")${new_lib}
+        echo "Replaced library on MARLIN_DLL: old: '${old_lib}'"
+        echo "                                new: '${new_lib}'"
     fi
 }
 
