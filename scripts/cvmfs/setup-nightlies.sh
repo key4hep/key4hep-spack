@@ -140,6 +140,19 @@ elif [ "$os" = "ubuntu22.04" ]; then
     echo "Ubuntu 22.04 detected"
 fi
 
+_replace_marlin_dll() {
+    # replace the library on MARLIN_DLL with the local one (if any)
+    local pkg_name=${1}
+    local install_prefix=${2}
+    if echo ${MARLIN_DLL} | grep -qE "/${pkg_name}/"; then
+        local old_lib=$(echo ${MARLIN_DLL} | tr ":" "\n" | grep -E "/${pkg_name}/")
+        local lib_name=$(basename ${old_lib})
+        local new_lib=$(pwd)/${install_prefix}/lib/${lib_name}
+        export MARLIN_DLL=$(echo ${MARLIN_DLL%:} | tr ":" "\n" | grep -Ev "/${pkg_name}/" | tr "\n" ":")${new_lib}
+        echo "Replaced library on MARLIN_DLL: old: '${old_lib}'"
+        echo "                                new: '${new_lib}'"
+    fi
+}
 
 k4_local_repo() {
     for arg in "$@"; do
@@ -168,7 +181,7 @@ k4_local_repo() {
     export CMAKE_PREFIX_PATH=$(echo $CMAKE_PREFIX_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export ROOT_INCLUDE_PATH=$(echo $ROOT_INCLUDE_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
-    export MARLIN_DLL=$(echo $MARLIN_DLL | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    _replace_marlin_dll ${current_repo} ${install}
     export PATH=$PWD/$install/bin:$PATH
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
     export PYTHONPATH=$PWD/$install/python:$PYTHONPATH
