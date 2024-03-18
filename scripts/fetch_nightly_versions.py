@@ -53,9 +53,12 @@ if __name__ == "__main__":
         description="Add latest commits to a spack environment"
     )
     parser.add_argument(
-        "path",
-        help="path to the current environment",
-        default="/key4hep-spack",
+        "--path",
+        help="path to a yaml file with spack packages",
+    )
+    parser.add_argument(
+        "--extra-path",
+        help="path to a yaml file with spack packages",
     )
     parser.add_argument(
         "date",
@@ -66,8 +69,15 @@ if __name__ == "__main__":
     date = args.date
 
     try:
-        with open(os.path.join(args.path, "packages.yaml"), "r") as recipe:
+        with open(args.path, "r") as recipe:
             text = yaml.safe_load(recipe)
+    except FileNotFoundError:
+        print("Please run this script from the key4hep-spack repository.")
+        raise
+
+    try:
+        with open(args.extra_path, "r") as recipe:
+            text_extra = yaml.safe_load(recipe)
     except FileNotFoundError:
         print("Please run this script from the key4hep-spack repository.")
         raise
@@ -135,11 +145,24 @@ if __name__ == "__main__":
         line = f"@{commit}"
         if package not in ["cepcsw"]:
             line += "=develop"
+        original = " "
+        if package in text["packages"] and "require" in text["packages"][package]:
+            original = text["packages"][package]["require"]
+            text["packages"][package]["require"] = line + original
+        elif (
+            package in text_extra["packages"]
+            and "require" in text_extra["packages"][package]
+        ):
+            original = text_extra["packages"][package]["require"]
+            text_extra["packages"][package]["require"] = line + original
+
         if not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
         text["packages"][package]["require"] = line
 
-    with open(os.path.join(args.path, "packages.yaml"), "w") as recipe:
+    with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)
+    with open(args.extra_path, "w") as recipe:
+        yaml.dump(text_extra, recipe)
