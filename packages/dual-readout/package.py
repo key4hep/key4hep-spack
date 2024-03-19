@@ -42,7 +42,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     )
 
     depends_on("dd4hep")
-    depends_on("edm4hep@0.4.1:")
+    depends_on("edm4hep")
     depends_on("podio@0.14.1:")
     depends_on("podio@0.15:", when="@0.1.1:")
     depends_on("py-jinja2", type=("build"))
@@ -53,7 +53,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on("pythia8")
     depends_on("hsf-cmaketools")
     depends_on("k4fwcore")
-    depends_on("k4fwcore@1.0pre14:")
     depends_on("simsipm")
 
     def cmake_args(self):
@@ -62,8 +61,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
-        if self.spec.satisfies("^gaudi@:34.99"):
-            args.append("-DHOST_BINARY_TAG=x86_64-linux-gcc9-opt")
         return args
 
     def setup_build_environment(self, env):
