@@ -138,6 +138,8 @@ if __name__ == "__main__":
         ("raida", "ilcsoft/raida"),
         ("sio", "ilcsoft/sio"),
     ]:
+        if package != 'dd4hep':
+            continue
         gitlab = False
         if package in ["opendatadetector"]:
             gitlab = True
@@ -149,6 +151,7 @@ if __name__ == "__main__":
         if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
             text["packages"][package]["require"] = line + original
+            print(f"text is {text['packages'][package]['require']}")
         elif (
             package in text_extra["packages"]
             and "require" in text_extra["packages"][package]
@@ -158,9 +161,9 @@ if __name__ == "__main__":
 
         if not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
+            text["packages"][package]["require"] = line
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
-        text["packages"][package]["require"] = line
 
     with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)
