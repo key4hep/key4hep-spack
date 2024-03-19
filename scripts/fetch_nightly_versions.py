@@ -138,8 +138,6 @@ if __name__ == "__main__":
         ("raida", "ilcsoft/raida"),
         ("sio", "ilcsoft/sio"),
     ]:
-        if package != 'dd4hep':
-            continue
         gitlab = False
         if package in ["opendatadetector"]:
             gitlab = True
