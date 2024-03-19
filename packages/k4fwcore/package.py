@@ -22,9 +22,9 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
         sha256="da089b320d0bd89c5b6d8a972009e11f324a442e6bb85778d8541364f957b4f9",
     )
 
-    depends_on("gaudi", when="@0.3.0:")
-    depends_on("root@6.08:")
-    depends_on("podio@0.10:")
+    depends_on("gaudi")
+    depends_on("root")
+    depends_on("podio")
     depends_on("podio@0.14.1", when="@1.0pre14:1.0pre15")
     depends_on("podio@0.14.2:", when="@1.0pre16:")
     depends_on("podio@:0.17.3", when="@:1.0pre17")  # podio/EventStore.h removed
