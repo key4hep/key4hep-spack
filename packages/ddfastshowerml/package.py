@@ -7,7 +7,7 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Ddfastshowerml(CMakePackage, Ilcsoftpackage):
-    """Linear Collider framework"""
+    """Package with utilities and plugins that allow to run fast simulation in Geant4 from ML inference within ddsim (DDG4)"""
 
     homepage = "https://gitlab.desy.de/ilcsoft/ddfastshowerml"
     git = "https://gitlab.desy.de/ilcsoft/ddfastshowerml.git"
