@@ -143,8 +143,8 @@ if __name__ == "__main__":
             gitlab = True
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         line = f"@{commit}"
-        if package not in ["cepcsw"]:
-            line += "=develop"
+        # if package not in ["cepcsw"]:
+        #     line += "=develop"
         original = " "
         if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
