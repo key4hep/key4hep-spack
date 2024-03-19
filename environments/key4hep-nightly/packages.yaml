@@ -1,8 +1,6 @@
 packages:
-  all:
-    variants: build_type=Release cxxstd=20
   acts:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   aidatt:
     variants: build_type=RelWithDebInfo cxxstd=20
   ced:
@@ -12,13 +10,13 @@ packages:
   cepcsw:
     variants: build_type=RelWithDebInfo cxxstd=20
   clicperformance:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   conformaltracking:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   dd4hep:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   ddkaltest:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   ddmarlinpandora:
     variants: build_type=RelWithDebInfo cxxstd=20
   delphes:
@@ -40,7 +38,7 @@ packages:
   gaudi:
     variants: build_type=RelWithDebInfo cxxstd=20
   geant4:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   gear:
     variants: build_type=RelWithDebInfo cxxstd=20
   ilcutil:
@@ -96,7 +94,7 @@ packages:
   marlinreco:
     variants: build_type=RelWithDebInfo cxxstd=20
   marlintrk:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlintrkprocessors:
     variants: build_type=RelWithDebInfo cxxstd=20
   marlinutil:
@@ -108,15 +106,10 @@ packages:
   pandoraanalysis:
     variants: build_type=RelWithDebInfo cxxstd=20
   physsim:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   podio:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   raida:
-    variants: build_type=RelWithDebInfo cxxstd=20
-  root:
-    variants: build_type=Release cxxstd=20
-    require: cxxstd=20
+    variants: build_type=RelWithDebInfo
   sio:
-    variants: build_type=RelWithDebInfo cxxstd=20
-  whizard:
     variants: build_type=RelWithDebInfo cxxstd=20
