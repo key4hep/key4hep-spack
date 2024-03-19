@@ -17,7 +17,7 @@ class Ddfastshowerml(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
 
-    variant("inference", values=("onnxruntime", "torch", "both"), default="onnxruntime")
+    variant("inference", values=("onnxruntime", "torch", "both"), default="both")
 
     depends_on("py-onnxruntime", when="inference=onnxruntime")
     depends_on("py-onnxruntime", when="inference=both")
