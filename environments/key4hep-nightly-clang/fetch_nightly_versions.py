@@ -1,1 +1,0 @@
-../../scripts/fetch_nightly_versions.py
