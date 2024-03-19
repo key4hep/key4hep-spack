@@ -48,6 +48,7 @@ def get_latest_commit(
 
     return commit
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Add latest commits to a spack environment"
