@@ -91,6 +91,7 @@ if __name__ == "__main__":
         ("clicperformance", "ilcsoft/clicperformance"),
         ("conformaltracking", "ilcsoft/conformaltracking"),
         ("dd4hep", "aidasoft/dd4hep"),
+        ("ddfastshowerml", "ilcsoft/ddfastshowerml"),
         ("ddkaltest", "ilcsoft/ddkaltest"),
         ("ddmarlinpandora", "ilcsoft/ddmarlinpandora"),
         ("delphes", "delphes/delphes"),
