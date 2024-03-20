@@ -18,10 +18,10 @@ def get_latest_commit(
     :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
     """
 
-    if not gitlab:
-        giturl = "https://api.github.com/repos/%s/commits"
+    if gitlab:
+        giturl = gitlab
     else:
-        giturl = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
+        giturl = "https://api.github.com/repos/%s/commits"
 
     if gitlab:
         repoinfo = repoinfo.replace("/", "%2F")
@@ -141,8 +141,10 @@ if __name__ == "__main__":
         ("sio", "ilcsoft/sio"),
     ]:
         gitlab = False
-        if package in ["opendatadetector", "ddfastshowerml"]:
-            gitlab = True
+        if package == ["opendatadetector"]:
+            gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
+        elif package == "ddfastshowerml":
+            gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         line = f"@{commit}"
         if package not in ["cepcsw"]:
