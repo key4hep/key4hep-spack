@@ -141,7 +141,7 @@ if __name__ == "__main__":
         ("sio", "ilcsoft/sio"),
     ]:
         gitlab = False
-        if package == ["opendatadetector"]:
+        if package == "opendatadetector":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
         elif package == "ddfastshowerml":
             gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
