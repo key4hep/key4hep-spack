@@ -91,7 +91,7 @@ if __name__ == "__main__":
         ("clicperformance", "ilcsoft/clicperformance"),
         ("conformaltracking", "ilcsoft/conformaltracking"),
         ("dd4hep", "aidasoft/dd4hep"),
-        ("ddfastshowerml", "ilcsoft/ddfastshowerml", gitlab=True),
+        ("ddfastshowerml", "ilcsoft/ddfastshowerml"),
         ("ddkaltest", "ilcsoft/ddkaltest"),
         ("ddmarlinpandora", "ilcsoft/ddmarlinpandora"),
         ("delphes", "delphes/delphes"),
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         ("sio", "ilcsoft/sio"),
     ]:
         gitlab = False
-        if package in ["opendatadetector"]:
+        if package in ["opendatadetector", "ddfastshowerml"]:
             gitlab = True
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         line = f"@{commit}"
