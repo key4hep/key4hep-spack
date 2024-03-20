@@ -113,6 +113,8 @@ packages:
     variants: build_type=Release
   conformaltracking:
     variants: build_type=Release
+  ddfastshowerml:
+    variants: build_type=Release
   ddkaltest:
     variants: build_type=Release
   ddmarlinpandora:
