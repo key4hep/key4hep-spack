@@ -50,4 +50,5 @@ compilers:
     target: aarch64
     modules: []
     environment: {}
-    extra_rpaths: []
+    extra_rpaths:
+      - /usr/local/gfortran/lib
