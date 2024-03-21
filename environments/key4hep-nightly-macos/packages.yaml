@@ -46,6 +46,9 @@ packages:
     variants: build_type=RelWithDebInfo
   gear:
     variants: build_type=RelWithDebInfo cxxstd=20
+  # Remove source-highlight since it doesn't compile on MacOS
+  gdb:
+    require: +python+tui~source-highlight~debuginfod
   # Maybe remove when using something that is not darwin
   gperftools:
     require: ~libunwind
