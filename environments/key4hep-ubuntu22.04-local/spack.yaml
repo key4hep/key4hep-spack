@@ -1,0 +1,18 @@
+spack:
+  view: false
+  concretizer:
+    unify: true
+
+  include:
+    - packages.yaml
+
+  packages:
+    all:
+      providers:
+        gl: [mesa]
+        glu: [mesa]
+      compiler: [gcc@11.3.0]
+  specs:
+    - key4hep-stack
+    - python@3.10.10 # workaround https://github.com/spack/spack/issues/32662
+    - lhapdf ~python # workaround https://github.com/spack/spack/issues/36772
