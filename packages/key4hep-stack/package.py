@@ -45,7 +45,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     )
 
     depends_on("acts")
-    depends_on("babayaga")
+    # babayaga doesn't build on macOS
+    depends_on("babayaga", when="platform=linux")
     depends_on("bdsim")
     depends_on("bhlumi")
     depends_on("cldconfig")
