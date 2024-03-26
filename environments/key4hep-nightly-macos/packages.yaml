@@ -37,7 +37,12 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   forwardtracking:
     variants: build_type=RelWithDebInfo cxxstd=20
+  # Changes from common: don't use unwind because of a conflict with darwin
+  # maybe remove when not using darwin
+  # Don't build with gperftools, fails at concretization because of the
+  # unwind conflict (bug in spack?)
   gaudi:
+    require: +aida+cppunit+examples+gaudialg~gperftools+heppdt+jemalloc~unwind+xercesc
     variants: build_type=RelWithDebInfo cxxstd=20
   geant4:
     variants: build_type=RelWithDebInfo
@@ -46,6 +51,9 @@ packages:
   # Remove source-highlight since it doesn't compile on MacOS
   gdb:
     require: +python+tui~source-highlight~debuginfod
+  # Maybe remove when using something that is not darwin
+  gperftools:
+    require: ~libunwind
   ilcutil:
     variants: build_type=RelWithDebInfo cxxstd=20
   ildperformance:
@@ -86,6 +94,9 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   lctuple:
     variants: build_type=RelWithDebInfo cxxstd=20
+  # Add openmp="project"
+  llvm:
+    variants: ~flang~lldb~lld~lua~mlir~internal_unwind~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86" openmp="project"
   marlin:
     variants: build_type=RelWithDebInfo cxxstd=20
   marlindd4hep:
@@ -116,5 +127,8 @@ packages:
     variants: build_type=RelWithDebInfo
   raida:
     variants: build_type=RelWithDebInfo
+  # Same as the one in key4hep-common but with a newer version
+  root:
+    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20 @6.30.02
   sio:
     variants: build_type=RelWithDebInfo cxxstd=20
