@@ -39,8 +39,10 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   # Changes from common: don't use unwind because of a conflict with darwin
   # maybe remove when not using darwin
+  # Don't build with gperftools, fails at concretization because of the
+  # unwind conflict (bug in spack?)
   gaudi:
-    require: +aida+cppunit+examples+gaudialg+gperftools+heppdt+jemalloc~unwind+xercesc
+    require: +aida+cppunit+examples+gaudialg~gperftools+heppdt+jemalloc~unwind+xercesc
     variants: build_type=RelWithDebInfo cxxstd=20
   geant4:
     variants: build_type=RelWithDebInfo
