@@ -1,6 +1,7 @@
 config:
-  checksum: false
   install_tree:
     projections:
       all: "{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-opt/{name}/{version}-{hash:6}"
       build_type=Debug: "{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{name}/{version}-{hash:6}"
+  # garfieldpp times out without this
+  connect_timeout: 20
