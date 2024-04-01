@@ -3,6 +3,8 @@ packages:
     variants: build_type=RelWithDebInfo
   aidatt:
     variants: build_type=RelWithDebInfo cxxstd=20
+  benchmark:
+    require: ~performance_counters
   ced:
     variants: build_type=RelWithDebInfo cxxstd=20
   cedviewer:
