@@ -87,8 +87,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4reccalorimeter")
     depends_on("k4rectracker")
 
-    # depends_on("cepcsw") # cepcsw depends on garfieldpp
+    # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
     depends_on("garfieldpp")
+    depends_on("genfit")
 
     depends_on("opendatadetector")
 
