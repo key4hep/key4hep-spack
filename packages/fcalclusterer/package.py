@@ -18,6 +18,10 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.1",
+        sha256="4310adaaf8171b8aec544237d957e3f8cd5ca6c8c27af4abd18923685466c51f",
+    )
+    version(
         "1.0.6",
         sha256="e1fcd34836f3feb2c6788a577f8b507873cfcf1b3b780ecfe3dca553de14f93b",
     )
