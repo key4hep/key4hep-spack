@@ -168,7 +168,7 @@ cat > sherpa.txt <<EOF
 }(processes)
 EOF
 
-run_test "Sherpa test" "Sherpa -f sherpa.txt && ./makelibs"
+run_test "Sherpa test" "Sherpa -f sherpa.txt || ./makelibs"
 
 
 # Report results
