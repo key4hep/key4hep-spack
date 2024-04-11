@@ -128,6 +128,41 @@ run_test "FCCAnalyses test" "python fcc.py"
 
 
 
+cat > sherpa.txt <<EOF
+(run){
+ RANDOM_SEED 42;
+ BEAM_1 11;
+ BEAM_2 -11;
+ BEAM_ENERGY_1 125.0;
+ BEAM_ENERGY_2 125.0;
+ MODEL HEFT;
+ PDF_LIBRARY None;
+ EVENTS 100;
+
+
+ MASS[25] 125;
+ WIDTH[25] 0.00407;
+ MASS[23] 91.1876;
+ WIDTH[23] 2.4952;
+ MASS[24] 80.379;
+ WIDTH[24] 2.085;
+ EVENT_OUTPUT HepMC_GenEvent[ZHDecay];
+ EVENT_GENERATION_MODE unweighted;
+ MASSIVE[13] 1;
+ ME_SIGNAL_GENERATOR Amegic;
+}(run)
+
+(processes){
+  Process 11 -11 -> 23[a] 25[b] ;
+  Decay 23[a]  -> 15 -15
+  Decay 25[b]  -> 13 -13
+  Order (0,4);
+  End process;
+}(processes)
+EOF
+
+run_test "Sherpa test" "sherpa -f sherpa.txt && ./makelibs"
+
 
 # Report results
 echo "Tests completed:"
