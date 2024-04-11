@@ -1,4 +1,4 @@
-# [Spack](https://github.com/spack/spack) package repo for Key4HEP software packaging
+# [Spack](https://github.com/spack/spack) package repo for Key4hep software packaging
 
 This repository holds a set of Spack recipes for key4hep software.
 
@@ -6,11 +6,17 @@ Consult the the [key4hep documentation website](https://cern.ch/key4hep) and the
 [spack documentation](https://spack.readthedocs.io/en/latest/) for more details.
 
 ## Spack Versions
-The spack recipes in this repository should work with any version of spack (0.19
-is known to work and it's possible older versions work too, newer than 0.19
-works). Some of the environments require spack 0.20 or newer since they use (or
-they include a file that uses) the `require` keyword which was introduced in
-[spack 0.20](https://github.com/spack/spack/releases/tag/v0.20.0).
+The spack recipes in this repository should work with any recent version of
+spack (at least 0.20 is needed because they use the `require` keyword which was
+introduced in [spack
+0.20](https://github.com/spack/spack/releases/tag/v0.20.0)). The nightlies are
+currently built against the commit of spack that is in the
+[`.latest-commit`](https://github.com/key4hep/key4hep-spack/blob/main/.latest-commit)
+file in this repository. From time to time the most recent commit is picked to
+get the latest version of the spack recipes. The commit of spack that was used
+to build a stack can be found in the file `.spack-commit` that is shipped with
+every stack on cvmfs.
+
 
 ## Repository Contents
 
