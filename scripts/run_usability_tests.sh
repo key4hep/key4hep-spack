@@ -127,6 +127,13 @@ EOF
 run_test "FCCAnalyses test" "python fcc.py"
 
 
+# https://github.com/key4hep/key4hep-spack/issues/505
+cat > vis.mac <<EOF
+/vis/open OGL
+/vis/drawVolume
+EOF
+
+run_test "Geant4 test" "geant4.sh -c vis.mac"
 
 cat > sherpa.txt <<EOF
 (run){
@@ -161,7 +168,7 @@ cat > sherpa.txt <<EOF
 }(processes)
 EOF
 
-run_test "Sherpa test" "sherpa -f sherpa.txt && ./makelibs"
+run_test "Sherpa test" "Sherpa -f sherpa.txt && ./makelibs"
 
 
 # Report results
