@@ -64,7 +64,8 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION
     os="centos7"
     k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*centos7*)
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]]; then
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
     os="almalinux9"
     k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*almalinux9*)
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
@@ -72,7 +73,7 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION
     k4path=$(echo /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*ubuntu22*)
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RHEL 9, Ubuntu 22.04"
+    echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
     return 1
 fi
 
@@ -135,7 +136,7 @@ if [ "$os" = "centos7" ]; then
         echo "This OS will reach the end of its maintenance support soon and won't have Key4hep builds in the future, consider upgrading to Alma 9"
     fi
 elif [ "$os" = "almalinux9" ]; then
-    echo "AlmaLinux/RHEL 9 detected"
+    echo "AlmaLinux/RockyLinux/RHEL 9 detected"
 elif [ "$os" = "ubuntu22.04" ]; then
     echo "Ubuntu 22.04 detected"
 fi
