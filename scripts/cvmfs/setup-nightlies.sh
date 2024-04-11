@@ -209,7 +209,7 @@ else
 fi
 echo "Use the following command to reproduce the current environment: "
 echo ""
-echo "        source ${setup_actual}"
+echo "        source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh -r $(basename $(dirname $(dirname $(dirname $(dirname $setup_actual)))))"
 echo ""
 echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
