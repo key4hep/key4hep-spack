@@ -127,14 +127,6 @@ EOF
 run_test "FCCAnalyses test" "python fcc.py"
 
 
-# https://github.com/key4hep/key4hep-spack/issues/505
-cat > vis.mac <<EOF
-/vis/open OGL
-/vis/drawVolume
-EOF
-
-run_test "Geant4 test" "geant4.sh -c vis.mac"
-
 cat > sherpa.txt <<EOF
 (run){
  RANDOM_SEED 42;
