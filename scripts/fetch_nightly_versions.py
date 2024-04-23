@@ -110,6 +110,7 @@ if __name__ == "__main__":
         ("k4fwcore", "key4hep/k4fwcore"),
         ("k4gen", "hep-fcc/k4Gen"),
         ("k4geo", "key4hep/k4geo"),
+        ("k4reco", "key4hep/k4reco"),
         ("k4marlinwrapper", "key4hep/k4marlinwrapper"),
         ("k4projecttemplate", "key4hep/k4-project-template"),
         ("k4reccalorimeter", "hep-fcc/k4reccalorimeter"),
