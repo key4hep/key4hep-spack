@@ -1,6 +1,7 @@
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
+
 class K4reco(CMakePackage, Key4hepPackage):
     """Reconstruction algorithms using Gaudi in native key4hep"""
 
