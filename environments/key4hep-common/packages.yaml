@@ -157,6 +157,8 @@ packages:
     variants: build_type=Release cxxstd=20
   k4reccalorimeter:
     variants: build_type=Release cxxstd=20
+  k4reco:
+    variants: build_type=Release cxxstd=20
   k4rectracker:
     variants: build_type=Release cxxstd=20
   k4simgeant4:

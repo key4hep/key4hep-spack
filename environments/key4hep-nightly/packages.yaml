@@ -63,6 +63,8 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   k4reccalorimeter:
     variants: build_type=RelWithDebInfo cxxstd=20
+  k4reco:
+    variants: build_type=RelWithDebInfo
   k4rectracker:
     variants: build_type=RelWithDebInfo cxxstd=20
   k4simdelphes:
