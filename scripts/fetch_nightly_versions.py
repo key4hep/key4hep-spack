@@ -154,7 +154,6 @@ if __name__ == "__main__":
         if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
             text["packages"][package]["require"] = line + original
-            print(f"text is {text['packages'][package]['require']}")
             continue
         elif (
             package in text_extra["packages"]
@@ -162,7 +161,6 @@ if __name__ == "__main__":
         ):
             original = text_extra["packages"][package]["require"]
             text_extra["packages"][package]["require"] = line + original
-            print(f"text_extra is {text_extra['packages'][package]['require']}")
             continue
 
         if not text["packages"][package]:
