@@ -99,6 +99,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
+    depends_on("include-what-you-use", when="+devtools")
     depends_on("man-db", when="+devtools")
     depends_on("ninja", when="+devtools")
     depends_on("onnx", when="+devtools")
