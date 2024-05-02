@@ -1,6 +1,6 @@
 packages:
   acts:
-    require: +dd4hep cxxstd=20
+    require: +dd4hep cxxstd=20 +json
   boost:
     require: +python
     buildable: true
