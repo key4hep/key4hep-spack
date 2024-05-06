@@ -24,6 +24,8 @@ packages:
     variants: ~flang~lldb~lld~lua~mlir~internal_unwind~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   marlin:
     require: +lccd
+  madgraph5amc:
+    require: '@3:'
   podio:
     require: +rntuple+rpath+sio
   py-numpy:
