@@ -34,6 +34,10 @@ class Babayaga(MakefilePackage):
     # See https://stackoverflow.com/questions/44308577/ieee-underflow-flag-ieee-denormal-in-fortran-77
     patch("main_stop.patch")
 
+    # Write the cross sections to the LHE files, patch provided by the authors
+    # in a mail
+    patch("cross-section.patch")
+
     def build(self, spec, prefix):
         with working_dir("."):
             make("-f", "Makefile", "babayaga-fcc")

@@ -1,0 +1,160 @@
+--- babayaga-fcc/main.f	2021-04-29 13:03:58.000000000 +0200
++++ main.f	2024-05-06 18:47:18.296583800 +0200
+@@ -93,6 +93,8 @@
+       character*20 hstnm
+       common/hostandpid/hstnm,idproc
+ 
++      common/crosssections/xsec,var
++      
+       idproc = getpid()
+       call hostnm(hstnm)
+       
+@@ -484,6 +486,22 @@
+             endif
+          endif
+ 
++         if (isnan(sdif)) then
++            print*,'NAN found (pos 2) setting sdif to 0!!!!'
++            print*,'pid,hostnm,ord,k,ng,emtx,sv,sdif,phsp,w'
++            print*,idproc,hstnm,ord,k,ng,emtx,sv,sdif,phsp,w
++            sdif = 0.d0
++            w = 0.d0
++            phsp = 0.d0
++            ie = 1
++            print*,'end ----!!!'
++            if (iverbose.gt.0) then
++               call printstatus(5,k,p1,p2,qph,xsec,var,varbefore,
++     .              sdif,sdifmax,fmax)
++            endif
++         endif
++
++         
+ !! unweightening for unweighted events...
+          if (k.gt.nsearch) then
+             istopsearch = 1
+@@ -517,24 +535,12 @@
+                endif
+             endif
+          endif
+-       
+-         if (isnan(sdif)) then
+-            print*,'NAN found (pos 2) setting sdif to 0!!!!'
+-            print*,'pid,hostnm,ord,k,ng,emtx,sv,sdif,phsp,w'
+-            print*,idproc,hstnm,ord,k,ng,emtx,sv,sdif,phsp,w
+-            sdif = 0.d0
+-            w = 0.d0
+-            phsp = 0.d0
+-            ie = 1
+-            print*,'end ----!!!'
+-            if (iverbose.gt.0) then
+-               call printstatus(5,k,p1,p2,qph,xsec,var,varbefore,
+-     .              sdif,sdifmax,fmax)
+-            endif
+-         endif
+ 
+          sum  = sum  + sdif
+          sum2 = sum2 + sdif**2
++         varbefore = var
++         xsec = sum/k
++         var  = sqrt(abs((sum2/k-xsec**2)/k))
+          
+          if (ng.eq.0) then
+             sumborn = sumborn + sdif/sv
+@@ -547,9 +553,6 @@
+          sump(ng)  = sump(ng)  + sdif
+          sum2p(ng) = sum2p(ng) + sdif**2
+ 
+-         varbefore = var
+-         xsec = sum/k
+-         var  = sqrt(abs((sum2/k-xsec**2)/k))
+ c         tollerate = 1.2d0
+          tollerate = 1.8d0
+          if (var.gt.tollerate*varbefore
+@@ -628,8 +631,8 @@
+             endif
+ !!            
+             xsec = sum/k
+-            var  = sqrt((abs(sum2/k-xsec**2))/k)            
+-
++            var  = sqrt((abs(sum2/k-xsec**2))/k)
++            
+             xsecborn = sumborn/k
+             varborn  = sqrt((abs(sum2born/k-xsecborn**2))/k)
+             
+--- babayaga-fcc/storage.F	2021-04-29 13:03:58.000000000 +0200
++++ storage.F	2024-05-06 18:47:21.846583712 +0200
+@@ -9,7 +9,10 @@
+       implicit double precision (a-h,o-z)
+       character*(*) storfile
+       integer i,istmod
++      character*100 storagefile
++      common/storagef/storagefile
+       include 'LesHouches.h'
++      storagefile = storfile      
+       istorunit = 61
+       if (i.eq.0) return
+ 
+@@ -52,8 +55,12 @@
+ 
+       write(ist,111)idbmup(1),idbmup(2),ebmup(1),ebmup(2),
+      .     pdfgup(1),pdfgup(2),pdfsup(1),pdfsup(2),idwtup,nprup
+-      write(ist,222)xsecup(1),xerrup(1),xmaxup(1),lprup(1)
+-      
++
++
++*-- modified 27/4/2024
++c      write(ist,222)xsecup(1),xerrup(1),xmaxup(1),lprup(1)
++      write(ist,'(a)')'TOBECHANGED'
++*--
+       write(ist,'(a)')'</init>'
+ 
+  111  format(2(2x,I3),2(2x,G16.9),6(2x,I3))
+@@ -72,6 +79,13 @@
+       common/storedevents/nstored
+       data nstored /0/
+ 
++      common/crosssections/xsec,var
++      common/realinput/anpoints,sdifmax
++
++      xsecup(1) = xsec
++      xerrup(1) = var
++      xmaxup(1) = sdifmax     
++      
+       nstored = nstored + 1
+ 
+ ccc counting extra photons
+@@ -160,9 +174,6 @@
+ 
+       return
+       end
+-*******************************************
+-
+-      
+ *********************************************************
+       subroutine eventstorage_unweighted(p3,p4,qph)
+       implicit double precision (a-h,o-z)
+@@ -244,13 +255,21 @@
+       end
+ *******************************************
+       subroutine finalizestorageLHA(i)
+-      integer istorunit,i
+-      common/storageunit/istorunit
++      integer i,k
++      character*200 stringa
++      character*100 storagefile
++      common/storagef/storagefile
++      include 'LesHouches.h'
+       if (i.eq.0) return
+       write(istorunit,'(a)')'</LesHouchesEvents>'
+       close(istorunit)
++*-- modified 27/4/2024
++      write(stringa,222)xsecup(1),xerrup(1),xmaxup(1),lprup(1)
++      call EXECUTE_COMMAND_LINE("sed -i '0,/TOBECHANGED/ s/TOBECHANGED/"
++     .//trim(stringa)//"/' "//trim(storagefile))
++ 222  format(3(2x,G16.9),1(2x,I3))
++*__
+       end
+-
+ *******************************************
+       subroutine finalizestorage(i)
+       integer istorunit,i
