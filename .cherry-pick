@@ -16,6 +16,10 @@ git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
 # gaudi: add missing std::list
 git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 
+# gaudi: Add v38.1
+git cherry-pick a1e485fe201036c35e2eace9f53acdf6c1fb550b -X theirs --no-commit
+
+
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]]; then
 
