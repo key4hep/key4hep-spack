@@ -40,6 +40,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = [self.define("FORCE_COLORED_OUTPUT", False)]
+        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
         return args
 
     def setup_run_environment(self, env):
