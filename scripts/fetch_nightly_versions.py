@@ -167,6 +167,8 @@ if __name__ == "__main__":
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
+        if package not in text["packages"]:
+            text["packages"][package] = {}
         text["packages"][package]["require"] = line
 
     with open(args.path, "w") as recipe:
