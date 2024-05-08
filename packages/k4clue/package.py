@@ -57,6 +57,7 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     def cmake_args(self):
         args = []
         args.append(self.define("cupla_DIR", self.spec["cupla"].prefix))
+        args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
         return args
 
     def setup_run_environment(self, env):
