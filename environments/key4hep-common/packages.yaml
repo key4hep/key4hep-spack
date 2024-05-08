@@ -1,4 +1,10 @@
 packages:
+  all:
+    target: [x86_64]
+    variants: build_type=Release cxxstd=20
+    buildable: true
+    compiler: []
+
   acts:
     require: +dd4hep cxxstd=20 +json
   boost:
@@ -25,7 +31,7 @@ packages:
   marlin:
     require: +lccd
   madgraph5amc:
-    require: '@3:'
+    require: '@3: +pythia8'
   podio:
     require: +rntuple+rpath+sio
   py-numpy:
@@ -78,7 +84,6 @@ packages:
     - spec: openssh@99
       prefix: /usr
 
-
   root:
     require: '@6.30+davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
@@ -95,14 +100,8 @@ packages:
     require: ~openmp
   gperftools:
     require: ~libunwind
-  all:
-    target: [x86_64]
-    variants: build_type=Release cxxstd=20
-    buildable: true
-    compiler: []
 
-
-  # C++20
+  # C++20 that don't appear above
   aidatt:
     variants: build_type=Release cxxstd=20
   ced:
@@ -128,7 +127,7 @@ packages:
   edm4hep:
     variants: build_type=Release cxxstd=20
   fastjet:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   fcalclusterer:
     variants: build_type=Release cxxstd=20
   fccanalyses:
@@ -204,7 +203,7 @@ packages:
   physsim:
     variants: build_type=Release
   pythia8:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   raida:
     variants: build_type=Release
   sio:
