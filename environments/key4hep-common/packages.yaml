@@ -127,6 +127,8 @@ packages:
     variants: build_type=Release cxxstd=20
   edm4hep:
     variants: build_type=Release cxxstd=20
+  fastjet:
+    variants: build_type=Release cxxstd=20
   fcalclusterer:
     variants: build_type=Release cxxstd=20
   fccanalyses:
