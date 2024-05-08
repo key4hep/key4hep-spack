@@ -163,7 +163,7 @@ if __name__ == "__main__":
             text_extra["packages"][package]["require"] = line + original
             continue
 
-        if not text["packages"][package]:
+        if package not in text["packages"] or not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
