@@ -103,18 +103,18 @@ packages:
 
   # C++20 that don't appear above
   edm4hep:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   fastjet:
     variants: cxxstd=20
   gear:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   ilcutil:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   ildperformance:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   lcio:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   pythia8:
     variants: cxxstd=20
   sio:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
