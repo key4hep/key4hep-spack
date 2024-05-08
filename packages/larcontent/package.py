@@ -17,6 +17,10 @@ class Larcontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "4.8.1",
+        sha256="b15ffe74cf95f61901ec389ca9c763dc767464fc35c2a6ed800126c2d4d13017",
+    )
+    version(
         "4.4.0",
         sha256="2a495a3e6c322035c4fa99e66152fc9eb48a516533fd1870a18c889310dbe223",
     )
@@ -28,23 +32,8 @@ class Larcontent(CMakePackage):
         "4.0.0",
         sha256="01a28828a92daa4a95fd7399ec9df3c7be9ac2b33f40c5a031707894a44951cd",
     )
-    version(
-        "3.27.0",
-        sha256="0aecf7e39fa96654bd19257e481997f0c9ee5871b97f587fa1b37046f909c4e0",
-    )
-    version(
-        "3.24.1",
-        sha256="2cd11a05e87b32af06c27f1fea8d54d67141881b1ae4be72b2068a4f546fde5a",
-    )
-    version(
-        "3.24.0",
-        sha256="02cb1533787f341823763de81478a6cb9be8971fc69be4cb1999f711fbb32f73",
-    )
 
-    patch("path1.patch")
-    patch("path2.patch")
-    patch("path3.patch")
-    patch("path4.patch")
+    patch("path.patch")
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")

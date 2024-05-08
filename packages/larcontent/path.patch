@@ -1,0 +1,40 @@
+diff --git a/cmake/LArContentConfig.cmake.in b/cmake/LArContentConfig.cmake.in
+index 8d102df7..7d4abc38 100644
+--- a/cmake/LArContentConfig.cmake.in
++++ b/cmake/LArContentConfig.cmake.in
+@@ -42,7 +42,7 @@ FIND_PATH( LArContent_INCLUDE_DIRS
+ 
+ 
+ # ---------- libraries --------------------------------------------------------
+-INCLUDE( "@PANDORA_CMAKE_MODULES_PATH@/MacroCheckPackageLibs.cmake" )
++INCLUDE( "MacroCheckPackageLibs" )
+ 
+ # only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
+ # additional components are set by cmake in variable PKG_FIND_COMPONENTS
+
+diff --git a/cmake/LArContentConfigVersion.cmake.in b/cmake/LArContentConfigVersion.cmake.in
+index 605bc880..464638b6 100644
+--- a/cmake/LArContentConfigVersion.cmake.in
++++ b/cmake/LArContentConfigVersion.cmake.in
+@@ -10,6 +10,6 @@ SET( ${PACKAGE_FIND_NAME}_VERSION_MINOR @LArContent_VERSION_MINOR@ )
+ SET( ${PACKAGE_FIND_NAME}_VERSION_PATCH @LArContent_VERSION_PATCH@ )
+ 
+ 
+-INCLUDE( "@PANDORA_CMAKE_MODULES_PATH@/MacroCheckPackageVersion.cmake" )
++INCLUDE( "MacroCheckPackageVersion" )
+ CHECK_PACKAGE_VERSION( ${PACKAGE_FIND_NAME} @LArContent_VERSION@ )
+ 
+diff --git a/cmake/LArPandoraContentConfig.cmake.in b/cmake/LArPandoraContentConfig.cmake.in
+index bd078884..498db896 100644
+--- a/cmake/LArPandoraContentConfig.cmake.in
++++ b/cmake/LArPandoraContentConfig.cmake.in
+@@ -42,7 +42,7 @@ FIND_PATH( LArPandoraContent_INCLUDE_DIRS
+ 
+ 
+ # ---------- libraries --------------------------------------------------------
+-INCLUDE( "@PANDORA_CMAKE_MODULES_PATH@/MacroCheckPackageLibs.cmake" )
++INCLUDE( "MacroCheckPackageLibs" )
+ 
+ # only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
+ # additional components are set by cmake in variable PKG_FIND_COMPONENTS
+
