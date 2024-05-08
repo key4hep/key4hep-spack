@@ -2,13 +2,13 @@ git remote add jmcarcell https://github.com/jmcarcell/spack
 git fetch jmcarcell -q
 
 # add a recent version of madgraph, remove when https://github.com/spack/spack/pull/41128 is merged
-curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff | git apply -p1
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff | patch -p1
 
 # add vdt for CPATH, needed for podio+rntuple
 git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 
 # Add a patch to fix whizard (re pythia8), remove when https://github.com/spack/spack/pull/43045 is merged
-curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43045.diff | git apply -p1
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43045.diff | patch -p1
 
 # podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
 git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
@@ -20,13 +20,13 @@ git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
 
 # pythia8: Add fix for 8.311, remove when https://github.com/spack/spack/pull/43803 is merged
-curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | git apply -p1
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | patch -p1
 
 # fastjet: Add a cxxstd variant, remove when https://github.com/spack/spack/pull/44072 is merged
-curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | git apply -p1
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | patch -p1
 
 # pythia8: Add a cxxstd, remove when https://github.com/spack/spack/pull/44077 is merged
-curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44077.diff | git apply -p1
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44077.diff | patch -p1
 
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]]; then
