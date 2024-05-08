@@ -203,6 +203,8 @@ packages:
     variants: build_type=Release cxxstd=20
   physsim:
     variants: build_type=Release
+  pythia8:
+    variants: build_type=Release cxxstd=20
   raida:
     variants: build_type=Release
   sio:
