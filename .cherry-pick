@@ -25,6 +25,9 @@ curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803
 # fastjet: Add a cxxstd variant, remove when https://github.com/spack/spack/pull/44072 is merged
 curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | git apply -p1
 
+# pythia8: Add a cxxstd, remove when https://github.com/spack/spack/pull/44077 is merged
+curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44077.diff | git apply -p1
+
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]]; then
 
