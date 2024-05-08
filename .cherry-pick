@@ -22,6 +22,9 @@ git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
 # pythia8: Add fix for 8.311, remove when https://github.com/spack/spack/pull/43803 is merged
 curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | git apply -p1
 
+# fastjet: Add a cxxstd variant, remove when https://github.com/spack/spack/pull/44072 is merged
+curl -s -o - https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | git apply -p1
+
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]]; then
 
