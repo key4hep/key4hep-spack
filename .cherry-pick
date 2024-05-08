@@ -16,7 +16,7 @@ git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
 # gaudi: add missing std::list, remove when building 38.2
 git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 
-# gaudi: Add v38.1, remove when https://github.com/spack/spack/pull/44055 is merged
+# gaudi: Add v38.1, remove!
 git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
 
 # pythia8: Add fix for 8.311, remove when https://github.com/spack/spack/pull/43803 is merged
