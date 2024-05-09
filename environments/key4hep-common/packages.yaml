@@ -110,8 +110,6 @@ packages:
     variants: cxxstd=20
   ilcutil:
     variants: cxxstd=20
-  ildperformance:
-    variants: cxxstd=20
   lcio:
     variants: cxxstd=20
   pythia8:

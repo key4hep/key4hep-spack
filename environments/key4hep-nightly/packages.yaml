@@ -2,13 +2,13 @@ packages:
   acts:
     variants: build_type=RelWithDebInfo
   aidatt:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   ced:
     variants: build_type=RelWithDebInfo
   cedviewer:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   cepcsw:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   clicperformance:
     variants: build_type=RelWithDebInfo
   conformaltracking:
@@ -20,25 +20,25 @@ packages:
   ddkaltest:
     variants: build_type=RelWithDebInfo
   ddmarlinpandora:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   delphes:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   dual-readout:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   edm4hep:
     variants: build_type=RelWithDebInfo cxxstd=20
   fcalclusterer:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   fccanalyses:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   fccdetectors:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   fccsw:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   forwardtracking:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   gaudi:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   geant4:
     variants: build_type=RelWithDebInfo
   gear:
@@ -46,69 +46,69 @@ packages:
   ilcutil:
     variants: build_type=RelWithDebInfo cxxstd=20
   ildperformance:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4clue:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4edm4hep2lcioconv:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4fwcore:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4gen:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4geo:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4marlinwrapper:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4projecttemplate:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4reccalorimeter:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4reco:
     variants: build_type=RelWithDebInfo
   k4rectracker:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4simdelphes:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   k4simgeant4:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   kaltest:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   kitrack:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   kitrackmarlin:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   lccd:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   lcfiplus:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   lcio:
     variants: build_type=RelWithDebInfo cxxstd=20
   lctuple:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlin:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlindd4hep:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlinfastjet:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlinkinfit:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlinkinfitprocessors:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlinreco:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlintrk:
     variants: build_type=RelWithDebInfo
   marlintrkprocessors:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   marlinutil:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   opendatadetector:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   overlay:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   pandoraanalysis:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   physsim:
     variants: build_type=RelWithDebInfo
   podio:
