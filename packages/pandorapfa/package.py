@@ -20,7 +20,7 @@ class Pandorapfa(Package):
     version("master", branch="master")
     version(
         "4.8.1",
-        sha256sum="3b9e224196f09f3ce59062e73e1d05d4e8821d8163025263eee4448f7529f780",
+        sha256="3b9e224196f09f3ce59062e73e1d05d4e8821d8163025263eee4448f7529f780",
     )
     version(
         "4.4.1",
