@@ -4,7 +4,7 @@ packages:
   aidatt:
     variants: build_type=RelWithDebInfo cxxstd=20
   ced:
-    variants: build_type=RelWithDebInfo cxxstd=20
+    variants: build_type=RelWithDebInfo
   cedviewer:
     variants: build_type=RelWithDebInfo cxxstd=20
   cepcsw:
