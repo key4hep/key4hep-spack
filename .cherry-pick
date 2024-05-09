@@ -22,7 +22,7 @@ git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
 # pythia8: Add fix for 8.311, remove when https://github.com/spack/spack/pull/43803 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | patch -p1
 
-# fastjet: Add a cxxstd variant, remove when https://github.com/spack/spack/pull/44072 is merged
+# fastjet: Add a cxxstd variant, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | patch -p1
 
 # pythia8: Add a cxxstd, remove when https://github.com/spack/spack/pull/44077 is merged
