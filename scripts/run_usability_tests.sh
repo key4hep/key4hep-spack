@@ -162,6 +162,27 @@ EOF
 
 run_test "Sherpa test" "Sherpa -f sherpa.txt || ./makelibs"
 
+cat > madgraph.txt <<EOF
+import model sm
+generate e- e+ > mu- mu+
+output Output
+launch
+shower=Pythia8
+set iseed 4714
+set EBEAM 175.0
+set MZ 91.1876
+set WZ 2.4952
+set nevents 100
+set pdlabel isronlyll
+set lpp1 3
+set lpp2 -3
+set pt_min_pdg 13: 20
+set pt_max_pdg 13: 175
+EOF
+
+run_test "MadGraph test" "mg5_aMC madgraph.txt"
+
+
 
 # Report results
 echo "Tests completed:"
