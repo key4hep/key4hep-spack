@@ -2,9 +2,10 @@ spack:
   view: false
   include:
   - ../key4hep-common/config-nightlies.yaml
-  - ../key4hep-common/packages.yaml
-  # Put packages after the common packages so that it doesn't get overwritten
+  # Put packages before the common packages so that it doesn't get overwritten
+  # See https://github.com/spack/spack/blob/master/lib/spack/docs/environments.rst?plain=1#L528
   - ./packages.yaml
+  - ../key4hep-common/packages.yaml
   - ../key4hep-common/compilers.yaml
   repos:
   - ../..
