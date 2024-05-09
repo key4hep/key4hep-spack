@@ -117,3 +117,7 @@ packages:
     variants: build_type=RelWithDebInfo
   sio:
     variants: build_type=RelWithDebInfo cxxstd=20
+
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+
