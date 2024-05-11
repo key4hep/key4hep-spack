@@ -93,12 +93,12 @@ if __name__ == "__main__":
         print("Please run this script from the key4hep-spack repository.")
         raise
 
-    try:
-        with open(args.spack, "r") as config:
-            text = yaml.safe_load(config)
-    except FileNotFoundError:
-        print("Please run this script from the key4hep-spack repository.")
-        raise
+    # try:
+    #     with open(args.spack, "r") as config:
+    #         text = yaml.safe_load(config)
+    # except FileNotFoundError:
+    #     print("Please run this script from the key4hep-spack repository.")
+    #     raise
 
     for package, location in [
         ("aidatt", "aidasoft/aidatt"),
