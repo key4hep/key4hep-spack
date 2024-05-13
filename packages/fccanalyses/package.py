@@ -36,6 +36,16 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         sha256="0a324f913e515c0a12d3d799e4c924ad57eaad51cbeae2633417bb819d97d227",
     )
 
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/373.patch?full_index=1",
+        sha256="e77e5962d35d764cae5757f066eecc30fa9c60cb05ff087e684636e7c8e4724d",
+    )
+
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/374.patch?full_index=1",
+        sha256="aba8cb69ba3494fe48bc4a3d26189932c4974c0013278081893cfef09606fae2",
+    )
+
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
     variant("acts", default=True, description="Build Acts-dependent analyzers.")
     variant("dd4hep", default=True, description="Build DD4hep-dependent analyzers.")
