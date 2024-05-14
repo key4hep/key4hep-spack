@@ -29,7 +29,9 @@ repository](https://gitlab.cern.ch/key4hep/k4-deploy).
 
 Additionally, the file `.latest-commit` contains the latest commit of Spack used
 for the recent builds, which is updated from time to time to keep up with the
-develop branch of Spack.
+develop branch of Spack. In addition, the file `.cherry-pick` contains some
+fixes needed to build the stack. These can also be found in the file
+`.cherry-pick` that is shipped with every stack on cvmfs.
 
 ## Central Installations
 
