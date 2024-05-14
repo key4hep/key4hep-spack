@@ -1,4 +1,10 @@
 packages:
+  all:
+    target: [x86_64]
+    variants: build_type=Release cxxstd=20
+    buildable: true
+    compiler: []
+
   acts:
     require: +dd4hep cxxstd=20 +json
   boost:
@@ -24,6 +30,8 @@ packages:
     variants: ~flang~lldb~lld~lua~mlir~internal_unwind~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   marlin:
     require: +lccd
+  madgraph5amc:
+    require: '@3: +pythia8'
   podio:
     require: +rntuple+rpath+sio
   py-numpy:
@@ -37,7 +45,7 @@ packages:
   texlive:
     require: scheme=basic
   xrootd:
-    require: +krb5
+    require: +krb5 cxxstd=20
 
   # Use the system OpenGL as recommended by spack
   # See https://github.com/key4hep/key4hep-spack/issues/318 and
@@ -76,13 +84,12 @@ packages:
     - spec: openssh@99
       prefix: /usr
 
-
   root:
-    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20
+    require: '@6.30: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops~openmp+pythia8 hepmc=3
+    require: ~fastjet~latex+lcio~lhapdf+openloops+openmp+pythia8 hepmc=3
   k4simdelphes:
     require: ~delphes_hepmc
   evtgen:
@@ -93,113 +100,29 @@ packages:
     require: ~openmp
   gperftools:
     require: ~libunwind
-  all:
-    target: [x86_64]
-    variants: build_type=Release cxxstd=20
-    buildable: true
-    compiler: []
 
-
-  # C++20
-  aidatt:
-    variants: build_type=Release cxxstd=20
-  ced:
-    variants: build_type=Release cxxstd=20
-  cedviewer:
-    variants: build_type=Release cxxstd=20
-  cepcsw:
-    variants: build_type=Release cxxstd=20
-  clicperformance:
-    variants: build_type=Release
-  conformaltracking:
-    variants: build_type=Release
-  ddfastshowerml:
-    variants: build_type=Release
-  ddkaltest:
-    variants: build_type=Release
-  ddmarlinpandora:
-    variants: build_type=Release cxxstd=20
-  delphes:
-    variants: build_type=Release cxxstd=20
-  dual-readout:
-    variants: build_type=Release cxxstd=20
+  # C++20 that don't appear above
   edm4hep:
-    variants: build_type=Release cxxstd=20
-  fcalclusterer:
-    variants: build_type=Release cxxstd=20
-  fccanalyses:
-    variants: build_type=Release cxxstd=20
-  fccdetectors:
-    variants: build_type=Release cxxstd=20
-  fccsw:
-    variants: build_type=Release cxxstd=20
-  forwardtracking:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
+  fastjet:
+    variants: cxxstd=20
   gear:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   ilcutil:
-    variants: build_type=Release cxxstd=20
-  ildperformance:
-    variants: build_type=Release cxxstd=20
-  k4clue:
-    variants: build_type=Release cxxstd=20
-  k4edm4hep2lcioconv:
-    variants: build_type=Release cxxstd=20
-  k4fwcore:
-    variants: build_type=Release cxxstd=20
-  k4gen:
-    variants: build_type=Release cxxstd=20
-  k4geo:
-    variants: build_type=Release cxxstd=20
-  k4marlinwrapper:
-    variants: build_type=Release cxxstd=20
-  k4projecttemplate:
-    variants: build_type=Release cxxstd=20
-  k4reccalorimeter:
-    variants: build_type=Release cxxstd=20
-  k4reco:
-    variants: build_type=Release cxxstd=20
-  k4rectracker:
-    variants: build_type=Release cxxstd=20
-  k4simgeant4:
-    variants: build_type=Release cxxstd=20
-  kaltest:
-    variants: build_type=Release cxxstd=20
-  kitrack:
-    variants: build_type=Release cxxstd=20
-  kitrackmarlin:
-    variants: build_type=Release cxxstd=20
-  lcfiplus:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
   lcio:
-    variants: build_type=Release cxxstd=20
-  lctuple:
-    variants: build_type=Release cxxstd=20
-  marlindd4hep:
-    variants: build_type=Release cxxstd=20
-  marlinfastjet:
-    variants: build_type=Release cxxstd=20
-  marlinkinfit:
-    variants: build_type=Release cxxstd=20
-  marlinkinfitprocessors:
-    variants: build_type=Release cxxstd=20
-  marlinreco:
-    variants: build_type=Release cxxstd=20
-  marlintrk:
-    variants: build_type=Release
-  marlintrkprocessors:
-    variants: build_type=Release cxxstd=20
-  marlinutil:
-    variants: build_type=Release cxxstd=20
-  opendatadetector:
-    variants: build_type=Release cxxstd=20
-  overlay:
-    variants: build_type=Release cxxstd=20
-  pandoraanalysis:
-    variants: build_type=Release cxxstd=20
-  physsim:
-    variants: build_type=Release
-  raida:
-    variants: build_type=Release
+    variants: cxxstd=20
+  pythia8:
+    variants: cxxstd=20
   sio:
-    variants: build_type=Release cxxstd=20
+    variants: cxxstd=20
+
+  # onnx and py-onnx should have the same versions
+  # And all should be consistent based on this table:
+  # https://onnxruntime.ai/docs/reference/compatibility.html#onnx-opset-support
+  onnx:
+    require: '@1.15.0'
+  py-onnx:
+    require: '@1.15.0'
+  py-onnxruntime:
+    require: '@1.17.1'

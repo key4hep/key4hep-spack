@@ -53,6 +53,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Add latest commits to a spack environment"
     )
+
+    # There are commented blocks to write to the packages.yaml directly and
+    # having a single spec instead of having multiple However, spack keeps
+    # having issues when concretizing on top of an existing installation (that may not be complete)
+    # so I'm reverting back to the previous approach of having multiple specs
+
     parser.add_argument(
         "--path",
         help="path to a yaml file with spack packages",
@@ -61,6 +67,10 @@ if __name__ == "__main__":
         "--extra-path",
         help="path to a yaml file with spack packages",
     )
+    # parser.add_argument(
+    #     "--spack",
+    #     help="path to the spack.yaml in the nightly environment",
+    # )
     parser.add_argument(
         "date",
         help="date until which to search for commits, for example: 2021-01-01",
@@ -82,6 +92,13 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print("Please run this script from the key4hep-spack repository.")
         raise
+
+    # try:
+    #     with open(args.spack, "r") as config:
+    #         text = yaml.safe_load(config)
+    # except FileNotFoundError:
+    #     print("Please run this script from the key4hep-spack repository.")
+    #     raise
 
     for package, location in [
         ("aidatt", "aidasoft/aidatt"),
@@ -150,6 +167,7 @@ if __name__ == "__main__":
         line = f"@{commit}"
         if package not in ["cepcsw"]:
             line += "=develop"
+
         original = " "
         if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
@@ -163,13 +181,19 @@ if __name__ == "__main__":
             text_extra["packages"][package]["require"] = line + original
             continue
 
-        if not text["packages"][package]:
+        if package not in text["packages"] or not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
+        if package not in text["packages"]:
+            text["packages"][package] = {}
         text["packages"][package]["require"] = line
+
+        # text["spack"]["specs"].append(f"{package}{line}")
 
     with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)
     with open(args.extra_path, "w") as recipe:
         yaml.dump(text_extra, recipe)
+    # with open(args.spack, "w") as config:
+    #     yaml.dump(text, config)

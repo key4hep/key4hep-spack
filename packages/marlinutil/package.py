@@ -59,10 +59,9 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         spec = self.spec
-        cxxstd = spec["root"].variants["cxxstd"].value
         # Make sure that we pick the right GSL
         return [
-            self.define("CMAKE_CXX_STANDARD", cxxstd),
+            self.define("CMAKE_CXX_STANDARD", spec["root"].variants["cxxstd"].value),
             self.define("GSL_DIR", self.spec["gsl"].prefix),
             self.define("BUILD_TESTING", self.run_tests),
         ]

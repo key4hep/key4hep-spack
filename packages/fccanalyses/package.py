@@ -29,45 +29,21 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         "0.6.0",
         sha256="a740c1818cc9e02ce44306b9a4f828b3ce85d2afaed1fc06d8f8a41f89f9abe2",
     )
-    version(
-        "0.5.1",
-        sha256="2d5493340e21e8a24cbbfec9a465616fca736c5058bd27acf79eb07f8948ea2b",
-    )
-    version(
-        "0.5.0",
-        sha256="6c4b68d15fbae3793473dc4475f216b65c1962ed5de7979e75b024cb6d05d541",
-    )
-    version(
-        "0.4.1",
-        sha256="60db645152326775e9ce0f8c5017bd68d83d0024ac71e3266dac2f83d96ffce3",
-    )
-    version(
-        "0.4.0",
-        sha256="0089d8dd71e45f31afb531f4bdd3140f78eb5484cc126746fff51d750b317a1f",
-    )
-    version(
-        "0.3.7",
-        sha256="523e7c6d8db73028356b468afb01bd1f077ff4268817afe56df92fc47d492fd2",
-    )
-    version(
-        "0.3.6",
-        sha256="ec673e22b44c6c7b4e947ba16e3c0f12c08ee4443433fcdfd2c09a6795ddb0b7",
-    )
-    version(
-        "0.3.5",
-        sha256="efc08ea107d2fe10c24486d549e8ad8f6457c9c9003d2d12d1c44ebcdbd9664c",
-    )
-
-    patch(
-        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/176.patch",
-        when="@0.4.0",
-        sha256="bff4be96d0c177caccc3642bc1b3538004a8d3e5a19b472563ac867281a65bd6",
-    )
 
     patch(
         "https://github.com/HEP-FCC/FCCAnalyses/commit/f645584b81aacd0b0f8141b28bcbfa139aecad5c.patch?full_index=1",
         when="@0.8.0",
         sha256="0a324f913e515c0a12d3d799e4c924ad57eaad51cbeae2633417bb819d97d227",
+    )
+
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/373.patch?full_index=1",
+        sha256="e77e5962d35d764cae5757f066eecc30fa9c60cb05ff087e684636e7c8e4724d",
+    )
+
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/374.patch?full_index=1",
+        sha256="aba8cb69ba3494fe48bc4a3d26189932c4974c0013278081893cfef09606fae2",
     )
 
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
@@ -86,13 +62,13 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("acts", when="+acts")
     depends_on("acts@:29", when="@:0.8.0 +acts")
     depends_on("acts@19.6.0:28", when="@0.7.0 +acts")
-    depends_on("acts@6.00.0:19.5.0", when="@0.3.5:0.6.0 +acts")
+    depends_on("acts@6.00.0:19.5.0", when="@:0.6.0 +acts")
     depends_on("eigen")
     depends_on("dd4hep", when="+dd4hep")
     depends_on("py-pyyaml", type=("build", "run"))
     depends_on("py-onnxruntime", when="+onnx")
     depends_on("delphes@3.5.1pre07:", when="@0.7.0:")
-    depends_on("catch2@3:", type=("test"), when="@0.4:")
+    depends_on("catch2@3:", type=("test"))
 
     def cmake_args(self):
         args = [
