@@ -180,8 +180,22 @@ set pt_min_pdg 13: 20
 set pt_max_pdg 13: 175
 EOF
 
-run_test "MadGraph test" "mg5_aMC madgraph.txt"
+run_test "Madgraph test" "mg5_aMC madgraph.txt"
 
+cat > babayaga.txt <<EOF
+fs gg
+seed 4711
+EWKc on
+nev 10000
+ecms 91.0
+store yes
+path .
+mode weighted
+thmin 15.0
+thmax 165.0
+run
+EOF
+run_test "babayaga test" "babayaga --config babayaga.txt; grep -A 2 '<init>' events.lhe | grep -qE '49[\.[:digit:]]+[[:space:]]*[\.[:digit:]]+[[:space:]]*[\.[:digit:]]+[[:space:]]*[\.[:digit:]]+' && true || false"
 
 
 # Report results
