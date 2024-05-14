@@ -1,4 +1,4 @@
-git remote add jmcarcell https://github.com/jmcarcell/spack
+git remote add jmcarcell https://github.com/jmcarcell/spack || true
 git fetch jmcarcell -q
 
 # add a recent version of madgraph, remove when https://github.com/spack/spack/pull/41128 is merged
