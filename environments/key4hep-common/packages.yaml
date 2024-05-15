@@ -113,6 +113,7 @@ packages:
   lcio:
     variants: cxxstd=20
   pythia8:
+    require: +gzip
     variants: cxxstd=20
   sio:
     variants: cxxstd=20
