@@ -2,6 +2,14 @@
 
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
+# Disable alias expansion, we don't want users to change the commands
+if [ -n "$ZSH_VERSION" ]; then
+    setopt no_aliases
+elif [ -n "$BASH_VERSION" ]; then
+    shopt -u expand_aliases
+fi
+
+
 function usage() {
     echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
@@ -226,3 +234,10 @@ echo "        source /cvmfs/sw.hsf.org/key4hep/setup.sh -r $(basename $(dirname 
 echo ""
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
+
+# Bring back aliases
+if [ -n "$ZSH_VERSION" ]; then
+    unsetopt no_aliases
+elif [ -n "$BASH_VERSION" ]; then
+    shopt -s expand_aliases
+fi
