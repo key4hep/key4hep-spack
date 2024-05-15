@@ -39,6 +39,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     patch(
         "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/373.patch?full_index=1",
         sha256="e77e5962d35d764cae5757f066eecc30fa9c60cb05ff087e684636e7c8e4724d",
+        when="@:0.9.0 ^py-onnxruntime@1.17.1:"
     )
 
     patch(
