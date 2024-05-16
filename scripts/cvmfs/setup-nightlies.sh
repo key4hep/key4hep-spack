@@ -61,6 +61,15 @@ function list_packages() {
     find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$name*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
 }
 
+function give_aliases_back() {
+    if [ -n "$ZSH_VERSION" ]; then
+        unsetopt no_aliases
+    elif [ -n "$BASH_VERSION" ]; then
+        shopt -s expand_aliases
+    fi
+}
+
+
 rel="latest"
 if [[ "$1" = "-r" && -n "$2" ]]; then
     rel="$2"
@@ -82,11 +91,13 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
+    give_aliases_back
     return 1
 fi
 
 check_release $1 $2 $os
 if [ $? -ne 0 ]; then
+  give_aliases_back
   return 1
 fi
 
@@ -97,26 +108,32 @@ for ((i=1; i<=$#; i++)); do
         --list-releases)
             if [ ! -n "$argn" ]; then
                 list_release $os
+                give_aliases_back
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
+                give_aliases_back
                 list_release $argn
                 return 0
             else
                 echo "Unsupported OS $argn, aborting..."
                 usage
+                give_aliases_back
                 return 1
             fi
             ;;
         --list-packages)
             if [ ! -n "$argn" ]; then
                 list_packages $os
+                give_aliases_back
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
                 list_packages $argn
+                give_aliases_back
                 return 0
             else
                 echo "Unsupported OS $argn, aborting..."
                 usage
+                give_aliases_back
                 return 1
             fi
             ;;
@@ -127,6 +144,7 @@ for ((i=1; i<=$#; i++)); do
             if [ "$prev" != "-r" ]; then
                 echo "Unknown argument $arg, it will be ignored"
                 # usage
+                # give_aliases_back
                 # return 1
             fi
             ;;
@@ -135,6 +153,7 @@ done
 
 if [ -n "$KEY4HEP_STACK" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
+    give_aliases_back
     return 1
 fi
 
@@ -223,9 +242,4 @@ echo "Nightly builds are intended for testing and development, if you need a sta
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
 
-# Bring back aliases
-if [ -n "$ZSH_VERSION" ]; then
-    unsetopt no_aliases
-elif [ -n "$BASH_VERSION" ]; then
-    shopt -s expand_aliases
-fi
+give_aliases_back
