@@ -19,13 +19,13 @@ git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 # gaudi: Add v38.1, remove!
 git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
 
-# pythia8: Add fix for 8.311, remove when https://github.com/spack/spack/pull/43803 is merged
+# pythia8: Add fix for 8.311, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | patch -p1
 
 # fastjet: Add a cxxstd variant, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | patch -p1
 
-# pythia8: Add a cxxstd, remove when https://github.com/spack/spack/pull/44077 is merged
+# pythia8: Add a cxxstd, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44077.diff | patch -p1
 
 # fix issues when reconcretizing a GitVersion? remove when https://github.com/spack/spack/pull/43859 is merged
