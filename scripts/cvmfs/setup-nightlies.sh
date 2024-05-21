@@ -2,13 +2,6 @@
 
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
-# Disable alias expansion, we don't want users to change the commands
-if [ -n "$ZSH_VERSION" ]; then
-    setopt no_aliases
-elif [ -n "$BASH_VERSION" ]; then
-    shopt -u expand_aliases
-fi
-
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
@@ -18,7 +11,7 @@ function usage() {
 }
 
 function check_release() {
-if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" || -z "$(ls "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
+if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" || -z "$(/usr/bin/ls "/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
         echo "Release $2 not found, this is a list of the available releases:"
         find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$3*" |
  \awk -F/ '{print $(NF-1)}' | sort
@@ -61,14 +54,6 @@ function list_packages() {
     find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$name*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
 }
 
-function give_aliases_back() {
-    if [ -n "$ZSH_VERSION" ]; then
-        unsetopt no_aliases
-    elif [ -n "$BASH_VERSION" ]; then
-        shopt -s expand_aliases
-    fi
-}
-
 
 rel="latest"
 if [[ "$1" = "-r" && -n "$2" ]]; then
@@ -78,26 +63,24 @@ fi
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
    [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
     os="centos7"
-    k4path=$(ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*centos7* | head -n1)
+    k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*centos7* | head -n1)
     echo "WARNING: CentOS 7 nightlies are not being built anymore and will be deleted soon, consider using AlmaLinux 9"
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
     os="almalinux9"
-    k4path=$(ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*almalinux9* | head -n1)
+    k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*almalinux9* | head -n1)
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
     os="ubuntu22.04"
-    k4path=$(ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
+    k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
-    give_aliases_back
     return 1
 fi
 
 check_release $1 $2 $os
 if [ $? -ne 0 ]; then
-  give_aliases_back
   return 1
 fi
 
@@ -108,32 +91,26 @@ for ((i=1; i<=$#; i++)); do
         --list-releases)
             if [ ! -n "$argn" ]; then
                 list_release $os
-                give_aliases_back
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
-                give_aliases_back
                 list_release $argn
                 return 0
             else
                 echo "Unsupported OS $argn, aborting..."
                 usage
-                give_aliases_back
                 return 1
             fi
             ;;
         --list-packages)
             if [ ! -n "$argn" ]; then
                 list_packages $os
-                give_aliases_back
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
                 list_packages $argn
-                give_aliases_back
                 return 0
             else
                 echo "Unsupported OS $argn, aborting..."
                 usage
-                give_aliases_back
                 return 1
             fi
             ;;
@@ -144,7 +121,6 @@ for ((i=1; i<=$#; i++)); do
             if [ "$prev" != "-r" ]; then
                 echo "Unknown argument $arg, it will be ignored"
                 # usage
-                # give_aliases_back
                 # return 1
             fi
             ;;
@@ -153,7 +129,6 @@ done
 
 if [ -n "$KEY4HEP_STACK" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
-    give_aliases_back
     return 1
 fi
 
@@ -224,7 +199,7 @@ k4_local_repo() {
     echo "Some variables may have to be updated manually to point to the local installation"
 }
 
-setup_script_path=$(ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
+setup_script_path=$(/usr/bin/ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
@@ -241,5 +216,3 @@ echo ""
 echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
-
-give_aliases_back
