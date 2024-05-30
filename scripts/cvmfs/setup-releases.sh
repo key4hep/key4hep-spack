@@ -35,7 +35,7 @@ function list_release() {
         return 1
     fi
     find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*" |
-    \awk -F/ '{print $(NF-1)}' | sort
+    \awk -F/ '{print $(NF-1)}' | sort -r | uniq
 }
 
 function list_packages() {
