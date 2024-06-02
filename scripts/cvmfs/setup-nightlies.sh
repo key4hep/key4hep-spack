@@ -5,9 +5,11 @@
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
-    echo "       -h           : print this help message"
+    echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
     echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+    echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
+    echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
 
 function check_release() {
@@ -88,6 +90,10 @@ for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
     eval "argn=\${$((i+1))}"
     case $arg in
+        --help|-h)
+            usage
+            return 0
+            ;;
         --list-releases)
             if [ ! -n "$argn" ]; then
                 list_release $os
