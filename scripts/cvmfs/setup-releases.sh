@@ -8,6 +8,8 @@ function usage() {
     echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
     echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+    echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
+    echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
 
 function check_release() {
