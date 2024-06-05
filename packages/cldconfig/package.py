@@ -15,6 +15,8 @@ class Cldconfig(CMakePackage):
     maintainers = ["jmcarcell"]
 
     version("main", branch="main")
+    # Old tag to make sure there is at least one, can be removed when
+    # there is another
     version("v02-04-01", tag="v02-04-01")
 
     depends_on("k4geo", type="test")
