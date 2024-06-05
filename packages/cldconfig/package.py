@@ -28,6 +28,7 @@ class Cldconfig(CMakePackage):
     depends_on("ddmarlinpandora", type="test")
     depends_on("clicperformance", type="test")
     depends_on("lcfiplus", type="test")
+    depends_on("marlinfastjet", type="test")
 
     def cmake_args(self):
         args = []
