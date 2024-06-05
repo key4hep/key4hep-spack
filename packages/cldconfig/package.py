@@ -22,6 +22,12 @@ class Cldconfig(CMakePackage):
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
     depends_on("k4fwcore", type="test")
+    depends_on("k4marlinwrapper", type="test")
+    depends_on("marlintrkprocessors", type="test")
+    depends_on("conformaltracking", type="test")
+    depends_on("ddmarlinpandora", type="test")
+    depends_on("clicperformance", type="test")
+    depends_on("lcfiplus", type="test")
 
     def cmake_args(self):
         args = []
