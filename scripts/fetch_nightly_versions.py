@@ -105,6 +105,7 @@ if __name__ == "__main__":
         ("ced", "ilcsoft/ced"),
         ("cedviewer", "ilcsoft/cedviewer"),
         # ("cepcsw", "cepc/cepcsw"),
+        ("cldconfig", "key4hep/CLDConfig"),
         ("clicperformance", "ilcsoft/clicperformance"),
         ("conformaltracking", "ilcsoft/conformaltracking"),
         ("dd4hep", "aidasoft/dd4hep"),
