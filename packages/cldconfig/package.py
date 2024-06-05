@@ -25,9 +25,5 @@ class Cldconfig(CMakePackage):
 
     def cmake_args(self):
         args = []
-        if "root" in self.spec:
-            args.append(
-                f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-            )
         args.append("-DBUILD_TESTING=%s" % self.run_tests)
         return args
