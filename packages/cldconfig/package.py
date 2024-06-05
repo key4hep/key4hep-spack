@@ -15,6 +15,7 @@ class Cldconfig(CMakePackage):
     maintainers = ["jmcarcell"]
 
     version("main", branch="main")
+    version("v02-04-01", tag="v02-04-01")
 
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
