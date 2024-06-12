@@ -193,7 +193,9 @@ k4_local_repo() {
     _replace_marlin_dll ${current_repo} ${install}
     export PATH=$PWD/$install/bin:$PATH
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
-    export PYTHONPATH=$PWD/$install/python:$PYTHONPATH
+    # Get the python site-packages directory
+    libpythondir=$(python -c "import site; print('/'.join(site.getsitepackages()[0].split('/')[-3:]))")
+    export PYTHONPATH=$PWD/$install/python:$PWD/$install/$libpythondir:$PYTHONPATH
     export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
