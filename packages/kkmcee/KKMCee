@@ -112,9 +112,7 @@ KKMCEE_SHARE=${KKMCEE_DIR}/share/KKMCee
 KKMCEE_ETC=${KKMCEE_DIR}/etc/KKMCee
 
 # Run existing config file
-if test ! "x$_CONFFILE" = "x" && test -f $_CONFFILE; then
-   ln -sf ${_CONFFILE} ./pro.input
-else
+if test "x$_CONFFILE" = "x"; then
 # We create a config file based on the input switches: this is the initial common part
 cat > ./pro.input <<EOF
  1 1 0 0 0 0 0 0         KAT1-KAT8        <- Input for the main program
@@ -186,6 +184,12 @@ cat >> ./pro.input <<EOF
 ********************************************************************************
 EndX
 EOF
+else
+if test ! -f $_CONFFILE; then
+    echo "Configuration file $_CONFFILE couldn't be found"
+    exit 1
+fi
+ln -sf $_CONFFILE ./pro.input
 fi
 
 # Create seed file
