@@ -117,6 +117,7 @@ if __name__ == "__main__":
         ("edm4hep", "key4hep/edm4hep"),
         ("fcalclusterer", "fcalsw/fcalclusterer"),
         ("fccanalyses", "hep-fcc/fccanalyses"),
+        ("fcc-config", "hep-fcc/fcc-config"),
         ("fccdetectors", "hep-fcc/fccdetectors"),
         ("fccsw", "hep-fcc/fccsw"),
         ("forwardtracking", "ilcsoft/forwardtracking"),
