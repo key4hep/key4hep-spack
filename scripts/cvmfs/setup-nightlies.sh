@@ -211,6 +211,11 @@ setup_script_path=$(/usr/bin/ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
+# For SWAN
+if [ -n "$LCG_VERSION" ]; then
+    unset CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH
+fi
+
 if [ "${rel}" = "latest" ]; then
     echo "Setting up the latest Key4hep software stack from CVMFS"
     echo "Note that you are using the latest stack, which may point to a newer stack in the future"
