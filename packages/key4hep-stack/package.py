@@ -55,6 +55,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("dd4hep")
     depends_on("delphes")
     depends_on("edm4hep")
+    depends_on("fcc-config")
     depends_on("geant4+qt")
     depends_on("guinea-pig")
     # depends_on('k4actstracking')
