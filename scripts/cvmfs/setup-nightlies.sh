@@ -213,6 +213,8 @@ export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack
 
 # For SWAN
 if [ -n "$LCG_VERSION" ]; then
+    echo "A LCG stack has been sourced, unsetting the following variables to avoid conflicts:"
+    echo "CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH"
     unset CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH
 fi
 
