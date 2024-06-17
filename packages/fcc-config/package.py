@@ -6,7 +6,7 @@
 from spack import *
 
 
-class Fccconfig(CMakePackage):
+class FccConfig(CMakePackage):
     """"""
 
     homepage = "https://github.com/HEP-FCC/FCC-config"
