@@ -76,6 +76,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("marlinkinfitprocessors")
     depends_on("marlintrkprocessors")
     depends_on("marlintrk")
+    depends_on("marlinmlflavortagging")
     depends_on("overlay")
     depends_on("pandoraanalysis")
     depends_on("pandorapfa")
