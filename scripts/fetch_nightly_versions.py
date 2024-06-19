@@ -143,11 +143,12 @@ if __name__ == "__main__":
         ("lcfiplus", "lcfiplus/lcfiplus"),
         ("lcio", "ilcsoft/lcio"),
         ("lctuple", "ilcsoft/lctuple"),
+        ("marlin", "ilcsoft/marlin"),
         ("marlindd4hep", "ilcsoft/marlindd4hep"),
         ("marlinfastjet", "ilcsoft/marlinfastjet"),
-        ("marlin", "ilcsoft/marlin"),
         ("marlinkinfit", "ilcsoft/marlinkinfit"),
         ("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors"),
+        ("marlinmlflavortagging", "ilcsoft/marlinmlflavortagging"),
         ("marlinreco", "ilcsoft/marlinreco"),
         ("marlintrk", "ilcsoft/marlintrk"),
         ("marlintrkprocessors", "ilcsoft/marlintrkprocessors"),
@@ -163,7 +164,7 @@ if __name__ == "__main__":
         gitlab = False
         if package == "opendatadetector":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
-        elif package == "ddfastshowerml":
+        elif package == "ddfastshowerml" or package == "marlinmlflavortagging":
             gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         line = f"@{commit}"
