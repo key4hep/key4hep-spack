@@ -118,6 +118,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-jupytext@1.16:", when="+devtools")
     depends_on("py-matplotlib", when="+devtools")
     depends_on("py-nbconvert", when="+devtools")
+    depends_on("py-rich", when="+devtools")
     depends_on("py-onnxruntime", when="+devtools")
     depends_on("py-onnx", when="+devtools")
     depends_on("py-pandas", when="+devtools")
