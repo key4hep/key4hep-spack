@@ -22,4 +22,4 @@ class FccConfig(CMakePackage):
         return args
 
     def setup_run_environment(self, env):
-        env.prepend_path("FCCCONFIG", self.prefix)
+        env.set("FCCCONFIG", self.prefix)
