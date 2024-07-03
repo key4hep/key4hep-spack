@@ -1,0 +1,136 @@
+packages:
+  acts:
+    variants: build_type=RelWithDebInfo
+  aidatt:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  benchmark:
+    require: ~performance_counters
+  ced:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  cedviewer:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  cepcsw:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  clicperformance:
+    variants: build_type=RelWithDebInfo
+  conformaltracking:
+    variants: build_type=RelWithDebInfo
+  dd4hep:
+    variants: build_type=RelWithDebInfo
+  ddfastshowerml:
+    variants: build_type=RelWithDebInfo
+  ddkaltest:
+    variants: build_type=RelWithDebInfo
+  ddmarlinpandora:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  delphes:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  dual-readout:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  edm4hep:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  fcalclusterer:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  fccanalyses:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  fccdetectors:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  fccsw:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  forwardtracking:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  # Changes from common: don't use unwind because of a conflict with darwin
+  # maybe remove when not using darwin
+  # Don't build with gperftools, fails at concretization because of the
+  # unwind conflict (bug in spack?)
+  gaudi:
+    require: +aida+cppunit+examples+gaudialg~gperftools+heppdt+jemalloc~unwind+xercesc
+    variants: build_type=RelWithDebInfo cxxstd=20
+  geant4:
+    variants: build_type=RelWithDebInfo
+  gear:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  # Remove source-highlight since it doesn't compile on MacOS
+  gdb:
+    require: +python+tui~source-highlight~debuginfod
+  # Maybe remove when using something that is not darwin
+  gperftools:
+    require: ~libunwind
+  ilcutil:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  ildperformance:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4clue:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4edm4hep2lcioconv:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4fwcore:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4gen:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4geo:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4marlinwrapper:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4projecttemplate:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4reccalorimeter:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4rectracker:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4simdelphes:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  k4simgeant4:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  kaltest:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  kitrack:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  kitrackmarlin:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  lccd:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  lcfiplus:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  lcio:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  lctuple:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  # Add openmp="project"
+  llvm:
+    variants: ~flang~lldb~lld~lua~mlir~internal_unwind~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~omp_tsan~omp_as_runtime~code_signing~python~version_suffix~shlib_symbol_version~z3~zstd compiler-rt="none" libcxx="none" targets="x86" openmp="project"
+  marlin:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlindd4hep:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlinfastjet:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlinkinfit:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlinkinfitprocessors:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlinreco:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlintrk:
+    variants: build_type=RelWithDebInfo
+  marlintrkprocessors:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  marlinutil:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  opendatadetector:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  overlay:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  pandoraanalysis:
+    variants: build_type=RelWithDebInfo cxxstd=20
+  physsim:
+    variants: build_type=RelWithDebInfo
+  podio:
+    variants: build_type=RelWithDebInfo
+  raida:
+    variants: build_type=RelWithDebInfo
+  # Same as the one in key4hep-common but with a newer version
+  root:
+    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20 @6.30.02
+  sio:
+    variants: build_type=RelWithDebInfo cxxstd=20
