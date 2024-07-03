@@ -19,7 +19,7 @@
 +      }
 +    }// end loop over particles
 +  } else {
-+     cout << "m_Hvent not defined! Cannot save helicity information" << endl;
++    cout << "m_Hvent not defined! Cannot save helicity information" << endl;
 +  }
 +
  }//ImprintSpin
