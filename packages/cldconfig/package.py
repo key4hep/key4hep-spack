@@ -36,4 +36,4 @@ class Cldconfig(CMakePackage):
         return args
 
     def setup_run_environment(self, env):
-        env.prepend_path("CLDCONFIG", self.prefix)
+        env.set("CLDCONFIG", self.prefix)
