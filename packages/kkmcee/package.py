@@ -117,7 +117,7 @@ class Kkmcee(AutotoolsPackage):
         install("ProdRun/kkmchepmc/kkmc-tauola.input", prefix.share.KKMCee)
         mv = which("mv")
         mv(prefix + "/bin/KKMCee", prefix + "/bin/KKMCee.exe")
-        install("ProdRun/kkmchepmc/KKMCee-5", prefix + "/bin/KKMCee")
+        cp(join_path(os.path.dirname(__file__), "KKMCee"), prefix + "/bin/KKMCee")
         chmod = which("chmod")
         chmod("a+x", prefix + "/bin/KKMCee")
         pcm_files = glob.glob("*/*_rdict.pcm")
@@ -128,12 +128,14 @@ class Kkmcee(AutotoolsPackage):
     def install(self, spec, prefix):
         chmod = which("chmod")
 
-        mkdirp(prefix.bin)
+        mkdirp(prefix.bin   o)
 
         install(join_path("ffbench", "ProdMC.exe"), join_path(prefix.bin, "KKMCee.exe"))
         chmod("755", join_path(prefix.bin, "KKMCee.exe"))
 
-        install(join_path(os.path.dirname(__file__), "KKMCee"), join_path(prefix.bin, "KKMCee"))
+        script_sh = join_path(os.path.dirname(__file__), "KKMCee")
+        script = script = prefix.bin.KKMCee
+        install(script_sh, script)
         chmod("755", script)
 
         mkdirp(prefix.etc.KKMCee)
