@@ -47,7 +47,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on("podio@0.15:", when="@0.1.1:")
     depends_on("py-jinja2", type=("build"))
     depends_on("py-pyyaml", type=("build"))
-    depends_on("hepmc3")
     depends_on("fastjet")
     depends_on("root+fftw")
     depends_on("pythia8")
