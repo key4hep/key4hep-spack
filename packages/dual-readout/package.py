@@ -51,6 +51,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on("hsf-cmaketools")
     depends_on("k4fwcore")
     depends_on("simsipm")
+    depends_on("k4gen")
 
     def cmake_args(self):
         args = []
