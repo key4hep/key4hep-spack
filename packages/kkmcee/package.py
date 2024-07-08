@@ -128,7 +128,7 @@ class Kkmcee(AutotoolsPackage):
     def install(self, spec, prefix):
         chmod = which("chmod")
 
-        mkdirp(prefix.bin   o)
+        mkdirp(prefix.bin)
 
         install(join_path("ffbench", "ProdMC.exe"), join_path(prefix.bin, "KKMCee.exe"))
         chmod("755", join_path(prefix.bin, "KKMCee.exe"))
