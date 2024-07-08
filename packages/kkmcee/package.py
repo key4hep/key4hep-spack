@@ -133,9 +133,7 @@ class Kkmcee(AutotoolsPackage):
         install(join_path("ffbench", "ProdMC.exe"), join_path(prefix.bin, "KKMCee.exe"))
         chmod("755", join_path(prefix.bin, "KKMCee.exe"))
 
-        script_sh = join_path(os.path.dirname(__file__), "KKMCee")
-        script = script = prefix.bin.KKMCee
-        install(script_sh, script)
+        install(join_path(os.path.dirname(__file__), "KKMCee"), join_path(prefix.bin, "KKMCee"))
         chmod("755", script)
 
         mkdirp(prefix.etc.KKMCee)

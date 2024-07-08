@@ -1,36 +1,51 @@
 #!/bin/bash
 
-# Wrapper around the KKMCee/ProdMC.exe executable
+# Wrapper around the KKMCee executable
 # This script relies on the presence of CVMFS in the system and uses the KKMCee
 # provided by the LCG Releases
 
 help(){
    echo ""
-   echo "+++ Wrapper around the KKMCee/ProdMC.exe executable +++"
+   echo "+++ Wrapper around the KKMCee executable  +++"
    echo ""
-   echo "Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]"
-   echo "       \tKKMCee -c config_file [-s seed_file]"
+   echo "Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s initial_seed] [OPTIONS]"
+   echo "       \tKKMCee -c config_file [-s initial_seed]"
    echo ""
    echo "Options:"
    echo -e "  -c, --config file \t\tPath to configuration file"
    echo -e "  -f, --flavour flavour \tFlavour to be generated (Mu|Tau|UDS|C|B|Hadrons)"
    echo -e "  -e, --ecms energy \t\tCenter of Mass energy in GeV"
-   echo -e "  -n, --nevts energy \t\tNumber of events to be generated"
-   echo -e "  -o, --outfile file \t\tFile with the generated events in LHE format"
-   echo -e "  -s, --seedfile file \t\tFile to be used for seeding (randomly generated, if missing)"
+   echo -e "  -n, --nevts events \t\tNumber of events to be generated"
+   echo -e "  -o, --outfile file \t\tFile with the generated events in HEPMCv3 format [kkmcee.hepmc]"
+   echo -e "  -s, --initialseed \t\tLong number to be used for initial seeding (randomly generated, if missing)"
    echo -e "  -b, --bessig bessig \t\tBeam-Energy-Spread of both beams (or of the first beam, if bessig2<0.) "
    echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread)]"
    echo -e "  -g, --bessig2 bessig2 \tBeam-Energy-Spread of the second beam if different from the first beam; fraction of Ecms/2."
    echo -e "                      \t\t[fraction of Ecms/2, default -1. (no spread or equal to first beam)]"
    echo -e "  -r, --besrho rho \t\tBeam-Energy-Spread correlation [default 0.]"
+   echo -e "  -d, --debug lvl \t\t PrintOut Level 0,1,2 [default 1]"
+   echo ""
+   echo "Special options for taus only:"
+   echo -e "  -t, --taudec t1*1000+t2 \tdecay channel for the first (t1) and second tau (t2)"
+   echo -e "                      \t\t 0        Inclusive"
+   echo -e "                      \t\t 1,2,3    electron,mu,pi"
+   echo -e "                      \t\t 4,5,6,7  rho,a1,K,K*"
+   echo -e "                      \t\t 8,9,10,11,12,13  3pip0,pi3pi0,3pi2pi0,5pi,5pip0,3pi3p0"
+   echo -e "                      \t\t 14, ... (other rare decays see tauola++)"
+   echo -e "  --tauopt file \t\tFile with tau options (see Tauola section in KKMCee_defaults)"
+   echo -e "                      \t\t the file is included as it is and overwrites other settings"
    echo ""
    echo "Examples:"
-   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE -b 0.001"
+   echo -e "KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.hepmc -b 0.001"
    echo -e "KKMCee -c kkmc_ditau.input"
-   echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.LHE"
+   echo -e "KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.hepmc"
+   echo ""
+   echo "  NB: (1) This wrapper works only for KKMCee versions 5 or newer"
+   echo "      (2) Output is HEPMC v3"
    echo ""
 }
 
+_DBGLVL=1
 _FLAVOUR="Mu"
 _ECMS="91.2"
 _NEVTS="100"
@@ -39,7 +54,11 @@ _HAVEBESTWO="no"
 _BESONE=-1.
 _BESTWO=-1.
 _BESRHO=0.
-_OUTFILE="KKMCee_OUT.LHE"
+_OUTFILE="kkmcee.hepmc"
+_TAUDEC=0
+_JAK1=0
+_JAK2=0
+_TAUOPT=""
 # Read arguments
 while [[ $# -gt 0 ]]
 do
@@ -82,13 +101,28 @@ do
             shift
             shift
         ;;
-        -s | --seedfile)
-           _SEEDFILE="$2"
+        -s | --initialseed)
+           _INITSEED="$2"
            shift
            shift
         ;;
         -o | --outfile)
            _OUTFILE="$2"
+           shift
+           shift
+        ;;
+        -t | --taudec)
+            _TAUDEC="$2"
+            shift
+            shift
+        ;;
+        --tauopt)
+           _TAUOPT="$2"
+           shift
+           shift
+        ;;
+        -d | --debug)
+           _DBGLVL="$2"
            shift
            shift
         ;;
@@ -108,28 +142,32 @@ echo -e "***********************************************************************
 
 KKMCEE_DIR=$(dirname $(dirname $0))
 KKMCEE_EXE=${KKMCEE_DIR}/bin/KKMCee.exe
-KKMCEE_SHARE=${KKMCEE_DIR}/share/KKMCee
+TABMAIN_EXE=${KKMCEE_DIR}/bin/TabMainC
+TABMAIN_OUTPUT=./TabMainC.output
 KKMCEE_ETC=${KKMCEE_DIR}/etc/KKMCee
 
 # Run existing config file
 if test "x$_CONFFILE" = "x"; then
 # We create a config file based on the input switches: this is the initial common part
 cat > ./pro.input <<EOF
- 1 1 0 0 0 0 0 0         KAT1-KAT8        <- Input for the main program
-    ${_NEVTS}      NEVT number of events
-----------cccccccccccccccccccccccccccccommentttttttttttttttttttttttttttttttttttt
-
+********************** THIS IS INPUT FILE FOR DEMO PROGRAM *********************
+*  This is input data for CEEX matrix element
 BeginX
 ********************************************************************************
 *               ACTUAL DATA FOR THIS PARTICULAR RUN
-********************************************************************************
-*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
-*     Center-of-mass energy [GeV]
+*-------------------------------------------------------------------------------
+*indx_____data______ccccccccc0cccc__________General_____ccc0ccccccccc0ccccccccc0
+    0           1000      1k   NEVT = number of events, OBSOLETE!!!
+* Center-of-mass energy [GeV]
     1        ${_ECMS}e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
+*     PrintOut from generator
+    5           ${_DBGLVL}  LevPri =xpar( 5)  PrintOut Level 0,1,2
+    6              1        Ie1Pri =xpar( 6)  PrintOut Start point
+    7              5        Ie2Pri =xpar( 7)  PrintOut End   point
 EOF
    if test "x${_DOBES}" = "xyes"; then
 cat >> ./pro.input <<EOF
-   25              4      =0 normal, =2 beamsstrahlung =3,4 for gaussian BES
+   25              4      KeyBES BES, =0 none, =2 beamsstrahlung =3,4 for gaussian BES
 *indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
    80       0.0e0         ParBES(0) E1=0 will be replaced by CMSene/2
    81       0.0e0         ParBES(1) E2=0 will be replaced by CMSene/2
@@ -137,18 +175,39 @@ cat >> ./pro.input <<EOF
    83       ${_BESTWO}e0         ParBES(3) sigma2/E2
    84       ${_BESRHO}e0         ParBES(4) rho correlation parameter [dimensionles]
 EOF
+   else
+cat >> ./pro.input <<EOF
+   25              0      KeyBES BES, =0 none, =2 beamsstrahlung =3,4 for gaussian BES
+EOF
    fi
 cat >> ./pro.input <<EOF
 ********************************************************************************
-*     Define process
+**     Define process
+**     Beam flavour code
+  400             11      KFini = xpar(400) dont change it                |<<<<|
 EOF
    if test "x$_FLAVOUR" = "xMu"; then
 cat >> ./pro.input <<EOF
   413              1      KFfin, muon
 EOF
    elif test "x$_FLAVOUR" = "xTau"; then
+      # Decays
+      if test ! "x${_TAUOPT}" = "x" && test -f ${_TAUOPT}; then
+cat ${_TAUOPT} >> ./pro.input
+      else
+         if test ! "x${_TAUDEC}" = "x0" ; then
+            _JAK2=$((${_TAUDEC}/1000))
+            _JAK1=$(((${_TAUDEC}-${_JAK2})/1000))
+         fi
+      fi
 cat >> ./pro.input <<EOF
   415              1      KFfin, tau
+*********************  Tau decays ***********************************************
+ 2001              ${_JAK1}     Jak1,  all inclusive
+ 2002              ${_JAK2}      Jak2,  all inclusive
+*****   PhotosC adding photons in tau decays in HEPMC3 event record
+   35              1   KeyPhts =0 for off; =1 in non-leptonic; =2 in all decays
+********************************************************************************
 EOF
    elif test "x$_FLAVOUR" = "xUDS"; then
 cat >> ./pro.input <<EOF
@@ -177,10 +236,22 @@ EOF
      rm -fr ./pro.input  
      exit 1
    fi
+
+# Initial seed switch
+_SSEED=""
+_FSEED=`date +%N`
+if test ! "x$_INITSEED" = "x"; then
+   _FSEED=$((${_SSEED}+1))
+   _SSEED="-s $_INITSEED"
+fi
+cat >> ./pro.input <<EOF
+********************************************************************************
+* FOAM GENERATION PARAMETERS
+ 3020       ${_FSEED}     Ranmar initial random number seed (KKMC and FOAM)
+EOF
+
 # Input file closing
 cat >> ./pro.input <<EOF
-  100              1      store lhe file to (${_OUTFILE})
-************************* one can change the lhf file name between brackets
 ********************************************************************************
 EndX
 EOF
@@ -192,30 +263,25 @@ fi
 ln -sf $_CONFFILE ./pro.input
 fi
 
-# Create seed file
-if test ! "x$_SEEDFILE" = "x" && test -f $_SEEDFILE; then
-   ln -sf $_SEEDFILE ./iniseed
-else
-   _seed=`date +"%j%H%M%N"`
-   _seed1=`echo ${_seed:0:8}`
-   _seed2=`echo ${_seed:8:15}`
-   echo "Seeds: $_seed1 $_seed2"
-   cat > ./iniseed <<EOF
-  $_seed1      IJKLIN= $_seed1  $_seed2
-         0      NTOTIN= 0
-         0      NTOT2N= 0
-EOF
-fi
-cat ./iniseed
+ln -sf ${KKMCEE_ETC}/KKMCee_defaults
+# Make EW tables
+time ${TABMAIN_EXE} > ${TABMAIN_OUTPUT}
 
 # Run
-cat > ./semaphore <<EOF
-START
+time ${KKMCEE_EXE} ${_SSEED} -o ${_OUTFILE} -n ${_NEVTS}
+if test ! "x$?" = "x0" ; then 
+    exit 1;
+else
+    echo "event generation ok" ;
+    # Cleanup
+    rm -f KKMCee_defaults
+    # Run files under KKMCee-datetime
+    _rundir="KKMCee-`date +%d%b%Y-%H%m%S`"
+    mkdir ${_rundir}
+    _runfiles="DIZET-table1 TabMain77.output TabMainC.output mcgen.root
+               pro.input pro.output pro77.output"
+    for f in ${_runfiles}; do
+       mv $f ${_rundir}
+    done
+fi
 
-EOF
-ln -sf ${KKMCEE_ETC}/KK2f_defaults   ./.KK2f_defaults
-ln -sf ${KKMCEE_ETC}/dizet   ./dizet
-time ${KKMCEE_EXE}
-
-# Clean-up
-rm -f ./.KK2f_defaults ./dizet
