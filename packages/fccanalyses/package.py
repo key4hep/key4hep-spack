@@ -9,7 +9,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     git = "https://github.com/HEP-FCC/FCCAnalyses.git"
     url = "https://github.com/HEP-FCC/FCCAnalyses/archive/v0.1.1.tar.gz"
 
-    maintainers = ["vvolkl", "clementhelsens"]
+    maintainers = ["vvolkl", "clementhelsens", "jsmiesko"]
 
     version("master", branch="master")
 
@@ -48,7 +48,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     )
 
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
-    variant("acts", default=True, description="Build Acts-dependent analyzers.")
+    variant("acts", default=False, description="Build Acts-dependent analyzers.")
     variant("dd4hep", default=True, description="Build DD4hep-dependent analyzers.")
 
     generator = "Ninja"
@@ -135,7 +135,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     def check(self):
         pass
 
-    # ... and  add custom check step that runs after installation instead
+    # ... and add custom check step that runs after installation instead
     @run_after("install")
     def install_check(self):
         with working_dir(self.build_directory):
