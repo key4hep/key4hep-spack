@@ -42,11 +42,6 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         when="@:0.9.0 ^py-onnxruntime@1.17.1:",
     )
 
-    patch(
-        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/FCCAnalyses/pull/374.patch?full_index=1",
-        sha256="aba8cb69ba3494fe48bc4a3d26189932c4974c0013278081893cfef09606fae2",
-    )
-
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
     variant("acts", default=False, description="Build Acts-dependent analyzers.")
     variant("dd4hep", default=True, description="Build DD4hep-dependent analyzers.")
