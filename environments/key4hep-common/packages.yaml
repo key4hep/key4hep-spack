@@ -23,6 +23,8 @@ packages:
     require: +opengl+qt~vecgeom cxxstd=20
   hdf5:
     require: +cxx+hl
+  hepmc3:
+    require: +python
   # https://github.com/key4hep/key4hep-spack/issues/517
   lccd:
     require: +conddbmysql
