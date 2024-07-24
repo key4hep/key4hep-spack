@@ -39,8 +39,6 @@ packages:
     variants: build_type=Debug
   gaudi:
     variants: build_type=Debug
-  geant4:
-    variants: build_type=Debug
   gear:
     variants: build_type=Debug cxxstd=20
   ilcutil:
