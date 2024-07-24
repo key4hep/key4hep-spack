@@ -1,7 +1,7 @@
 packages:
 
   whizard:
-    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8 hepmc=3
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
 
   all:
     target: [x86_64]
