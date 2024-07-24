@@ -119,8 +119,6 @@ packages:
     variants: cxxstd=20
   sio:
     variants: cxxstd=20
-  python:
-    require: '@3.11:'
 
   # onnx and py-onnx should have the same versions
   # And all should be consistent based on this table:
