@@ -1,0 +1,123 @@
+packages:
+  acts:
+    variants: build_type=Release
+  aidatt:
+    variants: build_type=Release
+  ced:
+    variants: build_type=Release
+  cedviewer:
+    variants: build_type=Release
+  cepcsw:
+    variants: build_type=Release
+  clicperformance:
+    variants: build_type=Release
+  conformaltracking:
+    variants: build_type=Release
+  dd4hep:
+    variants: build_type=Release
+  ddfastshowerml:
+    variants: build_type=Release
+  ddkaltest:
+    variants: build_type=Release
+  ddmarlinpandora:
+    variants: build_type=Release
+  delphes:
+    variants: build_type=Release
+  dual-readout:
+    variants: build_type=Release
+  edm4hep:
+    variants: build_type=Release cxxstd=20
+  fcalclusterer:
+    variants: build_type=Release
+  fccanalyses:
+    variants: build_type=Release
+  fccdetectors:
+    variants: build_type=Release
+  fccsw:
+    variants: build_type=Release
+  forwardtracking:
+    variants: build_type=Release
+  gaudi:
+    variants: build_type=Release
+  geant4:
+    variants: build_type=Release
+  gear:
+    variants: build_type=Release cxxstd=20
+  ilcutil:
+    variants: build_type=Release cxxstd=20
+  ildperformance:
+    variants: build_type=Release
+  k4clue:
+    variants: build_type=Release
+  k4edm4hep2lcioconv:
+    variants: build_type=Release
+  k4fwcore:
+    variants: build_type=Release
+  k4gen:
+    variants: build_type=Release
+  k4geo:
+    variants: build_type=Release
+  k4marlinwrapper:
+    variants: build_type=Release
+  k4projecttemplate:
+    variants: build_type=Release
+  k4reccalorimeter:
+    variants: build_type=Release
+  k4reco:
+    variants: build_type=Release
+  k4rectracker:
+    variants: build_type=Release
+  k4simdelphes:
+    variants: build_type=Release
+  k4simgeant4:
+    variants: build_type=Release
+  kaltest:
+    variants: build_type=Release
+  kitrack:
+    variants: build_type=Release
+  kitrackmarlin:
+    variants: build_type=Release
+  lccd:
+    variants: build_type=Release
+  lcfiplus:
+    variants: build_type=Release
+  lcio:
+    variants: build_type=Release cxxstd=20
+  lctuple:
+    variants: build_type=Release
+  marlin:
+    variants: build_type=Release
+  marlindd4hep:
+    variants: build_type=Release
+  marlinfastjet:
+    variants: build_type=Release
+  marlinkinfit:
+    variants: build_type=Release
+  marlinkinfitprocessors:
+    variants: build_type=Release
+  marlinreco:
+    variants: build_type=Release
+  marlintrk:
+    variants: build_type=Release
+  marlintrkprocessors:
+    variants: build_type=Release
+  marlinutil:
+    variants: build_type=Release
+  opendatadetector:
+    variants: build_type=Release
+  overlay:
+    variants: build_type=Release
+  pandoraanalysis:
+    variants: build_type=Release
+  physsim:
+    variants: build_type=Release
+  podio:
+    variants: build_type=Release
+  raida:
+    variants: build_type=Release
+  sio:
+    variants: build_type=Release cxxstd=20
+
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8 hepmc=3
+

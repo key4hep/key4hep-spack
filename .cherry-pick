@@ -7,55 +7,17 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff
 # add vdt for CPATH, needed for podio+rntuple
 git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 
-# whizard: Fix building with +openmp, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44414.diff | patch -p1
-
-# Add a patch to fix whizard (re pythia8), remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43045.diff | patch -p1
-
 # podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
 git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
 
 # gaudi: add missing std::list, remove when building 38.2
 git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 
-# gaudi: Add v38.1, remove!
-git cherry-pick 64df3df040c71ce2f31f718df1afb373bcf68368 -X theirs --no-commit
-
-# pythia8: Add fix for 8.311, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43803.diff | patch -p1
-
-# fastjet: Add a cxxstd variant, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44072.diff | patch -p1
-
-# pythia8: Add a cxxstd, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44077.diff | patch -p1
-
-# fix issues when reconcretizing a GitVersion? remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/43859.diff | patch -p1
-
 # py-onnxruntime: Install the session headers, needed by FCCAnalyses
 git cherry-pick e272ffa5a4768d23f1579403f9872360630e7278 -X theirs --no-commit
 
-# podio: change the python installation path, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44537.diff | patch -p1
-
-# edm4hep: change the python installation path, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/44681.diff | patch -p1
-
-
-
-if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]]; then
-
-  # patch for intel-tbb for CentOS 7, see https://github.com/oneapi-src/oneTBB/issues/859
-  # because we use binutils from the system which is old
-  git cherry-pick d8a0b0426a1c97c33c4b8f133d38e7dc03816a8c -X theirs --no-commit
-
-  # Make py-onnxruntime depend on git for CentOS 7 because the
-  # system git is too old and fails at fetching, remove when https://github.com/spack/spack/pull/43076 is merged
-  git cherry-pick b330252d082dc2865fa169af831b7b7c2affa8a5 -X theirs --no-commit
-
-fi
+# geant4 twisted tubes: remove when https://github.com/spack/spack/pull/45368 is merged
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45368.diff | patch -p1
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 

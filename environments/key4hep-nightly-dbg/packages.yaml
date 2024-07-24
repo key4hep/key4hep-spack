@@ -1,0 +1,123 @@
+packages:
+  acts:
+    variants: build_type=Debug
+  aidatt:
+    variants: build_type=Debug
+  ced:
+    variants: build_type=Debug
+  cedviewer:
+    variants: build_type=Debug
+  cepcsw:
+    variants: build_type=Debug
+  clicperformance:
+    variants: build_type=Debug
+  conformaltracking:
+    variants: build_type=Debug
+  dd4hep:
+    variants: build_type=Debug
+  ddfastshowerml:
+    variants: build_type=Debug
+  ddkaltest:
+    variants: build_type=Debug
+  ddmarlinpandora:
+    variants: build_type=Debug
+  delphes:
+    variants: build_type=Debug
+  dual-readout:
+    variants: build_type=Debug
+  edm4hep:
+    variants: build_type=Debug cxxstd=20
+  fcalclusterer:
+    variants: build_type=Debug
+  fccanalyses:
+    variants: build_type=Debug
+  fccdetectors:
+    variants: build_type=Debug
+  fccsw:
+    variants: build_type=Debug
+  forwardtracking:
+    variants: build_type=Debug
+  gaudi:
+    variants: build_type=Debug
+  geant4:
+    variants: build_type=Debug
+  gear:
+    variants: build_type=Debug cxxstd=20
+  ilcutil:
+    variants: build_type=Debug cxxstd=20
+  ildperformance:
+    variants: build_type=Debug
+  k4clue:
+    variants: build_type=Debug
+  k4edm4hep2lcioconv:
+    variants: build_type=Debug
+  k4fwcore:
+    variants: build_type=Debug
+  k4gen:
+    variants: build_type=Debug
+  k4geo:
+    variants: build_type=Debug
+  k4marlinwrapper:
+    variants: build_type=Debug
+  k4projecttemplate:
+    variants: build_type=Debug
+  k4reccalorimeter:
+    variants: build_type=Debug
+  k4reco:
+    variants: build_type=Debug
+  k4rectracker:
+    variants: build_type=Debug
+  k4simdelphes:
+    variants: build_type=Debug
+  k4simgeant4:
+    variants: build_type=Debug
+  kaltest:
+    variants: build_type=Debug
+  kitrack:
+    variants: build_type=Debug
+  kitrackmarlin:
+    variants: build_type=Debug
+  lccd:
+    variants: build_type=Debug
+  lcfiplus:
+    variants: build_type=Debug
+  lcio:
+    variants: build_type=Debug cxxstd=20
+  lctuple:
+    variants: build_type=Debug
+  marlin:
+    variants: build_type=Debug
+  marlindd4hep:
+    variants: build_type=Debug
+  marlinfastjet:
+    variants: build_type=Debug
+  marlinkinfit:
+    variants: build_type=Debug
+  marlinkinfitprocessors:
+    variants: build_type=Debug
+  marlinreco:
+    variants: build_type=Debug
+  marlintrk:
+    variants: build_type=Debug
+  marlintrkprocessors:
+    variants: build_type=Debug
+  marlinutil:
+    variants: build_type=Debug
+  opendatadetector:
+    variants: build_type=Debug
+  overlay:
+    variants: build_type=Debug
+  pandoraanalysis:
+    variants: build_type=Debug
+  physsim:
+    variants: build_type=Debug
+  podio:
+    variants: build_type=Debug
+  raida:
+    variants: build_type=Debug
+  sio:
+    variants: build_type=Debug cxxstd=20
+
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8 hepmc=3
+
