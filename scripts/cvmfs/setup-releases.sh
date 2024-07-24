@@ -74,6 +74,9 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VE
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
     os="ubuntu22.04"
     k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
+    os="ubuntu22.04"
+    k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
