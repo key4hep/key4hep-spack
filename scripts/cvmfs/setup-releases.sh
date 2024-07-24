@@ -71,10 +71,8 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VE
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
     os="almalinux9"
     k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9* | head -n1)
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
-    os="ubuntu22.04"
-    k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
     os="ubuntu22.04"
     k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
 else
