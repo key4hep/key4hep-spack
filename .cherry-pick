@@ -23,7 +23,7 @@ git cherry-pick 6b02e009664c6effb581023982dcb7863da5fb88 -X theirs --no-commit
 # git cherry-pick 8daeaeac29e817f85d86fcfa85b3293a7465b280 -X theirs --no-commit
 
 # Both geant4 changes in a single commit
-git cherry-pick c1000311c9da328785e8e42d3f711f8770c7165c -X theirs --no-commit
+git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 
 
 # sherpa v3: remove when https://github.com/spack/spack/pull/45101 is merged
