@@ -1,0 +1,11 @@
+--- a/Makefile	2024-07-29 19:25:11.897838050 +0200
++++ b/Makefile	2024-07-29 19:25:42.326653272 +0200
+@@ -146,7 +146,7 @@
+ 	@echo " "
+ 	@echo "Building RECOLA"
+ 	@echo " "
+-	cd $(RCLDIR)/build/ && CMAKE_INSTALL_PREFIX=../install cmake ../ -Dstatic=On && make && make install
++	cd $(RCLDIR)/build/ && CMAKE_INSTALL_PREFIX=../../install cmake ../ -Dstatic=On && make && make install
+
+ # babayaga library
+ libbabayaga.a: $(OBJECTS)
