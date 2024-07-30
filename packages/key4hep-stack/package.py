@@ -63,6 +63,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
     depends_on("k4gen")
+    depends_on("k4generatorsconfig")
     depends_on("k4projecttemplate")
     depends_on("k4reco")
     depends_on("k4simdelphes")

@@ -128,6 +128,7 @@ if __name__ == "__main__":
         ("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv"),
         ("k4fwcore", "key4hep/k4fwcore"),
         ("k4gen", "hep-fcc/k4Gen"),
+        ("k4gen", "key4hep/k4GeneratorsConfig"),
         ("k4geo", "key4hep/k4geo"),
         ("k4reco", "key4hep/k4reco"),
         ("k4marlinwrapper", "key4hep/k4marlinwrapper"),
