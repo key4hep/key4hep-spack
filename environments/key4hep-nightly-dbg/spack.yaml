@@ -11,7 +11,3 @@ spack:
   - ../..
   specs:
   - key4hep-stack+devtools
-config:
-  install_tree:
-    projections:
-      all: "{architecture.target}-{architecture.os}-{compiler.name}{compiler.version}-dbg/{name}/{version}-{hash:6}"
