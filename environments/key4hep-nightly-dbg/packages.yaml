@@ -46,7 +46,7 @@ packages:
   ildperformance:
     require: build_type=Debug
   key4hep-stack:
-    variants: build_type=Debug
+    require: build_type=Debug
   k4clue:
     require: build_type=Debug
   k4edm4hep2lcioconv:
