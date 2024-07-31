@@ -63,7 +63,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
     depends_on("k4gen")
-    depends_on("k4generatorsconfig")
     depends_on("k4projecttemplate")
     depends_on("k4reco")
     depends_on("k4simdelphes")
@@ -75,6 +74,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("whizard")
     depends_on("xrootd +krb5")
 
+    depends_on("k4generatorsconfig", when="+generators")
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
     depends_on("herwig3", when="+generators")
     depends_on("lhapdf", when="+generators")
