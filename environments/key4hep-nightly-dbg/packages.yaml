@@ -53,6 +53,8 @@ packages:
     variants: build_type=Debug
   k4gen:
     variants: build_type=Debug
+  k4generatorsconfig:
+    variants: build_type=Debug
   k4geo:
     variants: build_type=Debug
   k4marlinwrapper:
