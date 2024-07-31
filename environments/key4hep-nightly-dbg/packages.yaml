@@ -95,6 +95,8 @@ packages:
     require: build_type=Debug
   marlinkinfitprocessors:
     require: build_type=Debug
+  marlinmlflavortagging:
+    require: build_type=Debug
   marlinreco:
     require: build_type=Debug
   marlintrk:
