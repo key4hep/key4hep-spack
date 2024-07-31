@@ -40,7 +40,7 @@ packages:
   gaudi:
     require: build_type=Debug
   gear:
-    require: build_type=Debug cxxstd=20
+    require: build_type=Debug
   ilcutil:
     require: build_type=Debug cxxstd=20
   ildperformance:

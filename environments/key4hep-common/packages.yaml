@@ -109,8 +109,6 @@ packages:
     variants: cxxstd=20
   fastjet:
     variants: cxxstd=20
-  gear:
-    variants: cxxstd=20
   ilcutil:
     variants: cxxstd=20
   lcio:
