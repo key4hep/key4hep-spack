@@ -91,8 +91,6 @@ packages:
     require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres+pythia8+python+r+roofit+root7+rpath~shadow+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
-  whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
   k4simdelphes:
     require: ~delphes_hepmc
   evtgen:
