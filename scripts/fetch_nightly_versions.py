@@ -175,14 +175,14 @@ if __name__ == "__main__":
         original = " "
         if package in text["packages"] and "require" in text["packages"][package]:
             original = text["packages"][package]["require"]
-            text["packages"][package]["require"] = line + original
+            text["packages"][package]["require"] = line + ' ' + original
             continue
         elif (
             package in text_extra["packages"]
             and "require" in text_extra["packages"][package]
         ):
             original = text_extra["packages"][package]["require"]
-            text_extra["packages"][package]["require"] = line + original
+            text_extra["packages"][package]["require"] = line + ' ' + original
             continue
 
         if package not in text["packages"] or not text["packages"][package]:
