@@ -172,28 +172,23 @@ if __name__ == "__main__":
         if package not in ["cepcsw"]:
             line += "=develop"
 
-        original = " "
-        if package in text["packages"] and "require" in text["packages"][package]:
-            original = text["packages"][package]["require"]
-            text["packages"][package]["require"] = line + ' ' + original
-            continue
-        elif (
-            package in text_extra["packages"]
-            and "require" in text_extra["packages"][package]
-        ):
-            original = text_extra["packages"][package]["require"]
-            text_extra["packages"][package]["require"] = line + ' ' + original
-            continue
-
         if package not in text["packages"] or not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
+
         if package not in text["packages"]:
             text["packages"][package] = {}
-        text["packages"][package]["require"] = line
 
-        # text["spack"]["specs"].append(f"{package}{line}")
+        # Make sure the require options are merged in a single file, because
+        # otherwise they would be overwritten
+        final_text = line
+        if package in text_extra["packages"] and "require" in text_extra["packages"][package]:
+            final_text += ' ' + text_extra["packages"][package].pop("require")
+        if "require" in text["packages"][package]:
+            final_text += ' ' + text["packages"][package]["require"]
+        text["packages"][package]["require"] = final_text
+
 
     with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)
