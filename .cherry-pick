@@ -41,6 +41,10 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45498.diff
 # groff: add a dependency on m4
 git cherry-pick c471e510dde3c23d3f586d1fa8b66e934513ce43 -X theirs --no-commit
 
+# xrootd: change the certificate url until the issue is solved
+git cherry-pick afcd8b32383b1425062b25126890e12338d70e36 -X theirs --no-commit
+
+
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
