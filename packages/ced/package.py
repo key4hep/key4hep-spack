@@ -18,6 +18,10 @@ class Ced(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.10",
+        sha256="c3c6540559c00d55bd5981816d39290dbb9b091e34673e301e42934988a74012",
+    )
+    version(
         "1.9.4",
         sha256="9202eff8d02a35542e368a790d0c3bc81530f618f28f8f57929e29df52bf7634",
     )
