@@ -2,6 +2,7 @@ import os
 import requests
 import argparse
 import yaml
+from datetime import datetime
 
 
 def get_latest_commit(
@@ -194,6 +195,8 @@ if __name__ == "__main__":
         if package not in text["packages"]:
             text["packages"][package] = {}
         text["packages"][package]["require"] = final_text
+    text["packages"]["key4hep-stack"]["require"] = f"@{datetime.now().strftime('%Y-%m-%d')}: " +\
+        text["packages"]["key4hep-stack"]["require"]
 
 
     with open(args.path, "w") as recipe:
