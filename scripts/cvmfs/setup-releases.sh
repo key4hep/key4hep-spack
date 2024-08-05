@@ -23,7 +23,7 @@ if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" ||
     return 0
 }
 
-function list_release() {
+function list_releases() {
     if [ ! -n "$1" ]; then
         os=$os
     else
@@ -216,10 +216,10 @@ for ((i=1; i<=$#; i++)); do
             ;;
         --list-releases)
             if [ ! -n "$argn" ]; then
-                list_release $os
+                list_releases $os
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
-                list_release $argn
+                list_releases $argn
                 return 0
             else
                 echo "Unsupported OS $argn, aborting..."
