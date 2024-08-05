@@ -2,6 +2,7 @@ import os
 import requests
 import argparse
 import yaml
+from datetime import datetime
 
 
 def get_latest_commit(
@@ -128,6 +129,7 @@ if __name__ == "__main__":
         ("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv"),
         ("k4fwcore", "key4hep/k4fwcore"),
         ("k4gen", "hep-fcc/k4Gen"),
+        ("k4generatorsconfig", "key4hep/k4GeneratorsConfig"),
         ("k4geo", "key4hep/k4geo"),
         ("k4reco", "key4hep/k4reco"),
         ("k4marlinwrapper", "key4hep/k4marlinwrapper"),
@@ -171,28 +173,38 @@ if __name__ == "__main__":
         if package not in ["cepcsw"]:
             line += "=develop"
 
-        original = " "
-        if package in text["packages"] and "require" in text["packages"][package]:
-            original = text["packages"][package]["require"]
-            text["packages"][package]["require"] = line + original
-            continue
-        elif (
-            package in text_extra["packages"]
-            and "require" in text_extra["packages"][package]
-        ):
-            original = text_extra["packages"][package]["require"]
-            text_extra["packages"][package]["require"] = line + original
-            continue
-
         if package not in text["packages"] or not text["packages"][package]:
             print(f"Adding {package}@{commit} to the key4hep-stack package.py")
         else:
             print(f"Updating {package}@{commit} in the key4hep-stack package.py")
+
         if package not in text["packages"]:
             text["packages"][package] = {}
-        text["packages"][package]["require"] = line
+        text["packages"][package]["require"] = (
+            line + " " + text["packages"][package].get("require", "")
+        )
 
-        # text["spack"]["specs"].append(f"{package}{line}")
+    all_packages = set(text["packages"].keys()).union(
+        set(text_extra["packages"].keys())
+    )
+    for package in all_packages:
+        # Make sure the require options are merged in a single file, because
+        # otherwise they would be overwritten
+        final_text = ""
+        if package in text["packages"] and "require" in text["packages"][package]:
+            final_text += text["packages"][package]["require"]
+        if (
+            package in text_extra["packages"]
+            and "require" in text_extra["packages"][package]
+        ):
+            final_text += " " + text_extra["packages"][package].pop("require")
+        if package not in text["packages"]:
+            text["packages"][package] = {}
+        text["packages"][package]["require"] = final_text
+    text["packages"]["key4hep-stack"]["require"] = (
+        f"@{datetime.now().strftime('%Y-%m-%d')}: "
+        + text["packages"]["key4hep-stack"]["require"]
+    )
 
     with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)

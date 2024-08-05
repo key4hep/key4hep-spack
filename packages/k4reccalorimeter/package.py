@@ -26,10 +26,11 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1:")
     depends_on("gaudi")
     depends_on("dd4hep")
-    depends_on("fccdetectors")
-    depends_on("k4gen")
+    depends_on("k4geo")
     depends_on("k4simgeant4")
     depends_on("py-onnxruntime")
+    depends_on("fastjet")
+    depends_on("root")
 
     patch(
         "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4RecCalorimeter/pull/81.patch?full_index=1",

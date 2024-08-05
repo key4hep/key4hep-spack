@@ -1,0 +1,4 @@
+packages:
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
+

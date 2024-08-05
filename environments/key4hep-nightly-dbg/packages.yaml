@@ -1,0 +1,127 @@
+packages:
+  acts:
+    require: build_type=Debug
+  aidatt:
+    require: build_type=Debug
+  ced:
+    require: build_type=Debug
+  cedviewer:
+    require: build_type=Debug
+  cepcsw:
+    require: build_type=Debug
+  clicperformance:
+    require: build_type=Debug
+  conformaltracking:
+    require: build_type=Debug
+  dd4hep:
+    require: build_type=Debug
+  ddfastshowerml:
+    require: build_type=Debug
+  ddkaltest:
+    require: build_type=Debug
+  ddmarlinpandora:
+    require: build_type=Debug
+  delphes:
+    require: build_type=Debug
+  dual-readout:
+    require: build_type=Debug
+  edm4hep:
+    require: build_type=Debug cxxstd=20
+  fcalclusterer:
+    require: build_type=Debug
+  fccanalyses:
+    require: build_type=Debug
+  fccdetectors:
+    require: build_type=Debug
+  fccsw:
+    require: build_type=Debug
+  forwardtracking:
+    require: build_type=Debug
+  gaudi:
+    require: build_type=Debug
+  gear:
+    require: build_type=Debug
+  ilcutil:
+    require: build_type=Debug cxxstd=20
+  ildperformance:
+    require: build_type=Debug
+  key4hep-stack:
+    require: build_type=Debug
+  k4clue:
+    require: build_type=Debug
+  k4edm4hep2lcioconv:
+    require: build_type=Debug
+  k4fwcore:
+    require: build_type=Debug
+  k4gen:
+    require: build_type=Debug
+  k4generatorsconfig:
+    require: build_type=Debug
+  k4geo:
+    require: build_type=Debug
+  k4marlinwrapper:
+    require: build_type=Debug
+  k4projecttemplate:
+    require: build_type=Debug
+  k4reccalorimeter:
+    require: build_type=Debug
+  k4reco:
+    require: build_type=Debug
+  k4rectracker:
+    require: build_type=Debug
+  k4simdelphes:
+    require: build_type=Debug
+  k4simgeant4:
+    require: build_type=Debug
+  kaltest:
+    require: build_type=Debug
+  kitrack:
+    require: build_type=Debug
+  kitrackmarlin:
+    require: build_type=Debug
+  lccd:
+    require: build_type=Debug
+  lcfiplus:
+    require: build_type=Debug
+  lcio:
+    require: build_type=Debug cxxstd=20
+  lctuple:
+    require: build_type=Debug
+  marlin:
+    require: build_type=Debug
+  marlindd4hep:
+    require: build_type=Debug
+  marlinfastjet:
+    require: build_type=Debug
+  marlinkinfit:
+    require: build_type=Debug
+  marlinkinfitprocessors:
+    require: build_type=Debug
+  marlinmlflavortagging:
+    require: build_type=Debug
+  marlinreco:
+    require: build_type=Debug
+  marlintrk:
+    require: build_type=Debug
+  marlintrkprocessors:
+    require: build_type=Debug
+  marlinutil:
+    require: build_type=Debug
+  opendatadetector:
+    require: build_type=Debug
+  overlay:
+    require: build_type=Debug
+  pandoraanalysis:
+    require: build_type=Debug
+  physsim:
+    require: build_type=Debug
+  podio:
+    require: build_type=Debug
+  raida:
+    require: build_type=Debug
+  sio:
+    require: build_type=Debug cxxstd=20
+
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
+

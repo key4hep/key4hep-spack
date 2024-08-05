@@ -15,7 +15,7 @@ packages:
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3
   gaudi:
-    require: +aida+cppunit+examples+gaudialg+gperftools+heppdt+jemalloc+unwind+xercesc
+    require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
@@ -86,12 +86,11 @@ packages:
     - spec: openssh@99
       prefix: /usr
 
+  # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.30: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
+    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres+pythia8+python+r+roofit+root7+rpath~shadow+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
-  whizard:
-    require: ~fastjet~latex+lcio~lhapdf+openloops+openmp+pythia8 hepmc=3
   k4simdelphes:
     require: ~delphes_hepmc
   evtgen:
@@ -107,8 +106,6 @@ packages:
   edm4hep:
     variants: cxxstd=20
   fastjet:
-    variants: cxxstd=20
-  gear:
     variants: cxxstd=20
   ilcutil:
     variants: cxxstd=20

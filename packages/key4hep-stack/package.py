@@ -47,6 +47,15 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         description="add some standalone generators to the stack",
     )
 
+    # Fake variant that does nothing but this lets us group the packages
+    # that are build with Debug mode
+    variant(
+        "build_type",
+        default="Release",
+        values=("Release", "Debug"),
+        description="Build type",
+    )
+
     depends_on("acts")
     depends_on("babayaga")
     depends_on("bdsim")
@@ -74,12 +83,15 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("whizard")
     depends_on("xrootd +krb5")
 
+    depends_on("k4generatorsconfig", when="+generators")
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
     depends_on("herwig3", when="+generators")
     depends_on("lhapdf", when="+generators")
     depends_on("madgraph5amc", when="+generators")
     depends_on("photos+hepmc3", when="+generators")
+    # Sherpa3
     depends_on("sherpa", when="+generators")
+    depends_on("sherpa2", when="+generators")
 
     depends_on("ilcsoft")
 

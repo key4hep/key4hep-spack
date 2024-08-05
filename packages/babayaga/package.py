@@ -38,6 +38,8 @@ class Babayaga(MakefilePackage):
     # in a mail
     patch("cross-section.patch")
 
+    patch("recola-collier-path.patch")
+
     def build(self, spec, prefix):
         with working_dir("."):
             make("-f", "Makefile", "babayaga-fcc")
