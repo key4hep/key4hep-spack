@@ -301,4 +301,3 @@ echo "        $command"
 echo ""
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
-echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"
