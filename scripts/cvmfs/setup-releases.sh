@@ -4,6 +4,7 @@
 
 function usage() {
     echo "Usage: source /cvmfs/sw.hsf.org/key4hep/setup.sh [-r <release>] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       -d           : setup the debug version of the software stack"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
@@ -14,9 +15,8 @@ function usage() {
 
 function check_release() {
 if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" || -z "$(/usr/bin/ls "/cvmfs/sw.hsf.org/key4hep/releases/$2" | grep $3)") ]]; then
-        echo "Release $2 not found, this is a list of the available releases:"
-        find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$3*" |
- \awk -F/ '{print $(NF-1)}' | sort
+        echo "Release $2 with build type $build_type not found, this is a list of the available releases:"
+        list_releases $3
         echo "Aborting..."
         return 1
     fi
@@ -24,7 +24,11 @@ if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw.hsf.org/key4hep/releases/$2" ||
 }
 
 function list_release() {
-    os=$1
+    if [ ! -n "$1" ]; then
+        os=$os
+    else
+        os=$1
+    fi
     if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
         name="almalinux9"
     elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
@@ -36,16 +40,18 @@ function list_release() {
         usage
         return 1
     fi
-    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*" |
+    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*$build_type*" |
     \awk -F/ '{print $(NF-1)}' | sort
 }
 
 function list_packages() {
-    local os=$1
+    if [ ! -n "$1" ]; then
+        os=$os
+    else
+        os=$1
+    fi
     if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
         name="almalinux9"
-    elif [ "$os" = "centos" ] || [ "$os" = "centos7" ]; then
-        name="centos7"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
     else
@@ -53,113 +59,51 @@ function list_packages() {
         usage
         return 1
     fi
-    find /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$name*/ -maxdepth 2 -mindepth 2 -not -path '*/\.*' -type d | awk -F/ '{if ($NF ~ /develop/) printf "%s develop", $(NF-1); else {split($(NF),arr,"-"); printf "%s ", $(NF-1); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }'
+
+    previous_scratch_releases=()
+    while IFS= read -r line; do
+        previous_scratch_releases+=("$line")
+    done < <(find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 3 -mindepth 3 -type f -name ".scratch" | grep "$name" | grep opt | sort | xargs -n1 dirname)
+    for release in "${previous_scratch_releases[@]}"; do
+        # Get the latest previous or equal date
+        if [[ "$(basename $(dirname $release))" = "$rel" ]] || [[ "$(basename $(dirname $release))" < "$rel" ]]; then
+            latest_previous_release=$release
+        fi
+
+    done
+
+    # Define an array containing the paths to the folders
+    folders=("$latest_previous_release")
+    if [ $build_type = "dbg" ] && [ -d $(echo $latest_previous_release | sed 's/opt/dbg/') ]; then
+        folders+=($(echo $latest_previous_release | sed 's/opt/dbg/'))
+    fi
+    folders+=(/cvmfs/sw.hsf.org/key4hep/releases/$rel/*$name*-*$build_type*)
+
+    declare -a package_versions
+    package_versions=()
+
+    for folder in "${folders[@]}"; do
+        for package in $(ls $folder); do
+            package_name=$(basename "$package")
+            version_string=$(ls $folder/$package_name -t | head -n 1)
+            package_version=$(echo "$version_string" | awk '{if ($NF ~ /develop/) {split($NF,arr,"_"); printf "%s", arr[1]} else {split($(NF),arr,"-"); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }')
+
+            # Update the version of the package in the associative array
+            if [[ " ${package_versions[@]} " =~ "${package_name}" ]]; then
+                package_versions=("${package_versions[@]/$package_name=*/$package_name=$package_version}")
+            else
+                package_versions+=("$package_name=$package_version")
+            fi
+        done
+    done
+
+    # Print the final version of each package
+    for pair in "${package_versions[@]}"; do
+        echo ${pair%%=*} ${pair#*=}
+    done
+
 }
 
-
-rel="latest"
-if [[ "$1" = "-r" && -n "$2" ]]; then
-    rel="$2"
-fi
-
-if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
-   [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
-    os="centos7"
-    k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*centos7* | head -n1)
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
-    os="almalinux9"
-    k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*almalinux9* | head -n1)
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
-    os="ubuntu22.04"
-    k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*ubuntu22* | head -n1)
-else
-    echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
-    return 1
-fi
-
-check_release $1 $2 $os
-if [ $? -ne 0 ]; then
-  return 1
-fi
-
-for ((i=1; i<=$#; i++)); do
-    eval arg=\$$i
-    case $arg in
-        -h|--help)
-            usage
-            return 0
-            ;;
-        *)
-            ;;
-    esac
-done
-
-for ((i=1; i<=$#; i++)); do
-    eval arg=\$$i
-    eval "argn=\${$((i+1))}"
-    case $arg in
-        --help|-h)
-            usage
-            return 0
-            ;;
-        --list-releases)
-            if [ ! -n "$argn" ]; then
-                list_release $os
-                return 0
-            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
-                list_release $argn
-                return 0
-            else
-                echo "Unsupported OS $argn, aborting..."
-                usage
-                return 1
-            fi
-            ;;
-        --list-packages)
-            if [ ! -n "$argn" ]; then
-                list_packages $os
-                return 0
-            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
-                list_packages $argn
-                return 0
-            else
-                echo "Unsupported OS $argn, aborting..."
-                usage
-                return 1
-            fi
-            ;;
-        -r)
-            ;;
-        *)
-            eval "prev=\${$((i-1))}"
-            if [ "$prev" != "-r" ]; then
-                echo "Unknown argument $arg, it will be ignored"
-                # usage
-                # return 1
-            fi
-            ;;
-    esac
-done
-
-if [ -n "$KEY4HEP_STACK" ]; then
-    echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
-    return 1
-fi
-
-if [ "$os" = "centos7" ]; then
-    echo "Centos/RHEL 7 detected"
-    if [ "$rel" = "latest" ]; then
-        echo "This OS will reach the end of its maintenance support soon and won't have Key4hep builds in the future, consider upgrading to Alma 9"
-    fi
-elif [ "$os" = "almalinux9" ]; then
-    echo "AlmaLinux/RockyLinux/RHEL 9 detected"
-elif [ "$os" = "ubuntu22.04" ]; then
-    echo "Ubuntu 22.04 detected"
-fi
 
 _replace_marlin_dll() {
     # replace the library on MARLIN_DLL with the local one (if any)
@@ -220,6 +164,114 @@ k4_local_repo() {
     echo "Some variables may have to be updated manually to point to the local installation"
 }
 
+
+rel="latest-$build_type"
+if [[ "$1" = "-r" && -n "$2" ]]; then
+    rel="$2"
+fi
+
+if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
+   [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
+    os="centos7"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
+    os="almalinux9"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
+    os="ubuntu22"
+else
+    echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
+    echo "Supported OSes are: CentOS/RHEL 7, AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
+    return 1
+fi
+
+check_release $1 $2 $os
+if [ $? -ne 0 ]; then
+  return 1
+fi
+
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    case $arg in
+        -h|--help)
+            usage
+            return 0
+            ;;
+        *)
+            ;;
+    esac
+done
+
+build_type=opt
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    eval "argn=\${$((i+1))}"
+    case $arg in
+        --help|-h)
+            usage
+            return 0
+            ;;
+        --list-releases)
+            if [ ! -n "$argn" ]; then
+                list_release $os
+                return 0
+            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
+                list_release $argn
+                return 0
+            else
+                echo "Unsupported OS $argn, aborting..."
+                usage
+                return 1
+            fi
+            ;;
+        --list-packages)
+            if [ ! -n "$argn" ]; then
+                list_packages $os
+                return 0
+            elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|centos|ubuntu) ]]; then
+                list_packages $argn
+                return 0
+            else
+                echo "Unsupported OS $argn, aborting..."
+                usage
+                return 1
+            fi
+            ;;
+        -d)
+            build_type=dbg
+            ;;
+        -r)
+            ;;
+        *)
+            eval "prev=\${$((i-1))}"
+            if [ "$prev" != "-r" ]; then
+                echo "Unknown argument $arg, it will be ignored"
+                # usage
+                # return 1
+            fi
+            ;;
+    esac
+done
+
+k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*$build_type | head -n1)
+
+if [ -n "$KEY4HEP_STACK" ]; then
+    echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
+    return 1
+fi
+
+if [ "$os" = "centos7" ]; then
+    echo "Centos/RHEL 7 detected"
+    if [ "$rel" = "latest" ]; then
+        echo "This OS will reach the end of its maintenance support soon and won't have Key4hep builds in the future, consider upgrading to Alma 9"
+    fi
+elif [ "$os" = "almalinux9" ]; then
+    echo "AlmaLinux/RockyLinux/RHEL 9 detected"
+elif [ "$os" = "ubuntu22.04" ]; then
+    echo "Ubuntu 22.04 detected"
+fi
+
+
 setup_script_path=$(/usr/bin/ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
@@ -237,9 +289,14 @@ if [ "${rel}" = "latest" ]; then
 else
     echo "Setting up the Key4hep software stack release ${rel} from CVMFS"
 fi
+command="source /cvmfs/sw.hsf.org/key4hep/setup.sh -r $(basename $(dirname $(dirname $(dirname $(dirname $setup_actual)))))"
+if [ "$build_type" = "dbg" ]; then
+    command+=" -d"
+fi
 echo "Use the following command to reproduce the current environment: "
 echo ""
-echo "        source /cvmfs/sw.hsf.org/key4hep/setup.sh -r $(basename $(dirname $(dirname $(dirname $(dirname $setup_actual)))))"
+echo "        $command"
 echo ""
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
+echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"
