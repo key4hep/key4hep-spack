@@ -48,8 +48,10 @@ class Gear(CMakePackage, Ilcsoftpackage):
         args.append(self.define("BUILD_TESTING", self.run_tests))
         args.append(self.define_from_variant("GEAR_TGEO", "tgeo"))
         args.append(self.define_from_variant("INSTALL_DOC", "doc"))
-        if 'root' in self.spec:
-            args.append(f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}")
+        if "root" in self.spec:
+            args.append(
+                f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
+            )
         else:
             args.append("-DCMAKE_CXX_STANDARD=20")
         return args

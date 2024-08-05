@@ -24,7 +24,6 @@ class K4generatorsconfig(CMakePackage):
     depends_on("heppdt")
     depends_on("pythia8")
 
-
     def cmake_args(self):
         args = []
         args.append(
@@ -34,4 +33,3 @@ class K4generatorsconfig(CMakePackage):
 
     def setup_run_environment(self, env):
         env.set("K4GENERATORSCONFIG", self.prefix.share.k4geo)
-

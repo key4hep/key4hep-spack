@@ -180,24 +180,31 @@ if __name__ == "__main__":
 
         if package not in text["packages"]:
             text["packages"][package] = {}
-        text["packages"][package]["require"] = line + ' ' + text["packages"][package].get("require", "")
+        text["packages"][package]["require"] = (
+            line + " " + text["packages"][package].get("require", "")
+        )
 
-
-    all_packages = set(text["packages"].keys()).union(set(text_extra["packages"].keys()))
+    all_packages = set(text["packages"].keys()).union(
+        set(text_extra["packages"].keys())
+    )
     for package in all_packages:
         # Make sure the require options are merged in a single file, because
         # otherwise they would be overwritten
-        final_text = ''
+        final_text = ""
         if package in text["packages"] and "require" in text["packages"][package]:
             final_text += text["packages"][package]["require"]
-        if package in text_extra["packages"] and "require" in text_extra["packages"][package]:
-            final_text += ' ' + text_extra["packages"][package].pop("require")
+        if (
+            package in text_extra["packages"]
+            and "require" in text_extra["packages"][package]
+        ):
+            final_text += " " + text_extra["packages"][package].pop("require")
         if package not in text["packages"]:
             text["packages"][package] = {}
         text["packages"][package]["require"] = final_text
-    text["packages"]["key4hep-stack"]["require"] = f"@{datetime.now().strftime('%Y-%m-%d')}: " +\
-        text["packages"]["key4hep-stack"]["require"]
-
+    text["packages"]["key4hep-stack"]["require"] = (
+        f"@{datetime.now().strftime('%Y-%m-%d')}: "
+        + text["packages"]["key4hep-stack"]["require"]
+    )
 
     with open(args.path, "w") as recipe:
         yaml.dump(text, recipe)

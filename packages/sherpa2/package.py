@@ -17,7 +17,9 @@ class Sherpa2(AutotoolsPackage):
     photon-photon, lepton-hadron and hadron-hadron collisions."""
 
     homepage = "https://sherpa-team.gitlab.io"
-    url = "https://gitlab.com/sherpa-team/sherpa/-/archive/v2.2.11/sherpa-v2.2.11.tar.gz"
+    url = (
+        "https://gitlab.com/sherpa-team/sherpa/-/archive/v2.2.11/sherpa-v2.2.11.tar.gz"
+    )
     list_url = "https://gitlab.com/sherpa-team/sherpa/-/tags"
     git = "https://gitlab.com/sherpa-team/sherpa.git"
 
@@ -27,11 +29,26 @@ class Sherpa2(AutotoolsPackage):
 
     license("GPL-3.0-only")
 
-    version("2.2.15", sha256="0300fd719bf6a089b7dc5441f720e669ac1cb030045d87034a4733bee98e7bbc")
-    version("2.2.14", sha256="f17d88d7f3bc4234a9db3872e8a3c1f3ef99e1e2dc881ada5ddf848715dc82da")
-    version("2.2.13", sha256="ed1fd1372923c191ca44897802d950702b810382260e7464d36ac3234c5c8a64")
-    version("2.2.12", sha256="4ba78098e45aaac0bc303d1b5abdc15809f30b407abf9457d99b55e63384c83d")
-    version("2.2.11", sha256="5e12761988b41429f1d104f84fdf352775d233cde7a165eb64e14dcc20c3e1bd")
+    version(
+        "2.2.15",
+        sha256="0300fd719bf6a089b7dc5441f720e669ac1cb030045d87034a4733bee98e7bbc",
+    )
+    version(
+        "2.2.14",
+        sha256="f17d88d7f3bc4234a9db3872e8a3c1f3ef99e1e2dc881ada5ddf848715dc82da",
+    )
+    version(
+        "2.2.13",
+        sha256="ed1fd1372923c191ca44897802d950702b810382260e7464d36ac3234c5c8a64",
+    )
+    version(
+        "2.2.12",
+        sha256="4ba78098e45aaac0bc303d1b5abdc15809f30b407abf9457d99b55e63384c83d",
+    )
+    version(
+        "2.2.11",
+        sha256="5e12761988b41429f1d104f84fdf352775d233cde7a165eb64e14dcc20c3e1bd",
+    )
     version(
         "2.2.10",
         sha256="ae23bc8fdcc9f8c26becc41692822233b62203cd72a7e0dab2ca19316aa0aad7",
@@ -141,16 +158,28 @@ class Sherpa2(AutotoolsPackage):
     variant("python", default=False, description="Enable Python API")
     variant("hepmc2", default=True, description="Enable HepMC (version 2.x) support")
     variant("hepmc3", default=True, description="Enable HepMC (version 3.x) support")
-    variant("hepmc3root", default=False, description="Enable HepMC (version 3.1+) ROOT support")
+    variant(
+        "hepmc3root",
+        default=False,
+        description="Enable HepMC (version 3.1+) ROOT support",
+    )
     variant("rivet", default=False, description="Enable Rivet support")
     variant("fastjet", default=True, description="Enable FASTJET")
     variant("openloops", default=False, description="Enable OpenLoops")
     variant("recola", default=False, description="Enable Recola")
-    variant("lhole", default=False, description="Enable Les Houches One-Loop Generator interface")
+    variant(
+        "lhole",
+        default=False,
+        description="Enable Les Houches One-Loop Generator interface",
+    )
     variant("root", default=False, description="Enable ROOT support")
     variant("lhapdf", default=True, description="Enable LHAPDF support")
     variant("gzip", default=False, description="Enable gzip support")
-    variant("pythia", default=True, description="Enable fragmentation/decay interface to Pythia")
+    variant(
+        "pythia",
+        default=True,
+        description="Enable fragmentation/decay interface to Pythia",
+    )
     variant("blackhat", default=False, description="Enable BLACKHAT support")
     variant("ufo", default=False, description="Enable UFO support")
     variant("hztool", default=False, description="Enable HZTOOL support")
