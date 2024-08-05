@@ -161,6 +161,21 @@ k4_local_repo() {
     echo "Some variables may have to be updated manually to point to the local installation"
 }
 
+build_type=opt
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    eval "argn=\${$((i+1))}"
+    case $arg in
+        -d)
+            build_type=dbg
+            ;;
+        -h|--help)
+            usage
+            return 0
+            ;;
+    esac
+done
+
 
 rel="latest-$build_type"
 if [[ "$1" = "-r" && -n "$2" ]]; then
@@ -185,7 +200,6 @@ if [ $? -ne 0 ]; then
   return 1
 fi
 
-build_type=opt
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
     eval "argn=\${$((i+1))}"
@@ -221,7 +235,6 @@ for ((i=1; i<=$#; i++)); do
             fi
             ;;
         -d)
-            build_type=dbg
             ;;
         -r)
             ;;
