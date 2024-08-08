@@ -201,11 +201,13 @@ if __name__ == "__main__":
         if package not in text["packages"]:
             text["packages"][package] = {}
         text["packages"][package]["require"] = final_text
+    if "key4hep-stack" not in text["packages"]:
+        text["packages"]["key4hep-stack"] = {}
     text["packages"]["key4hep-stack"][
         "require"
-    ] = f"@{datetime.now().strftime('%Y-%m-%d')}: " + text["packages"].get(
-        "key4hep-stack", {}
-    ).get(
+    ] = f"@{datetime.now().strftime('%Y-%m-%d')}: " + text["packages"][
+        "key4hep-stack"
+    ].get(
         "require", ""
     )
 
