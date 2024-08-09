@@ -1,5 +1,4 @@
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
-from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class K4rectracker(CMakePackage, Key4hepPackage):
@@ -16,6 +15,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore")
     depends_on("gaudi")
     depends_on("dd4hep")
+    depends_on("marlinutil")
 
     def cmake_args(self):
         args = []
@@ -41,4 +41,3 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     def setup_build_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib64)
-        # k4_setup_env_for_framework_tests(self.spec, env)
