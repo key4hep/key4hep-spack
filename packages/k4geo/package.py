@@ -44,6 +44,7 @@ class K4geo(CMakePackage):
     depends_on("root")
     depends_on("python", type="build")
     depends_on("ninja", type="build")
+    depends_on("podio")
 
     def cmake_args(self):
         args = []
