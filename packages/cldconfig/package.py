@@ -17,7 +17,7 @@ class Cldconfig(CMakePackage):
     version("main", branch="main")
     # Old tag to make sure there is at least one, can be removed when
     # there is another
-    version("v02-04-01", tag="v02-04-01")
+    version("r2024-04-12", tag="r2024-04-12")
 
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
