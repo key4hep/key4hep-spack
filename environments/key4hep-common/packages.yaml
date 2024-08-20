@@ -24,7 +24,7 @@ packages:
   hdf5:
     require: +cxx+hl
   hepmc3:
-    require: +python
+    require: +python+rootio
   # https://github.com/key4hep/key4hep-spack/issues/517
   lccd:
     require: +conddbmysql
