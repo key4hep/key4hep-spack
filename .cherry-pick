@@ -34,6 +34,9 @@ git cherry-pick afcd8b32383b1425062b25126890e12338d70e36 -X theirs --no-commit
 # root: Add version 6.32.04
 git cherry-pick b6a5e4f8eb6276a68d7d42cf14812397cf6d2743 -X theirs --no-commit
 
+# acts: Add versions 36.0.0 and 36.1.0
+git cherry-pick 5bab73925c6da457f2fdf5c7d8fbeb14ff6e2986 -X theirs --no-commit
+
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
   # patch to rename libz so texlive can be built
