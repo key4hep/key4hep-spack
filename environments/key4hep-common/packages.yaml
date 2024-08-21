@@ -44,8 +44,6 @@ packages:
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
     require: ~cuda
-  texlive:
-    require: scheme=basic
   xrootd:
     require: +krb5 cxxstd=20
 
