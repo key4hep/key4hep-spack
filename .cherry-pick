@@ -43,6 +43,10 @@ git cherry-pick f4b2c42028405591cf44a2c5910840e894144f67 -X theirs --no-commit
 # poppler: fix URL, remove when https://github.com/spack/spack/pull/45857 is merged
 git cherry-pick 8becc0ca3c86f1fa26593909da03effbc665c31c -X theirs --no-commit
 
+# texlive: clean up recipe
+git cherry-pick 4ab7f72041d49f947230df2aa6426b6e39069a3a -X theirs --no-commit
+
+
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
   # patch to rename libz so texlive can be built
