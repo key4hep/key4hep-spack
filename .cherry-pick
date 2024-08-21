@@ -38,7 +38,7 @@ git cherry-pick b6a5e4f8eb6276a68d7d42cf14812397cf6d2743 -X theirs --no-commit
 git cherry-pick 5bab73925c6da457f2fdf5c7d8fbeb14ff6e2986 -X theirs --no-commit
 
 # sleef: Add the -fPIC flag
-git cherry-pick d3674e7a7fddf6a8e70dfcfd74c7e93920a9585e -X theirs --no-commit
+git cherry-pick f4b2c42028405591cf44a2c5910840e894144f67 -X theirs --no-commit
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
