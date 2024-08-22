@@ -28,10 +28,10 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45101.diff
 # py-onnx: make sure py-setuptools 64 and onwards is used for editable_mode
 git cherry-pick a8c4b3a03f0988cc201580f979980d61d3d5e417 -X theirs --no-commit
 
-# xrootd: change the certificate url until the issue is solved
+# xrootd: don't download from SLAC until the certificate issue is solved
 git cherry-pick afcd8b32383b1425062b25126890e12338d70e36 -X theirs --no-commit
 
-# root: Add version 6.32.04, remove when https://github.com/spack/spack/pull/45850 is merged
+# root: Add version 6.32.04, remove!
 git cherry-pick b6a5e4f8eb6276a68d7d42cf14812397cf6d2743 -X theirs --no-commit
 
 # acts: Add versions 36.0.0 and 36.1.0, remove when https://github.com/spack/spack/pull/45851 is merged
@@ -43,10 +43,10 @@ git cherry-pick f4b2c42028405591cf44a2c5910840e894144f67 -X theirs --no-commit
 # poppler: fix URL, remove when https://github.com/spack/spack/pull/45857 is merged
 git cherry-pick 8becc0ca3c86f1fa26593909da03effbc665c31c -X theirs --no-commit
 
-# texlive: clean up recipe
+# texlive: clean up recipe, remove when https://github.com/spack/spack/pull/45863 is merged
 git cherry-pick 4ab7f72041d49f947230df2aa6426b6e39069a3a -X theirs --no-commit
 
-# whizard: add fix for hepmc3 3.3.10 or above
+# whizard: add fix for hepmc3 3.3.10 or above, remove when https://github.com/spack/spack/pull/45862 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45862.diff | patch -p1
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
