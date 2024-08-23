@@ -40,7 +40,7 @@ git cherry-pick 5bab73925c6da457f2fdf5c7d8fbeb14ff6e2986 -X theirs --no-commit
 # sleef: Add the -fPIC flag
 git cherry-pick f4b2c42028405591cf44a2c5910840e894144f67 -X theirs --no-commit
 
-# poppler: fix URL, remove when https://github.com/spack/spack/pull/45857 is merged
+# poppler: fix URL, remove!
 git cherry-pick 8becc0ca3c86f1fa26593909da03effbc665c31c -X theirs --no-commit
 
 # texlive: clean up recipe, remove when https://github.com/spack/spack/pull/45863 is merged
