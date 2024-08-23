@@ -49,6 +49,9 @@ git cherry-pick 8becc0ca3c86f1fa26593909da03effbc665c31c -X theirs --no-commit
 # whizard: add fix for hepmc3 3.3.10 or above, remove when https://github.com/spack/spack/pull/45862 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45862.diff | patch -p1
 
+# dd4hep: add patch not to install plugins at CMAKE_INSTALL_LIBDIR
+git cherry-pick 6cb6f338d869de7b29d672083f15bfd2aefd2d45 -X theirs --no-commit
+
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
   # patch to rename libz so texlive can be built
