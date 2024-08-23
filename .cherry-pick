@@ -10,9 +10,6 @@ git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 # podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
 git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
 
-# py-onnxruntime: Install the session headers, needed by FCCAnalyses, check if needed
-# git cherry-pick e272ffa5a4768d23f1579403f9872360630e7278 -X theirs --no-commit
-
 # geant4 twisted tubes: remove when https://github.com/spack/spack/pull/45368 is merged or after 11.2.2
 # curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45368.diff | patch -p1
 
@@ -22,29 +19,38 @@ git cherry-pick 4d3b81d73b9dcbbe176d6baf3c00a4032307f6a8 -X theirs --no-commit
 # Both geant4 changes in a single commit
 git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 
-# sherpa v3: remove when https://github.com/spack/spack/pull/45101 is merged
+# sherpa v3: remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45101.diff | patch -p1
-
-# root: fix TUri for 6.32, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45428.diff | patch -p1
 
 # gaudi: use fmt 10 for now, remove!
 # remember to fix the range before v40
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45466.diff | patch -p1
 
 # py-onnx: make sure py-setuptools 64 and onwards is used for editable_mode
 git cherry-pick a8c4b3a03f0988cc201580f979980d61d3d5e417 -X theirs --no-commit
 
-# acts: add a dependency on dfelibs, remove when https://github.com/spack/spack/pull/45498 is merged
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45498.diff | patch -p1
-
-# groff: add a dependency on m4, remove!
-git cherry-pick c471e510dde3c23d3f586d1fa8b66e934513ce43 -X theirs --no-commit
-
-# xrootd: change the certificate url until the issue is solved
+# xrootd: don't download from SLAC until the certificate issue is solved
 git cherry-pick afcd8b32383b1425062b25126890e12338d70e36 -X theirs --no-commit
 
+# root: Add version 6.32.04, remove!
+git cherry-pick b6a5e4f8eb6276a68d7d42cf14812397cf6d2743 -X theirs --no-commit
 
+# acts: Add versions 36.0.0 and 36.1.0, remove when https://github.com/spack/spack/pull/45851 is merged
+git cherry-pick 5bab73925c6da457f2fdf5c7d8fbeb14ff6e2986 -X theirs --no-commit
+
+# sleef: Add the -fPIC flag
+git cherry-pick f4b2c42028405591cf44a2c5910840e894144f67 -X theirs --no-commit
+
+# poppler: fix URL, remove!
+git cherry-pick 8becc0ca3c86f1fa26593909da03effbc665c31c -X theirs --no-commit
+
+# texlive: clean up recipe, remove when https://github.com/spack/spack/pull/45863 is merged
+# git cherry-pick 4ab7f72041d49f947230df2aa6426b6e39069a3a -X theirs --no-commit
+
+# whizard: add fix for hepmc3 3.3.10 or above, remove when https://github.com/spack/spack/pull/45862 is merged
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45862.diff | patch -p1
+
+# dd4hep: add patch not to install plugins at CMAKE_INSTALL_LIBDIR
+git cherry-pick 6cb6f338d869de7b29d672083f15bfd2aefd2d45 -X theirs --no-commit
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 

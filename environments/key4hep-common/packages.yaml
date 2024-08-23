@@ -24,7 +24,7 @@ packages:
   hdf5:
     require: +cxx+hl
   hepmc3:
-    require: +python
+    require: +python+rootio
   # https://github.com/key4hep/key4hep-spack/issues/517
   lccd:
     require: +conddbmysql
@@ -44,8 +44,6 @@ packages:
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
     require: ~cuda
-  texlive:
-    require: scheme=basic
   xrootd:
     require: +krb5 cxxstd=20
 
@@ -88,7 +86,7 @@ packages:
 
   # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres+pythia8+python+r+roofit+root7+rpath~shadow+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
+    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia8+python+r+roofit+root7+rpath~shadow+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
