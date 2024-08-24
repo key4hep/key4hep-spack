@@ -124,8 +124,8 @@ packages:
   # And all should be consistent based on this table:
   # https://onnxruntime.ai/docs/reference/compatibility.html#onnx-opset-support
   onnx:
-    require: '@1.15.0'
+    require: '@1.16.1'
   py-onnx:
-    require: '@1.15.0'
+    require: '@1.16.1'
   py-onnxruntime:
     require: '@1.17.1'
