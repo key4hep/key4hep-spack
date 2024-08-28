@@ -9,7 +9,7 @@ class K4reco(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4Reco/archive/v00-01.tar.gz"
     git = "https://github.com/key4hep/k4Reco.git"
 
-    version("master", branch="main")
+    version("main", branch="main")
 
     depends_on("root")
     depends_on("edm4hep")
