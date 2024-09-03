@@ -66,7 +66,7 @@ packages:
   mesa:
     buildable: False
     externals:
-    - spec: mesa-glu@99
+    - spec: mesa@99
       prefix: /usr
   mesa-glu:
     buildable: False
