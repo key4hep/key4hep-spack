@@ -35,7 +35,7 @@ packages:
   madgraph5amc:
     require: '@3: +pythia8'
   podio:
-    require: +rntuple+rpath+sio
+    require: +datasource+rntuple+rpath+sio
   py-numpy:
     require: ^openblas
   # https://github.com/key4hep/key4hep-spack/issues/474
@@ -62,6 +62,11 @@ packages:
     buildable: False
     externals:
     - spec: openglu@99
+      prefix: /usr
+  mesa:
+    buildable: False
+    externals:
+    - spec: mesa@99
       prefix: /usr
   mesa-glu:
     buildable: False
