@@ -53,6 +53,8 @@ packages:
     require: build_type=Release
   k4fwcore:
     require: build_type=Release
+  k4gaudipandora:
+    require: build_type=Release
   k4gen:
     require: build_type=Release
   k4generatorsconfig:
