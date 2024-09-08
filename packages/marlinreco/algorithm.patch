@@ -1,0 +1,12 @@
+diff --git a/CaloDigi/Realistic/src/RealisticCaloDigi.cc b/CaloDigi/Realistic/src/RealisticCaloDigi.cc
+index 6f37fce..bf51b16 100644
+--- a/CaloDigi/Realistic/src/RealisticCaloDigi.cc
++++ b/CaloDigi/Realistic/src/RealisticCaloDigi.cc
+@@ -17,6 +17,7 @@
+ #include <assert.h>
+ #include <cmath>
+ #include <set>
++#include <algorithm>
+ 
+ #include "CLHEP/Random/Random.h"
+ #include "CLHEP/Random/RandGauss.h"
