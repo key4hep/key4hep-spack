@@ -41,7 +41,7 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
         sha256="0ea3bee03e2bec1924b5876675043b592a942bc8cf306eb7056eaf03ac1748f6",
     )
 
-    patch("algorithm.patch", when="@1.36")
+    patch("algorithm.patch", when="@:1.36")
 
     depends_on("ilcutil")
     depends_on("marlin")
