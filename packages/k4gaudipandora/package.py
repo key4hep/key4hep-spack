@@ -6,7 +6,7 @@
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Ddmarlinpandora(CMakePackage, Key4hepPackage):
+class K4gaudipandora(CMakePackage, Key4hepPackage):
     """Interface between Gaudi and PandoraPFA."""
 
     url = "https://github.com/key4hep/k4GaudiPandora/archive/v00-11.tar.gz"
