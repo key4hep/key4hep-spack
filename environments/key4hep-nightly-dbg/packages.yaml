@@ -53,6 +53,8 @@ packages:
     require: build_type=Debug
   k4fwcore:
     require: build_type=Debug
+  k4gaudipandora:
+    require: build_type=Debug
   k4gen:
     require: build_type=Debug
   k4generatorsconfig:
