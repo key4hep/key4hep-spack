@@ -22,7 +22,6 @@ class Ddmarlinpandora(CMakePackage, Key4hepPackage):
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("lccontent")
-    depends_on("pandorapfa")
     depends_on("pandorasdk")
     depends_on("root")
 
