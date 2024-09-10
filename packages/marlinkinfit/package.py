@@ -43,3 +43,5 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
 
     def setup_run_environment(self, env):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libMarlinKinfit.so")
+        # Make it usable from ROOT
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
