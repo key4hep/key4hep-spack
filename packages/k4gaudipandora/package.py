@@ -26,9 +26,8 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("root")
 
     def setup_run_environment(self, env):
-        env.prepend_path(
-            "LD_LIBRARY_PATH", self.spec["k4gaudipandora"].libs.directories[0]
-        )
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gaudipandora"].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gaudipandora"].prefix.lib64)
 
     def cmake_args(self):
         return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]
