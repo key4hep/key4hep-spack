@@ -71,6 +71,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
+    depends_on("k4gaudipandora")
     depends_on("k4gen")
     depends_on("k4projecttemplate")
     depends_on("k4reco")
