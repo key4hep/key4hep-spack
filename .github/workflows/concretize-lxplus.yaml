@@ -4,8 +4,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: cvmfs-contrib/github-action-cvmfs@v2
+    - uses: actions/checkout@v4
+    - uses: cvmfs-contrib/github-action-cvmfs@v4
       with:
         cvmfs_repositories: 'sw.hsf.org,sw-nightlies.hsf.org,sft-nightlies.cern.ch,sft.cern.ch,geant4.cern.ch'
     - name: Start container
@@ -26,7 +26,7 @@ jobs:
         source environments/key4hep-release-user/setup_clingo_centos7.sh
         spack add key4hep-stack
         spack concretize -f --reuse | tee -a key4hep-stack-concretization.log;'
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: concretization-log-artifact
         path: key4hep-stack-concretization.log

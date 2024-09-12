@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Concretize key4hep-stack
       run: |
         git clone --depth 1 https://github.com/key4hep/spack
