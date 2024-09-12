@@ -35,3 +35,6 @@ fi
 
 zziplib: add 0.13.78, remove when https://github.com/spack/spack/pull/46361 is merged
 git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
+
+py-contourpy: add a missing dependency on pybind, remove when https://github.com/spack/spack/pull/46363 is merged
+git cherry-pick 1f1641f2866d9d9179147338e7bddd021d6c1a5f -X theirs --no-commit
