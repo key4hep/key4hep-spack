@@ -5,7 +5,6 @@
 
 
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
-from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class K4clue(CMakePackage, Ilcsoftpackage):
@@ -15,7 +14,7 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4Clue.git"
     homepage = "https://github.com/key4hep/k4Clue"
 
-    maintainers = ("vvolkl", "jmcarcell")
+    maintainers = ["jmcarcell"]
 
     version("main", branch="main")
     version(
@@ -34,8 +33,6 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         "1.0", sha256="b1b1c871a2425305e56c1923c31eded300a28cd1a97c55e8b440caaefcafc7d1"
     )
 
-    depends_on("cupla")
-    depends_on("alpaka")
     depends_on("k4fwcore")
     depends_on("dd4hep")
     depends_on("py-six", type=("build", "run"))
@@ -71,6 +68,5 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].prefix.lib64)
 
     def setup_build_environment(self, env):
-        # k4_setup_env_for_framework_tests(self.spec, env)
         env.prepend_path("CPATH", self.spec["dd4hep"].prefix.include)
         env.prepend_path("CPATH", self.spec["alpaka"].prefix.include)

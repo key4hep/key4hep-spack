@@ -10,19 +10,18 @@ class K4rectracker(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
 
-    depends_on("root")
-    depends_on("edm4hep")
-    depends_on("k4fwcore")
-    depends_on("gaudi")
     depends_on("dd4hep")
+    depends_on("edm4hep")
+    depends_on("gaudi")
+    depends_on("k4fwcore")
     depends_on("marlinutil")
+    depends_on("root")
     # This shouldn't be necessary but the debug builds are failing because lcio can't be found
     # It started happening after adding marlinutil to the dependencies
     depends_on("lcio")
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
