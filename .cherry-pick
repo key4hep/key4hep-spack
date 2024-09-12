@@ -32,3 +32,6 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_I
   git cherry-pick f8c6f240ba9b99218eb72bfadce9f99952fec1de -X theirs --no-commit
 
 fi
+
+zziplib: add 0.13.78, remove when https://github.com/spack/spack/pull/46361 is merged
+git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
