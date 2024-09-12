@@ -80,9 +80,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("kkmcee")
     depends_on("k4geo")
     depends_on("podio")
-    depends_on("python~debug")
+    depends_on("python")
     depends_on("whizard")
-    depends_on("xrootd +krb5")
+    depends_on("xrootd")
 
     depends_on("k4generatorsconfig", when="+generators")
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
