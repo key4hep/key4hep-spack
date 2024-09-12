@@ -156,12 +156,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             # When building podio with +rntuple there are warnings constantly without this
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
-        # Add fastjet for FCCAnalyses (it's being loaded by ROOT)
-        if "fastjet" in self.spec:
-            env.prepend_path(
-                "LD_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0]
-            )
-
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
             env.prepend_path(
