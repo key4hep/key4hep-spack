@@ -117,7 +117,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("iwyu", when="+devtools")
     depends_on("man-db", when="+devtools")
     depends_on("ninja", when="+devtools")
-    depends_on("onnx", when="+devtools")
     # depends_on('prmon', when='+devtools')
     depends_on("py-awkward", when="+devtools")
     depends_on("py-black", when="+devtools")
