@@ -65,7 +65,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("delphes")
     depends_on("edm4hep")
     depends_on("fcc-config")
-    depends_on("geant4+qt")
+    depends_on("geant4")
     depends_on("guinea-pig")
     # depends_on('k4actstracking')
     depends_on("k4clue")
@@ -142,12 +142,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-torch", when="+devtools")
     depends_on("py-uproot", when="+devtools")
     depends_on("py-xgboost", when="+devtools")
-    depends_on("xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
-    # depends_on('py-pyg4ometry', when='+devtools')
-    # depends_on('py-tensorflow') # todo: check if we should integrate.
-    # depends_on('py-zfit') # todo: add in spack
-    # depends_on('py-root-pandas') # todo: add in spack
 
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
