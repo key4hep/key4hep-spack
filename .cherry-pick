@@ -28,10 +28,6 @@ git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 # py-onnx: make sure py-setuptools 64 and onwards is used for editable_mode
 git cherry-pick a8c4b3a03f0988cc201580f979980d61d3d5e417 -X theirs --no-commit
 
-# dd4hep: add patch not to install plugins at CMAKE_INSTALL_LIBDIR
-git cherry-pick 21c9d43cdbdb1de3164c1754696d74cb7fb448d9 -X theirs --no-commit
-
-
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
   # patch to rename libz so texlive can be built
