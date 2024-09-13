@@ -1,10 +1,10 @@
 git remote add jmcarcell https://github.com/jmcarcell/spack || true
 git fetch jmcarcell -q
 
-# Hardcode libdir to lib. This is needed for AlmaLinux 9 where CMAKE_INSTALL_LIBDIR gets
-# chosen as lib64 and this causes problems in some packages that expect lib.
-# Since spack installs each package to its own prefix we don't need to worry
-# about multilib environments
+# Hardcode CMAKE_INSTALL_LIBDIR to lib. This is needed for AlmaLinux 9 where
+# CMAKE_INSTALL_LIBDIR gets chosen as lib64 and this causes problems in some
+# packages that expect lib. Since spack installs each package to its own prefix
+# we don't need to worry about multilib environments
 git cherry-pick 42c070632bcb0f8333bc029e17a53646d9589d7e -X theirs --no-commit
 
 # add a recent version of madgraph, remove when https://github.com/spack/spack/pull/41128 is merged
