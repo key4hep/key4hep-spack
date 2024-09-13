@@ -35,7 +35,7 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_I
 
 fi
 
-zziplib: add 0.13.78, remove when https://github.com/spack/spack/pull/46361 is merged
+zziplib: add 0.13.78, remove!
 git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
 
 pybind11: fix pkgconfig, remove when https://github.com/spack/spack/pull/46298 is merged
