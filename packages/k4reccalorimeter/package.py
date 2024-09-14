@@ -44,7 +44,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     patch(
         "https://patch-diff.githubusercontent.com/raw/HEP-FCC/k4RecCalorimeter/pull/81.patch?full_index=1",
         sha256="a46d2fa00230d92e23788bf41870748c64c0a4ef2973bec3b26d1cf6dfc9c2db",
-        when="@:0.1.0pre13 ^py-onnxruntime@1.17.1:",
+        when="@:0.1.0pre12 ^py-onnxruntime@1.17.1:",
     )
 
     def cmake_args(self):
