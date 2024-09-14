@@ -28,6 +28,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("k4geo")
     depends_on("fccanalyses")
     depends_on("root")
+    depends_on("py-onnxruntime")
     depends_on("py-six", type=("build", "run"))
 
     def cmake_args(self):
