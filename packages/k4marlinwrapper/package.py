@@ -26,7 +26,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("root")
     depends_on("lcio")
     depends_on("marlin")
-    depends_on("gaudi@35.0:")
+    depends_on("gaudi@35.0: +gaudialg")
     depends_on("k4fwcore")
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.1:")
