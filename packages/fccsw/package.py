@@ -1,5 +1,4 @@
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
-from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class Fccsw(CMakePackage, Key4hepPackage):
@@ -31,7 +30,6 @@ class Fccsw(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
@@ -47,4 +45,3 @@ class Fccsw(CMakePackage, Key4hepPackage):
 
     def setup_build_environment(self, env):
         self.setup_run_environment(env)
-        # k4_setup_env_for_framework_tests(self.spec, env)

@@ -22,8 +22,6 @@ class K4gen(CMakePackage, Key4hepPackage):
     version("0.1pre09", tag="v0.1pre09")
     version("0.1pre08", tag="v0.1pre08")
     version("0.1pre07", tag="v0.1pre07")
-    version("0.1pre06", tag="v0.1pre06")
-    version("0.1pre05", tag="v0.1pre05")
 
     generator = "Ninja"
 
@@ -31,9 +29,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     depends_on("fastjet")
     depends_on("edm4hep")
     depends_on("podio")
-    depends_on("k4fwcore@1.0pre14:", when="@0.1pre06:")
-    depends_on("k4fwcore@1:")
-    depends_on("hepmc@:2.99.99", when="@:0.1pre05")
+    depends_on("k4fwcore")
     depends_on("hepmc3")
     depends_on("heppdt@:2.99.99")
     depends_on("pythia8")
@@ -42,7 +38,6 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
@@ -52,19 +47,15 @@ class K4gen(CMakePackage, Key4hepPackage):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gen"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gen"].prefix.lib64)
 
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gen"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gen"].prefix.lib64)
         env.set("K4GEN", self.prefix.share.k4Gen)
 
     def setup_build_environment(self, env):
         env.set("K4GEN", self.prefix.share.k4Gen)
-        # todo: workaround, fix properly in cmake
-        env.prepend_path("CPATH", self.spec["heppdt"].prefix.include)
 
     def check(self):
         pass

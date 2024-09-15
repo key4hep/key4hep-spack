@@ -26,10 +26,6 @@ class K4reco(CMakePackage, Key4hepPackage):
         )
         return args
 
-    def setup_dependent_build_environment(self, env, dependent_spec):
-        env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reco"].prefix.lib)
-
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reco"].prefix.lib)

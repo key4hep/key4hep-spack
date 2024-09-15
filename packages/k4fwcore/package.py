@@ -35,19 +35,12 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
             )
         )
         return args
-
-    def setup_dependent_build_environment(self, env, dependent_spec):
-        # needed to set up the runtime dependencies for tests
-        env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("PATH", self.prefix.scripts)
-        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
