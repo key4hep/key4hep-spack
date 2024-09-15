@@ -33,26 +33,24 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         "1.0", sha256="b1b1c871a2425305e56c1923c31eded300a28cd1a97c55e8b440caaefcafc7d1"
     )
 
-    depends_on("k4fwcore")
     depends_on("dd4hep")
+    depends_on("k4fwcore")
 
-    # todo: fix type='test'
-    depends_on("marlindd4hep")
-    depends_on("kaltest")
-    depends_on("conformaltracking")
-    depends_on("overlay")
-    depends_on("marlinreco")
-    depends_on("marlintrkprocessors")
-    depends_on("ddmarlinpandora")
-    depends_on("fcalclusterer")
-    depends_on("lctuple")
-    depends_on("marlinfastjet")
-    depends_on("lcfiplus")
-    depends_on("k4marlinwrapper")
+    depends_on("marlindd4hep", type="test")
+    depends_on("kaltest", type="test")
+    depends_on("conformaltracking", type="test")
+    depends_on("overlay", type="test")
+    depends_on("marlinreco", type="test")
+    depends_on("marlintrkprocessors", type="test")
+    depends_on("ddmarlinpandora", type="test")
+    depends_on("fcalclusterer", type="test")
+    depends_on("lctuple", type="test")
+    depends_on("marlinfastjet", type="test")
+    depends_on("lcfiplus", type="test")
+    depends_on("k4marlinwrapper", type="test")
 
     def cmake_args(self):
         args = []
-        args.append(self.define("cupla_DIR", self.spec["cupla"].prefix))
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
@@ -61,11 +59,8 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.set("K4CLUE", self.prefix.share.k4Clue)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("CPATH", self.spec["cupla"].prefix.include)
-        env.prepend_path("CPATH", self.spec["alpaka"].prefix.include)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].prefix.lib)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].prefix.lib64)
 
     def setup_build_environment(self, env):
         env.prepend_path("CPATH", self.spec["dd4hep"].prefix.include)
-        env.prepend_path("CPATH", self.spec["alpaka"].prefix.include)
