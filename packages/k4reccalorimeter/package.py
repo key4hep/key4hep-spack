@@ -48,7 +48,6 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reccalorimeter"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reccalorimeter"].prefix.lib64)
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)

@@ -21,12 +21,10 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
 
     depends_on("dd4hep")
     depends_on("k4geo")
-    depends_on("lcio")
     depends_on("root")
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
@@ -35,21 +33,11 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     def setup_run_environment(self, env):
         env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["fccdetectors"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["fccdetectors"].prefix.lib64)
-
-    def setup_build_environment(self, env):
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.set("FCCDETECTORS", self.prefix.share.FCCDetectors)
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib64)
         env.prepend_path("PYTHONPATH", self.prefix.python)
 
     def test(self):
