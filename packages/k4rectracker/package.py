@@ -29,17 +29,6 @@ class K4rectracker(CMakePackage, Key4hepPackage):
         )
         return args
 
-    def setup_dependent_build_environment(self, env, dependent_spec):
-        # needed to set up the runtime dependencies for tests
-        env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4rectracker"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4rectracker"].prefix.lib64)
-
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4rectracker"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4rectracker"].prefix.lib64)
-
-    def setup_build_environment(self, env):
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib64)

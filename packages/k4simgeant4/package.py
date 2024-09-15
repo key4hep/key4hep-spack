@@ -21,7 +21,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     depends_on("clhep")
     depends_on("dd4hep")
-    depends_on("k4fwcore@1.0:")
+    depends_on("k4fwcore")
     depends_on("geant4")
     depends_on("edm4hep")
     depends_on("g4ensdfstate")
@@ -32,7 +32,6 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
@@ -42,14 +41,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.set("K4SIMGEANT4", self.prefix.share.k4SimGeant4)
-        install_path = join_path(
-            self.spec["g4ensdfstate"].prefix.share,
-            "data",
-            "G4ENSDFSTATE{0}".format(self.spec["g4ensdfstate"].version),
-        )
-        env.set("G4ENSDFSTATEDATA", install_path)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4simgeant4"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4simgeant4"].prefix.lib64)
 
     def setup_build_environment(self, env):
         install_path = join_path(
@@ -62,4 +54,3 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4simgeant4"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4simgeant4"].prefix.lib64)
