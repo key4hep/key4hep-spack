@@ -41,6 +41,13 @@ class DualReadout(CMakePackage, Key4hepPackage):
         sha256="0fc3b0e77d52e1dec72a0dae73f15689720b28298deea1992301e8c41c80271c",
     )
 
+    # fix to gcc14 compile
+    patch(
+        "https://github.com/HEP-FCC/dual-readout/commit/87168de271be14b84da833d0e7d4fb9b1f1771e9.patch?full_index=1",
+        when="%gcc@14:",
+        sha256="9ff1cad595e631336f49c2430e147f29ddedb5e3eee650c36f9147f420f62423",
+    )
+
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("podio@0.14.1:")
@@ -52,6 +59,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore")
     depends_on("simsipm")
     depends_on("k4gen", type="run")
+    depends_on("gaudi")
 
     def cmake_args(self):
         args = []
