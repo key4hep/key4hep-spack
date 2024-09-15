@@ -47,12 +47,12 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
         # needed to set up the runtime dependencies for tests
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix.lib)
 
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4fwcore"].prefix.lib)
 
     def setup_build_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib)
