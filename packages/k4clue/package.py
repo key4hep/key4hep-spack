@@ -35,7 +35,6 @@ class K4clue(CMakePackage, Ilcsoftpackage):
 
     depends_on("k4fwcore")
     depends_on("dd4hep")
-    depends_on("py-six", type=("build", "run"))
 
     # todo: fix type='test'
     depends_on("marlindd4hep")
