@@ -60,7 +60,7 @@ jobs:
             source /${name}/.cherry-pick
 
             cd /${name}/environments/${env}
-            spack env add .
+            spack env activate .
             spack concretize
 
             EOF
