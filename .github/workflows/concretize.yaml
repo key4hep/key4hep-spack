@@ -17,6 +17,7 @@ jobs:
         build_type: [release, nightly]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
@@ -55,7 +56,7 @@ jobs:
             source spack/share/spack/setup-env.sh
 
             cd /spack
-            git checkout $(cat /${name}/key4hep-spack/.latest-commit)
+            git checkout $(cat /${name}/.latest-commit)
             source /${name}/.cherry-pick
 
             cd /${name}/environments/${env}
