@@ -55,7 +55,7 @@ jobs:
                 env=key4hep-release
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
-                python3 ${name}/scripts/fetch_nightly_versions.py --path ${name}/environments/key4hep-common/packages.yaml --extra-path ${name}/environments/key4hep-nightly-opt/packages.yaml ""
+                python3 /${name}/scripts/fetch_nightly_versions.py --path ${name}/environments/key4hep-common/packages.yaml --extra-path ${name}/environments/key4hep-nightly-opt/packages.yaml ""
             else
                 echo "Unknown build type"
                 exit 1
