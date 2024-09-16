@@ -47,6 +47,7 @@ jobs:
             source /key4hep-spack/.cherry-pick
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
+                exit 1
                 env=key4hep-release
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
