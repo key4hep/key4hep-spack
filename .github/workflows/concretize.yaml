@@ -17,7 +17,7 @@ jobs:
         build_type: [release, nightly]
     runs-on: ubuntu-latest
     steps:
-        - name: Start container
+      - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
             if [ "${{ inputs.image }}" = "alma9" ]; then
@@ -29,7 +29,7 @@ jobs:
               exit 1
             fi
 
-        - name: Setup environment and concretize
+      - name: Setup environment and concretize
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
 
