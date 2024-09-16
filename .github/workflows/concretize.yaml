@@ -1,0 +1,66 @@
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix:
+    image: [alma9, ubuntu22]
+    build_type: [release, nightly]
+  concretize:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Start container
+        run: |
+            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            if [ "${{ inputs.image }}" = "alma9" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/${name} -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
+            elif [ "${{ inputs.image }}" = "ubuntu22" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/${name} -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
+            else
+              echo "Unknown image"
+              exit 1
+            fi
+
+        - name: Setup environment and concretize
+        run: |
+            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+
+            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
+            set -e
+
+            if [ "${{ inputs.build_type }}" = "release" ]; then
+                env=key4hep-release
+            elif [ "${{ inputs.build_type }}" = "nightly" ]; then
+                env=key4hep-nightly-opt
+            else
+                echo "Unknown build type"
+                exit 1
+            fi
+
+            cd /
+
+            git clone https://github.com/spack/spack -q
+            source spack/share/spack/setup-env.sh
+
+            cd /spack
+            git checkout $(cat /${name}/.latest-commit)
+            source /${name}/.cherry-pick
+
+            cd /${name}/environments/${env}
+            spacktivate .
+            spack concretize
+
+            EOF
+
+            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
+
+            # cat ${GITHUB_WORKSPACE}/script_container.sh
+
+            docker exec container /bin/bash -c "/mount.sh && /${name}/script_container.sh"
