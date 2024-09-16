@@ -20,9 +20,9 @@ jobs:
       - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-            if [ "${{ inputs.image }}" = "alma9" ]; then
+            if [ "${{ matrix.image }}" = "alma9" ]; then
               docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/${name} -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
-            elif [ "${{ inputs.image }}" = "ubuntu22" ]; then
+            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
               docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/${name} -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
             else
               echo "Unknown image"
@@ -36,9 +36,9 @@ jobs:
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
 
-            if [ "${{ inputs.build_type }}" = "release" ]; then
+            if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release
-            elif [ "${{ inputs.build_type }}" = "nightly" ]; then
+            elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
             else
                 echo "Unknown build type"
