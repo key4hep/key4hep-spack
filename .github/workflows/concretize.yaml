@@ -10,10 +10,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  matrix:
-    image: [alma9, ubuntu22]
-    build_type: [release, nightly]
   concretize:
+    strategy:
+      matrix:
+        image: [alma9, ubuntu22]
+        build_type: [release, nightly]
     runs-on: ubuntu-latest
     steps:
         - name: Start container
