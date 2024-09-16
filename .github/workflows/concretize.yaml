@@ -48,6 +48,7 @@ jobs:
             fi
 
             cd /
+            ls -lah /
 
             git clone https://github.com/spack/spack -q
             source spack/share/spack/setup-env.sh
