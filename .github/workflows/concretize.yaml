@@ -7,14 +7,14 @@ on:
 
 jobs:
   concretize:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}
+      cancel-in-progress: true
     strategy:
       matrix:
         image: [alma9, ubuntu22]
         build_type: [release, nightly]
     runs-on: ubuntu-latest
-    concurrency:
-      group: "${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}"
-      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
       - name: Start container
