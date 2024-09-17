@@ -13,7 +13,7 @@ jobs:
         build_type: [release, nightly]
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}-${{ inputs.environment }}
+      group: "${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}"
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
