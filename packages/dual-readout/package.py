@@ -52,6 +52,14 @@ class DualReadout(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore")
     depends_on("simsipm")
     depends_on("k4gen", type="run")
+    depends_on("gaudi")
+
+    # Compile with GCC 14
+    patch(
+        "https://patch-diff.githubusercontent.com/raw/HEP-FCC/dual-readout/pull/40.patch?full_index=1",
+        when="@0.1.3 %gcc@14:",
+        sha256="9ff1cad595e631336f49c2430e147f29ddedb5e3eee650c36f9147f420f62423",
+    )
 
     def cmake_args(self):
         args = []
