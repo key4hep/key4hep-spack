@@ -61,7 +61,6 @@ class DualReadout(CMakePackage, Key4hepPackage):
         sha256="9ff1cad595e631336f49c2430e147f29ddedb5e3eee650c36f9147f420f62423",
     )
 
-
     def cmake_args(self):
         args = []
         # C++ Standard
