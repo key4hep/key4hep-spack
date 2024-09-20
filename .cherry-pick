@@ -25,12 +25,12 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/42844.diff
 # Both geant4 changes in a single commit
 git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 
-if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
+# if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
 
-  # patch to rename libz so texlive can be built
-  git cherry-pick f8c6f240ba9b99218eb72bfadce9f99952fec1de -X theirs --no-commit
+#   # patch to rename libz so texlive can be built
+#   git cherry-pick f8c6f240ba9b99218eb72bfadce9f99952fec1de -X theirs --no-commit
 
-fi
+# fi
 
 # zziplib: add 0.13.78, remove!
 git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
