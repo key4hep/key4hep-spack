@@ -41,6 +41,11 @@ packages:
     require: build_type=Release
   gear:
     require: build_type=Release
+  geant4-data:
+    buildable: False
+    externals:
+    - spec: geant4-data
+      prefix: /cvmfs/sw-nightlies.hsf.org/key4hep/share
   ilcutil:
     require: build_type=Release cxxstd=20
   ildperformance:
