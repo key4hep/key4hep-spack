@@ -1,0 +1,4 @@
+config:
+  install_tree:
+    projections:
+      all: "/{name}/{version}"
