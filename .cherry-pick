@@ -46,3 +46,10 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46372.diff
 
 # py-onnx: add fixes for GCC 14, remove when https://github.com/spack/spack/pull/46390 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
+
+# texlive: add new versions
+git cherry-pick 5398b1be15245e1be480c5aa4706f57795208505 -X theirs --no-commit
+
+# texlive: fix mtxrun, remove when https://github.com/spack/spack/pull/46465 is merged
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46465.diff | patch -p1
+
