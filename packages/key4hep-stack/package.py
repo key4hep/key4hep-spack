@@ -169,7 +169,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
                 self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
             )
 
-
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
         # in the recipe

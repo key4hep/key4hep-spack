@@ -34,7 +34,6 @@ class Marlinfastjet(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = []
-        # C++ Standard
         args.append(
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
