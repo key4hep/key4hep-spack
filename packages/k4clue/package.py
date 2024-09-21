@@ -59,4 +59,4 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     def setup_run_environment(self, env):
         env.set("K4CLUE", self.prefix.share.k4Clue)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4clue"].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
