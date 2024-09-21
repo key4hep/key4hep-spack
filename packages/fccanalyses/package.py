@@ -88,7 +88,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["fccanalyses"].prefix.lib)
         env.set("FCCDICTSDIR", "/cvmfs/fcc.cern.ch/FCCDicts")
 
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0])
+        env.prepend_path("ROOT_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0])
 
     # tests need installation, so skip here ...
     def check(self):
