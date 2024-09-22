@@ -1,5 +1,5 @@
 config:
   install_tree:
     projections:
-      all: "/{name}/{version}"
-    root: /cvmfs/sw-nightlies.hsf.org/key4hep/share/
+      all: "{name}/{version}"
+    root: /cvmfs/sw-nightlies.hsf.org/key4hep/share
