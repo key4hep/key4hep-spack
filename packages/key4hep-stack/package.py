@@ -16,20 +16,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     homepage = "https://cern.ch/key4hep"
 
-    ##################### versions ########################
-    #######################################################
-    ###  nightly builds
     version("master")
-    # this version can be extended with additional version
-    # fields to differentiate it, like 'master-2020-10-10'
-    #
-    ### stable builds
-    # builds the latest release of each package
-    # the preferred usage is to use the date as version, like:
     version(datetime.today().strftime("%Y-%m-%d"))
-    # version('2020-10-06') # example, no need to add here.
-    # more complex version configurations should be added in an
-    # environment
 
     # this bundle package installs a custom setup script, so
     # need to add the install phase (which normally does not
@@ -172,6 +160,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
         # in the recipe
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
         env.prepend_path("PYTHONPATH", self.spec["root"].prefix.lib)
 
         # Don't use libtools from the system
