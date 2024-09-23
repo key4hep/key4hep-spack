@@ -160,6 +160,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
         # in the recipe
+        # ROOT needs to be in LD_LIBRARY_PATH to prevent using system installations
         env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
         env.prepend_path("PYTHONPATH", self.spec["root"].prefix.lib)
 
