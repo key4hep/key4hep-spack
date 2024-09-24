@@ -44,7 +44,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     patch(
         "https://patch-diff.githubusercontent.com/raw/HEP-FCC/dual-readout/pull/42.patch?full_index=1",
         sha256="8dbe67f968eb81a07820b4e6758ace0d5170a35ccfd896440187160988bc6c79",
-        when="@0.1.4:",
+        when="@0.1.4",
     )
 
 
