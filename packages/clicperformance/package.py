@@ -20,6 +20,10 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "02-05-01",
+        sha256="dd0b240cdab859b5ee60f0fac834207a2a426840553be39db2050eb51119977f",
+    )
+    version(
         "02-05",
         sha256="0205f79914a2422ee8db722ad53cbdc8722cb0867e7b57660ca9ec21fbb4e2ba",
     )
