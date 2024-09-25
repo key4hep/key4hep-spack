@@ -68,6 +68,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     depends_on("lcio@2.20.1:", when="@00-08:")
     depends_on("lcio@2.22:", when="@00-09:")
     depends_on("podio")
+    depends_on("podio@1:", when="@00-09:")
     depends_on("edm4hep@0.5:", when="@00-03")
     depends_on("edm4hep@0.8:", when="@00-04:")
     depends_on("edm4hep@0.10:", when="@00-05:")
