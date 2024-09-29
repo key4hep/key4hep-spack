@@ -17,10 +17,17 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
-        "0.8", sha256="0c624d5719cd055dfc27a9954cdf5e501e6478a2a8baac3bf80da7063e58e6ed"
+        "0.9", sha256="a0c01e6137cd5bb0794d79433831644dfd5108c763e436428117cd6f4a826ce2"
     )
     version(
-        "0.7", sha256="aff49b9885d3c5e0804d5bcd3752ac77f3e3bbce6910fa9277252b907656914a"
+        "0.8",
+        sha256="0c624d5719cd055dfc27a9954cdf5e501e6478a2a8baac3bf80da7063e58e6ed",
+        deprecated=True,
+    )
+    version(
+        "0.7",
+        sha256="aff49b9885d3c5e0804d5bcd3752ac77f3e3bbce6910fa9277252b907656914a",
+        deprecated=True,
     )
 
     depends_on("root")
@@ -32,6 +39,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.1:")
     depends_on("k4edm4hep2lcioconv")
+    depends_on("k4edm4hep2lcioconv@00-09:", when="@0.9:")
     # for the doctest:
     depends_on("py-jupytext", type=("test"))
     depends_on("py-ipykernel", type=("test"))
