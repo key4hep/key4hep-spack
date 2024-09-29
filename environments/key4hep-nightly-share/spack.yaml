@@ -1,14 +1,12 @@
 spack:
   view: false
   include:
-  - ../key4hep-common/config-nightlies.yaml
+  - ./config.yaml
   # Put packages before the common packages so that it doesn't get overwritten
   # See https://github.com/spack/spack/blob/master/lib/spack/docs/environments.rst?plain=1#L528
-  - ./packages.yaml
   - ../key4hep-common/packages.yaml
   - ../key4hep-common/compilers.yaml
-  - ../key4hep-nightly-share/packages.yaml
   repos:
   - ../..
   specs:
-  - key4hep-stack+devtools
+  - geant4-data@11.2.2

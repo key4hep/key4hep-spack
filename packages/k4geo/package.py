@@ -60,8 +60,7 @@ class K4geo(CMakePackage):
         env.set("K4GEO", self.prefix.share.k4geo)
         env.set("lcgeo_DIR", self.prefix.share.k4geo)
         env.set("k4geo_DIR", self.prefix.share.k4geo)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].libs.directories[0])
 
     def setup_build_environment(self, env):
         env.set("LCGEO", self.prefix.share.k4geo)
@@ -69,11 +68,16 @@ class K4geo(CMakePackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
 
+    def setup_dependent_run_environment(self, env, dependent_spec):
+        env.set("LCGEO", self.prefix.share.k4geo)
+        env.set("lcgeo_DIR", self.prefix.share.k4geo)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].libs.directories[0])
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
+
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.set("LCGEO", self.prefix.share.k4geo)
         env.set("lcgeo_DIR", self.prefix.share.k4geo)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].prefix.lib64)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].libs.directories[0])
         env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
 
     # dd4hep tests need to run after install step:

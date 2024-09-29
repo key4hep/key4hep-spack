@@ -3,7 +3,8 @@
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
 function usage() {
-    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       -c           : select compiler, system or gcc14 (default) on AlmaLinux 9, system for the other OSes"
     echo "       -d           : setup the debug version of the software stack"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
@@ -24,13 +25,16 @@ if [[ "$1" = "-r" && -n "$2" && (! -d "/cvmfs/sw-nightlies.hsf.org/key4hep/relea
 }
 
 function list_releases() {
-    if [ ! -n "$1" ]; then
+    if [ -z "$1" ]; then
         os=$os
     else
         os=$1
     fi
     if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
         name="almalinux9"
+        if [ -z "$compiler" ]; then
+            compiler="gcc14"
+        fi
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
     else
@@ -38,18 +42,23 @@ function list_releases() {
         usage
         return 1
     fi
-    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*$build_type*" |
+    echo "Compiler is $compiler"
+    find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*$compiler*$build_type*" |
     \awk -F/ '{print $(NF-1)}' | sort
+    unset compiler
 }
 
 function list_packages() {
-    if [ ! -n "$1" ]; then
+    if [ -z "$1" ]; then
         os=$os
     else
         os=$1
     fi
     if [ "$os" = "almalinux" ] || [ "$os" = "almalinux9" ]; then
         name="almalinux9"
+        if [ -z "$compiler" ]; then
+            compiler="gcc14"
+        fi
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
     else
@@ -61,7 +70,7 @@ function list_packages() {
     previous_scratch_releases=()
     while IFS= read -r line; do
         previous_scratch_releases+=("$line")
-    done < <(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 3 -mindepth 3 -type f -name ".scratch" | grep "$name" | grep opt | sort | xargs -n1 dirname)
+    done < <(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 3 -mindepth 3 -type f -name ".scratch" | grep "$name" | grep "$compiler" | grep opt | sort | xargs -n1 dirname)
     for release in "${previous_scratch_releases[@]}"; do
         # Get the latest previous or equal date
         if [[ "$(basename $(dirname $release))" = "$rel" ]] || [[ "$(basename $(dirname $release))" < "$rel" ]]; then
@@ -75,31 +84,34 @@ function list_packages() {
     if [ $build_type = "dbg" ] && [ -d $(echo $latest_previous_release | sed 's/opt/dbg/') ]; then
         folders+=($(echo $latest_previous_release | sed 's/opt/dbg/'))
     fi
-    folders+=(/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$name*-*$build_type*)
+    folders+=(/cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$name*$compiler*-*$build_type*)
 
-    declare -a package_versions
-    package_versions=()
+    declare -A package_versions
 
     for folder in "${folders[@]}"; do
         for package in $(ls $folder); do
             package_name=$(basename "$package")
             version_string=$(ls $folder/$package_name -t | head -n 1)
             package_version=$(echo "$version_string" | awk '{if ($NF ~ /develop/) {split($NF,arr,"_"); printf "%s", arr[1]} else {split($(NF),arr,"-"); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }')
-
-            # Update the version of the package in the associative array
-            if [[ " ${package_versions[@]} " =~ "${package_name}" ]]; then
-                package_versions=("${package_versions[@]/$package_name=*/$package_name=$package_version}")
-            else
-                package_versions+=("$package_name=$package_version")
-            fi
+            package_versions["$package_name"]="$package_version"
         done
     done
 
-    # Print the final version of each package
-    for pair in "${package_versions[@]}"; do
-        echo ${pair%%=*} ${pair#*=}
-    done
+    # Print the final version for each package
+    if [ -z "$ZSH_VERSION" ]; then
+        # Bash
+        for package_name in $(printf "%s\n" "${!package_versions[@]}" | sort); do
+            package_version="${package_versions[$package_name]}"
+            echo "$package_name $package_version"
+        done
+    else
+        # Zsh
+        for key in ${(ok)package_versions}; do
+            echo "$key $package_versions[$key]" | tr -d '"'
+        done
+    fi
 
+    unset compiler
 }
 
 
@@ -208,8 +220,30 @@ for ((i=1; i<=$#; i++)); do
             usage
             return 0
             ;;
+        -c)
+            if [ "$os" = "almalinux9" ]; then
+                if [ -z "$argn" ]; then
+                    compiler="gcc14"
+                    echo "No compiler specified, using the default gcc 14.2.1 compiler"
+                elif [ "$argn" = "system" ]; then
+                    compiler="gcc11"
+                    echo "Using the system compiler"
+                elif [ "$argn" = "gcc11" ]; then
+                    compiler="gcc11"
+                    echo "Using the GCC 11.4 compiler"
+                else
+                    echo "Unsupported compiler $argn, aborting..."
+                    usage
+                    return 1
+                fi
+            else
+                echo "The -c flag is only supported on AlmaLinux 9, aborting..."
+                usage
+                return 1
+            fi
+            ;;
         --list-releases)
-            if [ ! -n "$argn" ]; then
+            if [ -z "$argn" ]; then
                 list_releases $os
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|ubuntu) ]]; then
@@ -222,7 +256,7 @@ for ((i=1; i<=$#; i++)); do
             fi
             ;;
         --list-packages)
-            if [ ! -n "$argn" ]; then
+            if [ -z "$argn" ]; then
                 list_packages $os
                 return 0
             elif [ -n "$argn" ] && [[ "$argn" =~ ^(almalinux|ubuntu) ]]; then
@@ -240,7 +274,7 @@ for ((i=1; i<=$#; i++)); do
             ;;
         *)
             eval "prev=\${$((i-1))}"
-            if [ "$prev" != "-r" ]; then
+            if [ "$prev" != "-r" ] && [ "$prev" != "-c" ]; then
                 echo "Unknown argument $arg, it will be ignored"
                 # usage
                 # return 1
@@ -249,7 +283,23 @@ for ((i=1; i<=$#; i++)); do
     esac
 done
 
-k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$build_type | head -n1)
+if [ -z "$compiler" ]; then
+    if [ "$os" = "almalinux9" ]; then
+        compiler="gcc14"
+        echo "No compiler specified, using the default gcc 14.2.1 compiler"
+    elif [ "$os" = "ubuntu22" ]; then
+        compiler="gcc11"
+        echo "No compiler specified, using the system compiler"
+    fi
+fi
+
+# Override the choice if sourcing a release before 2024-09-21
+if [ "$(echo $rel | grep -E '^2024-09-[0-9]{2}$')" ] && [ "$(date -d $rel +%s)" -lt "$(date -d '2024-09-21' +%s)" ]; then
+    compiler="gcc11"
+fi
+
+
+k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
 
 if [ -n "$KEY4HEP_STACK" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
@@ -266,7 +316,6 @@ fi
 setup_script_path=$(/usr/bin/ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
-echo $setup_actual
 
 # For SWAN
 if [ -n "$LCG_VERSION" ]; then
@@ -285,6 +334,9 @@ command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh -r $(basename $(dir
 if [ "$build_type" = "dbg" ]; then
     command+=" -d"
 fi
+if [ "$os" = "almalinux9" ] && [ "$compiler" != "gcc14" ]; then
+    command+=" -c $compiler"
+fi
 echo "Use the following command to reproduce the current environment: "
 echo ""
 echo "        $command"
@@ -293,3 +345,6 @@ echo "Nightly builds are intended for testing and development, if you need a sta
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
 echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"
+if [ "$os" = "almalinux9" ]; then
+    echo "Warning: The default compiler for AlmaLinux 9 has changed to GCC 14. A new -c flag can be used to select the compiler, to go back to the system compiler use '-c gcc11'"
+fi

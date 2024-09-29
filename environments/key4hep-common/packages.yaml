@@ -43,7 +43,7 @@ packages:
     require: backend=qt5agg
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
-    require: ~cuda
+    require: ~cuda+custom-protobuf
   xrootd:
     require: +krb5 cxxstd=20
 
@@ -91,7 +91,7 @@ packages:
 
   # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia8+python+r+roofit+root7+rpath~shadow+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
+    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
@@ -120,11 +120,8 @@ packages:
   sio:
     variants: cxxstd=20
 
-  # onnx and py-onnx should have the same versions
-  # And all should be consistent based on this table:
+  # The versions of py-onnx and py-onnxruntime should be consistent based on this table
   # https://onnxruntime.ai/docs/reference/compatibility.html#onnx-opset-support
-  onnx:
-    require: '@1.15.0'
   py-onnx:
     require: '@1.15.0'
   py-onnxruntime:

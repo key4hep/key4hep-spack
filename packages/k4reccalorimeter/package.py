@@ -21,15 +21,16 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     generator = "Ninja"
 
     depends_on("ninja", type="build")
-    depends_on("edm4hep")
-    depends_on("podio")
-    depends_on("k4fwcore@1:")
-    depends_on("gaudi")
+
     depends_on("dd4hep")
+    depends_on("edm4hep")
+    depends_on("fastjet")
+    depends_on("gaudi")
+    depends_on("k4fwcore")
     depends_on("k4geo")
     depends_on("k4simgeant4")
+    depends_on("podio")
     depends_on("py-onnxruntime")
-    depends_on("fastjet")
     depends_on("root")
 
     patch(
@@ -47,7 +48,6 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reccalorimeter"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reccalorimeter"].prefix.lib64)
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.set("K4RECCALORIMETER", self.prefix.share.k4RecCalorimeter)

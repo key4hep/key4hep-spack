@@ -16,20 +16,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
     homepage = "https://cern.ch/key4hep"
 
-    ##################### versions ########################
-    #######################################################
-    ###  nightly builds
     version("master")
-    # this version can be extended with additional version
-    # fields to differentiate it, like 'master-2020-10-10'
-    #
-    ### stable builds
-    # builds the latest release of each package
-    # the preferred usage is to use the date as version, like:
     version(datetime.today().strftime("%Y-%m-%d"))
-    # version('2020-10-06') # example, no need to add here.
-    # more complex version configurations should be added in an
-    # environment
 
     # this bundle package installs a custom setup script, so
     # need to add the install phase (which normally does not
@@ -65,7 +53,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("delphes")
     depends_on("edm4hep")
     depends_on("fcc-config")
-    depends_on("geant4+qt")
+    depends_on("geant4")
     depends_on("guinea-pig")
     # depends_on('k4actstracking')
     depends_on("k4clue")
@@ -80,9 +68,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("kkmcee")
     depends_on("k4geo")
     depends_on("podio")
-    depends_on("python~debug")
+    depends_on("python")
     depends_on("whizard")
-    depends_on("xrootd +krb5")
+    depends_on("xrootd")
 
     depends_on("k4generatorsconfig", when="+generators")
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
@@ -117,7 +105,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("iwyu", when="+devtools")
     depends_on("man-db", when="+devtools")
     depends_on("ninja", when="+devtools")
-    depends_on("onnx", when="+devtools")
     # depends_on('prmon', when='+devtools')
     depends_on("py-awkward", when="+devtools")
     depends_on("py-black", when="+devtools")
@@ -143,12 +130,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-torch", when="+devtools")
     depends_on("py-uproot", when="+devtools")
     depends_on("py-xgboost", when="+devtools")
-    depends_on("xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
-    # depends_on('py-pyg4ometry', when='+devtools')
-    # depends_on('py-tensorflow') # todo: check if we should integrate.
-    # depends_on('py-zfit') # todo: add in spack
-    # depends_on('py-root-pandas') # todo: add in spack
 
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
@@ -162,12 +144,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             # When building podio with +rntuple there are warnings constantly without this
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
-        # Add fastjet for FCCAnalyses (it's being loaded by ROOT)
-        if "fastjet" in self.spec:
-            env.prepend_path(
-                "LD_LIBRARY_PATH", self.spec["fastjet"].libs.directories[0]
-            )
-
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if self.compiler.operating_system == "ubuntu22.04":
             env.prepend_path(
@@ -180,6 +156,17 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
                 "OPENDATADETECTOR",
                 self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
             )
+            env.set(
+                "OPENDATADETECTOR_DATA",
+                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
+            )
+
+        # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
+        # <root>/lib, instead of <root>/lib/root which is the path that is set
+        # in the recipe
+        # ROOT needs to be in LD_LIBRARY_PATH to prevent using system installations
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
+        env.prepend_path("PYTHONPATH", self.spec["root"].prefix.lib)
 
         # Don't use libtools from the system
         if "libtool" in self.spec:
