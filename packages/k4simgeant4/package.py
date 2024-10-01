@@ -11,6 +11,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     maintainers = ["vvolkl"]
 
     version("main", branch="main")
+    version("0.1.0pre15", tag="v0.1.0pre15")
     version("0.1.0pre14", tag="v0.1.0pre14")
     version("0.1.0pre13", tag="v0.1.0pre13")
     version("0.1.0pre12", tag="v0.1.0pre12")

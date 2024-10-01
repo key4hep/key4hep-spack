@@ -10,6 +10,11 @@ class K4reco(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
 
+    version(
+        "0.1.0",
+        sha256="93ee8a66aeb31ed501a356a145551f9836fb744e22b435c6577ea5274ece39c6",
+    )
+
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")
