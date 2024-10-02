@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Marlinmlflavortagging(CMakePackage, Ilcsoftpackage):
+class Marlinmlflavortagging(CMakePackage, Key4hepPackage):
     """Package with processors for running deep ML based flavor taggers in Marlin."""
 
     homepage = "https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging"
     git = "https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging.git"
-    url = "https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging"
+    url = "https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging/-/archive/v0.1.0/MarlinMLFlavorTagging-v0.1.0.tar.gz"
 
     maintainers("tmadlener")
 
     version("main", branch="main")
+    version(
+        "0.1.0",
+        sha256="4ad9193e433fc7d06f53941b982a52f257f13bdfc882100ed42d6c7ca8689a20",
+    )
 
     depends_on("aida")
     depends_on("ilcutil")
