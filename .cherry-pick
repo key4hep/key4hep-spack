@@ -57,3 +57,4 @@ git cherry-pick 248a7c0f4894222bfcd0bb76b13a984c92d4c938 -X theirs --no-commit
 # Versions for the release, in order DD4hep and podio&edm4hep
 git cherry-pick 43d1cdb0bd4780bff369dafa681a8a7939313784 -X theirs --no-commit
 git cherry-pick 5d9c534018593fdef5db1028c60026d26bf4d65b -X theirs --no-commit
+git cherry-pick be8112e1ff9dea12296bfafb341cc5953e72c415 -X theirs --no-commit
