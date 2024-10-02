@@ -36,4 +36,4 @@ class K4generatorsconfig(CMakePackage):
     def setup_run_environment(self, env):
         env.set("K4GENERATORSCONFIG", self.prefix.share.k4GeneratorsConfig)
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("PATH", self.perfix.bin)
+        env.prepend_path("PATH", self.prefix.bin)
