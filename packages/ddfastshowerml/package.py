@@ -3,19 +3,23 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Ddfastshowerml(CMakePackage, Ilcsoftpackage):
+class Ddfastshowerml(CMakePackage, Key4hepPackage):
     """Package with utilities and plugins that allow to run fast simulation in Geant4 from ML inference within ddsim (DDG4)"""
 
     homepage = "https://gitlab.desy.de/ilcsoft/ddfastshowerml"
     git = "https://gitlab.desy.de/ilcsoft/ddfastshowerml.git"
-    url = "https://gitlab.desy.de/ilcsoft/ddfastshowerml"
+    url = "https://gitlab.desy.de/ilcsoft/ddfastshowerml/-/archive/v0.1.0/ddfastshowerml-v0.1.0.tar.gz"
 
-    maintainers = ["jmcarcell"]
+    maintainers = ["jmcarcell", "tmadlener"]
 
     version("main", branch="main")
+    version(
+        "0.1.0",
+        sha256="a9628624736baea4261950615b698c9389763c18953c29bb5b1635d8d2dd9c3b",
+    )
 
     variant("inference", values=("onnxruntime", "torch", "both"), default="both")
 
