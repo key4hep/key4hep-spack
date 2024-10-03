@@ -9,6 +9,12 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4FWCore.git"
 
     version("main", branch="main")
+
+    version(
+        "1.1.0",
+        sha256="31b03daf5f839708113f3452c6626975aa8b070a7cbbb3576b29b86918df13d3",
+    )
+
     version("1.0pre19", tag="v01-00pre19")
     version("1.0pre18", tag="v01-00pre18")
     version("1.0pre17", tag="v01-00pre17")
