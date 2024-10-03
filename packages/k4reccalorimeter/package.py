@@ -12,6 +12,10 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.0pre15",
+        sha256="8406e7ca3ff78a93ace7ca645f49bea979931b9f268e5d2aaad958886f9e7b55",
+    )
+    version(
         "0.1.0pre14",
         sha256="4e3480e02806a708fabcb4014f082e1de89cb4a2fb838994848bef6664ff5168",
     )
