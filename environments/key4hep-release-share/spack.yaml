@@ -1,0 +1,12 @@
+spack:
+  view: false
+  include:
+  - ./config.yaml
+  # Put packages before the common packages so that it doesn't get overwritten
+  # See https://github.com/spack/spack/blob/master/lib/spack/docs/environments.rst?plain=1#L528
+  - ../key4hep-common/packages.yaml
+  - ../key4hep-common/compilers.yaml
+  repos:
+  - ../..
+  specs:
+  - geant4-data@11.2.2
