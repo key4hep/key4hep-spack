@@ -5,7 +5,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     """Core framework components of the Key4HEP project"""
 
     homepage = "https://github.com/key4hep/k4FWCore"
-    url = "https://github.com/key4hep/k4FWCore/archive/v00-01.tar.gz"
+    url = "https://github.com/key4hep/k4FWCore/archive/v00-01-00.tar.gz"
     git = "https://github.com/key4hep/k4FWCore.git"
 
     version("main", branch="main")
