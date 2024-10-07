@@ -20,12 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: GH_TOKEN
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "GITHUB_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
-
       - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
@@ -39,7 +33,11 @@ jobs:
             fi
 
       - name: Setup environment and concretize
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+
+            export GITHUB_TOKEN=${GH_TOKEN}
 
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
