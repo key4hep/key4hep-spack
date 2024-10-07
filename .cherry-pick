@@ -42,7 +42,8 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46365.diff
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46372.diff | patch -p1
 
 # py-onnx: add fixes for GCC 14, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
+# curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
+git cherry-pick 096ab11961995ac8d69f7b177cbcadf618d3068e -X theirs --no-commit
 
 # texlive: add new versions, remove!
 git cherry-pick 5398b1be15245e1be480c5aa4706f57795208505 -X theirs --no-commit
