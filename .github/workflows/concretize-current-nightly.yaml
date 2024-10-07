@@ -56,7 +56,7 @@ jobs:
             cd /spack
             git checkout $(cat /key4hep-spack/.latest-commit)
             source /key4hep-spack/.cherry-pick
-            source spack/share/spack/setup-env.sh
+            source /spack/share/spack/setup-env.sh
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release
