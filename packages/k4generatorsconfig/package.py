@@ -17,7 +17,9 @@ class K4generatorsconfig(CMakePackage):
 
     version("main", branch="main")
 
-    version("0.1", sha256="0309f25bc4149de8c17a4615146074ece46f6f384a152e0fd05853ec652d9ad4")
+    version(
+        "0.1", sha256="0309f25bc4149de8c17a4615146074ece46f6f384a152e0fd05853ec652d9ad4"
+    )
 
     depends_on("podio")
     depends_on("edm4hep")
