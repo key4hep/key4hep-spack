@@ -1,0 +1,129 @@
+packages:
+  acts:
+    require: build_type=Release
+  aidatt:
+    require: build_type=Release
+  ced:
+    require: build_type=Release
+  cedviewer:
+    require: build_type=Release
+  cepcsw:
+    require: build_type=Release
+  clicperformance:
+    require: build_type=Release
+  conformaltracking:
+    require: build_type=Release
+  dd4hep:
+    require: build_type=Release
+  ddfastshowerml:
+    require: build_type=Release
+  ddkaltest:
+    require: build_type=Release
+  ddmarlinpandora:
+    require: build_type=Release
+  delphes:
+    require: build_type=Release
+  dual-readout:
+    require: build_type=Release
+  edm4hep:
+    require: build_type=Release cxxstd=20
+  fcalclusterer:
+    require: build_type=Release
+  fccanalyses:
+    require: build_type=Release
+  fccdetectors:
+    require: build_type=Release
+  fccsw:
+    require: build_type=Release
+  forwardtracking:
+    require: build_type=Release
+  gaudi:
+    require: build_type=Release
+  gear:
+    require: build_type=Release
+  ilcutil:
+    require: build_type=Release cxxstd=20
+  ildperformance:
+    require: build_type=Release
+  key4hep-stack:
+    require: build_type=Release
+  k4clue:
+    require: build_type=Release
+  k4edm4hep2lcioconv:
+    require: build_type=Release
+  k4fwcore:
+    require: build_type=Release
+  k4gaudipandora:
+    require: build_type=Release
+  k4gen:
+    require: build_type=Release
+  k4generatorsconfig:
+    require: build_type=Release
+  k4geo:
+    require: build_type=Release
+  k4marlinwrapper:
+    require: build_type=Release
+  k4projecttemplate:
+    require: build_type=Release
+  k4reccalorimeter:
+    require: build_type=Release
+  k4reco:
+    require: build_type=Release
+  k4rectracker:
+    require: build_type=Release
+  k4simdelphes:
+    require: build_type=Release
+  k4simgeant4:
+    require: build_type=Release
+  kaltest:
+    require: build_type=Release
+  kitrack:
+    require: build_type=Release
+  kitrackmarlin:
+    require: build_type=Release
+  lccd:
+    require: build_type=Release
+  lcfiplus:
+    require: build_type=Release
+  lcio:
+    require: build_type=Release cxxstd=20
+  lctuple:
+    require: build_type=Release
+  marlin:
+    require: build_type=Release
+  marlindd4hep:
+    require: build_type=Release
+  marlinfastjet:
+    require: build_type=Release
+  marlinkinfit:
+    require: build_type=Release
+  marlinkinfitprocessors:
+    require: build_type=Release
+  marlinmlflavortagging:
+    require: build_type=Release
+  marlinreco:
+    require: build_type=Release
+  marlintrk:
+    require: build_type=Release
+  marlintrkprocessors:
+    require: build_type=Release
+  marlinutil:
+    require: build_type=Release
+  opendatadetector:
+    require: build_type=Release
+  overlay:
+    require: build_type=Release
+  pandoraanalysis:
+    require: build_type=Release
+  physsim:
+    require: build_type=Release
+  podio:
+    require: build_type=Release
+  raida:
+    require: build_type=Release
+  sio:
+    require: build_type=Release cxxstd=20
+
+  whizard:
+    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
+
