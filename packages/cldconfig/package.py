@@ -16,8 +16,14 @@ class Cldconfig(CMakePackage):
     maintainers = ["jmcarcell"]
 
     version("main", branch="main")
-    version("2024-10-06", sha256="7ded5bc3f63eed6b6806d9581e1b47d7ca14a0c97ef5d61331d4ef88b1d7d643")
-    version("2024-04-12", sha256="8a15971152391da3b41bbf543316ad6b41949cd3d3c82e334a7a7b86092591da")
+    version(
+        "2024-10-06",
+        sha256="7ded5bc3f63eed6b6806d9581e1b47d7ca14a0c97ef5d61331d4ef88b1d7d643",
+    )
+    version(
+        "2024-04-12",
+        sha256="8a15971152391da3b41bbf543316ad6b41949cd3d3c82e334a7a7b86092591da",
+    )
 
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
