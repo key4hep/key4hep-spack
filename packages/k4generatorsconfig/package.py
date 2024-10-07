@@ -5,7 +5,7 @@
 
 
 class K4generatorsconfig(CMakePackage):
-    """DD4hep geometry models for future colliders."""
+    """A python based module for the automatic generation of inputfiles for Monte-Carlo(MC) generators."""
 
     homepage = "https://github.com/key4hep/k4GeneratorsConfig"
     git = "https://github.com/key4hep/k4GeneratorsConfig.git"
@@ -23,6 +23,8 @@ class K4generatorsconfig(CMakePackage):
     depends_on("hepmc3")
     depends_on("heppdt")
     depends_on("pythia8")
+    depends_on("python")
+    depends_on("py-pyyaml")
 
     def cmake_args(self):
         args = []
@@ -32,4 +34,6 @@ class K4generatorsconfig(CMakePackage):
         return args
 
     def setup_run_environment(self, env):
-        env.set("K4GENERATORSCONFIG", self.prefix.share.k4geo)
+        env.set("K4GENERATORSCONFIG", self.prefix.share.k4GeneratorsConfig)
+        env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("PATH", self.prefix.bin)
