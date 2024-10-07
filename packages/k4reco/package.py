@@ -12,7 +12,7 @@ class K4reco(CMakePackage, Key4hepPackage):
 
     version(
         "0.1.0",
-        sha256="93ee8a66aeb31ed501a356a145551f9836fb744e22b435c6577ea5274ece39c6",
+        sha256="6309de6cb083f1d263c40b99f06b47b774d485dc5361f98dad2f6e111376d69e",
     )
 
     depends_on("dd4hep")
