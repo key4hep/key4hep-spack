@@ -19,6 +19,7 @@ class K4geo(CMakePackage):
     version(
         "0.21",
         sha256="11074495f861d944b741187e8e4dedb4e7f85124f304605f8f8c7dce69dda4fb",
+        url="https://github.com/key4hep/k4geo/archive/refs/tags/v00-21.tar.gz",
     )
     version(
         "0.20.0",
