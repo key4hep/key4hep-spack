@@ -1,0 +1,78 @@
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  concretize-current-nightly:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        image: [alma9, ubuntu22]
+        build_type: [release, nightly]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start container
+        run: |
+            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            if [ "${{ matrix.image }}" = "alma9" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
+            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
+            else
+              echo "Unknown image"
+              exit 1
+            fi
+
+      - name: Setup environment and concretize
+        run: |
+
+            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
+            set -e
+
+            cd /
+
+            if [ "${{ matrix.image }}" = "alma9" ]; then
+              os=almalinux9
+            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
+              os=ubuntu22
+            else
+              echo "Unknown image"
+              exit 1
+            fi
+
+            rel=$(find /cvmfs/sw-nightlies.hsf.org/key4hep/releases/ -maxdepth 3 -type f -wholename "*$os*opt*/.scratch" | sort -r | head -1)
+            rel=$(dirname $rel)
+
+            git clone https://github.com/spack/spack -q
+            cd /spack
+            git checkout $(cat $rel/.spack-commit)
+            source $rel/.cherry-pick
+            source spack/share/spack/setup-env.sh
+
+            if [ "${{ matrix.build_type }}" = "release" ]; then
+                env=key4hep-release
+            elif [ "${{ matrix.build_type }}" = "nightly" ]; then
+                env=key4hep-nightly-opt
+                pip3 install pyyaml
+                python3 /key4hep-spack/scripts/fetch_nightly_versions.py --path /key4hep-spack/environments/key4hep-common/packages.yaml --extra-path /key4hep-spack/environments/key4hep-nightly-opt/packages.yaml ""
+            else
+                echo "Unknown build type"
+                exit 1
+            fi
+            cd /key4hep-spack/environments/${env}
+            spack env activate .
+            spack concretize
+
+            EOF
+
+            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
+
+            # cat ${GITHUB_WORKSPACE}/script_container.sh
+
+            docker exec container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
