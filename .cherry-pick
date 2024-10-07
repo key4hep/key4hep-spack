@@ -11,7 +11,7 @@ git cherry-pick 42c070632bcb0f8333bc029e17a53646d9589d7e -X theirs --no-commit
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
 git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
 
-# add a recent version of madgraph, remove when https://github.com/spack/spack/pull/41128 is merged
+# add a recent version of madgraph, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff | patch -p1
 
 # add vdt for CPATH, needed for podio+rntuple
@@ -48,7 +48,7 @@ git cherry-pick 096ab11961995ac8d69f7b177cbcadf618d3068e -X theirs --no-commit
 # texlive: add new versions, remove!
 git cherry-pick 5398b1be15245e1be480c5aa4706f57795208505 -X theirs --no-commit
 
-# texlive: fix mtxrun, remove when https://github.com/spack/spack/pull/46465 is merged
+# texlive: fix mtxrun, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46465.diff | patch -p1
 
 # py-onnx: add a patch for the standard, remove after 1.15.0
@@ -63,7 +63,7 @@ git cherry-pick bbb97dfb9b976e588ad63b19cd401788c9d6e5bc -X theirs --no-commit
 # madgraph5amc: add v3.5.6, remove!
 git cherry-pick 5777576e37ee28d674e2520d3f10b3f651a7680e -X theirs --no-commit
 
-py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove!
+# py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove!
 git cherry-pick 06f21ae4e2499bccaa6c52359bafbb93c161944b -X theirs --no-commit
 
 # Versions for the release, in order DD4hep and podio&edm4hep and LCIO
