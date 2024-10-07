@@ -75,7 +75,11 @@ jobs:
             cd /key4hep-spack/environments/${env}
             spack env activate .
             spack config add "upstreams:nightly-from-scratch:install_tree: $rel"
-            spack concretize
+            spack concretize >> conc.txt
+            cat conc.txt
+            echo "========================================="
+            echo "List of changes:"
+            cat conc.txt | grep -E " ^"
 
             EOF
 
