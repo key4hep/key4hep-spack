@@ -63,6 +63,8 @@ git cherry-pick bbb97dfb9b976e588ad63b19cd401788c9d6e5bc -X theirs --no-commit
 # madgraph5amc: add v3.5.6, remove when https://github.com/spack/spack/pull/46844 is merged
 git cherry-pick 5777576e37ee28d674e2520d3f10b3f651a7680e -X theirs --no-commit
 
+py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove when https://github.com/spack/spack/pull/46845 is merged
+git cherry-pick 06f21ae4e2499bccaa6c52359bafbb93c161944b -X theirs --no-commit
 
 # Versions for the release, in order DD4hep and podio&edm4hep and LCIO
 git cherry-pick 43d1cdb0bd4780bff369dafa681a8a7939313784 -X theirs --no-commit
