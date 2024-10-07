@@ -5,7 +5,7 @@ class K4reco(CMakePackage, Key4hepPackage):
     """Reconstruction algorithms using Gaudi in native key4hep"""
 
     homepage = "https://github.com/key4hep/k4Reco"
-    url = "https://github.com/key4hep/k4Reco/archive/v00-01.tar.gz"
+    url = "https://github.com/key4hep/k4Reco/archive/v00-01-00.tar.gz"
     git = "https://github.com/key4hep/k4Reco.git"
 
     version("main", branch="main")
