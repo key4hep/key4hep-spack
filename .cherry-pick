@@ -32,10 +32,10 @@ git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 # zziplib: add 0.13.78, remove!
 git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
 
-# pybind11: fix pkgconfig, remove when https://github.com/spack/spack/pull/46298 is merged
+# pybind11: fix pkgconfig, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46298.diff | patch -p1
 
-# gaudi: add patches, remove when https://github.com/spack/spack/pull/46365 is merged
+# gaudi: add patches, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46365.diff | patch -p1
 
 # py-awkward and py-awkward-cpp: fixes, remove!
@@ -53,7 +53,7 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46465.diff
 
 # py-onnx: add a patch for the standard, remove after 1.15.0
 git add .
-git cherry-pick 248a7c0f4894222bfcd0bb76b13a984c92d4c938 -X theirs --no-commit
+git cherry-pick bbd205543b09139f2f57f21099eb366c9f183d76 -X theirs --no-commit
 
 # py-cython: add version 3.0.11, remove when https://github.com/spack/spack/pull/46772 is merged
 git cherry-pick bb9bbeecad68dcc1e14211fa7940d26df663aaea -X theirs --no-commit
