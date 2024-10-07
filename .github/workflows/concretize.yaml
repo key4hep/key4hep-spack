@@ -39,10 +39,8 @@ jobs:
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
 
-            cd /
-            ls -lah /
-            ls -lah /key4hep-spack
 
+            cd /
             git clone https://github.com/spack/spack -q
             source spack/share/spack/setup-env.sh
 
