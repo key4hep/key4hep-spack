@@ -23,7 +23,7 @@ class K4generatorsconfig(CMakePackage):
     depends_on("hepmc3")
     depends_on("heppdt")
     depends_on("pythia8")
-    depends_on("python@3.7:")
+    depends_on("python")
     depends_on("py-pyyaml")
 
     def cmake_args(self):
