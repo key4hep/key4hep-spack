@@ -52,7 +52,7 @@ jobs:
             git clone https://github.com/spack/spack -q
             cd /spack
             git checkout $(cat $rel/.spack-commit)
-            source $rel/.cherry-pick
+            source $/key4hep-spack/.cherry-pick
             source spack/share/spack/setup-env.sh
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
