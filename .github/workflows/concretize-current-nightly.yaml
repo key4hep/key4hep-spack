@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: GH_TOKEN
+        shell: bash
+        run: echo "GITHUB_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
+
       - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
