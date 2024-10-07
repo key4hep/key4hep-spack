@@ -79,7 +79,7 @@ jobs:
             cat conc.txt
             echo "========================================="
             echo "List of changes:"
-            cat conc.txt | grep -E " ^"
+            cat conc.txt | grep -E " -"
 
             EOF
 
