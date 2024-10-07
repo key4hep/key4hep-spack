@@ -1,3 +1,6 @@
+# Concretize using the current nightlies as upstream to check if packages are changed or not
+# with the new changes
+
 on:
   push:
     branches:
@@ -13,7 +16,7 @@ jobs:
     strategy:
       matrix:
         image: [alma9, ubuntu22]
-        build_type: [release, nightly]
+        build_type: [nightly]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +54,7 @@ jobs:
 
             git clone https://github.com/spack/spack -q
             cd /spack
-            git checkout $(cat $rel/.spack-commit)
+            git checkout $(cat /key4hep-spack/.latest-commit)
             source /key4hep-spack/.cherry-pick
             source spack/share/spack/setup-env.sh
 
@@ -67,6 +70,7 @@ jobs:
             fi
             cd /key4hep-spack/environments/${env}
             spack env activate .
+            spack config add "upstreams:nightly-from-scratch:install_tree: $rel"
             spack concretize
 
             EOF
