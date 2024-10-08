@@ -124,6 +124,3 @@ packages:
   sio:
     require: build_type=Release cxxstd=20
 
-  whizard:
-    require: ~fastjet+latex+lcio~lhapdf+openloops+openmp+pythia8+gosam hepmc=3
-
