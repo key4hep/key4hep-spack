@@ -189,6 +189,11 @@ if [[ "$1" = "-r" && -n "$2" ]]; then
     rel="$2"
 fi
 
+# Build types are supported only after 2024-10-03
+if [[ ! "$rel" == "latest"* ]] && [[ "$rel" < "2024-10-03" ]]; then
+    build_type=""
+fi
+
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="centos"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="7"' ]] ||
    [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"7* ]]; then
     os="centos7"
@@ -259,7 +264,7 @@ for ((i=1; i<=$#; i++)); do
     esac
 done
 
-k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
+k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
 
 if [ -n "$KEY4HEP_STACK" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
