@@ -56,7 +56,7 @@ git add .
 git cherry-pick 248a7c0f4894222bfcd0bb76b13a984c92d4c938 -X theirs --no-commit
 
 # py-cython: add version 3.0.11, remove when https://github.com/spack/spack/pull/46772 is merged
-git cherry-pick bb9bbeecad68dcc1e14211fa7940d26df663aaea -X theirs --no-commit
+git cherry-pick 072d308c0b4b53c0d0528ee3a7e59de110133968 -X theirs --no-commit
 # py-lxml: add version 5.3.0, remove when https://github.com/spack/spack/pull/46771 is merged
 git cherry-pick bbb97dfb9b976e588ad63b19cd401788c9d6e5bc -X theirs --no-commit
 
