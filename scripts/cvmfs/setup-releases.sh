@@ -40,8 +40,9 @@ function list_releases() {
         usage
         return 1
     fi
-    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*$build_type*" |
+    find /cvmfs/sw.hsf.org/key4hep/releases/ -maxdepth 2 -type d -name "*$name*$compiler*$build_type*" |
     \awk -F/ '{print $(NF-1)}' | sort
+    unset compiler
 }
 
 function list_packages() {
@@ -79,29 +80,32 @@ function list_packages() {
     fi
     folders+=(/cvmfs/sw.hsf.org/key4hep/releases/$rel/*$name*-*$build_type*)
 
-    declare -a package_versions
-    package_versions=()
+    declare -A package_versions
 
     for folder in "${folders[@]}"; do
         for package in $(ls $folder); do
             package_name=$(basename "$package")
             version_string=$(ls $folder/$package_name -t | head -n 1)
             package_version=$(echo "$version_string" | awk '{if ($NF ~ /develop/) {split($NF,arr,"_"); printf "%s", arr[1]} else {split($(NF),arr,"-"); printf "%s", arr[1]; for (i=2; i<length(arr); i++) printf "-%s", arr[i] } printf "\n" }')
-
-            # Update the version of the package in the associative array
-            if [[ " ${package_versions[@]} " =~ "${package_name}" ]]; then
-                package_versions=("${package_versions[@]/$package_name=*/$package_name=$package_version}")
-            else
-                package_versions+=("$package_name=$package_version")
-            fi
+            package_versions["$package_name"]="$package_version"
         done
     done
 
-    # Print the final version of each package
-    for pair in "${package_versions[@]}"; do
-        echo ${pair%%=*} ${pair#*=}
-    done
+    # Print the final version for each package
+    if [ -z "$ZSH_VERSION" ]; then
+        # Bash
+        for package_name in $(printf "%s\n" "${!package_versions[@]}" | sort); do
+            package_version="${package_versions[$package_name]}"
+            echo "$package_name $package_version"
+        done
+    else
+        # Zsh
+        for key in ${(ok)package_versions}; do
+            echo "$key $package_versions[$key]" | tr -d '"'
+        done
+    fi
 
+    unset compiler
 }
 
 
@@ -255,7 +259,7 @@ for ((i=1; i<=$#; i++)); do
     esac
 done
 
-k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*$build_type | head -n1)
+k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
 
 if [ -n "$KEY4HEP_STACK" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
@@ -265,7 +269,7 @@ fi
 if [ "$os" = "centos7" ]; then
     echo "Centos/RHEL 7 detected"
     if [ "$rel" = "latest" ]; then
-        echo "This OS will reach the end of its maintenance support soon and won't have Key4hep builds in the future, consider upgrading to Alma 9"
+        echo "This OS has reached the end of its maintenance support and won't have Key4hep builds in the future, consider upgrading to Alma 9"
     fi
 elif [ "$os" = "almalinux9" ]; then
     echo "AlmaLinux/RockyLinux/RHEL 9 detected"
@@ -301,3 +305,4 @@ echo "        $command"
 echo ""
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
+echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"

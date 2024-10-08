@@ -49,7 +49,7 @@ jobs:
             source /key4hep-spack/.cherry-pick
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
-                env=key4hep-release
+                env=key4hep-release-opt
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
                 pip3 install pyyaml

@@ -9,14 +9,17 @@ class K4generatorsconfig(CMakePackage):
 
     homepage = "https://github.com/key4hep/k4GeneratorsConfig"
     git = "https://github.com/key4hep/k4GeneratorsConfig.git"
-    # To be changed once there is a first version
-    url = "https://github.com/key4hep/k4GeneratorsConfig.git/archive/v00-16-07.tar.gz"
+    url = "https://github.com/key4hep/k4GeneratorsConfig/archive/refs/tags/v0.1.tar.gz"
 
     generator = "Ninja"
 
     maintainers = ["jmcarcell"]
 
     version("main", branch="main")
+
+    version(
+        "0.1", sha256="0309f25bc4149de8c17a4615146074ece46f6f384a152e0fd05853ec652d9ad4"
+    )
 
     depends_on("podio")
     depends_on("edm4hep")

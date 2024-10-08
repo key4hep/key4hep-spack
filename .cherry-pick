@@ -11,7 +11,7 @@ git cherry-pick 42c070632bcb0f8333bc029e17a53646d9589d7e -X theirs --no-commit
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
 git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
 
-# add a recent version of madgraph, remove when https://github.com/spack/spack/pull/41128 is merged
+# add a recent version of madgraph, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff | patch -p1
 
 # add vdt for CPATH, needed for podio+rntuple
@@ -32,29 +32,42 @@ git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
 # zziplib: add 0.13.78, remove!
 git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
 
-# pybind11: fix pkgconfig, remove when https://github.com/spack/spack/pull/46298 is merged
+# pybind11: fix pkgconfig, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46298.diff | patch -p1
 
-# gaudi: add patches, remove when https://github.com/spack/spack/pull/46365 is merged
+# gaudi: add patches, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46365.diff | patch -p1
 
 # py-awkward and py-awkward-cpp: fixes, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46372.diff | patch -p1
 
 # py-onnx: add fixes for GCC 14, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
+# curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
+git cherry-pick 096ab11961995ac8d69f7b177cbcadf618d3068e -X theirs --no-commit
 
 # texlive: add new versions, remove!
 git cherry-pick 5398b1be15245e1be480c5aa4706f57795208505 -X theirs --no-commit
 
-# texlive: fix mtxrun, remove when https://github.com/spack/spack/pull/46465 is merged
+# texlive: fix mtxrun, remove!
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46465.diff | patch -p1
 
 # py-onnx: add a patch for the standard, remove after 1.15.0
 git add .
 git cherry-pick 248a7c0f4894222bfcd0bb76b13a984c92d4c938 -X theirs --no-commit
 
-# Versions for the release, in order DD4hep and podio&edm4hep
+# py-cython: add version 3.0.11, remove when https://github.com/spack/spack/pull/46772 is merged
+git cherry-pick 072d308c0b4b53c0d0528ee3a7e59de110133968 -X theirs --no-commit
+# py-lxml: add version 5.3.0, remove when https://github.com/spack/spack/pull/46771 is merged
+git cherry-pick 94ef87d013b3ea9627c1aa850b8929dbe217bf20 -X theirs --no-commit
+
+# madgraph5amc: add v3.5.6, remove!
+git cherry-pick 5777576e37ee28d674e2520d3f10b3f651a7680e -X theirs --no-commit
+
+# py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove!
+git cherry-pick 06f21ae4e2499bccaa6c52359bafbb93c161944b -X theirs --no-commit
+
+# Versions for the release, in order DD4hep and podio&edm4hep and LCIO
 git cherry-pick 43d1cdb0bd4780bff369dafa681a8a7939313784 -X theirs --no-commit
 git cherry-pick 5d9c534018593fdef5db1028c60026d26bf4d65b -X theirs --no-commit
 git cherry-pick be8112e1ff9dea12296bfafb341cc5953e72c415 -X theirs --no-commit
+git cherry-pick 1c6b6d0a0819409b75d7a59a90c3daf24fe80fee -X theirs --no-commit

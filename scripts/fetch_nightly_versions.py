@@ -68,6 +68,11 @@ if __name__ == "__main__":
         "--extra-path",
         help="path to a yaml file with spack packages",
     )
+    parser.add_argument(
+        "--only-merge",
+        help="only merge the packages.yaml files",
+        action="store_true",
+    )
     # parser.add_argument(
     #     "--spack",
     #     help="path to the spack.yaml in the nightly environment",
@@ -164,6 +169,8 @@ if __name__ == "__main__":
         ("raida", "ilcsoft/raida"),
         ("sio", "ilcsoft/sio"),
     ]:
+        if args.only_merge:
+            break
         gitlab = False
         if package == "opendatadetector":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
