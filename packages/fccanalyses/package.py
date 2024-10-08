@@ -57,6 +57,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("acts@:29", when="@:0.8.0 +acts")
     depends_on("acts@19.6.0:28", when="@0.7.0 +acts")
     depends_on("eigen")
+    depends_on("doxygen", when="@0.10.0:")
+    depends_on("podio +datasource", when="@0.10.0:")
     depends_on("dd4hep", when="+dd4hep")
     depends_on("py-pyyaml", type=("build", "run"))
     depends_on("py-onnxruntime", when="+onnx")
