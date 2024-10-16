@@ -75,7 +75,7 @@ function list_packages() {
 
     # Define an array containing the paths to the folders
     folders=("$latest_previous_release")
-    if [ $build_type = "dbg" ] && [ -d $(echo $latest_previous_release | sed 's/opt/dbg/') ]; then
+    if [ "$build_type" = "dbg" ] && [ -d $(echo $latest_previous_release | sed 's/opt/dbg/') ]; then
         folders+=($(echo $latest_previous_release | sed 's/opt/dbg/'))
     fi
     folders+=(/cvmfs/sw.hsf.org/key4hep/releases/$rel/*$name*-*$build_type*)
