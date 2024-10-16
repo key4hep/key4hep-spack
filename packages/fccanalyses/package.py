@@ -44,6 +44,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     variant("onnx", default=True, description="Build ONNX-dependent analyzers.")
     variant("acts", default=False, description="Build Acts-dependent analyzers.")
     variant("dd4hep", default=True, description="Build DD4hep-dependent analyzers.")
+    variant("docs", default=False, description="Build documentation.")
 
     generator = "Ninja"
 
@@ -52,6 +53,8 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("vdt")
     depends_on("fastjet")
     depends_on("python")
+    depends_on("podio")
+    depends_on("podio+datasource", when="@0.10.0:")
     depends_on("edm4hep")
     depends_on("acts", when="+acts")
     depends_on("acts@:29", when="@:0.8.0 +acts")
@@ -62,6 +65,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("py-onnxruntime", when="+onnx")
     depends_on("delphes@3.5.1pre07:", when="@0.7.0:")
     depends_on("catch2@3:", type=("test"))
+    depends_on("doxygen", type="build", when="+docs")
 
     def cmake_args(self):
         args = [
@@ -69,8 +73,10 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
             self.define_from_variant("WITH_ACTS", "acts"),
             self.define_from_variant("WITH_DD4HEP", "dd4hep"),
             self.define_from_variant("WITH_ONNX", "onnx"),
+            self.define_from_variant("FCCANALYSES_DOCUMENTATION", "docs"),
             self.define("BUILD_TESTING", self.run_tests),
         ]
+
         return args
 
     # todo: update the cmake config to remove this
