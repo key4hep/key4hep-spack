@@ -17,6 +17,7 @@ class PyPymadx(PythonPackage):
 
     version('master', branch='master')
 
+    depends_on("py-setuptools", type="build")
     depends_on("py-matplotlib@3:")
     depends_on("py-numpy@1.14:")
     depends_on("py-importlib-metadata")
