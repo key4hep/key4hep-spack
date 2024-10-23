@@ -22,7 +22,7 @@ class PyPybdsim(PythonPackage):
     depends_on("py-importlib-metadata")
     depends_on("py-scipy")
     depends_on("py-fortranformat")
-    depends_on("jinja2")
+    depends_on("py-jinja2")
 
     depends_on("py-pymadx")
     depends_on("pytransport")
