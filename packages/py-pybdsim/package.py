@@ -25,4 +25,4 @@ class PyPybdsim(PythonPackage):
     depends_on("py-jinja2")
 
     depends_on("py-pymadx")
-    depends_on("pytransport")
+    depends_on("py-pytransport")
