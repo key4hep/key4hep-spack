@@ -15,7 +15,7 @@ class PyPymadx(PythonPackage):
 
     maintainers = ["jmcarcell"]
 
-    version('master', branch='master')
+    version("master", branch="master")
 
     depends_on("py-setuptools", type="build")
     depends_on("py-matplotlib@3:")

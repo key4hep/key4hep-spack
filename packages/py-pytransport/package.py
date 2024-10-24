@@ -15,7 +15,7 @@ class PyPytransport(PythonPackage):
 
     maintainers = ["jmcarcell"]
 
-    version('master', branch='master')
+    version("master", branch="master")
 
     depends_on("py-setuptools", type="build")
 
