@@ -8,7 +8,7 @@ class PyPytransport(PythonPackage):
     """A Python based converter for TRANSPORT files to BDSIM readable gmad files"""
 
     homepage = "https://bitbucket.org/jairhul/pytransport"
-    url = "https://bitbucket.org/jairhul/pytransport"
+    url = "https://bitbucket.org/jairhul/pytransport/get/v2.0.2.tar.gz"
     git = "https://bitbucket.org/jairhul/pytransport.git"
 
     tags = ["hep"]
@@ -16,6 +16,11 @@ class PyPytransport(PythonPackage):
     maintainers = ["jmcarcell"]
 
     version("master", branch="master")
+
+    version(
+        "2.0.2",
+        sha256="61b2c6dd6d0a682a3499a396114c9f6815513f7d4e737a6c67e2d88f68046f00",
+    )
 
     depends_on("py-setuptools", type="build")
 
