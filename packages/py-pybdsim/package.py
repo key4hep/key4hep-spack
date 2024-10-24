@@ -8,7 +8,7 @@ class PyPybdsim(PythonPackage):
     """Utilities for preparing and analysing BDSIM input and output as well as controlling BDSIM"""
 
     homepage = "https://bitbucket.org/jairhul/pybdsim"
-    url = "https://bitbucket.org/jairhul/pybdsim"
+    url = "https://bitbucket.org/jairhul/pybdsim/get/v3.6.1.tar.gz"
     git = "https://bitbucket.org/jairhul/pybdsim.git"
 
     tags = ["hep"]
@@ -16,6 +16,11 @@ class PyPybdsim(PythonPackage):
     maintainers = ["jmcarcell"]
 
     version("master", branch="master")
+
+    version(
+        "3.6.1",
+        sha256="7bb7ba5d0f911dfc0115dce5b4a946743b34971836ef4112b2ede2195826cc11",
+    )
 
     depends_on("py-setuptools", type="build")
     depends_on("py-importlib-resources", type=("build", "run"))

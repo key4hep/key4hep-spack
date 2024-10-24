@@ -8,7 +8,7 @@ class PyPymadx(PythonPackage):
     """Utilities for processing and analysing MADX output"""
 
     homepage = "https://bitbucket.org/jairhul/pymadx"
-    url = "https://bitbucket.org/jairhul/pymadx"
+    url = "https://bitbucket.org/jairhul/pymadx/get/v2.2.1.tar.gz"
     git = "https://bitbucket.org/jairhul/pymadx.git"
 
     tags = ["hep"]
@@ -16,6 +16,11 @@ class PyPymadx(PythonPackage):
     maintainers = ["jmcarcell"]
 
     version("master", branch="master")
+
+    version(
+        "2.2.1",
+        sha256="e329204931de9be8b0ab88e7ba92045136165c382f8de02f0e11364671813276",
+    )
 
     depends_on("py-setuptools", type="build")
     depends_on("py-matplotlib@3:")
