@@ -15,7 +15,7 @@ class PyPybdsim(PythonPackage):
 
     maintainers = ["jmcarcell"]
 
-    version('master', branch='master')
+    version("master", branch="master")
 
     depends_on("py-setuptools", type="build")
     depends_on("py-importlib-resources", type=("build", "run"))
@@ -29,3 +29,6 @@ class PyPybdsim(PythonPackage):
 
     depends_on("py-pymadx")
     depends_on("py-pytransport")
+
+    def setup_run_environment(self, env):
+        env.prepend_path("PYTHONPATH", self.spec["py-importlib-resources"].prefix.lib)
