@@ -16,6 +16,15 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     maintainers = ["vvolkl", "tmadlener"]
 
     version("main", branch="main")
+
+    version(
+        "00-07-02",
+        sha256="bda65916f13b40dc30eb618e0c02b888d70e77a9a080e2f3557c616ef1a995df",
+    )
+    version(
+        "00-07-01",
+        sha256="ae0b5e913c78cfe89c89ff5e04c0d46de9235b34dbdf5cb64ca704530e0f6ced",
+    )
     version(
         "00-07",
         sha256="c9d2c3dd74c7047461bf13558c1d26aec6e68b5fe73cab513ed1a83f9b1aca57",
@@ -31,28 +40,6 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     version(
         "00-06",
         sha256="e83e17c5476a81d9a640a053b03b43f1ada3d4c34c02b30c9e64136f2917f1e7",
-    )
-    version(
-        "00-05",
-        sha256="a2964d674c017cfe4d3bf38ed3899c6eda8a5d1baef2e1d122ed21fad2a551b8",
-        deprecated=True,
-    )
-    version(
-        "00-04",
-        sha256="4f5c718cf646ff31cf9f9803fbf77d74cdf5ba5762a15096cf48c71830c7a94b",
-        deprecated=True,
-    )
-    version(
-        "00-03-01",
-        url="https://github.com/key4hep/k4SimDelphes/archive/v00-03-01.tar.gz",
-        sha256="b4d441225ca2bef8f2c506baeb16ef7b0e5117dabc38f8028009e7cfa3e21a8a",
-        deprecated=True,
-    )
-    version(
-        "00-03-00",
-        url="https://github.com/key4hep/k4SimDelphes/archive/v00-03-00.tar.gz",
-        sha256="f2dc577738a3819b33b23ee829a1123f283293512a09c62de166d95e55232776",
-        deprecated=True,
     )
 
     variant("framework", default=True, description="Build Gaudi framework integration.")
