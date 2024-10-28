@@ -5,10 +5,14 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     """Tracking detectors (and similar) digitization and reconstruction using Gaudi in native key4hep"""
 
     homepage = "https://github.com/key4hep/k4RecTracker"
-    url = "https://github.com/key4hep/k4RecTracker/archive/refs/tags/v00-01.tar.gz"
+    url = "https://github.com/key4hep/k4RecTracker/archive/refs/tags/v0.3.0.tar.gz"
     git = "https://github.com/key4hep/k4RecTracker.git"
 
     version("master", branch="master")
+    version(
+        "0.3.0",
+        sha256="e945be69b1b4d51b07e8e806e366893af84369a9d63b04deee691aa10d591a02",
+    )
 
     depends_on("dd4hep")
     depends_on("edm4hep")
