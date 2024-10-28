@@ -11,6 +11,10 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version("main", branch="main")
 
     version(
+        "1.1.1",
+        sha256="8ae8dc54e50c26537ac94050e08c4ad6c80e1555abd7bfd0e242d04c93e6017c",
+    )
+    version(
         "1.1",
         sha256="63a81e5893571a5e9209e4b6f2fe6d511772675a824cfef105f2df5f18fc6af4",
     )
