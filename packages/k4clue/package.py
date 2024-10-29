@@ -55,10 +55,12 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     depends_on("k4marlinwrapper", type="test")
 
     def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            self.define(
+                "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
+            ),
+            self.define("BUILD_TESTING", self.run_tests),
+        ]
         return args
 
     def setup_run_environment(self, env):
