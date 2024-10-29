@@ -47,41 +47,23 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
         sha256="c220604577d309bc11a5a4c147f55640fedef90375d1232439343362607a3906",
         deprecated=True,
     )
-    version(
-        "00-05",
-        sha256="6d352bacff6a16f8d2643cdb108794d02889c38b119442c3c260f9a75cb63e7a",
-        deprecated=True,
-    )
-    version(
-        "00-04",
-        sha256="1b6db84f42a1d6e2e5a02cecbc01a0282081b7270a523f201fad4d39f78ca015",
-        deprecated=True,
-    )
-    version(
-        "00-03",
-        sha256="0b7fffbe1a07aae4b5b7523e855e944fe90f6e072dae9a460a07134025bf1cf8",
-        deprecated=True,
-    )
 
-    depends_on("lcio")
-    depends_on("lcio@2.20:", when="@00-05:")
+    depends_on("lcio@2.20:")
     depends_on("lcio@2.20.1:", when="@00-08:")
     depends_on("lcio@2.22:", when="@00-09:")
     depends_on("podio")
     depends_on("podio@1:", when="@00-09:")
-    depends_on("edm4hep@0.5:", when="@00-03")
-    depends_on("edm4hep@0.8:", when="@00-04:")
-    depends_on("edm4hep@0.10:", when="@00-05:")
+    depends_on("edm4hep@0.10:")
     depends_on("edm4hep@0.99:", when="@00-09:")
 
     def cmake_args(self):
         args = [
             self.define("BUILD_TESTING", self.run_tests),
             self.define("FORCE_COLORED_OUTPUT", False),
+            self.define(
+                "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
+            ),
         ]
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
         return args
 
     def setup_run_environment(self, env):

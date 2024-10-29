@@ -35,11 +35,12 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
     depends_on("root")
 
     def cmake_args(self):
-        args = []
-        # C++ Standard
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            self.define(
+                "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
+            ),
+            self.define("BUILD_TESTING", self.run_tests),
+        ]
         return args
 
     def setup_run_environment(self, env):

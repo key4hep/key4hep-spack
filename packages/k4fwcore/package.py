@@ -37,12 +37,12 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
 
     def cmake_args(self):
-        args = []
-        args.append(
+        args = [
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
-            )
-        )
+            ),
+            self.define("BUILD_TESTING", self.run_tests),
+        ]
         return args
 
     def setup_run_environment(self, env):

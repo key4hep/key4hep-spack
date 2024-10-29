@@ -7,7 +7,7 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
-    """Gaudify Marlin Processors in order to run them in the Key4HEP framework"""
+    """Gaudify Marlin Processors in order to run them in the Key4hep framework"""
 
     homepage = "https://github.com/key4hep/k4MarlinWrapper"
     git = "https://github.com/key4hep/k4MarlinWrapper.git"
@@ -48,10 +48,13 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("k4simgeant4", type=("test"))
 
     def cmake_args(self):
-        args = [self.define("FORCE_COLORED_OUTPUT", False)]
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            self.define("FORCE_COLORED_OUTPUT", False),
+            self.define(
+                "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
+            ),
+            self.define("BUILD_TESTING", self.run_tests),
+        ]
         return args
 
     def setup_run_environment(self, env):
