@@ -11,6 +11,10 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version("main", branch="main")
 
     version(
+        "1.1.2",
+        sha256="5451f1644357ac8ced0f5fc984809f4a48bdf2f4baf25a0a2f70540ed0427ac4",
+    )
+    version(
         "1.1.1",
         sha256="8ae8dc54e50c26537ac94050e08c4ad6c80e1555abd7bfd0e242d04c93e6017c",
     )
@@ -23,24 +27,13 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version("1.0pre18", tag="v01-00pre18")
     version("1.0pre17", tag="v01-00pre17")
     version("1.0pre16", tag="v01-00pre16")
-    version("1.0pre15", tag="v01-00pre15")
-    version("1.0pre14", tag="v01-00pre14")
-
-    patch(
-        "https://github.com/key4hep/k4FWCore/commit/d1061e272a0688722e89491f5e5829dc9b352127.patch",
-        when="@1.0pre14",
-        sha256="da089b320d0bd89c5b6d8a972009e11f324a442e6bb85778d8541364f957b4f9",
-    )
 
     depends_on("gaudi")
     depends_on("gaudi +gaudialg", when="@:1.0pre19 ^gaudi@37:")
     depends_on("root")
     depends_on("podio")
-    depends_on("podio@0.14.1", when="@1.0pre14:1.0pre15")
-    depends_on("podio@0.14.2:", when="@1.0pre16:")
     depends_on("podio@:0.17.3", when="@:1.0pre17")  # podio/EventStore.h removed
     depends_on("edm4hep")
-    depends_on("edm4hep@0.4.1:", when="@1.0pre14:")
     depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
 
     def cmake_args(self):
