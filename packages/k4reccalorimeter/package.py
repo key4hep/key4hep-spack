@@ -12,6 +12,10 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.0pre16",
+        sha256="a7c1a92a6bf5d641ddf797d3f8b8d1cb90c8a866956a15fd5dd27ff984755b74",
+    )
+    version(
         "0.1.0pre15",
         sha256="8406e7ca3ff78a93ace7ca645f49bea979931b9f268e5d2aaad958886f9e7b55",
     )
@@ -22,9 +26,6 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     version("0.1.0pre13", tag="v0.1.0pre13")
     version("0.1.0pre12", tag="v0.1.0pre12")
     version("0.1.0pre11", tag="v0.1.0pre11")
-    version("0.1.0pre10", tag="v0.1.0pre10")
-    version("0.1.0pre09", tag="v0.1.0pre09")
-    version("0.1.0pre07", tag="v0.1.0pre07")
 
     generator = "Ninja"
 
