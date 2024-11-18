@@ -126,3 +126,6 @@ packages:
     require: '@1.15.0'
   py-onnxruntime:
     require: '@1.17.1'
+  # Otherwise py-onnx will no longer build
+  py-setuptools:
+    require: "@69:"
