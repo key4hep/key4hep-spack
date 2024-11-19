@@ -83,6 +83,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("sherpa", when="+generators")
     depends_on("sherpa2", when="+generators")
 
+    depends_on("py-pybdsim", when="+generators")
+    depends_on("py-pymadx", when="+generators")
+    depends_on("py-pytransport", when="+generators")
+
     depends_on("ilcsoft")
 
     depends_on("fccsw")
