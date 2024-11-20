@@ -28,6 +28,8 @@ class PyPyhepmc(PythonPackage):
     depends_on("hepmc3", type=("build", "run"))
     depends_on("py-numpy@1.21:", type=("build", "run"))
     depends_on("py-pybind11", type=("build", "run"))
+    # In v2.14.0 a dot command is run at import time to check which formats are supported
+    # The system dot on Alma 9 does not support any formats and importing fails so graphviz is required
     depends_on("graphviz", type="run")
 
     @run_before("install")
