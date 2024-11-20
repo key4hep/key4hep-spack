@@ -1,0 +1,18 @@
+spack:
+  packages:
+    all:
+      variants:
+        - build_type=RelWithDebInfo
+        - 'cxxstd=20'
+      target: []
+      compiler: []
+
+    boost:
+      require: +context+exception+fiber+filesystem+graph+log+multithreaded+program_options+python+regex+system+shared+test+thread
+
+  view: false
+  include:
+  - ../key4hep-common/packages.yaml
+
+  specs:
+  - key4hep-base-stack
