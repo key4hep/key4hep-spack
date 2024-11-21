@@ -8,7 +8,7 @@ spack:
       compiler: []
 
     boost:
-      require: +atomic+context+exception+fiber+filesystem+graph+log+multithreaded+program_options+python+regex+system+shared+test+thread
+      require: +atomic+chrono+context+date_time+exception+fiber+filesystem+graph+iostreams+locale+log+math+multithreaded+program_options+python+random+regex+serialization+shared+signals+system+test+thread+timer+wave
 
   view: false
   include:
