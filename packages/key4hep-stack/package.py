@@ -117,6 +117,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-pylint", when="+devtools")
     depends_on("py-boto3", when="+devtools")
     depends_on("py-gcovr", when="+devtools")
+    depends_on("py-pyhepmc", when="+devtools")
     depends_on("py-h5py", when="+devtools")
     depends_on("py-ipykernel", when="+devtools")
     depends_on("py-ipython", when="+devtools")
