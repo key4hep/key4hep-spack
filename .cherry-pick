@@ -66,11 +66,13 @@ git cherry-pick 5777576e37ee28d674e2520d3f10b3f651a7680e -X theirs --no-commit
 # py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove!
 git cherry-pick 06f21ae4e2499bccaa6c52359bafbb93c161944b -X theirs --no-commit
 
+# py-hepmc3: Extend python when the python bindings are enabled
+git cherry-pick 04b8b88bd6485d4cf01373ec9ccf18a49f30b34d -X theirs --no-commit
+
 # Versions for the release, in order DD4hep and podio&edm4hep and LCIO
 git cherry-pick 43d1cdb0bd4780bff369dafa681a8a7939313784 -X theirs --no-commit
 git cherry-pick 5d9c534018593fdef5db1028c60026d26bf4d65b -X theirs --no-commit
 git cherry-pick be8112e1ff9dea12296bfafb341cc5953e72c415 -X theirs --no-commit
 git cherry-pick 1c6b6d0a0819409b75d7a59a90c3daf24fe80fee -X theirs --no-commit
-
-# py-hepmc3: Extend python when the python bindings are enabled
-git cherry-pick 04b8b88bd6485d4cf01373ec9ccf18a49f30b34d -X theirs --no-commit
+# delphes: Add version 3.5.1pre11
+git cherry-pick 1aa5c7450c5947abae090c7a89b64b1236e1a153 -X theirs --no-commit
