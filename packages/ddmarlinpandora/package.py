@@ -42,6 +42,13 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
     depends_on("larcontent")
     depends_on("dd4hep")
     depends_on("marlintrk")
+    depends_on("pandoramonitoring", when="+monitoring")
+
+    variant("monitoring", default=False, description="Enable Pandora Monitoring")
+
+    def setup_build_environment(self, env):
+        if "+monitoring" in self.spec:
+            env.set("PANDORA_MONITORING", "ON")
 
     def setup_run_environment(self, env):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libDDMarlinPandora.so")

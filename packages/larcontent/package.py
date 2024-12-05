@@ -39,10 +39,18 @@ class Larcontent(CMakePackage):
     depends_on("pandorasdk")
     depends_on("eigen")
 
+    depends_on("pandoramonitoring", when="+monitoring")
+
+    variant("monitoring", default=False, description="Enable Pandora Monitoring")
+
+    def setup_build_environment(self, env):
+        if "+monitoring" in self.spec:
+            env.set("PANDORA_MONITORING", "ON")
+
     def cmake_args(self):
         args = [
             "-DCMAKE_MODULE_PATH=%s" % self.spec["pandorapfa"].prefix.cmakemodules,
-            "-DCMAKE_CXX_FLAGS=-std=c++17 -Wno-error",
+            "-DCMAKE_CXX_FLAGS=-std=c++20 -Wno-error",
         ]
         return args
 
