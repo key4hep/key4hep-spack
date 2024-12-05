@@ -79,6 +79,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("marlinmlflavortagging")
     depends_on("overlay")
     depends_on("pandoraanalysis")
+    depends_on("pandoramonitoring")
     depends_on("pandorapfa")
     depends_on("physsim")
     depends_on("raida")
