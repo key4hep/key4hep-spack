@@ -40,7 +40,7 @@ class Lccontent(CMakePackage):
 
     def setup_build_environment(self, env):
         if "+monitoring" in self.spec:
-            env.set('PANDORA_MONITORING', 'ON')
+            env.set("PANDORA_MONITORING", "ON")
 
     def cmake_args(self):
         args = [
