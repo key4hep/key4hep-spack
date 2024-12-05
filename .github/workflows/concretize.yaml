@@ -59,6 +59,18 @@ jobs:
                 exit 1
             fi
             cd /key4hep-spack/environments/${env}
+
+            echo "========="
+            echo "spack.yaml"
+            cat spack.yaml
+            echo "========="
+            echo "packages.yaml"
+            cat packages.yaml
+            echo "========="
+            echo "key4hep-common/packages.yaml"
+            cat /key4hep-spack/environments/key4hep-common/packages.yaml
+            echo "========="
+
             spack env activate .
             spack concretize
 

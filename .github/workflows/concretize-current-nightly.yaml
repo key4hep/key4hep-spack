@@ -75,6 +75,18 @@ jobs:
             cd /key4hep-spack/environments/${env}
             spack env activate .
             spack config add "upstreams:nightly-from-scratch:install_tree: $rel"
+
+            echo "========="
+            echo "spack.yaml"
+            cat spack.yaml
+            echo "========="
+            echo "packages.yaml"
+            cat packages.yaml
+            echo "========="
+            echo "key4hep-common/packages.yaml"
+            cat /key4hep-spack/environments/key4hep-common/packages.yaml
+            echo "========="
+
             spack concretize >> conc.txt
             cat conc.txt
             echo "========================================="
