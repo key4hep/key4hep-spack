@@ -38,15 +38,12 @@ class Lccontent(CMakePackage):
 
     variant("monitoring", default=False, description="Enable Pandora Monitoring")
 
-    def setup_build_environment(self, env):
-        if "+monitoring" in self.spec:
-            env.set("PANDORA_MONITORING", "ON")
-
     def cmake_args(self):
         args = [
             "-DCMAKE_CXX_STANDARD=20",
             "-DCMAKE_MODULE_PATH=%s" % self.spec["pandorapfa"].prefix.cmakemodules,
             "-DCMAKE_CXX_FLAGS=-Wno-error",
+            self.define_from_variant("PANDORA_MONITORING", "monitoring"),
         ]
         return args
 
