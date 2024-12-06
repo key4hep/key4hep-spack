@@ -46,13 +46,11 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
 
     variant("monitoring", default=False, description="Enable Pandora Monitoring")
 
-    def setup_build_environment(self, env):
-        if "+monitoring" in self.spec:
-            env.set("PANDORA_MONITORING", "ON")
-
     def setup_run_environment(self, env):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libDDMarlinPandora.so")
 
     def cmake_args(self):
-        # C++ Standard
-        return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]
+        return [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            self.define_from_variant("PANDORA_MONITORING", "monitoring"),
+        ]
