@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class PyPytransport(PythonPackage):
     """A Python based converter for TRANSPORT files to BDSIM readable gmad files"""

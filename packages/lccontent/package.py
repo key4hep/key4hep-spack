@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class Lccontent(CMakePackage):
     """Pandora algorithms and tools for Linear Collider event reconstruction."""

@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""

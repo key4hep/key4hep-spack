@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 from spack.pkg.k4.key4hep_stack import install_setup_script
 
