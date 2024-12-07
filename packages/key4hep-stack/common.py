@@ -2,7 +2,7 @@
 Common methods for use in Key4hep recipes
 """
 
-from spack import *
+from spack.package import *
 from spack.directives import *
 from spack.user_environment import *
 

@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class Emela(CMakePackage):
     """Library that implements the evolution in pure QED of the unpolarised electron parton distribution functions (PDFs) up to next-to-leading logarithmic (NLL) approximation"""

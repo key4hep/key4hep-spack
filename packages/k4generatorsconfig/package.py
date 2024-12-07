@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class K4generatorsconfig(CMakePackage):
     """A python based module for the automatic generation of inputfiles for Monte-Carlo(MC) generators."""
