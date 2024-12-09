@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
