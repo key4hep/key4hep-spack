@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""
@@ -39,10 +41,15 @@ class Larcontent(CMakePackage):
     depends_on("pandorasdk")
     depends_on("eigen")
 
+    depends_on("pandoramonitoring", when="+monitoring")
+
+    variant("monitoring", default=False, description="Enable Pandora Monitoring")
+
     def cmake_args(self):
         args = [
             "-DCMAKE_MODULE_PATH=%s" % self.spec["pandorapfa"].prefix.cmakemodules,
             "-DCMAKE_CXX_FLAGS=-std=c++17 -Wno-error",
+            self.define_from_variant("PANDORA_MONITORING", "monitoring"),
         ]
         return args
 

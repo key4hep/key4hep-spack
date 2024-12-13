@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class PyPybdsim(PythonPackage):
     """Utilities for preparing and analysing BDSIM input and output as well as controlling BDSIM"""

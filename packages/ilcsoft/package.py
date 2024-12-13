@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 from spack.pkg.k4.key4hep_stack import install_setup_script
 
@@ -79,6 +80,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("marlinmlflavortagging")
     depends_on("overlay")
     depends_on("pandoraanalysis")
+    depends_on("pandoramonitoring")
     depends_on("pandorapfa")
     depends_on("physsim")
     depends_on("raida")
