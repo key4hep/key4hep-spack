@@ -345,6 +345,3 @@ echo "Nightly builds are intended for testing and development, if you need a sta
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
 echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"
-if [ "$os" = "almalinux9" ]; then
-    echo "Warning: The default compiler for AlmaLinux 9 has changed to GCC 14. A new -c flag can be used to select the compiler, to go back to the system compiler use '-c gcc11'"
-fi
