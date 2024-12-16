@@ -41,7 +41,9 @@ packages:
   madgraph5amc:
     require: '@3: +pythia8'
   rivet:
-    require: hepmc=3
+    require: 
+      - hepmc=3
+      - "@:3"
   podio:
     require: +datasource+rntuple+rpath+sio
   py-numpy:
