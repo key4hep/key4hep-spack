@@ -41,7 +41,7 @@ packages:
   madgraph5amc:
     require: '@3: +pythia8'
   rivet:
-    require: 
+    require:
       - hepmc=3
       - "@:3"
   podio:
