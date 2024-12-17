@@ -15,4 +15,4 @@ spack:
   - ../key4hep-common/packages.yaml
 
   specs:
-  - key4hep-base-stack
+  - key4hep-external-stack
