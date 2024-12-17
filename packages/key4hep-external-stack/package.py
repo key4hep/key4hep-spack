@@ -5,9 +5,9 @@ from datetime import datetime
 from spack.pkg.k4.key4hep_stack import Key4hepPackage, install_setup_script
 
 
-class Key4hepBaseStack(BundlePackage, Key4hepPackage):
-    """Bundle package that contains a base software stack upon which Key4hep can
-    be built
+class Key4hepExternalStack(BundlePackage, Key4hepPackage):
+    """Bundle package that contains a basic external software stack upon which
+    Key4hep can be built
 
     The packages in this base stack are mainly
     """
