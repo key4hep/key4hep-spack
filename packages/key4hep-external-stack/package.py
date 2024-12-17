@@ -4,6 +4,8 @@ from datetime import datetime
 
 from spack.pkg.k4.key4hep_stack import Key4hepPackage, install_setup_script
 
+from common import *
+
 
 class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     """Bundle package that contains a basic external software stack upon which
