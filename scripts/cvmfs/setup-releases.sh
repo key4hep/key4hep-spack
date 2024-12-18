@@ -161,8 +161,11 @@ k4_local_repo() {
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
     if [ "$current_repo" = "k4geo" ]; then
+        export LCGEO=$PWD
         export K4GEO=$PWD
-        echo "Added K4GEO=$PWD"
+        export lcgeo_DIR=$PWD
+        export k4geo_DIR=$PWD
+        echo "Added LCGEO, K4GEO, lcgeo_DIR and k4geo_DIR to the environment"
     fi
     echo "Added $PWD/$install to the environment and removed any paths containing /${current_repo}/"
     echo "Some variables may have to be updated manually to point to the local installation"
