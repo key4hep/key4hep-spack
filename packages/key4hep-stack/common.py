@@ -137,8 +137,10 @@ def ilc_url_for_version(self, version):
     # on the value of the patch version
     if patch == 0:
         version_str = "v%02d-%02d.tar.gz" % (major, minor)
-    else:
+    elif isinstance(patch, int):
         version_str = "v%02d-%02d-%02d.tar.gz" % (major, minor, patch)
+    else:  # allow for v00-04-pre
+        version_str = "v%02d-%02d-%s.tar.gz" % (major, minor, patch)
     return base_url + "/" + version_str
 
 
