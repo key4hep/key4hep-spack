@@ -61,7 +61,7 @@ jobs:
           context: ./Docker/${{matrix.os.dir}}
           file: ./Docker/${{matrix.os.dir}}/Dockerfile-externals
           build-args: |
-            VERSION=${{ steps.meta.outputs.version }}
-            REPOSITORY=${{ env.REGISTRY }}/${{env.OWNER_LC}}
+            GITHUB_REPOSITORY=${{ github.repository }}
+            COMMIT_SHA=${{ github.sha }}
           tags: ${{ env.REGISTRY }}/${{env.OWNER_LC}}/${{ env.IMAGE_NAME}}:${{steps.meta.outputs.version}}-${{matrix.os.suffix}}
           labels: ${{ steps.meta.outputs.labels }}
