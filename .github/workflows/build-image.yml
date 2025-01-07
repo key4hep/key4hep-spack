@@ -1,0 +1,67 @@
+name: Re-build and publish key4hep-externals image
+on: [push, workflow_dispatch]
+
+env:
+  REGISTRY: ghcr.io
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build-externals:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [{dir: AlmaLinux9,suffix: alma9}]
+    env:
+      IMAGE_NAME: key4hep-externals
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: endersonmenezes/free-disk-space@v2
+        with:
+          remove_android: true
+          remove_dotnet: true
+          remove_haskell: true
+          remove_tool_cache: true
+          remove_swap: true
+          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
+          remove_packages_one_command: true
+          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
+          testing: false
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: lowercase owner name
+        run: |
+            echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+            OWNER: '${{ github.repository_owner }}'
+      - name: Docker Meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{env.OWNER_LC}}/mucoll-dummy
+      - name: Build and Push
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          context: ./Docker/${{matrix.os.dir}}
+          file: ./Docker/${{matrix.os.dir}}/Dockerfile-externals
+          build-args: |
+            VERSION=${{ steps.meta.outputs.version }}
+            REPOSITORY=${{ env.REGISTRY }}/${{env.OWNER_LC}}
+          tags: ${{ env.REGISTRY }}/${{env.OWNER_LC}}/${{ env.IMAGE_NAME}}:${{steps.meta.outputs.version}}-${{matrix.os.suffix}}
+          labels: ${{ steps.meta.outputs.labels }}
