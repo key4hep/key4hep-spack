@@ -65,4 +65,4 @@ class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     depends_on("aida")
 
     def install(self, spec, prefix):
-        return install_setup_script(self, spec, prefix, "K4_BASE_STACK")
+        return install_setup_script(self, spec, prefix, "K4_EXTERNAL_STACK")
