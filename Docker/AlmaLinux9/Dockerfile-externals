@@ -28,7 +28,7 @@ RUN source /opt/setup_spack.sh && \
 
 RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
-    git clone -b base-environment --single-branch https://github.com/${GITHUB_REPOSITORY} ${REPOPATH} && \
+    git clone https://github.com/${GITHUB_REPOSITORY} ${REPOPATH} && \
     cd ${REPOPATH} && \
     git checkout ${COMMIT_SHA} && \
     cd -
