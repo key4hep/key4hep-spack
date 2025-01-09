@@ -53,8 +53,6 @@ packages:
   xrootd:
     require: +krb5 cxxstd=20
 
-  fmt:
-    require: "@:10"
   # Use the system OpenGL as recommended by spack
   # See https://github.com/key4hep/key4hep-spack/issues/318 and
   # https://github.com/key4hep/key4hep-spack/issues/516
