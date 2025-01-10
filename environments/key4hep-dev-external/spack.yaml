@@ -1,0 +1,21 @@
+spack:
+  packages:
+    all:
+      variants:
+        - build_type=RelWithDebInfo
+        - 'cxxstd=20'
+      target: []
+      compiler: []
+
+    boost:
+      require: +atomic+chrono+context+date_time+exception+fiber+filesystem+graph+iostreams+locale+log+math+multithreaded+program_options+python+random+regex+serialization+shared+signals+system+test+thread+timer+wave
+    # Keep the possibility to build Gaudi 38
+    fmt:
+      require: "@:10"
+
+  view: false
+  include:
+  - ../key4hep-common/packages.yaml
+
+  specs:
+  - key4hep-external-stack
