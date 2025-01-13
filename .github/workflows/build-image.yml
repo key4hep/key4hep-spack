@@ -35,7 +35,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          path: key4hep-spack
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to DockerHub
@@ -57,7 +56,7 @@ jobs:
       - name: Determine spack ref
         id: getref
         run: |
-          echo "spack_ref=$(cat key4hep-spack/.latest-commit)" >>${GITHUB_OUTPUT}
+          echo "spack_ref=$(cat .latest-commit)" >>${GITHUB_OUTPUT}
       - name: Build and Push
         id: docker_build
         uses: docker/build-push-action@v6
