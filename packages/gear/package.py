@@ -19,6 +19,10 @@ class Gear(CMakePackage, Ilcsoftpackage):
     version("master", branch="master")
 
     version(
+        "1.9.4",
+        sha256="346c5985664762942281f67f36722a7318c5fb7be1be13453bb1601665fc8738",
+    )
+    version(
         "1.9.3",
         sha256="c6e9075dc6be63d9e3019ce8c636adfa4be2bffb8120b1d9d054a0830724aaed",
     )

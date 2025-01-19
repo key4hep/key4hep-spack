@@ -19,6 +19,10 @@ class Larcontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "4.11.02",
+        sha256="57efb355a7ce0ed0f50bdb020ef302a06f7a14ff0dd643907f9f2c9d59da2f0d",
+    )
+    version(
         "4.8.1",
         sha256="b15ffe74cf95f61901ec389ca9c763dc767464fc35c2a6ed800126c2d4d13017",
     )
