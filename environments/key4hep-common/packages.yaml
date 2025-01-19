@@ -12,6 +12,8 @@ packages:
     buildable: true
   curl:
     require: +gssapi
+  graphviz:
+    require: +expat+poppler
   ddmarlinpandora:
     require: +monitoring
   dd4hep:

@@ -178,6 +178,17 @@ def install_setup_script(self, spec, prefix, env_var):
     with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
 
+    # Try to create a symlink to fjcontrib/include/fastjet/contrib in fastjet/include/fastjet/
+    # See https://github.com/key4hep/key4hep-spack/issues/690
+    if 'fjcontrib' in spec:
+        try:
+            os.symlink(
+                os.path.join(spec['fjcontrib'].prefix, "include", "fastjet", "contrib"),
+                os.path.join(spec['fastjet'].prefix, "include", "fastjet", "contrib")
+            )
+        except FileExistsError:
+            pass
+
 
 class Key4hepPackage(PackageBase):
     tags = ["hep", "key4hep"]

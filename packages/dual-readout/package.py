@@ -49,6 +49,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
 
     depends_on("dd4hep")
     depends_on("edm4hep")
+    depends_on("geant4")
     depends_on("podio")
     depends_on("fastjet")
     depends_on("root")

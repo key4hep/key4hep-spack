@@ -155,17 +155,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
             )
-        # env variable for OpenDataDetector, see
-        # https://github.com/key4hep/key4hep-spack/issues/526
-        if "opendatadetector" in self.spec:
-            env.set(
-                "OPENDATADETECTOR",
-                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
-            )
-            env.set(
-                "OPENDATADETECTOR_DATA",
-                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
-            )
 
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
