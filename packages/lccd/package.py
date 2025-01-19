@@ -18,6 +18,10 @@ class Lccd(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.5.3",
+        sha256="7af2152a60b818eb930cb78f64714b1576f5af4346d173ca7a36885fbe0f1784",
+    )
+    version(
         "1.5.2",
         sha256="0e8929b0f390be112125a1ce12fd9695c7890b5cfef586b56304e4bd08a8ea49",
     )

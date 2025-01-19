@@ -13,6 +13,10 @@ class K4gen(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1pre13",
+        sha256="d2a7fe39b1984325c7aeb5fdedbf46f1ae3c0a14c0105ad54a521b366c410c8e",
+    )
+    version(
         "0.1pre12",
         sha256="1356f748c0be4d5a33f0e1b2b3f4fbd9f03e185f1f53df2d59b254f960e860af",
     )
