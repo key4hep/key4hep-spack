@@ -6,7 +6,7 @@ packages:
     buildable: False
   g4emlow:
     externals:
-    - spec: "g4emlow@8.5"
+    - spec: "g4emlow@8.6"
       prefix: /cvmfs/sw.hsf.org/key4hep/share/g4emlow/8.5
     buildable: False
   g4photonevaporation:
@@ -21,8 +21,8 @@ packages:
     buildable: False
   g4particlexs:
     externals:
-    - spec: "g4particlexs@4.0"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4particlexs/4.0
+    - spec: "g4particlexs@4.1"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4particlexs/4.1
     buildable: False
   g4pii:
     externals:
@@ -53,4 +53,14 @@ packages:
     externals:
     - spec: "g4ensdfstate@2.3"
       prefix: /cvmfs/sw.hsf.org/key4hep/share/g4ensdfstate/2.3
+    buildable: False
+  g4urrpt:
+    externals:
+    - spec: "g4urrpt@1.0"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4urrpt/1.0
+    buildable: False
+  g4nudexlib:
+    externals:
+    - spec: "g4nudexlib@1.0"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4nudexlib/1.0
     buildable: False
