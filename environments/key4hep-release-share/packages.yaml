@@ -6,18 +6,18 @@ packages:
     buildable: False
   g4emlow:
     externals:
-    - spec: "g4emlow@8.6"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4emlow/8.5
+    - spec: "g4emlow@8.6.1"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4emlow/8.6.1
     buildable: False
   g4photonevaporation:
     externals:
-    - spec: "g4photonevaporation@5.7"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4photonevaporation/5.7
+    - spec: "g4photonevaporation@6.1"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4photonevaporation/6.1
     buildable: False
   g4radioactivedecay:
     externals:
-    - spec: "g4radioactivedecay@5.6"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4radioactivedecay/5.6
+    - spec: "g4radioactivedecay@6.1.2"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4radioactivedecay/6.1.2
     buildable: False
   g4particlexs:
     externals:
@@ -51,13 +51,13 @@ packages:
     buildable: False
   g4ensdfstate:
     externals:
-    - spec: "g4ensdfstate@2.3"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4ensdfstate/2.3
+    - spec: "g4ensdfstate@3.0"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4ensdfstate/3.0
     buildable: False
   g4urrpt:
     externals:
-    - spec: "g4urrpt@1.0"
-      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4urrpt/1.0
+    - spec: "g4urrpt@1.1"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4urrpt/1.1
     buildable: False
   g4nudexlib:
     externals:
