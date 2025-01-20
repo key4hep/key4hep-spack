@@ -9,7 +9,7 @@ from spack.package import *
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""
 
-    url = "https://github.com/PandoraPFA/larcontent/archive/v03-04-00.tar.gz"
+    url = "https://github.com/PandoraPFA/larcontent/archive/v03_04_00.tar.gz"
     homepage = "https://github.com/PandoraPFA/larcontent"
     git = "https://github.com/PandoraPFA/larcontent.git"
 
@@ -19,8 +19,12 @@ class Larcontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "4.12.00",
+        sha256="f5affe4f4102de4734a439349274249cf5f41684020c8291aa2e551cc0c13131",
+    )
+    version(
         "4.11.02",
-        sha256="57efb355a7ce0ed0f50bdb020ef302a06f7a14ff0dd643907f9f2c9d59da2f0d",
+        sha256="06a8c55aab782e23f90839f76dbd0aa981355f90ccf48b3358eb5843bad45dc8",
     )
     version(
         "4.8.1",
@@ -29,10 +33,6 @@ class Larcontent(CMakePackage):
     version(
         "4.4.0",
         sha256="2a495a3e6c322035c4fa99e66152fc9eb48a516533fd1870a18c889310dbe223",
-    )
-    version(
-        "4.0.0",
-        sha256="01a28828a92daa4a95fd7399ec9df3c7be9ac2b33f40c5a031707894a44951cd",
     )
     version(
         "4.0.0",
