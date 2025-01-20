@@ -64,3 +64,13 @@ packages:
     - spec: "g4nudexlib@1.0"
       prefix: /cvmfs/sw.hsf.org/key4hep/share/g4nudexlib/1.0
     buildable: False
+  g4tendl:
+    externals:
+    - spec: "g4tendl@1.4"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4tendl/1.4
+    buildable: False
+  g4channeling:
+    externals:
+    - spec: "g4channeling@1.0"
+      prefix: /cvmfs/sw.hsf.org/key4hep/share/g4channeling/1.0
+    buildable: False
