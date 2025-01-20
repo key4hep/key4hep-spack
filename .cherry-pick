@@ -5,7 +5,7 @@ git fetch jmcarcell -q
 # CMAKE_INSTALL_LIBDIR gets chosen as lib64 and this causes problems in some
 # packages that expect lib. Since spack installs each package to its own prefix
 # we don't need to worry about multilib environments
-git cherry-pick 42c070632bcb0f8333bc029e17a53646d9589d7e -X theirs --no-commit
+git cherry-pick dcedd688a077ba5399b1a77275364b8164eab41f -X theirs --no-commit
 
 # Because the patch above and py-onnx being a python package, it will try to find
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
