@@ -107,7 +107,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
-    depends_on("iwyu", when="+devtools")
+    # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
     depends_on("ninja", when="+devtools")
     # depends_on('prmon', when='+devtools')
