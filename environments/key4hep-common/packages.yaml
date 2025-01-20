@@ -24,7 +24,7 @@ packages:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
   geant4:
-    require: '@11.3: +opengl+qt~vecgeom cxxstd=20'
+    require: +opengl+qt~vecgeom cxxstd=20
   hdf5:
     require: +cxx+hl
   hepmc3:
