@@ -17,7 +17,7 @@ git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 # podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/42844.diff | patch -p1
 
-# py-hepmc3: Extend python when the python bindings are enabled, remove when https://github.com/spack/spack/pull/47836 is merged
+# py-hepmc3: Extend python when the python bindings are enabled, remove!
 git cherry-pick 04b8b88bd6485d4cf01373ec9ccf18a49f30b34d -X theirs --no-commit
 
 # py-awkward: add py-importlib-metadata to the dependencies, remove when https://github.com/spack/spack/pull/47027 is merged
