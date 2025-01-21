@@ -27,4 +27,7 @@ git cherry-pick b61942b3d57f492d09fb4da3e681f88d683f9563 -X theirs --no-commit
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/48557.diff | patch -p1
 
 # pandoramonitoring: add patch for C++20, remove when https://github.com/spack/spack/pull/48659 is merged
-04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5
+git cherry-pick 04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5 -X theirs --no-commit
+
+# py-pyqt5: add gmake as a dependency
+git cherry-pick a87e8fc95948cde3ea425303a76d36d1768a6b3c -X theirs --no-commit
