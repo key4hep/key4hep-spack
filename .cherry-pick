@@ -34,3 +34,6 @@ git cherry-pick a87e8fc95948cde3ea425303a76d36d1768a6b3c -X theirs --no-commit
 
 # gtkplus: add conflict with GCC14, remove when https://github.com/spack/spack/pull/48661 is merged
 git cherry-pick 1e85e2f27582dc105e7b7d9e668e32b5b9e696f8 -X theirs --no-commit
+
+# acts: add patch to find python before DD4hep
+git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
