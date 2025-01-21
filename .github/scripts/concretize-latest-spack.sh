@@ -9,9 +9,9 @@ cd /spack
 # git checkout $(cat /key4hep-spack/.latest-commit)
 # source /key4hep-spack/.cherry-pick
 
-if [ "${{ matrix.build_type }}" = "release" ]; then
+if [ "$1" = "release" ]; then
     env=key4hep-release-opt
-elif [ "${{ matrix.build_type }}" = "nightly" ]; then
+elif [ "$1" = "nightly" ]; then
     env=key4hep-nightly-opt
 else
     echo "Unknown build type"

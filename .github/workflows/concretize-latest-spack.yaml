@@ -39,7 +39,7 @@ jobs:
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
 
-            /key4hep-spack/.github/scripts/concretize-latest-spack.sh
+            /key4hep-spack/.github/scripts/concretize-latest-spack.sh "${{ matrix.build_type }}"
 
             EOF
 
