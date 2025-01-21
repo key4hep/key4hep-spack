@@ -151,7 +151,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
-        if self.compiler.operating_system == "ubuntu22.04":
+        if self.compiler.operating_system == "ubuntu22.04" or self.compiler.operating_system == "ubuntu24.04":
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
             )
