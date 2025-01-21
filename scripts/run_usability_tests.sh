@@ -127,37 +127,66 @@ EOF
 run_test "FCCAnalyses test" "python fcc.py"
 
 
+# Test for sherpa 2
+# cat > sherpa.txt <<EOF
+# (run){
+#  RANDOM_SEED 42;
+#  BEAM_1 11;
+#  BEAM_2 -11;
+#  BEAM_ENERGY_1 125.0;
+#  BEAM_ENERGY_2 125.0;
+#  MODEL HEFT;
+#  PDF_LIBRARY None;
+#  EVENTS 100;
+
+
+#  MASS[25] 125;
+#  WIDTH[25] 0.00407;
+#  MASS[23] 91.1876;
+#  WIDTH[23] 2.4952;
+#  MASS[24] 80.379;
+#  WIDTH[24] 2.085;
+#  EVENT_OUTPUT HepMC_GenEvent[ZHDecay];
+#  EVENT_GENERATION_MODE unweighted;
+#  MASSIVE[13] 1;
+#  ME_SIGNAL_GENERATOR Amegic;
+# }(run)
+
+# (processes){
+#   Process 11 -11 -> 23[a] 25[b] ;
+#   Decay 23[a]  -> 15 -15
+#   Decay 25[b]  -> 13 -13
+#   Order (0,4);
+#   End process;
+# }(processes)
+# EOF
+
 cat > sherpa.txt <<EOF
-(run){
- RANDOM_SEED 42;
- BEAM_1 11;
- BEAM_2 -11;
- BEAM_ENERGY_1 125.0;
- BEAM_ENERGY_2 125.0;
- MODEL HEFT;
- PDF_LIBRARY None;
- EVENTS 100;
+# collider setup
+BEAMS: [52, 52]
+BEAM_SPECTRA: [DM_beam,DM_beam]
+BEAM_MODE: Relic_Density
+DM_beam_weighted: 1
+DM_TEMPERATURE: 1
+DM_RELATIVISTIC: 1
+PDF_SET: [None, None]
+MODEL: SMDM
+EVENTS: 0
 
+PARTICLE_DATA:
+  52:
+    Mass: 10
 
- MASS[25] 125;
- WIDTH[25] 0.00407;
- MASS[23] 91.1876;
- WIDTH[23] 2.4952;
- MASS[24] 80.379;
- WIDTH[24] 2.085;
- EVENT_OUTPUT HepMC_GenEvent[ZHDecay];
- EVENT_GENERATION_MODE unweighted;
- MASSIVE[13] 1;
- ME_SIGNAL_GENERATOR Amegic;
-}(run)
+# me generator settings
+ME_GENERATORS:
+- Internal
 
-(processes){
-  Process 11 -11 -> 23[a] 25[b] ;
-  Decay 23[a]  -> 15 -15
-  Decay 25[b]  -> 13 -13
-  Order (0,4);
-  End process;
-}(processes)
+PROCESSES:
+# DM DM -> mu- mu+
+- 52 52 -> 13 -13:
+    # 2 vertices so 2nd order is leading
+    Order: {QCD: 0, EW: 2}
+    Integration_Error: 0.05
 EOF
 
 run_test "Sherpa test" "Sherpa -f sherpa.txt || ./makelibs"
