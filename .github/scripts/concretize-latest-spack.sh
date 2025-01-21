@@ -1,3 +1,4 @@
+source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 cd /
 latest=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | jq -r .tag_name)
 echo "Latest spack release: $latest"
