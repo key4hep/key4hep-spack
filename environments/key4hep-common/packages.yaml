@@ -13,7 +13,7 @@ packages:
   curl:
     require: +gssapi
   graphviz:
-    require: +expat+poppler
+    require: +expat+pangocairo
   ddmarlinpandora:
     require: +monitoring
   dd4hep:
