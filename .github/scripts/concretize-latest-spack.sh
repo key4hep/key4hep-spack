@@ -1,5 +1,5 @@
 cd /
-latest=$(curl -s https://api.github.com/repos/OWNER/REPO/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
+latest=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
 echo "Latest spack release: $latest"
 git clone https://github.com/spack/spack -q -b $latest
 source spack/share/spack/setup-env.sh
