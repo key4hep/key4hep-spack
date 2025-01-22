@@ -54,6 +54,8 @@ packages:
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
     require: ~cuda+custom-protobuf
+  thepeg:
+    require: +rivet
   xrootd:
     require: +krb5 cxxstd=20
 
