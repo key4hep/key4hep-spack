@@ -1,4 +1,4 @@
-name: concretize-latest-spack
+name: Concretize latest spack
 
 on:
   push:
