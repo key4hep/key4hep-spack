@@ -42,8 +42,6 @@ packages:
     require: +lccd
   madgraph5amc:
     require: '@3: +pythia8'
-  rivet:
-    require: '@:3 hepmc=3'
   podio:
     require: +datasource+rntuple+sio
   py-numpy:
@@ -133,6 +131,6 @@ packages:
   # The versions of py-onnx and py-onnxruntime should be consistent based on this table
   # https://onnxruntime.ai/docs/reference/compatibility.html#onnx-opset-support
   py-onnx:
-    require: '@1.15.0'
+    require: '@1.16:'
   py-onnxruntime:
-    require: '@1.17.1'
+    require: '@1.18:'
