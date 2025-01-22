@@ -1,7 +1,11 @@
 cd /
-latest=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
-echo "Latest spack release: $latest"
-git clone https://github.com/spack/spack -q -b $latest
+if [ -z "$2" ]; then
+  tag=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
+else
+  tag="$2"
+fi
+echo "Checking out the spack tag: $tag"
+git clone https://github.com/spack/spack -q -b $tag
 source spack/share/spack/setup-env.sh
 
 cd /spack
