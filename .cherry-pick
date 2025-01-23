@@ -29,7 +29,7 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/48557.diff
 # pandoramonitoring: add patch for C++20, remove when https://github.com/spack/spack/pull/48659 is merged
 git cherry-pick 04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5 -X theirs --no-commit
 
-# py-pyqt5: add gmake as a dependency, remove when https://github.com/spack/spack/pull/48660 is merged
+# py-pyqt5: add gmake as a dependency, remove!
 git cherry-pick a87e8fc95948cde3ea425303a76d36d1768a6b3c -X theirs --no-commit
 
 # gtkplus: add conflict with GCC14, remove when https://github.com/spack/spack/pull/48661 is merged
