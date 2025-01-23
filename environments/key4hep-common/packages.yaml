@@ -42,8 +42,10 @@ packages:
     require: +lccd
   madgraph5amc:
     require: '@3: +pythia8'
+  # Without the 3.1.11 minimum, spack concretizes to 3.1.10 even though that version
+  # doesn't work well with hepmc3 due to an issue with parsing the HepMC3 version
   rivet:
-    require: '@:3 hepmc=3'
+    require: '@3.1.11:3 hepmc=3'
   podio:
     require: +datasource+rntuple+sio
   py-numpy:
