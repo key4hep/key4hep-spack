@@ -39,11 +39,9 @@ class Physsim(CMakePackage, Ilcsoftpackage):
     patch("TString_include.patch", when="@:0.4.1")
 
     def setup_run_environment(self, env):
-        env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libPhyssim.so")
-
-    def setup_run_environment(self, env):
         # The dictionary headers require physsim to be in CPATH or ROOT_INCLUDE_PATH
         env.prepend_path("CPATH", self.prefix.include.physsim)
+        env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libPhyssim.so")
 
     def cmake_args(self):
         args = []

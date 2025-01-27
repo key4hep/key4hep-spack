@@ -1,0 +1,52 @@
+name: Concretize latest spack
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  concretize:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        image: [alma9, ubuntu22]
+        build_type: [release, nightly]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start container
+        run: |
+            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            if [ "${{ matrix.image }}" = "alma9" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
+            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
+            else
+              echo "Unknown image"
+              exit 1
+            fi
+
+      - name: Setup environment and concretize
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+
+            export GITHUB_TOKEN=${GH_TOKEN}
+
+            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
+            set -e
+
+            /key4hep-spack/.github/scripts/concretize-tag-spack.sh "${{ matrix.build_type }}"
+
+            EOF
+
+            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
+
+            # cat ${GITHUB_WORKSPACE}/script_container.sh
+
+            docker exec container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"

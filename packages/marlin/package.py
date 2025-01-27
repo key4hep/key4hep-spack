@@ -17,6 +17,11 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     maintainers = ["vvolkl"]
 
     version("master", branch="master")
+
+    version(
+        "1.19.4",
+        sha256="1cefd23065a8e554ddaf38961457f67497bc8a3eb940bb037b4ca60443e0a0d2",
+    )
     version(
         "1.19.3",
         sha256="b581e4e80b67979e3dae9b2c926848e3de005f30e6193ee6b3b6e746e8ae6b6b",

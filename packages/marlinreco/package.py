@@ -8,7 +8,7 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlinreco(CMakePackage, Ilcsoftpackage):
-    """Assembly of various Marlin processor for reconstruction."""
+    """Assembly of various Marlin processors for reconstruction."""
 
     url = "https://github.com/iLCSoft/MarlinReco/archive/v01-27.tar.gz"
     homepage = "https://github.com/iLCSoft/MarlinReco"
