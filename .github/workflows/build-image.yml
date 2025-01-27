@@ -23,8 +23,6 @@ jobs:
     strategy:
       matrix:
         os: [{dir: AlmaLinux9,suffix: alma9}]
-    env:
-      IMAGE_NAME: key4hep-externals
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -59,7 +57,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{env.OWNER_LC}}/key4hep-dummy
+          images: ${{env.OWNER_LC}}/key4hep-externals
       - name: Determine spack ref
         id: getref
         run: |
@@ -75,5 +73,5 @@ jobs:
             GITHUB_REPOSITORY=${{ github.repository }}
             COMMIT_SHA=${{ github.sha }}
             SPACK_COMMIT=${{ steps.getref.outputs.spack_ref }}
-          tags: ${{ env.REGISTRY }}/${{env.OWNER_LC}}/${{ env.IMAGE_NAME}}:${{steps.meta.outputs.version}}-${{matrix.os.suffix}}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
