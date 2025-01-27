@@ -1,5 +1,9 @@
 name: Re-build and publish key4hep-externals image
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
