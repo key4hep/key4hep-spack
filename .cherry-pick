@@ -76,3 +76,6 @@ git cherry-pick be8112e1ff9dea12296bfafb341cc5953e72c415 -X theirs --no-commit
 git cherry-pick 1c6b6d0a0819409b75d7a59a90c3daf24fe80fee -X theirs --no-commit
 # delphes: Add version 3.5.1pre11
 git cherry-pick 1aa5c7450c5947abae090c7a89b64b1236e1a153 -X theirs --no-commit
+# delphes: Add version 3.5.1pre12
+git cherry-pick fe30053610a78c60488890fa0c8fccaa51e86e7e -X theirs --no-commit
+
