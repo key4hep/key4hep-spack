@@ -293,13 +293,10 @@ done
 if [ -z "$compiler" ]; then
     if [ "$os" = "almalinux9" ]; then
         compiler="gcc14"
-        echo "No compiler specified, using the default gcc 14.2.1 compiler"
     elif [ "$os" = "ubuntu22" ]; then
         compiler="gcc11"
-        echo "No compiler specified, using the system compiler"
     elif [ "$os" = "ubuntu24" ]; then
         compiler="gcc13"
-        echo "No compiler specified, using the system compiler"
     fi
 fi
 
