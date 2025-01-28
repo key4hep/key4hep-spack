@@ -14,6 +14,8 @@ packages:
     require: +gssapi
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3
+  delphes:
+    require: '@3.5.1pre12'
   gaudi:
     require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
   gdb:
