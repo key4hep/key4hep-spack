@@ -81,6 +81,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on("hepmc", when="+delphes_hepmc")
     depends_on("hepmc3", when="+framework")
     depends_on("k4fwcore", when="+framework")
+    depends_on("gaudi", when="+framework")
 
     depends_on("catch2@3.0.1:", type=("build", "test"))
     depends_on("k4gen", when="+integration_tests", type=("build", "test", "run"))
