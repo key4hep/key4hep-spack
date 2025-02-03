@@ -17,7 +17,7 @@ permissions:
 jobs:
   build-externals:
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}-${{ matrix.build_type }}
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     strategy:
