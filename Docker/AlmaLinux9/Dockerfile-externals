@@ -1,0 +1,71 @@
+###############################################################################
+#  Repository: ${REPOSITORY}/key4hep-externals
+#  Tag:        ${VERSION}-alma9
+###############################################################################
+
+FROM ghcr.io/key4hep/key4hep-images/alma9:latest
+
+# Picking specific commits
+ARG SPACK_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
+ARG COMMIT_SHA=e49a0639ff987a84fa0c6263e068776f9d7b6f67
+ARG GITHUB_REPOSITORY=madbaron/key4hep-spack
+
+# Setting up Spack
+RUN git clone https://github.com/spack/spack.git /opt/spack && \
+    echo "source /opt/spack/share/spack/setup-env.sh" >> /opt/setup_spack.sh && \
+    echo "alias setup_spack=\"source /opt/setup_spack.sh\"" >> /etc/profile.d/aliases.sh
+
+# Using specific commit of Key4hep repository if requested
+RUN if [ -n "${SPACK_COMMIT}" ]; then \
+      cd /opt/spack; \
+      git checkout ${SPACK_COMMIT}; \
+    fi
+
+# Registering compilers with Spack
+ENV SPACK_COLOR="always"
+RUN source /opt/setup_spack.sh && \
+    spack compiler find
+
+RUN source /opt/setup_spack.sh && \
+    REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
+    git clone https://github.com/${GITHUB_REPOSITORY} ${REPOPATH} && \
+    cd ${REPOPATH} && \
+    git checkout ${COMMIT_SHA} && \
+    cd -
+
+# Apply our patches to spack
+COPY apply_patches.sh ./apply_patches.sh
+
+RUN source /opt/setup_spack.sh && \
+    ./apply_patches.sh ${SPACK_ROOT}/var/key4hep-spack
+
+# Add the package repositories
+RUN source /opt/setup_spack.sh && \
+    spack repo add --scope system ${SPACK_ROOT}/var/key4hep-spack
+
+# Create the release environment
+RUN source /opt/setup_spack.sh && \
+    cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-dev-external && \
+    spack env activate . && \
+    cd - && \
+    echo "source /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
+    echo "cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-dev-external" >> ${HOME}/setup_env.sh && \
+    echo "spack env activate ." >> ${HOME}/setup_env.sh && \
+    echo "cd -" >> ${HOME}/setup_env.sh && \
+    echo "spack env status" >> ${HOME}/setup_env.sh
+
+# Concretizing the stack reusing system packages as external
+RUN source ${HOME}/setup_env.sh && \
+    spack concretize --reuse
+
+# Installing fragments of dependency tree in separate layers for cached debugging
+ENV SPACK_INSTALL_OPTS="--only-concrete --no-add --fail-fast"
+
+RUN source ${HOME}/setup_env.sh && \
+    spack spec -NIt && \
+    spack install ${SPACK_INSTALL_OPTS} && \
+    spack clean -a
+
+RUN source ${HOME}/setup_env.sh && \
+    echo "source ${SPACK_ENV}/.spack-env/view/setup.sh" > /opt/setup_k4_externals.sh && \
+    echo "alias setup_k4_externals=\"source /opt/setup_k4_externals.sh\"" >> /etc/profile.d/aliases.sh
