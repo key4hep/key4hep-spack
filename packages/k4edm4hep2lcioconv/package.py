@@ -18,6 +18,10 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-10",
+        sha256="d0d082d9dee973819d7713d883507a0303dbd917fb14c3749a4ffcdafc4e4af2",
+    )
+    version(
         "00-09",
         sha256="bdbb88e2900eb3834d74d100b4d32ae760ee0816ac5fa4a5930772fbe9fb11d9",
     )
