@@ -1,8 +1,8 @@
 cd /
-if [ -z "$2" ]; then
+if [ -z "$1" ]; then
   tag=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
 else
-  tag="$2"
+  tag="$1"
 fi
 echo "Checking out the spack tag: $tag"
 git clone https://github.com/spack/spack -q -b $tag
@@ -12,15 +12,7 @@ cd /spack
 # git checkout $(cat /key4hep-spack/.latest-commit)
 # source /key4hep-spack/.cherry-pick
 
-if [ "$1" = "release" ]; then
-    env=key4hep-release-opt
-elif [ "$1" = "nightly" ]; then
-    env=key4hep-nightly-opt
-else
-    echo "Unknown build type"
-    exit 1
-fi
-cd /key4hep-spack/environments/${env}
+cd /key4hep-spack/environments/key4hep-base
 
 echo "========="
 echo "spack.yaml"

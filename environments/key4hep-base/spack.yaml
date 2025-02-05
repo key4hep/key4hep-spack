@@ -1,0 +1,8 @@
+spack:
+  view: false
+  include:
+  - ../key4hep-common/packages.yaml
+  repos:
+  - ../..
+  specs:
+  - key4hep-stack+devtools
