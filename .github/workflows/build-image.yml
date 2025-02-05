@@ -52,7 +52,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ github.repository_owner }}/key4hep-externals
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals
       - name: Determine spack ref
         id: getref
         run: |
