@@ -42,9 +42,9 @@ class Lccontent(CMakePackage):
 
     def cmake_args(self):
         args = [
-            "-DCMAKE_CXX_STANDARD=20",
             "-DCMAKE_MODULE_PATH=%s" % self.spec["pandorapfa"].prefix.cmakemodules,
             "-DCMAKE_CXX_FLAGS=-Wno-error",
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value if 'root' in self.spec else 20}",
             self.define_from_variant("PANDORA_MONITORING", "monitoring"),
         ]
         return args

@@ -18,6 +18,10 @@ class Ddfastshowerml(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.1",
+        sha256="a9628624736baea4261950615b698c9389763c18953c29bb5b1635d8d2dd9c3b",
+    )
+    version(
         "0.1.0",
         sha256="a9628624736baea4261950615b698c9389763c18953c29bb5b1635d8d2dd9c3b",
     )
@@ -29,6 +33,7 @@ class Ddfastshowerml(CMakePackage, Key4hepPackage):
     depends_on("py-torch", when="inference=torch")
     depends_on("py-torch", when="inference=both")
     depends_on("dd4hep")
+    depends_on("openmpi", when="@0.1.1:")
 
     def cmake_args(self):
         args = []

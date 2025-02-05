@@ -4,7 +4,7 @@
 
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       -c           : select compiler, system or gcc14 (default) on AlmaLinux 9, system for the other OSes"
+    # echo "       -c           : select compiler, gcc14 (default) on AlmaLinux 9, system for the other OSes"
     echo "       -d           : setup the debug version of the software stack"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
@@ -35,8 +35,10 @@ function list_releases() {
         if [ -z "$compiler" ]; then
             compiler="gcc14"
         fi
-    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
+    elif [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
+    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
+        name="ubuntu24"
     else
         echo "Unsupported OS, aborting..."
         usage
@@ -59,8 +61,10 @@ function list_packages() {
         if [ -z "$compiler" ]; then
             compiler="gcc14"
         fi
-    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
+    elif [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
+    elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
+        name="ubuntu24"
     else
         echo "Unsupported OS, aborting..."
         usage
@@ -204,9 +208,12 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERS
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
     os="ubuntu22"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
+    os="ubuntu24"
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04"
+    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04 and Ubuntu 24.04"
     return 1
 fi
 
@@ -231,9 +238,6 @@ for ((i=1; i<=$#; i++)); do
                 elif [ "$argn" = "system" ]; then
                     compiler="gcc11"
                     echo "Using the system compiler"
-                elif [ "$argn" = "gcc11" ]; then
-                    compiler="gcc11"
-                    echo "Using the GCC 11.4 compiler"
                 else
                     echo "Unsupported compiler $argn, aborting..."
                     usage
@@ -289,10 +293,10 @@ done
 if [ -z "$compiler" ]; then
     if [ "$os" = "almalinux9" ]; then
         compiler="gcc14"
-        echo "No compiler specified, using the default gcc 14.2.1 compiler"
     elif [ "$os" = "ubuntu22" ]; then
         compiler="gcc11"
-        echo "No compiler specified, using the system compiler"
+    elif [ "$os" = "ubuntu24" ]; then
+        compiler="gcc13"
     fi
 fi
 
@@ -311,8 +315,10 @@ fi
 
 if [ "$os" = "almalinux9" ]; then
     echo "AlmaLinux/RockyLinux/RHEL 9 detected"
-elif [ "$os" = "ubuntu22.04" ]; then
+elif [ "$os" = "ubuntu22" ]; then
     echo "Ubuntu 22.04 detected"
+elif [ "$os" = "ubuntu24" ]; then
+    echo "Ubuntu 24.04 detected"
 fi
 
 
@@ -347,4 +353,3 @@ echo ""
 echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
-echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"

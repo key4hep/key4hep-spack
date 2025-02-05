@@ -12,12 +12,14 @@ packages:
     buildable: true
   curl:
     require: +gssapi
+  graphviz:
+    require: +expat+pangocairo
   ddmarlinpandora:
     require: +monitoring
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3
   gaudi:
-    require: +aida+cppunit+examples+gperftools+heppdt+jemalloc+unwind+xercesc
+    require: '@39: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc'
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
@@ -40,8 +42,10 @@ packages:
     require: +lccd
   madgraph5amc:
     require: '@3: +pythia8'
+  # Without the 3.1.11 minimum, spack concretizes to 3.1.10 even though that version
+  # doesn't work well with hepmc3 due to an issue with parsing the HepMC3 version
   rivet:
-    require: '@:3 hepmc=3'
+    require: hepmc=3
   podio:
     require: +datasource+rntuple+sio
   py-numpy:
@@ -52,6 +56,8 @@ packages:
   # Requested by Thomas Madlener for DESY, without CUDA and before v2
   py-torch:
     require: ~cuda+custom-protobuf
+  thepeg:
+    require: +rivet
   xrootd:
     require: +krb5 cxxstd=20
 
@@ -131,6 +137,6 @@ packages:
   # The versions of py-onnx and py-onnxruntime should be consistent based on this table
   # https://onnxruntime.ai/docs/reference/compatibility.html#onnx-opset-support
   py-onnx:
-    require: '@1.15.0'
+    require: '@1.16:'
   py-onnxruntime:
-    require: '@1.17.1'
+    require: '@1.18:'

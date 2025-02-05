@@ -35,6 +35,12 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
     variant("doc", default=False, description="build doxygen documentation")
 
     depends_on("marlinkinfit")
+    depends_on("marlin")
+    depends_on("marlinutil")
+    depends_on("root")
+    depends_on("gsl")
+    depends_on("clhep")
+    depends_on("raida")
     depends_on("doxygen", when="+doc")
 
     def cmake_args(self):

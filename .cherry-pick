@@ -5,14 +5,11 @@ git fetch jmcarcell -q
 # CMAKE_INSTALL_LIBDIR gets chosen as lib64 and this causes problems in some
 # packages that expect lib. Since spack installs each package to its own prefix
 # we don't need to worry about multilib environments
-git cherry-pick 42c070632bcb0f8333bc029e17a53646d9589d7e -X theirs --no-commit
+git cherry-pick dcedd688a077ba5399b1a77275364b8164eab41f -X theirs --no-commit
 
 # Because the patch above and py-onnx being a python package, it will try to find
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
 git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
-
-# add a recent version of madgraph, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/41128.diff | patch -p1
 
 # add vdt for CPATH, needed for podio+rntuple
 git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
@@ -20,59 +17,23 @@ git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 # podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/42844.diff | patch -p1
 
-# geant4 twisted tubes: remove when https://github.com/spack/spack/pull/45368 is merged or after 11.2.2
-# curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/45368.diff | patch -p1
+# py-awkward: add py-importlib-metadata to the dependencies, remove!
+git cherry-pick a2e5fecea7740ee522a4978784082e9a9106bb58 -X theirs --no-commit
 
-# geant4 gen trap fix, remove after 11.2.2
-# git cherry-pick 8daeaeac29e817f85d86fcfa85b3293a7465b280 -X theirs --no-commit
+# pandora: set the C++ standards, remove when https://github.com/spack/spack/pull/48300 is merged
+git cherry-pick b61942b3d57f492d09fb4da3e681f88d683f9563 -X theirs --no-commit
 
-# Both geant4 changes in a single commit
-git cherry-pick c8191268c3ea4aca6e870ad40d695e92f94d0e47 -X theirs --no-commit
+# gaudi: add v39.2 and a fix for compiling on GCC 11, remove!
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/48557.diff | patch -p1
 
-# zziplib: add 0.13.78, remove!
-git cherry-pick db5538f5f12de8d1599ef4339e2dd1756d1230ad -X theirs --no-commit
+# pandoramonitoring: add patch for C++20, remove!
+git cherry-pick 04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5 -X theirs --no-commit
 
-# pybind11: fix pkgconfig, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46298.diff | patch -p1
+# py-pyqt5: add gmake as a dependency, remove!
+git cherry-pick a87e8fc95948cde3ea425303a76d36d1768a6b3c -X theirs --no-commit
 
-# gaudi: add patches, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46365.diff | patch -p1
+# gtkplus: add conflict with GCC14, remove when https://github.com/spack/spack/pull/48661 is merged
+git cherry-pick 1e85e2f27582dc105e7b7d9e668e32b5b9e696f8 -X theirs --no-commit
 
-# py-awkward and py-awkward-cpp: fixes, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46372.diff | patch -p1
-
-# py-onnx: add fixes for GCC 14, remove!
-# curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46390.diff | patch -p1
-git cherry-pick 096ab11961995ac8d69f7b177cbcadf618d3068e -X theirs --no-commit
-
-# texlive: add new versions, remove!
-git cherry-pick 5398b1be15245e1be480c5aa4706f57795208505 -X theirs --no-commit
-
-# texlive: fix mtxrun, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/46465.diff | patch -p1
-
-# py-onnx: add a patch for the standard, remove after 1.15.0
-git add .
-git cherry-pick 248a7c0f4894222bfcd0bb76b13a984c92d4c938 -X theirs --no-commit
-
-# py-cython: add version 3.0.11, remove when https://github.com/spack/spack/pull/46772 is merged
-git cherry-pick 072d308c0b4b53c0d0528ee3a7e59de110133968 -X theirs --no-commit
-# py-lxml: add version 5.3.0, remove when https://github.com/spack/spack/pull/46771 is merged
-git cherry-pick 94ef87d013b3ea9627c1aa850b8929dbe217bf20 -X theirs --no-commit
-
-# madgraph5amc: add v3.5.6, remove!
-git cherry-pick 5777576e37ee28d674e2520d3f10b3f651a7680e -X theirs --no-commit
-
-# py-gevent: add a patch for cython 3.0.10 and 3.0.11, remove!
-git cherry-pick 06f21ae4e2499bccaa6c52359bafbb93c161944b -X theirs --no-commit
-
-# py-hepmc3: Extend python when the python bindings are enabled
-git cherry-pick 04b8b88bd6485d4cf01373ec9ccf18a49f30b34d -X theirs --no-commit
-
-# Versions for the release, in order DD4hep and podio&edm4hep and LCIO
-git cherry-pick 43d1cdb0bd4780bff369dafa681a8a7939313784 -X theirs --no-commit
-git cherry-pick 5d9c534018593fdef5db1028c60026d26bf4d65b -X theirs --no-commit
-git cherry-pick be8112e1ff9dea12296bfafb341cc5953e72c415 -X theirs --no-commit
-git cherry-pick 1c6b6d0a0819409b75d7a59a90c3daf24fe80fee -X theirs --no-commit
-# delphes: Add version 3.5.1pre11
-git cherry-pick 1aa5c7450c5947abae090c7a89b64b1236e1a153 -X theirs --no-commit
+# acts: add patch to find python before DD4hep
+git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
