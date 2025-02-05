@@ -4,7 +4,7 @@
 
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       -c           : select compiler, system or gcc14 (default) on AlmaLinux 9, system for the other OSes"
+    # echo "       -c           : select compiler, gcc14 (default) on AlmaLinux 9, system for the other OSes"
     echo "       -d           : setup the debug version of the software stack"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
@@ -353,4 +353,3 @@ echo ""
 echo "Nightly builds are intended for testing and development, if you need a stable environment use the releases"
 echo "If you have any issues, comments or requests, open an issue at https://github.com/key4hep/key4hep-spack/issues"
 source ${setup_actual}
-echo "Tip: A new -d flag can be used to access debug builds, otherwise the default is the optimized build"
