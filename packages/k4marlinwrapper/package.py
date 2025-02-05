@@ -37,10 +37,13 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4fwcore@:1.1.0", when="@:0.9")
+    depends_on("k4fwcore@1.2:", when="@0.11:")
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.1:")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4edm4hep2lcioconv@00-09:", when="@0.9:")
+    depends_on("k4edm4hep2lcioconv@00-10:", when="@0.11:")
+
     # for the doctest:
     depends_on("py-jupytext", type=("test"))
     depends_on("py-ipykernel", type=("test"))
