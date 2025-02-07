@@ -26,35 +26,11 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     version(
         "00-10",
         sha256="a7fbdb0dfc3082b71f158a1c0a7f3c7698901b1f2bc9204cf7e9c656ae142884",
+        deprecated=True,
     )
     version(
         "00-09",
-        sha256="bdbb88e2900eb3834d74d100b4d32ae760ee0816ac5fa4a5930772fbe9fb11d9",
-    )
-    version(
-        "00-08-02",
-        sha256="a0418b5c3c6ce77435bd942279420b0390099f417a7984227cf212710b079321",
-        deprecated=True,
-    )
-    version(
-        "00-08-01",
-        sha256="4518e39a0c87182d394f213074344ed29724005cd0481a2555a1fe48fdb98d2b",
-        deprecated=True,
-    )
-    version(
-        "00-08",
-        sha256="e3bfcb611b78d8e457d7f68e25d5aabe21b4b87928b0de0fc61a09734c7adb4c",
-        deprecated=True,
-    )
-    version(
-        "00-07",
-        sha256="269d14c390f987fb3fdb0d2e952febfb639415bef50e5e1c8992f23e0cd4a5a6",
-        deprecated=True,
-    )
-    version(
-        "00-06",
-        sha256="c220604577d309bc11a5a4c147f55640fedef90375d1232439343362607a3906",
-        deprecated=True,
+        sha256="aae9ac39ae56f9e18b8b2f13c84ca95a2c90b71069a5318b894a574d773d8815",
     )
 
     depends_on("lcio@2.20:")
