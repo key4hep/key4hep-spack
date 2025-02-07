@@ -12,11 +12,21 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     homepage = "https://github.com/key4hep/k4EDM4hep2LcioConv"
     git = "https://github.com/key4hep/k4EDM4hep2LcioConv.git"
-    url = "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/v00-01.zip"
+    url = (
+        "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/refs/tags/v00-10.tar.gz"
+    )
 
     maintainers = ["tmadlener"]
 
     version("main", branch="main")
+    version(
+        "00-11",
+        sha256="937c9a794f094395134ed4df448fda643e0ba4a339b7ee1d8d2e4ea08f4ee2f7",
+    )
+    version(
+        "00-10",
+        sha256="a7fbdb0dfc3082b71f158a1c0a7f3c7698901b1f2bc9204cf7e9c656ae142884",
+    )
     version(
         "00-09",
         sha256="bdbb88e2900eb3834d74d100b4d32ae760ee0816ac5fa4a5930772fbe9fb11d9",
