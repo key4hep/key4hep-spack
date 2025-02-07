@@ -18,8 +18,13 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-11",
+        sha256="f550ba488ed49ec7b41b9543a232e41409f8ae4e6bbe559649321599c5983488",
+    )
+    version(
         "00-10",
         sha256="d0d082d9dee973819d7713d883507a0303dbd917fb14c3749a4ffcdafc4e4af2",
+        deprecated=True,  # Cannot be consumed via CMake with version requirements
     )
     version(
         "00-09",
