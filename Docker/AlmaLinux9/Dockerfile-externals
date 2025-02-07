@@ -67,5 +67,6 @@ RUN source ${HOME}/setup_env.sh && \
     spack clean -a
 
 RUN source ${HOME}/setup_env.sh && \
-    echo "source ${SPACK_ENV}/.spack-env/view/setup.sh" > /opt/setup_k4_externals.sh && \
+    KEY4HEP_EXTERNALS_STACK_PATH=$(spack find --format "{prefix}" key4hep-external-stack) && \
+    echo "source ${KEY4HEP_EXTERNALS_STACK_PATH}/setup.sh" > /opt/setup_k4_externals.sh && \
     echo "alias setup_k4_externals=\"source /opt/setup_k4_externals.sh\"" >> /etc/profile.d/aliases.sh
