@@ -24,6 +24,7 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
 # Registering compilers with Spack
 ENV SPACK_COLOR="always"
 RUN source /opt/setup_spack.sh && \
+    /mount.sh && \
     spack compiler find
 
 RUN source /opt/setup_spack.sh && \
