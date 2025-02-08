@@ -10,6 +10,9 @@ ARG SPACK_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
 ARG COMMIT_SHA=e49a0639ff987a84fa0c6263e068776f9d7b6f67
 ARG GITHUB_REPOSITORY=madbaron/key4hep-spack
 
+# Install gcc
+RUN dnf install -y gcc gcc-c++ gcc-gfortran
+
 # Setting up Spack
 RUN git clone https://github.com/spack/spack.git /opt/spack && \
     echo "source /opt/spack/share/spack/setup-env.sh" >> /opt/setup_spack.sh && \
@@ -24,7 +27,6 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
 # Registering compilers with Spack
 ENV SPACK_COLOR="always"
 RUN source /opt/setup_spack.sh && \
-    /mount.sh && \
     spack compiler find
 
 RUN source /opt/setup_spack.sh && \
