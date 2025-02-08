@@ -3,7 +3,7 @@
 #  Tag:        ${VERSION}-alma9
 ###############################################################################
 
-FROM ghcr.io/key4hep/key4hep-images/alma9-cvmfs:latest
+FROM ghcr.io/key4hep/key4hep-images/alma9:latest
 
 # Picking specific commits
 ARG SPACK_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
