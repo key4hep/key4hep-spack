@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - main
+    - fix-externals-view
   workflow_dispatch:
 
 env:
