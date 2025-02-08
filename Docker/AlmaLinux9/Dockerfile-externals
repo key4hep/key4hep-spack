@@ -11,7 +11,7 @@ ARG COMMIT_SHA=e49a0639ff987a84fa0c6263e068776f9d7b6f67
 ARG GITHUB_REPOSITORY=madbaron/key4hep-spack
 
 # Install gcc
-RUN dnf install -y gcc gcc-c++ gcc-gfortran
+RUN dnf install -y gcc gcc-c++ gcc-gfortran lbzip2
 
 # Setting up Spack
 RUN git clone https://github.com/spack/spack.git /opt/spack && \
