@@ -1,4 +1,8 @@
 spack:
+
+  include:
+  - ../key4hep-common/compilers.yaml
+
   packages:
     all:
       variants:
