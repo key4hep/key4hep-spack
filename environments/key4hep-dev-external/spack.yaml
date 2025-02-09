@@ -1,5 +1,4 @@
 spack:
-
   packages:
     all:
       variants:
