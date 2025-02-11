@@ -8,7 +8,10 @@ FROM ghcr.io/key4hep/key4hep-images/alma9:latest
 # Picking specific commits
 ARG SPACK_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
 ARG COMMIT_SHA=e49a0639ff987a84fa0c6263e068776f9d7b6f67
-ARG GITHUB_REPOSITORY=madbaron/key4hep-spack
+ARG GITHUB_REPOSITORY=key4hep/key4hep-spack
+
+# Install gcc and lbzip2
+RUN dnf install -y gcc gcc-c++ gcc-gfortran lbzip2 unzip
 
 # Setting up Spack
 RUN git clone https://github.com/spack/spack.git /opt/spack && \
@@ -65,7 +68,3 @@ RUN source ${HOME}/setup_env.sh && \
     spack spec -NIt && \
     spack install ${SPACK_INSTALL_OPTS} && \
     spack clean -a
-
-RUN source ${HOME}/setup_env.sh && \
-    echo "source ${SPACK_ENV}/.spack-env/view/setup.sh" > /opt/setup_k4_externals.sh && \
-    echo "alias setup_k4_externals=\"source /opt/setup_k4_externals.sh\"" >> /etc/profile.d/aliases.sh
