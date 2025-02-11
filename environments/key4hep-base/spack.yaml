@@ -2,6 +2,7 @@ spack:
   view: false
   include:
   - ../key4hep-common/packages.yaml
+  - ../key4hep-common/compilers.yaml
   repos:
   - ../..
   specs:
