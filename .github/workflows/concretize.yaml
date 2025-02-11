@@ -52,7 +52,6 @@ jobs:
                 env=key4hep-release-opt
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
-                pip3 install pyyaml
                 python3 /key4hep-spack/scripts/fetch_nightly_versions.py --path /key4hep-spack/environments/key4hep-common/packages.yaml --extra-path /key4hep-spack/environments/key4hep-common-opt/packages.yaml ""
             else
                 echo "Unknown build type"
