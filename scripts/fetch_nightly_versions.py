@@ -143,7 +143,7 @@ if __name__ == "__main__":
         ("k4reccalorimeter", "hep-fcc/k4reccalorimeter"),
         ("k4rectracker", "key4hep/k4rectracker"),
         ("k4simdelphes", "key4hep/k4SimDelphes"),
-        ("k4simgeant4", "hep-fcc/k4simgeant4"),
+        ("k4simgeant4", "key4hep/k4simgeant4"),
         ("kaltest", "ilcsoft/kaltest"),
         ("kitrack", "ilcsoft/kitrack"),
         ("kitrackmarlin", "ilcsoft/kitrackmarlin"),
