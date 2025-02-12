@@ -5,9 +5,9 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4simgeant4(CMakePackage, Key4hepPackage):
     """Geant4 components of the Key4HEP software"""
 
-    homepage = "https://github.com/HEP-FCC/k4SimGeant4/"
-    url = "https://github.com/HEP-FCC/k4SimGeant4/archive/v0.1.0pre05.tar.gz"
-    git = "https://github.com/HEP-FCC/k4SimGeant4.git"
+    homepage = "https://github.com/key4hep/k4SimGeant4/"
+    url = "https://github.com/key4hep/k4SimGeant4/archive/v0.1.0pre05.tar.gz"
+    git = "https://github.com/key4hep/k4SimGeant4.git"
 
     maintainers = ["vvolkl"]
 
