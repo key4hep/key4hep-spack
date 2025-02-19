@@ -21,6 +21,9 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     version("0.1.0pre09", tag="v0.1.0pre09")
     version("0.1.0pre08", tag="v0.1.0pre08")
 
+
+    variant("docs", default=False, description="Build the documentation")
+
     depends_on("clhep")
     depends_on("dd4hep")
     depends_on("k4fwcore")
@@ -33,10 +36,10 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on("k4gen")
 
     def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            self.define_from_variant("BUILD_DOCS", "docs"),
+        ]
         return args
 
     def setup_run_environment(self, env):
