@@ -21,7 +21,6 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     version("0.1.0pre09", tag="v0.1.0pre09")
     version("0.1.0pre08", tag="v0.1.0pre08")
 
-
     variant("docs", default=False, description="Build the documentation")
 
     depends_on("clhep")
