@@ -37,3 +37,7 @@ git cherry-pick 1e85e2f27582dc105e7b7d9e668e32b5b9e696f8 -X theirs --no-commit
 
 # acts: add patch to find python before DD4hep
 git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
+
+# lcio: versions 2.22.4 and 2.22.5
+git cherry-pick 731e48b1bd6656de265e99d246a026a704dfb24d -X theirs --no-commit  # For 2.22.4
+git cherry-pick dd16f451fcf1f5d11559ee76221c9c086dcb4e10 -X theirs --no-commit  # For 2.22.5
