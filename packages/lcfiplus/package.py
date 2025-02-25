@@ -26,7 +26,7 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
         sha256="0d4d27cd0d9407cd2f13e5a978be8c9389bc86c78c2eefd0ae7c060c4b7196c3",
     )
 
-    patch("dict.patch", when="@0.10:")
+    patch("dict.patch", when="@0.10:0.10.1")
 
     depends_on("marlin")
     depends_on("marlinutil")
