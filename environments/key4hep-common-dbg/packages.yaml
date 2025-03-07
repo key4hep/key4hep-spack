@@ -115,8 +115,6 @@ packages:
     require: build_type=Debug
   pandoraanalysis:
     require: build_type=Debug
-  physsim:
-    require: build_type=Debug
   podio:
     require: build_type=Debug
   raida:

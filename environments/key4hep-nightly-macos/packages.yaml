@@ -123,8 +123,6 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   pandoraanalysis:
     variants: build_type=RelWithDebInfo cxxstd=20
-  physsim:
-    variants: build_type=RelWithDebInfo
   podio:
     variants: build_type=RelWithDebInfo
   raida:
