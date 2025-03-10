@@ -164,7 +164,6 @@ if __name__ == "__main__":
         ("opendatadetector", "acts/OpenDataDetector"),
         ("overlay", "ilcsoft/overlay"),
         ("pandoraanalysis", "PandoraPFA/LCPandoraAnalysis"),
-        ("physsim", "ilcsoft/physsim"),
         ("podio", "aidasoft/podio"),
         ("raida", "ilcsoft/raida"),
         ("sio", "ilcsoft/sio"),
