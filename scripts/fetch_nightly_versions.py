@@ -167,7 +167,6 @@ if __name__ == "__main__":
         ("physsim", "ilcsoft/physsim"),
         ("podio", "aidasoft/podio"),
         ("raida", "ilcsoft/raida"),
-        ("simsipm", "edopro98/simsipm"),
         ("sio", "ilcsoft/sio"),
     ]:
         if args.only_merge:

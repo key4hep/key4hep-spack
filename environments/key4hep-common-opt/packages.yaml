@@ -121,8 +121,6 @@ packages:
     require: build_type=Release
   raida:
     require: build_type=Release
-  simsipm:
-    require: build_type=Release
   sio:
     require: build_type=Release cxxstd=20
 
