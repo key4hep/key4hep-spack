@@ -121,6 +121,8 @@ packages:
     require: build_type=Debug
   raida:
     require: build_type=Debug
+  simsipm:
+    require: build_type=Debug
   sio:
     require: build_type=Debug cxxstd=20
 
