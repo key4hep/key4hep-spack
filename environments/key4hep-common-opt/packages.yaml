@@ -115,8 +115,6 @@ packages:
     require: build_type=Release
   pandoraanalysis:
     require: build_type=Release
-  physsim:
-    require: build_type=Release
   podio:
     require: build_type=Release
   raida:
