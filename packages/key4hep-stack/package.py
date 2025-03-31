@@ -176,5 +176,15 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         if "automake" in self.spec:
             env.prepend_path("PATH", self.spec["automake"].prefix.bin)
 
+        # Add the correct path in pytorch to CMAKE_PREFIX_PATH
+        # This could be deleted (to be tested) once https://github.com/spack/spack/pull/49267 is merged
+        if "py-torch" in self.spec:
+            env.prepend_path(
+                "CMAKE_PREFIX_PATH",
+                join_path(
+                    self["py-torch"].module.python_platlib, "torch", "share", "cmake"
+                ),
+            )
+
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")
