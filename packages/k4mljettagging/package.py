@@ -2,12 +2,12 @@ from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Fccanalyses(CMakePackage, Key4hepPackage):
-    """RDF Analysers for the FCC."""
+class K4mljettagger(CMakePackage, Key4hepPackage):
+    """Implementation of Jet-Flavor Tagging on CLD full simulation with the ParticleTransformer"""
 
     homepage = "https://github.com/saracreates/JetTagging"
     git = "https://github.com/saracreates/JetTagging.git"
-    # url = "https://github.com/HEP-FCC/FCCAnalyses/archive/v0.1.1.tar.gz"
+    # url = "https://github.com/saracreates/archive/v0.1.1.tar.gz"
 
     maintainers = ["jmcarcell"]
 
