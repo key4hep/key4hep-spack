@@ -46,7 +46,7 @@ packages:
   ildperformance:
     require: build_type=Debug
   k4mljettagger:
-    require: build_type=Release
+    require: build_type=Debug
   key4hep-stack:
     require: build_type=Debug
   k4clue:
