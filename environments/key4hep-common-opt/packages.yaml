@@ -45,6 +45,8 @@ packages:
     require: build_type=Release cxxstd=20
   ildperformance:
     require: build_type=Release
+  k4mljettagging:
+    require: build_type=Release
   key4hep-stack:
     require: build_type=Release
   k4clue:
