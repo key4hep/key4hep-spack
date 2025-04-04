@@ -5,8 +5,8 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4mljettagger(CMakePackage, Key4hepPackage):
     """Implementation of Jet-Flavor Tagging on CLD full simulation with the ParticleTransformer"""
 
-    homepage = "https://github.com/saracreates/JetTagging"
-    git = "https://github.com/saracreates/JetTagging.git"
+    homepage = "https://github.com/saracreates/k4MLJetTagger"
+    git = "https://github.com/saracreates/k4MLJetTagger.git"
     # url = "https://github.com/saracreates/archive/v0.1.1.tar.gz"
 
     maintainers = ["jmcarcell"]
