@@ -36,7 +36,6 @@ class Ddfastshowerml(CMakePackage, Key4hepPackage):
     depends_on("openmpi", when="@0.1.1:")
 
     def cmake_args(self):
-
         args = [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
         ]
