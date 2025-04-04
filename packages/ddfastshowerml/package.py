@@ -36,8 +36,12 @@ class Ddfastshowerml(CMakePackage, Key4hepPackage):
     depends_on("openmpi", when="@0.1.1:")
 
     def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+        ]
+        # This fixes issues in Ubuntu24 when it's not linking to libgomp from gcc-runtime
+        if self.spec.satisfies("inference=torch") or self.spec.satisfies(
+            "inference=both"
+        ):
+            args.append(f"-DCMAKE_SHARED_LINKER_FLAGS={self.compiler.openmp_flag}")
         return args
