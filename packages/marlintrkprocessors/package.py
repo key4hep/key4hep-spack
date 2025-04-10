@@ -18,6 +18,10 @@ class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "2.12.7",
+        sha256="34cc4cfbf6265fbd9c1164a294957596a5cd722d82d9e66a3f8db51414fa8271",
+    )
+    version(
         "2.12.6",
         sha256="1414329054b95747a3406a73b2db41b352d322008af68a3e1d7526cf80ac7898",
     )
