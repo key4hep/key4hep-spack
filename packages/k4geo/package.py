@@ -57,6 +57,7 @@ class K4geo(CMakePackage):
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
         args.append(self.define("BUILD_TESTING", self.run_tests))
+        args.append("-DINSTALL_BEAMPIPE_STL_FILES=ON")
         return args
 
     def setup_run_environment(self, env):
