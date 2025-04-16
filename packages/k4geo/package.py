@@ -56,8 +56,9 @@ class K4geo(CMakePackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
+        # Automatically install the CAD beampipe files if we install the compact files
+        args.append(self.define("INSTALL_BEAMPIPE_STL_FILES", self.comapact))
         args.append(self.define("BUILD_TESTING", self.run_tests))
-        args.append("-DINSTALL_BEAMPIPE_STL_FILES=ON")
         return args
 
     def setup_run_environment(self, env):
