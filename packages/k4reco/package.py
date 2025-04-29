@@ -27,7 +27,7 @@ class K4reco(CMakePackage, Key4hepPackage):
     depends_on("root")
 
     depends_on("lcio", when="+conformal_tracking")
-    depends_on("ilcutils", when="+conformal_tracking")
+    depends_on("ilcutil", when="+conformal_tracking")
     depends_on("kaltest", when="+conformal_tracking")
     depends_on("ddkaltest", when="+conformal_tracking")
 
