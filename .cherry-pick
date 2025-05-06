@@ -14,8 +14,9 @@ git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
 # add vdt for CPATH, needed for podio+rntuple
 git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 
-# podio: add rpath, remove when https://github.com/spack/spack/pull/42844 is merged
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/42844.diff | patch -p1
+# podio: add rpath, remove!
+git cherry-pick 336a2d365e4f8097e02589f9d60f550e3e0f2319 -X theirs --no-commit
+git cherry-pick 9418024a42cfedb161e03f18a21f1a1b22b98472 -X theirs --no-commit
 
 # py-awkward: add py-importlib-metadata to the dependencies, remove!
 git cherry-pick a2e5fecea7740ee522a4978784082e9a9106bb58 -X theirs --no-commit
@@ -24,7 +25,7 @@ git cherry-pick a2e5fecea7740ee522a4978784082e9a9106bb58 -X theirs --no-commit
 git cherry-pick b7410867ac52e8281e4dcdf1339c0b44903ce767 -X theirs --no-commit
 
 # gaudi: add v39.2 and a fix for compiling on GCC 11, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/48557.diff | patch -p1
+git cherry-pick 81e6dcd95c783e0a80f8e4b2a8a77058c34aafeb -X theirs --no-commit
 
 # pandoramonitoring: add patch for C++20, remove!
 git cherry-pick 04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5 -X theirs --no-commit
@@ -33,7 +34,8 @@ git cherry-pick 04b786bcdeddbfbcfe5a4e4985eb4ec9415e22b5 -X theirs --no-commit
 git cherry-pick a87e8fc95948cde3ea425303a76d36d1768a6b3c -X theirs --no-commit
 
 # gtkplus: add conflict with GCC14, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/48661.diff | patch -p1
+git cherry-pick 1dac47a1a0e2e74723287780148c4d579ea75ada -X theirs --no-commit
+git cherry-pick 16e9dca19d6d2e4df1e60dc796f4f89a02fd2dc2 -X theirs --no-commit
 
 # acts: add patch to find python before DD4hep
 git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
@@ -42,6 +44,6 @@ git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
 git cherry-pick 731e48b1bd6656de265e99d246a026a704dfb24d -X theirs --no-commit  # For 2.22.4
 git cherry-pick dd16f451fcf1f5d11559ee76221c9c086dcb4e10 -X theirs --no-commit  # For 2.22.5
 
-# podio: add dependency on fmt, remove when https://github.com/spack/spack/pull/49986 is merged
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack/pull/49986.diff | patch -p1
+# podio: add dependency on fmt, remove!
+git cherry-pick b4b35f9efd77a3e6701e14d0c2dd7ebc1f5a2049 -X theirs --no-commit  # For 2.22.5
 
