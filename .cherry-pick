@@ -44,6 +44,6 @@ git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
 git cherry-pick 731e48b1bd6656de265e99d246a026a704dfb24d -X theirs --no-commit  # For 2.22.4
 git cherry-pick dd16f451fcf1f5d11559ee76221c9c086dcb4e10 -X theirs --no-commit  # For 2.22.5
 
-# podio: add dependency on fmt, remove when https://github.com/spack/spack/pull/49986 is merged
+# podio: add dependency on fmt, remove!
 git cherry-pick b4b35f9efd77a3e6701e14d0c2dd7ebc1f5a2049 -X theirs --no-commit  # For 2.22.5
 
