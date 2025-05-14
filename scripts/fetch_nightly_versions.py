@@ -107,6 +107,7 @@ if __name__ == "__main__":
     #     raise
 
     for package, location in [
+        ("acts", "acts-project/acts"),
         ("aidatt", "aidasoft/aidatt"),
         ("ced", "ilcsoft/ced"),
         ("cedviewer", "ilcsoft/cedviewer"),
