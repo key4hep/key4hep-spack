@@ -42,6 +42,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("podio")
     depends_on("py-onnxruntime")
     depends_on("root")
+    depends_on("simsipm")
 
     def cmake_args(self):
         args = []

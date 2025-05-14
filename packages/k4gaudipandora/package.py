@@ -26,6 +26,9 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk")
     depends_on("root")
 
+    # Used in the tests
+    depends_on("k4geo")
+
     def setup_run_environment(self, env):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gaudipandora"].prefix.lib)
 
