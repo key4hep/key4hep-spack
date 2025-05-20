@@ -36,6 +36,7 @@ function list_releases() {
             compiler="gcc14"
         fi
     elif [ "$os" = "ubuntu22" ]; then
+        echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
         name="ubuntu22"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
         name="ubuntu24"
@@ -62,6 +63,7 @@ function list_packages() {
             compiler="gcc14"
         fi
     elif [ "$os" = "ubuntu22" ]; then
+        echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
         name="ubuntu22"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
         name="ubuntu24"
@@ -207,6 +209,7 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERS
     os="almalinux9"
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
+    echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
     os="ubuntu22"
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
