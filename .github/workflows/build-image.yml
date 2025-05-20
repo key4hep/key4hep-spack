@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [{dir: AlmaLinux9,suffix: alma9}]
+        os: [{dir: AlmaLinux9,suffix: alma9}, {dir: Ubuntu24,suffix: ubuntu24}]
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -52,7 +52,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ matrix.os.suffix }}
       - name: Determine spack ref
         id: getref
         run: |
