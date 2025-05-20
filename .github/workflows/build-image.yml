@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - main
+    - ubuntu_image
   workflow_dispatch:
 
 env:
