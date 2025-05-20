@@ -9,6 +9,10 @@ on:
 env:
   REGISTRY: ghcr.io
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   packages: write
@@ -17,9 +21,6 @@ permissions:
 
 jobs:
   build-externals:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     strategy:
       matrix:
