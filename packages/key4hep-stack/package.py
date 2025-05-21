@@ -139,6 +139,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
 
+    depends_on("cxx", type="build")
+    depends_on("c", type="build")
+    depends_on("fortran", type="build")
+
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
@@ -153,8 +157,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if (
-            self.compiler.operating_system == "ubuntu22.04"
-            or self.compiler.operating_system == "ubuntu24.04"
+            self.spec.architecture.os == "ubuntu22.04"
+            or self.spec.architecture.os == "ubuntu24.04"
         ):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
