@@ -14,7 +14,7 @@ class Physsim(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/Physsim"
     git = "https://github.com/iLCSoft/Physsim.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     tags = ["hep"]
 

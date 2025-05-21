@@ -11,7 +11,7 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
     )
     git = "https://github.com/key4hep/k4-project-template.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
     version(

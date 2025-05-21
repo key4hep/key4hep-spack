@@ -14,7 +14,7 @@ class Raida(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/iLCSoft/raida.git"
     url = "https://github.com/iLCSoft/raida/archive/v01-06.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

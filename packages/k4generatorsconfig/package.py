@@ -15,7 +15,7 @@ class K4generatorsconfig(CMakePackage):
 
     generator = "Ninja"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

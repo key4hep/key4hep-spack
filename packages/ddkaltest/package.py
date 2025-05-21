@@ -14,7 +14,7 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/DDKalTest/archive/v01-06.tar.gz"
     git = "https://github.com/iLCSoft/DDKalTest.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

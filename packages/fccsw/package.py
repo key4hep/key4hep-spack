@@ -9,7 +9,7 @@ class Fccsw(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/FCCSW/archive/v0.16.tar.gz"
     git = "https://github.com/HEP-FCC/FCCSW.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
 

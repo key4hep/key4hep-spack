@@ -14,7 +14,7 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/KalDet/archive/v01-14-01.tar.gz"
     git = "https://github.com/iLCSoft/KalDet.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

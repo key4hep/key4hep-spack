@@ -18,7 +18,7 @@ class Kkmcee(AutotoolsPackage):
 
     tags = ["hep"]
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="FCC_release")
     version(

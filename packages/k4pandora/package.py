@@ -16,7 +16,7 @@ class K4pandora(CMakePackage, Key4hepPackage):
 
     tags = ["hep", "key4hep"]
 
-    maintainers = ["mirguest"]
+    maintainers("mirguest")
 
     version("master", branch="master")
 

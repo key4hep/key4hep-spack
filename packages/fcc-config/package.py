@@ -13,7 +13,7 @@ class FccConfig(CMakePackage):
     url = "https://github.com/HEP-FCC/FCC-config/archive/refs/tags/v0.1.0.tar.gz"
     git = "https://github.com/HEP-FCC/FCC-config"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
     version(

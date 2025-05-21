@@ -9,7 +9,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4SimGeant4/archive/v0.1.0pre05.tar.gz"
     git = "https://github.com/key4hep/k4SimGeant4.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
     version("0.1.0pre15", tag="v0.1.0pre15")

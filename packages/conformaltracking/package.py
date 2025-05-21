@@ -16,7 +16,7 @@ class Conformaltracking(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/ConformalTracking/archive/v01-10.tar.gz"
     git = "https://github.com/iLCSoft/ConformalTracking.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

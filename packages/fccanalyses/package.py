@@ -9,7 +9,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     git = "https://github.com/HEP-FCC/FCCAnalyses.git"
     url = "https://github.com/HEP-FCC/FCCAnalyses/archive/v0.1.1.tar.gz"
 
-    maintainers = ["vvolkl", "clementhelsens", "jsmiesko"]
+    maintainers("vvolkl", "clementhelsens", "jsmiesko")
 
     version("master", branch="master")
 

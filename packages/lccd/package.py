@@ -14,7 +14,7 @@ class Lccd(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/iLCSoft/lccd.git"
     url = "https://github.com/iLCSoft/lccd/archive/v01-05.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

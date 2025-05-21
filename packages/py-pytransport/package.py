@@ -15,7 +15,7 @@ class PyPytransport(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("master", branch="master")
 
