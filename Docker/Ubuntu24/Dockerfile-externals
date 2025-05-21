@@ -12,8 +12,8 @@ ARG GITHUB_REPOSITORY=key4hep/key4hep-spack
 
 # Setting up Spack
 RUN git clone https://github.com/spack/spack.git /opt/spack && \
-    echo "source /opt/spack/share/spack/setup-env.sh" >> /opt/setup_spack.sh && \
-    echo "alias setup_spack=\"source /opt/setup_spack.sh\"" >> /etc/profile.d/aliases.sh
+    echo ". /opt/spack/share/spack/setup-env.sh" >> /opt/setup_spack.sh && \
+    echo "alias setup_spack=\". /opt/setup_spack.sh\"" >> /etc/profile.d/aliases.sh
 
 # Using specific commit of Key4hep repository if requested
 RUN if [ -n "${SPACK_COMMIT}" ]; then \
@@ -48,20 +48,20 @@ RUN . /opt/setup_spack.sh && \
     cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-dev-external && \
     spack env activate . && \
     cd - && \
-    echo "source /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
+    echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
     echo "cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-dev-external" >> ${HOME}/setup_env.sh && \
     echo "spack env activate ." >> ${HOME}/setup_env.sh && \
     echo "cd -" >> ${HOME}/setup_env.sh && \
     echo "spack env status" >> ${HOME}/setup_env.sh
 
 # Concretizing the stack reusing system packages as external
-RUN source ${HOME}/setup_env.sh && \
+RUN . ${HOME}/setup_env.sh && \
     spack concretize --reuse
 
 # Installing fragments of dependency tree in separate layers for cached debugging
 ENV SPACK_INSTALL_OPTS="--only-concrete --no-add --fail-fast"
 
-RUN source ${HOME}/setup_env.sh && \
+RUN . ${HOME}/setup_env.sh && \
     spack spec -NIt && \
     spack install ${SPACK_INSTALL_OPTS} && \
     spack clean -a
