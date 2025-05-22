@@ -19,7 +19,7 @@ jobs:
     with:
       target: ${{ matrix.target }}
   build-image:
-    needs: update-cache
+    needs: build-and-cache
     strategy:
       fail-fast: false
       matrix:
