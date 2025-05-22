@@ -1,9 +1,16 @@
-name: Spack Build
+name: Build Stack and Publish Image
+description: |
+  Publish key4hep-dev-external stack docker image.
+  This workflow relies on a spack cache.
 
 on: push
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  build-and-cache:
     strategy:
       fail-fast: false
       matrix:
@@ -11,3 +18,12 @@ jobs:
     uses: ./.github/workflows/build-template.yaml
     with:
       target: ${{ matrix.target }}
+  build-image:
+    needs: update-cache
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [alma9]
+    uses: ./.github/workflows/image-template.yaml
+    with:
+      os: ${{ matrix.os }}
