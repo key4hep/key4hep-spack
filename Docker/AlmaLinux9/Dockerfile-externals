@@ -24,10 +24,16 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
       git checkout ${SPACK_COMMIT}; \
     fi
 
-# Registering compilers with Spack
+# Configure spack environment with:
+# - System compilers
+# - Buildcache
 ENV SPACK_COLOR="always"
+ARG SPACK_BUILDCACHE
 RUN source /opt/setup_spack.sh && \
-    spack compiler find
+    spack compiler find && \
+    if [ -n "${SPACK_BUILDCACHE}" ]; then \
+        spack mirror add --unsigned local-buildcache "${SPACK_BUILDCACHE}"; \
+    fi
 
 RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \

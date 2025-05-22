@@ -1,0 +1,13 @@
+name: Spack Build
+
+on: push
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [release]
+    uses: ./.github/workflows/build-template.yaml
+    with:
+      target: ${{ matrix.target }}
