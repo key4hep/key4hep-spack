@@ -14,7 +14,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4MarlinWrapper.git"
     url = "https://github.com/key4hep/k4MarlinWrapper/archive/v00-01.tar.gz"
 
-    maintainers = ["tmadlener", "jmcarcell"]
+    maintainers("tmadlener", "jmcarcell")
 
     version("main", branch="main")
     version(

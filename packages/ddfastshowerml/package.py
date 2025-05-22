@@ -14,7 +14,7 @@ class Ddfastshowerml(CMakePackage, Key4hepPackage):
     git = "https://gitlab.desy.de/ilcsoft/ddfastshowerml.git"
     url = "https://gitlab.desy.de/ilcsoft/ddfastshowerml/-/archive/v0.1.0/ddfastshowerml-v0.1.0.tar.gz"
 
-    maintainers = ["jmcarcell", "tmadlener"]
+    maintainers("jmcarcell", "tmadlener")
 
     version("main", branch="main")
     version(

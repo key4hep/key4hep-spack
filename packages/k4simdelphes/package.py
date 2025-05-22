@@ -14,7 +14,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4SimDelphes.git"
     url = "https://github.com/key4hep/k4SimDelphes/archive/v00-00-01.tar.gz"
 
-    maintainers = ["vvolkl", "tmadlener"]
+    maintainers("vvolkl", "tmadlener")
 
     version("main", branch="main")
     version(

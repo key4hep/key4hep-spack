@@ -14,7 +14,7 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/AIDASoft/aidaTT/archive/v00-10.tar.gz"
     git = "https://github.com/AIDASoft/aidaTT.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

@@ -14,7 +14,7 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/MarlinKinfitProcessors"
     git = "https://github.com/iLCSoft/MarlinKinfitProcessors.git"
 
-    maintainers = ["vvolkl", "tmadlener"]
+    maintainers("vvolkl", "tmadlener")
 
     version("master", branch="master")
     version(

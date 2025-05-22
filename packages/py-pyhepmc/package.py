@@ -15,7 +15,7 @@ class PyPyhepmc(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

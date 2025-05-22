@@ -14,7 +14,7 @@ class Cedviewer(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/CEDViewer"
     git = "https://github.com/iLCSoft/CEDViewer.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

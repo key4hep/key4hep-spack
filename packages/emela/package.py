@@ -12,7 +12,7 @@ class Emela(CMakePackage):
     homepage = "https://github.com/jmcarcell/eMELA"
     url = "https://github.com/gstagnit/eMELA/archive/refs/tags/v1.0.tar.gz"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version(
         "1.0",

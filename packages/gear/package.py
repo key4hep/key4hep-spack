@@ -14,7 +14,7 @@ class Gear(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/iLCSoft/gear.git"
     url = "https://github.com/iLCSoft/gear/archive/v01-05.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
 

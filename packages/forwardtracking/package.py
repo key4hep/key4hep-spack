@@ -14,7 +14,7 @@ class Forwardtracking(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/ForwardTracking"
     git = "https://github.com/iLCSoft/ForwardTracking.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

@@ -14,7 +14,7 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/MarlinDD4hep"
     git = "https://github.com/iLCSoft/MarlinDD4hep.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

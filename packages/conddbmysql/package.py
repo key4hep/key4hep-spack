@@ -14,7 +14,7 @@ class Conddbmysql(CMakePackage, Key4hepPackage):
     git = "https://github.com/iLCSoft/conddbmysql.git"
     url = "https://github.com/iLCSoft/CondDBMySQL/archive/CondDBMySQL_ILC-0-9-7.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

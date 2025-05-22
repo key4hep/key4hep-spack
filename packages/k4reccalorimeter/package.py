@@ -9,7 +9,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
     git = "https://github.com/HEP-FCC/k4RecCalorimeter.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
     version(

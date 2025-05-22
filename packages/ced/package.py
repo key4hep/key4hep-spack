@@ -14,7 +14,7 @@ class Ced(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/CED/archive/v01-09-03.tar.gz"
     git = "https://github.com/iLCSoft/CED.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

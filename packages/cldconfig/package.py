@@ -13,7 +13,7 @@ class Cldconfig(CMakePackage):
     git = "https://github.com/key4hep/CLDConfig"
     url = "https://github.com/key4hep/CLDConfig/archive/refs/tags/r2024-10-06.tar.gz"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
     version(

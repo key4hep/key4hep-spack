@@ -9,7 +9,7 @@ class Cepcsw(CMakePackage, Key4hepPackage):
     url = "https://github.com/cepc/CEPCSW/archive/v0.1.tar.gz"
     git = "https://github.com/cepc/CEPCSW.git"
 
-    maintainers = ["mirguest"]
+    maintainers("mirguest")
 
     version("master", branch="master")
     version(
