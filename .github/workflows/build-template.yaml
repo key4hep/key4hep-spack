@@ -53,7 +53,7 @@ jobs:
       - name: Apply Patches
         shell: spack-bash {0}
         run: |
-          SPACK_ROOT=$(realpath spack) key4hep-spack/Docker/AlmaLinux9/apply_patches.sh key4hep-spack
+          SPACK_ROOT=$(realpath spack) key4hep-spack/Docker/alma9/apply_patches.sh key4hep-spack
       - name: Spack Local Setup
         shell: spack-bash {0}
         run: |
