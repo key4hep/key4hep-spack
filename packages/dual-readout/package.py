@@ -14,7 +14,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
     homepage = "https://github.com/HEP-FCC/dual-readout"
     git = "https://github.com/HEP-FCC/dual-readout.git"
 
-    maintainers = ["vvolkl", "SanghyunKo"]
+    maintainers("vvolkl", "SanghyunKo")
 
     version("master", branch="master")
 

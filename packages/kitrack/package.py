@@ -14,7 +14,7 @@ class Kitrack(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/KiTrack"
     git = "https://github.com/iLCSoft/KiTrack.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

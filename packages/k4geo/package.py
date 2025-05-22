@@ -15,7 +15,7 @@ class K4geo(CMakePackage):
 
     generator = "Ninja"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
     version(

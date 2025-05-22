@@ -16,7 +16,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
         "https://github.com/key4hep/k4EDM4hep2LcioConv/archive/refs/tags/v00-10.tar.gz"
     )
 
-    maintainers = ["tmadlener"]
+    maintainers("tmadlener")
 
     version("main", branch="main")
     version(

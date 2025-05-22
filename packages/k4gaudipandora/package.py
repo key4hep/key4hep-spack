@@ -14,7 +14,7 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     homepage = "https://github.com/key4hep/k4GaudiPandora.git"
     git = "https://github.com/key4hep/k4GaudiPandora.git"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

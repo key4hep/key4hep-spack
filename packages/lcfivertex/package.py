@@ -14,7 +14,7 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/LCFIVertex"
     git = "https://github.com/iLCSoft/LCFIVertex.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

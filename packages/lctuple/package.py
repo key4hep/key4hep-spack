@@ -14,7 +14,7 @@ class Lctuple(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/LCTuple"
     git = "https://github.com/iLCSoft/LCTuple.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

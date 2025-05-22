@@ -14,7 +14,7 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/KalTest/archive/v02-05.tar.gz"
     git = "https://github.com/iLCSoft/KalTest.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

@@ -14,7 +14,7 @@ class Garlic(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/Garlic"
     git = "https://github.com/iLCSoft/Garlic.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

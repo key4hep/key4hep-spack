@@ -14,7 +14,7 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/ClicPerformance"
     git = "https://github.com/iLCSoft/ClicPerformance.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     generator = "Ninja"
 

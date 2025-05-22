@@ -15,7 +15,7 @@ class PyPyg4ometry(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="develop")
 

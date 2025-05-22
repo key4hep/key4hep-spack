@@ -14,7 +14,7 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/DDMarlinPandora/archive/v00-11.tar.gz"
     git = "https://github.com/iLCSoft/DDMarlinPandora.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

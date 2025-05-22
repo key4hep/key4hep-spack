@@ -15,7 +15,7 @@ class PyPymadx(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("master", branch="master")
 

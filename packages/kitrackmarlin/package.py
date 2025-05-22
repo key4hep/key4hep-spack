@@ -14,7 +14,7 @@ class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/KiTrackMarlin"
     git = "https://github.com/iLCSoft/KiTrackMarlin.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

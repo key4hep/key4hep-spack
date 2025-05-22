@@ -14,7 +14,7 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4Clue.git"
     homepage = "https://github.com/key4hep/k4Clue"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

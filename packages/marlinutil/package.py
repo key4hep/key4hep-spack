@@ -16,7 +16,7 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/MarlinUtil/archive/v01-15-01.tar.gz"
     git = "https://github.com/iLCSoft/MarlinUtil.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(
