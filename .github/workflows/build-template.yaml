@@ -33,22 +33,22 @@ jobs:
           dnf update -y
           dnf install -y gcc gcc-c++ gcc-gfortran lbzip2 unzip
           dnf clean all
-      - name: Determine spack and key4hep ref
-        id: getref
-        run: |
-          echo "spack_ref=$(cat key4hep-spack/.latest-commit)" >>${GITHUB_OUTPUT}
       - name: Checkout key4hep repository
         uses: actions/checkout@v4
         with:
           repository: key4hep/key4hep-spack
           ref: ${{ github.sha }}
-          path: /opt/key4hep-spack
+          path: key4hep-spack
+      - name: Determine spack and key4hep ref
+        id: getref
+        run: |
+          echo "spack_ref=$(cat key4hep-spack/.latest-commit)" >>${GITHUB_OUTPUT}
       - name: Set up Spack
         uses: spack/setup-spack@v2
         with:
           ref: ${{ steps.getref.outputs.spack_ref }} # Spack version (examples: develop, releases/v0.23)
           color: true                                # Force color output (SPACK_COLOR=always)
-          path: /opt/spack                           # Where to clone Spack
+          path: spack                           # Where to clone Spack
           buildcache: false                          # No central build cache (incompatible)
       - name: Spack Setup Build Cache
         shell: spack-bash {0}
@@ -59,7 +59,7 @@ jobs:
       - name: Apply the patches
         shell: spack-bash {0}
         run: |
-          SPACK_ROOT=$(realpath spack) /opt/key4hep-spack/AlmaLinux9/apply_patches.sh /opt/key4hep-spack
+          SPACK_ROOT=$(realpath spack) key4hep-spack/AlmaLinux9/apply_patches.sh key4hep-spack
       - name: Spack Local Setup
         shell: spack-bash {0}
         run: |
