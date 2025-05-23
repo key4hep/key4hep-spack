@@ -67,3 +67,4 @@ jobs:
           spack concretize --reuse
           spack install --only-concrete --no-add --fail-fast
           spack clean -a
+          spack buildcache size
