@@ -53,8 +53,9 @@ jobs:
       - name: Apply Patches
         shell: spack-bash {0}
         run: |
-          ls
-          source key4hep-spack/Docker/alma9/apply_patches.sh key4hep-spack
+          cd key4hep-spack 
+          source .cherry-pick
+          cd ..
       - name: Spack Local Setup
         shell: spack-bash {0}
         run: |
