@@ -43,10 +43,11 @@ RUN source /opt/setup_spack.sh && \
     cd -
 
 # Apply our patches to spack
-COPY apply_patches.sh ./apply_patches.sh
-
 RUN source /opt/setup_spack.sh && \
-    ./apply_patches.sh ${SPACK_ROOT}/var/key4hep-spack
+    REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
+    cd /opt/spack && \
+    source ${REPOPATH}/.cherry-pick && \
+    cd -
 
 # Add the package repositories
 RUN source /opt/setup_spack.sh && \

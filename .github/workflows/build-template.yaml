@@ -49,7 +49,7 @@ jobs:
         run: |
           git -C spack fetch # Needed to fetch the full history for backporting patches
           spack config add 'config:install_tree:padded_length:128'
-          spack mirror add --oci-username '${{ github.actor }}' --oci-password-variable '${{ secrets.GITHUB_TOKEN }}' --unsigned --autopush local-buildcache 'oci://ghcr.io/${{ github.repository_owner }}/spack-buildcache'
+          spack mirror add --oci-username '${{ github.actor }}' --oci-password '${{ secrets.GITHUB_TOKEN }}' --unsigned --autopush local-buildcache 'oci://ghcr.io/${{ github.repository_owner }}/spack-buildcache'
       - name: Apply Patches
         shell: spack-bash {0}
         run: |
