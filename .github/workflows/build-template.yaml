@@ -7,7 +7,7 @@ description: |
 on:
   workflow_call:
     inputs:
-      target:
+      os:
         required: true
         type: string
 
@@ -20,7 +20,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/key4hep/key4hep-images/alma9:latest
+    container: ghcr.io/key4hep/key4hep-images/${{inputs.os}}:latest
     steps:
       - name: Setup System Dependencies
         run: |
@@ -54,7 +54,7 @@ jobs:
         shell: spack-bash {0}
         run: |
           cd spack 
-          source ../key4hep-spack/.cherry-pick
+          . ../key4hep-spack/.cherry-pick
           cd ..
       - name: Spack Local Setup
         shell: spack-bash {0}
