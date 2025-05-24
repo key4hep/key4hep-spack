@@ -10,16 +10,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  strategy:
-    fail-fast: false
-    matrix:
-      os: [alma9]
   build-and-cache:
     uses: ./.github/workflows/build-template.yaml
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [alma9]
     with:
       os: ${{ matrix.os }}
   build-image:
     needs: build-and-cache
     uses: ./.github/workflows/image-template.yaml
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [alma9]
     with:
       os: ${{ matrix.os }}
