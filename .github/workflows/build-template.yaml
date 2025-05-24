@@ -23,6 +23,7 @@ jobs:
     container: ghcr.io/key4hep/key4hep-images/${{inputs.os}}:latest
     steps:
       - name: Setup System Dependencies
+        if: ${{ inputs.os == 'alma9' }}
         run: |
           dnf update -y
           dnf install -y gcc gcc-c++ gcc-gfortran lbzip2 unzip
