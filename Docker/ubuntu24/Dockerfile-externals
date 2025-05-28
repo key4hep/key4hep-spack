@@ -75,4 +75,5 @@ ENV SPACK_INSTALL_OPTS="--only-concrete --no-add --fail-fast"
 RUN . ${HOME}/setup_env.sh && \
     spack spec -NIt && \
     spack install ${SPACK_INSTALL_OPTS} && \
+    spack mirror remove local-buildcache && \
     spack clean -a
