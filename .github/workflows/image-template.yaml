@@ -72,5 +72,8 @@ jobs:
             COMMIT_SHA=${{ github.sha }}
             SPACK_COMMIT=${{ steps.getref.outputs.spack_ref }}
             SPACK_BUILDCACHE=oci://ghcr.io/${{ github.repository_owner }}/spack-buildcache
+            OCI_USERNAME=${{ github.actor }}
+          secrets: |
+            "ocipass=${{ secrets.GITHUB_TOKEN }}"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

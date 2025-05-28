@@ -29,10 +29,14 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
 # - Buildcache
 ENV SPACK_COLOR="always"
 ARG SPACK_BUILDCACHE
-RUN source /opt/setup_spack.sh && \
+ARG OCI_USERNAME
+RUN --mount=type=secret,id=ocipass \
+    OCI_PASSWORD=$(cat /run/secrets/ocipass) && \
+    source /opt/setup_spack.sh && \
+    spack config add 'config:install_tree:padded_length:128' && \
     spack compiler find && \
     if [ -n "${SPACK_BUILDCACHE}" ]; then \
-        spack mirror add --unsigned local-buildcache "${SPACK_BUILDCACHE}"; \
+        spack mirror add --oci-username "${OCI_USERNAME}" --oci-password "${OCI_PASSWORD}" --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
     fi
 
 RUN source /opt/setup_spack.sh && \
