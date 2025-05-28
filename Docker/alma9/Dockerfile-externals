@@ -36,7 +36,7 @@ RUN --mount=type=secret,id=ocipass \
     spack config add 'config:install_tree:padded_length:128' && \
     spack compiler find && \
     if [ -n "${SPACK_BUILDCACHE}" ]; then \
-        spack mirror add --oci-username "${OCI_USERNAME}" --oci-password-variable OCI_PASSWORD --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
+        spack mirror add --oci-username "${OCI_USERNAME}" --oci-password "${OCI_PASSWORD}" --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
     fi
 
 RUN source /opt/setup_spack.sh && \
