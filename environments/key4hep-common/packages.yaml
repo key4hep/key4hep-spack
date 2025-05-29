@@ -45,7 +45,7 @@ packages:
   madgraph5amc:
     require: '@3: +pythia8'
   podio:
-    require: +datasource+rntuple+rpath+sio
+    require: +datasource+rntuple+sio
   py-numpy:
     require: ^openblas
   # https://github.com/key4hep/key4hep-spack/issues/474
