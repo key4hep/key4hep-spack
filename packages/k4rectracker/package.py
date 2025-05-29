@@ -11,6 +11,10 @@ class K4rectracker(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
     version(
+        "0.5.0",
+        sha256="82bc11059689676585a5494be86849b800ef86965485271c325ea4f3176caaac",
+    )
+    version(
         "0.4.0",
         sha256="c93d75df8d219d821617b9365ef3034aa5ba69617a626585f438f2f06bfa8e5f",
     )

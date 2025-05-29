@@ -14,6 +14,10 @@ class Fccsw(CMakePackage, Key4hepPackage):
     version("master", branch="master")
 
     version(
+        "1.0pre11",
+        sha256="79a1b424069544a4be0084ced91506084a09265c3e171bb3f409b7362e1f6677",
+    )
+    version(
         "1.0pre10",
         sha256="7d7cd655a557b272e816b399c068fa5e6ee1c72491bb7e0dffa552557b949cbf",
     )

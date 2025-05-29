@@ -22,6 +22,10 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
         sha256="39386f8d9648ebfd9771d99f2d318c5214a5560ad4135a12b90b0f3662681e6d",
     )
     version(
+        "01-14-pre",
+        sha256="a390f9fc7308cf3ddacf308f6dd7160f1eb60d1d5d917360e0d42b358fa38384",
+    )
+    version(
         "1.14",
         sha256="67eb70874f9cd1d85d0a192e40e3e2ec3ecd03b6e2746bb2e1bdcf1b40c9c32a",
     )
