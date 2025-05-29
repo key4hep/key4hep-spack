@@ -7,11 +7,12 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
 
     homepage = "https://github.com/key4hep/k4MLJetTagger"
     git = "https://github.com/key4hep/k4MLJetTagger.git"
-    # url = "https://github.com/key4hep/archive/v0.1.1.tar.gz"
+    url = "https://github.com/key4hep/k4MLJetTagger/archive/v0.1.1.tar.gz"
 
     maintainers("jmcarcell")
 
     version("main", branch="main")
+    version("0.1.0", sha256="175bcc75bf6378880aa8fc85a1a1e3f75b400633c9ec88e0583431e085451463")
 
     generator = "Ninja"
 
