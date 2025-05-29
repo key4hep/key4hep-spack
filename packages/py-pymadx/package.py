@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class PyPymadx(PythonPackage):
     """Utilities for processing and analysing MADX output"""
@@ -13,7 +15,7 @@ class PyPymadx(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("master", branch="master")
 

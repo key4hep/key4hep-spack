@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -8,9 +9,17 @@ class K4gen(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/k4Gen/archive/refs/tags/v0.1pre02.tar.gz"
     git = "https://github.com/HEP-FCC/k4Gen.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
+    version(
+        "0.1pre14",
+        sha256="b52a68509336bd660953fc56fe6193439ecee76b9843153d5682a2ed77baf3ab",
+    )
+    version(
+        "0.1pre13",
+        sha256="d2a7fe39b1984325c7aeb5fdedbf46f1ae3c0a14c0105ad54a521b366c410c8e",
+    )
     version(
         "0.1pre12",
         sha256="1356f748c0be4d5a33f0e1b2b3f4fbd9f03e185f1f53df2d59b254f960e860af",

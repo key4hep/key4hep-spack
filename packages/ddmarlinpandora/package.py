@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,9 +14,13 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/DDMarlinPandora/archive/v00-11.tar.gz"
     git = "https://github.com/iLCSoft/DDMarlinPandora.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "0.13",
+        sha256="1e14a89cd408f597f27b2743af7684068457d6f0b0e1737f03e8093d9deb23d3",
+    )
     version(
         "0.12.2",
         sha256="c9d9461aee2eb2db81f4369583a84f6f0d5261db5d06f641bcd16704b62096fe",
@@ -42,10 +47,15 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
     depends_on("larcontent")
     depends_on("dd4hep")
     depends_on("marlintrk")
+    depends_on("pandoramonitoring", when="+monitoring")
+
+    variant("monitoring", default=False, description="Enable Pandora Monitoring")
 
     def setup_run_environment(self, env):
         env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libDDMarlinPandora.so")
 
     def cmake_args(self):
-        # C++ Standard
-        return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]
+        return [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            self.define_from_variant("PANDORA_MONITORING", "monitoring"),
+        ]

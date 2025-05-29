@@ -3,19 +3,29 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""
 
-    url = "https://github.com/PandoraPFA/larcontent/archive/v03-04-00.tar.gz"
+    url = "https://github.com/PandoraPFA/larcontent/archive/v03_04_00.tar.gz"
     homepage = "https://github.com/PandoraPFA/larcontent"
     git = "https://github.com/PandoraPFA/larcontent.git"
 
     tags = ["hep"]
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "4.12.00",
+        sha256="f5affe4f4102de4734a439349274249cf5f41684020c8291aa2e551cc0c13131",
+    )
+    version(
+        "4.11.02",
+        sha256="06a8c55aab782e23f90839f76dbd0aa981355f90ccf48b3358eb5843bad45dc8",
+    )
     version(
         "4.8.1",
         sha256="b15ffe74cf95f61901ec389ca9c763dc767464fc35c2a6ed800126c2d4d13017",
@@ -28,10 +38,6 @@ class Larcontent(CMakePackage):
         "4.0.0",
         sha256="01a28828a92daa4a95fd7399ec9df3c7be9ac2b33f40c5a031707894a44951cd",
     )
-    version(
-        "4.0.0",
-        sha256="01a28828a92daa4a95fd7399ec9df3c7be9ac2b33f40c5a031707894a44951cd",
-    )
 
     patch("path.patch")
 
@@ -39,10 +45,16 @@ class Larcontent(CMakePackage):
     depends_on("pandorasdk")
     depends_on("eigen")
 
+    depends_on("pandoramonitoring", when="+monitoring")
+
+    variant("monitoring", default=False, description="Enable Pandora Monitoring")
+
     def cmake_args(self):
         args = [
             "-DCMAKE_MODULE_PATH=%s" % self.spec["pandorapfa"].prefix.cmakemodules,
-            "-DCMAKE_CXX_FLAGS=-std=c++17 -Wno-error",
+            "-DCMAKE_CXX_FLAGS=-Wno-error",
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value if 'root' in self.spec else 20}",
+            self.define_from_variant("PANDORA_MONITORING", "monitoring"),
         ]
         return args
 

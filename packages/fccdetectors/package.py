@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -8,7 +9,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/FCCDetectors/archive/refs/tags/v0.1pre03.tar.gz"
     git = "https://github.com/HEP-FCC/FCCDetectors.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
     # can be removed once the ci is fixed

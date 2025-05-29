@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
+from spack.package import *
 
 
 class Cldconfig(CMakePackage):
@@ -13,9 +13,13 @@ class Cldconfig(CMakePackage):
     git = "https://github.com/key4hep/CLDConfig"
     url = "https://github.com/key4hep/CLDConfig/archive/refs/tags/r2024-10-06.tar.gz"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
+    version(
+        "2025-05-26",
+        sha256="9be425b074331c8b5ffeefd57af3d3c8242fa7639665cfb9b7a99d6cc09320e8",
+    )
     version(
         "2024-10-06",
         sha256="7ded5bc3f63eed6b6806d9581e1b47d7ca14a0c97ef5d61331d4ef88b1d7d643",

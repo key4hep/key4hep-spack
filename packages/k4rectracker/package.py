@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -9,6 +10,14 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     git = "https://github.com/key4hep/k4RecTracker.git"
 
     version("master", branch="master")
+    version(
+        "0.5.0",
+        sha256="82bc11059689676585a5494be86849b800ef86965485271c325ea4f3176caaac",
+    )
+    version(
+        "0.4.0",
+        sha256="c93d75df8d219d821617b9365ef3034aa5ba69617a626585f438f2f06bfa8e5f",
+    )
     version(
         "0.3.0",
         sha256="e945be69b1b4d51b07e8e806e366893af84369a9d63b04deee691aa10d591a02",
@@ -23,6 +32,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     # This shouldn't be necessary but the debug builds are failing because lcio can't be found
     # It started happening after adding marlinutil to the dependencies
     depends_on("lcio")
+    depends_on("pandorasdk", when="@0.4.0:")
 
     def cmake_args(self):
         args = []

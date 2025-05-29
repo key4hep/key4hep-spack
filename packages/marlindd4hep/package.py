@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -14,7 +14,7 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/MarlinDD4hep"
     git = "https://github.com/iLCSoft/MarlinDD4hep.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

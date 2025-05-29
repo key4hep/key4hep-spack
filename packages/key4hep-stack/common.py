@@ -2,7 +2,7 @@
 Common methods for use in Key4hep recipes
 """
 
-from spack import *
+from spack.package import *
 from spack.directives import *
 from spack.user_environment import *
 
@@ -137,8 +137,10 @@ def ilc_url_for_version(self, version):
     # on the value of the patch version
     if patch == 0:
         version_str = "v%02d-%02d.tar.gz" % (major, minor)
-    else:
+    elif isinstance(patch, int):
         version_str = "v%02d-%02d-%02d.tar.gz" % (major, minor, patch)
+    else:  # allow for v00-04-pre
+        version_str = "v%02d-%02d-%s.tar.gz" % (major, minor, patch)
     return base_url + "/" + version_str
 
 
@@ -175,6 +177,17 @@ def install_setup_script(self, spec, prefix, env_var):
     cmds = k4_generate_setup_script(env_mod)
     with open(os.path.join(prefix, "setup.sh"), "w") as f:
         f.write(cmds)
+
+    # Try to create a symlink to fjcontrib/include/fastjet/contrib in fastjet/include/fastjet/
+    # See https://github.com/key4hep/key4hep-spack/issues/690
+    if "fjcontrib" in spec:
+        try:
+            os.symlink(
+                os.path.join(spec["fjcontrib"].prefix, "include", "fastjet", "contrib"),
+                os.path.join(spec["fastjet"].prefix, "include", "fastjet", "contrib"),
+            )
+        except FileExistsError:
+            pass
 
 
 class Key4hepPackage(PackageBase):

@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -15,7 +15,7 @@ class Marlintrk(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/MarlinTrk/archive/v02-08.tar.gz"
     git = "https://github.com/iLCSoft/MarlinTrk.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

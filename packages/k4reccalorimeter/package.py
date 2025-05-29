@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -8,9 +9,13 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
     git = "https://github.com/HEP-FCC/k4RecCalorimeter.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="main")
+    version(
+        "0.1.0pre17",
+        sha256="7e8d73e107d0d715f40a1277e97e0f14f8b5f3ad4dd0c75fc3a52fc1b5c641c2",
+    )
     version(
         "0.1.0pre16",
         sha256="a7c1a92a6bf5d641ddf797d3f8b8d1cb90c8a866956a15fd5dd27ff984755b74",
@@ -41,6 +46,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("podio")
     depends_on("py-onnxruntime")
     depends_on("root")
+    depends_on("simsipm")
 
     def cmake_args(self):
         args = []

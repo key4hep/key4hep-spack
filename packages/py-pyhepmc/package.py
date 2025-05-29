@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class PyPyhepmc(PythonPackage):
     """Python bindings for HepMC3"""
@@ -13,7 +15,7 @@ class PyPyhepmc(PythonPackage):
 
     tags = ["hep"]
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

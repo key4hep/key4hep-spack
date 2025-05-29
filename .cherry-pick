@@ -79,3 +79,13 @@ git cherry-pick 1aa5c7450c5947abae090c7a89b64b1236e1a153 -X theirs --no-commit
 # delphes: Add version 3.5.1pre12
 git cherry-pick fe30053610a78c60488890fa0c8fccaa51e86e7e -X theirs --no-commit
 
+# lcio: versions 2.22.4 and 2.22.5
+git cherry-pick 731e48b1bd6656de265e99d246a026a704dfb24d -X theirs --no-commit  # For 2.22.4
+git cherry-pick dd16f451fcf1f5d11559ee76221c9c086dcb4e10 -X theirs --no-commit  # For 2.22.5
+git cherry-pick 75faab206bf0243c911b60f9988c69685abea393 -X theirs --no-commit  # For 2.22.6
+
+# podio: add 1.3 and edm4hep 0.99.2
+git cherry-pick d8c819f3b8658e7085056ae6d7320010253c5987 -X theirs --no-commit
+
+# dd4hep: add v1.32
+git cherry-pick 7e3af5d42d551adcf24aeab6deaa9aeabe521c81 -X theirs --no-commit

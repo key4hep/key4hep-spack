@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -14,7 +14,7 @@ class Ced(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/CED/archive/v01-09-03.tar.gz"
     git = "https://github.com/iLCSoft/CED.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

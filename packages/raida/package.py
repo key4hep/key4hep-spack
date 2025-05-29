@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,7 +14,7 @@ class Raida(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/iLCSoft/raida.git"
     url = "https://github.com/iLCSoft/raida/archive/v01-06.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(
@@ -22,6 +23,10 @@ class Raida(CMakePackage, Ilcsoftpackage):
     )
     version(
         "1.10.0",
+        sha256="de7023639efd6c05d72132fa322e7167d9c227a1964a06cfd8e144e478118ab1",
+    )
+    version(
+        "01-10",
         sha256="de7023639efd6c05d72132fa322e7167d9c227a1964a06cfd8e144e478118ab1",
     )
     version(

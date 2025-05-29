@@ -3,19 +3,24 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
 class Marlinreco(CMakePackage, Ilcsoftpackage):
-    """Assembly of various Marlin processor for reconstruction."""
+    """Assembly of various Marlin processors for reconstruction."""
 
     url = "https://github.com/iLCSoft/MarlinReco/archive/v01-27.tar.gz"
     homepage = "https://github.com/iLCSoft/MarlinReco"
     git = "https://github.com/iLCSoft/MarlinReco.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "1.36.2",
+        sha256="3d147297f03c9d02fcbf441f895f82185bc7607eef59fb119e2268a521a811c7",
+    )
     version(
         "1.36.1",
         sha256="fc97edf00ea943f76340e20ccc57a8538292ed64e7b33b6f64e9ebc7a3da9320",
@@ -39,6 +44,10 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
     version(
         "1.33",
         sha256="4f5a9c091c26d67b6be6b1cf2fc1fd57445302a4f817a4aea021c51a3fdc7424",
+    )
+    version(
+        "01-32-01",
+        sha256="153d7154525f9c34723a28195f0bc591823113864f94f8c75b724a43f4a3febf",
     )
     version(
         "1.32",

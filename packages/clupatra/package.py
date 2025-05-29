@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -14,7 +14,7 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/Clupatra"
     git = "https://github.com/iLCSoft/Clupatra.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

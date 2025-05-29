@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -13,7 +14,7 @@ class Conddbmysql(CMakePackage, Key4hepPackage):
     git = "https://github.com/iLCSoft/conddbmysql.git"
     url = "https://github.com/iLCSoft/CondDBMySQL/archive/CondDBMySQL_ILC-0-9-7.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

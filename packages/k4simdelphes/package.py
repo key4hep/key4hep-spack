@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,9 +14,13 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/key4hep/k4SimDelphes.git"
     url = "https://github.com/key4hep/k4SimDelphes/archive/v00-00-01.tar.gz"
 
-    maintainers = ["vvolkl", "tmadlener"]
+    maintainers("vvolkl", "tmadlener")
 
     version("main", branch="main")
+    version(
+        "00-07-05",
+        sha256="54887cb8192470846e9e083bfbb6ff92f98555a2067c7c405b6490fdee2fb9b5",
+    )
     version(
         "00-07-04",
         sha256="dd92de9ec5a680c26e73b4a4b9aa7377b1366bf26ceeb5960fb114671dec1c5e",

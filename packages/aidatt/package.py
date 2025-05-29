@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,7 +14,7 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/AIDASoft/aidaTT/archive/v00-10.tar.gz"
     git = "https://github.com/AIDASoft/aidaTT.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

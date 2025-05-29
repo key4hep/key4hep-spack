@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 import os
 
 
@@ -43,6 +45,6 @@ class Bhlumi(MakefilePackage):
         chmod("755", join_path(prefix.bin, "BHLUMI.exe"))
 
         script_sh = join_path(os.path.dirname(__file__), "BHLUMI")
-        script = script = prefix.bin.BHLUMI
+        script = prefix.bin.BHLUMI
         install(script_sh, script)
         chmod("755", script)

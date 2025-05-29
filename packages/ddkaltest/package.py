@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -14,7 +14,7 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/DDKalTest/archive/v01-06.tar.gz"
     git = "https://github.com/iLCSoft/DDKalTest.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

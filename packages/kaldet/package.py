@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -14,12 +14,16 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/KalDet/archive/v01-14-01.tar.gz"
     git = "https://github.com/iLCSoft/KalDet.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(
         "1.14.1",
         sha256="39386f8d9648ebfd9771d99f2d318c5214a5560ad4135a12b90b0f3662681e6d",
+    )
+    version(
+        "01-14-pre",
+        sha256="a390f9fc7308cf3ddacf308f6dd7160f1eb60d1d5d917360e0d42b358fa38384",
     )
     version(
         "1.14",

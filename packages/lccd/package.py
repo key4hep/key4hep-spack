@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,9 +14,13 @@ class Lccd(CMakePackage, Ilcsoftpackage):
     git = "https://github.com/iLCSoft/lccd.git"
     url = "https://github.com/iLCSoft/lccd/archive/v01-05.tar.gz"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "1.5.3",
+        sha256="7af2152a60b818eb930cb78f64714b1576f5af4346d173ca7a36885fbe0f1784",
+    )
     version(
         "1.5.2",
         sha256="0e8929b0f390be112125a1ce12fd9695c7890b5cfef586b56304e4bd08a8ea49",

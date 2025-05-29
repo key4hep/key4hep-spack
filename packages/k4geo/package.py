@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class K4geo(CMakePackage):
     """DD4hep geometry models for future colliders."""
@@ -13,9 +15,13 @@ class K4geo(CMakePackage):
 
     generator = "Ninja"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
+    version(
+        "00-22",
+        sha256="95712eaf3452d29d35ac8156c37e5b4ea6449eb04073fb330bddc5df686f2cb3",
+    )
     version(
         "0.21",
         sha256="0451e532fd22b2b9ea93a71f7036ea6de44386ecb10a84f28bc1d9fd557c6ad1",
@@ -43,7 +49,6 @@ class K4geo(CMakePackage):
 
     depends_on("lcio")
     depends_on("dd4hep")
-    depends_on("boost")
     depends_on("root")
     depends_on("python", type="build")
     depends_on("ninja", type="build")
@@ -55,6 +60,12 @@ class K4geo(CMakePackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
+        # Automatically install the CAD beampipe files if we install the compact files
+        args.append(
+            self.define(
+                "INSTALL_BEAMPIPE_STL_FILES", self.spec.variants["compact"].value
+            )
+        )
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
 

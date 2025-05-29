@@ -3,8 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
-from spack.pkg.k4.key4hep_stack import k4_setup_env_for_framework_tests
 
 
 class Fcalclusterer(CMakePackage, Ilcsoftpackage):
@@ -14,7 +14,7 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/FCalSW/FCalClusterer"
     git = "https://github.com/FCalSW/FCalClusterer.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

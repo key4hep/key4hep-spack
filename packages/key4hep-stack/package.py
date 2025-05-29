@@ -57,6 +57,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("geant4")
     depends_on("guinea-pig")
     # depends_on('k4actstracking')
+    depends_on("k4mljettagger")
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
@@ -107,7 +108,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
-    depends_on("iwyu", when="+devtools")
+    # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
     depends_on("ninja", when="+devtools")
     # depends_on('prmon', when='+devtools')
@@ -151,20 +152,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
-        if self.compiler.operating_system == "ubuntu22.04":
+        if (
+            self.compiler.operating_system == "ubuntu22.04"
+            or self.compiler.operating_system == "ubuntu24.04"
+        ):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
-            )
-        # env variable for OpenDataDetector, see
-        # https://github.com/key4hep/key4hep-spack/issues/526
-        if "opendatadetector" in self.spec:
-            env.set(
-                "OPENDATADETECTOR",
-                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
-            )
-            env.set(
-                "OPENDATADETECTOR_DATA",
-                self.spec["opendatadetector"].prefix.share + "/OpenDataDetector",
             )
 
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
@@ -183,6 +176,16 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             env.prepend_path("PATH", self.spec["autoconf"].prefix.bin)
         if "automake" in self.spec:
             env.prepend_path("PATH", self.spec["automake"].prefix.bin)
+
+        # Add the correct path in pytorch to CMAKE_PREFIX_PATH
+        # This could be deleted (to be tested) once https://github.com/spack/spack/pull/49267 is merged
+        if "py-torch" in self.spec:
+            env.prepend_path(
+                "CMAKE_PREFIX_PATH",
+                join_path(
+                    self["py-torch"].module.python_platlib, "torch", "share", "cmake"
+                ),
+            )
 
     def install(self, spec, prefix):
         return install_setup_script(self, spec, prefix, "K4_LATEST_SETUP_PATH")

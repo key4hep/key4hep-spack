@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack import *
+from spack.package import *
 
 
 class FccConfig(CMakePackage):
@@ -13,9 +13,13 @@ class FccConfig(CMakePackage):
     url = "https://github.com/HEP-FCC/FCC-config/archive/refs/tags/v0.1.0.tar.gz"
     git = "https://github.com/HEP-FCC/FCC-config"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
+    version(
+        "0.2.0",
+        sha256="d0d9261d5471656cf2db6a76c2171ce8caf6913e20975e19fd60ef82bb80fda2",
+    )
     version(
         "0.1.0",
         sha256="f609d88a1a6fbbdad50b8988012d80b8dad5c5fe31d6788761a7b06e1561736c",

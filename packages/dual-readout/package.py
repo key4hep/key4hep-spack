@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -14,10 +14,18 @@ class DualReadout(CMakePackage, Key4hepPackage):
     homepage = "https://github.com/HEP-FCC/dual-readout"
     git = "https://github.com/HEP-FCC/dual-readout.git"
 
-    maintainers = ["vvolkl", "SanghyunKo"]
+    maintainers("vvolkl", "SanghyunKo")
 
     version("master", branch="master")
 
+    version(
+        "0.1.6",
+        sha256="784d37b0be92649687fa15f31ab7f3cea10296bf1e533516bcb546abf1b802b6",
+    )
+    version(
+        "0.1.5",
+        sha256="65a5b0cce56d1eabfbc108edc89eb0795465ff895cb54b553098010a76b1afb6",
+    )
     version(
         "0.1.4",
         sha256="fca86bd8e2ab922957babbfcaeb902fda09205ddd23cb1f85b7659b79b205d53",
@@ -49,6 +57,7 @@ class DualReadout(CMakePackage, Key4hepPackage):
 
     depends_on("dd4hep")
     depends_on("edm4hep")
+    depends_on("geant4")
     depends_on("podio")
     depends_on("fastjet")
     depends_on("root")

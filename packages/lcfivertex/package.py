@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,7 +14,7 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/LCFIVertex"
     git = "https://github.com/iLCSoft/LCFIVertex.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

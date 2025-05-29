@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 import os
 import glob
 
@@ -16,7 +18,7 @@ class Kkmcee(AutotoolsPackage):
 
     tags = ["hep"]
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("main", branch="FCC_release")
     version(

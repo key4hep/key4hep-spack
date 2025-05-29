@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -15,7 +16,7 @@ class K4pandora(CMakePackage, Key4hepPackage):
 
     tags = ["hep", "key4hep"]
 
-    maintainers = ["mirguest"]
+    maintainers("mirguest")
 
     version("master", branch="master")
 

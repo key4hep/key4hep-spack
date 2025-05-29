@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
@@ -8,10 +9,14 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     git = "https://github.com/HEP-FCC/FCCAnalyses.git"
     url = "https://github.com/HEP-FCC/FCCAnalyses/archive/v0.1.1.tar.gz"
 
-    maintainers = ["vvolkl", "clementhelsens", "jsmiesko"]
+    maintainers("vvolkl", "clementhelsens", "jsmiesko")
 
     version("master", branch="master")
 
+    version(
+        "0.11.0",
+        sha256="f4dc3439a699f02c82ba92902403d3053f8e16c017e6ae6e1a10f4d65bc13643",
+    )
     version(
         "0.10.0",
         sha256="a3cf897e1063a7e45fc3fb554c490af8fc2bafee338ae42aeaf455c851798e11",

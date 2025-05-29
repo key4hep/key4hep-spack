@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,7 +14,7 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/MarlinKinfitProcessors"
     git = "https://github.com/iLCSoft/MarlinKinfitProcessors.git"
 
-    maintainers = ["vvolkl", "tmadlener"]
+    maintainers("vvolkl", "tmadlener")
 
     version("master", branch="master")
     version(
@@ -34,6 +35,12 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
     variant("doc", default=False, description="build doxygen documentation")
 
     depends_on("marlinkinfit")
+    depends_on("marlin")
+    depends_on("marlinutil")
+    depends_on("root")
+    depends_on("gsl")
+    depends_on("clhep")
+    depends_on("raida")
     depends_on("doxygen", when="+doc")
 
     def cmake_args(self):

@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class GuineaPig(CMakePackage):
     """Generator of Unwanted Interactions for Numerical Experiment
@@ -14,7 +16,7 @@ class GuineaPig(CMakePackage):
 
     tags = ["hep"]
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
     version(

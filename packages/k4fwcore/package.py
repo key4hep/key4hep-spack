@@ -1,3 +1,4 @@
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -10,6 +11,14 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
 
+    version(
+        "1.3",
+        sha256="3a484594b4f101a3b4755ca7ee71458440b5edfd5b455b7e64176ad6f0025d01",
+    )
+    version(
+        "1.2",
+        sha256="4405a3d6e88845807d57849a759827ad988681c31c9e63851b9f7d30c9a407e4",
+    )
     version(
         "1.1.2",
         sha256="5451f1644357ac8ced0f5fc984809f4a48bdf2f4baf25a0a2f70540ed0427ac4",

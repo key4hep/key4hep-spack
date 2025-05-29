@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,7 +14,7 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/ClicPerformance"
     git = "https://github.com/iLCSoft/ClicPerformance.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     generator = "Ninja"
 

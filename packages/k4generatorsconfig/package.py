@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
+
 
 class K4generatorsconfig(CMakePackage):
     """A python based module for the automatic generation of inputfiles for Monte-Carlo(MC) generators."""
@@ -13,10 +15,18 @@ class K4generatorsconfig(CMakePackage):
 
     generator = "Ninja"
 
-    maintainers = ["jmcarcell"]
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 
+    version(
+        "0.2.0",
+        sha256="12ce31858ff2c77860420a74d999d5f6479b5fe6febb59d1e2dcccf7b2123264",
+    )
+    version(
+        "0.1.1",
+        sha256="ecf4c4661fa5c117460aa06a002d8f3da8721adf306edb6e87150a0c73907b92",
+    )
     version(
         "0.1", sha256="0309f25bc4149de8c17a4615146074ece46f6f384a152e0fd05853ec652d9ad4"
     )

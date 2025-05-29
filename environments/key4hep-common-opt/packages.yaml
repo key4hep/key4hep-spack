@@ -45,6 +45,8 @@ packages:
     require: build_type=Release cxxstd=20
   ildperformance:
     require: build_type=Release
+  k4mljettagger:
+    require: build_type=Release
   key4hep-stack:
     require: build_type=Release
   k4clue:
@@ -120,6 +122,8 @@ packages:
   podio:
     require: build_type=Release
   raida:
+    require: build_type=Release
+  simsipm:
     require: build_type=Release
   sio:
     require: build_type=Release cxxstd=20

@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -16,9 +16,13 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
     url = "https://github.com/iLCSoft/MarlinUtil/archive/v01-15-01.tar.gz"
     git = "https://github.com/iLCSoft/MarlinUtil.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "1.18.2",
+        sha256="63bbb3d12e36efbd9cddb72ff2bb92742cb087fcb81edfa4b4617b6407f9e173",
+    )
     version(
         "1.18.1",
         sha256="823fa3bcd3103d3e3f9e500df2a3bc859c7b2e565253c8174d7afb384d2866e2",

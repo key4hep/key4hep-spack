@@ -3,6 +3,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 
 
@@ -13,9 +14,13 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/ILDPerformance"
     git = "https://github.com/iLCSoft/ILDPerformance.git"
 
-    maintainers = ["vvolkl"]
+    maintainers("vvolkl")
 
     version("master", branch="master")
+    version(
+        "1.12.1",
+        sha256="b392e1a32dcc8eb325a5f27e15172aca3d43468241e11ee65f70d692d2cb136a",
+    )
     version(
         "1.12",
         sha256="d606cc5d71dfb3b2a753000dc665187b2b9d937906d1611a789e7a19cd4edd2e",
