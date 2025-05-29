@@ -46,6 +46,10 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
         sha256="4f5a9c091c26d67b6be6b1cf2fc1fd57445302a4f817a4aea021c51a3fdc7424",
     )
     version(
+        "01-32-01",
+        sha256="153d7154525f9c34723a28195f0bc591823113864f94f8c75b724a43f4a3febf",
+    )
+    version(
         "1.32",
         sha256="0ea3bee03e2bec1924b5876675043b592a942bc8cf306eb7056eaf03ac1748f6",
     )

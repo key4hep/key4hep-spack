@@ -20,6 +20,10 @@ class K4generatorsconfig(CMakePackage):
     version("main", branch="main")
 
     version(
+        "0.2.0",
+        sha256="12ce31858ff2c77860420a74d999d5f6479b5fe6febb59d1e2dcccf7b2123264",
+    )
+    version(
         "0.1.1",
         sha256="ecf4c4661fa5c117460aa06a002d8f3da8721adf306edb6e87150a0c73907b92",
     )
