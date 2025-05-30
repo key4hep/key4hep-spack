@@ -12,7 +12,10 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
     maintainers("jmcarcell")
 
     version("main", branch="main")
-    version("0.1.0", sha256="175bcc75bf6378880aa8fc85a1a1e3f75b400633c9ec88e0583431e085451463")
+    version(
+        "0.1.0",
+        sha256="175bcc75bf6378880aa8fc85a1a1e3f75b400633c9ec88e0583431e085451463",
+    )
 
     generator = "Ninja"
 
