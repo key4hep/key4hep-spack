@@ -1,0 +1,20 @@
+name: Build Stack and Publish Image
+description: |
+  Publish key4hep-dev-external stack docker image.
+  This workflow relies on a spack cache.
+
+on: push
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-image:
+    uses: ./.github/workflows/image-template.yaml
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [alma9, ubuntu24]
+    with:
+      os: ${{ matrix.os }}
