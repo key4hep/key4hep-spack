@@ -13,6 +13,19 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
+    spec: gcc@11.4.1
+    paths:
+      cc: /usr/bin/gcc
+      cxx: /usr/bin/g++
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
+    flags: {}
+    operating_system: almalinux9
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
     spec: gcc@13.3.0
     paths:
       cc: /usr/bin/gcc
@@ -21,6 +34,19 @@ compilers:
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: ubuntu24.04
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@11.4.0
+    paths:
+      cc: /usr/bin/gcc
+      cxx: /usr/bin/g++
+      f77: /usr/bin/gfortran
+      fc: /usr/bin/gfortran
+    flags: {}
+    operating_system: ubuntu22.04
     target: x86_64
     modules: []
     environment: {}
