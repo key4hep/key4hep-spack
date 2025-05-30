@@ -131,6 +131,11 @@ packages:
   pythia8:
     require: +gzip+hepmc3
     variants: cxxstd=20
+  # Ask for Python > 3.11
+  # Since many packages depend on setuptools that was dropped in 3.12,
+  # without asking explicitly the version used will be 3.11
+  python:
+    require: "@3.12:"
   sio:
     variants: cxxstd=20
 
