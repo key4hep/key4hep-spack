@@ -7,7 +7,7 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
 
     homepage = "https://github.com/key4hep/k4MLJetTagger"
     git = "https://github.com/key4hep/k4MLJetTagger.git"
-    # url = "https://github.com/key4hep/archive/v0.1.1.tar.gz"
+    url = "https://github.com/key4hep/archive/v0.1.0.tar.gz"
 
     maintainers("jmcarcell")
 
