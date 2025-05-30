@@ -38,17 +38,15 @@ packages:
   forwardtracking:
     require: build_type=Release+ipo
   gaudi:
-    require: build_type=Release+ipo
+    require: build_type=Release
   gear:
     require: build_type=Release+ipo
   ilcutil:
     require: build_type=Release+ipo cxxstd=20
   ildperformance:
     require: build_type=Release+ipo
-  k4mljettagger:
-    require: build_type=Release+ipo
   key4hep-stack:
-    require: build_type=Release+ipo
+    require: build_type=Release
   k4clue:
     require: build_type=Release+ipo
   k4edm4hep2lcioconv:
