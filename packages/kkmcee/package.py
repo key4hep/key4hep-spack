@@ -36,6 +36,8 @@ class Kkmcee(AutotoolsPackage):
     # the typo in the release version (uppercase 'V') confuses the fetcher of spack - go via tag
     version("4.30", tag="V4.30")
 
+    depends_on("c", type="build")
+
     depends_on("autoconf", type="build")
     depends_on("automake", type="build")
     depends_on("libtool", type="build")
