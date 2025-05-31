@@ -26,6 +26,8 @@ class K4reco(CMakePackage, Key4hepPackage):
 
     variant("conformal_tracking", default=True, description="Build Conformal Tracking")
 
+    depends_on("cxx", type="build")
+
     depends_on("podio")
     depends_on("dd4hep")
     depends_on("edm4hep")

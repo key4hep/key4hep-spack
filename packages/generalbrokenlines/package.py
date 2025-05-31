@@ -43,6 +43,8 @@ class Generalbrokenlines(CMakePackage):
         sha256="27fe33529447b1976ecbdcafaabd1aeab072b5773685a89d6c0f3ac10fd2b920",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("eigen")
     depends_on("root")
 

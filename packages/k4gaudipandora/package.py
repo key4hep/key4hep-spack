@@ -22,6 +22,8 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
         sha256="a77e7f76728c14054f112e923b55e434becafb7d392e2f3653133a5e8ad2d235",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")

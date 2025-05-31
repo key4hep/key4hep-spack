@@ -16,6 +16,8 @@ class Babayaga(MakefilePackage):
 
     tags = ["hep"]
 
+    depends_on("fortran", type="build")
+
     version(
         "fcc-1.0.0",
         sha256="bfd474e267972ae06d7e622de87db7ba5edcbb2e1323838d4a299ac3cd23dce8",
