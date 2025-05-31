@@ -16,6 +16,7 @@ class Babayaga(MakefilePackage):
 
     tags = ["hep"]
 
+    depends_on("cxx", type="build")
     depends_on("fortran", type="build")
 
     version(
