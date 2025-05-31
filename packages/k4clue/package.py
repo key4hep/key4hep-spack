@@ -42,6 +42,8 @@ class K4clue(CMakePackage, Ilcsoftpackage):
         "1.0", sha256="b1b1c871a2425305e56c1923c31eded300a28cd1a97c55e8b440caaefcafc7d1"
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("dd4hep")
     depends_on("k4fwcore")
 
