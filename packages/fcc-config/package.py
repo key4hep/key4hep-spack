@@ -25,6 +25,8 @@ class FccConfig(CMakePackage):
         sha256="f609d88a1a6fbbdad50b8988012d80b8dad5c5fe31d6788761a7b06e1561736c",
     )
 
+    depends_on("cxx", type="build")
+
     def cmake_args(self):
         args = []
         args.append("-DBUILD_TESTING=%s" % self.run_tests)
