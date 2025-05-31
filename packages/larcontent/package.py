@@ -41,6 +41,9 @@ class Larcontent(CMakePackage):
 
     patch("path.patch")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("pandorapfa")
     depends_on("pandorasdk")
     depends_on("eigen")
