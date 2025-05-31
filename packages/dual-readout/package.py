@@ -59,6 +59,8 @@ class DualReadout(CMakePackage, Key4hepPackage):
         when="@0.1.4",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("geant4")
