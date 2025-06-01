@@ -26,6 +26,9 @@ class Marlinfastjet(CMakePackage, Ilcsoftpackage):
         sha256="abdffa6c2c9328bb094456f6003920d0c860e7faa5c76aea650da9e47e698bdf",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")
