@@ -31,6 +31,9 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
         "1.5", sha256="4ef6fea7527dbb5f9a12322e92e27d80f2c29b115aae13987f55cb6cf02f31f5"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("dd4hep")
     depends_on("root")
     depends_on("ilcutil")
