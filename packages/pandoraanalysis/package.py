@@ -24,6 +24,9 @@ class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
         sha256="cab082096921d60390054bb0da6afc5eaee4df28411266d4404f9b3f50048e39",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")
