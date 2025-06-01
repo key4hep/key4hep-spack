@@ -37,6 +37,7 @@ class Kkmcee(AutotoolsPackage):
     version("4.30", tag="V4.30")
 
     depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("fortran", type="build")
 
     depends_on("autoconf", type="build")

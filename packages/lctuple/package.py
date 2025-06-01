@@ -30,6 +30,9 @@ class Lctuple(CMakePackage, Ilcsoftpackage):
         sha256="e0e7c4c86f257027a7e9b1c42438087a7b0919964f9719080be25df8a0f95968",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("root")
