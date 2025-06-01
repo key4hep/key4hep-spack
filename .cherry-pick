@@ -24,4 +24,4 @@ git cherry-pick 248217db40db2c437902487c562404ecb484403c -X theirs --no-commit
 git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
 
 # Add build dependencies for several packages, remove when https://github.com/spack/spack/pull/50742 is merged
-git cherry-pick d36f5481689e63da851cba9bc2d12b8182828e45 -X theirs --no-commit
+git cherry-pick 46856def51b9c57a4a6a6731ec5ae68999798824 -X theirs --no-commit
