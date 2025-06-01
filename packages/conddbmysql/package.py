@@ -22,6 +22,9 @@ class Conddbmysql(CMakePackage, Key4hepPackage):
         sha256="7cbf9e06e2b3d131939ac0b66816814738e8c5021449f19921b4071c1979ef5a",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("mariadb")
     depends_on("ilcutil")
 

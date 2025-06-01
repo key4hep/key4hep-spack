@@ -22,6 +22,9 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
         sha256="5379a369ee29bebeece7e814c0595bac9f08f2737ce03ae529b4b4e84dea1283",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("eigen")
     depends_on("generalbrokenlines")
