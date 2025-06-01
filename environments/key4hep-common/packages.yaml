@@ -7,6 +7,10 @@ packages:
 
   acts:
     require: +dd4hep cxxstd=20 +json
+  # Build the assembler since the one from Alma 9 is old
+  # and does not support AVX2 from py-onnxruntime or py-torch
+  binutils:
+    require: +gas
   boost:
     require: +python
     buildable: true
