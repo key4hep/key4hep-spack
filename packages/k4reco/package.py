@@ -41,12 +41,15 @@ class K4reco(CMakePackage, Key4hepPackage):
     depends_on("kaltest", when="+conformal_tracking")
     depends_on("ddkaltest", when="+conformal_tracking")
 
+    depends_on("k4geo", type="test")
+
     def cmake_args(self):
         args = [
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
             ),
             self.define_from_variant("BUILD_TRACKING", "conformal_tracking"),
+            self.define("BUILD_TESTING", self.run_tests),
         ]
         return args
 
