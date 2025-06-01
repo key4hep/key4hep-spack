@@ -26,6 +26,9 @@ class Kitrack(CMakePackage, Ilcsoftpackage):
         sha256="e89e0553ba76946749e422aa470bbe20456b085efe523fb42f97565201376870",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("root")
