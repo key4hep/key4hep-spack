@@ -25,6 +25,9 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
         "0.6", sha256="e22127f3d349c5b5a6a1c95585f5bf410d77cf598b3432b188f781436632372a"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")

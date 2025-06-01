@@ -46,6 +46,9 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
         sha256="87837d7fd802e46c8530c721035ae75946d699031f093612ec02a7fabe0c6143",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("lcio")
     depends_on("gear")
