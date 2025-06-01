@@ -29,6 +29,9 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
         "2.5", sha256="8753ecf5ed7819744cc66a652cf8ddcd0d783a25ee19b5387212f70dd9abbce5"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("root")
 

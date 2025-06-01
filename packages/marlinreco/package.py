@@ -56,6 +56,9 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
 
     patch("algorithm.patch", when="@:1.36")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")

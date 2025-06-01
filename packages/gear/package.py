@@ -49,6 +49,8 @@ class Gear(CMakePackage, Ilcsoftpackage):
 
     variant("doc", default=False, description="build doxygen documentation")
 
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("clhep")
 
