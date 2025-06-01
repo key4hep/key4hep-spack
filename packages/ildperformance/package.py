@@ -40,6 +40,9 @@ class Ildperformance(CMakePackage, Ilcsoftpackage):
         "1.8", sha256="bcf19d3a6f425fa5eea228676d07558635881a0329c4d66ffda4230dfe9617c1"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")
