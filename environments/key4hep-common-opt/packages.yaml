@@ -58,7 +58,7 @@ packages:
   k4gen:
     require: +ipo build_type=Release
   k4generatorsconfig:
-    require: +ipo build_type=Release
+    require: build_type=Release
   k4geo:
     require: +ipo build_type=Release
   k4marlinwrapper:
