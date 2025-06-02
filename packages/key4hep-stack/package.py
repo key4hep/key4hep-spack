@@ -44,6 +44,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         description="Build type",
     )
 
+    # Add compilers to the build dependencies
+    # so that we have them available to set them in the env script
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+    depends_on("fortran", type="build")
+
     # Key4hep packages
     depends_on("cldconfig")
     depends_on("dd4hep")
@@ -158,8 +164,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if (
-            self.architecture.os == "ubuntu22.04"
-            or self.architecture.os == "ubuntu24.04"
+            self.spec.architecture.os == "ubuntu22.04"
+            or self.spec.architecture.os == "ubuntu24.04"
         ):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
