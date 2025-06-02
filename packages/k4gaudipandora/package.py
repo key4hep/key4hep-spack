@@ -17,6 +17,10 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     maintainers("jmcarcell")
 
     version("main", branch="main")
+    version(
+        "0.1.0",
+        sha256="a77e7f76728c14054f112e923b55e434becafb7d392e2f3653133a5e8ad2d235",
+    )
 
     depends_on("dd4hep")
     depends_on("edm4hep")

@@ -139,6 +139,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
 
+    depends_on("aprilcontent")
+    depends_on("sdhcalcontent")
+
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
