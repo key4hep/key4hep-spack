@@ -40,6 +40,9 @@ class Clicperformance(CMakePackage, Ilcsoftpackage):
         sha256="4e68230b558b3ba471b67d717bddabe609baa25f0228c18a2e8889ed9630f076",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")
