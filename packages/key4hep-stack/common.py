@@ -152,7 +152,7 @@ def install_setup_script(self, spec, prefix, env_var):
     env_mod = spack.util.environment.EnvironmentModifications()
 
     # first setup compiler, similar to build_environment.py in spack
-    env_mod.prepend_path("PATH", os.path.dirname(self.compiler.cxx))
+    # env_mod.prepend_path("PATH", os.path.dirname(self.compiler.cxx))
 
     # now walk over the dependencies
     with STORE.db.read_transaction():
@@ -164,14 +164,14 @@ def install_setup_script(self, spec, prefix, env_var):
             env_mod.extend(uenv.environment_modifications_for_specs(spec))
         env_mod.prepend_path(uenv.spack_loaded_hashes_var, spec.dag_hash())
 
-    if self.compiler.cc:
-        env_mod.set("CC", self.compiler.cc)
-    if self.compiler.cxx:
-        env_mod.set("CXX", self.compiler.cxx)
-    if self.compiler.f77:
-        env_mod.set("F77", self.compiler.f77)
-    if self.compiler.fc:
-        env_mod.set("FC", self.compiler.fc)
+    # if self.compiler.cc:
+    #     env_mod.set("CC", self.compiler.cc)
+    # if self.compiler.cxx:
+    #     env_mod.set("CXX", self.compiler.cxx)
+    # if self.compiler.f77:
+    #     env_mod.set("F77", self.compiler.f77)
+    # if self.compiler.fc:
+    #     env_mod.set("FC", self.compiler.fc)
 
     # transform to bash commands, and write to file
     cmds = k4_generate_setup_script(env_mod)
