@@ -116,7 +116,7 @@ if __name__ == "__main__":
         ("clicperformance", "ilcsoft/clicperformance"),
         ("conformaltracking", "ilcsoft/conformaltracking"),
         ("dd4hep", "aidasoft/dd4hep"),
-        ("ddfastshowerml", "ilcsoft/ddfastshowerml"),
+        ("ddml", "key4hep/ddml"),
         ("ddkaltest", "ilcsoft/ddkaltest"),
         ("ddmarlinpandora", "ilcsoft/ddmarlinpandora"),
         ("delphes", "delphes/delphes"),
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         gitlab = False
         if package == "opendatadetector":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
-        elif package == "ddfastshowerml" or package == "marlinmlflavortagging":
+        elif package == "marlinmlflavortagging":
             gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
         commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
         line = f"@{commit}"
