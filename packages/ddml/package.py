@@ -7,7 +7,7 @@ from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Ddfastshowerml(CMakePackage, Key4hepPackage):
+class Ddml(CMakePackage, Key4hepPackage):
     """Package with utilities and plugins that allow to run fast simulation in Geant4 from ML inference within ddsim (DDG4)"""
 
     homepage = "https://github.com/key4hep/DDML"
