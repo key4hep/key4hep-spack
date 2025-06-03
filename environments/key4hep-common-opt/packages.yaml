@@ -15,7 +15,7 @@ packages:
     require: build_type=Release
   dd4hep:
     require: build_type=Release
-  ddfastshowerml:
+  ddml:
     require: build_type=Release
   ddkaltest:
     require: build_type=Release
