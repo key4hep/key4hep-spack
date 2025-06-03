@@ -18,7 +18,7 @@ def get_latest_commit(
     :param name: spack name of the package, p.ex: "edm4hep"
     :param repoinfo: description of the owner and repository names, p.ex: "key4hep/edm4hep"
     """
-
+    print(f"Fetching the latest commit for {name}")
     if gitlab:
         giturl = gitlab
     else:
@@ -43,6 +43,8 @@ def get_latest_commit(
         }
 
     response = requests.get(giturl % repoinfo, params=search_params, headers=headers)
+    if not response.ok:
+        print("Request failed")
 
     commit = response.json()[0]["sha" if not gitlab else "id"]
     int(commit, 16)
