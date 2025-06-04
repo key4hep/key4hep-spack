@@ -5,7 +5,8 @@ git fetch jmcarcell -q
 # CMAKE_INSTALL_LIBDIR gets chosen as lib64 and this causes problems in some
 # packages that expect lib. Since spack installs each package to its own prefix
 # we don't need to worry about multilib environments
-git cherry-pick dcedd688a077ba5399b1a77275364b8164eab41f -X theirs --no-commit
+# It doesn't seem to do anything at the moment
+# git cherry-pick dcedd688a077ba5399b1a77275364b8164eab41f -X theirs --no-commit
 
 # Because the patch above and py-onnx being a python package, it will try to find
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
@@ -25,3 +26,6 @@ git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
 
 # Add build dependencies for several packages, remove when https://github.com/spack/spack/pull/50742 is merged
 git cherry-pick 46856def51b9c57a4a6a6731ec5ae68999798824 -X theirs --no-commit
+
+# py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove when https://github.com/spack/spack/pull/50780 is merged
+git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
