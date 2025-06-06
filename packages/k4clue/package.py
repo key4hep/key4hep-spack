@@ -45,6 +45,9 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     depends_on("dd4hep")
     depends_on("k4fwcore")
 
+    # Fix the range when a new version is available
+    depends_on("alpaka", when="@01-00-07:")
+
     depends_on("marlindd4hep", type="test")
     depends_on("kaltest", type="test")
     depends_on("conformaltracking", type="test")
