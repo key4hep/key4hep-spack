@@ -1,16 +1,17 @@
-name: Re-build and publish key4hep-externals image
+name: Publish key4hep-externals image
+description: |
+  Loads a key4hep-dev-external stack from spack cache.
+  This workflow builds the image and pushes it to the registry.
+
 on:
-  push:
-    branches:
-    - main
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
 
 env:
   REGISTRY: ghcr.io
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -21,9 +22,6 @@ permissions:
 jobs:
   build-externals:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [alma9, ubuntu24]
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -53,7 +51,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ matrix.os }}
+          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
       - name: Determine spack ref
         id: getref
         run: |
@@ -63,11 +61,15 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          context: ./Docker
-          file: ./Docker/${{matrix.os}}/Dockerfile-externals
+          context: ./Docker/${{inputs.os}}
+          file: ./Docker/${{inputs.os}}/Dockerfile-externals
           build-args: |
             GITHUB_REPOSITORY=${{ github.repository }}
             COMMIT_SHA=${{ github.sha }}
             SPACK_COMMIT=${{ steps.getref.outputs.spack_ref }}
+            SPACK_BUILDCACHE=oci://ghcr.io/${{ github.repository_owner }}/spack-buildcache
+            OCI_USERNAME=${{ github.actor }}
+          secrets: |
+            "ocipass=${{ secrets.GITHUB_TOKEN }}"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
