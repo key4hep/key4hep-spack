@@ -65,6 +65,8 @@ packages:
     require: build_type=Debug
   k4marlinwrapper:
     require: build_type=Debug
+  k4mljettagger:
+    require: build_type=Debug
   k4projecttemplate:
     require: build_type=Debug
   k4reccalorimeter:
