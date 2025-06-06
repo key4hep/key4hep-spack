@@ -19,7 +19,7 @@ git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
 git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
 
 # root: set runtime_cxxmodules to True, remove when https://github.com/spack/spack-packages/pull/109 is merged
-git cherry-pick 248217db40db2c437902487c562404ecb484403c -X theirs --no-commit
+git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
 
 # ghostscript: fixes for missing DSO symbol and add X libraries, remove when https://github.com/spack/spack-packages/pull/108 is merged
 git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
@@ -29,3 +29,7 @@ git cherry-pick 46856def51b9c57a4a6a6731ec5ae68999798824 -X theirs --no-commit
 
 # py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove when https://github.com/spack/spack-packages/pull/106 is merged
 git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
+
+# madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
+git cherry-pick f6291de4735216f0361a0c78e98d9391de5d8230 -X theirs --no-commit
+
