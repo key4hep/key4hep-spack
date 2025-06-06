@@ -33,8 +33,6 @@ packages:
     require: +ipo build_type=Release
   fccdetectors:
     require: +ipo build_type=Release
-  fccsw:
-    require: +ipo build_type=Release
   forwardtracking:
     require: +ipo build_type=Release
   gaudi:
