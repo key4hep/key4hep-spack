@@ -7,27 +7,27 @@ from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class Ddfastshowerml(CMakePackage, Key4hepPackage):
+class Ddml(CMakePackage, Key4hepPackage):
     """Package with utilities and plugins that allow to run fast simulation in Geant4 from ML inference within ddsim (DDG4)"""
 
-    homepage = "https://gitlab.desy.de/ilcsoft/ddfastshowerml"
-    git = "https://gitlab.desy.de/ilcsoft/ddfastshowerml.git"
-    url = "https://gitlab.desy.de/ilcsoft/ddfastshowerml/-/archive/v0.1.0/ddfastshowerml-v0.1.0.tar.gz"
+    homepage = "https://github.com/key4hep/DDML"
+    git = "https://github.com/key4hep/DDML.git"
+    url = "https://github.com/key4hep/DDML/archive/refs/tags/v0.2.0.tar.gz"
 
     maintainers("jmcarcell", "tmadlener")
 
     version("main", branch="main")
     version(
         "0.2.0",
-        sha256="1a124c9d19efe1a5435f8838a31c4d9325e23d0bab7d46603f3de654a4cfbbfd",
+        sha256="377f34a341bcd11a177195b795c763c98f06450445839982c96adee76f51ad08",
     )
     version(
         "0.1.1",
-        sha256="a9628624736baea4261950615b698c9389763c18953c29bb5b1635d8d2dd9c3b",
+        sha256="0c11f84a912c89404de46df9ed6f0f0bb4f8985a292f0400f1c4f1b0afea1f72",
     )
     version(
         "0.1.0",
-        sha256="a9628624736baea4261950615b698c9389763c18953c29bb5b1635d8d2dd9c3b",
+        sha256="17ccdd7673780bbe91d98fe6ad3d9c2ad21803ca71b75b740a6beb0f8ea39358",
     )
 
     variant("inference", values=("onnxruntime", "torch", "both"), default="both")

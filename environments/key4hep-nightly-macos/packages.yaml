@@ -17,7 +17,7 @@ packages:
     variants: build_type=RelWithDebInfo
   dd4hep:
     variants: build_type=RelWithDebInfo
-  ddfastshowerml:
+  ddml:
     variants: build_type=RelWithDebInfo
   ddkaltest:
     variants: build_type=RelWithDebInfo

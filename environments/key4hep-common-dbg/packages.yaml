@@ -15,7 +15,7 @@ packages:
     require: build_type=Debug
   dd4hep:
     require: build_type=Debug
-  ddfastshowerml:
+  ddml:
     require: build_type=Debug
   ddkaltest:
     require: build_type=Debug

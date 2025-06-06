@@ -49,7 +49,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("clicperformance")
     depends_on("clupatra")
     depends_on("conformaltracking")
-    depends_on("ddfastshowerml")
+    depends_on("ddml")
     depends_on("ddkaltest")
     depends_on("ddmarlinpandora")
     depends_on("fcalclusterer")
