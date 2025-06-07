@@ -33,3 +33,6 @@ git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 git cherry-pick f6291de4735216f0361a0c78e98d9391de5d8230 -X theirs --no-commit
 
+# py_onnxruntime: add new versions, patches and update the recipe, remove when https://github.com/spack/spack-packages/pull/128 is merged
+git cherry-pick 02cbdf51cddc766219bfd0ebb19f663d58744bcb -X theirs --no-commit
+
