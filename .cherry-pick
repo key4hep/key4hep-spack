@@ -43,5 +43,5 @@ git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
 git cherry-pick 56a2461146b5c9a5afc7ca70b857bc2e6aeaf915 -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
-git cherry-pick 96bd531aab28abaf167360012ef337e73ad8069c -X theirs --no-commit
+git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
