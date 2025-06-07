@@ -25,7 +25,7 @@ git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
 git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
 
 # Add build dependencies for several packages, remove when https://github.com/spack/spack-packages/pull/107 is merged
-git cherry-pick 46856def51b9c57a4a6a6731ec5ae68999798824 -X theirs --no-commit
+git cherry-pick 65daf31f2e89c1027c3d1ecc2c03638254ea83e2 -X theirs --no-commit
 
 # py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove when https://github.com/spack/spack-packages/pull/106 is merged
 git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
@@ -35,4 +35,13 @@ git cherry-pick f6291de4735216f0361a0c78e98d9391de5d8230 -X theirs --no-commit
 
 # py_onnxruntime: add new versions, patches and update the recipe, remove when https://github.com/spack/spack-packages/pull/128 is merged
 git cherry-pick 02cbdf51cddc766219bfd0ebb19f663d58744bcb -X theirs --no-commit
+
+# py_onnx: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
+git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
+
+# py_gevent: add gmake as a dependency, remove when https://github.com/spack/spack-packages/pull/133 is merged
+git cherry-pick 56a2461146b5c9a5afc7ca70b857bc2e6aeaf915 -X theirs --no-commit
+
+# py_gosam: try a fix for the build, which is probably not correct
+git cherry-pick 96bd531aab28abaf167360012ef337e73ad8069c -X theirs --no-commit
 
