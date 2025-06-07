@@ -27,6 +27,8 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     variant("docs", default=False, description="Build the documentation")
 
+    depends_on("cxx", type="build")
+
     depends_on("clhep")
     depends_on("dd4hep")
     depends_on("k4fwcore")

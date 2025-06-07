@@ -32,6 +32,9 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
 
     patch("dict.patch", when="@0.10:0.10.1")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("marlin")
     depends_on("marlinutil")
     depends_on("lcfivertex")
