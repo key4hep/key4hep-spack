@@ -47,3 +47,7 @@ git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
 # gaudi: add db patch
 git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
+
+# dd4hep: set CMAKE_INSTALL_LIBDIR to lib
+git cherry-pick 1e6c10bd39a6fc552c16994b2af65ac39ddb878c -X theirs --no-commit
+
