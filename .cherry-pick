@@ -45,3 +45,5 @@ git cherry-pick 56a2461146b5c9a5afc7ca70b857bc2e6aeaf915 -X theirs --no-commit
 # py_gosam: try a fix for the build, which is probably not correct
 git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
+# gaudi: add db patch
+git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
