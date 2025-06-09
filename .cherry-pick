@@ -6,7 +6,7 @@ git fetch jmcarcell -q
 # packages that expect lib. Since spack installs each package to its own prefix
 # we don't need to worry about multilib environments
 # It doesn't seem to do anything at the moment
-git cherry-pick dcedd688a077ba5399b1a77275364b8164eab41f -X theirs --no-commit
+git cherry-pick 2a78f7d6b5559b607daf6694f7278297f15a5b8d -X theirs --no-commit
 
 # Because the patch above and py-onnx being a python package, it will try to find
 # protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
@@ -47,7 +47,4 @@ git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
 # gaudi: add db patch
 git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
-
-# dd4hep: set CMAKE_INSTALL_LIBDIR to lib
-# git cherry-pick 1e6c10bd39a6fc552c16994b2af65ac39ddb878c -X theirs --no-commit
 
