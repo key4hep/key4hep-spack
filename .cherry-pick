@@ -27,7 +27,7 @@ git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
 # Add build dependencies for several packages, remove when https://github.com/spack/spack-packages/pull/107 is merged
 git cherry-pick 65daf31f2e89c1027c3d1ecc2c03638254ea83e2 -X theirs --no-commit
 
-# py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove when https://github.com/spack/spack-packages/pull/106 is merged
+# py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove!
 git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
 
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
