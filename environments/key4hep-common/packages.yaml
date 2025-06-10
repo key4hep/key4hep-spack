@@ -45,7 +45,7 @@ packages:
   marlin:
     require: +lccd
   madgraph5amc:
-    require: '@3: +pythia8'
+    require: '@3: +pythia8 models="loop_qcd_qed_sm_Gmu"'
   # Without the 3.1.11 minimum, spack concretizes to 3.1.10 even though that version
   # doesn't work well with hepmc3 due to an issue with parsing the HepMC3 version
   rivet:
