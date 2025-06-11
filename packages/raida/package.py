@@ -34,7 +34,6 @@ class Raida(CMakePackage, Ilcsoftpackage):
         sha256="53ad3fd7c62e5eba70e6d6099e5ef4d92920399afb7b31dc8008b6ad865a9e85",
     )
 
-
     depends_on("c", type="build")
     depends_on("cxx", type="build")
 
