@@ -95,11 +95,13 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # Devtools
     depends_on("catch2@3:", when="+devtools")
     depends_on("cmake", when="+devtools")
+    depends_on("cppcheck", when="+devtools")
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
     # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
+    depends_on("mold", when="+devtools")
     depends_on("ninja", when="+devtools")
     # depends_on('prmon', when='+devtools')
     depends_on("py-awkward", when="+devtools")

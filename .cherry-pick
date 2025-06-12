@@ -48,3 +48,5 @@ git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 # gaudi: add db patch
 git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
 
+# py-pylint and py-astroid: add latest versions compatible with Python 3.13, remove when https://github.com/spack/spack-packages/pull/179 is merged
+git cherry-pick 16c3e4c8161502dbd60e4deaf5d137b2936fc95f -X theirs --no-commit
