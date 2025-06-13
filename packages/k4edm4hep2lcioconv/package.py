@@ -37,6 +37,8 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
         sha256="aae9ac39ae56f9e18b8b2f13c84ca95a2c90b71069a5318b894a574d773d8815",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("lcio@2.20:")
     depends_on("lcio@2.20.1:", when="@00-08:")
     depends_on("lcio@2.22:", when="@00-09:")

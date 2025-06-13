@@ -34,6 +34,9 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
 
     variant("doc", default=False, description="build doxygen documentation")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("marlinkinfit")
     depends_on("marlin")
     depends_on("marlinutil")

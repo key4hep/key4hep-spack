@@ -27,6 +27,8 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     variant("docs", default=False, description="Build the documentation")
 
+    depends_on("cxx", type="build")
+
     depends_on("clhep")
     depends_on("dd4hep")
     depends_on("k4fwcore")
@@ -34,9 +36,9 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("g4ensdfstate")
     depends_on("root")
-    # testing
-    depends_on("fccdetectors")
-    depends_on("k4gen")
+
+    depends_on("fccdetectors", type="test")
+    depends_on("k4gen", type="test")
 
     def cmake_args(self):
         args = [

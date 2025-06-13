@@ -24,6 +24,9 @@ class Lcfivertex(CMakePackage, Ilcsoftpackage):
         "0.8", sha256="37f3ea8754cefb60073471c298b4c1926ef9858e8edb4c51affa1ff7de4e2fb8"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("lcio")
     depends_on("boost")
     depends_on("ilcutil")

@@ -42,6 +42,9 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
         sha256="8028d0e94d8bbdc7047f1897847c9bdf4fd7d2ba9d0120413100569a9922d753",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("gear")

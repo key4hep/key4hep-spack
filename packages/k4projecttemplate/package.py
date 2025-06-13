@@ -33,6 +33,8 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     generator = "Ninja"
 
+    depends_on("cxx", type="build")
+
     depends_on("ninja", type="build")
     depends_on("edm4hep")
     depends_on("k4fwcore@1.0pre14:", when="@0.3.0:")

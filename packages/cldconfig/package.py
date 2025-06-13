@@ -29,6 +29,8 @@ class Cldconfig(CMakePackage):
         sha256="8a15971152391da3b41bbf543316ad6b41949cd3d3c82e334a7a7b86092591da",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
     depends_on("k4fwcore", type="test")
