@@ -17,6 +17,9 @@ class Marlinmlflavortagging(CMakePackage, Key4hepPackage):
         sha256="4ad9193e433fc7d06f53941b982a52f257f13bdfc882100ed42d6c7ca8689a20",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("aida")
     depends_on("ilcutil")
     depends_on("lcio@2.21:")

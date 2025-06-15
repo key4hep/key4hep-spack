@@ -36,6 +36,9 @@ class Lccd(CMakePackage, Ilcsoftpackage):
 
     variant("conddbmysql", default=False, description="builds with database support")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("lcio")
     depends_on("lcio@2.20.1:", when="@1.5.2:")

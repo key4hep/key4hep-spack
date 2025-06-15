@@ -33,8 +33,6 @@ packages:
     require: build_type=Debug
   fccdetectors:
     require: build_type=Debug
-  fccsw:
-    require: build_type=Debug
   forwardtracking:
     require: build_type=Debug
   gaudi:
@@ -44,8 +42,6 @@ packages:
   ilcutil:
     require: build_type=Debug cxxstd=20
   ildperformance:
-    require: build_type=Debug
-  k4mljettagger:
     require: build_type=Debug
   key4hep-stack:
     require: build_type=Debug
@@ -64,6 +60,8 @@ packages:
   k4geo:
     require: build_type=Debug
   k4marlinwrapper:
+    require: build_type=Debug
+  k4mljettagger:
     require: build_type=Debug
   k4projecttemplate:
     require: build_type=Debug

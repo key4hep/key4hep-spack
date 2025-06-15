@@ -21,6 +21,9 @@ class Garlic(CMakePackage, Ilcsoftpackage):
         "3.1", sha256="a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")

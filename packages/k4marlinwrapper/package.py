@@ -38,6 +38,8 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
         deprecated=True,
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("root")
     depends_on("lcio")
     depends_on("marlin")

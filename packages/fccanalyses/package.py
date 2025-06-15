@@ -53,6 +53,11 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
 
     generator = "Ninja"
 
+    depends_on(
+        "fortran", type="build"
+    )  # some library is adding their flags, -lgfortran
+    depends_on("cxx", type="build")
+
     depends_on("ninja", type="build")
     depends_on("root +tmva+xrootd")
     depends_on("vdt")

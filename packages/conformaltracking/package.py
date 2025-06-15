@@ -42,6 +42,9 @@ class Conformaltracking(CMakePackage, Ilcsoftpackage):
         "1.8", sha256="e25d2a5df0e77a4223120b0697e2c2414b6ffd12fe6f645c2fbb1a372b635c31"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("root")
     depends_on("marlin")

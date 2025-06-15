@@ -38,6 +38,9 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
         sha256="92410186209508091e0a8e330986283ffb32e40fd7195d10aad1a6a2e953f3ee",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlinutil")
     depends_on("marlin")

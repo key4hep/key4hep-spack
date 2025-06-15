@@ -30,6 +30,9 @@ class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
         sha256="1307578313673fae159aa6fb4eacf3f22bfa085c61337d14a5895e078a8d7f70",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("kitrack")
     depends_on("marlin")
     depends_on("marlinutil")
