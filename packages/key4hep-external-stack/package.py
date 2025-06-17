@@ -52,7 +52,6 @@ class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     depends_on("py-scipy")
 
     # gaudi dependencies
-    depends_on("py-nose")
     depends_on("cppgsl")
     depends_on("fmt")
     depends_on("cppunit")
