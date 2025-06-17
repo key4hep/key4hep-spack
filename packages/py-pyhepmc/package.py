@@ -24,6 +24,8 @@ class PyPyhepmc(PythonPackage):
         sha256="17a6f941e4fa06d08a628990f6816d1da5e545d65f533e6f598740d2cb76ace4",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("cmake", type="build")
     depends_on("py-setuptools-scm", type="build")
 

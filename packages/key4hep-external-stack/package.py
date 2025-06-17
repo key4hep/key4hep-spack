@@ -23,6 +23,12 @@ class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     # exist for a bundle package)
     phases = ["install"]
 
+    # Add compilers to the build dependencies
+    # so that we have them available to set them in the env script
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+    depends_on("fortran", type="build")
+
     # Some generally useful development tools
     depends_on("cmake")
     depends_on("ninja")
@@ -52,7 +58,6 @@ class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     depends_on("py-scipy")
 
     # gaudi dependencies
-    depends_on("py-nose")
     depends_on("cppgsl")
     depends_on("fmt")
     depends_on("cppunit")

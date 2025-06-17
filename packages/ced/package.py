@@ -43,6 +43,9 @@ class Ced(CMakePackage, Ilcsoftpackage):
 
     patch("glut-link.patch", when="@:1.9.3")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("freeglut")
     depends_on("ilcutil")
 

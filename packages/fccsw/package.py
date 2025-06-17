@@ -28,6 +28,8 @@ class Fccsw(CMakePackage, Key4hepPackage):
     version("1.0pre06", tag="v1.0pre06")
     version("1.0pre05", tag="v1.0pre05")
 
+    depends_on("cxx", type="build")
+
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4gen")

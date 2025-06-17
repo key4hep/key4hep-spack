@@ -31,6 +31,9 @@ class K4generatorsconfig(CMakePackage):
         "0.1", sha256="0309f25bc4149de8c17a4615146074ece46f6f384a152e0fd05853ec652d9ad4"
     )
 
+    depends_on("c", type="build")  # needed for cmdline_parser at link time
+    depends_on("cxx", type="build")
+
     depends_on("podio")
     depends_on("edm4hep")
     depends_on("hepmc3")

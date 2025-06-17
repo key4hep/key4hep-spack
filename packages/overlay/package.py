@@ -46,6 +46,9 @@ class Overlay(CMakePackage, Ilcsoftpackage):
         sha256="fa03e2870b8f072fd9c1cd68354274437050ce6ed30d0db9a816a3cbdee54cb1",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("marlinutil")

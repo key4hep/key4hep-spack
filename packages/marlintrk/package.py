@@ -38,6 +38,9 @@ class Marlintrk(CMakePackage, Ilcsoftpackage):
 
     variant("gear", default=False, description="Provide Gear backward compatibility")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("lcio")
     depends_on("gear", when="+gear")

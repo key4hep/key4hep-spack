@@ -76,6 +76,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
         description="Build standalone executable with Pythia+EvtGen input",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("edm4hep", type=("build", "link", "run"))
     depends_on("podio")
     depends_on("delphes@3.5.1pre04:", when="@00-03-00:", type=("build", "link", "run"))

@@ -56,6 +56,9 @@ class Ilcutil(CMakePackage, Ilcsoftpackage):
 
     variant("doc", default=False, description="Build the documentation")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("doxygen", when="+doc")
 
     def cmake_args(self):

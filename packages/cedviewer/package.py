@@ -38,6 +38,9 @@ class Cedviewer(CMakePackage, Ilcsoftpackage):
         sha256="e778396dc6d9c106888c30bc11695a2283be68a5ced155df72cd5ec7d3c3f648",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ced")
     depends_on("marlin")
     depends_on("marlinutil")

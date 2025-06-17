@@ -7,6 +7,10 @@ packages:
 
   acts:
     require: +dd4hep cxxstd=20 +json
+  # Build the assembler since the one from Alma 9 is old
+  # and does not support AVX2 from py-onnxruntime or py-torch
+  binutils:
+    require: +gas
   boost:
     require: +python
     buildable: true
@@ -41,7 +45,7 @@ packages:
   marlin:
     require: +lccd
   madgraph5amc:
-    require: '@3: +pythia8'
+    require: '@3: +pythia8 models="loop_qcd_qed_sm_Gmu"'
   # Without the 3.1.11 minimum, spack concretizes to 3.1.10 even though that version
   # doesn't work well with hepmc3 due to an issue with parsing the HepMC3 version
   rivet:
@@ -105,7 +109,7 @@ packages:
 
   # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+threads+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd cxxstd=20'
+    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
@@ -131,6 +135,11 @@ packages:
   pythia8:
     require: +gzip+hepmc3
     variants: cxxstd=20
+  # Ask for Python > 3.11
+  # Since many packages depend on setuptools that was dropped in 3.12,
+  # without asking explicitly the version used will be 3.11
+  python:
+    require: "@3.12:"
   sio:
     variants: cxxstd=20
 

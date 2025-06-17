@@ -32,6 +32,9 @@ class Physsim(CMakePackage, Ilcsoftpackage):
         sha256="4c22eee5dcccb764a5ff90850aeb33563c45a14af8939a3ebea736c7d92ac1c1",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("root")
 

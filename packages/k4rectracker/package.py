@@ -23,6 +23,9 @@ class K4rectracker(CMakePackage, Key4hepPackage):
         sha256="e945be69b1b4d51b07e8e806e366893af84369a9d63b04deee691aa10d591a02",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")

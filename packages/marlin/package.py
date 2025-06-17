@@ -61,6 +61,8 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     variant("aida", default=True, description="builds with aida")
     variant("doc", default=False, description="build doxygen documentation")
 
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("gear")
     depends_on("lcio")

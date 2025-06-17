@@ -54,6 +54,9 @@ class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
         sha256="49a567831e2b7a0c43ded955ce31fbe7d467a59960f4bcc2c2120e20762639b0",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("marlin")
     depends_on("marlinutil")
     depends_on("dd4hep")

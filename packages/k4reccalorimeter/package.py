@@ -34,6 +34,8 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
 
     generator = "Ninja"
 
+    depends_on("cxx", type="build")
+
     depends_on("ninja", type="build")
 
     depends_on("dd4hep")

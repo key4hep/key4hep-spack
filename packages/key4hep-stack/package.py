@@ -44,19 +44,16 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         description="Build type",
     )
 
-    depends_on("acts")
-    # babayaga doesn't build on macOS
-    depends_on("babayaga", when="platform=linux")
-    depends_on("bdsim")
-    depends_on("bhlumi")
+    # Add compilers to the build dependencies
+    # so that we have them available to set them in the env script
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+    depends_on("fortran", type="build")
+
+    # Key4hep packages
     depends_on("cldconfig")
     depends_on("dd4hep")
-    depends_on("delphes")
     depends_on("edm4hep")
-    depends_on("fcc-config")
-    depends_on("geant4")
-    depends_on("guinea-pig")
-    # depends_on('k4actstracking')
     depends_on("k4mljettagger")
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
@@ -65,15 +62,22 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4gen")
     depends_on("k4projecttemplate")
     depends_on("k4reco")
+    depends_on("k4rectracker")
     depends_on("k4simdelphes")
     depends_on("k4simgeant4")
-    depends_on("kkmcee")
     depends_on("k4geo")
     depends_on("podio")
-    depends_on("python")
-    depends_on("whizard")
-    depends_on("xrootd")
+    # HEP-FCC packages
+    depends_on("fcc-config")
+    depends_on("fccsw")
+    depends_on("dual-readout")
+    depends_on("fccanalyses")
+    depends_on("fccdetectors")
+    depends_on("k4reccalorimeter")
+    # ILCSoft packages
+    depends_on("ilcsoft")
 
+    # Generators
     depends_on("k4generatorsconfig", when="+generators")
     depends_on("evtgen+pythia8+tauola+photos", when="+generators")
     depends_on("herwig3", when="+generators")
@@ -88,28 +92,16 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-pymadx", when="+generators")
     depends_on("py-pytransport", when="+generators")
 
-    depends_on("ilcsoft")
-
-    depends_on("fccsw")
-    depends_on("dual-readout")
-    depends_on("fccanalyses")
-    depends_on("fccdetectors")
-    depends_on("k4reccalorimeter")
-    depends_on("k4rectracker")
-
-    # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
-    depends_on("garfieldpp")
-    depends_on("genfit")
-
-    depends_on("opendatadetector")
-
+    # Devtools
     depends_on("catch2@3:", when="+devtools")
     depends_on("cmake", when="+devtools")
+    depends_on("cppcheck", when="+devtools")
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
     # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
+    depends_on("mold", when="+devtools")
     depends_on("ninja", when="+devtools")
     # depends_on('prmon', when='+devtools')
     depends_on("py-awkward", when="+devtools")
@@ -139,7 +131,25 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
 
+    # Other
+    depends_on("acts")
     depends_on("aprilcontent")
+    # babayaga doesn't build on macOS
+    depends_on("babayaga", when="platform=linux")
+    depends_on("bdsim")
+    depends_on("bhlumi")
+    depends_on("delphes")
+    depends_on("geant4")
+    depends_on("guinea-pig")
+    # depends_on('k4actstracking')
+    depends_on("kkmcee")
+    depends_on("python")
+    depends_on("whizard")
+    depends_on("xrootd")
+    # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
+    depends_on("garfieldpp")
+    depends_on("genfit")
+    depends_on("opendatadetector")
     depends_on("sdhcalcontent")
 
     def setup_run_environment(self, env):
@@ -156,8 +166,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
 
         # Issue on ubuntu, whizard fails to load libomega.so.0
         if (
-            self.compiler.operating_system == "ubuntu22.04"
-            or self.compiler.operating_system == "ubuntu24.04"
+            self.spec.architecture.os == "ubuntu22.04"
+            or self.spec.architecture.os == "ubuntu24.04"
         ):
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]

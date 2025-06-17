@@ -32,6 +32,8 @@ class Bhlumi(MakefilePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    depends_on("fortran", type="build")
+
     def build(self, spec, prefix):
         with working_dir("4.x-cpc"):
             make("-f", "makefile", "lhemain")

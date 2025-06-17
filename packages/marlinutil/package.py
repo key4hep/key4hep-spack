@@ -60,6 +60,9 @@ class Marlinutil(CMakePackage, Ilcsoftpackage):
         sha256="05e878c9aae4a675e37ad2c63abc0b1c4c2a45dcb2e3c9ae5c31e7e6f64118bf",
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("marlin")
     depends_on("clhep")

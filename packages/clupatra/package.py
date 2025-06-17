@@ -25,6 +25,9 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
         "1.3", sha256="5256d1b120157e9a6916f86249e589d0ea386c4e6dac83fec0294b753a779c25"
     )
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("ilcutil")
     depends_on("gsl")
     depends_on("marlin")

@@ -47,6 +47,8 @@ class K4geo(CMakePackage):
 
     variant("compact", default=True, description="Install compact files")
 
+    depends_on("cxx", type="build")
+
     depends_on("lcio")
     depends_on("dd4hep")
     depends_on("root")
