@@ -35,9 +35,6 @@ function list_releases() {
         if [ -z "$compiler" ]; then
             compiler="gcc14"
         fi
-    elif [ "$os" = "ubuntu22" ]; then
-        echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
-        name="ubuntu22"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
         name="ubuntu24"
     else
@@ -62,9 +59,6 @@ function list_packages() {
         if [ -z "$compiler" ]; then
             compiler="gcc14"
         fi
-    elif [ "$os" = "ubuntu22" ]; then
-        echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
-        name="ubuntu22"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu24" ]; then
         name="ubuntu24"
     else
@@ -207,16 +201,12 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERS
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
     os="almalinux9"
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="22.04"' ]]; then
-    echo "Warning: Ubuntu 22.04 is deprecated, please use Ubuntu 24.04 or Alma 9"
-    os="ubuntu22"
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
     os="ubuntu24"
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9, Ubuntu 22.04 and Ubuntu 24.04"
+    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 24.04"
     return 1
 fi
 
@@ -296,8 +286,6 @@ done
 if [ -z "$compiler" ]; then
     if [ "$os" = "almalinux9" ]; then
         compiler="gcc14"
-    elif [ "$os" = "ubuntu22" ]; then
-        compiler="gcc11"
     elif [ "$os" = "ubuntu24" ]; then
         compiler="gcc13"
     fi
@@ -318,8 +306,6 @@ fi
 
 if [ "$os" = "almalinux9" ]; then
     echo "AlmaLinux/RockyLinux/RHEL 9 detected"
-elif [ "$os" = "ubuntu22" ]; then
-    echo "Ubuntu 22.04 detected"
 elif [ "$os" = "ubuntu24" ]; then
     echo "Ubuntu 24.04 detected"
 fi
