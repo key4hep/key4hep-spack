@@ -164,14 +164,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             # When building podio with +rntuple there are warnings constantly without this
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
-        # Issue on ubuntu, whizard fails to load libomega.so.0
-        if (
-            self.spec.architecture.os == "ubuntu22.04"
-            or self.spec.architecture.os == "ubuntu24.04"
-        ):
-            env.prepend_path(
-                "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
-            )
+        # Otherwise whizard generated libraries will not be able to find libomega.so
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
 
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
