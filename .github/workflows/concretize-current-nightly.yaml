@@ -40,8 +40,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 
-            export GITHUB_TOKEN=${GH_TOKEN}
-
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
 
@@ -101,4 +99,4 @@ jobs:
 
             # cat ${GITHUB_WORKSPACE}/script_container.sh
 
-            docker exec container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
+            docker exec -e GITHUB_TOKEN="${GITHUB_TOKEN}" container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
