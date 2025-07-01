@@ -9,9 +9,9 @@ from spack.package import *
 class PyPymadx(PythonPackage):
     """Utilities for processing and analysing MADX output"""
 
-    homepage = "https://bitbucket.org/jairhul/pymadx"
-    url = "https://bitbucket.org/jairhul/pymadx/get/v2.2.1.tar.gz"
-    git = "https://bitbucket.org/jairhul/pymadx.git"
+    homepage = "https://github.com/bdsim-collaboration/pymadx"
+    url = "https://github.com/bdsim-collaboration/pymadx/archive/v2.2.1.tar.gz"
+    git = "https://github.com/bdsim-collaboration/pymadx.git"
 
     tags = ["hep"]
 
@@ -21,7 +21,7 @@ class PyPymadx(PythonPackage):
 
     version(
         "2.2.1",
-        sha256="e329204931de9be8b0ab88e7ba92045136165c382f8de02f0e11364671813276",
+        sha256="c4109b5b6214c50e1cc6f0ff76c38b3ea88043536a9c3f8b45685b8b3babac97",
     )
 
     depends_on("py-setuptools", type="build")

@@ -9,9 +9,9 @@ from spack.package import *
 class PyPybdsim(PythonPackage):
     """Utilities for preparing and analysing BDSIM input and output as well as controlling BDSIM"""
 
-    homepage = "https://bitbucket.org/jairhul/pybdsim"
-    url = "https://bitbucket.org/jairhul/pybdsim/get/v3.6.1.tar.gz"
-    git = "https://bitbucket.org/jairhul/pybdsim.git"
+    homepage = "https://github.com/bdsim-collaboration/pybdsim"
+    url = "https://github.com/bdsim-collaboration/pybdsim/archive/v3.6.1.tar.gz"
+    git = "https://github.com/bdsim-collaboration/pybdsim.git"
 
     tags = ["hep"]
 
@@ -21,7 +21,7 @@ class PyPybdsim(PythonPackage):
 
     version(
         "3.6.1",
-        sha256="7bb7ba5d0f911dfc0115dce5b4a946743b34971836ef4112b2ede2195826cc11",
+        sha256="9308648b2745d60fe5da6c9422bbe8ea2f177f1987cd949ece01ab88b55bb339",
     )
 
     depends_on("py-setuptools", type="build")
