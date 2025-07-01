@@ -1,11 +1,7 @@
-name: Concretize
+name: Concretize current nightly
 description: |
   Concretize using the current nightlies as upstream to check if packages are changed or not
   with the new changes
-
-name: Concretize latest spack
-description: |
-  This workflow concretizes the spack environment that was used for the last build
 
 
 on:
