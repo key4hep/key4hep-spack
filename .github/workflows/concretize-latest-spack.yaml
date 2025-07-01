@@ -31,8 +31,6 @@ jobs:
             fi
 
       - name: Setup environment and concretize
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 
             export GITHUB_TOKEN=${GH_TOKEN}
