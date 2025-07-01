@@ -38,8 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 
-            export GITHUB_TOKEN=${GH_TOKEN}
-
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
 
