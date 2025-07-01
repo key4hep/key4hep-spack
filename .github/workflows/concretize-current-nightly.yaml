@@ -1,5 +1,8 @@
-# Concretize using the current nightlies as upstream to check if packages are changed or not
-# with the new changes
+name: Concretize current nightly
+description: |
+  Concretize using the current nightlies as upstream to check if packages are changed or not
+  with the new changes
+
 
 on:
   push:
@@ -15,7 +18,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        image: [alma9, ubuntu22]
+        image: [alma9, ubuntu24]
         build_type: [nightly]
     runs-on: ubuntu-latest
     steps:
@@ -25,8 +28,8 @@ jobs:
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
             if [ "${{ matrix.image }}" = "alma9" ]; then
               docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
-            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
+            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs tail -f /dev/null
             else
               echo "Unknown image"
               exit 1
@@ -34,10 +37,8 @@ jobs:
 
       - name: Setup environment and concretize
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-
-            export GITHUB_TOKEN=${GH_TOKEN}
 
             cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
             set -e
@@ -45,8 +46,8 @@ jobs:
 
             if [ "${{ matrix.image }}" = "alma9" ]; then
               os=almalinux9
-            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
-              os=ubuntu22
+            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
+              os=ubuntu24
             else
               echo "Unknown image"
               exit 1
@@ -98,4 +99,4 @@ jobs:
 
             # cat ${GITHUB_WORKSPACE}/script_container.sh
 
-            docker exec container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
+            docker exec -e GITHUB_TOKEN="${GITHUB_TOKEN}" container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"

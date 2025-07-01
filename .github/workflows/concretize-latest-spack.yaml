@@ -8,13 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  concretize:
+  concretize-latest-spack:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}
       cancel-in-progress: true
     strategy:
       matrix:
-        image: [alma9, ubuntu22]
+        image: [alma9, ubuntu24]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,16 +23,14 @@ jobs:
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
             if [ "${{ matrix.image }}" = "alma9" ]; then
               docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
-            elif [ "${{ matrix.image }}" = "ubuntu22" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu22-cvmfs tail -f /dev/null
+            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs tail -f /dev/null
             else
               echo "Unknown image"
               exit 1
             fi
 
       - name: Setup environment and concretize
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 
             export GITHUB_TOKEN=${GH_TOKEN}
