@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  concretize:
+  concretize-latest-spack:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}
       cancel-in-progress: true
