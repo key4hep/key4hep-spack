@@ -32,7 +32,9 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore")
     depends_on("marlinutil")
     depends_on("root")
-    depends_on("delphes", when="@0.6.0:") # To be updated with specifc version once new delphes tag with latest changes is released
+    depends_on(
+        "delphes", when="@0.6.0:"
+    )  # To be updated with specifc version once new delphes tag with latest changes is released
     # This shouldn't be necessary but the debug builds are failing because lcio can't be found
     # It started happening after adding marlinutil to the dependencies
     depends_on("lcio")
