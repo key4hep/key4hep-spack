@@ -9,9 +9,9 @@ from spack.package import *
 class PyPytransport(PythonPackage):
     """A Python based converter for TRANSPORT files to BDSIM readable gmad files"""
 
-    homepage = "https://bitbucket.org/jairhul/pytransport"
-    url = "https://bitbucket.org/jairhul/pytransport/get/v2.0.2.tar.gz"
-    git = "https://bitbucket.org/jairhul/pytransport.git"
+    homepage = "https://github.com/bdsim-collaboration/pytransport"
+    url = "https://github.com/bdsim-collaboration/pytransport/archive/v2.0.2.tar.gz"
+    git = "https://github.com/bdsim-collaboration/pytransport.git"
 
     tags = ["hep"]
 
@@ -21,7 +21,7 @@ class PyPytransport(PythonPackage):
 
     version(
         "2.0.2",
-        sha256="61b2c6dd6d0a682a3499a396114c9f6815513f7d4e737a6c67e2d88f68046f00",
+        sha256="5e858ec0a73695ca8ba62f221e57ed4c5182ded125372e997918a140072b5852",
     )
 
     depends_on("py-setuptools", type="build")
