@@ -34,6 +34,8 @@ def get_latest_commit(
     token = os.environ.get("GITHUB_TOKEN" if not gitlab else "CERN_GITLAB_TOKEN", None)
     if token:
         headers["Authorization" if not gitlab else "PRIVATE-TOKEN"] = f"token {token}"
+    else:
+        print('Warning: No token provided, this might lead to rate limiting issues')
 
     # not tested for gitlab
     search_params = {}
