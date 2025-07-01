@@ -35,7 +35,7 @@ def get_latest_commit(
     if token:
         headers["Authorization" if not gitlab else "PRIVATE-TOKEN"] = f"token {token}"
     else:
-        print('Warning: No token provided, this might lead to rate limiting issues')
+        print("Warning: No token provided, this might lead to rate limiting issues")
 
     # not tested for gitlab
     search_params = {}
