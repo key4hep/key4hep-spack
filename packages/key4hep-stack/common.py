@@ -16,17 +16,8 @@ import spack.util.environment
 from spack.util.environment import *
 import spack.user_environment as uenv
 
-try:
-    # https://github.com/spack/spack/pull/38944 renamed store -> STORE
-    from spack.store import STORE
-except ImportError:
-    from spack import store as STORE
-
-# TODO: can be removed when spack versions prior to v0.18.1 are no longer needed
-try:
-    from spack.package import PackageBase
-except ImportError:
-    from spack.package_base import PackageBase
+from spack.store import STORE
+from spack.package_base import PackageBase
 
 from shlex import quote as cmd_quote
 
