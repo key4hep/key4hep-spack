@@ -39,7 +39,7 @@ git cherry-pick 02cbdf51cddc766219bfd0ebb19f663d58744bcb -X theirs --no-commit
 # py_onnx: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
 git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
 
-# py_gevent: add gmake as a dependency, remove when https://github.com/spack/spack-packages/pull/133 is merged
+# py_gevent: add gmake as a dependency, remove!
 git cherry-pick 56a2461146b5c9a5afc7ca70b857bc2e6aeaf915 -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
@@ -48,7 +48,7 @@ git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 # gaudi: add db patch
 git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
 
-# py-pylint and py-astroid: add latest versions compatible with Python 3.13, remove when https://github.com/spack/spack-packages/pull/179 is merged
+# py-pylint and py-astroid: add latest versions compatible with Python 3.13, remove!
 git cherry-pick 16c3e4c8161502dbd60e4deaf5d137b2936fc95f -X theirs --no-commit
 
 # Build sherpa from a branch
