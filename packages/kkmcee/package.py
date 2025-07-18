@@ -22,6 +22,11 @@ class Kkmcee(AutotoolsPackage):
 
     version("main", branch="FCC_release")
     version(
+        "5.01.00",
+        sha256="7ef81f37c81efbe736651fcc2eed659da04a43e864d4d6047290ca9c65b3cad5",
+        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/KKMCee-5.01.00.tar.gz",
+    )
+    version(
         "5.00.02",
         sha256="149578aac6ecfa5d9e43bcfabe2a10119058b9092596d2f3b61063d0b4b3c0af",
     )
@@ -48,10 +53,10 @@ class Kkmcee(AutotoolsPackage):
     depends_on("photos+hepmc3", when="@5:")
     depends_on("hepmc3", when="@5:")
 
-    patch("KKMCee-5.00.01.patch1", level=0, when="@5:")
-    patch("KKMCee-5.00.01.patch2", level=0, when="@5:")
-    patch("KKMCee-5.00.01.patch3", level=0, when="@5:")
-    patch("KKMCee-5.00.01.patch4", level=0, when="@5:")
+    patch("KKMCee-5.00.01.patch1", level=0, when="@5:5.00.02")
+    patch("KKMCee-5.00.01.patch2", level=0, when="@5:5.00.02")
+    patch("KKMCee-5.00.01.patch3", level=0, when="@5:5.00.02")
+    patch("KKMCee-5.00.01.patch4", level=0, when="@5:5.00.02")
 
     patch("KKMCee-dev-4.30.patch", level=0, when="@:4.30")
     patch("KKMCee-dev-4.32.01.patch", level=0, when="@4.31:4.32.01")
@@ -120,12 +125,22 @@ class Kkmcee(AutotoolsPackage):
         install("SRCee/KKMCee_defaults", prefix.etc.KKMCee)
         install("SRCee/KKee2f.h", prefix.include)
         mkdirp(prefix + "/share/KKMCee")
-        install("ProdRun/kkmchepmc/kkmc-tauola.input", prefix.share.KKMCee)
-        mv = which("mv")
-        mv(prefix + "/bin/KKMCee", prefix + "/bin/KKMCee.exe")
-        install(join_path(os.path.dirname(__file__), "KKMCee"), prefix + "/bin/KKMCee")
         chmod = which("chmod")
+        mv = which("mv")
+        if spec.satisfies("@5:5.00.02"):
+            install("ProdRun/kkmchepmc/kkmc-tauola.input", prefix.share.KKMCee)
+
+            mv(prefix + "/bin/KKMCee", prefix + "/bin/KKMCee.exe")
+            install(
+                join_path(os.path.dirname(__file__), "KKMCee"), prefix + "/bin/KKMCee"
+            )
+        else:
+            install("ProdRun/workKKMCee/KKMCee-Tauola.input", prefix.share.KKMCee)
+
+            install("ProdRun/workKKMCee/KKMCee", prefix.bin)
+
         chmod("a+x", prefix + "/bin/KKMCee")
+
         pcm_files = glob.glob("*/*_rdict.pcm")
         for f in pcm_files:
             install(f, prefix.lib)
