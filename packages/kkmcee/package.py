@@ -137,7 +137,7 @@ class Kkmcee(AutotoolsPackage):
         else:
             install("ProdRun/workKKMCee/KKMCee-Tauola.input", prefix.share.KKMCee)
 
-            install("ProdRun/workKKMCee/KKMCee", prefix.share.KKMCee)
+            install("ProdRun/workKKMCee/KKMCee", prefix.bin)
 
         chmod("a+x", prefix + "/bin/KKMCee")
 
