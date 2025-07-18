@@ -24,7 +24,7 @@ class Kkmcee(AutotoolsPackage):
     version(
         "5.01.00",
         sha256="7ef81f37c81efbe736651fcc2eed659da04a43e864d4d6047290ca9c65b3cad5",
-        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/KKMCee-5.01.00.tar.gz"
+        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/KKMCee-5.01.00.tar.gz",
     )
     version(
         "5.00.02",
@@ -131,7 +131,9 @@ class Kkmcee(AutotoolsPackage):
             install("ProdRun/kkmchepmc/kkmc-tauola.input", prefix.share.KKMCee)
 
             mv(prefix + "/bin/KKMCee", prefix + "/bin/KKMCee.exe")
-            install(join_path(os.path.dirname(__file__), "KKMCee"), prefix + "/bin/KKMCee")
+            install(
+                join_path(os.path.dirname(__file__), "KKMCee"), prefix + "/bin/KKMCee"
+            )
         else:
             install("ProdRun/workKKMCee/KKMCee-Tauola.input", prefix.share.KKMCee)
 
