@@ -23,7 +23,7 @@ class Kkmcee(AutotoolsPackage):
     version("main", branch="FCC_release")
     version(
         "5.01.00",
-        sha256="11d80b73d7ffc4d08769c5ce55a39a96f6ac0c5a6652d87159d3398d162bd5f1",
+        sha256="f51092d23dfa917fe9a824f9d9e166fd8b02337afa922768f8c089ff4b586678",
         url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/KKMCee-5.01.00.tar.gz",
     )
     version(
