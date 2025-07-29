@@ -14,6 +14,8 @@ packages:
   boost:
     require: +python
     buildable: true
+  cppcheck:
+    require: "@2.18.0:"
   curl:
     require: +gssapi
   graphviz:
