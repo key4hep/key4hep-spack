@@ -9,7 +9,6 @@ from spack.user_environment import *
 import os
 
 import spack.cmd
-import llnl.util.tty as tty
 import spack.platforms
 import spack.spec
 import spack.util.environment
@@ -18,6 +17,11 @@ import spack.user_environment as uenv
 
 from spack.store import STORE
 from spack.package_base import PackageBase
+
+try:
+    import spack.llnl.util.tty as tty
+except:
+    import llnl.util.tty as tty
 
 from shlex import quote as cmd_quote
 
