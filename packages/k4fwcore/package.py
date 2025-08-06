@@ -37,6 +37,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version("1.0pre17", tag="v01-00pre17")
     version("1.0pre16", tag="v01-00pre16")
 
+    depends_on("c", type="build", when="@:1.2")
     depends_on("cxx", type="build")
 
     depends_on("gaudi")
