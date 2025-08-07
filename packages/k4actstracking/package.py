@@ -14,6 +14,9 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
+
     depends_on("acts+dd4hep+tgeo+json")
     depends_on("gaudi")
     depends_on("root")
