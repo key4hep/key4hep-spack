@@ -129,7 +129,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   build-externals:
-    needs: update_cache_amd64, update_cache_arm64
+    needs: ["update_cache_amd64", "update_cache_arm64"]
     runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
