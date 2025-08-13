@@ -41,6 +41,8 @@ jobs:
       - build-linux-amd64
       - build-linux-arm64
     runs-on: ubuntu-latest
+    outputs:
+      image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ steps.build.outputs.digest }}
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -53,6 +55,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
+          flavor: latest=true
       - name: Create manifest
         id: build
         uses: int128/docker-manifest-create-action@v2

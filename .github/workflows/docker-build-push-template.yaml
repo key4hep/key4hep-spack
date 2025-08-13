@@ -57,6 +57,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
+          flavor: latest=false,suffix=-${{ inputs.platform }}
       - name: Determine spack ref
         id: getref
         run: |
@@ -77,5 +78,5 @@ jobs:
             OCI_USERNAME=${{ github.actor }}
           secrets: |
             "ocipass=${{ secrets.GITHUB_TOKEN }}"
-          tags: ${{ steps.meta.outputs.tags }}-${{ inputs.platform }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
