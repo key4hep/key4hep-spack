@@ -25,7 +25,7 @@ jobs:
     with:
       os: ${{ inputs.os }}
       runner: ubuntu-latest
-      platform: linux/amd64
+      platform: amd64
       registry: ${{ inputs.registry }}
 
   build-linux-arm64:
@@ -33,7 +33,7 @@ jobs:
     with:
       os: ${{ inputs.os }}
       runner: ubuntu-24.04-arm
-      platform: linux/arm64
+      platform: arm64
       registry: ${{ inputs.registry }}
 
   publish-multiarch:
