@@ -24,8 +24,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        arch: ["ubuntu-24.04", "ubuntu-24.04-arm"]
-    runs-on: ${{ matrix.arch }}
+        arch: ["linux/amd64", "linux/arm64"]
+    runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -65,6 +65,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: false
+          platforms: ${{ matrix.arch }}
           context: ./Docker/${{inputs.os}}
           file: ./Docker/${{inputs.os}}/Dockerfile-externals
           build-args: |
