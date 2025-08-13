@@ -9,9 +9,9 @@ on:
       os:
         required: true
         type: string
-
-env:
-  REGISTRY: ghcr.io
+      registry:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -26,7 +26,7 @@ jobs:
       os: ${{ inputs.os }}
       runner: ubuntu-latest
       platform: linux/amd64
-      registry: ${{ env.REGISTRY }}
+      registry: ${{ inputs.registry }}
 
   build-linux-arm64:
     uses: ./.github/workflows/docker-build-push-template.yaml
@@ -34,7 +34,7 @@ jobs:
       os: ${{ inputs.os }}
       runner: ubuntu-24.04-arm
       platform: linux/arm64
-      registry: ${{ env.REGISTRY }}
+      registry: ${{ inputs.registry }}
 
   publish-multiarch:
     needs:
@@ -45,14 +45,14 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ inputs.registry }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker Meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
+          images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
       - name: Create manifest
         id: build
         uses: int128/docker-manifest-create-action@v2
@@ -60,5 +60,5 @@ jobs:
           index-annotations: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
           sources: |
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.outputs.digest }}
-            ${{ env.REGISTRY }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.outputs.digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.outputs.digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.outputs.digest }}
