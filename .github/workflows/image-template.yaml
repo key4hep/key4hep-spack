@@ -20,7 +20,7 @@ permissions:
   attestations: write
 
 jobs:
-  fill_caches:
+  update_caches:
     strategy:
       fail-fast: true
       matrix:
