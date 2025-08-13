@@ -64,9 +64,9 @@ jobs:
         id: pick_arch
         run: |
           if [ ${{ matrix.arch }} != 'ubuntu-latest' ]; then
-            echo "platform='linux/arm64'" >> ${GITHUB_OUTPUT}
+            echo "platform=\'linux/arm64\'" >> ${GITHUB_OUTPUT}
           else
-            echo "platform='linux/amd64'" >> ${GITHUB_OUTPUT}
+            echo "platform=\'linux/amd64\'" >> ${GITHUB_OUTPUT}
           fi
       - name: Build and Push
         id: docker_build
