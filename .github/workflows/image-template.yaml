@@ -56,6 +56,11 @@ jobs:
         with:
           images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
           flavor: latest=true
+      - name: print some stuff
+        id: printstuff
+        run: |
+          echo ${{ needs.build-linux-amd64.docker_build.outputs.digest }};
+          echo ${{ needs.build-linux-arm64.outputs.digest }};
       - name: Create manifest
         id: build
         uses: int128/docker-manifest-create-action@v2
@@ -63,5 +68,5 @@ jobs:
           index-annotations: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
           sources: |
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.outputs.digest }}
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.outputs.digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.docker_build.outputs.digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.docker_build.outputs.digest }}
