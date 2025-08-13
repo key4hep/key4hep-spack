@@ -24,8 +24,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        arch: ["linux/amd64", "linux/arm64"]
-    runs-on: ubuntu-latest
+        arch: ["ubuntu-24.04", "ubuntu-24.04-arm"]
+    runs-on: ${{ matrix.arch }}
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -60,12 +60,20 @@ jobs:
         id: getref
         run: |
           echo "spack_ref=$(cat .latest-commit)" >>${GITHUB_OUTPUT}
+      - name: Pick architecture
+        id: pick_arch
+        run: |
+          if [ ${{ matrix.arch }} != 'ubuntu-24.04' ]; then
+            echo "platform=linux/arm64" >> ${GITHUB_OUTPUT}
+          else
+            echo "platform=linux/amd64" >> ${GITHUB_OUTPUT}
+          fi
       - name: Build and Push
         id: docker_build
         uses: docker/build-push-action@v6
         with:
           push: false
-          platforms: ${{ matrix.arch }}
+          platforms: ${{ steps.pick_arch.outputs.platform }}
           context: ./Docker/${{inputs.os}}
           file: ./Docker/${{inputs.os}}/Dockerfile-externals
           build-args: |
