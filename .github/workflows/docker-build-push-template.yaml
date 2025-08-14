@@ -28,7 +28,7 @@ jobs:
   build-and-push:
     runs-on: ${{ inputs.runner }}
     outputs:
-      image-digest: ${{ steps.docker_build.outputs.digest }}
+      image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}:${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}-${{ inputs.platform }}@${{ steps.build.outputs.digest }}
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -65,7 +65,7 @@ jobs:
         run: |
           echo "spack_ref=$(cat .latest-commit)" >>${GITHUB_OUTPUT}
       - name: Build and Push
-        id: docker_build
+        id: build
         uses: docker/build-push-action@v6
         with:
           push: true
