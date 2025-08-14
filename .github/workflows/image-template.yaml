@@ -27,8 +27,6 @@ jobs:
       runner: ubuntu-latest
       platform: amd64
       registry: ${{ inputs.registry }}
-    outputs:
-      image-digest: ${{ build-and-push.docker_build.outputs.digest }}
 
   build-linux-arm64:
     uses: ./.github/workflows/docker-build-push-template.yaml
@@ -37,8 +35,6 @@ jobs:
       runner: ubuntu-24.04-arm
       platform: arm64
       registry: ${{ inputs.registry }}
-    outputs:
-      image-digest: ${{ build-and-push.docker_build.outputs.digest }}
 
   publish-multiarch:
     needs:
@@ -65,5 +61,5 @@ jobs:
           index-annotations: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
           sources: |
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.outputs.image-digest }}
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.outputs.image-digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.build-and-push.outputs.image-digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.build-and-push.outputs.image-digest }}
