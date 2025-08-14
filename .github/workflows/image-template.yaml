@@ -61,5 +61,5 @@ jobs:
           index-annotations: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
           sources: |
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.build-and-push.outputs.image-digest }}
-            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.build-and-push.outputs.image-digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-amd64.jobs.build-and-push.outputs.image-digest }}
+            ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ needs.build-linux-arm64.jobs.build-and-push.outputs.image-digest }}
