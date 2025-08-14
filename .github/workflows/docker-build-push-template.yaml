@@ -28,7 +28,7 @@ jobs:
   build-and-push:
     runs-on: ${{ inputs.runner }}
     outputs:
-      image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}@${{ steps.docker_build.outputs.digest }}
+      image-digest: ${{ steps.docker_build.outputs.digest }}
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
