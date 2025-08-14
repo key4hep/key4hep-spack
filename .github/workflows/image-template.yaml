@@ -27,6 +27,8 @@ jobs:
       runner: ubuntu-latest
       platform: amd64
       registry: ${{ inputs.registry }}
+    outputs:
+      image-digest: ${{ build-and-push.docker_build.outputs.digest }}
 
   build-linux-arm64:
     uses: ./.github/workflows/docker-build-push-template.yaml
@@ -35,6 +37,8 @@ jobs:
       runner: ubuntu-24.04-arm
       platform: arm64
       registry: ${{ inputs.registry }}
+    outputs:
+      image-digest: ${{ build-and-push.docker_build.outputs.digest }}
 
   publish-multiarch:
     needs:
