@@ -17,6 +17,10 @@ on:
       registry:
         required: true
         type: string
+    outputs:
+      image-uri:
+        description: "The URI of the built image with digest"
+        value: ${{ jobs.build-and-push.outputs.image-uri }}
 
 permissions:
   contents: read
