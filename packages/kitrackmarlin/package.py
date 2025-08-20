@@ -18,6 +18,10 @@ class Kitrackmarlin(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.14",
+        sha256="ea1e4601b2897e723ff69228d528db685ac950f6a870461a4b84db0981a67206",
+    )
+    version(
         "1.13.2",
         sha256="264c3d1b289091dc76edc2441486c8eb0b6221171f77d51df5a6bbf3b4dd270a",
     )
