@@ -13,6 +13,10 @@ spack:
     fmt:
       require: "@:10"
 
+  concretizer:
+    targets:
+      host_compatible: true
+
   view: false
   include:
   - ../key4hep-common/packages.yaml
