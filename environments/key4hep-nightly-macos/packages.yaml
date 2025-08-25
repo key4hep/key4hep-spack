@@ -131,6 +131,6 @@ packages:
     variants: build_type=RelWithDebInfo
   # Same as the one in key4hep-common but with a newer version
   root:
-    require: +davix+fftw+gsl+math+minuit+mlp+opengl~postgres~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20 @6.30.02
+    require: +davix+fftw+gsl+math+minuit+mlp+opengl~pythia6+pythia8+python+r+root7+roofit+rpath~shadow+sqlite+ssl+tbb+threads+tmva+unuran+vc+vdt+x+xml+xrootd cxxstd=20 @6.30.02
   sio:
     variants: build_type=RelWithDebInfo cxxstd=20
