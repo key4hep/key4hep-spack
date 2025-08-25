@@ -33,4 +33,4 @@ class FccConfig(CMakePackage):
         return args
 
     def setup_run_environment(self, env):
-        env.set("FCCCONFIG", self.prefix)
+        env.set("FCCCONFIG", join_path(self.prefix, "share", "FCC-config"))
