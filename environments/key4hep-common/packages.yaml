@@ -1,6 +1,6 @@
 packages:
   all:
-    target: [x86_64]
+    target: []
     variants: build_type=Release cxxstd=20
     buildable: true
     compiler: []
