@@ -12,6 +12,7 @@ ARG GITHUB_REPOSITORY=key4hep/key4hep-spack
 
 # Setting up Spack
 RUN git clone https://github.com/spack/spack.git /opt/spack && \
+    echo "export SPACK_ROOT=/opt/spack" >> /opt/setup_spack.sh && \
     echo ". /opt/spack/share/spack/setup-env.sh" >> /opt/setup_spack.sh && \
     echo "alias setup_spack=\". /opt/setup_spack.sh\"" >> /etc/profile.d/aliases.sh
 

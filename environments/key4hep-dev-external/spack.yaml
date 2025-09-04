@@ -4,7 +4,7 @@ spack:
       variants:
         - build_type=RelWithDebInfo
         - 'cxxstd=20'
-      target: []
+      target: [x86_64, aarch64]
       compiler: []
 
     boost:
@@ -12,6 +12,10 @@ spack:
     # Keep the possibility to build Gaudi 38
     fmt:
       require: "@:10"
+
+  concretizer:
+    targets:
+      host_compatible: true
 
   view: false
   include:

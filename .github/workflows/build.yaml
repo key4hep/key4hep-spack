@@ -18,3 +18,4 @@ jobs:
         os: [alma9, ubuntu24]
     with:
       os: ${{ matrix.os }}
+      registry: ghcr.io
