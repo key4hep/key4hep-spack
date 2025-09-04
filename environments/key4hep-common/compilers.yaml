@@ -47,7 +47,7 @@ compilers:
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: ubuntu22.04
-    target: [x86_64]
+    target: x86_64
     modules: []
     environment: {}
     extra_rpaths: []
