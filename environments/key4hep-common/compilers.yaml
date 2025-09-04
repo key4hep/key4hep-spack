@@ -8,7 +8,7 @@ compilers:
       fc: /cvmfs/sw.hsf.org/contrib/x86_64-almalinux9-gcc11.4.1-opt/gcc/14.2.0-yuyjov/bin/gfortran
     flags: {}
     operating_system: almalinux9
-    target: [x86_64]
+    target: x86_64
     modules: []
     environment: {}
     extra_rpaths: []
@@ -21,7 +21,7 @@ compilers:
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: almalinux9
-    target: [x86_64]
+    target: x86_64
     modules: []
     environment: {}
     extra_rpaths: []
@@ -34,7 +34,7 @@ compilers:
       fc: /usr/bin/gfortran
     flags: {}
     operating_system: ubuntu24.04
-    target: [x86_64]
+    target: x86_64
     modules: []
     environment: {}
     extra_rpaths: []
@@ -60,7 +60,7 @@ compilers:
       fc: /usr/local/bin/gfortran
     flags: {}
     operating_system: sonoma
-    target: [aarch64]
+    target: aarch64
     modules: []
     environment: {}
     extra_rpaths:
