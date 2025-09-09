@@ -9,9 +9,9 @@ from spack.package import *
 
 
 class Cluestering(CMakePackage):
-    """High-performance density-based clustering library developed at CERN""" 
+    """High-performance density-based clustering library developed at CERN"""
 
-    url = "https://github.com/cms-patatrack/CLUEstering/archive/refs/tags/2.7.0.tar.gz"
+    url = "https://github.com/cms-patatrack/CLUEstering/archive/2.7.0.tar.gz"
     git = "https://github.com/cms-patatrack/CLUEstering.git"
     homepage = "https://github.com/cms-patatrack/CLUEstering"
 
