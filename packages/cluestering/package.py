@@ -26,6 +26,8 @@ class Cluestering(CMakePackage):
         sha256="bb2c7b8e3301f87261b1da874dce62bdd9630b6ff020846f6b8b3e774a2697b9",
     )
 
+    depends_on("cxx", type="build")
+
     depends_on("boost")
     depends_on("alpaka")
 
