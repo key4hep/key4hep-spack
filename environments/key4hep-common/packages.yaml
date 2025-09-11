@@ -20,6 +20,8 @@ packages:
     require: +gssapi
   graphviz:
     require: +expat+pangocairo
+  gsl:
+    require: +external-cblas
   ddmarlinpandora:
     require: +monitoring
   dd4hep:
