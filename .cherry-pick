@@ -17,7 +17,7 @@ git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 git cherry-pick d30d75acefeba6c18ab2263ec879ddb68d70dd48 -X theirs --no-commit
 
-# py_onnx: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
+# py_torch: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
 git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
