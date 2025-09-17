@@ -19,6 +19,10 @@ class Lccontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "3.2.0",
+        sha256="37a5b7dbc6d9f7cc9d010294a3f75dd30e9dad591ae4e88784e410868deabae6",
+    )
+    version(
         "3.1.6",
         sha256="d332c37f5bbc182ac4f90435c2b708152d32c233a1dbc2d71b99b8a5212a1bfa",
     )
