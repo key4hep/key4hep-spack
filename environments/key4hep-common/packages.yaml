@@ -115,7 +115,7 @@ packages:
 
   # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd cxxstd=20'
+    require: '@6.36: +davix+fftw+gsl+math+minuit+mlp+opengl~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
