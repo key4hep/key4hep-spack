@@ -17,15 +17,12 @@ git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 git cherry-pick d30d75acefeba6c18ab2263ec879ddb68d70dd48 -X theirs --no-commit
 
-# py_torch: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
-git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
-
-# py_gosam: try a fix for the build, which is probably not correct
-git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
-
 # gaudi: add db patch, not needed after v40r1
 git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
 
 # Build sherpa from a branch
 git cherry-pick 35aaea769fa78c6060f9d9bd3c5c1ec479a0cd79 -X theirs --no-commit
+
+# py_gosam: try a fix for the build, which is probably not correct
+# git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
