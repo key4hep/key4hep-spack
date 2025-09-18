@@ -1,27 +1,17 @@
-git remote add jmcarcell https://github.com/jmcarcell/spack || true
+git remote add jmcarcell https://github.com/jmcarcell/spack-packages || true
 git fetch jmcarcell -q
 
-# Because the patch above and py-onnx being a python package, it will try to find
-# protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
-git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
-
-# add vdt for CPATH, needed for podio+rntuple
-git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
-
-# acts: add patch to find python before DD4hep
-git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
-
 # root: set runtime_cxxmodules to True, remove when https://github.com/spack/spack-packages/pull/109 is merged
-git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/109.diff | patch -p1
 
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
-git cherry-pick d30d75acefeba6c18ab2263ec879ddb68d70dd48 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
 
 # gaudi: add db patch, not needed after v40r1
-git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
+git cherry-pick c6c6d822a5fd0b30297507547f56370330ae3e71 -X theirs --no-commit
 
 # Build sherpa from a branch
-git cherry-pick 35aaea769fa78c6060f9d9bd3c5c1ec479a0cd79 -X theirs --no-commit
+git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
 # git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
