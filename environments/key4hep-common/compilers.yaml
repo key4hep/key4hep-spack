@@ -11,3 +11,4 @@ packages:
         flags: {}
         environment: {}
         extra_rpaths: []
+        platform_os: almalinux9
