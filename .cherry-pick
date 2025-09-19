@@ -13,6 +13,9 @@ git cherry-pick c6c6d822a5fd0b30297507547f56370330ae3e71 -X theirs --no-commit
 # Build sherpa from a branch
 git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 
+# root: allow +ipo
+git cherry-pick 229e2730faef2def3a2488f46cd6f912b6f8894d -X theirs --no-commit
+
 # py_gosam: try a fix for the build, which is probably not correct
 # git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
