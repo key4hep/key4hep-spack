@@ -4,7 +4,7 @@ git fetch jmcarcell -q
 # root: allow +ipo
 git cherry-pick 229e2730faef2def3a2488f46cd6f912b6f8894d -X theirs --no-commit
 
-# root: add v6.36.06, remove when https://github.com/spack/spack-packages/pull/1558 is merged
+# root: add v6.36.06, remove!
 git cherry-pick 5b5709eacb920942dbd6aee24607d531ed05176e -X theirs --no-commit
 
 # root: set runtime_cxxmodules to True, remove when https://github.com/spack/spack-packages/pull/109 is merged
@@ -21,4 +21,10 @@ git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
 # git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
+
+# py_cramjam: add c as a dependency, remove when https://github.com/spack/spack-packages/pull/1606 is merged
+git cherry-pick 1d52ef13480b8ac31d316dba3e29c636b03bf4bb -X theirs --no-commit
+
+# py_ruff: add gmake as a dependency, remove when https://github.com/spack/spack-packages/pull/1608 is merged
+git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
 
