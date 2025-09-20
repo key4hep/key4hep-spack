@@ -84,9 +84,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("lhapdf", when="+generators")
     depends_on("madgraph5amc", when="+generators")
     depends_on("photos+hepmc3", when="+generators")
-    # Sherpa3
     depends_on("sherpa", when="+generators")
-    depends_on("sherpa2", when="+generators")
 
     depends_on("py-pybdsim", when="+generators")
     depends_on("py-pymadx", when="+generators")
