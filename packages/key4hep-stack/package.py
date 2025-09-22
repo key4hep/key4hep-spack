@@ -160,6 +160,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # Otherwise whizard generated libraries will not be able to find libomega.so
         env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
 
+        # See https://github.com/root-project/root/issues/18949
+        env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
+
         # Don't use libtools from the system
         if "libtool" in self.spec:
             env.prepend_path("PATH", self.spec["libtool"].prefix.bin)
