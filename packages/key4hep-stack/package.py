@@ -157,12 +157,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set("LC_ALL", "C")
         env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, "setup.sh"))
 
-        # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
-        if "vdt" in self.spec:
-            env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
-            # When building podio with +rntuple there are warnings constantly without this
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
-
         # Otherwise whizard generated libraries will not be able to find libomega.so
         env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
 
