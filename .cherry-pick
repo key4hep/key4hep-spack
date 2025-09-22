@@ -25,6 +25,6 @@ git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 # py_cramjam: add c as a dependency, remove when https://github.com/spack/spack-packages/pull/1606 is merged
 git cherry-pick 1d52ef13480b8ac31d316dba3e29c636b03bf4bb -X theirs --no-commit
 
-# py_ruff: add gmake as a dependency, remove when https://github.com/spack/spack-packages/pull/1608 is merged
+# py_ruff: add gmake as a dependency, remove!
 git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
 
