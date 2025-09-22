@@ -28,3 +28,6 @@ git cherry-pick 1d52ef13480b8ac31d316dba3e29c636b03bf4bb -X theirs --no-commit
 # py_ruff: add gmake as a dependency, remove!
 git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
 
+# dd4hep: set CMAKE_INSTALL_LIBDIR to lib
+git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
+
