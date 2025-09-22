@@ -166,13 +166,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # Otherwise whizard generated libraries will not be able to find libomega.so
         env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
 
-        # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
-        # <root>/lib, instead of <root>/lib/root which is the path that is set
-        # in the recipe
-        # ROOT needs to be in LD_LIBRARY_PATH to prevent using system installations
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
-        env.prepend_path("PYTHONPATH", self.spec["root"].prefix.lib)
-
         # Don't use libtools from the system
         if "libtool" in self.spec:
             env.prepend_path("PATH", self.spec["libtool"].prefix.bin)
