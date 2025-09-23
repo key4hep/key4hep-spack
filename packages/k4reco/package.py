@@ -50,6 +50,7 @@ class K4reco(CMakePackage, Key4hepPackage):
             ),
             self.define_from_variant("BUILD_TRACKING", "conformal_tracking"),
             self.define("BUILD_TESTING", self.run_tests),
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
         return args
 

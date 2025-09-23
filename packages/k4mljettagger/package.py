@@ -34,6 +34,7 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
         args = [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             self.define("BUILD_TESTING", self.run_tests),
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
 
         return args
