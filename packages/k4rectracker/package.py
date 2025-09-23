@@ -44,7 +44,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
         args = [
             self.define("CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value),
             self.define("BUILD_TESTING", self.run_tests), # not used in the package
-            self.define_from_variant("CMAKE_INSTALL_LIBDIR", "lib"),
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
         return args
 
