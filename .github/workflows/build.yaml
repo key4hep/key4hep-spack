@@ -1,6 +1,6 @@
 name: Build Stack and Publish Image
 description: |
-  Publish key4hep-dev-external stack docker image.
+  Publish key4hep-dev-external stack and key4hep-sim-reco docker images.
   This workflow relies on a spack cache.
 
 on: push
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-image:
+  build-externals-image:
     uses: ./.github/workflows/image-template.yaml
     strategy:
       fail-fast: false
@@ -20,3 +20,13 @@ jobs:
       os: ${{ matrix.os }}
       registry: ghcr.io
       stack: externals
+
+  build-sim-reco-image:
+    uses: ./.github/workflows/image-template.yaml
+    strategy:
+      fail-fast: false
+    needs: build-externals-image
+    with:
+      os: ubuntu24
+      registry: ghcr.io
+      stack: sim-reco
