@@ -12,4 +12,4 @@ spack:
   repos:
   - ../..
   specs:
-  - key4hep-stack+devtools
+  - key4hep-stack+devtools+ml+analysis+generators
