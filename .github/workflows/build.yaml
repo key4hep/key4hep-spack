@@ -19,3 +19,4 @@ jobs:
     with:
       os: ${{ matrix.os }}
       registry: ghcr.io
+      stack: externals
