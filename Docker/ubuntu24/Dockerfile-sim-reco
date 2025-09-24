@@ -4,7 +4,9 @@ FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:main
 RUN echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
     echo "cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-sim-reco" >> ${HOME}/setup_env.sh && \
     echo "spack env activate ." >> ${HOME}/setup_env.sh && \
-    echo "spack env status" >> ${HOME}/setup_env.sh
+    echo "spack env status" >> ${HOME}/setup_env.sh && \
+    cat ${HOME}/setup_env.sh && \
+    echo SPACK_ROOT=${SPACK_ROOT}
 
 # Concretize the stack
 RUN . ${HOME}/setup_env.sh && \
