@@ -87,6 +87,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # Sherpa3
     depends_on("sherpa", when="+generators")
     depends_on("sherpa2", when="+generators")
+    # babayaga doesn't build on macOS
+    depends_on("babayaga", when="+generators platform=linux")
+    depends_on("bhlumi", when="+generators")
+    depends_on("whizard", when="+generators")
+    depends_on("kkmcee", when="+generators")
+    depends_on("guinea-pig", when="+generators")
 
     depends_on("py-pybdsim", when="+generators")
     depends_on("py-pymadx", when="+generators")
@@ -134,18 +140,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # Other
     depends_on("acts")
     depends_on("aprilcontent")
-    # babayaga doesn't build on macOS
-    depends_on("babayaga", when="platform=linux")
     depends_on("bdsim")
-    depends_on("bhlumi")
     depends_on("cluestering")
     depends_on("delphes")
     depends_on("geant4")
-    depends_on("guinea-pig")
     # depends_on('k4actstracking')
-    depends_on("kkmcee")
     depends_on("python")
-    depends_on("whizard")
     depends_on("xrootd")
     # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
     depends_on("garfieldpp")
@@ -165,8 +165,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             # When building podio with +rntuple there are warnings constantly without this
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
-        # Otherwise whizard generated libraries will not be able to find libomega.so
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
+        if "whizard" in self.spec:
+            # Otherwise whizard generated libraries will not be able to find libomega.so
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
+            )
 
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
