@@ -3,7 +3,6 @@ packages:
     target: [x86_64, aarch64]
     variants: build_type=Release cxxstd=20
     buildable: true
-    compiler: []
 
   acts:
     require: +dd4hep cxxstd=20 +json
