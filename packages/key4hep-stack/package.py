@@ -88,6 +88,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # ILCSoft packages
     for variant in ("ml", "generators"):
         depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
+        depends_on(f"ilcsoft ~{variant}", when=f"~{variant}")
 
     # Generators
     depends_on("k4generatorsconfig", when="+generators")
