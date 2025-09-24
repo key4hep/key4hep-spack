@@ -34,6 +34,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         default=True,
         description="add some standalone generators to the stack",
     )
+    variant(
+        "ml",
+        default=True,
+        description="add packages that are necessary for ml inference",
+    )
 
     # Fake variant that does nothing but this lets us group the packages
     # that are build with Debug mode
@@ -74,8 +79,10 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccanalyses")
     depends_on("fccdetectors")
     depends_on("k4reccalorimeter")
+
     # ILCSoft packages
-    depends_on("ilcsoft")
+    for variant in ("ml", "generators"):
+        depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
 
     # Generators
     depends_on("k4generatorsconfig", when="+generators")
@@ -124,20 +131,22 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-jupytext@1.16:", when="+devtools")
     depends_on("py-matplotlib", when="+devtools")
     depends_on("py-nbconvert", when="+devtools")
-    depends_on("py-onnxruntime", when="+devtools")
-    depends_on("py-onnx", when="+devtools")
     depends_on("py-pandas", when="+devtools")
     depends_on("py-particle", when="+devtools")
     depends_on("py-pip", when="+devtools")
     depends_on("py-pre-commit", when="+devtools")
     depends_on("py-ruff", when="+devtools")
-    depends_on("py-scikit-learn", when="+devtools")
     depends_on("py-scipy", when="+devtools")
-    depends_on("py-torch", when="+devtools")
     depends_on("py-uproot", when="+devtools")
     depends_on("py-vector", when="+devtools")
-    depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
+
+    # ML inference related stuff
+    depends_on("py-onnxruntime", when="+ml")
+    depends_on("py-onnx", when="+ml")
+    depends_on("py-torch", when="+ml")
+    depends_on("py-scikit-learn", when="+ml")
+    depends_on("py-xgboost", when="+ml")
 
     # Other
     depends_on("acts")

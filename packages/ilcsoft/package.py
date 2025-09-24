@@ -30,11 +30,22 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     # exist for a bundle package)
     phases = ["install"]
 
-    depends_on("guinea-pig")
+    variant(
+        "generators",
+        default=True,
+        description="add some standalone generators to the stack",
+    )
+    variant(
+        "ml",
+        default=True,
+        description="add packages that are necessary for ml inference",
+    )
+
+    depends_on("guinea-pig", when="+generators")
     # todo: figure out the api for the cern gitlab instance
     # depends_on('guinea-pig@master', when="@master")
 
-    depends_on("whizard")
+    depends_on("whizard", when="+generators")
     # todo: figure out the api for the whizard gitlab instance
     # depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
@@ -49,7 +60,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("clicperformance")
     depends_on("clupatra")
     depends_on("conformaltracking")
-    depends_on("ddml")
+    depends_on("ddml", when="+ml")
     depends_on("ddkaltest")
     depends_on("ddmarlinpandora")
     depends_on("fcalclusterer")
@@ -73,7 +84,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("marlinfastjet")
     depends_on("marlinkinfit")
     depends_on("marlinkinfitprocessors")
-    depends_on("marlinmlflavortagging")
+    depends_on("marlinmlflavortagging", when="+ml")
     depends_on("marlinreco")
     depends_on("marlintrk")
     depends_on("marlintrkprocessors")
