@@ -1,0 +1,14 @@
+spack:
+  include:
+    - ../key4hep-common-opt/packages.yaml
+    - ../key4hep-common/packages.yaml
+
+  view: false
+
+  concretizer:
+    unify: true
+    targets:
+      host_compatible: true
+
+  specs:
+    - key4hep-stack +analysis~generators~ml~devtools
