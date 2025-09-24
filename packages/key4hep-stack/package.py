@@ -39,6 +39,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         default=True,
         description="add packages that are necessary for ml inference",
     )
+    variant(
+        "analysis",
+        default=True,
+        description="Add packages that are useful for analysis",
+    )
 
     # Fake variant that does nothing but this lets us group the packages
     # that are build with Debug mode
@@ -121,27 +126,29 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("man-db", when="+devtools")
     depends_on("mold", when="+devtools")
     depends_on("prmon", when="+devtools")
-    depends_on("py-awkward", when="+devtools")
     depends_on("py-black", when="+devtools")
     depends_on("py-flake8", when="+devtools")
     depends_on("py-pylint", when="+devtools")
     depends_on("py-boto3", when="+devtools")
     depends_on("py-gcovr", when="+devtools")
-    depends_on("py-pyhepmc", when="+devtools")
-    depends_on("py-h5py", when="+devtools")
-    depends_on("py-ipykernel", when="+devtools")
-    depends_on("py-ipython", when="+devtools")
-    depends_on("py-jupytext@1.16:", when="+devtools")
-    depends_on("py-matplotlib", when="+devtools")
-    depends_on("py-nbconvert", when="+devtools")
-    depends_on("py-pandas", when="+devtools")
-    depends_on("py-particle", when="+devtools")
     depends_on("py-pre-commit", when="+devtools")
     depends_on("py-ruff", when="+devtools")
-    depends_on("py-scipy", when="+devtools")
-    depends_on("py-uproot", when="+devtools")
-    depends_on("py-vector", when="+devtools")
     depends_on("benchmark", when="+devtools")
+
+    # Generic analysis packages
+    depends_on("py-awkward", when="+analysis")
+    depends_on("py-uproot", when="+analysis")
+    depends_on("py-scipy", when="+analysis")
+    depends_on("py-pandas", when="+analysis")
+    depends_on("py-particle", when="+analysis")
+    depends_on("py-pyhepmc", when="+analysis")
+    depends_on("py-h5py", when="+analysis")
+    depends_on("py-ipykernel", when="+analysis")
+    depends_on("py-ipython", when="+analysis")
+    depends_on("py-jupytext@1.16:", when="+analysis")
+    depends_on("py-matplotlib", when="+analysis")
+    depends_on("py-nbconvert", when="+analysis")
+    depends_on("py-vector", when="+analysis")
 
     # ML inference related stuff
     depends_on("py-onnxruntime", when="+ml")
