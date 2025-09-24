@@ -85,6 +85,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("madgraph5amc", when="+generators")
     depends_on("photos+hepmc3", when="+generators")
     depends_on("sherpa", when="+generators")
+    # babayaga doesn't build on macOS
+    depends_on("babayaga", when="+generators platform=linux")
+    depends_on("bhlumi", when="+generators")
+    depends_on("whizard", when="+generators")
+    depends_on("kkmcee", when="+generators")
+    depends_on("guinea-pig", when="+generators")
 
     depends_on("py-pybdsim", when="+generators")
     depends_on("py-pymadx", when="+generators")
@@ -136,18 +142,12 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # Other
     depends_on("acts")
     depends_on("aprilcontent")
-    # babayaga doesn't build on macOS
-    depends_on("babayaga", when="platform=linux")
     depends_on("bdsim")
-    depends_on("bhlumi")
     depends_on("cluestering")
     depends_on("delphes")
     depends_on("geant4")
-    depends_on("guinea-pig")
     # depends_on('k4actstracking')
-    depends_on("kkmcee")
     depends_on("python")
-    depends_on("whizard")
     depends_on("xrootd")
     # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
     depends_on("garfieldpp")
@@ -161,8 +161,17 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set("LC_ALL", "C")
         env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, "setup.sh"))
 
-        # Otherwise whizard generated libraries will not be able to find libomega.so
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
+        # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
+        if "vdt" in self.spec:
+            env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
+            # When building podio with +rntuple there are warnings constantly without this
+            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
+
+        if "whizard" in self.spec:
+            # Otherwise whizard generated libraries will not be able to find libomega.so
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
+            )
 
         # See https://github.com/root-project/root/issues/18949
         env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
