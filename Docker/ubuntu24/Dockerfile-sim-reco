@@ -1,5 +1,11 @@
 FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
 
+# Make sure we pull in the current version of the branch
+RUN . /opt/setup_spack.sh && \
+    cd ${SPACK_ROOT}/var/key4hep-spack && \
+    git fetch && \
+    git checkout origin/reco-image
+
 # Configure spack environment with:
 # - System compilers
 # - Buildcache
