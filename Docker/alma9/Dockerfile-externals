@@ -32,12 +32,12 @@ ENV SPACK_COLOR="always"
 ARG SPACK_BUILDCACHE
 ARG OCI_USERNAME
 RUN --mount=type=secret,id=ocipass \
-    OCI_PASSWORD=$(cat /run/secrets/ocipass) && \
+    export OCI_PASSWORD=$(cat /run/secrets/ocipass) && \
     source /opt/setup_spack.sh && \
     spack config add 'config:install_tree:padded_length:128' && \
     spack compiler find && \
     if [ -n "${SPACK_BUILDCACHE}" ]; then \
-        spack mirror add --oci-username "${OCI_USERNAME}" --oci-password "${OCI_PASSWORD}" --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
+        spack mirror add --oci-username "${OCI_USERNAME}" --oci-password-variable OCI_PASSWORD --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
     fi
 
 RUN source /opt/setup_spack.sh && \
@@ -76,7 +76,9 @@ RUN source ${HOME}/setup_env.sh && \
 # Installing fragments of dependency tree in separate layers for cached debugging
 ENV SPACK_INSTALL_OPTS="--only-concrete --no-add --fail-fast"
 
-RUN source ${HOME}/setup_env.sh && \
+RUN --mount=type=secret,id=ocipass \
+    export OCI_PASSWORD=$(cat /run/secrets/ocipass) && \
+    . ${HOME}/setup_env.sh && \
     spack spec -NIt && \
     spack install ${SPACK_INSTALL_OPTS} && \
     spack env deactivate && \
