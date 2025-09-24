@@ -26,6 +26,7 @@ class FccConfig(CMakePackage):
     )
 
     depends_on("cxx", type="build")
+    depends_on("c", type="build", when="@:0.2")
 
     def cmake_args(self):
         args = []
