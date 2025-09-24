@@ -1,7 +1,8 @@
 FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:main
 
 # Create the environment setup script
-RUN echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
+RUN . /opt/setup_spack.sh && \
+    echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
     echo "cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-sim-reco" >> ${HOME}/setup_env.sh && \
     echo "spack env activate ." >> ${HOME}/setup_env.sh && \
     echo "spack env status" >> ${HOME}/setup_env.sh && \
