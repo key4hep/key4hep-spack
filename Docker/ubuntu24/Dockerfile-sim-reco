@@ -1,5 +1,11 @@
 FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:main
 
+# Update the key4hep-spack repository
+RUN . /opt/setup_spack.sh && \
+    cd ${SPACK_ROOT}/var/key4hep-spack && \
+    git fetch && \
+    git checkout origin/reco-image
+
 # Create the environment setup script
 RUN . /opt/setup_spack.sh && \
     echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
