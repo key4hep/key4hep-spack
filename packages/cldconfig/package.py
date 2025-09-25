@@ -17,6 +17,10 @@ class Cldconfig(CMakePackage):
 
     version("main", branch="main")
     version(
+        "2025-09-15",
+        sha256="8cf568d45181c58069ceafbd13b3a374f7db8f28db52c609463c9e7054deb8fd",
+    )
+    version(
         "2025-05-26",
         sha256="9be425b074331c8b5ffeefd57af3d3c8242fa7639665cfb9b7a99d6cc09320e8",
     )
@@ -30,6 +34,7 @@ class Cldconfig(CMakePackage):
     )
 
     depends_on("cxx", type="build")
+    depends_on("c", type="build", when="@:2025-05-26")
 
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
