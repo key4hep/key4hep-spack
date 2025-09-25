@@ -34,23 +34,16 @@ class Fccsw(CMakePackage, Key4hepPackage):
 
     depends_on("cxx", type="build")
 
-    depends_on("gaudi")
-    depends_on("k4fwcore")
-    depends_on("k4gen")
-    depends_on("k4simdelphes")
-    depends_on("fccdetectors")
-    depends_on("k4simgeant4")
-    depends_on("k4reccalorimeter")
-    depends_on("k4geo")
-    depends_on("fccanalyses")
-    depends_on("root")
-
-    def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
-        return args
+    depends_on("gaudi", type="test")
+    depends_on("k4fwcore", type="test")
+    depends_on("k4gen", type="test")
+    depends_on("k4simdelphes", type="test")
+    depends_on("fccdetectors", type="test")
+    depends_on("k4simgeant4", type="test")
+    depends_on("k4reccalorimeter", type="test")
+    depends_on("k4geo", type="test")
+    depends_on("fccanalyses", type="test")
+    depends_on("root", type="test")
 
     def setup_dependent_build_environment(self, env, dependent_spec):
         env.set("FCCSW", self.prefix.share.FCCSW)
