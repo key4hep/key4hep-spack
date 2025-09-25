@@ -62,4 +62,3 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-
