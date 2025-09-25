@@ -64,7 +64,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("cldconfig")
     depends_on("dd4hep")
     depends_on("edm4hep")
-    depends_on("k4mljettagger")
+    depends_on("k4mljettagger", when="+ml")
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
