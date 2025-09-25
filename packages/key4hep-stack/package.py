@@ -81,7 +81,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fcc-config")
     depends_on("fccsw")
     depends_on("dual-readout")
-    depends_on("fccanalyses")
+    depends_on("fccanalyses~onnx", when="~ml")
+    depends_on("fccanalyses+onnx", when="+ml")
     depends_on("fccdetectors")
     depends_on("k4reccalorimeter")
 
