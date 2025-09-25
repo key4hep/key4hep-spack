@@ -34,6 +34,16 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         default=True,
         description="add some standalone generators to the stack",
     )
+    variant(
+        "ml",
+        default=True,
+        description="add packages that are necessary for ml inference",
+    )
+    variant(
+        "analysis",
+        default=True,
+        description="Add packages that are useful for analysis",
+    )
 
     # Fake variant that does nothing but this lets us group the packages
     # that are build with Debug mode
@@ -54,7 +64,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("cldconfig")
     depends_on("dd4hep")
     depends_on("edm4hep")
-    depends_on("k4mljettagger")
+    depends_on("k4mljettagger", when="+ml")
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
@@ -71,11 +81,15 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fcc-config")
     depends_on("fccsw")
     depends_on("dual-readout")
-    depends_on("fccanalyses")
+    depends_on("fccanalyses~onnx", when="~ml")
+    depends_on("fccanalyses+onnx", when="+ml")
     depends_on("fccdetectors")
-    depends_on("k4reccalorimeter")
+    depends_on("k4reccalorimeter", when="+ml")
+
     # ILCSoft packages
-    depends_on("ilcsoft")
+    for variant in ("ml", "generators"):
+        depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
+        depends_on(f"ilcsoft ~{variant}", when=f"~{variant}")
 
     # Generators
     depends_on("k4generatorsconfig", when="+generators")
@@ -87,65 +101,71 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # Sherpa3
     depends_on("sherpa", when="+generators")
     depends_on("sherpa2", when="+generators")
+    # babayaga doesn't build on macOS
+    depends_on("babayaga", when="+generators platform=linux")
+    depends_on("bhlumi", when="+generators")
+    depends_on("whizard", when="+generators")
+    depends_on("kkmcee", when="+generators")
+    depends_on("guinea-pig", when="+generators")
 
     depends_on("py-pybdsim", when="+generators")
     depends_on("py-pymadx", when="+generators")
     depends_on("py-pytransport", when="+generators")
 
-    # Devtools
-    depends_on("catch2@3:", when="+devtools")
-    depends_on("cmake", when="+devtools")
+    # Basic build and debug tools
+    depends_on("catch2@3:")
+    depends_on("cmake")
+    depends_on("ninja")
+    depends_on("py-pip")
+    depends_on("gdb")
+
+    # More extensive Devtools
     depends_on("cppcheck", when="+devtools")
     depends_on("doxygen", when="+devtools")
-    depends_on("gdb", when="+devtools")
     depends_on("llvm", when="+devtools")
     # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
     depends_on("mold", when="+devtools")
-    depends_on("ninja", when="+devtools")
     # depends_on('prmon', when='+devtools')
-    depends_on("py-awkward", when="+devtools")
     depends_on("py-black", when="+devtools")
     depends_on("py-flake8", when="+devtools")
     depends_on("py-pylint", when="+devtools")
     depends_on("py-boto3", when="+devtools")
     depends_on("py-gcovr", when="+devtools")
-    depends_on("py-pyhepmc", when="+devtools")
-    depends_on("py-h5py", when="+devtools")
-    depends_on("py-ipykernel", when="+devtools")
-    depends_on("py-ipython", when="+devtools")
-    depends_on("py-jupytext@1.16:", when="+devtools")
-    depends_on("py-matplotlib", when="+devtools")
-    depends_on("py-nbconvert", when="+devtools")
-    depends_on("py-onnxruntime", when="+devtools")
-    depends_on("py-onnx", when="+devtools")
-    depends_on("py-pandas", when="+devtools")
-    depends_on("py-particle", when="+devtools")
-    depends_on("py-pip", when="+devtools")
     depends_on("py-pre-commit", when="+devtools")
     depends_on("py-ruff", when="+devtools")
-    depends_on("py-scikit-learn", when="+devtools")
-    depends_on("py-scipy", when="+devtools")
-    depends_on("py-torch", when="+devtools")
-    depends_on("py-uproot", when="+devtools")
-    depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
+
+    # Generic analysis packages
+    depends_on("py-awkward", when="+analysis")
+    depends_on("py-uproot", when="+analysis")
+    depends_on("py-scipy", when="+analysis")
+    depends_on("py-pandas", when="+analysis")
+    depends_on("py-particle", when="+analysis")
+    depends_on("py-pyhepmc", when="+analysis")
+    depends_on("py-h5py", when="+analysis")
+    depends_on("py-ipykernel", when="+analysis")
+    depends_on("py-ipython", when="+analysis")
+    depends_on("py-jupytext@1.16:", when="+analysis")
+    depends_on("py-matplotlib", when="+analysis")
+    depends_on("py-nbconvert", when="+analysis")
+
+    # ML inference related stuff
+    depends_on("py-onnxruntime", when="+ml")
+    depends_on("py-onnx", when="+ml")
+    depends_on("py-torch", when="+ml")
+    depends_on("py-scikit-learn", when="+ml")
+    depends_on("py-xgboost", when="+ml")
 
     # Other
     depends_on("acts")
     depends_on("aprilcontent")
-    # babayaga doesn't build on macOS
-    depends_on("babayaga", when="platform=linux")
     depends_on("bdsim")
-    depends_on("bhlumi")
     depends_on("cluestering")
     depends_on("delphes")
     depends_on("geant4")
-    depends_on("guinea-pig")
     # depends_on('k4actstracking')
-    depends_on("kkmcee")
     depends_on("python")
-    depends_on("whizard")
     depends_on("xrootd")
     # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit
     depends_on("garfieldpp")
@@ -165,8 +185,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             # When building podio with +rntuple there are warnings constantly without this
             env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
 
-        # Otherwise whizard generated libraries will not be able to find libomega.so
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0])
+        if "whizard" in self.spec:
+            # Otherwise whizard generated libraries will not be able to find libomega.so
+            env.prepend_path(
+                "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
+            )
 
         # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
         # <root>/lib, instead of <root>/lib/root which is the path that is set
