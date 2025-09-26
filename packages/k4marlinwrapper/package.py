@@ -67,6 +67,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
             ),
             self.define("BUILD_TESTING", self.run_tests),
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
         return args
 

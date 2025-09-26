@@ -17,6 +17,10 @@ class FccConfig(CMakePackage):
 
     version("main", branch="main")
     version(
+        "0.3.0",
+        sha256="9fa21dece2f934a774ca31df7da11b8291d5ab4f694b21931fc88024112ec6c2",
+    )
+    version(
         "0.2.0",
         sha256="d0d9261d5471656cf2db6a76c2171ce8caf6913e20975e19fd60ef82bb80fda2",
     )
