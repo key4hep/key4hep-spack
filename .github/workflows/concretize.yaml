@@ -50,7 +50,7 @@ jobs:
             source spack/share/spack/setup-env.sh
             git clone https://github.com/spack/spack-packages
 
-            spack repo set --destination $PWD/spack-packages builtin
+            spack repo set --destination /spack-packages builtin
             spack repo add key4hep-spack
 
             cd /spack-packages
