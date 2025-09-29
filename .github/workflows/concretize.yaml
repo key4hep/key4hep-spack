@@ -45,9 +45,16 @@ jobs:
             cd /
             git clone https://github.com/spack/spack -q
             source spack/share/spack/setup-env.sh
+            git clone https://github.com/spack/spack-packages
+
+            spack repo set --destination $PWD/spack-packages builtin
+            spack repo add key4hep-spack
 
             cd /spack
             git checkout $(cat /key4hep-spack/.latest-commit)
+
+            cd /spack-packages
+            git checkout $(cat $WORKAREA/key4hep-spack/.latest-packages-commit) -q
             source /key4hep-spack/.cherry-pick
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
