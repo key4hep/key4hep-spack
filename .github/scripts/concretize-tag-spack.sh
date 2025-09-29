@@ -12,6 +12,9 @@ cd /spack
 # git checkout $(cat /key4hep-spack/.latest-commit)
 # source /key4hep-spack/.cherry-pick
 
+spack repo set --destination /spack-packages builtin
+spack repo add key4hep-spack
+git clone https://github.com/spack/spack-packages
 cd /key4hep-spack/environments/key4hep-base
 
 echo "========="
