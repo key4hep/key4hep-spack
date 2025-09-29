@@ -126,6 +126,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-scipy", when="+devtools")
     depends_on("py-torch", when="+devtools")
     depends_on("py-uproot", when="+devtools")
+    depends_on("py-vector", when="+devtools")
     depends_on("py-xgboost", when="+devtools")
     depends_on("benchmark", when="+devtools")
 

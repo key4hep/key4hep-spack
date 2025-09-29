@@ -18,7 +18,6 @@ class K4clue(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
 
-
     version(
         "01-00-08",
         sha256="8700ee09b1dbc45438b856f88239baa83ee514585d76b6d3d464ae95b96ff830",
