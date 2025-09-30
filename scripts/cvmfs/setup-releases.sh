@@ -145,6 +145,7 @@ k4_local_repo() {
     fi
     current_repo=$(basename $PWD | tr '[:upper:]' '[:lower:]' | tr -d -)
     export PATH=$(echo $PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
+    export ROOT_LIBRARY_PATH=$(echo $ROOT_LIBRARY_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export PYTHONPATH=$(echo $PYTHONPATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     export CMAKE_PREFIX_PATH=$(echo $CMAKE_PREFIX_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
@@ -152,6 +153,7 @@ k4_local_repo() {
     export ROOT_INCLUDE_PATH=$(echo $ROOT_INCLUDE_PATH | tr ":" "\n" | grep -Ev "/${current_repo}/" | tr "\n" ":")
     _replace_marlin_dll ${current_repo} ${install}
     export PATH=$PWD/$install/bin:$PATH
+    export ROOT_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$ROOT_LIBRARY_PATH
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
     # Get the python site-packages directory
     libpythondir=$(python -c "import site; print('/'.join(site.getsitepackages()[0].split('/')[-3:]))")
