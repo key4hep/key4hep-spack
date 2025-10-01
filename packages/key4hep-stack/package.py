@@ -189,10 +189,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         # This could be deleted (to be tested) once https://github.com/spack/spack/pull/49267 is merged
         if "py-torch" in self.spec:
             env.prepend_path(
-                "CMAKE_PREFIX_PATH",
-                join_path(
-                    self["py-torch"].module.python_platlib, "torch", "share", "cmake"
-                ),
+                "CMAKE_PREFIX_PATH", self.spec["py-torch"].package.cmake_prefix_paths[0]
             )
 
     def install(self, spec, prefix):
