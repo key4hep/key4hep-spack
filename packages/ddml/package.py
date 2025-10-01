@@ -46,8 +46,6 @@ class Ddml(CMakePackage, Key4hepPackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
         ]
         # This fixes issues in Ubuntu24 when it's not linking to libgomp from gcc-runtime
-        if self.spec.satisfies("inference=torch") or self.spec.satisfies(
-            "inference=both"
-        ):
+        if "py-torch" in self.spec:
             args.append(f"-DCMAKE_SHARED_LINKER_FLAGS={self.compiler.openmp_flag}")
         return args
