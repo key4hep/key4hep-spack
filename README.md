@@ -93,7 +93,7 @@ cd spack-packages
 git checkout $(cat ../key4hep-spack/.latest-packages-commit)
 cd ..
 
-spack repo set --destination $PWD/spack-packages builtin
+spack repo set --destination "${PWD%/}/spack-packages" builtin
 spack repo add key4hep-spack
 
 cd spack-packages
