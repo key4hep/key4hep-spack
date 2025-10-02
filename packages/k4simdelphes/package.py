@@ -100,6 +100,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DUSE_EXTERNAL_CATCH2=ON",
             "-DBUILD_TESTING={0}".format(self.run_tests),
+            "-DCMAKE_INSTALL_LIBDIR=lib",
         ]
         return args
 

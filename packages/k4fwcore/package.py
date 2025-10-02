@@ -62,7 +62,3 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
         env.prepend_path("PYTHONPATH", self.prefix.python)
         env.prepend_path("PATH", self.prefix.scripts)
         env.prepend_path("LD_LIBRARY_PATH", self.prefix.lib)
-
-    def setup_build_environment(self, env):
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["gaudi"].prefix.lib64)

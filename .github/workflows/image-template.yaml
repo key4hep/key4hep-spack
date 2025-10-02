@@ -53,7 +53,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
-          flavor: latest=true
+          flavor: latest=${{ github.ref == 'refs/heads/main' }}
       - name: Create manifest
         id: build
         uses: int128/docker-manifest-create-action@v2

@@ -98,10 +98,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("lhapdf", when="+generators")
     depends_on("madgraph5amc", when="+generators")
     depends_on("photos+hepmc3", when="+generators")
-    # Sherpa3
     depends_on("sherpa", when="+generators")
-    depends_on("sherpa2", when="+generators")
-    # babayaga doesn't build on macOS
     depends_on("babayaga", when="+generators platform=linux")
     depends_on("bhlumi", when="+generators")
     depends_on("whizard", when="+generators")
@@ -179,24 +176,14 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         env.set("LC_ALL", "C")
         env.set("KEY4HEP_STACK", os.path.join(self.spec.prefix, "setup.sh"))
 
-        # set vdt, needed for root, see https://github.com/spack/spack/pull/37278
-        if "vdt" in self.spec:
-            env.prepend_path("CPATH", self.spec["vdt"].prefix.include)
-            # When building podio with +rntuple there are warnings constantly without this
-            env.prepend_path("LD_LIBRARY_PATH", self.spec["vdt"].libs.directories[0])
-
         if "whizard" in self.spec:
             # Otherwise whizard generated libraries will not be able to find libomega.so
             env.prepend_path(
                 "LD_LIBRARY_PATH", self.spec["whizard"].libs.directories[0]
             )
 
-        # When changing CMAKE_INSTALL_LIBDIR to lib, everything is installed to
-        # <root>/lib, instead of <root>/lib/root which is the path that is set
-        # in the recipe
-        # ROOT needs to be in LD_LIBRARY_PATH to prevent using system installations
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["root"].prefix.lib)
-        env.prepend_path("PYTHONPATH", self.spec["root"].prefix.lib)
+        # See https://github.com/root-project/root/issues/18949
+        env.prepend_path("ROOT_INCLUDE_PATH", self.spec["vc"].prefix.include)
 
         # Don't use libtools from the system
         if "libtool" in self.spec:
