@@ -29,11 +29,11 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
     depends_on("cxx", type="build")
 
     depends_on("ilcutil")
-    depends_on("marlin")
-    depends_on("marlinutil")
+    depends_on("marlin", when="@:0.6.1")
+    depends_on("lcio@2.21:", when="@0.7:")
     depends_on("clhep")
     depends_on("gsl")
-    depends_on("root")
+    depends_on("root@6.14:")
     depends_on("raida")
 
     def cmake_args(self):
@@ -46,6 +46,5 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
         return args
 
     def setup_run_environment(self, env):
-        env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libMarlinKinfit.so")
         # Make it usable from ROOT
         env.prepend_path("ROOT_LIBRARY_PATH", self.prefix.lib)
