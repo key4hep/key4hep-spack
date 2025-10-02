@@ -34,6 +34,7 @@ class Cldconfig(CMakePackage):
     )
 
     depends_on("cxx", type="build")
+    depends_on("c", type="build", when="@:2025-05-26")
 
     depends_on("k4geo", type="test")
     depends_on("dd4hep", type="test")
