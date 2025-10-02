@@ -46,7 +46,7 @@ RUN . /opt/setup_spack.sh && \
 RUN . /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
     cd /opt/spack && \
-    . ${REPOPATH}/.cherry-pick && \
+    #. ${REPOPATH}/.cherry-pick && \
     cd -
 
 # Add the package repositories
