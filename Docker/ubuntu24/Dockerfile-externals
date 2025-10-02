@@ -61,7 +61,7 @@ RUN . /opt/setup_spack.sh && \
 
 # Add the package repositories
 RUN . /opt/setup_spack.sh && \
-    spack repo add --scope system ${SPACK_ROOT}/var/key4hep-spack
+    spack repo add ${SPACK_ROOT}/var/key4hep-spack
 
 # Create the release environment
 RUN . /opt/setup_spack.sh && \
