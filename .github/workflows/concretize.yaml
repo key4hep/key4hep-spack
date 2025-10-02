@@ -43,7 +43,6 @@ jobs:
 
 
             cd /
-            git clone https://github.com/key4hep/key4hep-spack -q
             git clone https://github.com/spack/spack -q
             cd spack
             git checkout $(cat ../key4hep-spack/.latest-commit)
