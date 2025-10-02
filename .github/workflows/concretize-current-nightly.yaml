@@ -57,19 +57,23 @@ jobs:
             rel=$(dirname $rel)
 
             cd /
+            git clone https://github.com/key4hep/key4hep-spack -q
             git clone https://github.com/spack/spack -q
-            cd /spack
-            git checkout $(cat /key4hep-spack/.latest-commit) -q
-            cd /
+            cd spack
+            git checkout $(cat ../key4hep-spack/.latest-commit)
+            cd ..
             source spack/share/spack/setup-env.sh
-            git clone https://github.com/spack/spack-packages
+            git clone https://github.com/spack/spack-packages -q
+            cd spack-packages
+            git checkout $(cat ../key4hep-spack/.latest-packages-commit)
+            cd ..
 
             spack repo set --destination /spack-packages builtin
             spack repo add key4hep-spack
 
-            cd /spack-packages
-            git checkout $(cat /key4hep-spack/.latest-packages-commit) -q
-            source /key4hep-spack/.cherry-pick
+            cd spack-packages
+            source ../key4hep-spack/.cherry-pick
+            cd ..
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release
