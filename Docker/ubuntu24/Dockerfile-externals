@@ -24,7 +24,7 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
       cd -; \
     fi
 
-#Checkout spack packages and add builtin repo
+# Checkout spack packages and add builtin repo
 RUN . /opt/setup_spack.sh && \
     git clone https://github.com/spack/spack-packages /opt/spack-packages && \
     cd /opt/spack-packages && \
