@@ -35,7 +35,6 @@ class Lccontent(CMakePackage):
     patch("path2.patch", when="@:3.1")
     patch("path3.patch", when="@:3.1")
     patch("path4.patch", when="@:3.1")
-
     patch("bool-int.patch", when="@:3.1.5")
 
     depends_on("c", type="build")
