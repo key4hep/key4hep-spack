@@ -17,6 +17,10 @@ class Cldconfig(CMakePackage):
 
     version("main", branch="main")
     version(
+        "2025-09-15",
+        sha256="8cf568d45181c58069ceafbd13b3a374f7db8f28db52c609463c9e7054deb8fd",
+    )
+    version(
         "2025-05-26",
         sha256="9be425b074331c8b5ffeefd57af3d3c8242fa7639665cfb9b7a99d6cc09320e8",
     )

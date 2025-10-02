@@ -7,7 +7,7 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
 
     homepage = "https://github.com/key4hep/k4MLJetTagger"
     git = "https://github.com/key4hep/k4MLJetTagger.git"
-    url = "https://github.com/key4hep/archive/v0.1.0.tar.gz"
+    url = "https://github.com/key4hep/k4MLJetTagger/archive/v0.1.0.tar.gz"
 
     maintainers("jmcarcell")
 
@@ -34,6 +34,7 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
         args = [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             self.define("BUILD_TESTING", self.run_tests),
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
 
         return args

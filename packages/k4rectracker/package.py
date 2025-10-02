@@ -41,12 +41,13 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk", when="@0.4.0:")
 
     def cmake_args(self):
-        args = []
-        args.append(
+        args = [
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
-            )
-        )
+            ),
+            self.define("BUILD_TESTING", self.run_tests),  # not used in the package
+            self.define("CMAKE_INSTALL_LIBDIR", "lib"),
+        ]
         return args
 
     def setup_run_environment(self, env):

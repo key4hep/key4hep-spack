@@ -1,6 +1,6 @@
 name: Concretize
 description: |
-  This workflow concretizes the spack environment that was used for the last build
+  This workflow concretizes the spack environment that was used for the last nightly or release build
 
 on:
   push:
@@ -44,11 +44,21 @@ jobs:
 
             cd /
             git clone https://github.com/spack/spack -q
+            cd spack
+            git checkout $(cat ../key4hep-spack/.latest-commit)
+            cd ..
             source spack/share/spack/setup-env.sh
+            git clone https://github.com/spack/spack-packages -q
+            cd spack-packages
+            git checkout $(cat ../key4hep-spack/.latest-packages-commit)
+            cd ..
 
-            cd /spack
-            git checkout $(cat /key4hep-spack/.latest-commit)
-            source /key4hep-spack/.cherry-pick
+            spack repo set --destination /spack-packages builtin
+            spack repo add key4hep-spack
+
+            cd spack-packages
+            source ../key4hep-spack/.cherry-pick
+            cd ..
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release-opt

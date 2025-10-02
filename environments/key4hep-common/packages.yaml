@@ -3,7 +3,6 @@ packages:
     target: [x86_64, aarch64]
     variants: build_type=Release cxxstd=20
     buildable: true
-    compiler: []
 
   acts:
     require: +dd4hep cxxstd=20 +json
@@ -20,17 +19,19 @@ packages:
     require: +gssapi
   graphviz:
     require: +expat+pangocairo
+  gsl:
+    require: +external-cblas
   ddmarlinpandora:
     require: +monitoring
   dd4hep:
-    require: +edm4hep+lcio+xercesc+hepmc3
+    require: +edm4hep+lcio+xercesc+hepmc3 +ipo
   gaudi:
-    require: '@39: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc'
+    require: '@39: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc +ipo'
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
   geant4:
-    require: +opengl+qt~vecgeom cxxstd=20
+    require: +opengl+qt~vecgeom +ipo cxxstd=20
   hdf5:
     require: +cxx+hl
   hepmc3:
@@ -113,7 +114,7 @@ packages:
 
   # The version seems to be necessary, otherwise it defaults to an older version
   root:
-    require: '@6.32: +davix+fftw+gsl+math+minuit+mlp+opengl~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd cxxstd=20'
+    require: '@6.36: +davix+fftw+gsl+math+minuit+mlp+opengl~pythia8+python+r+roofit+root7+rpath~shadow+spectrum+sqlite+ssl+tbb+tmva+tmva-cpu+unuran+vc+vdt+webgui+x+xml+xrootd +ipo cxxstd=20'
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
@@ -145,7 +146,7 @@ packages:
   # Since many packages depend on setuptools that was dropped in 3.12,
   # without asking explicitly the version used will be 3.11
   python:
-    require: "@3.12:"
+    require: "@3.12: +optimizations"
   sio:
     variants: cxxstd=20
 
