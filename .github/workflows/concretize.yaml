@@ -1,6 +1,6 @@
 name: Concretize
 description: |
-  This workflow concretizes the spack environment that was used for the last build
+  This workflow concretizes the spack environment that was used for the last nightly or release build
 
 on:
   push:
@@ -42,31 +42,35 @@ jobs:
             set -e
 
 
-            cd /
+            cd ~
+            git clone https://github.com/key4hep/key4hep-spack -q
             git clone https://github.com/spack/spack -q
-            cd /spack
-            git checkout $(cat /key4hep-spack/.latest-commit) -q
-            cd /
+            cd spack
+            git checkout $(cat ../key4hep-spack/.latest-commit)
+            cd ..
             source spack/share/spack/setup-env.sh
-            git clone https://github.com/spack/spack-packages
+            git clone https://github.com/spack/spack-packages -q
+            cd spack-packages
+            git checkout $(cat ../key4hep-spack/.latest-packages-commit)
+            cd ..
 
-            spack repo set --destination /spack-packages builtin
+            spack repo set --destination $PWD/spack-packages builtin
             spack repo add key4hep-spack
 
-            cd /spack-packages
-            git checkout $(cat /key4hep-spack/.latest-packages-commit) -q
-            source /key4hep-spack/.cherry-pick
+            cd spack-packages
+            source ../key4hep-spack/.cherry-pick
+            cd ..
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release-opt
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
-                python3 /key4hep-spack/scripts/fetch_nightly_versions.py --path /key4hep-spack/environments/key4hep-common/packages.yaml --extra-path /key4hep-spack/environments/key4hep-common-opt/packages.yaml ""
+                python3 ~/key4hep-spack/scripts/fetch_nightly_versions.py --path ~/key4hep-spack/environments/key4hep-common/packages.yaml --extra-path ~/key4hep-spack/environments/key4hep-common-opt/packages.yaml ""
             else
                 echo "Unknown build type"
                 exit 1
             fi
-            cd /key4hep-spack/environments/${env}
+            cd ~/key4hep-spack/environments/${env}
 
             echo "========="
             echo "spack.yaml"
@@ -76,7 +80,7 @@ jobs:
             cat packages.yaml
             echo "========="
             echo "key4hep-common/packages.yaml"
-            cat /key4hep-spack/environments/key4hep-common/packages.yaml
+            cat ~/key4hep-spack/environments/key4hep-common/packages.yaml
             echo "========="
 
             spack env activate .
