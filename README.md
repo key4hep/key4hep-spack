@@ -101,7 +101,7 @@ source ../key4hep-spack/.cherry-pick
 cd ..
 
 cd key4hep-spack/env/<env_of_your_choice>
-spack activate .
+spack env activate .
 
 spack concretize
 spack install -p 2 # -p 2 for 2 packages being built at the same time
