@@ -1,58 +1,33 @@
-git remote add jmcarcell https://github.com/jmcarcell/spack || true
+git remote add jmcarcell https://github.com/jmcarcell/spack-packages || true
 git fetch jmcarcell -q
 
-# Hardcode CMAKE_INSTALL_LIBDIR to lib. This is needed for AlmaLinux 9 where
-# CMAKE_INSTALL_LIBDIR gets chosen as lib64 and this causes problems in some
-# packages that expect lib. Since spack installs each package to its own prefix
-# we don't need to worry about multilib environments
-# It doesn't seem to do anything at the moment
-git cherry-pick 2a78f7d6b5559b607daf6694f7278297f15a5b8d -X theirs --no-commit
+# root: allow +ipo
+git cherry-pick 229e2730faef2def3a2488f46cd6f912b6f8894d -X theirs --no-commit
 
-# Because the patch above and py-onnx being a python package, it will try to find
-# protobuf in CMAKE_INSTALL_LIBDIR which is lib64 so a symlink is created here
-git cherry-pick 3ec184fad8582cc501f55e0ea0b0f6b3fb9b70bf -X theirs --no-commit
-
-# add vdt for CPATH, needed for podio+rntuple
-git cherry-pick f97fabc3ff12527e5220ea6917719a73f8bd4315 -X theirs --no-commit
-
-# acts: add patch to find python before DD4hep
-git cherry-pick d8bb37270ee2f84bbaa6432cf1aa3dbea421ec9d -X theirs --no-commit
+# root: add v6.36.06, remove!
+git cherry-pick 5b5709eacb920942dbd6aee24607d531ed05176e -X theirs --no-commit
 
 # root: set runtime_cxxmodules to True, remove when https://github.com/spack/spack-packages/pull/109 is merged
-git cherry-pick 75e923133f6fd458d7c2d0ab5636b0a692cf77e1 -X theirs --no-commit
-
-# ghostscript: fixes for missing DSO symbol and add X libraries, remove!
-git cherry-pick 73078e8832bd82347e4020513a7c30cffbf3589f -X theirs --no-commit
-
-# Add build dependencies for several packages, remove!
-git cherry-pick 65daf31f2e89c1027c3d1ecc2c03638254ea83e2 -X theirs --no-commit
-
-# py_ruff and py_rpds_py: add a dependency on C for builds on Alma 9, remove!
-git cherry-pick 32e44d69f8113e3e0ff55cdb22b057a64cf70259 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/109.diff | patch -p1
 
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
-git cherry-pick d30d75acefeba6c18ab2263ec879ddb68d70dd48 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
 
-# py_onnxruntime: add new versions, patches and update the recipe, remove!
-git cherry-pick 02cbdf51cddc766219bfd0ebb19f663d58744bcb -X theirs --no-commit
-
-# py_onnx: add binutils as a dependency, remove when https://github.com/spack/spack-packages/pull/141 is merged
-git cherry-pick 6c143f1fe29bb85991fc1d9dcc8cdd0f7a734b06 -X theirs --no-commit
-
-# py_gevent: add gmake as a dependency, remove!
-git cherry-pick 56a2461146b5c9a5afc7ca70b857bc2e6aeaf915 -X theirs --no-commit
-
-# py_gosam: try a fix for the build, which is probably not correct
-git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
-
-# gaudi: add db patch
-git cherry-pick fa861e5f51580a78277e9e5135ea9f281320d3fe -X theirs --no-commit
-
-# py-pylint and py-astroid: add latest versions compatible with Python 3.13, remove!
-git cherry-pick 16c3e4c8161502dbd60e4deaf5d137b2936fc95f -X theirs --no-commit
+# gaudi: add db patch, not needed after v40r1
+git cherry-pick c6c6d822a5fd0b30297507547f56370330ae3e71 -X theirs --no-commit
 
 # Build sherpa from a branch
-git cherry-pick 35aaea769fa78c6060f9d9bd3c5c1ec479a0cd79 -X theirs --no-commit
+git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 
-# cppcheck: add v2.18.0
-git cherry-pick adea0a1d48a28014e1c3cb8cc0c7fedb01df55ff -X theirs --no-commit
+# py_gosam: try a fix for the build, which is probably not correct
+# git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
+
+# py_cramjam: add c as a dependency, remove!
+git cherry-pick 1d52ef13480b8ac31d316dba3e29c636b03bf4bb -X theirs --no-commit
+
+# py_ruff: add gmake as a dependency, remove!
+git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
+
+# dd4hep: set CMAKE_INSTALL_LIBDIR to lib
+git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
+

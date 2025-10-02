@@ -40,4 +40,7 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4gaudipandora"].prefix.lib)
 
     def cmake_args(self):
-        return [f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"]
+        return [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            "-DCMAKE_INSTALL_LIBDIR=lib",
+        ]

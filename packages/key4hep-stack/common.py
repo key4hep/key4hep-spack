@@ -89,6 +89,14 @@ def k4_generate_setup_script(env_mod, shell="sh"):
         pruned_path_list = prune_duplicate_paths(path_list)
         new_env[name] = ":".join(pruned_path_list)
 
+    # Remove FCCAnalyses from ROOT_LIBRARY_PATH to avoid issues with dictionaries
+    # since ROOT_LIBRARY_PATH is searched before LD_LIBRARY_PATH
+    # In the recipe FCCAnalyses is added to LD_LIBRARY_PATH
+    if "ROOT_LIBRARY_PATH" in new_env:
+        path_list = new_env["ROOT_LIBRARY_PATH"].split(":")
+        pruned_path_list = [p for p in path_list if "fccanalyses" not in p]
+        new_env["ROOT_LIBRARY_PATH"] = ":".join(pruned_path_list)
+
     # get shell commands
     k4_shell_set_strings = {
         "sh": "export {0}={1}\n",

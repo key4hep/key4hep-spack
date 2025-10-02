@@ -1,4 +1,9 @@
 name: Concretize latest spack
+description: |
+    This workflow uses the latest tag of Spack together with the
+    develop branch of spack-packages and tries to concretize
+    It may fail if there are requirements (for example in key4hep-common/packages.yaml)
+    that are not yet in spack-packages
 
 on:
   push:

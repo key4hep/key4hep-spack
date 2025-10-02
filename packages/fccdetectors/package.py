@@ -12,8 +12,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     maintainers("vvolkl")
 
     version("main", branch="main")
-    # can be removed once the ci is fixed
-    version("master", branch="main")
+    version("0.1pre11", tag="v0.1pre11")
     version("0.1pre10", tag="v0.1pre10")
     version("0.1pre09", tag="v0.1pre09")
     version("0.1pre08", tag="v0.1pre08")
@@ -27,10 +26,10 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     depends_on("root")
 
     def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            "-DCMAKE_INSTALL_LIBDIR=lib",
+        ]
         return args
 
     def setup_run_environment(self, env):

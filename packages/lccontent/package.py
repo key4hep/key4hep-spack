@@ -31,10 +31,12 @@ class Lccontent(CMakePackage):
         sha256="876a49ac79344a55e3bc611dd9668c7c1d90915e66b7fbe0e93c29460d23984b",
     )
 
+
     patch("path1.patch", when="@:3.1")
     patch("path2.patch", when="@:3.1")
     patch("path3.patch", when="@:3.1")
     patch("path4.patch", when="@:3.1")
+
     patch("bool-int.patch", when="@:3.1.5")
 
     depends_on("c", type="build")

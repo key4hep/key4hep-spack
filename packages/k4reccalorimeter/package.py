@@ -51,10 +51,10 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("simsipm")
 
     def cmake_args(self):
-        args = []
-        args.append(
-            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
-        )
+        args = [
+            f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
+            "-DCMAKE_INSTALL_LIBDIR=lib",
+        ]
         return args
 
     def setup_run_environment(self, env):
