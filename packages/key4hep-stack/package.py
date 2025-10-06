@@ -91,11 +91,14 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("py-pytransport", when="+generators")
 
     # Devtools
+    depends_on("autoconf", when="+devtools")
+    depends_on("automake", when="+devtools")
     depends_on("catch2@3:", when="+devtools")
     depends_on("cmake", when="+devtools")
     depends_on("cppcheck", when="+devtools")
     depends_on("doxygen", when="+devtools")
     depends_on("gdb", when="+devtools")
+    depends_on("libtool", when="+devtools")
     depends_on("llvm", when="+devtools")
     # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
     depends_on("man-db", when="+devtools")
