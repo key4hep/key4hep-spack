@@ -24,7 +24,6 @@ RUN git clone https://github.com/spack/spack.git /opt/spack && \
 RUN if [ -n "${SPACK_COMMIT}" ]; then \
       cd /opt/spack; \
       git checkout ${SPACK_COMMIT}; \
-      cd -; \
     fi
 
 # Checkout spack packages and add builtin repo
@@ -33,7 +32,6 @@ RUN . /opt/setup_spack.sh && \
     cd /opt/spack-packages && \
     git checkout ${SPACK_PACKAGES_COMMIT} && \
     spack repo set --destination "/opt/spack-packages" builtin && \
-    cd -
 
 # Configure spack environment with:
 # - System compilers
@@ -53,14 +51,12 @@ RUN source /opt/setup_spack.sh && \
     git clone https://github.com/${GITHUB_REPOSITORY} ${REPOPATH} && \
     cd ${REPOPATH} && \
     git checkout ${COMMIT_SHA} && \
-    cd -
 
 # Apply our patches to spack
 RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
     cd /opt/spack-packages && \
     source ${REPOPATH}/.cherry-pick && \
-    cd -
 
 # Add the package repositories
 RUN source /opt/setup_spack.sh && \
