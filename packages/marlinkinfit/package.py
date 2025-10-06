@@ -18,6 +18,9 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.7", sha256="db156dd458441ad5c6e59c4608e5815169bcad3400ddfb4c89807d8747e27994"
+    )
+    version(
         "0.6.1",
         sha256="06732df9e8f5f17841ae6de2f7a6cf1b6e80de1064e9cb013906cdd015c00f61",
     )
@@ -29,8 +32,10 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
     depends_on("cxx", type="build")
 
     depends_on("ilcutil")
-    depends_on("marlin")
-    depends_on("marlinutil")
+    # See https://github.com/iLCSoft/MarlinKinfit/pull/5
+    depends_on("ilcutil@1.8:", when="@0.7:")
+    depends_on("marlin", when="@:0.6.1")
+    depends_on("lcio@2.21:", when="@0.7:")
     depends_on("clhep")
     depends_on("gsl")
     depends_on("root")
@@ -46,6 +51,5 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
         return args
 
     def setup_run_environment(self, env):
-        env.prepend_path("MARLIN_DLL", self.prefix.lib + "/libMarlinKinfit.so")
         # Make it usable from ROOT
         env.prepend_path("ROOT_LIBRARY_PATH", self.prefix.lib)
