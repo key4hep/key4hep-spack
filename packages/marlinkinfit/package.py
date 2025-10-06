@@ -38,7 +38,7 @@ class Marlinkinfit(CMakePackage, Ilcsoftpackage):
     depends_on("lcio@2.21:", when="@0.7:")
     depends_on("clhep")
     depends_on("gsl")
-    depends_on("root@6.14:")
+    depends_on("root")
     depends_on("raida")
 
     def cmake_args(self):
