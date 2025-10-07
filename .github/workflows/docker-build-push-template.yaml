@@ -67,7 +67,8 @@ jobs:
       - name: Determine spack ref
         id: getref
         run: |
-          echo "spack_ref=$(cat .latest-commit)" >>${GITHUB_OUTPUT}
+          echo "spack_ref=$(cat .latest-commit)" >>${GITHUB_OUTPUT};
+          echo "spack_packages_ref=$(cat .latest-packages-commit)" >>${GITHUB_OUTPUT}
       - name: Build and Push
         id: build
         uses: docker/build-push-action@v6
@@ -80,6 +81,7 @@ jobs:
             GITHUB_REPOSITORY=${{ github.repository }}
             COMMIT_SHA=${{ github.sha }}
             SPACK_COMMIT=${{ steps.getref.outputs.spack_ref }}
+            SPACK_PACKAGES_COMMIT=${{ steps.getref.outputs.spack_packages_ref }}
             SPACK_BUILDCACHE=oci://ghcr.io/${{ github.repository_owner }}/spack-buildcache
             OCI_USERNAME=${{ github.actor }}
           secrets: |

@@ -7,6 +7,7 @@ FROM ghcr.io/key4hep/key4hep-images/alma9:latest
 
 # Picking specific commits
 ARG SPACK_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
+ARG SPACK_PACKAGES_COMMIT=6cb16c39ab85fbc211e50be804fa7a15f24ccebc
 ARG COMMIT_SHA=e49a0639ff987a84fa0c6263e068776f9d7b6f67
 ARG GITHUB_REPOSITORY=key4hep/key4hep-spack
 
@@ -25,6 +26,13 @@ RUN if [ -n "${SPACK_COMMIT}" ]; then \
       git checkout ${SPACK_COMMIT}; \
     fi
 
+# Checkout spack packages and add builtin repo
+RUN . /opt/setup_spack.sh && \
+    git clone https://github.com/spack/spack-packages /opt/spack-packages && \
+    cd /opt/spack-packages && \
+    git checkout ${SPACK_PACKAGES_COMMIT} && \
+    spack repo set --destination "/opt/spack-packages" builtin
+
 # Configure spack environment with:
 # - System compilers
 # - Buildcache
@@ -42,19 +50,17 @@ RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
     git clone https://github.com/${GITHUB_REPOSITORY} ${REPOPATH} && \
     cd ${REPOPATH} && \
-    git checkout ${COMMIT_SHA} && \
-    cd -
+    git checkout ${COMMIT_SHA}
 
-# Apply our patches to spack
+# Apply our patches to spack packages
 RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
-    cd /opt/spack && \
-    source ${REPOPATH}/.cherry-pick && \
-    cd -
+    cd /opt/spack-packages && \
+    source ${REPOPATH}/.cherry-pick
 
 # Add the package repositories
 RUN source /opt/setup_spack.sh && \
-    spack repo add --scope system ${SPACK_ROOT}/var/key4hep-spack
+    spack repo add ${SPACK_ROOT}/var/key4hep-spack
 
 # Create the release environment
 RUN source /opt/setup_spack.sh && \

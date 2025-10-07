@@ -8,7 +8,7 @@ spack:
       compiler: []
 
     boost:
-      require: +atomic+chrono+context+date_time+exception+fiber+filesystem+graph+iostreams+locale+log+math+multithreaded+program_options+python+random+regex+serialization+shared+signals+system+test+thread+timer+wave
+      require: +atomic+chrono+context+date_time+exception+fiber+filesystem+graph+iostreams+locale+log+math+multithreaded+program_options+python+random+regex+serialization+shared+system+test+thread+timer+wave
     # Keep the possibility to build Gaudi 38
     fmt:
       require: "@:10"
