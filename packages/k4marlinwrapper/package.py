@@ -62,7 +62,6 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     def cmake_args(self):
         args = [
-            self.define("FORCE_COLORED_OUTPUT", False),
             self.define(
                 "CMAKE_CXX_STANDARD", self.spec["root"].variants["cxxstd"].value
             ),
