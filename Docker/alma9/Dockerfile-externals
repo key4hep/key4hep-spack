@@ -52,7 +52,7 @@ RUN source /opt/setup_spack.sh && \
     cd ${REPOPATH} && \
     git checkout ${COMMIT_SHA}
 
-# Apply our patches to spack
+# Apply our patches to spack packages
 RUN source /opt/setup_spack.sh && \
     REPOPATH=${SPACK_ROOT}/var/key4hep-spack && \
     cd /opt/spack-packages && \
