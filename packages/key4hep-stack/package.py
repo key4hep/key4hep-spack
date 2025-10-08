@@ -44,6 +44,11 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
         default=True,
         description="Add packages that are useful for analysis",
     )
+    variant(
+        "full",
+        default=False,
+        description="Build the full stack regardless of the values of the variants",
+    )
 
     # Fake variant that does nothing but this lets us group the packages
     # that are build with Debug mode
@@ -64,7 +69,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("cldconfig")
     depends_on("dd4hep")
     depends_on("edm4hep")
-    depends_on("k4mljettagger", when="+ml")
+    depends_on("k4mljettagger", when="+ml | +full")
     depends_on("k4clue")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4fwcore")
@@ -82,33 +87,34 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccsw")
     depends_on("dual-readout")
     depends_on("fccanalyses~onnx", when="~ml")
-    depends_on("fccanalyses+onnx", when="+ml")
+    depends_on("fccanalyses+onnx", when="+ml | +full")
     depends_on("fccdetectors")
-    depends_on("k4reccalorimeter", when="+ml")
+    depends_on("k4reccalorimeter", when="+ml | +full")
 
     # ILCSoft packages
     for variant in ("ml", "generators"):
-        depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
-        depends_on(f"ilcsoft ~{variant}", when=f"~{variant}")
+        depends_on(f"ilcsoft +{variant}", when=f"+{variant} | +full")
+        depends_on(f"ilcsoft ~{variant}", when=f"~{variant} | ~full")
 
-    # Generators
-    depends_on("k4generatorsconfig", when="+generators")
-    depends_on("evtgen+pythia8+tauola+photos", when="+generators")
-    depends_on("herwig3", when="+generators")
-    depends_on("lhapdf", when="+generators")
-    depends_on("madgraph5amc", when="+generators")
-    depends_on("photos+hepmc3", when="+generators")
-    depends_on("sherpa", when="+generators")
-    # babayaga doesn't build on macOS
-    depends_on("babayaga", when="+generators platform=linux")
-    depends_on("bhlumi", when="+generators")
-    depends_on("whizard", when="+generators")
-    depends_on("kkmcee", when="+generators")
-    depends_on("guinea-pig", when="+generators")
+    with when("+generators | +full"):
+        # Generators
+        depends_on("k4generatorsconfig")
+        depends_on("evtgen+pythia8+tauola+photos")
+        depends_on("herwig3")
+        depends_on("lhapdf")
+        depends_on("madgraph5amc")
+        depends_on("photos+hepmc3")
+        depends_on("sherpa")
+        # babayaga doesn't build on macOS
+        depends_on("babayaga", when="platform=linux")
+        depends_on("bhlumi")
+        depends_on("whizard")
+        depends_on("kkmcee")
+        depends_on("guinea-pig")
 
-    depends_on("py-pybdsim", when="+generators")
-    depends_on("py-pymadx", when="+generators")
-    depends_on("py-pytransport", when="+generators")
+        depends_on("py-pybdsim")
+        depends_on("py-pymadx")
+        depends_on("py-pytransport")
 
     # Basic build and debug tools
     depends_on("autoconf")
@@ -120,44 +126,47 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("gdb")
     depends_on("libtool")
 
-    # More extensive Devtools
-    depends_on("cppcheck", when="+devtools")
-    depends_on("doxygen", when="+devtools")
-    depends_on("llvm", when="+devtools")
-    # depends_on("iwyu", when="+devtools") # Not that useful and makes the LLVM built be older than it should
-    depends_on("man-db", when="+devtools")
-    depends_on("mold", when="+devtools")
-    depends_on("prmon", when="+devtools")
-    depends_on("py-black", when="+devtools")
-    depends_on("py-flake8", when="+devtools")
-    depends_on("py-pylint", when="+devtools")
-    depends_on("py-boto3", when="+devtools")
-    depends_on("py-gcovr", when="+devtools")
-    depends_on("py-pre-commit", when="+devtools")
-    depends_on("py-ruff", when="+devtools")
-    depends_on("benchmark", when="+devtools")
+    with when("+devtools | +full"):
+        # More extensive Devtools
+        depends_on("cppcheck")
+        depends_on("doxygen")
+        depends_on("llvm")
+        # depends_on("iwyu") # Not that useful and makes the LLVM built be older than it should
+        depends_on("man-db")
+        depends_on("mold")
+        depends_on("prmon")
+        depends_on("py-black")
+        depends_on("py-flake8")
+        depends_on("py-pylint")
+        depends_on("py-boto3")
+        depends_on("py-gcovr")
+        depends_on("py-pre-commit")
+        depends_on("py-ruff")
+        depends_on("benchmark")
 
-    # Generic analysis packages
-    depends_on("py-awkward", when="+analysis")
-    depends_on("py-uproot", when="+analysis")
-    depends_on("py-scipy", when="+analysis")
-    depends_on("py-pandas", when="+analysis")
-    depends_on("py-particle", when="+analysis")
-    depends_on("py-pyhepmc", when="+analysis")
-    depends_on("py-h5py", when="+analysis")
-    depends_on("py-ipykernel", when="+analysis")
-    depends_on("py-ipython", when="+analysis")
-    depends_on("py-jupytext@1.16:", when="+analysis")
-    depends_on("py-matplotlib", when="+analysis")
-    depends_on("py-nbconvert", when="+analysis")
-    depends_on("py-vector", when="+analysis")
+    with when("+analysis | +full"):
+        # Generic analysis packages
+        depends_on("py-awkward")
+        depends_on("py-uproot")
+        depends_on("py-scipy")
+        depends_on("py-pandas")
+        depends_on("py-particle")
+        depends_on("py-pyhepmc")
+        depends_on("py-h5py")
+        depends_on("py-ipykernel")
+        depends_on("py-ipython")
+        depends_on("py-jupytext@1.16:")
+        depends_on("py-matplotlib")
+        depends_on("py-nbconvert")
+        depends_on("py-vector")
 
-    # ML inference related stuff
-    depends_on("py-onnxruntime", when="+ml")
-    depends_on("py-onnx", when="+ml")
-    depends_on("py-torch", when="+ml")
-    depends_on("py-scikit-learn", when="+ml")
-    depends_on("py-xgboost", when="+ml")
+    with when("+ml | +full"):
+        # ML inference related stuff
+        depends_on("py-onnxruntime")
+        depends_on("py-onnx")
+        depends_on("py-torch")
+        depends_on("py-scikit-learn")
+        depends_on("py-xgboost")
 
     # Other
     depends_on("acts")
