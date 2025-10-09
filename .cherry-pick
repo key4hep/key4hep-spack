@@ -31,5 +31,8 @@ git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
 # dd4hep: set CMAKE_INSTALL_LIBDIR to lib
 git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
 
-# prmon: add build dependencies, remove when https://github.com/spack/spack-packages/pull/1892 is merged
+# prmon: add build dependencies, remove!
 git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
+
+# acts: add a few dependencies: numpy, sympy and particle, check if still needed
+git cherry-pick abf6e8dede6a14e6be3842271f661413129e0497 -X theirs --no-commit
