@@ -18,6 +18,10 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.14",
+        sha256="b22f1fb589d59b9878d746632ad74ca76a03153b16c8901023eecc7469f6dbdb",
+    )
+    version(
         "0.13",
         sha256="80274bba9bc4ce53f0d78132bd5aba82f03000a527c2eed3adc5c33f12d194f3",
     )
@@ -38,7 +42,7 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
         sha256="92410186209508091e0a8e330986283ffb32e40fd7195d10aad1a6a2e953f3ee",
     )
 
-    depends_on("c", type="build")
+    depends_on("c", type="build", when="@:0.13")
     depends_on("cxx", type="build")
 
     depends_on("ilcutil")

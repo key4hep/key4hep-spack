@@ -19,6 +19,10 @@ class Gear(CMakePackage, Ilcsoftpackage):
     version("master", branch="master")
 
     version(
+        "1.9.6",
+        sha256="9089dd88b29c63725c6f46551d3bcf9810e0d400f3b402ba1e86ff9bcb08c66e",
+    )
+    version(
         "1.9.5",
         sha256="9e7c70b2dd83c84e88c9a124808588c1ca91c66fcc0385de9d33b584e813a2ed",
     )
@@ -50,6 +54,7 @@ class Gear(CMakePackage, Ilcsoftpackage):
     variant("doc", default=False, description="build doxygen documentation")
 
     depends_on("cxx", type="build")
+    depends_on("c", type="build", when="@:1.9.4")
 
     depends_on("ilcutil")
     depends_on("clhep")
