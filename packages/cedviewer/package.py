@@ -18,6 +18,10 @@ class Cedviewer(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.21",
+        sha256="3a3326f2277b2de8c0eda8fc47f8f0d9e0d9fd2dfb920ddeda480bc4ca8a6140",
+    )
+    version(
         "1.20",
         sha256="e2b1b50b42be28aa28bbdba99e403e053a1aff7bcd7c76c6b7224768a3d28c68",
     )

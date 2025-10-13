@@ -19,6 +19,10 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     version("master", branch="master")
 
     version(
+        "1.19.6",
+        sha256="744deba7f8e0c6c5e1554ea53a53ef7ad9973a4c1ae2e7b164efb4d9a4eba8fb",
+    )
+    version(
         "1.19.5",
         sha256="d0ad571fa7f47badf874bd577f644686ad85175c622a7d9797501bdfa5ea93f6",
     )
@@ -62,6 +66,7 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     variant("doc", default=False, description="build doxygen documentation")
 
     depends_on("cxx", type="build")
+    depends_on("c", type="build", when="@:1.19.4")
 
     depends_on("ilcutil")
     depends_on("gear")
