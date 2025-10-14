@@ -32,7 +32,7 @@ RUN . /opt/setup_spack.sh && \
 # Concretize the stack
 RUN --mount=type=secret,id=ocipass \
     . ${HOME}/setup_env.sh && \
-    OCI_PASSWORD=$(cat /run/secrets/ocipass) spack concretize --reuse
+    OCI_PASSWORD=$(cat /run/secrets/ocipass) spack concretize -f --reuse
 
 # Installing fragments of dependency tree in separate layers for cached debugging
 ENV SPACK_INSTALL_OPTS="--only-concrete --no-add --fail-fast"
