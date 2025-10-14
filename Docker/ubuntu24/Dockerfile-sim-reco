@@ -4,6 +4,13 @@ FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && \
     echo ". $HOME/.cargo/env" > ${HOME}/setup_env.sh
 
+# Install llvm
+RUN apt-get update && \
+    apt-get install -y lsb-release wget software-properties-common gnupg && \
+    bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" && \
+    update-alternatives --install /usr/bin/clang clang /usr/bin/clang-20 200 && \
+    update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-20 200
+
 # Make sure we pull in the current version of the branch
 RUN . /opt/setup_spack.sh && \
     cd ${SPACK_ROOT}/var/key4hep-spack && \
@@ -26,7 +33,7 @@ RUN . /opt/setup_spack.sh && \
 
 # Create the environment setup script
 RUN . /opt/setup_spack.sh && \
-    echo ". /opt/setup_spack.sh" > ${HOME}/setup_env.sh && \
+    echo ". /opt/setup_spack.sh" >> ${HOME}/setup_env.sh && \
     echo "cd ${SPACK_ROOT}/var/key4hep-spack/environments/key4hep-sim-reco" >> ${HOME}/setup_env.sh && \
     echo "spack env activate ." >> ${HOME}/setup_env.sh && \
     echo "spack env status" >> ${HOME}/setup_env.sh && \
@@ -36,7 +43,7 @@ RUN . /opt/setup_spack.sh && \
 # Concretize the stack
 RUN --mount=type=secret,id=ocipass \
     . ${HOME}/setup_env.sh && \
-    spack external find --not-buildable && \
+    spack external find --not-buildable rust llvm && \
     OCI_PASSWORD=$(cat /run/secrets/ocipass) spack concretize -f --reuse
 
 # Installing fragments of dependency tree in separate layers for cached debugging
