@@ -11,4 +11,4 @@ spack:
       host_compatible: true
 
   specs:
-    - key4hep-stack +analysis~generators~ml~devtools
+    - key4hep-stack +analysis~generators~ml~devtools~full
