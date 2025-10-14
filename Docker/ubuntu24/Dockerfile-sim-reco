@@ -1,5 +1,9 @@
 FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
 
+# Install rust (TODO: Pull to externals image?)
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && \
+    echo ". $HOME/.cargo/env" > ${HOME}/setup_env.sh
+
 # Make sure we pull in the current version of the branch
 RUN . /opt/setup_spack.sh && \
     cd ${SPACK_ROOT}/var/key4hep-spack && \
@@ -32,6 +36,7 @@ RUN . /opt/setup_spack.sh && \
 # Concretize the stack
 RUN --mount=type=secret,id=ocipass \
     . ${HOME}/setup_env.sh && \
+    spack external find --not-buildable && \
     OCI_PASSWORD=$(cat /run/secrets/ocipass) spack concretize -f --reuse
 
 # Installing fragments of dependency tree in separate layers for cached debugging
