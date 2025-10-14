@@ -4,7 +4,7 @@ FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
 RUN . /opt/setup_spack.sh && \
     cd ${SPACK_ROOT}/var/key4hep-spack && \
     git fetch && \
-    git checkout origin/reco-image
+    git checkout origin/lcws-tutorial
 
 # Configure spack environment with:
 # - System compilers
