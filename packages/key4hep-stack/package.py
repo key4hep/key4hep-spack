@@ -162,9 +162,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             depends_on("py-h5py")
             depends_on("py-ipykernel")
             depends_on("py-ipython")
-            depends_on("py-jupytext@1.16:")
+            # depends_on("py-jupytext@1.16:")
             depends_on("py-matplotlib")
-            depends_on("py-nbconvert")
+            # depends_on("py-nbconvert")
             depends_on("py-vector")
 
     for v in ("+ml", "+full"):
