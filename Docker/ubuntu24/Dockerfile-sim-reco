@@ -56,3 +56,10 @@ RUN --mount=type=secret,id=ocipass \
     spack env deactivate && \
     spack clean -a && \
     spack mirror rm local-buildcache
+
+COPY utilities.sh /opt/scripts/utilities.sh
+
+RUN . ${HOME}/setup_env.sh && \
+    KEY4HEP_STACK_PATH=$(spack find --format "{prefix}" key4hep-stack) && \
+    echo "source ${KEY4HEP_STACK_PATH}" > /opt/setup_key4hep.sh && \
+    echo "source /opt/scripts/utilities.sh" >> /opt/setup_key4hep.sh
