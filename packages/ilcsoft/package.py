@@ -46,8 +46,6 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     # depends_on('guinea-pig@master', when="@master")
 
     depends_on("whizard", when="+generators")
-    # todo: figure out the api for the whizard gitlab instance
-    # depends_on('whizard@master +lcio +openloops hepmc=2', when="@master")
 
     depends_on("k4simdelphes")
     depends_on("delphes")
