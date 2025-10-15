@@ -2,11 +2,17 @@ spack:
   packages:
     k4fwcore:
       require: '@main'
+    podio:
+      require: '@master +rntuple+sio+datasource'
     dd4hep:
       require: '@master +edm4hep+lcio+xercesc+hepmc3 +ipo'
     k4marlinwrapper:
       require: '@main'
     k4edm4hep2lcioconv:
+      require: '@main'
+    k4gaudipandora:
+      require: '@main'
+    k4actstracking:
       require: '@main'
 
   include:
