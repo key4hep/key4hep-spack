@@ -36,3 +36,9 @@ git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
 
 # acts: add a few dependencies: numpy, sympy and particle, check if still needed
 git cherry-pick abf6e8dede6a14e6be3842271f661413129e0497 -X theirs --no-commit
+
+# lcio: add 2.23
+git cherry-pick 20cc4178e27292a18f9ca8f819366e66af560ace -X theirs --no-commit
+
+# podio: add 1.5
+git cherry-pick 8d027b1651840631350d0ba9f30624f2baf26350 -X theirs --no-commit
