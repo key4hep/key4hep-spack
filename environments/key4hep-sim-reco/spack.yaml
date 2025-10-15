@@ -1,6 +1,15 @@
 spack:
+  packages:
+    k4fwcore:
+      require: '@main'
+    dd4hep:
+      require: '@master +edm4hep+lcio+xercesc+hepmc3 +ipo'
+    k4marlinwrapper:
+      require: '@main'
+    k4edm4hep2lcioconv:
+      require: '@main'
+
   include:
-    - ../key4hep-common-opt/packages.yaml
     - ../key4hep-common/packages.yaml
 
   view: false
