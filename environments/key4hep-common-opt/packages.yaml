@@ -13,8 +13,6 @@ packages:
     require: +ipo build_type=Release
   conformaltracking:
     require: +ipo build_type=Release
-  dd4hep:
-    require: build_type=Release
   ddml:
     require: +ipo build_type=Release
   ddkaltest:
