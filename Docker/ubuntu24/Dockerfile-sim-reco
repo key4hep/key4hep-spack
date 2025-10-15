@@ -1,4 +1,4 @@
-FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
+FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:lcws-tutorial
 
 # Install rust (TODO: Pull to externals image?)
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && \
