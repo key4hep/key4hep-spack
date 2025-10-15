@@ -61,5 +61,7 @@ COPY utilities.sh /opt/scripts/utilities.sh
 
 RUN . ${HOME}/setup_env.sh && \
     KEY4HEP_STACK_PATH=$(spack find --format "{prefix}" key4hep-stack) && \
-    echo "source ${KEY4HEP_STACK_PATH}" > /opt/setup_key4hep.sh && \
+    echo "source $(echo ${KEY4HEP_STACK_PATH} | sed -E 's/\x1b\[[0-9;]*m//g')/setup.sh" > /opt/setup_key4hep.sh && \
     echo "source /opt/scripts/utilities.sh" >> /opt/setup_key4hep.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/setup_key4hep.sh && exec /bin/bash"]

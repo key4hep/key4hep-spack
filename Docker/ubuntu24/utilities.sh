@@ -64,4 +64,5 @@ k4_local_repo() {
     echo "Some variables may have to be updated manually to point to the local installation"
 }
 
-
+export -f k4_local_repo
+export -f _replace_marlin_dll
