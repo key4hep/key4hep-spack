@@ -20,6 +20,12 @@ spack:
       require: '@master'
     edm4hep:
       require: '@main'
+    k4simgeant4:
+      require: '@main'
+    k4generatorsconfig:
+      require: '@main'
+    k4gen:
+      require: '@main'
 
   include:
     - ../key4hep-common/packages.yaml
