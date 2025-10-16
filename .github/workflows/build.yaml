@@ -25,7 +25,7 @@ jobs:
     uses: ./.github/workflows/image-template.yaml
     strategy:
       fail-fast: false
-    needs: build-externals-image
+    # needs: build-externals-image
     with:
       os: ubuntu24
       registry: ghcr.io
