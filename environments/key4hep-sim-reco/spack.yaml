@@ -14,6 +14,12 @@ spack:
       require: '@main'
     k4actstracking:
       require: '@main'
+    k4reco:
+      require: '@main'
+    fccanalyses:
+      require: '@master'
+    edm4hep:
+      require: '@main'
 
   include:
     - ../key4hep-common/packages.yaml
