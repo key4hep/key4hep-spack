@@ -87,7 +87,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fcc-config")
     depends_on("fccsw")
     depends_on("dual-readout")
-    depends_on("fccanalyses~onnx", when="~ml")
+    depends_on("fccanalyses~onnx", when="~ml~full")
     depends_on("fccanalyses+onnx", when="+ml")
     depends_on("fccanalyses+onnx", when="+full")
     depends_on("fccdetectors")
@@ -97,7 +97,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     # ILCSoft packages
     for variant in ("ml", "generators"):
         depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
-        depends_on(f"ilcsoft ~{variant}", when=f"~{variant}")
+        depends_on(f"ilcsoft ~{variant}", when=f"~{variant}~full")
     depends_on("ilcsoft +generators +ml", when="+full")
 
     for v in ("+generators", "+full"):
