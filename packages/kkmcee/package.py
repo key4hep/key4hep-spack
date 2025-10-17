@@ -18,13 +18,13 @@ class Kkmcee(AutotoolsPackage):
 
     tags = ["hep"]
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("main", branch="FCC_release")
     version(
         "5.01.00",
-        sha256="f51092d23dfa917fe9a824f9d9e166fd8b02337afa922768f8c089ff4b586678",
-        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/KKMCee-5.01.00.tar.gz",
+        sha256="cc1d92c474aa67e12c6e13c390968f777b9d0da007c501f252c2d894f4590889",
+        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/kkmcee-5.01.00.tar.gz",
     )
     version(
         "5.00.02",
