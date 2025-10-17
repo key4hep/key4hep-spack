@@ -192,6 +192,9 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("opendatadetector")
     depends_on("sdhcalcontent")
 
+    for variant in ("generators", "ml", "analysis", "devtools"):
+        conflicts(f"+{variant}", when="+full", msg=f"+full already enables +{variant}")
+
     def setup_run_environment(self, env):
         # set locale to avoid certain issues with xerces-c
         # (see https://github.com/key4hep/key4hep-spack/issues/170)
