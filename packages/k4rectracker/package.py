@@ -11,6 +11,10 @@ class K4rectracker(CMakePackage, Key4hepPackage):
 
     version("master", branch="master")
     version(
+        "0.6.0",
+        sha256="2d8448d7603767913d840b0d3043bf8982582f9309b37399a6a37ce8ab3c7644",
+    )
+    version(
         "0.5.0",
         sha256="82bc11059689676585a5494be86849b800ef86965485271c325ea4f3176caaac",
     )
@@ -39,6 +43,8 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     # It started happening after adding marlinutil to the dependencies
     depends_on("lcio")
     depends_on("pandorasdk", when="@0.4.0:")
+    depends_on("py-onnxruntime", when="@0.6.0:")
+    depends_on("py-torch", when="@0.6.0:")
 
     def cmake_args(self):
         args = [
