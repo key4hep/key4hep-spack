@@ -38,7 +38,7 @@ packages:
     require: +python+rootio
   # https://github.com/key4hep/key4hep-spack/issues/517
   kkmcee:
-    require: "@5.01.00:"
+    require: "@5.01.rc"
   larcontent:
     require: +monitoring
   lccd:
