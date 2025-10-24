@@ -183,7 +183,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("cluestering")
     depends_on("delphes")
     depends_on("geant4")
-    # depends_on('k4actstracking')
+    depends_on("k4actstracking")
     depends_on("python")
     depends_on("xrootd")
     # depends_on("cepcsw") # cepcsw depends on garfieldpp and genfit

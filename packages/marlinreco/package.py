@@ -18,6 +18,10 @@ class Marlinreco(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.37.1",
+        sha256="8d6eee518956b690c65c9be66c135044da6176782026e8b8b05a179b35a3cb4c",
+    )
+    version(
         "1.37",
         sha256="19f11b1e54514c678c06fffe4fea07e2112f4a92cff6b3b53c70ccb308616555",
     )
