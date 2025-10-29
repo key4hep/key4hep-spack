@@ -20,7 +20,7 @@ class Kkmcee(AutotoolsPackage):
 
     maintainers("jmcarcell")
 
-    version("main", branch="FCC_release")
+    version("main", branch="FCC_release_cpp")
     version(
         "5.01.rc",
         sha256="cc1d92c474aa67e12c6e13c390968f777b9d0da007c501f252c2d894f4590889",
