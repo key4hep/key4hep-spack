@@ -60,6 +60,11 @@ class Kkmcee(AutotoolsPackage):
 
     patch("KKMCee-dev-4.30.patch", level=0, when="@:4.30")
     patch("KKMCee-dev-4.32.01.patch", level=0, when="@4.31:4.32.01")
+    patch(
+        "https://github.com/KrakowHEPSoft/KKMCee/commit/9524af1e5fc6e0d5da576f15ae7fca359036b4ba.diff",
+        sha256="bb7969ba059c48d4c44d1ce49b5388506070b1c6c1c375bdce94b2079a614698",
+        when="@5.01.rc",
+    )
 
     @when("@4")
     def patch(self):
