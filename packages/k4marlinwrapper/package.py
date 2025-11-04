@@ -18,6 +18,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-13",
+        sha256="492d227cc76c6f8d39d24a465eecf69a513c8de025f0dad283251fbf3485016a",
+    )
+    version(
         "00-12",
         sha256="f129269ec551a3fffe197763cdb742ca5690209c9f4213d59009fcb154adcdd4",
     )
@@ -42,6 +46,7 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     depends_on("root")
     depends_on("lcio")
+    depends_on("lcio@2.21:", when="@00-13:")
     depends_on("marlin")
     depends_on("gaudi+gaudialg", when="@:0.8")
     depends_on("gaudi")
