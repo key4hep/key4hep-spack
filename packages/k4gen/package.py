@@ -5,9 +5,9 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4gen(CMakePackage, Key4hepPackage):
     """Generator components for the Key4hep framework"""
 
-    homepage = "https://github.com/HEP-FCC/k4Gen/"
-    url = "https://github.com/HEP-FCC/k4Gen/archive/refs/tags/v0.1pre02.tar.gz"
-    git = "https://github.com/HEP-FCC/k4Gen.git"
+    homepage = "https://github.com/key4hep/k4Gen/"
+    url = "https://github.com/key4hep/k4Gen/archive/refs/tags/v0.1pre02.tar.gz"
+    git = "https://github.com/key4hep/k4Gen.git"
 
     maintainers("vvolkl")
 
