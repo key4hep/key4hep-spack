@@ -2,7 +2,7 @@ spack:
   packages:
     all:
       variants:
-        - build_type=RelWithDebInfo
+        - build_type=Release
         - 'cxxstd=20'
       target: [x86_64, aarch64]
 
