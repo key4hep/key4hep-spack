@@ -34,5 +34,5 @@ git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
 # prmon: add build dependencies, remove!
 git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
 
-# acts: add a few dependencies: numpy, sympy and particle, check if still needed
-git cherry-pick abf6e8dede6a14e6be3842271f661413129e0497 -X theirs --no-commit
+# acts: add a few dependencies: numpy, sympy, particle and hatchling, see https://github.com/spack/spack-packages/pull/1924
+git cherry-pick 06cca71e3a4778f64af0659f8228368af55a6378 -X theirs --no-commit
