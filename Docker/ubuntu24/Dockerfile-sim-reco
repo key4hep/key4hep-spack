@@ -1,4 +1,4 @@
-FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:latest
+FROM ghcr.io/key4hep/key4hep-externals-ubuntu24:reco-image
 
 # Configure spack environment with:
 # - System compilers
