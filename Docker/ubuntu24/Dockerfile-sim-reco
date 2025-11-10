@@ -7,8 +7,6 @@ ENV SPACK_COLOR="always"
 ARG SPACK_BUILDCACHE
 ARG OCI_USERNAME
 RUN . /opt/setup_spack.sh && \
-    spack config add 'config:install_tree:padded_length:128' && \
-    spack compiler find && \
     if [ -n "${SPACK_BUILDCACHE}" ]; then \
         spack mirror remove local-buildcache || true; \
         spack mirror add --oci-username "${OCI_USERNAME}" --oci-password-variable OCI_PASSWORD --unsigned --autopush local-buildcache "${SPACK_BUILDCACHE}";\
