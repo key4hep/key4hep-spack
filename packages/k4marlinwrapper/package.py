@@ -43,7 +43,6 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     depends_on("lcio")
     depends_on("lcio@2.21:", when="@00-13:")
     depends_on("marlin")
-    depends_on("gaudi+gaudialg", when="@:0.8")
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4fwcore@:1.1.0", when="@:0.9")
