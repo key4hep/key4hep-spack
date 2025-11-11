@@ -44,6 +44,7 @@ class K4generatorsconfig(CMakePackage):
 
     depends_on("podio")
     depends_on("edm4hep")
+    depends_on("edm4hep@0.99.3:", when="@1.0.1-alpha:")
     depends_on("hepmc3")
     depends_on("heppdt")
     depends_on("pythia8")
