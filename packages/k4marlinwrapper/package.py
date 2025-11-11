@@ -18,6 +18,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-13",
+        sha256="492d227cc76c6f8d39d24a465eecf69a513c8de025f0dad283251fbf3485016a",
+    )
+    version(
         "00-12",
         sha256="f129269ec551a3fffe197763cdb742ca5690209c9f4213d59009fcb154adcdd4",
     )
@@ -32,24 +36,18 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
     version(
         "0.9", sha256="a0c01e6137cd5bb0794d79433831644dfd5108c763e436428117cd6f4a826ce2"
     )
-    version(
-        "0.8",
-        sha256="0c624d5719cd055dfc27a9954cdf5e501e6478a2a8baac3bf80da7063e58e6ed",
-        deprecated=True,
-    )
 
     depends_on("cxx", type="build")
 
     depends_on("root")
     depends_on("lcio")
+    depends_on("lcio@2.21:", when="@00-13:")
     depends_on("marlin")
-    depends_on("gaudi+gaudialg", when="@:0.8")
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4fwcore@:1.1.0", when="@:0.9")
     depends_on("k4fwcore@1.2:", when="@0.11:")
-    depends_on("edm4hep")
-    depends_on("edm4hep@0.10.1:")
+    depends_on("edm4hep@0.99:")
     depends_on("k4edm4hep2lcioconv")
     depends_on("k4edm4hep2lcioconv@:00-10", when="@:0.10")
     depends_on("k4edm4hep2lcioconv@00-11:", when="@0.11:")
