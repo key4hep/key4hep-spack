@@ -36,3 +36,6 @@ git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
 
 # acts: add a few dependencies: numpy, sympy, particle and hatchling, see https://github.com/spack/spack-packages/pull/1924
 git cherry-pick 06cca71e3a4778f64af0659f8228368af55a6378 -X theirs --no-commit
+
+# simsipm: fix build conflict on ARM: see https://github.com/spack/spack-packages/pull/1714
+git cherry-pick 1e8f896b2807bcc48553e90d6212f0931fa5262f -X theirs --no-commit
