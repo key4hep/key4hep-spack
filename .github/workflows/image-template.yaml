@@ -1,6 +1,6 @@
-name: Publish key4hep-externals image
+name: Publish key4hep images
 description: |
-  Loads a key4hep-dev-external stack from spack cache.
+  Loads a key4hep stack from spack cache.
   This workflow builds the image and pushes it to the registry.
 
 on:
@@ -12,6 +12,10 @@ on:
       registry:
         required: true
         type: string
+      stack:
+        required: true
+        type: string
+
 
 permissions:
   contents: read
@@ -27,6 +31,7 @@ jobs:
       runner: ubuntu-latest
       platform: amd64
       registry: ${{ inputs.registry }}
+      stack: ${{ inputs.stack }}
 
   build-linux-arm64:
     uses: ./.github/workflows/docker-build-push-template.yaml
@@ -35,6 +40,7 @@ jobs:
       runner: ubuntu-24.04-arm
       platform: arm64
       registry: ${{ inputs.registry }}
+      stack: ${{ inputs.stack }}
 
   publish-multiarch:
     needs:
@@ -52,7 +58,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
+          images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-${{ inputs.stack }}-${{ inputs.os }}
           flavor: latest=${{ github.ref == 'refs/heads/main' }}
       - name: Create manifest
         id: build
