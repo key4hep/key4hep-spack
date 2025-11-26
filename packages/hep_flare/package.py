@@ -21,7 +21,7 @@
 from spack.package import *
 
 
-class Flare(PythonPackage):
+class HepFlare(PythonPackage):
     """FLARE: FCCee b2Luigi Automated Reconstruction And Event processing.
 
     A framework powered by b2luigi to easily run Monte Carlo generators and
