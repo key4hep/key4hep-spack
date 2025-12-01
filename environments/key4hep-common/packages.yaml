@@ -26,7 +26,7 @@ packages:
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3 +ipo
   gaudi:
-    require: '@39: +aida+cppunit+gperftools+heppdt+jemalloc+unwind+xercesc +ipo'
+    require: '@39: +aida+cppunit+heppdt+xercesc +ipo'
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
