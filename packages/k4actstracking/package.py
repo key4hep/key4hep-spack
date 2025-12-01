@@ -32,4 +32,4 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
-        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4reco"].prefix.lib)
+        env.prepend_path("LD_LIBRARY_PATH", self.spec["k4actstracking"].prefix.lib)
