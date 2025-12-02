@@ -30,12 +30,14 @@ class HepFlare(PythonPackage):
 
     homepage = "https://camcoop1.github.io/FLARE"
     url = "https://pypi.org/project/hep-flare"
+    pypi = "hep-flare/hep-flare-0.1.11.tar.gz"
 
     # notify when the package is updated.
     maintainers("CamCoop1", "amanmdesai")
 
     version("master", branch="main")
     
+    version("0.1.11", sha256="f82498e0956ce0b0a752e53483a257a28f2407d376b3a320c45132bd026a9609")
     version("0.1.9", sha256="67e2fc8aa95f9a05fed964b2c74710c54e97671ce125727c96c4b5e6c370b7dd")
     version("0.1.8", sha256="a7e4b9f3e87a783bbef0279470df8152f267ea7d42d98dcabd0b7383c91efcd9")
     version("0.1.7", sha256="dbb6a3fd93d0635545b5786698ef9fef7456582469869d404f87e038f19ec28b")
