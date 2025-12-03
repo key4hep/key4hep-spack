@@ -166,6 +166,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
             depends_on("py-matplotlib")
             depends_on("py-nbconvert")
             depends_on("py-vector")
+            depends_on("py-pyarrow")
 
     for v in ("+ml", "+full"):
         with when(v):
