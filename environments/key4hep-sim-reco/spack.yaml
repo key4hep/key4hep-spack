@@ -1,0 +1,20 @@
+spack:
+  packages:
+    all:
+      variants:
+        - build_type=RelWithDebInfo
+        - 'cxxstd=20'
+      target: [x86_64, aarch64]
+
+  include:
+    - ../key4hep-common/packages.yaml
+
+  view: false
+
+  concretizer:
+    unify: true
+    targets:
+      host_compatible: true
+
+  specs:
+    - key4hep-stack +analysis~generators~ml~devtools
