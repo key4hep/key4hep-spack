@@ -36,3 +36,6 @@ git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
 
 # acts: add a few dependencies: numpy, sympy, particle and hatchling, see https://github.com/spack/spack-packages/pull/1924
 git cherry-pick 06cca71e3a4778f64af0659f8228368af55a6378 -X theirs --no-commit
+
+# arrow: depend on snappy only with +snappy, remove when https://github.com/spack/spack-packages/pull/2659 is merged
+git cherry-pick de91ea2dec37dac697067479455965681e277d5f -X theirs --no-commit
