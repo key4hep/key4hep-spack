@@ -4,17 +4,8 @@ git fetch jmcarcell -q
 # root: allow +ipo
 git cherry-pick 229e2730faef2def3a2488f46cd6f912b6f8894d -X theirs --no-commit
 
-# root: add v6.36.06, remove!
-git cherry-pick 5b5709eacb920942dbd6aee24607d531ed05176e -X theirs --no-commit
-
-# root: set runtime_cxxmodules to True, remove when https://github.com/spack/spack-packages/pull/109 is merged
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/109.diff | patch -p1
-
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
-
-# gaudi: add db patch, not needed after v40r1
-git cherry-pick c6c6d822a5fd0b30297507547f56370330ae3e71 -X theirs --no-commit
 
 # Build sherpa from a branch
 git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
@@ -22,20 +13,8 @@ git cherry-pick 8e084ccb76f8abfcea04b8378cf670891fee1b1f -X theirs --no-commit
 # py_gosam: try a fix for the build, which is probably not correct
 # git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
 
-# py_cramjam: add c as a dependency, remove!
-git cherry-pick 1d52ef13480b8ac31d316dba3e29c636b03bf4bb -X theirs --no-commit
-
-# py_ruff: add gmake as a dependency, remove!
-git cherry-pick 0d0b1c9cd823085faa341843e48fe3a0ab91003f -X theirs --no-commit
-
 # dd4hep: set CMAKE_INSTALL_LIBDIR to lib
 git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
-
-# prmon: add build dependencies, remove!
-git cherry-pick f81d7d8d863bd943b72ef01f3ef5392548960295 -X theirs --no-commit
-
-# acts: add a few dependencies: numpy, sympy, particle and hatchling, see https://github.com/spack/spack-packages/pull/1924
-git cherry-pick 06cca71e3a4778f64af0659f8228368af55a6378 -X theirs --no-commit
 
 # arrow: depend on snappy only with +snappy, remove when https://github.com/spack/spack-packages/pull/2659 is merged
 git cherry-pick de91ea2dec37dac697067479455965681e277d5f -X theirs --no-commit
