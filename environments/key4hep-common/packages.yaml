@@ -9,7 +9,7 @@ packages:
   # Build the assembler since the one from Alma 9 is old
   # and does not support AVX2 from py-onnxruntime or py-torch
   arrow:
-    require: +parquet
+    require: +parquet+zstd
   binutils:
     require: +gas
   boost:
