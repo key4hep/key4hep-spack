@@ -29,3 +29,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     def cmake_args(self):
         return []
+
+    def setup_run_environment(self, env):
+        env.prepend_path("PYTHONPATH", self.prefix.python)
+        env.prepend_path("GAUDI_PLUGIN_PATH", self.spec["k4actstracking"].prefix.lib)
