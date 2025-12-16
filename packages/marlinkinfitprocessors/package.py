@@ -18,6 +18,10 @@ class Marlinkinfitprocessors(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.5.1",
+        sha256="cefead4b653ce0aa6fc2bb45d4908c1723f694eefbec9545f59e0ce8d2d10a03",
+    )
+    version(
         "0.5", sha256="0e560923e8af46b70b29973a6fda5ff459bb76e52452125b79a2397e9e0f5cfd"
     )
     version(
