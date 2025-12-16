@@ -12,6 +12,10 @@ class K4reco(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "0.3.0",
+        sha256="a54074046631e935f792fcf6d4e1904c60c71bef8886217b35b46261631314dd",
+    )
+    version(
         "0.2.1",
         sha256="4d456945b31569f070806c7e40f3dcf01931af5d970f2f371597bfbe1b79cfd3",
     )
@@ -33,6 +37,7 @@ class K4reco(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("gaudi")
     depends_on("k4fwcore")
+    depends_on("k4fwcore@1.4:", when="@0.3.0:")
     depends_on("k4simgeant4")
     depends_on("root")
 

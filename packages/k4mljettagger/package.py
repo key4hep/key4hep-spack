@@ -13,6 +13,10 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.1",
+        sha256="fc707d023a3160a06a739f2e21b6158fe02f63da9a6f4fe9edc9098c993c9cf4",
+    )
+    version(
         "0.1.0",
         sha256="175bcc75bf6378880aa8fc85a1a1e3f75b400633c9ec88e0583431e085451463",
     )

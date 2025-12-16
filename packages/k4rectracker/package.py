@@ -10,6 +10,11 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     git = "https://github.com/key4hep/k4RecTracker.git"
 
     version("master", branch="master")
+
+    version(
+        "0.7.0",
+        sha256="4e1a07b1465a2e17e6b9d3999d51149b1cf2e727f9cb8064bac640bdfb8cbc4d",
+    )
     version(
         "0.6.0",
         sha256="2d8448d7603767913d840b0d3043bf8982582f9309b37399a6a37ce8ab3c7644",
@@ -30,10 +35,12 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("c", type="build")
     depends_on("cxx", type="build")
 
+    depends_on("podio@1.2:", when="@0.5.0:")
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")
     depends_on("k4fwcore")
+    depends_on("k4fwcore@1.3:", when="@0.6.0:")
     depends_on("marlinutil")
     depends_on("root")
     depends_on(

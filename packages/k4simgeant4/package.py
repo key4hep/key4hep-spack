@@ -13,6 +13,10 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.0pre17",
+        sha256="23a8b22cc2d0e629d4920f6c48b453acda04d5abce82e702cb22556d5cb20c1d",
+    )
+    version(
         "0.1.0pre16",
         sha256="15607bd7257ed5545e19fd924f485df6bc15c910a6441d2e03cf578e854eba4b",
     )
@@ -34,6 +38,7 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore")
     depends_on("geant4")
     depends_on("edm4hep")
+    depends_on("edm4hep@:0.99.2", when="@:0.1.0pre16")
     depends_on("g4ensdfstate")
     depends_on("root")
 
