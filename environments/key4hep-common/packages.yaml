@@ -126,10 +126,6 @@ packages:
     require: +hepmc3
   xgboost:
     require: ~openmp
-  gperftools:
-    require: ~libunwind
-  sherpa:
-    require: '@3.0.2:'
 
   # C++20 that don't appear above
   edm4hep:
