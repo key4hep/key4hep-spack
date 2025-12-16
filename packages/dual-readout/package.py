@@ -19,6 +19,10 @@ class DualReadout(CMakePackage, Key4hepPackage):
     version("master", branch="master")
 
     version(
+        "0.1.8",
+        sha256="b8c4fe5b59c3adae3fa8e0a259b3e05181a543137e081520c35f2f8c9bcb0e19",
+    )
+    version(
         "0.1.7",
         sha256="c3b807f10001e523dbbfca7390a1184b97bd9429ff07276d429e01346623012e",
     )

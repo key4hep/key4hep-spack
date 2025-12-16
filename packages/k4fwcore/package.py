@@ -12,6 +12,10 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     version("main", branch="main")
 
     version(
+        "1.4",
+        sha256="8952caeade65253a4ba5ff263f501a6d954ffd57b7f1b83d7d11d586a1dd3235",
+    )
+    version(
         "1.3",
         sha256="3a484594b4f101a3b4755ca7ee71458440b5edfd5b455b7e64176ad6f0025d01",
     )
@@ -45,9 +49,13 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("root")
     depends_on("podio")
     depends_on("podio@1.0.1:", when="@1.1:")  # linking against podioIO
+    depends_on(
+        "podio@1.3:", when="@1.3:"
+    )  # using edm4hep::edm4hepDataTypes and related
     depends_on("podio@:0.17.3", when="@:1.0pre17")  # podio/EventStore.h removed
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
+    depends_on("edm4hep@0.99:", when="@1.2:")
 
     def cmake_args(self):
         args = [

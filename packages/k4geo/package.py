@@ -19,6 +19,10 @@ class K4geo(CMakePackage):
 
     version("main", branch="main")
     version(
+        "00-24",
+        sha256="3eefd973c0e534cc5cbb4d8fc079455508986bba49f859c30e0c23ac3e732f19",
+    )
+    version(
         "00-23",
         sha256="dd0c6300a6a2190a089012dfea271bd31050e8d4134ce09d896ebd81ef7391c5",
     )
@@ -55,6 +59,7 @@ class K4geo(CMakePackage):
 
     depends_on("lcio")
     depends_on("dd4hep")
+    depends_on("dd4hep@1.31:", when="@0.22:")
     depends_on("root")
     depends_on("python", type="build")
     depends_on("ninja", type="build")

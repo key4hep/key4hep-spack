@@ -18,6 +18,10 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-07-06",
+        sha256="9650278b9722869f872c75a486b081e1c761aa3b76ec1852a61ae3dedd76fec3",
+    )
+    version(
         "00-07-05",
         sha256="54887cb8192470846e9e083bfbb6ff92f98555a2067c7c405b6490fdee2fb9b5",
     )
@@ -87,6 +91,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on("hepmc", when="+delphes_hepmc")
     depends_on("hepmc3", when="+framework")
     depends_on("k4fwcore", when="+framework")
+    depends_on("k4fwcore@1.3:", when="@00-07-06: +framework")
 
     depends_on("catch2@3.0.1:", type=("build", "test"))
     depends_on("k4gen", when="+integration_tests", type=("build", "test", "run"))

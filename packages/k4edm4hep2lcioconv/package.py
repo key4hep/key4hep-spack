@@ -20,6 +20,10 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-13",
+        sha256="0672be1d53761a53a7b8d1b0dc12106df888aa47d26f74aa61ebcb53db19b2f4",
+    )
+    version(
         "00-12",
         sha256="4a435456d029657d6bb4f6406e7060bb9934a96370b356a8972268e95f80bcf1",
     )
@@ -46,6 +50,7 @@ class K4edm4hep2lcioconv(CMakePackage, Key4hepPackage):
     depends_on("podio@1:", when="@00-09:")
     depends_on("edm4hep@0.10:")
     depends_on("edm4hep@0.99:", when="@00-09:")
+    depends_on("edm4hep@:0.99.2", when="@:00-12")
 
     def cmake_args(self):
         args = [
