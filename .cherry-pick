@@ -25,5 +25,5 @@ git cherry-pick 2726ea09a8f127c81943e07e2382afd6425bd1d3 -X theirs --no-commit
 # texlive: do not install the documentation and source files, remove when https://github.com/spack/spack-packages/pull/2771 is merged
 git cherry-pick 834e7d6b9b4d33cb11bf3de5e099d2745e924bd5 -X theirs --no-commit
 
-# sherpa: add v3.0.3, remove when https://github.com/spack/spack-packages/pull/2781 is merged
+# sherpa: add v3.0.3, remove!
 git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
