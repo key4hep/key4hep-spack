@@ -18,6 +18,10 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.11.1",
+        sha256="3e15a6d14c1569c237884f5d5ee57860733e37682401baf0e55e7f406f90c78b",
+    )
+    version(
         "0.11",
         sha256="db034e7738d107ea128efaef65071856218324a841db9cd6186b01a6acd054ae",
     )
