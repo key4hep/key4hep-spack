@@ -30,3 +30,6 @@ git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
 
 # clhep: add 2.4.7.2, remove when https://github.com/spack/spack-packages/pull/2799 is merged
 git cherry-pick 369c205c9c0ef453928b6fa1ef67b3becdabdf15 -X theirs --no-commit
+
+# geant4 add v11.4.0, remove when https://github.com/spack/spack-packages/pull/2670 is merged
+git cherry-pick 18bba1de91588b8279f6d7a5891139be7581b94b -X theirs --no-commit
