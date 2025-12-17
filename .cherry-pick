@@ -27,3 +27,6 @@ git cherry-pick 834e7d6b9b4d33cb11bf3de5e099d2745e924bd5 -X theirs --no-commit
 
 # sherpa: add v3.0.3, remove!
 git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
+
+# clhep: add 2.4.7.2, remove when https://github.com/spack/spack-packages/pull/2799 is merged
+git cherry-pick 369c205c9c0ef453928b6fa1ef67b3becdabdf15 -X theirs --no-commit
