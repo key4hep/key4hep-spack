@@ -9,4 +9,4 @@ spack:
   repos:
   - ../..
   specs:
-  - geant4-data@11.3.0
+  - geant4-data@11.4.0
