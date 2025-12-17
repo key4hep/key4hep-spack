@@ -32,4 +32,8 @@ git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
 git cherry-pick 369c205c9c0ef453928b6fa1ef67b3becdabdf15 -X theirs --no-commit
 
 # geant4 add v11.4.0, remove when https://github.com/spack/spack-packages/pull/2670 is merged
-git cherry-pick 18bba1de91588b8279f6d7a5891139be7581b94b -X theirs --no-commit
+git cherry-pick 2257cd8924bad610c374b4bf908282c15d46110d -X theirs --no-commit
+
+# garfieldpp: add v2025.12 (compatible with ROOT 6.38.00), remove when https://github.com/spack/spack-packages/pull/2813 is merged
+git cherry-pick 8b7b71050db11127f2b868df481f026c361bf087 -X theirs --no-commit
+
