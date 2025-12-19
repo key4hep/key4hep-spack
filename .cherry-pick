@@ -37,3 +37,6 @@ git cherry-pick 2257cd8924bad610c374b4bf908282c15d46110d -X theirs --no-commit
 # garfieldpp: add v2025.12 (compatible with ROOT 6.38.00), remove when https://github.com/spack/spack-packages/pull/2813 is merged
 git cherry-pick 8b7b71050db11127f2b868df481f026c361bf087 -X theirs --no-commit
 
+# gaudi: add v40.2
+git cherry-pick 24ebf73d5fa1801f0c54a3faaa47b8a1785eba80 -X theirs --no-commit
+
