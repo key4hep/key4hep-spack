@@ -83,6 +83,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4simgeant4")
     depends_on("k4geo")
     depends_on("podio")
+    depends_on("hep-flare")
+    
     # HEP-FCC packages
     depends_on("fcc-config")
     depends_on("fccsw")
@@ -93,7 +95,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccdetectors")
     depends_on("k4reccalorimeter", when="+ml")
     depends_on("k4reccalorimeter", when="+full")
-
+    
     # ILCSoft packages
     for variant in ("ml", "generators"):
         depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
