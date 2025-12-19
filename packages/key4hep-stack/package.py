@@ -83,7 +83,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4simgeant4")
     depends_on("k4geo")
     depends_on("podio")
-    depends_on("hep-flare")
+
     
     # HEP-FCC packages
     depends_on("fcc-config")
@@ -194,7 +194,8 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("genfit")
     depends_on("opendatadetector")
     depends_on("sdhcalcontent")
-
+    depends_on("hep-flare")
+    
     for variant in ("generators", "ml", "analysis", "devtools"):
         conflicts(f"+{variant}", when="+full", msg=f"+full already enables +{variant}")
 
