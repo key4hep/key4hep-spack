@@ -40,6 +40,9 @@ git cherry-pick 8b7b71050db11127f2b868df481f026c361bf087 -X theirs --no-commit
 # gaudi: add v40.2
 git cherry-pick 24ebf73d5fa1801f0c54a3faaa47b8a1785eba80 -X theirs --no-commit
 
+# gaudi: fix the fmt dependencies, remove when https://github.com/spack/spack-packages/pull/2825 is merged
+git cherry-pick 8971505668f6ce86053848e45c7dd46e89573747 -X theirs --no-commit
+
 # thrift: make sure the python variant exists with CMake, remove when https://github.com/spack/spack-packages/pull/2846 is merged
 git cherry-pick 840a11811f6c1617daa97d54345b06b2d4b1ddb6 -X theirs --no-commit
 
