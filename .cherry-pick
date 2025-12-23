@@ -21,11 +21,14 @@ curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/2
 
 # cargo_c: add the package, remove!
 git cherry-pick 2726ea09a8f127c81943e07e2382afd6425bd1d3 -X theirs --no-commit
-# cargo_c: fix builds
-git cherry-pick 42569d775efaa639a9c7905061bedaacf7759692 -X theirs --no-commit
+# cargo_c: fix builds, remove when https://github.com/spack/spack-packages/pull/2867 is merged
+git cherry-pick 56600f5b3d15c8776bf56b135c6333551e4377ab -X theirs --no-commit
 
 # texlive: do not install the documentation and source files, remove!
 git cherry-pick 834e7d6b9b4d33cb11bf3de5e099d2745e924bd5 -X theirs --no-commit
+
+# texlive: add missing import, remove when https://github.com/spack/spack-packages/pull/2882 is merged
+git cherry-pick 57603adf4731caa2e7b4896059018406abb11996 -X theirs --no-commit
 
 # sherpa: add v3.0.3, remove!
 git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
