@@ -48,7 +48,7 @@ git cherry-pick 24ebf73d5fa1801f0c54a3faaa47b8a1785eba80 -X theirs --no-commit
 # gaudi: fix the fmt dependencies, remove when https://github.com/spack/spack-packages/pull/2825 is merged
 git cherry-pick 577e67ad8ccba05916539418b8dc71b48b705b1f -X theirs --no-commit
 
-# thrift: make sure the python variant exists with CMake, remove when https://github.com/spack/spack-packages/pull/2846 is merged
+# thrift: make sure the python variant exists with CMake, remove!
 git cherry-pick 840a11811f6c1617daa97d54345b06b2d4b1ddb6 -X theirs --no-commit
 
 # podio: ensure Python.h is found in ROOT ACLiC, remove!
