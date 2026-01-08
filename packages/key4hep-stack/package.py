@@ -94,7 +94,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("fccdetectors")
     depends_on("k4reccalorimeter", when="+ml")
     depends_on("k4reccalorimeter", when="+full")
-    
     # ILCSoft packages
     for variant in ("ml", "generators"):
         depends_on(f"ilcsoft +{variant}", when=f"+{variant}")
