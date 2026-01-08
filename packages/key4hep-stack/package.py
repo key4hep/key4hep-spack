@@ -83,7 +83,6 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     depends_on("k4simgeant4")
     depends_on("k4geo")
     depends_on("podio")
-
     
     # HEP-FCC packages
     depends_on("fcc-config")
