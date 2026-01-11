@@ -54,3 +54,5 @@ git cherry-pick 840a11811f6c1617daa97d54345b06b2d4b1ddb6 -X theirs --no-commit
 # podio: ensure Python.h is found in ROOT ACLiC, remove!
 git cherry-pick 935196d3bd0a005a32c843afca5e1e510ad7176a -X theirs --no-commit
 
+# b2luigi: add the new package
+git cherry-pick 20e86bf8f19bd1895bdbf88443fc43233002eec0 -X theirs --no-commit
