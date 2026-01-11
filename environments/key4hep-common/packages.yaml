@@ -9,14 +9,12 @@ packages:
   # Build the assembler since the one from Alma 9 is old
   # and does not support AVX2 from py-onnxruntime or py-torch
   arrow:
-    require: +parquet+zstd
+    require: +parquet+snappy+zstd
   binutils:
     require: +gas
   boost:
     require: +python
     buildable: true
-  cppcheck:
-    require: "@2.18.0:"
   curl:
     require: +gssapi
   graphviz:
@@ -28,7 +26,7 @@ packages:
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3 +ipo
   gaudi:
-    require: '@39: +aida+cppunit+heppdt+xercesc +ipo'
+    require: +aida+heppdt+xercesc +ipo
   gdb:
     require: +python+tui+source-highlight~debuginfod
   # https://github.com/key4hep/key4hep-spack/pull/501
@@ -48,6 +46,7 @@ packages:
   lccontent:
     require: +monitoring
   llvm:
+    require: '@21:'
     variants: ~flang~lldb~lld~lua~mlir~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~code_signing~python~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
   marlin:
     require: +lccd
@@ -127,10 +126,6 @@ packages:
     require: +hepmc3
   xgboost:
     require: ~openmp
-  gperftools:
-    require: ~libunwind
-  sherpa:
-    require: '@3.0.2:'
 
   # C++20 that don't appear above
   edm4hep:
