@@ -133,6 +133,7 @@ if __name__ == "__main__":
         ("gear", "ilcsoft/gear"),
         ("ilcutil", "ilcsoft/ilcutil"),
         ("ildperformance", "ilcsoft/ildperformance"),
+        ("k4actstracking", "key4hep/k4actstracking"),
         ("k4mljettagger", "key4hep/k4mljettagger"),
         ("k4clue", "key4hep/k4clue"),
         ("k4edm4hep2lcioconv", "key4hep/k4edm4hep2lcioconv"),
