@@ -11,7 +11,7 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
     """Interface between Marlin and PandoraPFA."""
 
     url = "https://github.com/iLCSoft/DDMarlinPandora/archive/v00-11.tar.gz"
-    homepage = "https://github.com/iLCSoft/DDMarlinPandora/archive/v00-11.tar.gz"
+    homepage = "https://github.com/iLCSoft/DDMarlinPandora"
     git = "https://github.com/iLCSoft/DDMarlinPandora.git"
 
     maintainers("vvolkl")
