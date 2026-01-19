@@ -47,7 +47,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("fastjet")
     depends_on("gaudi")
-    depends_on("k4fwcore")
+    depends_on("k4fwcore@1.5:", when="@0.1.0pre18:")
     depends_on("k4fwcore@:1.4", when="@:0.1.0pre17")
     depends_on("k4geo")
     depends_on("k4simgeant4")
