@@ -32,6 +32,7 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("gaudi")
     depends_on("k4fwcore")
+    depends_on("k4fwcore@:1.4", when="@:0.1.0")
     depends_on("lccontent")
     depends_on("pandorasdk")
     depends_on("root")

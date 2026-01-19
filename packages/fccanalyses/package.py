@@ -69,6 +69,7 @@ class Fccanalyses(CMakePackage, Key4hepPackage):
     depends_on("python")
     depends_on("podio")
     depends_on("podio+datasource", when="@0.10.0:")
+    depends_on("podio@:1.5", when="@:0.11.0")
     depends_on("edm4hep")
     depends_on("acts", when="+acts")
     depends_on("acts@:29", when="@:0.8.0 +acts")
