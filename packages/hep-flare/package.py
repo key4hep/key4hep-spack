@@ -1,0 +1,53 @@
+# Copyright Spack Project Developers. See COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+from spack_repo.builtin.build_systems.python import PythonPackage
+
+from spack.package import *
+
+
+class HepFlare(PythonPackage):
+    """FLARE: FCCee b2Luigi Automated Reconstruction And Event processing.
+
+    A framework powered by b2luigi to easily run Monte Carlo generators and
+    fccanalysis workflows.
+    """
+
+    homepage = "https://github.com/CamCoop1/FLARE"
+    pypi = "hep-flare/hep-flare-0.1.11.tar.gz"
+
+    license("MIT")
+
+    # notify when the package is updated.
+    maintainers("CamCoop1", "amanmdesai")
+
+    version("master", branch="main")
+
+    version(
+        "0.2.1",
+        sha256="8beb14c2045774fc06e1773dd4cd73842cd515f3158651744bba0920ea0361e3",
+    )
+    version(
+        "0.1.11",
+        sha256="f82498e0956ce0b0a752e53483a257a28f2407d376b3a320c45132bd026a9609",
+    )
+    version(
+        "0.1.9",
+        sha256="67e2fc8aa95f9a05fed964b2c74710c54e97671ce125727c96c4b5e6c370b7dd",
+    )
+    version(
+        "0.1.8",
+        sha256="a7e4b9f3e87a783bbef0279470df8152f267ea7d42d98dcabd0b7383c91efcd9",
+    )
+    version(
+        "0.1.7",
+        sha256="dbb6a3fd93d0635545b5786698ef9fef7456582469869d404f87e038f19ec28b",
+    )
+    version(
+        "0.1.6",
+        sha256="1aa5b25e7d6f3a2f2ca50872577f7d8e0a3927f0b5984cd683f0f36faeb09a57",
+    )
+
+    depends_on("py-b2luigi@1.2.6:", type=("build", "run"))
+    depends_on("py-pyyaml@6.0:", type=("build", "run"))
+    depends_on("py-pydantic1", type=("build", "run"))
