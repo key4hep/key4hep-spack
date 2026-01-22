@@ -170,10 +170,10 @@ k4_local_repo() {
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
     export GAUDI_PLUGIN_PATH=$PWD/$install/lib:$PWD/$install/lib64:$GAUDI_PLUGIN_PATH
     if [ "$current_repo" = "k4geo" ]; then
-        export LCGEO=$PWD
-        export K4GEO=$PWD
-        export lcgeo_DIR=$PWD
-        export k4geo_DIR=$PWD
+        export K4GEO=$PWD/$install/share/k4geo
+        export LCGEO=$K4GEO
+        export lcgeo_DIR=$K4GEO
+        export k4geo_DIR=$K4GEO
         echo "Added LCGEO, K4GEO, lcgeo_DIR and k4geo_DIR to the environment"
     fi
     echo "Added $PWD/$install to the environment and removed any paths containing /${current_repo}/"
