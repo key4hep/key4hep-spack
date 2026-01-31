@@ -56,3 +56,10 @@ git cherry-pick 935196d3bd0a005a32c843afca5e1e510ad7176a -X theirs --no-commit
 
 # b2luigi: add the new package
 git cherry-pick 20e86bf8f19bd1895bdbf88443fc43233002eec0 -X theirs --no-commit
+
+# podio: add v1.7
+# edm4hep: add v1.0
+# dd4hep: add v1.35
+git cherry-pick 208b3c478e74e5217724b4894d1db941b0c13555 -X theirs --no-commit
+git cherry-pick 9ba7aca4be1e05e17c911aa48f6eb7ca5d3c8df7 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/3157.diff | patch -p1
