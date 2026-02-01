@@ -25,6 +25,8 @@ packages:
     require: +monitoring
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3 +ipo
+  edm4hep:
+    require: '@1.0: cxxstd=20'
   gaudi:
     require: +aida+heppdt+xercesc +ipo
   gdb:
@@ -128,8 +130,6 @@ packages:
     require: ~openmp
 
   # C++20 that don't appear above
-  edm4hep:
-    variants: cxxstd=20
   fastjet:
     variants: cxxstd=20
   ilcutil:
