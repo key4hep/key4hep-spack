@@ -26,7 +26,8 @@ packages:
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3 +ipo
   edm4hep:
-    require: '@1.0: cxxstd=20'
+    require: '@1.0:'
+    variants: cxxstd=20
   gaudi:
     require: +aida+heppdt+xercesc +ipo
   gdb:
