@@ -22,6 +22,7 @@ class K4generatorsconfig(CMakePackage):
     version(
         "1.0.1-alpha",
         sha256="da408d16c446b6fa1775ea1ff3b03cb1b90894ea958dd74086cf361e4d9ed5ee",
+        preferred=True,
     )
     version(
         "1.0.0-alpha",
