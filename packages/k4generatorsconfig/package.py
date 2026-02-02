@@ -19,6 +19,7 @@ class K4generatorsconfig(CMakePackage):
 
     version("main", branch="main")
 
+    # preferred is apparently needed with these alpha versions
     version(
         "1.0.1-alpha",
         sha256="da408d16c446b6fa1775ea1ff3b03cb1b90894ea958dd74086cf361e4d9ed5ee",
