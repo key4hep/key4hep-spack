@@ -183,15 +183,36 @@ k4_local_repo() {
 
 build_type=opt
 lcg_setup=0
-lcg_build_type=opt
 
-for arg in "$@"; do
-    if [ "$arg" = "--lcg" ]; then
-        lcg_setup=1
-    elif [ "$arg" = "-d" ]; then
-        lcg_build_type=dbg
-    fi
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    eval "argn=\${$((i+1))}"
+    case $arg in
+        --lcg)
+            lcg_setup=1
+            ;;
+        -d)
+            build_type=dbg
+            ;;
+        -h|--help)
+            usage
+            return 0
+            ;;
+    esac
 done
+
+if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
+    os="almalinux9"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
+    os="ubuntu24"
+else
+    echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
+    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 24.04"
+    return 1
+fi
 
 if [ $lcg_setup -eq 1 ]; then
     for arg in "$@"; do
@@ -206,71 +227,48 @@ if [ $lcg_setup -eq 1 ]; then
         esac
     done
 
-    if [ -n "$KEY4HEP_STACK" ]; then
-        echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
-        return 1
-    fi
-
-    if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-       [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-       [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
-        :
-    else
+    if [ "$os" != "almalinux9" ]; then
         echo "Unsupported OS for --lcg, aborting..."
         echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9"
         return 1
     fi
 
-    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/x86_64-el9-gcc14-${lcg_build_type}/setup.sh"
+    lcg_arch="$(uname -m)"
+    if [ "$lcg_arch" != "x86_64" ]; then
+        echo "Unsupported architecture $lcg_arch for --lcg (expected x86_64), aborting..."
+        return 1
+    fi
+
+    if [ -n "$KEY4HEP_STACK" ]; then
+        echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
+        return 1
+    fi
+
+    # Map the detected OS to LCG view naming.
+    lcg_os_tag="el9"
+    lcg_compiler_tag="gcc14"
+    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
     if [ ! -f "$lcg_setup_script" ]; then
         echo "LCG setup script not found at: $lcg_setup_script"
         return 1
     fi
 
     echo "Sourcing LCG devkey-head view from CVMFS"
-    # echo "Use the following command to reproduce the current environment:"
-    # echo ""
-    # if [ "$lcg_build_type" = "dbg" ]; then
-    #     echo "        source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg -d"
-    # else
-    #     echo "        source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
-    # fi
-    # echo ""
+    echo "Use the following command to reproduce the current environment: "
+    echo ""
+    command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
+    if [ "$build_type" = "dbg" ]; then
+        command+=" -d"
+    fi
+    echo "        $command"
+    echo ""
     source "$lcg_setup_script"
     return 0
 fi
 
-for ((i=1; i<=$#; i++)); do
-    eval arg=\$$i
-    eval "argn=\${$((i+1))}"
-    case $arg in
-        -d)
-            build_type=dbg
-            ;;
-        -h|--help)
-            usage
-            return 0
-            ;;
-    esac
-done
-
-
 rel="latest-$build_type"
 if [[ "$1" = "-r" && -n "$2" ]]; then
     rel="$2"
-fi
-
-if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
-    os="almalinux9"
-elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
-     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
-    os="ubuntu24"
-else
-    echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 24.04"
-    return 1
 fi
 
 check_release $1 $2 $os
