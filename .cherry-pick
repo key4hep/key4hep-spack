@@ -4,6 +4,9 @@ git fetch jmcarcell -q
 # root: allow +ipo
 git cherry-pick 9af230f21396b8e99eefab09a586f51120ab186a -X theirs --no-commit
 
+# root: use a builtin civetweb
+git cherry-pick eed88ee482b3248a9056e3a8986bdc354146ccb1 -X theirs --no-commit
+
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
 
