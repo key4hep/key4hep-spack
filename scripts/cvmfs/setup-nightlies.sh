@@ -240,6 +240,7 @@ if [ $lcg_setup -eq 1 ]; then
 
     lcg_os_tag="el9"
     lcg_compiler_tag="gcc14"
+    lcg_arch_tag="x86_64"
     lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
     if [ ! -f "$lcg_setup_script" ]; then
         echo "LCG setup script not found at: $lcg_setup_script"
