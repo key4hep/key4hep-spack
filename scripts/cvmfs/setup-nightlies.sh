@@ -233,18 +233,11 @@ if [ $lcg_setup -eq 1 ]; then
         return 1
     fi
 
-    lcg_arch="$(uname -m)"
-    if [ "$lcg_arch" != "x86_64" ]; then
-        echo "Unsupported architecture $lcg_arch for --lcg (expected x86_64), aborting..."
-        return 1
-    fi
-
     if [ -n "$KEY4HEP_STACK" ]; then
         echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
         return 1
     fi
 
-    # Map the detected OS to LCG view naming.
     lcg_os_tag="el9"
     lcg_compiler_tag="gcc14"
     lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
@@ -254,14 +247,14 @@ if [ $lcg_setup -eq 1 ]; then
     fi
 
     echo "Sourcing LCG devkey-head view from CVMFS"
-    echo "Use the following command to reproduce the current environment: "
-    echo ""
-    command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
-    if [ "$build_type" = "dbg" ]; then
-        command+=" -d"
-    fi
-    echo "        $command"
-    echo ""
+    # echo "Use the following command to reproduce the current environment: "
+    # echo ""
+    # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
+    # if [ "$build_type" = "dbg" ]; then
+    #     command+=" -d"
+    # fi
+    # echo "        $command"
+    # echo ""
     source "$lcg_setup_script"
     return 0
 fi
