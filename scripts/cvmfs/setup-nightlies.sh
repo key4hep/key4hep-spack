@@ -145,6 +145,12 @@ k4_local_repo() {
         esac
     done
 
+    # if lcg
+    if [ $lcg_setup -eq 1 ]; then
+        echo "With LCG views, k4_local_repo won't remove paths to the current repository in the stack"
+        echo "The version in the stack will be always findable. It's possible that this causes issue, please report them"
+    fi
+
     if [ -n "$1" ]; then
         install=$1
     else
