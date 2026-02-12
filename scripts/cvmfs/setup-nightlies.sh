@@ -3,10 +3,11 @@
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
 function usage() {
-    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
     # echo "       -c           : select compiler, gcc14 (default) on AlmaLinux 9, system for the other OSes"
     echo "       -d           : setup the debug version of the software stack"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (only compatible with -d)"
     echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
     echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
@@ -144,6 +145,12 @@ k4_local_repo() {
         esac
     done
 
+    # if lcg
+    if [ $lcg_setup -eq 1 ]; then
+        echo "With LCG views, k4_local_repo won't remove paths to the current repository in the stack"
+        echo "The version in the stack will be always findable. It's possible that this causes issue, please report them"
+    fi
+
     if [ -n "$1" ]; then
         install=$1
     else
@@ -181,10 +188,15 @@ k4_local_repo() {
 }
 
 build_type=opt
+lcg_setup=0
+
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
     eval "argn=\${$((i+1))}"
     case $arg in
+        --lcg)
+            lcg_setup=1
+            ;;
         -d)
             build_type=dbg
             ;;
@@ -194,12 +206,6 @@ for ((i=1; i<=$#; i++)); do
             ;;
     esac
 done
-
-
-rel="latest-$build_type"
-if [[ "$1" = "-r" && -n "$2" ]]; then
-    rel="$2"
-fi
 
 if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
@@ -212,6 +218,57 @@ else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
     echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 24.04"
     return 1
+fi
+
+if [ $lcg_setup -eq 1 ]; then
+    for arg in "$@"; do
+        case "$arg" in
+            --lcg|-d)
+                ;;
+            *)
+                echo "The --lcg option is only compatible with -d"
+                usage
+                return 1
+                ;;
+        esac
+    done
+
+    if [ "$os" != "almalinux9" ]; then
+        echo "Unsupported OS for --lcg, aborting..."
+        echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9"
+        return 1
+    fi
+
+    if [ -n "$KEY4HEP_STACK" ]; then
+        echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
+        return 1
+    fi
+
+    lcg_os_tag="el9"
+    lcg_compiler_tag="gcc14"
+    lcg_arch_tag="x86_64"
+    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
+    if [ ! -f "$lcg_setup_script" ]; then
+        echo "LCG setup script not found at: $lcg_setup_script"
+        return 1
+    fi
+
+    echo "Sourcing LCG devkey-head view from CVMFS"
+    # echo "Use the following command to reproduce the current environment: "
+    # echo ""
+    # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
+    # if [ "$build_type" = "dbg" ]; then
+    #     command+=" -d"
+    # fi
+    # echo "        $command"
+    # echo ""
+    source "$lcg_setup_script"
+    return 0
+fi
+
+rel="latest-$build_type"
+if [[ "$1" = "-r" && -n "$2" ]]; then
+    rel="$2"
 fi
 
 check_release $1 $2 $os
