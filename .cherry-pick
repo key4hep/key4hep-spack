@@ -5,7 +5,7 @@ git fetch jmcarcell -q
 git cherry-pick 9af230f21396b8e99eefab09a586f51120ab186a -X theirs --no-commit
 
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
+git cherry-pick bc695c29ab074df4ed4baffc2e7f0eefe7e6fb03 -X theirs --no-commit
 
 # py_gosam: try a fix for the build, which is probably not correct
 # git cherry-pick 45e1d831afc38948a89966c01f6ffa57201d8c0d -X theirs --no-commit
@@ -17,7 +17,7 @@ git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
 git cherry-pick de91ea2dec37dac697067479455965681e277d5f -X theirs --no-commit
 
 # rust: add v1.92, remove!
-curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/2737.diff | patch -p1
+git cherry-pick 01b4708b21e90ce93ab276eca5b40c79185efb22 -X theirs --no-commit
 
 # cargo_c: add the package, remove!
 git cherry-pick 2726ea09a8f127c81943e07e2382afd6425bd1d3 -X theirs --no-commit
