@@ -143,7 +143,7 @@ packages:
   # Since many packages depend on setuptools that was dropped in 3.12,
   # without asking explicitly the version used will be 3.11
   python:
-    require: "@3.12: +optimizations"
+    require: "@3.12:3.13 +optimizations"
   sio:
     variants: cxxstd=20
 
