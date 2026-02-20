@@ -25,6 +25,8 @@ packages:
     require: +monitoring
   dd4hep:
     require: +edm4hep+lcio+xercesc+hepmc3 +ipo
+  edm4hep:
+    variants: cxxstd=20
   gaudi:
     require: +aida+heppdt+xercesc +ipo
   gdb:
@@ -46,8 +48,7 @@ packages:
   lccontent:
     require: +monitoring
   llvm:
-    require: '@21:'
-    variants: ~flang~lldb~lld~lua~mlir~polly~libomptarget~libomptarget_debug~gold~split_dwarf~llvm_dylib~link_llvm_dylib~code_signing~python~z3~zstd compiler-rt="none" libcxx="none" targets="x86"
+    require: '@21: ~lldb~lld~lua~polly~libomptarget~gold~llvm_dylib compiler-rt="none" libcxx="none" libunwind="none" targets="x86"'
   marlin:
     require: +lccd
   madgraph5amc:
@@ -128,8 +129,6 @@ packages:
     require: ~openmp
 
   # C++20 that don't appear above
-  edm4hep:
-    variants: cxxstd=20
   fastjet:
     variants: cxxstd=20
   ilcutil:
