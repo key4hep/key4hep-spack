@@ -134,6 +134,7 @@ class Key4hepStack(BundlePackage, Key4hepPackage):
     for v in ("+devtools", "+full"):
         with when(v):
             # More extensive Devtools
+            depends_on("ccache")
             depends_on("cppcheck")
             depends_on("doxygen")
             depends_on("llvm")
