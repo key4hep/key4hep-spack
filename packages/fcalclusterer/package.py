@@ -57,9 +57,8 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     depends_on("root +unuran +math")
     depends_on("dd4hep")
 
-    # testing
-    depends_on("k4geo")
-    depends_on("marlindd4hep")
+    depends_on("k4geo", type="test")
+    depends_on("marlindd4hep", type="test")
 
     # CMAKE_INSTALL_PREFIX is overwritten by the package
     patch("install.patch", when="@:1.0.1")
