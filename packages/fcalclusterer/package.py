@@ -93,9 +93,11 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
 
     def setup_build_environment(self, env):
         # k4_setup_env_for_framework_tests(self.spec, env)
-        env.prepend_path(
-            "MARLIN_DLL", self.spec["marlindd4hep"].prefix.lib + "/libMarlinDD4hep.so"
-        )
+        if "marlindd4hep" in self.spec:
+            env.prepend_path(
+                "MARLIN_DLL",
+                self.spec["marlindd4hep"].prefix.lib + "/libMarlinDD4hep.so",
+            )
         env.prepend_path("ROOT_INCLUDE_PATH", self.spec["dd4hep"].prefix.include)
         env.prepend_path("LD_LIBRARY_PATH", self.spec["dd4hep"].prefix.lib)
         # used p.ex. in ddsim to find DDDetectors dir
