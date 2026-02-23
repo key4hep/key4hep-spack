@@ -15,6 +15,7 @@ class HepFlare(PythonPackage):
 
     homepage = "https://github.com/CamCoop1/FLARE"
     pypi = "hep-flare/hep-flare-0.1.11.tar.gz"
+    git = "https://github.com/CamCoop1/FLARE.git"
 
     license("MIT")
 
