@@ -42,21 +42,18 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
 
     version("1.0pre19", tag="v01-00pre19")
     version("1.0pre18", tag="v01-00pre18")
-    version("1.0pre17", tag="v01-00pre17")
-    version("1.0pre16", tag="v01-00pre16")
 
     depends_on("c", type="build", when="@:1.2")
     depends_on("cxx", type="build")
 
     depends_on("gaudi")
-    depends_on("gaudi +gaudialg", when="@:1.0pre19 ^gaudi@37:")
+    conflicts("^gaudi@37: ~gaudialg", when="@:1.0pre19")
     depends_on("root")
     depends_on("podio")
     depends_on("podio@1.0.1:", when="@1.1:")  # linking against podioIO
     depends_on(
         "podio@1.3:", when="@1.3:"
     )  # using edm4hep::edm4hepDataTypes and related
-    depends_on("podio@:0.17.3", when="@:1.0pre17")  # podio/EventStore.h removed
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.2:", when="@1.0pre17:")
     depends_on("edm4hep@0.99:", when="@1.2:")
