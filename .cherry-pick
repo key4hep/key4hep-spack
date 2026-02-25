@@ -7,6 +7,9 @@ git cherry-pick 9af230f21396b8e99eefab09a586f51120ab186a -X theirs --no-commit
 # root: use a builtin civetweb
 git cherry-pick eed88ee482b3248a9056e3a8986bdc354146ccb1 -X theirs --no-commit
 
+# root: add v6.38.02
+git cherry-pick b6375e080536a5e997ab0f0bd8f6a68d50f1d0ae -X theirs --no-commit
+
 # madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
 curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
 
