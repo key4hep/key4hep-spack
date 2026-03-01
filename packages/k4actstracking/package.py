@@ -1,4 +1,4 @@
-json spack.package import *
+from spack.package import *
 from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
