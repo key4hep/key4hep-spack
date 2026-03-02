@@ -24,7 +24,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     depends_on("cxx", type="build")
 
-    depends_on("acts+dd4hep+tgeo+json")
+    depends_on("acts+dd4hep+json")
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")
