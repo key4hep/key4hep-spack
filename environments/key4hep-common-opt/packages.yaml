@@ -23,8 +23,6 @@ packages:
     require: +ipo build_type=Release
   delphes:
     require: +ipo build_type=Release
-  dual-readout:
-    require: +ipo build_type=Release
   edm4hep:
     require: +ipo build_type=Release cxxstd=20
   fcalclusterer:

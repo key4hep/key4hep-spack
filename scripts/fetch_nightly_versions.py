@@ -122,7 +122,6 @@ if __name__ == "__main__":
         ("ddkaltest", "ilcsoft/ddkaltest"),
         ("ddmarlinpandora", "ilcsoft/ddmarlinpandora"),
         ("delphes", "delphes/delphes"),
-        ("dual-readout", "hep-fcc/dual-readout"),
         ("edm4hep", "key4hep/edm4hep"),
         ("fcalclusterer", "fcalsw/fcalclusterer"),
         ("fccanalyses", "hep-fcc/fccanalyses"),
