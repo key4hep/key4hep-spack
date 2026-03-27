@@ -22,6 +22,10 @@ class Cluestering(CMakePackage):
     version("main", branch="main")
 
     version(
+        "2.10.0",
+        sha256="98217630d40c71cd78074c9afc0fdefc017783804039e2f3815587fb472047a8",
+    )
+    version(
         "2.7.0",
         sha256="bb2c7b8e3301f87261b1da874dce62bdd9630b6ff020846f6b8b3e774a2697b9",
     )
