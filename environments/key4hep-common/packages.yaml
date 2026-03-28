@@ -15,6 +15,8 @@ packages:
   boost:
     require: +python
     buildable: true
+  cluestering:
+    require: '@2.10.0:'
   curl:
     require: +gssapi
   graphviz:
