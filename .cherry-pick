@@ -63,9 +63,16 @@ git cherry-pick 20e86bf8f19bd1895bdbf88443fc43233002eec0 -X theirs --no-commit
 # podio: add v1.7
 # edm4hep: add v1.0
 # dd4hep: add v1.35
+# root: add v6.38.04
+# lcio: add v2.23.2
+# dd4hep: add v1.36
 git cherry-pick 208b3c478e74e5217724b4894d1db941b0c13555 -X theirs --no-commit
 git cherry-pick 9ba7aca4be1e05e17c911aa48f6eb7ca5d3c8df7 -X theirs --no-commit
 git cherry-pick 4ede55d3da74d08a2c07a982615247f4325b031c -X theirs --no-commit
+git cherry-pick 8c3d911dbe50e3150b337c49ea3969243a925b45 -X theirs --no-commit
+git cherry-pick 849813803ae65486b7e9087f2e5ec0bd73685e84 -X theirs --no-commit
+curl -s https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/4121.diff | patch -p1
+
 
 # alpaka: add v2.1.0
 git cherry-pick c5923e68e7a53a70108a33e5a58ed21b0cf35ba0 -X theirs --no-commit
