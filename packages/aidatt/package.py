@@ -18,6 +18,10 @@ class Aidatt(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.11",
+        sha256="7cec72b44a1c3bbe4750647371f962140dd1144dc98520021007c6c3766c7ae9",
+    )
+    version(
         "0.10",
         sha256="5379a369ee29bebeece7e814c0595bac9f08f2737ce03ae529b4b4e84dea1283",
     )

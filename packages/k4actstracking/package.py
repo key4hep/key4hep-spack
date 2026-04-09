@@ -13,6 +13,11 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     maintainers("vvolkl")
 
     version("main", branch="main")
+
+    version(
+        "00-03",
+        sha256="3beaf4b8196fb952ba4708afb14f71690b849e4aeacef3e5a2497843ec91d98f",
+    )
     version(
         "00-02",
         sha256="789d4a8cd5ac6fa9150d4f010c80e491d71c794163eeb194bcfd20f5c37568b1",
