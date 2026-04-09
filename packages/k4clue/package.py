@@ -19,6 +19,10 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     version("main", branch="main")
 
     version(
+        "01-01-00",
+        sha256="de7295eb145f6ca30ff094538e9943f8e80c1f20e758752666df451c570d87ad",
+    )
+    version(
         "01-00-09",
         sha256="a51d782b209601c2d1a37183a74b4b4b4fb51341177e4467822ff665a930e260",
     )
@@ -58,9 +62,11 @@ class K4clue(CMakePackage, Ilcsoftpackage):
     depends_on("k4fwcore@1.3:", when="@01-00-08:")
 
     # Fix the range when a new version is available
-    depends_on("alpaka", when="@01-00-07:")
+    depends_on("alpaka@:2.0.0", when="@01-00-07:01-00-09")
+    depends_on("alpaka@2.1.0:", when="@01-01-00:")
 
-    depends_on("cluestering", when="@01-00-08:")
+    depends_on("cluestering@:2.9.0", when="@01-00-08:01-00-09")
+    depends_on("cluestering@2.10.0:", when="@01-01-00:")
 
     depends_on("marlindd4hep", type="test")
     depends_on("kaltest", type="test")
