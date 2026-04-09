@@ -19,10 +19,6 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     version("master", branch="master")
 
     version(
-        "1.20",
-        sha256="ad9d342663e168b6edd91f532faf016fc721a92b218015baf0b4bf6f8e08af15",
-    )
-    version(
         "1.19.6",
         sha256="744deba7f8e0c6c5e1554ea53a53ef7ad9973a4c1ae2e7b164efb4d9a4eba8fb",
     )
@@ -73,7 +69,6 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     depends_on("c", type="build", when="@:1.19.4")
 
     depends_on("ilcutil")
-    depends_on("ilcutil@1.9:", when="@1.20:")
     depends_on("gear")
     depends_on("lcio")
     depends_on("lcio@2.19:", when="@1.19:")
@@ -82,7 +77,6 @@ class Marlin(CMakePackage, Ilcsoftpackage):
     depends_on("lccd", when="+lccd")
     depends_on("clhep", when="+clhep")
     depends_on("raida", when="+aida")
-    depends_on("raida@1.12:", when="@1.20: +aida")
 
     def cmake_args(self):
         args = []

@@ -42,6 +42,9 @@ class Raida(CMakePackage, Ilcsoftpackage):
     depends_on("cxx", type="build")
 
     depends_on("ilcutil")
+    # Because of https://github.com/iLCSoft/RAIDA/pull/10, downstream packages will not work
+    # after updating ilcutil to 1.9
+    depends_on("ilcutil@1.9:", when="@1.12:")
     depends_on("root")
 
     def cmake_args(self):
