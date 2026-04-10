@@ -3,14 +3,15 @@
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
 function usage() {
-    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       -c <compiler> : select the compiler (for --lcg on AlmaLinux 9: gcc16 (default) or gcc14)"
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--spack] [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       -c <compiler> : select the compiler (for default LCG on AlmaLinux 9: gcc16 (default) or gcc14)"
     echo "       -d           : setup the debug version of the software stack"
-    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
-    echo "       --lcg        : source the LCG devkey-head view from CVMFS"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (default)"
+    echo "       --spack      : source the spack-based Key4hep nightly stack instead of the default LCG devkey-head view"
+    echo "       -r <release> : setup a specific release (--spack only), if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
-    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
-    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
     echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
     echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
@@ -188,14 +189,17 @@ k4_local_repo() {
 }
 
 build_type=opt
-lcg_setup=0
+lcg_setup=1
 
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
     eval "argn=\${$((i+1)):-}"
     case $arg in
         --lcg)
-            lcg_setup=1
+            # no-op: devkey-head is the default; kept for backwards compatibility
+            ;;
+        --spack)
+            lcg_setup=0
             ;;
         -d)
             build_type=dbg
@@ -246,7 +250,7 @@ if [ $lcg_setup -eq 1 ]; then
                     fi
                     ;;
                 *)
-                    echo "The --lcg option is only compatible with -d and -c gcc14|gcc16"
+                    echo "The devkey-head setup only supports -d and -c gcc14|gcc16. Use --spack to access other options (-r, --list-releases, --list-packages)."
                     usage
                     return 1
                     ;;
@@ -255,8 +259,8 @@ if [ $lcg_setup -eq 1 ]; then
     fi
 
     if [ "$os" != "almalinux9" ] && [ "$os" != "ubuntu26" ]; then
-        echo "Unsupported OS for --lcg, aborting..."
-        echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04"
+        echo "Unsupported OS for the devkey-head setup, aborting..."
+        echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04. Use --spack for Ubuntu 24.04."
         return 1
     fi
 
@@ -282,7 +286,15 @@ if [ $lcg_setup -eq 1 ]; then
         return 1
     fi
 
-    echo "Sourcing LCG devkey-head view from CVMFS"
+    echo "Sourcing LCG devkey-head view from CVMFS (use --spack to source the spack-based nightly stack)"
+    # echo "Use the following command to reproduce the current environment: "
+    # echo ""
+    # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
+    # if [ "$build_type" = "dbg" ]; then
+    #     command+=" -d"
+    # fi
+    # echo "        $command"
+    # echo ""
     source "$lcg_setup_script"
     return 0
 fi
