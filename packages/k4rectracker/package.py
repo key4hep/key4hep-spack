@@ -43,6 +43,8 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1.3:", when="@0.6.0:")
     depends_on("marlinutil")
     depends_on("root")
+    depends_on("genfit", when="@0.8.0:")
+    depends_on("eigen", when="@0.8.0:")
     depends_on(
         "delphes", when="@0.6.0:"
     )  # To be updated with specifc version once new delphes tag with latest changes is released
