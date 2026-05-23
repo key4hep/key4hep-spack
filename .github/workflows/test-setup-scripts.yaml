@@ -1,0 +1,75 @@
+name: Test Setup Scripts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/cvmfs/setup-nightlies.sh
+      - scripts/cvmfs/setup-releases.sh
+  pull_request:
+    paths:
+      - scripts/cvmfs/setup-nightlies.sh
+      - scripts/cvmfs/setup-releases.sh
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-nightlies:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: alma9
+            image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs
+          - os: ubuntu24
+            image: ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs
+          - os: ubuntu26
+            image: ghcr.io/key4hep/key4hep-images/ubuntu26-cvmfs
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Set up cvmfs
+        run: /mount.sh
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6
+
+      - name: Source nightlies setup script (opt)
+        run: source scripts/cvmfs/setup-nightlies.sh
+
+      - name: Source nightlies setup script (dbg)
+        run: source scripts/cvmfs/setup-nightlies.sh -d
+
+  test-releases:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: alma9
+            image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Set up cvmfs
+        run: /mount.sh
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6
+
+      - name: Source releases setup script (opt)
+        run: source scripts/cvmfs/setup-releases.sh
+
+      - name: Source releases setup script (dbg)
+        run: source scripts/cvmfs/setup-releases.sh -d

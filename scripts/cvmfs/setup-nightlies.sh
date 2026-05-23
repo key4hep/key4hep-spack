@@ -9,8 +9,8 @@ function usage() {
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "       --lcg        : source the LCG devkey-head view from CVMFS (only compatible with -d)"
     echo "       --help, -h   : print this help message"
-    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution"
-    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
     echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
     echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
@@ -214,28 +214,36 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERS
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
     os="ubuntu24"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="26.04"' ]]; then
+    os="ubuntu26"
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 24.04"
+    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9, Ubuntu 24.04, and Ubuntu 26.04"
     return 1
 fi
 
-if [ $lcg_setup -eq 1 ]; then
-    for arg in "$@"; do
-        case "$arg" in
-            --lcg|-d)
-                ;;
-            *)
-                echo "The --lcg option is only compatible with -d"
-                usage
-                return 1
-                ;;
-        esac
-    done
+if [ "$os" = "ubuntu26" ]; then
+    lcg_setup=1
+fi
 
-    if [ "$os" != "almalinux9" ]; then
+if [ $lcg_setup -eq 1 ]; then
+    if [ "$os" != "ubuntu26" ]; then
+        for arg in "$@"; do
+            case "$arg" in
+                --lcg|-d)
+                    ;;
+                *)
+                    echo "The --lcg option is only compatible with -d"
+                    usage
+                    return 1
+                    ;;
+            esac
+        done
+    fi
+
+    if [ "$os" != "almalinux9" ] && [ "$os" != "ubuntu26" ]; then
         echo "Unsupported OS for --lcg, aborting..."
-        echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9"
+        echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04"
         return 1
     fi
 
@@ -244,9 +252,17 @@ if [ $lcg_setup -eq 1 ]; then
         return 1
     fi
 
-    lcg_os_tag="el9"
-    lcg_compiler_tag="gcc14"
     lcg_arch_tag="x86_64"
+    if [ "$os" = "ubuntu26" ]; then
+        echo "Ubuntu 26.04 detected"
+        echo "Ubuntu 26 is only available through the LCG devkey-head view"
+        echo "Note: --list-releases and --list-packages are not supported for Ubuntu 26"
+        lcg_os_tag="ubuntu2604"
+        lcg_compiler_tag="gcc15"
+    else
+        lcg_os_tag="el9"
+        lcg_compiler_tag="gcc14"
+    fi
     lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
     if [ ! -f "$lcg_setup_script" ]; then
         echo "LCG setup script not found at: $lcg_setup_script"
@@ -254,14 +270,6 @@ if [ $lcg_setup -eq 1 ]; then
     fi
 
     echo "Sourcing LCG devkey-head view from CVMFS"
-    # echo "Use the following command to reproduce the current environment: "
-    # echo ""
-    # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
-    # if [ "$build_type" = "dbg" ]; then
-    #     command+=" -d"
-    # fi
-    # echo "        $command"
-    # echo ""
     source "$lcg_setup_script"
     return 0
 fi
