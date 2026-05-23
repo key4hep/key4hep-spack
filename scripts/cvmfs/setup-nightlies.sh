@@ -222,18 +222,24 @@ else
     return 1
 fi
 
+if [ "$os" = "ubuntu26" ]; then
+    lcg_setup=1
+fi
+
 if [ $lcg_setup -eq 1 ]; then
-    for arg in "$@"; do
-        case "$arg" in
-            --lcg|-d)
-                ;;
-            *)
-                echo "The --lcg option is only compatible with -d"
-                usage
-                return 1
-                ;;
-        esac
-    done
+    if [ "$os" != "ubuntu26" ]; then
+        for arg in "$@"; do
+            case "$arg" in
+                --lcg|-d)
+                    ;;
+                *)
+                    echo "The --lcg option is only compatible with -d"
+                    usage
+                    return 1
+                    ;;
+            esac
+        done
+    fi
 
     if [ "$os" != "almalinux9" ] && [ "$os" != "ubuntu26" ]; then
         echo "Unsupported OS for --lcg, aborting..."
@@ -248,6 +254,9 @@ if [ $lcg_setup -eq 1 ]; then
 
     lcg_arch_tag="x86_64"
     if [ "$os" = "ubuntu26" ]; then
+        echo "Ubuntu 26.04 detected"
+        echo "Ubuntu 26 is only available through the LCG devkey-head view"
+        echo "Note: --list-releases and --list-packages are not supported for Ubuntu 26"
         lcg_os_tag="ubuntu2604"
         lcg_compiler_tag="gcc15"
     else
@@ -261,28 +270,6 @@ if [ $lcg_setup -eq 1 ]; then
     fi
 
     echo "Sourcing LCG devkey-head view from CVMFS"
-    source "$lcg_setup_script"
-    return 0
-fi
-
-if [ "$os" = "ubuntu26" ]; then
-    # Ubuntu 26 is only available through the LCG devkey-head view
-    if [ -n "$KEY4HEP_STACK" ]; then
-        echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
-        return 1
-    fi
-    lcg_arch_tag="x86_64"
-    lcg_os_tag="ubuntu2604"
-    lcg_compiler_tag="gcc15"
-    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
-    if [ ! -f "$lcg_setup_script" ]; then
-        echo "LCG setup script not found at: $lcg_setup_script"
-        return 1
-    fi
-    echo "Ubuntu 26.04 detected"
-    echo "Ubuntu 26 is only available through the LCG devkey-head view"
-    echo "Note: --list-releases and --list-packages are not supported for Ubuntu 26"
-    echo "Sourcing LCG devkey-head view from CVMFS: $lcg_setup_script"
     source "$lcg_setup_script"
     return 0
 fi
