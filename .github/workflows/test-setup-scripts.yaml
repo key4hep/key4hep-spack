@@ -30,22 +30,23 @@ jobs:
           - os: ubuntu26
             image: ghcr.io/key4hep/key4hep-images/ubuntu26-cvmfs
     runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: Set up cvmfs
+        run: /mount.sh
+
       - uses: actions/checkout@v4
 
-      - name: Start container
-        run: |
-          docker run --name container --privileged \
-            -v ${GITHUB_WORKSPACE}:/key4hep-spack \
-            -d ${{ matrix.image }} tail -f /dev/null
-
       - name: Source nightlies setup script (opt)
-        run: |
-          docker exec container bash -c "/mount.sh && source /key4hep-spack/scripts/cvmfs/setup-nightlies.sh"
+        run: source scripts/cvmfs/setup-nightlies.sh
 
       - name: Source nightlies setup script (dbg)
-        run: |
-          docker exec container bash -c "/mount.sh && source /key4hep-spack/scripts/cvmfs/setup-nightlies.sh -d"
+        run: source scripts/cvmfs/setup-nightlies.sh -d
 
   test-releases:
     strategy:
@@ -57,19 +58,20 @@ jobs:
           - os: ubuntu24
             image: ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs
     runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
     steps:
+      - name: Set up cvmfs
+        run: /mount.sh
+
       - uses: actions/checkout@v4
 
-      - name: Start container
-        run: |
-          docker run --name container --privileged \
-            -v ${GITHUB_WORKSPACE}:/key4hep-spack \
-            -d ${{ matrix.image }} tail -f /dev/null
-
       - name: Source releases setup script (opt)
-        run: |
-          docker exec container bash -c "/mount.sh && source /key4hep-spack/scripts/cvmfs/setup-releases.sh"
+        run: source scripts/cvmfs/setup-releases.sh
 
       - name: Source releases setup script (dbg)
-        run: |
-          docker exec container bash -c "/mount.sh && source /key4hep-spack/scripts/cvmfs/setup-releases.sh -d"
+        run: source scripts/cvmfs/setup-releases.sh -d
