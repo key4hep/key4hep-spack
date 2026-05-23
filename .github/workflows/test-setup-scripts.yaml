@@ -2,6 +2,8 @@ name: Test Setup Scripts
 
 on:
   push:
+    branches:
+      - main
     paths:
       - scripts/cvmfs/setup-nightlies.sh
       - scripts/cvmfs/setup-releases.sh
