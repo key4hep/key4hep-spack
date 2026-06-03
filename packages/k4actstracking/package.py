@@ -15,6 +15,10 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "00-04",
+        sha256="2e048b488b1f5b2ba8b64de42987c8f8972859beda689a8fc249604b85a4f29a",
+    )
+    version(
         "00-03",
         sha256="3beaf4b8196fb952ba4708afb14f71690b849e4aeacef3e5a2497843ec91d98f",
     )
