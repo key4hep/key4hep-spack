@@ -124,7 +124,7 @@ packages:
   py-tensorflow:
     require: ~cuda~nccl
   k4simdelphes:
-    require: ~delphes_hepmc
+    require: +delphes_hepmc
   evtgen:
     require: +photos
   photos:
