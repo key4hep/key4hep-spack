@@ -54,6 +54,11 @@ class K4geo(CMakePackage):
     )
 
     variant("compact", default=True, description="Install compact files")
+    variant(
+        "beampipe_stl",
+        default=True,
+        description="Download and install the FCC-ee MDI beampipe CAD (STL) files",
+    )
 
     depends_on("cxx", type="build")
 
@@ -71,11 +76,9 @@ class K4geo(CMakePackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
-        # Automatically install the CAD beampipe files if we install the compact files
+        # The beampipe STL files are downloaded from the network at configure time
         args.append(
-            self.define(
-                "INSTALL_BEAMPIPE_STL_FILES", self.spec.variants["compact"].value
-            )
+            self.define_from_variant("INSTALL_BEAMPIPE_STL_FILES", "beampipe_stl")
         )
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
