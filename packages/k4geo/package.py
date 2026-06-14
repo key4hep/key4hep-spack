@@ -77,7 +77,9 @@ class K4geo(CMakePackage):
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
         # The beampipe STL files are downloaded from the network at configure time
-        args.append(self.define_from_variant("INSTALL_BEAMPIPE_STL_FILES", "beampipe_stl"))
+        args.append(
+            self.define_from_variant("INSTALL_BEAMPIPE_STL_FILES", "beampipe_stl")
+        )
         args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
 
