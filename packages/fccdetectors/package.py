@@ -12,6 +12,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     maintainers("vvolkl")
 
     version("main", branch="main")
+    version("0.1pre12", tag="v0.1pre12")
     version("0.1pre11", tag="v0.1pre11")
     version("0.1pre10", tag="v0.1pre10")
     version("0.1pre09", tag="v0.1pre09")

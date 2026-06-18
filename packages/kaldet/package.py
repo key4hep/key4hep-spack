@@ -18,6 +18,10 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.15",
+        sha256="699065c4882dbaaaa55518c4e46b2d718c5e7183f8f271e7278fb35fc992f037",
+    )
+    version(
         "1.14.1",
         sha256="39386f8d9648ebfd9771d99f2d318c5214a5560ad4135a12b90b0f3662681e6d",
     )
@@ -50,6 +54,8 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
     depends_on("gear")
     depends_on("kaltest")
     depends_on("root")
+    depends_on("root@:6.38.99", when="@:1.14.1")
+
 
     patch("dict.patch")
 

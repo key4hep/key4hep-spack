@@ -14,6 +14,10 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "0.1.0pre19",
+        sha256="604c096fa8fc80eea56852d0c732fac7a304c00537e35c6c5902ae71e9b497dc",
+    )
+    version(
         "0.1.0pre18",
         sha256="dd935cc40abd8bafc018fdd127f2190383603dd482fa3e6b25991894b75980f4",
     )
@@ -47,9 +51,11 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("fastjet")
     depends_on("gaudi")
-    depends_on("k4fwcore@1.5:", when="@0.1.0pre18:")
+    depends_on("k4fwcore@1.6:", when="@0.1.0pre19:")
+    depends_on("k4fwcore@1.5", when="@0.1.0pre18")
     depends_on("k4fwcore@:1.4", when="@:0.1.0pre17")
-    depends_on("k4geo")
+    depends_on("k4geo@:0.24", when="@:0.1.0pre18")
+    depends_on("k4geo@0.25:", when="@0.1.0pre19:")
     depends_on("k4simgeant4")
     depends_on("podio")
     depends_on("py-onnxruntime")
