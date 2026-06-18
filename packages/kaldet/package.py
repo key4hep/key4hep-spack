@@ -56,7 +56,6 @@ class Kaldet(CMakePackage, Ilcsoftpackage):
     depends_on("root")
     depends_on("root@:6.38.99", when="@:1.14.1")
 
-
     patch("dict.patch")
 
     def cmake_args(self):
