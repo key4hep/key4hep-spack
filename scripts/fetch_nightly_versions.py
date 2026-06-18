@@ -75,6 +75,11 @@ if __name__ == "__main__":
         help="only merge the packages.yaml files",
         action="store_true",
     )
+    parser.add_argument(
+        "--skip-connection-errors",
+        help="skip packages whose host is unreachable instead of failing",
+        action="store_true",
+    )
     # parser.add_argument(
     #     "--spack",
     #     help="path to the spack.yaml in the nightly environment",
@@ -181,7 +186,14 @@ if __name__ == "__main__":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
         elif package == "marlinmlflavortagging":
             gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
-        commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
+        try:
+            commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
+        except requests.exceptions.ConnectionError as e:
+            if args.skip_connection_errors:
+                print(f"Warning: Could not reach host for {package}, skipping: {e}")
+                continue
+            raise
+
         line = f"@{commit}"
         if package not in ["cepcsw"]:
             line += "=develop"
