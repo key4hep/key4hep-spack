@@ -17,6 +17,9 @@ on:
       registry:
         required: true
         type: string
+      stack:
+        required: true
+        type: string
     outputs:
       image-uri:
         description: "The URI of the built image with digest"
@@ -32,7 +35,7 @@ jobs:
   build-and-push:
     runs-on: ${{ inputs.runner }}
     outputs:
-      image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}:${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}-${{ inputs.platform }}@${{ steps.build.outputs.digest }}
+      image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-${{ inputs.stack }}-${{ inputs.os }}:${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}-${{ inputs.platform }}@${{ steps.build.outputs.digest }}
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: endersonmenezes/free-disk-space@v2
@@ -62,7 +65,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
+          images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-${{ inputs.stack }}-${{ inputs.os }}
           flavor: latest=false,suffix=-${{ inputs.platform }}
       - name: Determine spack ref
         id: getref
@@ -76,7 +79,7 @@ jobs:
           push: true
           platforms: linux/${{ inputs.platform }}
           context: ./Docker/${{inputs.os}}
-          file: ./Docker/${{inputs.os}}/Dockerfile-externals
+          file: ./Docker/${{inputs.os}}/Dockerfile-${{ inputs.stack }}
           build-args: |
             GITHUB_REPOSITORY=${{ github.repository }}
             COMMIT_SHA=${{ github.sha }}

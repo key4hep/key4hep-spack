@@ -12,6 +12,9 @@ spack:
     fmt:
       require: "@:10"
 
+    py-numpy:
+      require: "@2: ^openblas"
+
   concretizer:
     targets:
       host_compatible: true
