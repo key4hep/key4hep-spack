@@ -36,6 +36,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("cxx", type="build")
 
     depends_on("podio@1.2:", when="@0.5.0:")
+    depends_on("k4geo", when="@0.8.0:")
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")
