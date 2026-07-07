@@ -21,10 +21,7 @@ from spack.package_base import PackageBase
 try:
     import spack.util.tty as tty
 except:
-    try:
-        import spack.llnl.util.tty as tty
-    except:
-        import llnl.util.tty as tty
+    import spack.llnl.util.tty as tty
 
 from shlex import quote as cmd_quote
 
