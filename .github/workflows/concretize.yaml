@@ -20,7 +20,7 @@ jobs:
         build_type: [release, nightly]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Start container
         run: |
             name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
