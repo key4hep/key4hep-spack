@@ -1,0 +1,90 @@
+name: Concretize nightly with latest spack
+description: |
+  Concretize the nightlies using the last commit of the develop branch of spack
+  instead of picking up the pinned version from .latest-commit.
+  spack-packages still uses the pinned version from .latest-packages-commit
+  with the usual cherry-picks applied. This allows early detection of breaking
+  changes in upstream spack.
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  concretize-nightly-latest-spack:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        image: [alma9, ubuntu24]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start container
+        run: |
+            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
+            if [ "${{ matrix.image }}" = "alma9" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
+            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
+              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs tail -f /dev/null
+            else
+              echo "Unknown image"
+              exit 1
+            fi
+
+      - name: Setup environment and concretize
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+
+            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
+            set -e
+
+
+            cd /
+            git clone https://github.com/spack/spack -q -b develop
+            cd spack
+            echo "Spack checked out at: $(git rev-parse HEAD)"
+            cd ..
+            source spack/share/spack/setup-env.sh
+            git clone https://github.com/spack/spack-packages -q
+            cd spack-packages
+            git checkout $(cat ../key4hep-spack/.latest-packages-commit)
+            cd ..
+
+            spack repo set --destination /spack-packages builtin
+            spack repo add key4hep-spack
+
+            cd spack-packages
+            source ../key4hep-spack/.cherry-pick
+            cd ..
+
+            python3 /key4hep-spack/scripts/fetch_nightly_versions.py --path /key4hep-spack/environments/key4hep-common/packages.yaml --extra-path /key4hep-spack/environments/key4hep-common-opt/packages.yaml --skip-connection-errors ""
+
+            cd /key4hep-spack/environments/key4hep-nightly-opt
+
+            echo "========="
+            echo "spack.yaml"
+            cat spack.yaml
+            echo "========="
+            echo "packages.yaml"
+            cat packages.yaml
+            echo "========="
+            echo "key4hep-common/packages.yaml"
+            cat /key4hep-spack/environments/key4hep-common/packages.yaml
+            echo "========="
+
+            spack env activate .
+            spack concretize
+
+            EOF
+
+            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
+
+            # cat ${GITHUB_WORKSPACE}/script_container.sh
+
+            docker exec -e GITHUB_TOKEN="${GITHUB_TOKEN}" container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
