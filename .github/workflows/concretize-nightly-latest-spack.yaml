@@ -46,7 +46,7 @@ jobs:
 
 
             cd /
-            git clone https://github.com/spack/spack -q -b develop
+            git clone https://github.com/spack/spack -q
             cd spack
             echo "Spack checked out at: $(git rev-parse HEAD)"
             cd ..
