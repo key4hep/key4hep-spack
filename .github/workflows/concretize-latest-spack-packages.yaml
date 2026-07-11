@@ -1,7 +1,7 @@
-name: Concretize latest spack
+name: Concretize latest spack-packages
 description: |
     This workflow uses the latest tag of Spack together with the
-    develop branch of spack-packages and tries to concretize
+    develop branch of spack-packages and tries to concretize.
     It may fail if there are requirements (for example in key4hep-common/packages.yaml)
     that are not yet in spack-packages
 
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  concretize-latest-spack:
+  concretize-latest-spack-packages:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.image }}
       cancel-in-progress: true
