@@ -35,7 +35,7 @@ jobs:
       image-uri: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}:${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}-${{ inputs.platform }}@${{ steps.build.outputs.digest }}
     steps:
       - name: Free Disk Space (Ubuntu)
-        uses: endersonmenezes/free-disk-space@v3
+        uses: endersonmenezes/free-disk-space@7901478139cff6e9d44df5972fd8ab8fcade4db1 #v3
         with:
           remove_android: true
           remove_dotnet: true
@@ -47,20 +47,20 @@ jobs:
           remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/share/glade* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell"
           testing: false
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7
         with:
           fetch-depth: 0
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c #v4
       - name: Login to Docker Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 #v4
         with:
           registry: ${{ inputs.registry }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker Meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 #v5
         with:
           images: ${{ inputs.registry }}/${{ github.repository_owner }}/key4hep-externals-${{ inputs.os }}
           flavor: latest=false,suffix=-${{ inputs.platform }}
@@ -71,7 +71,7 @@ jobs:
           echo "spack_packages_ref=$(cat .latest-packages-commit)" >>${GITHUB_OUTPUT}
       - name: Build and Push
         id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 #v6
         with:
           push: true
           platforms: linux/${{ inputs.platform }}
