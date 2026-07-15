@@ -1,3 +1,5 @@
+KEY4HEP_SPACK_ROOT=${KEY4HEP_SPACK_ROOT:-/key4hep-spack}
+
 cd /
 if [ -z "$1" ]; then
   tag=$(curl -s https://api.github.com/repos/spack/spack/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
@@ -9,14 +11,14 @@ git clone https://github.com/spack/spack -q -b $tag
 source spack/share/spack/setup-env.sh
 
 cd /spack
-# git checkout $(cat /key4hep-spack/.latest-commit)
-# source /key4hep-spack/.cherry-pick
+# git checkout $(cat ${KEY4HEP_SPACK_ROOT}/.latest-commit)
+# source ${KEY4HEP_SPACK_ROOT}/.cherry-pick
 
 cd /
 spack repo set --destination /spack-packages builtin
-spack repo add key4hep-spack
+spack repo add ${KEY4HEP_SPACK_ROOT}
 git clone https://github.com/spack/spack-packages -q
-cd /key4hep-spack/environments/key4hep-base
+cd ${KEY4HEP_SPACK_ROOT}/environments/key4hep-base
 
 echo "========="
 echo "spack.yaml"
@@ -26,7 +28,7 @@ echo "packages.yaml"
 cat packages.yaml
 echo "========="
 echo "key4hep-common/packages.yaml"
-cat /key4hep-spack/environments/key4hep-common/packages.yaml
+cat ${KEY4HEP_SPACK_ROOT}/environments/key4hep-common/packages.yaml
 echo "========="
 
 spack env activate .

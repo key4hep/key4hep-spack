@@ -19,57 +19,49 @@ jobs:
         image: [alma9, ubuntu24]
         build_type: [release, nightly]
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/key4hep/key4hep-images/${{ matrix.image }}-cvmfs
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7
-      - name: Start container
-        run: |
-            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-            if [ "${{ matrix.image }}" = "alma9" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
-            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs tail -f /dev/null
-            else
-              echo "Unknown image"
-              exit 1
-            fi
-
+      - name: Set up cvmfs
+        run: /mount.sh
       - name: Setup environment and concretize
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEY4HEP_SPACK_ROOT: ${{ github.workspace }}
         run: |
-
-            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
-            set -e
-
-
             cd /
             git clone https://github.com/spack/spack -q
             cd spack
-            git checkout $(cat ../key4hep-spack/.latest-commit)
+            git checkout $(cat ${KEY4HEP_SPACK_ROOT}/.latest-commit)
             cd ..
             source spack/share/spack/setup-env.sh
             git clone https://github.com/spack/spack-packages -q
             cd spack-packages
-            git checkout $(cat ../key4hep-spack/.latest-packages-commit)
+            git checkout $(cat ${KEY4HEP_SPACK_ROOT}/.latest-packages-commit)
             cd ..
 
             spack repo set --destination /spack-packages builtin
-            spack repo add key4hep-spack
+            spack repo add ${KEY4HEP_SPACK_ROOT}
 
             cd spack-packages
-            source ../key4hep-spack/.cherry-pick
+            source ${KEY4HEP_SPACK_ROOT}/.cherry-pick
             cd ..
 
             if [ "${{ matrix.build_type }}" = "release" ]; then
                 env=key4hep-release-opt
             elif [ "${{ matrix.build_type }}" = "nightly" ]; then
                 env=key4hep-nightly-opt
-                python3 /key4hep-spack/scripts/fetch_nightly_versions.py --path /key4hep-spack/environments/key4hep-common/packages.yaml --extra-path /key4hep-spack/environments/key4hep-common-opt/packages.yaml --skip-connection-errors ""
+                python3 ${KEY4HEP_SPACK_ROOT}/scripts/fetch_nightly_versions.py --path ${KEY4HEP_SPACK_ROOT}/environments/key4hep-common/packages.yaml --extra-path ${KEY4HEP_SPACK_ROOT}/environments/key4hep-common-opt/packages.yaml --skip-connection-errors ""
             else
                 echo "Unknown build type"
                 exit 1
             fi
-            cd /key4hep-spack/environments/${env}
+            cd ${KEY4HEP_SPACK_ROOT}/environments/${env}
 
             echo "========="
             echo "spack.yaml"
@@ -79,16 +71,8 @@ jobs:
             cat packages.yaml
             echo "========="
             echo "key4hep-common/packages.yaml"
-            cat /key4hep-spack/environments/key4hep-common/packages.yaml
+            cat ${KEY4HEP_SPACK_ROOT}/environments/key4hep-common/packages.yaml
             echo "========="
 
             spack env activate .
             spack concretize
-
-            EOF
-
-            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
-
-            # cat ${GITHUB_WORKSPACE}/script_container.sh
-
-            docker exec -e GITHUB_TOKEN="${GITHUB_TOKEN}" container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
