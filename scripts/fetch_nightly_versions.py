@@ -185,6 +185,7 @@ if __name__ == "__main__":
         if package == "opendatadetector":
             gitlab = "https://gitlab.cern.ch/api/v4/projects/%s/repository/commits"
         elif package == "marlinmlflavortagging":
+            continue
             gitlab = "https://gitlab.desy.de/api/v4/projects/%s/repository/commits"
         try:
             commit = get_latest_commit(package, location, date=date, gitlab=gitlab)
