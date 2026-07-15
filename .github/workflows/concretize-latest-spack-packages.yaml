@@ -21,34 +21,18 @@ jobs:
       matrix:
         image: [alma9, ubuntu24]
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/key4hep/key4hep-images/${{ matrix.image }}-cvmfs
+      options: --privileged
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #v7
-      - name: Start container
-        run: |
-            name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-            if [ "${{ matrix.image }}" = "alma9" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/alma9-cvmfs tail -f /dev/null
-            elif [ "${{ matrix.image }}" = "ubuntu24" ]; then
-              docker run --name container --privileged -v ${GITHUB_WORKSPACE}:/key4hep-spack -v ~/.cache/ccache:/root/.cache/ccache -d ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs tail -f /dev/null
-            else
-              echo "Unknown image"
-              exit 1
-            fi
-
+      - name: Set up cvmfs
+        run: /mount.sh
       - name: Setup environment and concretize
+        env:
+          KEY4HEP_SPACK_ROOT: ${{ github.workspace }}
         run: |
-
-            export GITHUB_TOKEN=${GH_TOKEN}
-
-            cat <<'EOF' > ${GITHUB_WORKSPACE}/script_container.sh
-            set -e
-
-            /key4hep-spack/.github/scripts/concretize-tag-spack.sh
-
-            EOF
-
-            chmod +x ${GITHUB_WORKSPACE}/script_container.sh
-
-            # cat ${GITHUB_WORKSPACE}/script_container.sh
-
-            docker exec container /bin/bash -c "/mount.sh && /key4hep-spack/script_container.sh"
+            ${KEY4HEP_SPACK_ROOT}/.github/scripts/concretize-tag-spack.sh
