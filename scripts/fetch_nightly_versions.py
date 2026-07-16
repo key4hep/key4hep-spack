@@ -165,7 +165,7 @@ if __name__ == "__main__":
         ("marlinfastjet", "ilcsoft/marlinfastjet"),
         ("marlinkinfit", "ilcsoft/marlinkinfit"),
         ("marlinkinfitprocessors", "ilcsoft/marlinkinfitprocessors"),
-        ("marlinmlflavortagging", "ilcsoft/marlinmlflavortagging"),
+        # ("marlinmlflavortagging", "ilcsoft/marlinmlflavortagging"),
         ("marlinreco", "ilcsoft/marlinreco"),
         ("marlintrk", "ilcsoft/marlintrk"),
         ("marlintrkprocessors", "ilcsoft/marlintrkprocessors"),
