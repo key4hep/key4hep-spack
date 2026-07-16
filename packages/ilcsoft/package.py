@@ -82,7 +82,7 @@ class Ilcsoft(BundlePackage, Key4hepPackage):
     depends_on("marlinfastjet")
     depends_on("marlinkinfit")
     depends_on("marlinkinfitprocessors")
-    depends_on("marlinmlflavortagging", when="+ml")
+    # depends_on("marlinmlflavortagging", when="+ml")
     depends_on("marlinreco")
     depends_on("marlintrk")
     depends_on("marlintrkprocessors")
