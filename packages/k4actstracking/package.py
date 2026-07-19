@@ -10,7 +10,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4ActsTracking/archive/refs/tags/v00-01.tar.gz"
     git = "https://github.com/key4hep/k4ActsTracking.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("main", branch="main")
 

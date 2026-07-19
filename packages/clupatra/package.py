@@ -14,7 +14,7 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/Clupatra"
     git = "https://github.com/iLCSoft/Clupatra.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

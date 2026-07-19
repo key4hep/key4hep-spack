@@ -14,7 +14,7 @@ class Marlintrkprocessors(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/MarlinTrkProcessors"
     git = "https://github.com/iLCSoft/MarlinTrkProcessors.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

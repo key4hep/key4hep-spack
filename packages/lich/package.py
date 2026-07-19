@@ -16,7 +16,7 @@ class Lich(CMakePackage, Ilcsoftpackage):
 
     tags = ["hep"]
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

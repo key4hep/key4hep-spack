@@ -15,7 +15,7 @@ class Larcontent(CMakePackage):
 
     tags = ["hep"]
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

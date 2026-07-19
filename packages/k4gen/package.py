@@ -9,7 +9,7 @@ class K4gen(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4Gen/archive/refs/tags/v0.1pre02.tar.gz"
     git = "https://github.com/key4hep/k4Gen.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("main", branch="main")
     version(

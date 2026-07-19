@@ -14,7 +14,7 @@ class Overlay(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/iLCSoft/Overlay"
     git = "https://github.com/iLCSoft/Overlay.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(
