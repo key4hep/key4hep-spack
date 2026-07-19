@@ -14,7 +14,7 @@ class Fcalclusterer(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/FCalSW/FCalClusterer"
     git = "https://github.com/FCalSW/FCalClusterer.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

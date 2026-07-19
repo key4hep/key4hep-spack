@@ -14,7 +14,7 @@ class Lcfiplus(CMakePackage, Ilcsoftpackage):
     homepage = "https://github.com/lcfiplus/LCFIPlus"
     git = "https://github.com/lcfiplus/LCFIPlus.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("master", branch="master")
     version(

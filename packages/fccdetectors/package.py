@@ -9,7 +9,7 @@ class Fccdetectors(CMakePackage, Key4hepPackage):
     url = "https://github.com/HEP-FCC/FCCDetectors/archive/refs/tags/v0.1pre03.tar.gz"
     git = "https://github.com/HEP-FCC/FCCDetectors.git"
 
-    maintainers("vvolkl")
+    maintainers("jmcarcell")
 
     version("main", branch="main")
     version("0.1pre12", tag="v0.1pre12")
