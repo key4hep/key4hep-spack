@@ -29,8 +29,6 @@ packages:
     require: build_type=Debug
   fccanalyses:
     require: build_type=Debug
-  fccdetectors:
-    require: build_type=Debug
   forwardtracking:
     require: build_type=Debug
   gaudi:

@@ -131,7 +131,6 @@ if __name__ == "__main__":
         ("fcalclusterer", "fcalsw/fcalclusterer"),
         ("fccanalyses", "hep-fcc/fccanalyses"),
         ("fcc-config", "hep-fcc/fcc-config"),
-        ("fccdetectors", "hep-fcc/fccdetectors"),
         ("fccsw", "hep-fcc/fccsw"),
         ("forwardtracking", "ilcsoft/forwardtracking"),
         ("gear", "ilcsoft/gear"),

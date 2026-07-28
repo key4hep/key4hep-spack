@@ -39,7 +39,6 @@ class Fccsw(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore", type="test")
     depends_on("k4gen", type="test")
     depends_on("k4simdelphes", type="test")
-    depends_on("fccdetectors", type="test")
     depends_on("k4simgeant4", type="test")
     depends_on("k4reccalorimeter", type="test")
     depends_on("k4geo", type="test")

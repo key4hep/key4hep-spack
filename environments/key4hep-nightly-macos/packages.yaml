@@ -31,8 +31,6 @@ packages:
     variants: build_type=RelWithDebInfo cxxstd=20
   fccanalyses:
     variants: build_type=RelWithDebInfo cxxstd=20
-  fccdetectors:
-    variants: build_type=RelWithDebInfo cxxstd=20
   fccsw:
     variants: build_type=RelWithDebInfo cxxstd=20
   forwardtracking:
