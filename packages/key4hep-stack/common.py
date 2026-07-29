@@ -101,8 +101,12 @@ def k4_generate_setup_script(env_mod, shell="sh"):
     k4_shell_set_strings = {
         "sh": "export {0}={1}\n",
     }
+    # ${VAR:-} rather than $VAR so that the generated script can be sourced from
+    # a shell running with `set -u`, where expanding an unset variable is fatal.
+    # The expansion is identical when the variable is set, and both forms expand
+    # to the empty string when it is not, so the generated environment is unchanged.
     k4_shell_prepend_strings = {
-        "sh": "export {0}={1}:${0}\n",
+        "sh": "export {0}={1}:${{{0}:-}}\n",
     }
     cmds = []
     for name in set(new_env):

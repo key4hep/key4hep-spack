@@ -192,7 +192,7 @@ lcg_setup=0
 
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
-    eval "argn=\${$((i+1))}"
+    eval "argn=\${$((i+1)):-}"
     case $arg in
         --lcg)
             lcg_setup=1
@@ -247,7 +247,7 @@ if [ $lcg_setup -eq 1 ]; then
         return 1
     fi
 
-    if [ -n "$KEY4HEP_STACK" ]; then
+    if [ -n "${KEY4HEP_STACK:-}" ]; then
         echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
         return 1
     fi
@@ -275,18 +275,18 @@ if [ $lcg_setup -eq 1 ]; then
 fi
 
 rel="latest-$build_type"
-if [[ "$1" = "-r" && -n "$2" ]]; then
+if [[ "${1:-}" = "-r" && -n "${2:-}" ]]; then
     rel="$2"
 fi
 
-check_release $1 $2 $os
+check_release "${1:-}" "${2:-}" "$os"
 if [ $? -ne 0 ]; then
   return 1
 fi
 
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
-    eval "argn=\${$((i+1))}"
+    eval "argn=\${$((i+1)):-}"
     case $arg in
         --help|-h)
             usage
@@ -366,9 +366,9 @@ if [ "$(echo $rel | grep -E '^2024-09-[0-9]{2}$')" ] && [ "$(date -d $rel +%s)" 
 fi
 
 
-k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
+k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*${compiler:-}*$build_type | head -n1)
 
-if [ -n "$KEY4HEP_STACK" ]; then
+if [ -n "${KEY4HEP_STACK:-}" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
     return 1
 fi
@@ -385,7 +385,7 @@ setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
 # For SWAN
-if [ -n "$LCG_VERSION" ]; then
+if [ -n "${LCG_VERSION:-}" ]; then
     echo "A LCG stack has been sourced, unsetting the following variables to avoid conflicts:"
     echo "CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH"
     unset CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH

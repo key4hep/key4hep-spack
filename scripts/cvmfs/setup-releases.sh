@@ -178,7 +178,7 @@ k4_local_repo() {
 build_type=opt
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
-    eval "argn=\${$((i+1))}"
+    eval "argn=\${$((i+1)):-}"
     case $arg in
         -d)
             build_type=dbg
@@ -192,7 +192,7 @@ done
 
 
 rel="latest-$build_type"
-if [[ "$1" = "-r" && -n "$2" ]]; then
+if [[ "${1:-}" = "-r" && -n "${2:-}" ]]; then
     rel="$2"
 fi
 
@@ -220,14 +220,14 @@ else
     return 1
 fi
 
-check_release $1 $2 $os
+check_release "${1:-}" "${2:-}" "$os"
 if [ $? -ne 0 ]; then
   return 1
 fi
 
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
-    eval "argn=\${$((i+1))}"
+    eval "argn=\${$((i+1)):-}"
     case $arg in
         --help|-h)
             usage
@@ -274,9 +274,9 @@ for ((i=1; i<=$#; i++)); do
     esac
 done
 
-k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
+k4path=$(/usr/bin/ls -rd /cvmfs/sw.hsf.org/key4hep/releases/$rel/*$os*${compiler:-}*$build_type | head -n1)
 
-if [ -n "$KEY4HEP_STACK" ]; then
+if [ -n "${KEY4HEP_STACK:-}" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
     return 1
 fi
@@ -300,7 +300,7 @@ setup_actual=$(readlink -f $setup_script_path)
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
 # For SWAN
-if [ -n "$LCG_VERSION" ]; then
+if [ -n "${LCG_VERSION:-}" ]; then
     echo "A LCG stack has been sourced, unsetting the following variables to avoid conflicts:"
     echo "CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH"
     unset CMAKE_PREFIX_PATH CPPYY_BACKEND_LIBRARY LD_LIBRARY_PATH PKG_CONFIG_PATH PYTHONHOME PYTHONPATH
