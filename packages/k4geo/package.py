@@ -63,10 +63,15 @@ class K4geo(CMakePackage):
         default=True,
         description="Download and install the FCC-ee MDI beampipe CAD (STL) files",
     )
+    variant(
+        "lcio",
+        default=True,
+        description="Turn on LCIO support (requires lcio package)",
+    )
 
     depends_on("cxx", type="build")
 
-    depends_on("lcio")
+    depends_on("lcio", when="+lcio")
     depends_on("dd4hep")
     depends_on("dd4hep@1.31:", when="@0.22:")
     depends_on("root")
@@ -80,6 +85,7 @@ class K4geo(CMakePackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
+        args.append(self.define_from_variant("K4GEO_USE_LCIO", "lcio"))
         # The beampipe STL files are downloaded from the network at configure time
         args.append(
             self.define_from_variant("INSTALL_BEAMPIPE_STL_FILES", "beampipe_stl")
