@@ -33,15 +33,28 @@ class K4actstracking(CMakePackage, Key4hepPackage):
 
     depends_on("cxx", type="build")
 
+    variant(
+        "gnn",
+        default=False,
+        description="Build the GNN track finding pipeline",
+    )
+
     depends_on("acts+dd4hep+json")
+    # The GNN tracking pipeline is the only consumer of the acts GNN plugin.
+    depends_on("acts+dd4hep+json+gnn+onnx+torch", when="+gnn")
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")
     depends_on("k4fwcore")
     depends_on("opendatadetector", type="test")
+    # The ML inference dependencies are only needed by the GNN tracking pipeline.
+    depends_on("py-torch", when="+gnn")
+    depends_on("py-onnxruntime", when="+gnn")
 
     def cmake_args(self):
-        return []
+        return [
+            self.define_from_variant("K4ACTSTRACKING_BUILD_GNN", "gnn"),
+        ]
 
     def setup_run_environment(self, env):
         env.prepend_path("PYTHONPATH", self.prefix.python)
