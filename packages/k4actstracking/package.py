@@ -40,14 +40,12 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     )
 
     depends_on("acts+dd4hep+json")
-    # The GNN tracking pipeline is the only consumer of the acts GNN plugin.
     depends_on("acts+dd4hep+json+gnn+onnx+torch", when="+gnn")
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")
     depends_on("k4fwcore")
     depends_on("opendatadetector", type="test")
-    # The ML inference dependencies are only needed by the GNN tracking pipeline.
     depends_on("py-torch", when="+gnn")
     depends_on("py-onnxruntime", when="+gnn")
 
