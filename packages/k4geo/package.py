@@ -120,7 +120,7 @@ class K4geo(CMakePackage):
         env.prepend_path("LD_LIBRARY_PATH", self.spec["k4geo"].libs.directories[0])
         if self.spec.satisfies("+lcio"):
             env.prepend_path("LD_LIBRARY_PATH", self.spec["lcio"].libs.directories[0])
- 
+
     # dd4hep tests need to run after install step:
     # disable the usual check
     def check(self):
