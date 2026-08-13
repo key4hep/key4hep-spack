@@ -15,6 +15,10 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "00-05",
+        sha256="0d4f66c1994df51c5c552734e1fdb099cab9103d84a129e3b1940a4f1c28f370",
+    )
+    version(
         "00-04",
         sha256="2e048b488b1f5b2ba8b64de42987c8f8972859beda689a8fc249604b85a4f29a",
     )
@@ -39,8 +43,12 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         description="Build the GNN track finding pipeline",
     )
 
-    depends_on("acts+dd4hep+json")
-    depends_on("acts+dd4hep+json+gnn+onnx+torch", when="+gnn")
+    depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
+    # The GNN pipeline is the only consumer of the acts GNN plugin
+    depends_on(
+        "acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json+gnn+onnx+torch",
+        when="+gnn",
+    )
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")

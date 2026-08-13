@@ -18,12 +18,23 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.3.0",
+        sha256="8dd1218696e6866f0bda59637793726596a202bad0c90e9969dd57fbe467e500",
+    )
+    version(
         "0.2.0",
         sha256="a7615d19dca1a13901168fa6ca196be6bfb7728a5088321bfb9ed45494c300e0",
     )
     version(
         "0.1.0",
         sha256="a77e7f76728c14054f112e923b55e434becafb7d392e2f3653133a5e8ad2d235",
+    )
+
+    variant(
+        "ddkaltest",
+        default=True,
+        description="Recompute the track states at the calorimeter with DDKalTest, "
+        "rather than taking the ones already present on the input tracks",
     )
 
     depends_on("cxx", type="build")
@@ -37,6 +48,10 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk")
     depends_on("root")
     depends_on("k4reco", when="@0.2.0:")
+    # Recomputing the track states uses k4Reco::GaudiTrkUtils, which k4reco only builds
+    # with +conformal_tracking, and which is what brings LCIO into the stack. With
+    # ~ddkaltest that target is not linked, so plain k4reco is enough.
+    depends_on("k4reco+conformal_tracking", when="@0.3.0: +ddkaltest")
 
     # Used in the tests
     depends_on("k4geo")
@@ -49,4 +64,5 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
         return [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DCMAKE_INSTALL_LIBDIR=lib",
+            self.define_from_variant("K4GAUDIPANDORA_USE_DDKALTEST", "ddkaltest"),
         ]
