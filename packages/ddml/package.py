@@ -18,6 +18,10 @@ class Ddml(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-03",
+        sha256="f62027b1e4e7e9b259d46e4c37373fdd3634ebb16bf5be691af7c10e6f729c0d",
+    )
+    version(
         "0.2.0",
         sha256="377f34a341bcd11a177195b795c763c98f06450445839982c96adee76f51ad08",
     )
