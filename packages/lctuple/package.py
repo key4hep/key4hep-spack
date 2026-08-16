@@ -18,6 +18,10 @@ class Lctuple(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.14.1",
+        sha256="e3551bae3bb55606ea5644eeff867894d2bb39777d9b9f43a295d1f3dacfabf3",
+    )
+    version(
         "1.14",
         sha256="7088a6923c4e4c3ac327965c8d41f53eb1403134a9df52e43635fa5eaef48581",
     )
