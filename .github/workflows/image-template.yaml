@@ -56,7 +56,7 @@ jobs:
           flavor: latest=${{ github.ref == 'refs/heads/main' }}
       - name: Create manifest
         id: build
-        uses: int128/docker-manifest-create-action@a0bcb6430fe0047c0558deab102a6c66c373dae2 #v2
+        uses: int128/docker-manifest-create-action@1e15cac7af24af7153ff7968c09072d61bb4456b #v2
         with:
           index-annotations: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
