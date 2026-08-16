@@ -18,6 +18,10 @@ class Marlindd4hep(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.6.3",
+        sha256="3844e873558eda81238f2a4a204c4073b8273ca4199b529f2b3978e72ef76a8a",
+    )
+    version(
         "0.6.2",
         sha256="0229b2990c955f1302fd289ccf564dbbab728a108e6e9e3016259d4b90acd43f",
     )
