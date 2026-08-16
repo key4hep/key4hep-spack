@@ -18,6 +18,10 @@ class Kaltest(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "2.6",
+        sha256="e36b15c80ee194eb2963b6d7b494a8999c5f121ed463517d614f48df5f056958",
+    )
+    version(
         "2.5.2",
         sha256="6f17d25fdfa6fc01c733a5ef5cb7e89e110165d77c9891f606928d496bda7d6a",
     )

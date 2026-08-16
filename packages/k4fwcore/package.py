@@ -63,6 +63,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.2:")
     depends_on("edm4hep@0.99:", when="@1.2:")
+    depends_on("edm4hep@1.1:", when="@1.7:")
 
     def cmake_args(self):
         args = [
