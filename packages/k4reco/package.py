@@ -12,6 +12,10 @@ class K4reco(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "0.4.0",
+        sha256="824ee203ed480d78f5b24284884474a89e47253d5360288d4fb33f5c92c84296",
+    )
+    version(
         "0.3.0",
         sha256="a54074046631e935f792fcf6d4e1904c60c71bef8886217b35b46261631314dd",
     )
