@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
-from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
+from spack.pkg.k4.key4hep_stack import Key4hepPackage
 
 
-class K4clue(CMakePackage, Ilcsoftpackage):
+class K4clue(CMakePackage, Key4hepPackage):
     """CLUE Clustering for Key4hep"""
 
     url = "https://github.com/key4hep/k4Clue/archive/v01-00-01.tar.gz"
