@@ -71,6 +71,7 @@ class K4geo(CMakePackage):
         "lcio",
         default=True,
         description="Turn on LCIO support (requires lcio package)",
+        when="@:00-26",
     )
 
     depends_on("cxx", type="build")
@@ -89,12 +90,16 @@ class K4geo(CMakePackage):
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}"
         )
         args.append(self.define_from_variant("INSTALL_COMPACT_FILES", "compact"))
-        args.append(self.define_from_variant("K4GEO_USE_LCIO", "lcio"))
         # The beampipe STL files are downloaded from the network at configure time
         args.append(
             self.define_from_variant("INSTALL_BEAMPIPE_STL_FILES", "beampipe_stl")
         )
         args.append(self.define("BUILD_TESTING", self.run_tests))
+
+        if self.spec.satisfies("@:00-26"):
+            # This cmake option is deprecated afterwards and has no effect
+            args.append(self.define_from_variant("K4GEO_USE_LCIO", "lcio"))
+
         return args
 
     def setup_run_environment(self, env):
