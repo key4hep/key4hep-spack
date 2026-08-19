@@ -63,6 +63,10 @@ class Generalbrokenlines(CMakePackage):
         # the patch version is omitted when 0
         # so for example v01-12-01, v01-12 ...
         base_url = self.url.rsplit("/", 1)[0]
+
+        if version.isdevelop():
+            return f"{base_url}/refs/heads/{version}.tar.gz"
+
         major = str(version[0]).zfill(2)
         minor = str(version[1]).zfill(2)
         # handle the different cases for the patch version:

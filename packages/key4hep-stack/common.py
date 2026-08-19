@@ -128,6 +128,15 @@ def ilc_url_for_version(self, version):
     :type param: str
     """
     base_url = self.url.rsplit("/", 1)[0]
+
+    if version.isdevelop():
+        return f"{base_url}/refs/heads/{version}.tar.gz"
+
+    if len(version) > 3:
+        # pre-releases are not separated from the release version,
+        # e.g. 1.0pre19 -> v01-00pre19
+        return f"{base_url}/v{version[0]:02d}-{version[1]:02d}{version[2:]}.tar.gz"
+
     if len(version) == 1:
         major = version[0]
         minor, patch = 0, 0

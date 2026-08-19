@@ -190,5 +190,12 @@ class Kkmcee(AutotoolsPackage):
     def url_for_version(self, version):
         # contrary to ilcsoftpackages, here the patch version is kept when 0
         base_url = self.url[: self.url.rfind("/")]
+
+        if version.isdevelop():
+            # the develop version does not follow the release naming, and the
+            # branch name differs from the version name
+            branch = self.versions.get(version, {}).get("branch", str(version))
+            return self.url.rsplit("/refs/", 1)[0] + f"/refs/heads/{branch}.tar.gz"
+
         url = base_url + "/v%s.tar.gz" % (version)
         return url
