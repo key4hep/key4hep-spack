@@ -9,9 +9,9 @@ from spack.package import *
 class Larcontent(CMakePackage):
     """Pandora algorithms and tools for LAr TPC event reconstruction"""
 
-    url = "https://github.com/PandoraPFA/larcontent/archive/v03_04_00.tar.gz"
-    homepage = "https://github.com/PandoraPFA/larcontent"
-    git = "https://github.com/PandoraPFA/larcontent.git"
+    url = "https://github.com/PandoraPFAOrg/larcontent/archive/v03_04_00.tar.gz"
+    homepage = "https://github.com/PandoraPFAOrg/larcontent"
+    git = "https://github.com/PandoraPFAOrg/larcontent.git"
 
     tags = ["hep"]
 

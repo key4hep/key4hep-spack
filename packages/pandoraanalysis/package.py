@@ -10,9 +10,9 @@ from spack.pkg.k4.key4hep_stack import Ilcsoftpackage
 class Pandoraanalysis(CMakePackage, Ilcsoftpackage):
     """Pandora calibration and analysis tools in iLCSoft / Marlin framework"""
 
-    url = "https://github.com/PandoraPFA/LCPandoraAnalysis/archive/v02-00-01.tar.gz"
-    homepage = "https://github.com/PandoraPFA/LCPandoraAnalysis"
-    git = "https://github.com/PandoraPFA/LCPandoraAnalysis.git"
+    url = "https://github.com/PandoraPFAOrg/LCPandoraAnalysis/archive/v02-00-01.tar.gz"
+    homepage = "https://github.com/PandoraPFAOrg/LCPandoraAnalysis"
+    git = "https://github.com/PandoraPFAOrg/LCPandoraAnalysis.git"
 
     tags = ["hep"]
 
