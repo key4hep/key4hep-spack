@@ -9,9 +9,9 @@ from spack.package import *
 class Lccontent(CMakePackage):
     """Pandora algorithms and tools for Linear Collider event reconstruction."""
 
-    url = "https://github.com/PandoraPFA/lccontent/archive/v03-01-05.tar.gz"
-    homepage = "https://github.com/PandoraPFA/lccontent"
-    git = "https://github.com/PandoraPFA/lccontent.git"
+    url = "https://github.com/PandoraPFAOrg/lccontent/archive/v03-01-05.tar.gz"
+    homepage = "https://github.com/PandoraPFAOrg/lccontent"
+    git = "https://github.com/PandoraPFAOrg/lccontent.git"
 
     tags = ["hep"]
 
