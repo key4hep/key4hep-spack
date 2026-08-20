@@ -48,7 +48,6 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("pandorasdk")
     depends_on("root")
     depends_on("k4reco", when="@0.2.0:")
-    depends_on("k4reco@0.4.0", when="@0.3.0")
     # Recomputing the track states uses k4Reco::GaudiTrkUtils, which k4reco only builds
     # with +conformal_tracking, and which is what brings LCIO into the stack. With
     # ~ddkaltest that target is not linked, so plain k4reco is enough.
