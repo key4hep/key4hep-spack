@@ -155,6 +155,7 @@ if __name__ == "__main__":
         ("kaltest", "ilcsoft/kaltest"),
         ("kitrack", "ilcsoft/kitrack"),
         ("kitrackmarlin", "ilcsoft/kitrackmarlin"),
+        ("lccontent", "PandoraPFAOrg/lccontent"),
         ("lccd", "ilcsoft/lccd"),
         ("lcfiplus", "lcfiplus/lcfiplus"),
         ("lcio", "ilcsoft/lcio"),
