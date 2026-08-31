@@ -35,6 +35,8 @@ function list_releases() {
         name="centos7"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
+    elif [ "$os" = "ubuntu24" ]; then
+        name="ubuntu24"
     else
         echo "Unsupported OS, aborting..."
         usage
@@ -55,6 +57,8 @@ function list_packages() {
         name="almalinux9"
     elif [ "$os" = "ubuntu" ] || [ "$os" = "ubuntu22" ]; then
         name="ubuntu22"
+    elif [ "$os" = "ubuntu24" ]; then
+        name="ubuntu24"
     else
         echo "Unsupported OS, aborting..."
         usage

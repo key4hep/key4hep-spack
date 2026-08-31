@@ -55,6 +55,8 @@ jobs:
         include:
           - os: alma9
             image: ghcr.io/key4hep/key4hep-images/alma9-cvmfs
+          - os: ubuntu24
+            image: ghcr.io/key4hep/key4hep-images/ubuntu24-cvmfs
     runs-on: ubuntu-latest
     container:
       image: ${{ matrix.image }}
