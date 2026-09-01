@@ -19,6 +19,10 @@ class Lccontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "5.0.0",
+        sha256="f83fb3d920f7c40dd93332bac8db859adf399fa915e6b081f4db5a82805d9c2e",
+    )
+    version(
         "3.2.0",
         sha256="37a5b7dbc6d9f7cc9d010294a3f75dd30e9dad591ae4e88784e410868deabae6",
     )
@@ -42,6 +46,8 @@ class Lccontent(CMakePackage):
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
+
+    conflicts("^pandorapfa@5:", when="@:3.2.0")
 
     depends_on("pandoramonitoring", when="+monitoring")
 
