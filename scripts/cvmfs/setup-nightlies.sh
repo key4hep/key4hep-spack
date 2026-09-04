@@ -3,14 +3,17 @@
 # This script sets up the Key4hep software stack from CVMFS for the nightlies
 
 function usage() {
-    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       -c <compiler> : select the compiler (for --lcg on AlmaLinux 9: gcc16 (default) or gcc14)"
+    echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--spack] [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       Default setup: LCG on AlmaLinux 9 and Ubuntu 26; Spack on Ubuntu 24"
+    echo "       -c <compiler> : select the compiler (for LCG on AlmaLinux 9: gcc16 (default) or gcc14)"
     echo "       -d           : setup the debug version of the software stack"
-    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
-    echo "       --lcg        : source the LCG devkey-head view from CVMFS"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26; supports only -d and -c on AlmaLinux 9)"
+    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for -r and the listing options on AlmaLinux 9; not available on Ubuntu 26)"
+    echo "       -r <release> : setup a specific release (--spack only), if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
-    echo "       --list-releases [distribution] : list available releases for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
-    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (almalinux, centos, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
+    echo "       On AlmaLinux 9, use --spack --list-releases or --spack --list-packages to access the listings"
     echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
     echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
@@ -188,7 +191,8 @@ k4_local_repo() {
 }
 
 build_type=opt
-lcg_setup=0
+lcg_setup=1
+setup_requested=0
 
 for ((i=1; i<=$#; i++)); do
     eval arg=\$$i
@@ -196,6 +200,11 @@ for ((i=1; i<=$#; i++)); do
     case $arg in
         --lcg)
             lcg_setup=1
+            setup_requested=1
+            ;;
+        --spack)
+            lcg_setup=0
+            setup_requested=1
             ;;
         -d)
             build_type=dbg
@@ -222,41 +231,48 @@ else
     return 1
 fi
 
-if [ "$os" = "ubuntu26" ]; then
-    lcg_setup=1
+if [ $setup_requested -eq 0 ] && [ "$os" = "ubuntu24" ]; then
+    lcg_setup=0
+fi
+
+if [ "$os" = "ubuntu26" ] && [ $lcg_setup -eq 0 ]; then
+    echo "The spack-based nightly stack is not available for Ubuntu 26.04. Use the default LCG devkey-head setup instead."
+    return 1
 fi
 
 if [ $lcg_setup -eq 1 ]; then
     lcg_compiler_request=""
-    if [ "$os" != "ubuntu26" ]; then
-        for ((i=1; i<=$#; i++)); do
-            eval arg=\$$i
-            eval "argn=\${$((i+1)):-}"
-            case "$arg" in
-                --lcg|-d)
-                    ;;
-                -c)
-                    if [ "$argn" = "gcc14" ] || [ "$argn" = "gcc16" ]; then
-                        lcg_compiler_request="$argn"
-                        ((i++))
-                    else
-                        echo "Unsupported compiler ${argn:-<none>} for --lcg, aborting..."
-                        usage
-                        return 1
-                    fi
-                    ;;
-                *)
-                    echo "The --lcg option is only compatible with -d and -c gcc14|gcc16"
+    for ((i=1; i<=$#; i++)); do
+        eval arg=\$$i
+        eval "argn=\${$((i+1)):-}"
+        case "$arg" in
+            --lcg|-d)
+                ;;
+            -c)
+                if [ "$os" != "almalinux9" ]; then
+                    echo "The -c flag is only supported on AlmaLinux 9 for the devkey-head setup, aborting..."
                     usage
                     return 1
-                    ;;
-            esac
-        done
-    fi
+                elif [ "$argn" = "gcc14" ] || [ "$argn" = "gcc16" ]; then
+                    lcg_compiler_request="$argn"
+                    ((i++))
+                else
+                    echo "Unsupported compiler ${argn:-<none>} for --lcg, aborting..."
+                    usage
+                    return 1
+                fi
+                ;;
+            *)
+                echo "The devkey-head setup only supports -d and, on AlmaLinux 9, -c gcc14|gcc16. Use --spack to access other options (-r, --list-releases, --list-packages)."
+                usage
+                return 1
+                ;;
+        esac
+    done
 
     if [ "$os" != "almalinux9" ] && [ "$os" != "ubuntu26" ]; then
-        echo "Unsupported OS for --lcg, aborting..."
-        echo "Supported OSes for --lcg are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04"
+        echo "Unsupported OS for the devkey-head setup, aborting..."
+        echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04. Use --spack for Ubuntu 24.04."
         return 1
     fi
 
@@ -282,19 +298,41 @@ if [ $lcg_setup -eq 1 ]; then
         return 1
     fi
 
-    echo "Sourcing LCG devkey-head view from CVMFS"
+    echo "Sourcing LCG devkey-head view from CVMFS (use --spack to source the spack-based nightly stack)"
+    # echo "Use the following command to reproduce the current environment: "
+    # echo ""
+    # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
+    # if [ "$build_type" = "dbg" ]; then
+    #     command+=" -d"
+    # fi
+    # echo "        $command"
+    # echo ""
     source "$lcg_setup_script"
     return 0
 fi
 
 rel="latest-$build_type"
-if [[ "${1:-}" = "-r" && -n "${2:-}" ]]; then
-    rel="$2"
-fi
+release_requested=0
+for ((i=1; i<=$#; i++)); do
+    eval arg=\$$i
+    eval "argn=\${$((i+1)):-}"
+    if [ "$arg" = "-r" ]; then
+        if [ -z "$argn" ]; then
+            echo "No release specified after -r, aborting..."
+            usage
+            return 1
+        fi
+        rel="$argn"
+        release_requested=1
+        ((i++))
+    fi
+done
 
-check_release "${1:-}" "${2:-}" "$os"
-if [ $? -ne 0 ]; then
-  return 1
+if [ $release_requested -eq 1 ]; then
+    check_release -r "$rel" "$os"
+    if [ $? -ne 0 ]; then
+      return 1
+    fi
 fi
 
 for ((i=1; i<=$#; i++)); do
@@ -304,6 +342,8 @@ for ((i=1; i<=$#; i++)); do
         --help|-h)
             usage
             return 0
+            ;;
+        --spack|--lcg)
             ;;
         -c)
             if [ "$os" = "almalinux9" ]; then
@@ -353,6 +393,7 @@ for ((i=1; i<=$#; i++)); do
         -d)
             ;;
         -r)
+            ((i++))
             ;;
         *)
             eval "prev=\${$((i-1))}"
@@ -381,6 +422,11 @@ fi
 
 k4path=$(/usr/bin/ls -rd /cvmfs/sw-nightlies.hsf.org/key4hep/releases/$rel/*$os*$compiler*$build_type | head -n1)
 
+if [ -z "$k4path" ] || [ ! -d "$k4path" ]; then
+    echo "Key4hep nightly stack not found for release $rel, OS $os, compiler $compiler, and build type $build_type"
+    return 1
+fi
+
 if [ -n "${KEY4HEP_STACK:-}" ]; then
     echo "The Key4hep software stack is already set up, please start a new shell to avoid conflicts"
     return 1
@@ -395,6 +441,10 @@ fi
 
 setup_script_path=$(/usr/bin/ls -t1 $k4path/key4hep-stack/*/setup.sh | head -1)
 setup_actual=$(readlink -f $setup_script_path)
+if [ -z "$setup_actual" ] || [ ! -f "$setup_actual" ]; then
+    echo "Key4hep nightly setup script not found in $k4path"
+    return 1
+fi
 export key4hep_stack_version=$(echo "$setup_actual"| grep -Po '(?<=key4hep-stack/)(.*)(?=-[[:alnum:]]{6}/)')
 
 # For SWAN
