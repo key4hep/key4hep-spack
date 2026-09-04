@@ -4,14 +4,16 @@
 
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--spack] [--lcg] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
+    echo "       Default setup: LCG on AlmaLinux 9 and Ubuntu 26; Spack on Ubuntu 24"
     echo "       -c <compiler> : select the compiler (for LCG on AlmaLinux 9: gcc16 (default) or gcc14)"
     echo "       -d           : setup the debug version of the software stack"
-    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26)"
-    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; not available on Ubuntu 26)"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26; supports only -d and -c on AlmaLinux 9)"
+    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for -r and the listing options on AlmaLinux 9; not available on Ubuntu 26)"
     echo "       -r <release> : setup a specific release (--spack only), if not specified the latest release will be used (also used for --list-packages)"
     echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
     echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
+    echo "       On AlmaLinux 9, use --spack --list-releases or --spack --list-packages to access the listings"
     echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
     echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
 }
