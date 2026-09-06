@@ -40,6 +40,8 @@ class K4reco(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1.4:", when="@0.3.0:")
     depends_on("k4simgeant4")
     depends_on("root")
+    depends_on("fastjet", when="@0.5.0:")
+    depends_on("fjcontrib", when="@0.5.0:")
 
     depends_on("lcio", when="+conformal_tracking")
     depends_on("ilcutil", when="+conformal_tracking")
