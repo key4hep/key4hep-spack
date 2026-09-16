@@ -48,6 +48,12 @@ def k4_setup_env_for_framework_tests(spec, env):
             spec["root"].package.setup_dependent_run_environment(env, dspec)
 
 
+def fish_quote(s):
+    """Quote a string for the fish shell. Inside single quotes fish only
+    treats backslashes and single quotes specially, so escape those"""
+    return "'" + s.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
 def k4_generate_setup_script(env_mod, shell="sh"):
     """Return shell code corresponding to a EnvironmentModifications object.
     Contrary to the spack environment_modifications() method, this does not evaluate
@@ -59,7 +65,7 @@ def k4_generate_setup_script(env_mod, shell="sh"):
 
     :param env_mod: spack EnvironmentModifications object
     :type env_mod: class: `spack.EnvironmentModifications`
-    :param str shell: type of the shell. Only 'sh' possible at the moment
+    :param str shell: type of the shell, either 'sh' or 'fish'
     :return: Shell code corresponding to the environment modifications.
     :rtype: str
     """
@@ -100,18 +106,28 @@ def k4_generate_setup_script(env_mod, shell="sh"):
     # get shell commands
     k4_shell_set_strings = {
         "sh": "export {0}={1}\n",
+        "fish": "set -gx {0} {1}\n",
     }
+    # In fish, joining explicitly with ':' works both for path variables (names ending
+    # in PATH, which fish treats as colon-separated lists) and for regular ones, and
+    # avoids a trailing ':' when the variable is not set yet
     k4_shell_prepend_strings = {
         "sh": "export {0}={1}:${0}\n",
+        "fish": "set -gx {0} (string join : {1} ${0})\n",
     }
+    k4_shell_quote = {
+        "sh": cmd_quote,
+        "fish": fish_quote,
+    }
+    if shell not in k4_shell_set_strings:
+        raise ValueError(f"Unsupported shell '{shell}', use one of: sh, fish")
+    quote = k4_shell_quote[shell]
     cmds = []
     for name in set(new_env):
         if env_set_not_prepend[name]:
-            cmds += [k4_shell_set_strings[shell].format(name, cmd_quote(new_env[name]))]
+            cmds += [k4_shell_set_strings[shell].format(name, quote(new_env[name]))]
         else:
-            cmds += [
-                k4_shell_prepend_strings[shell].format(name, cmd_quote(new_env[name]))
-            ]
+            cmds += [k4_shell_prepend_strings[shell].format(name, quote(new_env[name]))]
     return "".join(sorted(cmds))
 
 
@@ -185,10 +201,11 @@ def install_setup_script(self, spec, prefix, env_var):
     if self.compiler.fc:
         env_mod.set("FC", self.compiler.fc)
 
-    # transform to bash commands, and write to file
-    cmds = k4_generate_setup_script(env_mod)
-    with open(os.path.join(prefix, "setup.sh"), "w") as f:
-        f.write(cmds)
+    # transform to shell commands, and write to file
+    for shell in ("sh", "fish"):
+        cmds = k4_generate_setup_script(env_mod, shell=shell)
+        with open(os.path.join(prefix, f"setup.{shell}"), "w") as f:
+            f.write(cmds)
 
     # Try to create a symlink to fjcontrib/include/fastjet/contrib in fastjet/include/fastjet/
     # See https://github.com/key4hep/key4hep-spack/issues/690
