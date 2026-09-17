@@ -108,12 +108,11 @@ def k4_generate_setup_script(env_mod, shell="sh"):
         "sh": "export {0}={1}\n",
         "fish": "set -gx {0} {1}\n",
     }
-    # In fish, joining explicitly with ':' works both for path variables (names ending
-    # in PATH, which fish treats as colon-separated lists) and for regular ones, and
-    # avoids a trailing ':' when the variable is not set yet
+    # In fish, --path makes the variable a colon-separated list even when its name does
+    # not end in PATH (e.g. MARLIN_DLL), otherwise it would be exported space-separated
     k4_shell_prepend_strings = {
         "sh": "export {0}={1}:${0}\n",
-        "fish": "set -gx {0} (string join : {1} ${0})\n",
+        "fish": "set -gx --path {0} {1} ${0}\n",
     }
     k4_shell_quote = {
         "sh": cmd_quote,
