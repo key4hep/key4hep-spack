@@ -119,8 +119,6 @@ def k4_generate_setup_script(env_mod, shell="sh"):
         "sh": cmd_quote,
         "fish": fish_quote,
     }
-    if shell not in k4_shell_set_strings:
-        raise ValueError(f"Unsupported shell '{shell}', use one of: sh, fish")
     quote = k4_shell_quote[shell]
     cmds = []
     for name in set(new_env):
