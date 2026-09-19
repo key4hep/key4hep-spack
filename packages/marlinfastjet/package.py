@@ -19,6 +19,10 @@ class Marlinfastjet(CMakePackage, Ilcsoftpackage):
     version("master", branch="master")
     version(
         "0.5.3",
+        sha256="12e614e9711ec3b265f24a606b9a865e0b51b50783d9a6907325c0be913e98e3",
+    )
+    version(
+        "0.5.3",
         sha256="bf88cdcea89bb5febe5e77176164ec0d1d0d61be2890978f66a7638ac248ef5b",
     )
     version(
