@@ -18,6 +18,10 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.4.0",
+        sha256="d8b01fe5e4d46a29b36494e3be2f952b7330c55a694d3670c1ffc002838cd0ff",
+    )
+    version(
         "0.3.0",
         sha256="8dd1218696e6866f0bda59637793726596a202bad0c90e9969dd57fbe467e500",
     )
