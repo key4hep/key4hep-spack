@@ -66,6 +66,7 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
         args = [
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value}",
             "-DCMAKE_INSTALL_LIBDIR=lib",
+            self.define("BUILD_TESTING", self.run_tests),
         ]
         return args
 
