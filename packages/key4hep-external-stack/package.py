@@ -58,7 +58,7 @@ class Key4hepExternalStack(BundlePackage, Key4hepPackage):
     depends_on("py-scipy")
 
     # gaudi dependencies
-    depends_on("cppgsl")
+    depends_on("ms-gsl")
     depends_on("fmt")
     depends_on("cppunit")
     depends_on("gperftools")
