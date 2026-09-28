@@ -9,7 +9,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4RecTracker/archive/refs/tags/v0.3.0.tar.gz"
     git = "https://github.com/key4hep/k4RecTracker.git"
 
-    version("master", branch="master")
+    version("main", branch="main")
 
     version(
         "0.7.0",
@@ -72,7 +72,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
             self.define("BUILD_TESTING", self.run_tests),  # not used in the package
             self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
-        if self.spec.satisfies("@master"):
+        if self.spec.satisfies("@0.7.0.1:"):
             args.append(self.define_from_variant("K4RECTRACKER_TRACKING", "tracking"))
         return args
 
