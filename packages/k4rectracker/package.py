@@ -9,7 +9,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     url = "https://github.com/key4hep/k4RecTracker/archive/refs/tags/v0.3.0.tar.gz"
     git = "https://github.com/key4hep/k4RecTracker.git"
 
-    version("master", branch="master")
+    version("main", branch="main")
 
     version(
         "0.7.0",
@@ -32,6 +32,13 @@ class K4rectracker(CMakePackage, Key4hepPackage):
         sha256="e945be69b1b4d51b07e8e806e366893af84369a9d63b04deee691aa10d591a02",
     )
 
+    variant(
+        "tracking",
+        default=True,
+        when="@0.8.0:",
+        description="Build the Tracking subpackage (FCCee tracking, needs GenFit, MarlinUtil, PandoraSDK, ONNX Runtime, Torch)",
+    )
+
     depends_on("c", type="build")
     depends_on("cxx", type="build")
 
@@ -42,19 +49,19 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4fwcore@1.3:", when="@0.6.0:")
-    depends_on("marlinutil")
+    depends_on("marlinutil", when="+tracking")
     depends_on("root")
-    depends_on("genfit", when="@0.8.0:")
-    depends_on("eigen", when="@0.8.0:")
+    depends_on("genfit", when="@0.8.0: +tracking")
+    depends_on("eigen", when="@0.8.0: +tracking")
     depends_on(
         "delphes", when="@0.6.0:"
     )  # To be updated with specifc version once new delphes tag with latest changes is released
     # This shouldn't be necessary but the debug builds are failing because lcio can't be found
     # It started happening after adding marlinutil to the dependencies
-    depends_on("lcio")
-    depends_on("pandorasdk", when="@0.4.0:")
-    depends_on("py-onnxruntime", when="@0.6.0:")
-    depends_on("py-torch", when="@0.6.0:")
+    depends_on("lcio", when="+tracking")
+    depends_on("pandorasdk", when="@0.4.0: +tracking")
+    depends_on("py-onnxruntime", when="@0.6.0: +tracking")
+    depends_on("py-torch", when="@0.6.0: +tracking")
 
     def cmake_args(self):
         args = [
@@ -64,6 +71,8 @@ class K4rectracker(CMakePackage, Key4hepPackage):
             self.define("BUILD_TESTING", self.run_tests),  # not used in the package
             self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
+        if self.spec.satisfies("@0.8.0:"):
+            args.append(self.define_from_variant("K4RECTRACKER_TRACKING", "tracking"))
         return args
 
     def setup_run_environment(self, env):
