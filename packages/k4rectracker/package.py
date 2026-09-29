@@ -35,10 +35,9 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     variant(
         "tracking",
         default=True,
+        when="0.8.0:"
         description="Build the Tracking subpackage (FCCee tracking, needs GenFit, MarlinUtil, PandoraSDK, ONNX Runtime, Torch)",
     )
-    # The K4RECTRACKER_TRACKING flag is only available after 0.7.0
-    conflicts("~tracking", when="@:0.7.0")
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
@@ -72,7 +71,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
             self.define("BUILD_TESTING", self.run_tests),  # not used in the package
             self.define("CMAKE_INSTALL_LIBDIR", "lib"),
         ]
-        if self.spec.satisfies("@0.7.0.1:"):
+        if self.spec.satisfies("@0.8.0:"):
             args.append(self.define_from_variant("K4RECTRACKER_TRACKING", "tracking"))
         return args
 
