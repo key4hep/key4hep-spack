@@ -35,7 +35,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     variant(
         "tracking",
         default=True,
-        when="0.8.0:"
+        when="0.8.0:",
         description="Build the Tracking subpackage (FCCee tracking, needs GenFit, MarlinUtil, PandoraSDK, ONNX Runtime, Torch)",
     )
 
