@@ -172,13 +172,13 @@ k4_local_repo() {
     export PATH=$PWD/$install/bin:$PATH
     export ROOT_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$ROOT_LIBRARY_PATH
     export LD_LIBRARY_PATH=$PWD/$install/lib:$PWD/$install/lib64:$LD_LIBRARY_PATH
-    # Get the python site-packages directory
-    libpythondir=$(python -c "import site; print('/'.join(site.getsitepackages()[0].split('/')[-3:]))")
-    export PYTHONPATH=$PWD/$install/python:$PWD/$install/$libpythondir:$PYTHONPATH
+    # Get the python version for the site-packages directories
+    pyversion=$(python -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+    export PYTHONPATH=$PWD/$install/python:$PWD/$install/lib/python${pyversion}/site-packages:$PWD/$install/lib64/python${pyversion}/site-packages:$PYTHONPATH
     export CMAKE_PREFIX_PATH=$PWD/$install:$CMAKE_PREFIX_PATH
     export PKG_CONFIG_PATH=$PWD/$install/lib/pkgconfig:$PKG_CONFIG_PATH
     export ROOT_INCLUDE_PATH=$PWD/$install/include:$ROOT_INCLUDE_PATH
-    export GAUDI_PLUGIN_PATH=$PWD/$install/lib:$PWD/$install/lib64:$GAUDI_PLUGIN_PATH
+    export GAUDI_PLUGIN_PATH=$PWD/$install/lib/gaudi-plugins:$PWD/$install/lib64/gaudi-plugins:$PWD/$install/lib:$PWD/$install/lib64:$GAUDI_PLUGIN_PATH
     if [ "$current_repo" = "k4geo" ]; then
         export LCGEO=$PWD
         export K4GEO=$PWD
