@@ -42,20 +42,30 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         default=False,
         description="Build the GNN track finding pipeline",
     )
+    variant(
+        "cuda",
+        default=False,
+        description="Enable CUDA support for the GNN track finding pipeline",
+    )
 
     depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
-    # The GNN pipeline is the only consumer of the acts GNN plugin
-    depends_on(
-        "acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json+gnn+onnx+torch",
-        when="+gnn",
-    )
+
+    with when("+gnn"):
+        depends_on("acts+gnn+onnx+torch")
+        depends_on("py-torch")
+        depends_on("py-onnxruntime")
+
+    with when("+cuda"):
+        depends_on("cuda")
+        depends_on("acts+cuda")
+        depends_on("py-torch+cuda")
+        depends_on("py-onnxruntime+cuda")
+
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")
     depends_on("k4fwcore")
     depends_on("opendatadetector", type="test")
-    depends_on("py-torch", when="+gnn")
-    depends_on("py-onnxruntime", when="+gnn")
 
     def cmake_args(self):
         return [
