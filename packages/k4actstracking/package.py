@@ -48,6 +48,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         description="Enable CUDA support for the GNN track finding pipeline",
     )
 
+    depends_on("wget", type="build")
     depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
 
     with when("+gnn"):
