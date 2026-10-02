@@ -55,11 +55,6 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         depends_on("acts+gnn+onnx+torch")
         depends_on("py-torch")
         depends_on("py-onnxruntime")
-
-    with when("+gnn~cuda"):
-        depends_on("acts~cuda")
-        depends_on("py-torch~cuda")
-        depends_on("py-onnxruntime~cuda")
     with when("+cuda"):
         depends_on("acts+cuda")
         depends_on("py-torch+cuda")
