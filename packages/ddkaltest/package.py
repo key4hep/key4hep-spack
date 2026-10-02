@@ -18,6 +18,10 @@ class Ddkaltest(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.7.2",
+        sha256="267fbc688d9444b99dae6616e68a3ae4ec89ba79a5503b3b4a646945e7e7ff8a",
+    )
+    version(
         "1.7.1",
         sha256="151e029aa1451f86cfc8aee1b75f242bf226d20904bfe6b85dc9e62383f35dc4",
     )
