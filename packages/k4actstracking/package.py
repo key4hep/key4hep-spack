@@ -46,6 +46,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         "cuda",
         default=False,
         description="Enable CUDA support for the GNN track finding pipeline",
+        when="+gnn",
     )
 
     depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
@@ -54,9 +55,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
         depends_on("acts+gnn+onnx+torch")
         depends_on("py-torch")
         depends_on("py-onnxruntime")
-
     with when("+cuda"):
-        depends_on("cuda")
         depends_on("acts+cuda")
         depends_on("py-torch+cuda")
         depends_on("py-onnxruntime+cuda")
