@@ -7,9 +7,10 @@ function usage() {
     echo "       Default setup: LCG on AlmaLinux 9 and Ubuntu 26; Spack on Ubuntu 24"
     echo "       -c <compiler> : select the compiler (for LCG on AlmaLinux 9: gcc16 (default) or gcc14)"
     echo "       -d           : setup the debug version of the software stack"
-    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26; supports only -d and -c on AlmaLinux 9)"
-    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for -r and the listing options on AlmaLinux 9; not available on Ubuntu 26)"
-    echo "       -r <release> : setup a specific release (--spack only), if not specified the latest release will be used (also used for --list-packages)"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26; supports only -d, -r and -c on AlmaLinux 9)"
+    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for the listing options on AlmaLinux 9; not available on Ubuntu 26)"
+    echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
+    echo "                      for --spack the release is a date (see --list-releases), for --lcg it is a day of the week (Mon, Tue, Wed, Thu, Fri, Sat) or latest; there are no Sunday builds"
     echo "       --help, -h   : print this help message"
     echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
     echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
@@ -242,11 +243,30 @@ fi
 
 if [ $lcg_setup -eq 1 ]; then
     lcg_compiler_request=""
+    lcg_release="latest"
     for ((i=1; i<=$#; i++)); do
         eval arg=\$$i
         eval "argn=\${$((i+1)):-}"
         case "$arg" in
             --lcg|-d)
+                ;;
+            -r)
+                case "$argn" in
+                    Mon|Tue|Wed|Thu|Fri|Sat|latest)
+                        lcg_release="$argn"
+                        ((i++))
+                        ;;
+                    Sun)
+                        echo "LCG nightlies are not built on Sunday, aborting..."
+                        return 1
+                        ;;
+                    *)
+                        echo "Unsupported release ${argn:-<none>} for --lcg, aborting..."
+                        echo "The LCG nightly releases are Mon, Tue, Wed, Thu, Fri, Sat, or latest"
+                        usage
+                        return 1
+                        ;;
+                esac
                 ;;
             -c)
                 if [ "$os" != "almalinux9" ]; then
@@ -263,7 +283,7 @@ if [ $lcg_setup -eq 1 ]; then
                 fi
                 ;;
             *)
-                echo "The devkey-head setup only supports -d and, on AlmaLinux 9, -c gcc14|gcc16. Use --spack to access other options (-r, --list-releases, --list-packages)."
+                echo "The devkey-head setup only supports -d, -r <day> and, on AlmaLinux 9, -c gcc14|gcc16. Use --spack to access other options (--list-releases, --list-packages)."
                 usage
                 return 1
                 ;;
@@ -292,13 +312,20 @@ if [ $lcg_setup -eq 1 ]; then
         lcg_os_tag="el9"
         lcg_compiler_tag="${lcg_compiler_request:-gcc16}"
     fi
-    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/latest/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
+    lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/${lcg_release}/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
     if [ ! -f "$lcg_setup_script" ]; then
         echo "LCG setup script not found at: $lcg_setup_script"
+        if [ "$lcg_release" != "latest" ]; then
+            echo "Available releases: $(/usr/bin/ls /cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/ | grep -v latest | tr '\n' ' ')"
+        fi
         return 1
     fi
 
-    echo "Sourcing LCG devkey-head view from CVMFS (use --spack to source the spack-based nightly stack)"
+    if [ "$lcg_release" = "latest" ]; then
+        echo "Sourcing the latest LCG devkey-head view from CVMFS (use --spack to source the spack-based nightly stack)"
+    else
+        echo "Sourcing the LCG devkey-head view from ${lcg_release} from CVMFS (use --spack to source the spack-based nightly stack)"
+    fi
     # echo "Use the following command to reproduce the current environment: "
     # echo ""
     # command="source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh --lcg"
