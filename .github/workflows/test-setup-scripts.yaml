@@ -55,7 +55,7 @@ jobs:
         run: |
           for day in Mon Tue Wed Thu Fri Sat; do
             (
-              source scripts/cvmfs/setup-nightlies.sh --lcg -r "$day"
+              source scripts/cvmfs/setup-nightlies.sh -r "$day"
               [[ "$lcg_setup_script" == "/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/$day/"* ]]
             )
           done
@@ -65,7 +65,7 @@ jobs:
         run: |
           for day in Mon Tue Wed Thu Fri Sat; do
             (
-              source scripts/cvmfs/setup-nightlies.sh --lcg -r "$day" -d
+              source scripts/cvmfs/setup-nightlies.sh -r "$day" -d
               [[ "$lcg_setup_script" == "/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/$day/"* ]]
             )
           done
@@ -73,7 +73,7 @@ jobs:
       - name: Reject Sunday LCG nightlies
         if: matrix.os != 'ubuntu24'
         run: |
-          if output=$(source scripts/cvmfs/setup-nightlies.sh --lcg -r Sun 2>&1); then
+          if output=$(source scripts/cvmfs/setup-nightlies.sh -r Sun 2>&1); then
             echo "Expected the Sunday LCG setup to fail"
             exit 1
           else
