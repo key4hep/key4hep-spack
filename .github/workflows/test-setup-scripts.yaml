@@ -7,10 +7,12 @@ on:
     paths:
       - scripts/cvmfs/setup-nightlies.sh
       - scripts/cvmfs/setup-releases.sh
+      - .github/workflows/test-setup-scripts.yaml
   pull_request:
     paths:
       - scripts/cvmfs/setup-nightlies.sh
       - scripts/cvmfs/setup-releases.sh
+      - .github/workflows/test-setup-scripts.yaml
   workflow_dispatch:
 
 concurrency:
@@ -47,6 +49,39 @@ jobs:
 
       - name: Source nightlies setup script (dbg)
         run: source scripts/cvmfs/setup-nightlies.sh -d
+
+      - name: Source LCG weekday setup scripts (opt)
+        if: matrix.os != 'ubuntu24'
+        run: |
+          for day in Mon Tue Wed Thu Fri Sat; do
+            (
+              source scripts/cvmfs/setup-nightlies.sh --lcg -r "$day"
+              [[ "$lcg_setup_script" == "/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/$day/"* ]]
+            )
+          done
+
+      - name: Source LCG weekday setup scripts (dbg)
+        if: matrix.os != 'ubuntu24'
+        run: |
+          for day in Mon Tue Wed Thu Fri Sat; do
+            (
+              source scripts/cvmfs/setup-nightlies.sh --lcg -r "$day" -d
+              [[ "$lcg_setup_script" == "/cvmfs/sft-nightlies.cern.ch/lcg/views/devkey-head/$day/"* ]]
+            )
+          done
+
+      - name: Reject Sunday LCG nightlies
+        if: matrix.os != 'ubuntu24'
+        run: |
+          if output=$(source scripts/cvmfs/setup-nightlies.sh --lcg -r Sun 2>&1); then
+            echo "Expected the Sunday LCG setup to fail"
+            exit 1
+          else
+            status=$?
+          fi
+          printf '%s\n' "$output"
+          [[ "$status" -eq 1 ]]
+          [[ "$output" == *"LCG nightlies are not built on Sunday"* ]]
 
   test-releases:
     strategy:
