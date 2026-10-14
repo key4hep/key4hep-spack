@@ -12,6 +12,10 @@ class K4reco(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "0.5.0",
+        sha256="14d59a71c3d888a459ddce5049c5475495a5f86324c09c42f5d3db615f14591d",
+    )
+    version(
         "0.4.0",
         sha256="824ee203ed480d78f5b24284884474a89e47253d5360288d4fb33f5c92c84296",
     )
@@ -37,6 +41,7 @@ class K4reco(CMakePackage, Key4hepPackage):
     depends_on("cxx", type="build")
 
     depends_on("podio")
+    depends_on("podio@1.8:", when="@0.5.0:")
     depends_on("dd4hep")
     depends_on("edm4hep")
     depends_on("gaudi")
