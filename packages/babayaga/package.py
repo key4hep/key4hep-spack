@@ -12,7 +12,7 @@ class Babayaga(MakefilePackage):
     """Babayaga is the state of art Monte Carlo for e+e- -> gamma gamma"""
 
     homepage = "https://www2.pv.infn.it/~hepcomplex/babayaga.html"
-    url = "http://neowulf.pv.infn.it:8281/babayaga-fcc/babayaga-fcc.tar.bz2"
+    url = "https://neowulf.pv.infn.it:8281/babayaga-fcc/babayaga-fcc.tar.bz2"
 
     tags = ["hep"]
 
