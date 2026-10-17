@@ -13,6 +13,10 @@ class K4simgeant4(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.0pre19",
+        sha256="0805d48fdfa2fe0390e1221434c6b3c7c8406cbe111d02ace07c63a0641cacc5",
+    )
+    version(
         "0.1.0pre18",
         sha256="d14487bf42fb711a83405c95d697badf1ae249d4123be099e6d0915cf167bc69",
     )
