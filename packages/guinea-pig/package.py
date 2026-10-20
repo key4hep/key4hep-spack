@@ -21,8 +21,8 @@ class GuineaPig(CMakePackage):
     version("master", branch="master")
     version(
         "1.2.2",
-        tag="v1.2.2",
-        commit="18ce27f6311009b2cb381a18b2fd02af621147a1",
+        "v1.2.2",
+        sha256sum="cbeafb33141762803e4b11eef3d2259d511e010a0e8df09c3e05767734998572",
         preferred=True,
     )
     version(
