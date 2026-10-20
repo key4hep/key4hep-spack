@@ -1,13 +1,18 @@
 git remote add jmcarcell https://github.com/jmcarcell/spack-packages || true
 git fetch jmcarcell -q
 
-# root: allow +ipo
-git cherry-pick 9af230f21396b8e99eefab09a586f51120ab186a -X theirs --no-commit
+# root: allow +ipo (patch from jmcarcell/spack-packages@9af230f2, applied with targeted
+# edits rather than a cherry-pick so that newer upstream changes to root are kept)
+ROOT_PKG=repos/spack_repo/builtin/packages/root/package.py
+git checkout 9af230f21396b8e99eefab09a586f51120ab186a -- repos/spack_repo/builtin/packages/root/ipo.patch
+sed -i '0,/^    if _is_macos:/s//    patch("ipo.patch")\n\n    if _is_macos:/' ${ROOT_PKG}
+sed -i 's/^\( *\)conflicts("+ipo",/\1# conflicts("+ipo",/' ${ROOT_PKG}
 
-# root: use a builtin civetweb
-git cherry-pick eed88ee482b3248a9056e3a8986bdc354146ccb1 -X theirs --no-commit
+# root: use a builtin civetweb (same as jmcarcell/spack-packages@eed88ee4)
+sed -i 's/^\( *\)depends_on("civetweb +shared", when="+http")/\1# depends_on("civetweb +shared", when="+http")/' ${ROOT_PKG}
+sed -i 's/define("builtin_civetweb", False)/define("builtin_civetweb", True)/' ${ROOT_PKG}
 
-# madgraph5amc: add changes to install models, remove when https://github.com/spack/spack-packages/pull/110 is merged
+# madgraph5amc: add changes to install models (https://github.com/spack/spack-packages/pull/110, closed upstream)
 curl -sSfL https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/110.diff | patch -p1
 
 # py_gosam: try a fix for the build, which is probably not correct
@@ -16,62 +21,5 @@ curl -sSfL https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pul
 # dd4hep: set CMAKE_INSTALL_LIBDIR to lib
 git cherry-pick e79552a5782ae4967f1acb15e7bf1a31660f0eea -X theirs --no-commit
 
-# arrow: depend on snappy only with +snappy, remove!
-git cherry-pick de91ea2dec37dac697067479455965681e277d5f -X theirs --no-commit
-
-# rust: add v1.92, remove!
-curl -sSfL  https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/2737.diff | patch -p1
-
-# cargo_c: add the package, remove!
-git cherry-pick 2726ea09a8f127c81943e07e2382afd6425bd1d3 -X theirs --no-commit
-# cargo_c: fix builds, remove!
-git cherry-pick 56600f5b3d15c8776bf56b135c6333551e4377ab -X theirs --no-commit
-
-# texlive: do not install the documentation and source files, remove!
-git cherry-pick 834e7d6b9b4d33cb11bf3de5e099d2745e924bd5 -X theirs --no-commit
-
-# texlive: add missing import, remove!
-git cherry-pick 57603adf4731caa2e7b4896059018406abb11996 -X theirs --no-commit
-
-# sherpa: add v3.0.3, remove!
-git cherry-pick 59b1812d32c26145c7fbbbfc3889f5841e4ad6fd -X theirs --no-commit
-
-# clhep: add 2.4.7.2, remove!
-git cherry-pick 369c205c9c0ef453928b6fa1ef67b3becdabdf15 -X theirs --no-commit
-
-# geant4 add v11.4.0, remove!
-git cherry-pick ee7b3febd85b3fa90f8b6c7b20f1dad348bb02c0 -X theirs --no-commit
-
-# garfieldpp: add v2025.12 (compatible with ROOT 6.38.00), remove!
-curl -sSfL  https://patch-diff.githubusercontent.com/raw/spack/spack-packages/pull/2813.diff | patch -p1
-
-# gaudi: add v40.2
-git cherry-pick 24ebf73d5fa1801f0c54a3faaa47b8a1785eba80 -X theirs --no-commit
-
-# gaudi: fix the fmt dependencies, remove when https://github.com/spack/spack-packages/pull/2825 is merged
-git cherry-pick 577e67ad8ccba05916539418b8dc71b48b705b1f -X theirs --no-commit
-
-# thrift: make sure the python variant exists with CMake, remove!
-git cherry-pick 840a11811f6c1617daa97d54345b06b2d4b1ddb6 -X theirs --no-commit
-
-# podio: ensure Python.h is found in ROOT ACLiC, remove!
-git cherry-pick 935196d3bd0a005a32c843afca5e1e510ad7176a -X theirs --no-commit
-
-# b2luigi: add the new package
-git cherry-pick 20e86bf8f19bd1895bdbf88443fc43233002eec0 -X theirs --no-commit
-
-# podio: add v1.7
-# edm4hep: add v1.0
-# dd4hep: add v1.35 through 1.37
-git cherry-pick 208b3c478e74e5217724b4894d1db941b0c13555 -X theirs --no-commit
-git cherry-pick 9ba7aca4be1e05e17c911aa48f6eb7ca5d3c8df7 -X theirs --no-commit
-git cherry-pick 4ede55d3da74d08a2c07a982615247f4325b031c -X theirs --no-commit
-git cherry-pick 107eb9966c8a9688e042c42e903274099688b590 -X theirs --no-commit
-git cherry-pick cfdc775b857dbecc1b7ba62b5ec00d4f8b0f3e6b -X theirs --no-commit
-
-# edm4hep: add v1.1
-git cherry-pick 5c1471ca2093e1ed98abab9ea482f1c45845fb1b -X theirs --no-commit
-
-# alpaka: add v2.1.0
-git cherry-pick c5923e68e7a53a70108a33e5a58ed21b0cf35ba0 -X theirs --no-commit
-
+# herwig3: the bundled LoopTools has integer constants out of range for gfortran (seen on aarch64)
+sed -i 's/^\( *\)flags.append("-std=legacy")/&\n\1flags.append("-fno-range-check")/' repos/spack_repo/builtin/packages/herwig3/package.py

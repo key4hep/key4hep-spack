@@ -12,7 +12,7 @@ class Babayaga(MakefilePackage):
     """Babayaga is the state of art Monte Carlo for e+e- -> gamma gamma"""
 
     homepage = "https://www2.pv.infn.it/~hepcomplex/babayaga.html"
-    url = "http://neowulf.pv.infn.it:8281/babayaga-fcc/babayaga-fcc.tar.bz2"
+    url = "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/babayaga-fcc1.0.0.tar.bz2"
 
     tags = ["hep"]
 
@@ -23,6 +23,8 @@ class Babayaga(MakefilePackage):
     version(
         "fcc-1.0.0",
         sha256="bfd474e267972ae06d7e622de87db7ba5edcbb2e1323838d4a299ac3cd23dce8",
+        # the file name does not follow the version, so do not let spack extrapolate it
+        url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/babayaga-fcc1.0.0.tar.bz2",
     )
 
     variant(

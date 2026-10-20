@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [alma9, ubuntu24]
+        os: [ubuntu24]
     with:
       os: ${{ matrix.os }}
       registry: ghcr.io
