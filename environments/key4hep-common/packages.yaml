@@ -50,7 +50,7 @@ packages:
   lccd:
     require: +conddbmysql
   lccontent:
-    require: +monitoring
+    require: +monitoring +ml
   llvm:
     require: '@21: ~lldb~lld~lua~polly~libomptarget~gold~llvm_dylib compiler-rt="none" libcxx="none" libunwind="none" targets="x86"'
   marlin:

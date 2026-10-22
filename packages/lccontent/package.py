@@ -44,8 +44,13 @@ class Lccontent(CMakePackage):
     depends_on("pandorasdk")
 
     depends_on("pandoramonitoring", when="+monitoring")
+    # LCContentML (ONNX inference algorithms) is a separate library, built only with +ml
+    depends_on("py-onnxruntime", when="+ml")
 
     variant("monitoring", default=False, description="Enable Pandora Monitoring")
+    variant(
+        "ml", default=False, description="Build the ONNX inference library LCContentML"
+    )
 
     def cmake_args(self):
         args = [
@@ -53,6 +58,7 @@ class Lccontent(CMakePackage):
             "-DCMAKE_CXX_FLAGS=-Wno-error",
             f"-DCMAKE_CXX_STANDARD={self.spec['root'].variants['cxxstd'].value if 'root' in self.spec else 20}",
             self.define_from_variant("PANDORA_MONITORING", "monitoring"),
+            self.define_from_variant("LCContent_BUILD_ML", "ml"),
         ]
         return args
 
