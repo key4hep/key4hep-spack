@@ -206,6 +206,7 @@ for ((i=1; i<=$#; i++)); do
             setup_requested=1
             ;;
         --spack)
+            echo "WARNING: Spack nightly builds are no longer built and the existing builds are outdated. The --spack option will soon fail."
             lcg_setup=0
             setup_requested=1
             ;;
