@@ -54,6 +54,7 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@:1.4", when="@:0.1.0")
     depends_on("lccontent")
     depends_on("lccontent@5.1:", when="@0.5:")
+    depends_on("nlohmann-json", when="@0.6.0:")
     depends_on("pandorasdk")
     depends_on("root")
     depends_on("k4reco", when="@0.2.0:")
