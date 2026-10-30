@@ -54,6 +54,7 @@ class Lccontent(CMakePackage):
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
+    depends_on("pandorasdk@4.0.1:", when="@5.1:")
 
     conflicts("^pandorapfa@5:", when="@:3.2.0")
 
