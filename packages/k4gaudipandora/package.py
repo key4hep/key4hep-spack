@@ -18,6 +18,14 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.5.0",
+        sha256="fe72463542a319715c3c74a1207c983246ceda00043fcd17f5c1092201cbfd45",
+    )
+    version(
+        "0.4.0",
+        sha256="d8b01fe5e4d46a29b36494e3be2f952b7330c55a694d3670c1ffc002838cd0ff",
+    )
+    version(
         "0.3.0",
         sha256="8dd1218696e6866f0bda59637793726596a202bad0c90e9969dd57fbe467e500",
     )
@@ -41,10 +49,15 @@ class K4gaudipandora(CMakePackage, Key4hepPackage):
 
     depends_on("dd4hep")
     depends_on("edm4hep")
+    depends_on("edm4hep@1:", when="@0.5.0:")
     depends_on("gaudi")
+    depends_on("gsl", when="@0.2.0:")
     depends_on("k4fwcore@1.5:", when="@0.2.0:")
     depends_on("k4fwcore@:1.4", when="@:0.1.0")
     depends_on("lccontent")
+    depends_on("lccontent@5.1.0:", when="@0.4.0:")
+    depends_on("lccontent@5.1.1:", when="@0.6.0:")
+    depends_on("nlohmann-json", when="@0.6.0:")
     depends_on("pandorasdk")
     depends_on("root")
     depends_on("k4reco", when="@0.2.0:")
