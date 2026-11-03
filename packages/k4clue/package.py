@@ -19,6 +19,10 @@ class K4clue(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "01-01-01",
+        sha256="484b7d363b8a116141054f174deb84202a1af9d3fe881139afd6367af620aeca",
+    )
+    version(
         "01-01-00",
         sha256="de7295eb145f6ca30ff094538e9943f8e80c1f20e758752666df451c570d87ad",
     )

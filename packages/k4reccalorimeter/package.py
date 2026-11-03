@@ -5,14 +5,18 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4reccalorimeter(CMakePackage, Key4hepPackage):
     """Calorimeter reconstruction components for the Key4hep framework"""
 
-    homepage = "https://github.com/HEP-FCC/k4RecCalorimeter/"
-    url = "https://github.com/HEP-FCC/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
-    git = "https://github.com/HEP-FCC/k4RecCalorimeter.git"
+    homepage = "https://github.com/key4hep/k4RecCalorimeter/"
+    url = "https://github.com/key4hep/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
+    git = "https://github.com/key4hep/k4RecCalorimeter.git"
 
     maintainers("jmcarcell")
 
     version("main", branch="main")
 
+    version(
+        "0.1.0pre20",
+        sha256="02711366fb23a3f1a89f05448bd0276a8cb7fc885e337e834087d93564ec6f1c",
+    )
     version(
         "0.1.0pre19",
         sha256="604c096fa8fc80eea56852d0c732fac7a304c00537e35c6c5902ae71e9b497dc",
@@ -55,7 +59,8 @@ class K4reccalorimeter(CMakePackage, Key4hepPackage):
     depends_on("k4fwcore@1.5", when="@0.1.0pre18")
     depends_on("k4fwcore@:1.4", when="@:0.1.0pre17")
     depends_on("k4geo@:0.24", when="@:0.1.0pre18")
-    depends_on("k4geo@0.25:", when="@0.1.0pre19:")
+    depends_on("k4geo@0.25", when="@0.1.0pre19")
+    depends_on("k4geo@0.26:", when="@0.1.0pre20:")
     depends_on("k4simgeant4")
     depends_on("podio")
     depends_on("py-onnxruntime")
