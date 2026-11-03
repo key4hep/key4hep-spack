@@ -5,9 +5,9 @@ from spack.pkg.k4.key4hep_stack import Key4hepPackage
 class K4reccalorimeter(CMakePackage, Key4hepPackage):
     """Calorimeter reconstruction components for the Key4hep framework"""
 
-    homepage = "https://github.com/HEP-FCC/k4RecCalorimeter/"
-    url = "https://github.com/HEP-FCC/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
-    git = "https://github.com/HEP-FCC/k4RecCalorimeter.git"
+    homepage = "https://github.com/key4hep/k4RecCalorimeter/"
+    url = "https://github.com/key4hep/k4RecCalorimeter/archive/refs/tags/v0.1.0pre04.tar.gz"
+    git = "https://github.com/key4hep/k4RecCalorimeter.git"
 
     maintainers("jmcarcell")
 
