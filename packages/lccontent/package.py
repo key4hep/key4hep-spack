@@ -19,6 +19,18 @@ class Lccontent(CMakePackage):
 
     version("master", branch="master")
     version(
+        "5.1.1",
+        sha256="d109f91706b9930f244326df9334ac202fa26ae18540059f6cd678194e34fff7",
+    )
+    version(
+        "5.1.0",
+        sha256="5696b73207d2980e9f434fb606b58161ba33360d64ce7286ff79fd50f2d79f1d",
+    )
+    version(
+        "5.0.0",
+        sha256="f3c4e941cc6f6a02bd660acbd29190441ca7e6b9074a4a431457282b36613ee2",
+    )
+    version(
         "3.2.0",
         sha256="37a5b7dbc6d9f7cc9d010294a3f75dd30e9dad591ae4e88784e410868deabae6",
     )
@@ -42,6 +54,9 @@ class Lccontent(CMakePackage):
 
     depends_on("pandorapfa")
     depends_on("pandorasdk")
+    depends_on("pandorasdk@4.0.1:", when="@5.1:")
+
+    conflicts("^pandorapfa@5:", when="@:3.2.0")
 
     depends_on("pandoramonitoring", when="+monitoring")
     # LCContentML (ONNX inference algorithms) is a separate library, built only with +ml
