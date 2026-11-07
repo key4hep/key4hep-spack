@@ -125,11 +125,14 @@ _replace_marlin_dll() {
     # replace the library on MARLIN_DLL with the local one (if any)
     local pkg_name=${1}
     local install_prefix=${2}
-    if echo ${MARLIN_DLL} | grep -qE "/${pkg_name}/"; then
-        local old_lib=$(echo ${MARLIN_DLL} | tr ":" "\n" | grep -E "/${pkg_name}/")
+    # in LCG views only the symlink target has the package in its path
+    local old_lib=$(echo ${MARLIN_DLL} | tr ":" "\n" | while read -r lib; do
+        readlink -f "${lib}" | grep -qE "/${pkg_name}/" && echo "${lib}"
+    done)
+    if [ -n "${old_lib}" ]; then
         local lib_name=$(basename ${old_lib})
         local new_lib=$(pwd)/${install_prefix}/lib/${lib_name}
-        export MARLIN_DLL=$(echo ${MARLIN_DLL%:} | tr ":" "\n" | grep -Ev "/${pkg_name}/" | tr "\n" ":")${new_lib}
+        export MARLIN_DLL=$(echo ${MARLIN_DLL%:} | tr ":" "\n" | grep -Fxv "${old_lib}" | tr "\n" ":")${new_lib}
         echo "Replaced library on MARLIN_DLL: old: '${old_lib}'"
         echo "                                new: '${new_lib}'"
     fi
