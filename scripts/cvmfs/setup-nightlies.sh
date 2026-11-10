@@ -4,17 +4,17 @@
 
 function usage() {
     echo "Usage: source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh [--spack] [--lcg] [--latest-tags] [-c <compiler>] [-r <release>] [-d] [--list-releases [distribution]] [--list-packages [distribution]]"
-    echo "       Default setup: LCG on AlmaLinux 9 and Ubuntu 26; Spack on Ubuntu 24"
-    echo "       -c <compiler> : select the compiler (for LCG on AlmaLinux 9: gcc16 (default) or gcc14)"
+    echo "       Default setup: LCG on AlmaLinux 9/10 and Ubuntu 26; Spack on Ubuntu 24"
+    echo "       -c <compiler> : select the compiler (for LCG on AlmaLinux 9/10: gcc16 only, the default)"
     echo "       -d           : setup the debug version of the software stack"
-    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9 and Ubuntu 26; supports only -d, -r and -c on AlmaLinux 9)"
+    echo "       --lcg        : source the LCG devkey-head view from CVMFS (the default on AlmaLinux 9/10 and Ubuntu 26; supports only -d, -r and -c on AlmaLinux 9/10)"
     echo "       --latest-tags: source the LCG devkey view with the latest tags instead of devkey-head (LCG only; supports the same platforms and options)"
-    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for the listing options on AlmaLinux 9; not available on Ubuntu 26)"
+    echo "       --spack      : source the spack-based Key4hep nightly stack (the default on Ubuntu 24; required for the listing options on AlmaLinux 9; not available on AlmaLinux 10 or Ubuntu 26)"
     echo "       -r <release> : setup a specific release, if not specified the latest release will be used (also used for --list-packages)"
     echo "                      for --spack the release is a date (see --list-releases), for --lcg it is a day of the week (Mon, Tue, Wed, Thu, Fri, Sat) or latest; there are no Sunday builds"
     echo "       --help, -h   : print this help message"
-    echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for Ubuntu 26)"
-    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for Ubuntu 26)"
+    echo "       --list-releases [distribution] : list available releases for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the releases for the detected distribution (not supported for AlmaLinux 10 or Ubuntu 26)"
+    echo "       --list-packages [distribution] : list available packages and their versions for the specified distribution (--spack only, almalinux, ubuntu). By default (no OS is specified) it will list the packages for the detected distribution (not supported for AlmaLinux 10 or Ubuntu 26)"
     echo "       On AlmaLinux 9, use --spack --list-releases or --spack --list-packages to access the listings"
     echo "In addition, after sourcing, the command k4_local_repo can be used to add the current repository to the environment"
     echo "It will delete all the existing paths containing the repository name and add some predefined paths to the environment"
@@ -230,6 +230,10 @@ if [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERS
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9* ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"9*  ]]; then
     os="almalinux9"
+elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="almalinux"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"10* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rhel"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"10* ]] ||
+     [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID="rocky"' && "$(grep -E 'VERSION_ID' /etc/os-release)" = VERSION_ID=\"10* ]]; then
+    os="almalinux10"
 elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]] ||
      [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=pop' && "$(grep -E 'VERSION_ID' /etc/os-release)" = 'VERSION_ID="24.04"' ]]; then
     os="ubuntu24"
@@ -237,7 +241,7 @@ elif [[ "$(grep -E '^ID=' /etc/os-release)" = 'ID=ubuntu' && "$(grep -E 'VERSION
     os="ubuntu26"
 else
     echo "Unsupported OS or OS couldn't be correctly detected, aborting..."
-    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9, Ubuntu 24.04, and Ubuntu 26.04"
+    echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9/10, Ubuntu 24.04, and Ubuntu 26.04"
     return 1
 fi
 
@@ -250,8 +254,8 @@ if [ $lcg_setup -eq 0 ] && [ "$lcg_view" = "devkey" ]; then
     return 1
 fi
 
-if [ "$os" = "ubuntu26" ] && [ $lcg_setup -eq 0 ]; then
-    echo "The spack-based nightly stack is not available for Ubuntu 26.04. Use the default LCG ${lcg_view} setup instead."
+if { [ "$os" = "almalinux10" ] || [ "$os" = "ubuntu26" ]; } && [ $lcg_setup -eq 0 ]; then
+    echo "The spack-based nightly stack is not available for $os. Use the default LCG ${lcg_view} setup instead."
     return 1
 fi
 
@@ -283,11 +287,11 @@ if [ $lcg_setup -eq 1 ]; then
                 esac
                 ;;
             -c)
-                if [ "$os" != "almalinux9" ]; then
-                    echo "The -c flag is only supported on AlmaLinux 9 for the ${lcg_view} setup, aborting..."
+                if [ "$os" != "almalinux9" ] && [ "$os" != "almalinux10" ]; then
+                    echo "The -c flag is only supported on AlmaLinux 9/10 for the ${lcg_view} setup, aborting..."
                     usage
                     return 1
-                elif [ "$argn" = "gcc14" ] || [ "$argn" = "gcc16" ]; then
+                elif [ "$argn" = "gcc16" ]; then
                     lcg_compiler_request="$argn"
                     ((i++))
                 else
@@ -297,16 +301,16 @@ if [ $lcg_setup -eq 1 ]; then
                 fi
                 ;;
             *)
-                echo "The ${lcg_view} setup only supports --latest-tags, -d, -r <day> and, on AlmaLinux 9, -c gcc14|gcc16. Use --spack to access other options (--list-releases, --list-packages)."
+                echo "The ${lcg_view} setup only supports --latest-tags, -d, -r <day> and, on AlmaLinux 9/10, -c gcc16. Use --spack to access other options (--list-releases, --list-packages)."
                 usage
                 return 1
                 ;;
         esac
     done
 
-    if [ "$os" != "almalinux9" ] && [ "$os" != "ubuntu26" ]; then
+    if [ "$os" != "almalinux9" ] && [ "$os" != "almalinux10" ] && [ "$os" != "ubuntu26" ]; then
         echo "Unsupported OS for the ${lcg_view} setup, aborting..."
-        echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9 and Ubuntu 26.04. Use --spack for Ubuntu 24.04."
+        echo "Supported OSes are: AlmaLinux/RockyLinux/RHEL 9/10 and Ubuntu 26.04. Use --spack for Ubuntu 24.04."
         return 1
     fi
 
@@ -323,7 +327,7 @@ if [ $lcg_setup -eq 1 ]; then
         lcg_os_tag="ubuntu2604"
         lcg_compiler_tag="gcc15"
     else
-        lcg_os_tag="el9"
+        lcg_os_tag="el${os#almalinux}"
         lcg_compiler_tag="${lcg_compiler_request:-gcc16}"
     fi
     lcg_setup_script="/cvmfs/sft-nightlies.cern.ch/lcg/views/${lcg_view}/${lcg_release}/${lcg_arch_tag}-${lcg_os_tag}-${lcg_compiler_tag}-${build_type}/setup.sh"
