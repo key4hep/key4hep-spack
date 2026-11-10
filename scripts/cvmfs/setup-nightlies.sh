@@ -127,7 +127,7 @@ _replace_marlin_dll() {
     local install_prefix=${2}
     # in LCG views only the symlink target has the package in its path
     local old_lib=$(echo ${MARLIN_DLL} | tr ":" "\n" | while read -r lib; do
-        realpath "${lib}" | grep -qE "/${pkg_name}/" && echo "${lib}"
+        realpath -q "${lib}" | grep -qE "/${pkg_name}/" && echo "${lib}"
     done)
     if [ -n "${old_lib}" ]; then
         local lib_name=$(basename ${old_lib})
