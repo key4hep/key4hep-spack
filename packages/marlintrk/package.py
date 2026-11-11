@@ -19,6 +19,10 @@ class Marlintrk(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "2.10",
+        sha256="78acc2a236d49fcacee9251846fe4eabe04a7c029678b71ea5a789a5f22bceb7",
+    )
+    version(
         "2.9.2",
         sha256="4523de3d1eaf93cd345391b72d43de724fd5829f96283f0a96bc6672373820ba",
     )

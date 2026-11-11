@@ -18,6 +18,10 @@ class Kitrack(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.11",
+        sha256="1ece1156bb44bec340a40b298874c49ed274d644b35036354c21c6ff004f8add",
+    )
+    version(
         "1.10.1",
         sha256="ccfd9317168814350d089a406cc7ed0cf1b44e9aa71e846faf8f0ab4113c7adf",
     )
