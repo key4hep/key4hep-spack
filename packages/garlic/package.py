@@ -18,6 +18,10 @@ class Garlic(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "3.2",
+        sha256="d5c8f5283f9697596b1b27df342aa6e2db19eaed6c2d6572e6b21f479e55f681",
+    )
+    version(
         "3.1", sha256="a35bea352d0c6aaa7d289656f6272be216e9b8ada2a750461ceed7c2cf780940"
     )
 
