@@ -15,6 +15,10 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "00-06",
+        sha256="e1d77a4c3385019e11c4778b458d0315135576e36461ee00e31bacf246ce04a7",
+    )
+    version(
         "00-05",
         sha256="0d4f66c1994df51c5c552734e1fdb099cab9103d84a129e3b1940a4f1c28f370",
     )
@@ -50,6 +54,10 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     )
 
     depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
+    # The EDM4hep track conversion API was extended in Acts 48.0.0.
+    depends_on("acts@48.0:", when="@00-06:")
+    # GNN track finding needs the OnnxEdgeClassifier feature ordering fix.
+    depends_on("acts@48.1:", when="@00-06: +gnn")
 
     with when("+gnn"):
         depends_on("acts+gnn+onnx+torch")

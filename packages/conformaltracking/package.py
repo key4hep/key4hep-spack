@@ -20,6 +20,10 @@ class Conformaltracking(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.13",
+        sha256="1ad3f1cdb8a4e1c331c798434ed44342dded0ff05ed4e0e2636276ccab3c6f57",
+    )
+    version(
         "1.12.1",
         sha256="50809b288e0af6af40ffd3257803a0413454c277647bd748d867312afeff9d8e",
     )
