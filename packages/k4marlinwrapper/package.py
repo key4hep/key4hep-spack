@@ -18,6 +18,10 @@ class K4marlinwrapper(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-15-02",
+        sha256="1d00ebcd012a9d1b148ca5003e7541611f837084e38c40ec450ee193d1b72acc",
+    )
+    version(
         "00-15-01",
         sha256="bd27945843a3f856c4f294ffb4ce2003df7b9a828b3083b4b376ba059cc671ce",
     )
