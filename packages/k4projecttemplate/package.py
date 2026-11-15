@@ -15,6 +15,11 @@ class K4projecttemplate(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.7.2",
+        sha256="153f6db1d3673f05c38f92cf2c2b55824534e7742b63196adb28887b1f0035e8",
+        url="https://github.com/key4hep/k4-project-template/archive/refs/tags/v00.07.02.tar.gz",
+    )
+    version(
         "0.7.1",
         sha256="1700dc41c6f2a5b39983fd8666fcd022ee4749b69a42f06af00ff074e5e150ba",
     )
