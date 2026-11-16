@@ -78,7 +78,7 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     depends_on("edm4hep")
     depends_on("edm4hep@1.2:", when="@00-07:")
     depends_on("k4fwcore")
-    depends_on("opendatadetector", type="test")
+    depends_on("opendatadetector", type="test", when="@:00-03")
 
     def cmake_args(self):
         return [
