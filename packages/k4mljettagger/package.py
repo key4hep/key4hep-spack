@@ -13,6 +13,15 @@ class K4mljettagger(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "0.1.3",
+        sha256="9295b184555a3d80aa6f1d2be7f7ede06e7d0c21384e1c831ee7b96e3b8f9ce9",
+        url="https://github.com/key4hep/k4MLJetTagger/archive/refs/tags/v00.01.03.tar.gz",
+    )
+    version(
+        "0.1.2",
+        sha256="17e001f5af85c3f7c167c0bbdd0a97648764007ef43ef934aa7277273fd4d4c7",
+    )
+    version(
         "0.1.1",
         sha256="fc707d023a3160a06a739f2e21b6158fe02f63da9a6f4fe9edc9098c993c9cf4",
     )

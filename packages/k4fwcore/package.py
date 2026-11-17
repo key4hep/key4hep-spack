@@ -11,6 +11,9 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "1.8", sha256="247f3d49831a08f6f3d4515310678fde891560b09ee5ed0b9429aa6b67abc8d0"
+    )
+    version(
         "1.7", sha256="44a6197019609e635631e413ce7ddb82fdb524ca634a2b744f5566b83f0efad4"
     )
     version(
@@ -63,6 +66,7 @@ class K4fwcore(CMakePackage, Ilcsoftpackage):
     depends_on("edm4hep")
     depends_on("edm4hep@0.10.2:")
     depends_on("edm4hep@0.99:", when="@1.2:")
+    depends_on("edm4hep@1.1:", when="@1.7:")
 
     def cmake_args(self):
         args = [

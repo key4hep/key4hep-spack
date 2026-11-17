@@ -15,6 +15,14 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "00-07",
+        sha256="c6fac94be6f9ed890c717f09b8a3de85ad49f4699e95650cd3dfeaf50f37c84e",
+    )
+    version(
+        "00-06",
+        sha256="e1d77a4c3385019e11c4778b458d0315135576e36461ee00e31bacf246ce04a7",
+    )
+    version(
         "00-05",
         sha256="0d4f66c1994df51c5c552734e1fdb099cab9103d84a129e3b1940a4f1c28f370",
     )
@@ -50,6 +58,11 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     )
 
     depends_on("acts+dd4hep+edm4hep+examples+geant4+hepmc3+python+json")
+    # The EDM4hep track conversion API was extended in Acts 48.0.0.
+    depends_on("acts@48.0:", when="@00-06:")
+    # GNN track finding needs the OnnxEdgeClassifier feature ordering fix.
+    depends_on("acts@48.1:", when="@00-06: +gnn")
+    depends_on("acts@48.1:", when="@00-07:")
 
     with when("+gnn"):
         depends_on("acts+gnn+onnx+torch")
@@ -63,8 +76,9 @@ class K4actstracking(CMakePackage, Key4hepPackage):
     depends_on("gaudi")
     depends_on("root")
     depends_on("edm4hep")
+    depends_on("edm4hep@1.2:", when="@00-07:")
     depends_on("k4fwcore")
-    depends_on("opendatadetector", type="test")
+    depends_on("opendatadetector", type="test", when="@:00-03")
 
     def cmake_args(self):
         return [

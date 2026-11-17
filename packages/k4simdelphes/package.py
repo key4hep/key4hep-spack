@@ -18,6 +18,14 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
 
     version("main", branch="main")
     version(
+        "00-09",
+        sha256="a6d6df379a984c07426361604a30dc511e6354820f95b3bca46b72977a2fae70",
+    )
+    version(
+        "00-08",
+        sha256="f22eaee99933993f401f002a34da9638638e5853a0221f58f8eacbaf2bedfa20",
+    )
+    version(
         "00-07-06",
         sha256="9650278b9722869f872c75a486b081e1c761aa3b76ec1852a61ae3dedd76fec3",
     )
@@ -85,6 +93,8 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on("edm4hep", type=("build", "link", "run"))
     depends_on("podio")
     depends_on("delphes@3.5.1pre04:", when="@00-03-00:", type=("build", "link", "run"))
+    # 00-09 depends on Delphes 3.5.2pre02, but that version is not in the Delphes
+    # recipe, so the dependency can not be added yet
 
     depends_on("pythia8", when="+delphes_pythia")
     depends_on("evtgen+pythia8+tauola+photos", when="+delphes_pythia_evtgen")
@@ -92,6 +102,7 @@ class K4simdelphes(CMakePackage, Ilcsoftpackage):
     depends_on("hepmc3", when="+framework")
     depends_on("k4fwcore", when="+framework")
     depends_on("k4fwcore@1.3:", when="@00-07-06: +framework")
+    depends_on("k4fwcore@1.7:", when="@00-08: +framework")
 
     depends_on("catch2@3.0.1:", type=("build", "test"))
     depends_on("k4gen", when="+integration_tests", type=("build", "test", "run"))

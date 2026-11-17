@@ -18,6 +18,10 @@ class Ddmarlinpandora(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "0.15",
+        sha256="2c77fb58ebd0dcb13d8c25bca25e4f8973edb5cc013b6cb71719dab4a2d86985",
+    )
+    version(
         "0.14",
         sha256="9c8de305d65007e2ce22489f961e469111d24b1c850dac5efc237019bd4da28e",
     )

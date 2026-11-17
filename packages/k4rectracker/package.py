@@ -12,6 +12,10 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     version("main", branch="main")
 
     version(
+        "0.8.0",
+        sha256="078b78d3f9ab9358f0379e615047434b95adc675cd276875d30546ea4ad03f6e",
+    )
+    version(
         "0.7.0",
         sha256="4e1a07b1465a2e17e6b9d3999d51149b1cf2e727f9cb8064bac640bdfb8cbc4d",
     )
@@ -46,10 +50,15 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("k4geo", when="@0.8.0:")
     depends_on("dd4hep")
     depends_on("edm4hep")
+    # EDM4hep 1.1.1 deletes the getTrackStates(Location) overload used by older releases.
+    depends_on("edm4hep@:1.1.0", when="@:0.7.0")
+    depends_on("edm4hep@1.1:", when="@0.8.0:")
     depends_on("gaudi")
     depends_on("k4fwcore")
     depends_on("k4fwcore@1.3:", when="@0.6.0:")
+    depends_on("marlinutil", when="@:0.7.0")
     depends_on("marlinutil", when="+tracking")
+    depends_on("gsl")
     depends_on("root")
     depends_on("genfit", when="@0.8.0: +tracking")
     depends_on("eigen", when="@0.8.0: +tracking")
@@ -58,9 +67,14 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     )  # To be updated with specifc version once new delphes tag with latest changes is released
     # This shouldn't be necessary but the debug builds are failing because lcio can't be found
     # It started happening after adding marlinutil to the dependencies
+    depends_on("lcio", when="@:0.7.0")
     depends_on("lcio", when="+tracking")
+    depends_on("pandorasdk", when="@0.4.0:0.7.0")
     depends_on("pandorasdk", when="@0.4.0: +tracking")
+    depends_on("py-onnxruntime", when="@0.6.0:0.7.0")
     depends_on("py-onnxruntime", when="@0.6.0: +tracking")
+    depends_on("py-onnxruntime@1.16:", when="@0.8.0: +tracking")
+    depends_on("py-torch", when="@0.6.0:0.7.0")
     depends_on("py-torch", when="@0.6.0: +tracking")
 
     def cmake_args(self):
