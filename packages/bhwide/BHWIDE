@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Wrapper for the key/value configuration accepted by BHWIDE.
+declare -a keys=()
+declare -A defaults descriptions overrides
+
+option() {
+    keys+=("$1")
+    defaults[$1]=$2
+    descriptions[$1]=$3
+}
+
+option events 100000 'Number of events to generate.'
+option seed 12345 'RANMAR seed (used with keyrnd 1).'
+option lhe demo.lhe 'LHE output path, relative to the working directory.'
+
+option cmsene 91.188 'Total center-of-mass energy in GeV.'
+option thminp 10.0 'Minimum positron scattering angle in degrees.'
+option thmaxp 170.0 'Maximum positron scattering angle in degrees.'
+option thmine 10.0 'Minimum electron scattering angle in degrees.'
+option thmaxe 170.0 'Maximum electron scattering angle in degrees.'
+option enminp 0.2 'Minimum outgoing positron energy in GeV.'
+option enmine 0.2 'Minimum outgoing electron energy in GeV.'
+option acolli 10.0 'Maximum electron-positron acollinearity in degrees.'
+option epscms 1e-5 'Soft-photon cutoff: photon energy > cmsene * epscms / 2.'
+option wtmax 3.0 'Rejection threshold for unweighted events; nonpositive values reset it to 10.'
+
+option amaz 91.1879 'Z-boson mass in GeV.'
+option gammz 2.4955 'Z-boson width in GeV; the electroweak library may recalculate it.'
+option sinw2 0.23122 'Sine squared of the weak mixing angle; the library may recalculate it.'
+option amtop 172.60 'Top-quark mass in GeV.'
+option amhig 125.13 'Higgs-boson mass in GeV.'
+
+option keywgt 0 'Event weights: 0 = unit weights, 1 = variable weights.'
+option keyrnd 1 'Random-number generator: 1 = RANMAR, 2 = RANECU.'
+option keycha 0 'Channels: 0 = both plus interference, 1 = s only, 2 = t only (1 and 2 require keymod 2).'
+option keyzof 0 'Z contribution: 0 = on, 1 = off for tests.'
+option keyewc 1 'Radiative corrections: 0 = QED only, 1 = full electroweak.'
+option keylib 2 'Electroweak library: 1 = BABAMC (obsolete), 2 = ALIBABA.'
+option keymod 1 'Hard bremsstrahlung matrix element: 1 = MODEL1, 2 = CALKUL.'
+option keypia 5 'Photon vacuum polarization: 0 = off; 1 = Burkhardt et al. (1989); 2 = Eidelman–Jegerlehner (1995); 3 = Burkhardt–Pietrzyk (1995); 4/5 = Jegerlehner (Oct 2025/Jul 2026).'
+
+usage() {
+    printf 'Usage: BHWIDE [--option VALUE ...]\n\n'
+    printf '  --help               Show this help.\n'
+    local key
+    for key in "${keys[@]}"; do
+        printf '  --%-8s VALUE     %s [default: %s]\n' \
+            "$key" "${descriptions[$key]}" "${defaults[$key]}"
+    done
+}
+
+die() {
+    printf 'BHWIDE: %s\n' "$*" >&2
+    exit 2
+}
+
+while (( $# > 0 )); do
+    flag=$1
+    shift
+    case "$flag" in
+        --help) usage; exit 0 ;;
+        --[a-z]*) key=${flag#--} ;;
+        *) die "unknown option: $flag (see --help)" ;;
+    esac
+    [[ $key =~ ^[a-z0-9]+$ ]] && [[ ${defaults[$key]+set} ]] ||
+        die "unknown option: $flag (see --help)"
+    [[ $# -gt 0 && -n $1 && $1 != --* ]] || die "$flag requires a value"
+    [[ $1 != *$'\n'* && $1 != *$'\r'* ]] || die "$flag requires a single-line value"
+    if [[ $key != lhe && ! $1 =~ ^[0-9eEdD+.-]+$ ]]; then
+        die "$flag requires a numeric value"
+    fi
+    overrides[$key]=$1
+    shift
+done
+
+cfg=$(mktemp) || exit 1
+trap 'rm -f -- "$cfg"' EXIT
+
+for key in "${keys[@]}"; do
+    if [[ ${overrides[$key]+set} ]]; then
+        printf '%s %s\n' "$key" "${overrides[$key]}" || exit 1
+    fi
+done > "$cfg" || exit 1
+
+"$(dirname -- "$0")/BHWIDE.exe" "$cfg"
