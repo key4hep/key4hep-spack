@@ -79,7 +79,7 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("py-onnxruntime@1.16:", when="@0.8.0: +tracking")
     depends_on("py-torch", when="@0.6.0:0.7.0")
     depends_on("py-torch", when="@0.6.0: +tracking")
-    # TrackMerger needs the Gaudi version of KalTest for fitting
+    # TrackMerger needs the Gaudi version of DDKalTest for fitting
     depends_on("k4reco", when="@0.9.0: +tracking")
 
     def cmake_args(self):
