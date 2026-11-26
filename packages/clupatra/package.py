@@ -18,6 +18,9 @@ class Clupatra(CMakePackage, Ilcsoftpackage):
 
     version("master", branch="master")
     version(
+        "1.5", sha256="f21de4b0d208c291d8a3af2b48777d50991c0e119fa4043d74eb11f1ba83fb98"
+    )
+    version(
         "1.4", sha256="1ba5c98213eab97a5c7407fb483432dcf8ff631e87f720c5f94baae62bc53510"
     )
     version(

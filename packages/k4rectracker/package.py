@@ -10,7 +10,10 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     git = "https://github.com/key4hep/k4RecTracker.git"
 
     version("main", branch="main")
-
+    version(
+        "0.9.0",
+        sha256="9d2d9468613abc7e7c5e45b26f925c8efe445783a6a4dd6eac8cfb729c39bbbd",
+    )
     version(
         "0.8.0",
         sha256="078b78d3f9ab9358f0379e615047434b95adc675cd276875d30546ea4ad03f6e",
@@ -76,6 +79,8 @@ class K4rectracker(CMakePackage, Key4hepPackage):
     depends_on("py-onnxruntime@1.16:", when="@0.8.0: +tracking")
     depends_on("py-torch", when="@0.6.0:0.7.0")
     depends_on("py-torch", when="@0.6.0: +tracking")
+    # TrackMerger needs the Gaudi version of DDKalTest for fitting
+    depends_on("k4reco", when="@0.9.0: +tracking")
 
     def cmake_args(self):
         args = [
