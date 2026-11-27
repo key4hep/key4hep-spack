@@ -18,6 +18,10 @@ class Ddml(CMakePackage, Key4hepPackage):
 
     version("main", branch="main")
     version(
+        "00-04",
+        sha256="8ac9096726a3af5f1713ea481b6b69eca3aee993189c4f3ce150d072f3088517",
+    )
+    version(
         "00-03",
         sha256="f62027b1e4e7e9b259d46e4c37373fdd3634ebb16bf5be691af7c10e6f729c0d",
     )
@@ -34,12 +38,28 @@ class Ddml(CMakePackage, Key4hepPackage):
         sha256="17ccdd7673780bbe91d98fe6ad3d9c2ad21803ca71b75b740a6beb0f8ea39358",
     )
 
-    variant("inference", values=("onnxruntime", "torch", "both"), default="both")
+    with when("@:00-03"):
+        variant(
+            "inference",
+            values=("onnxruntime", "torch", "both"),
+            default="both",
+            multi=False,
+        )
+        depends_on("py-onnxruntime", when="inference=both")
+        depends_on("py-torch", when="inference=both")
+
+    with when("@00-04:"):
+        variant(
+            "inference",
+            values=("python", "torch", "onnxruntime"),
+            default="torch,onnxruntime,python",
+            multi=True,
+        )
+        depends_on("py-onnxruntime@1.16:", when="inference=onnxruntime")
+        depends_on("py-pybind11@2.10:", when="inference=python")
 
     depends_on("py-onnxruntime", when="inference=onnxruntime")
-    depends_on("py-onnxruntime", when="inference=both")
     depends_on("py-torch", when="inference=torch")
-    depends_on("py-torch", when="inference=both")
     depends_on("dd4hep")
     depends_on("openmpi", when="@0.1.1:")
 
@@ -52,4 +72,7 @@ class Ddml(CMakePackage, Key4hepPackage):
         # This fixes issues in Ubuntu24 when it's not linking to libgomp from gcc-runtime
         if "py-torch" in self.spec:
             args.append(f"-DCMAKE_SHARED_LINKER_FLAGS={self.compiler.openmp_flag}")
+        if "py-pybind11" in self.spec:
+            args.append("DDML_ENABLE_EMBEDDED_PYINFERENCE=ON")
+
         return args
