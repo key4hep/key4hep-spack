@@ -1,0 +1,350 @@
+--- Makefile
++++ Makefile
+@@ -26,21 +26,23 @@ PATHGL = ./glib
+ PATHLE = ./lep-ws95
+ PATHTE = ./tests
+ #=============================================================================
+-.PHONY: demo clean Clean CLEAN export tar-all count-bhw-lines count-all-lines 
++.PHONY: demo run clean Clean CLEAN export tar-all count-bhw-lines count-all-lines
+ #=============================================================================
+ # Run a simple demo program for BHWIDE
+ demo:
+ 	(cd ./$(PATHDE); make demo)
++run:
++	(cd ./$(PATHDE); make run)
+ #=============================================================================
+ clean:
+ 	\rm -f *~
+-Clean:	clean
+ 	cd $(PATHDE); make clean
+ 	cd $(PATHBW); make clean
+ 	cd $(PATHEW); make clean
+ 	cd $(PATHIN); make clean
+ 	cd $(PATHEW); make clean
+ 	cd $(PATHGL); make clean
++Clean:	clean
+ CLEAN:	Clean
+ 	cd $(PATHLE); make clean
+ 	cd $(PATHTE); make clean
+--- demo/Makefile
++++ demo/Makefile
+@@ -1,9 +1,12 @@
+ ####### Include common settings
+ include ../Makefile.inc
+ #############################################################################
++.PHONY: demo run
++
+ CFNAME = demo
+-COMMAND = $(CFNAME).exe
++COMMAND = ../bin/bhwide
+ OBJECTS = $(CFNAME).o
++CONFIG ?=
+ #############################################################################
+ DIRNBW = bhw
+ DIRNEW = ewc
+@@ -35,21 +38,20 @@ $(EXTER_LIB4): $(PATHEW)/*.f
+ # Link procedure
+ $(COMMAND): $(OBJECTS) \
+ 	$(EXTER_LIB1) $(EXTER_LIB2) $(EXTER_LIB3) $(EXTER_LIB4)
++	mkdir -p $(dir $@)
+ 	$(LD) -o $@ $(LDFLAGS) $(OBJECTS) \
+ 	$(EXTER_LIB1) $(EXTER_LIB2) $(EXTER_LIB3) $(EXTER_LIB4)
+ #---------------------------------------------------------------------------
+ #                            Demo run
+ #---------------------------------------------------------------------------
+ demo:  $(COMMAND)
+-	time ./$<
+-	pdflatex $(CFNAME).tex
+-	gv $(CFNAME).pdf
+-	diff -s $(CFNAME).output $(CFNAME)_100k.output
++run:  $(COMMAND)
++	./$< $(if $(CONFIG),"$(CONFIG)")
+ #---------------------------------------------------------------------------
+ #                   Cleaning
+ #---------------------------------------------------------------------------
+ clean:
+-	(rm -f  *.o  *.a  *~  *.exe  *.aux  *.dvi  *.log  core  *.gz lmap)
++	(rm -f  *.o  *.a  *~  *.exe  $(COMMAND)  *.aux  *.dvi  *.log  core  *.gz lmap)
+ Clean:  clean
+ 	cd $(PATHBW); make clean
+ 	cd $(PATHEW); make clean
+--- demo/demo.f
++++ demo/demo.f
+@@ -22,16 +22,30 @@
+ ! Generating some low statistic sample, producing a few         !
+ ! histograms and printing output.                               !
+ !---------------------------------------------------------------!
++      USE ISO_FORTRAN_ENV, ONLY: IOSTAT_END, IOSTAT_EOR
+       IMPLICIT REAL*8 (A-H,O-Z) 
+ ! Input/output files
+       COMMON / INOUT  / NINP,NOUT
++      COMMON / MOMSET / p1(4),q1(4),p2(4),q2(4),
++     &                  phot(100,4),nphot
++      COMMON / WGTALL / wtmod,wtcrud,wttrig,wtset(300)
+       DIMENSION  xpar(100),npar(100)
++      CHARACTER*256 LHEline
++      CHARACTER*256 LHEFile
++      CHARACTER*4096 ConfigFile,ConfigLine,ValueArg
++      CHARACTER(*), PARAMETER :: Whitespace = ' '//ACHAR(9)//
++     &                            ACHAR(11)//ACHAR(12)//ACHAR(13)
++      INTEGER ConfigUnit,LineNumber,First,Split,Last,SeedIn,IOStatus
++      REAL*8 LHEwgt
+       SAVE 
+ !
+       ninp = 5
++      NevTot = 100000
++      SeedIn = 12345
++      LHEFile = 'demo.lhe'
+ ! General Output for everybody including glibk
+       nout = 16
+-      OPEN(nout,FILE='./demo.output')
++      OPEN(nout,STATUS='SCRATCH',FORM='FORMATTED')
+       REWIND(nout)
+       CALL goutpu(nout)
+       WRITE(nout,*) '   '
+@@ -43,13 +57,13 @@
+       WRITE(nout,*) '   '
+ !----------------------------------------------------------------------
+ ! Input parameters for  BHWIDE
+-      CMSEne =  91.2    ! CMS Energy = 2*Ebeam [GeV]
+-      ThMinp =  25.0    ! Detector range ThetaMin [deg] for positrons
+-      ThMaxp = 155.0    ! Detector range ThetaMax [deg] for positrons
+-      ThMine =  25.0    ! Detector range ThetaMin [deg] for electrons
+-      ThMaxe = 155.0    ! Detector range ThetaMax [deg] for electrons
+-      EnMinp =   1.0    ! Energy minimum [GeV] for detected positrons
+-      EnMine =   1.0    ! Energy minimum [GeV] for detected electrons
++      CMSEne =  91.188  ! CMS Energy = 2*Ebeam [GeV]
++      ThMinp =  10.0    ! Detector range ThetaMin [deg] for positrons
++      ThMaxp = 170.0    ! Detector range ThetaMax [deg] for positrons
++      ThMine =  10.0    ! Detector range ThetaMin [deg] for electrons
++      ThMaxe = 170.0    ! Detector range ThetaMax [deg] for electrons
++      EnMinp =   0.2    ! Energy minimum [GeV] for detected positrons
++      EnMine =   0.2    ! Energy minimum [GeV] for detected electrons
+       Acolli =  10.0    ! Maximum acollinearity [deg] of final e+e-
+       epsCMS =  1d-5    ! Infrared cut on photon energy 
+       WTMAX  =   3.0    ! Maximum Weight for rejection
+@@ -64,7 +78,6 @@
+       KeyRnd =   1   ! RANMAR random numbers
+       KeyCha =   0   ! Channel choice: all/s-only/t-only: =0/1/2
+       KeyZof =   0   ! Z-contribution ON/OFF: =0/1
+-      KeyOpt = 1000*KeyZof +100*KeyCha +10*KeyWgt + KeyRnd
+ !#      KeyEWC =   0   ! QED corrections only 
+       KeyEWC =   1   ! Total O(alpha) ElectroWeak corr. included
+ !#      KeyLib = 1   ! ElectroWeak corrections from BABAMC (obsolete!)
+@@ -72,10 +85,120 @@
+       KeyMod =   1   ! Hard bremsstr. matrix element from MODEL1
+ !#      KeyMod =   2   ! Hard bremsstr. matrix alement from MODEL2
+       KeyPia =   5   ! Vacuum polarization option (0/1/2/3/4/5)
++!
++            IF (COMMAND_ARGUMENT_COUNT().GT.1) THEN
++                  WRITE(6,*) 'Usage: bhwide [config-file]'
++                  STOP 1
++            ELSEIF (COMMAND_ARGUMENT_COUNT().EQ.1) THEN
++                  CALL GET_COMMAND_ARGUMENT(1,ConfigFile,STATUS=IOStatus)
++                  IF (IOStatus.NE.0 .OR. ConfigFile.EQ.' ') THEN
++                        WRITE(6,*) 'Invalid configuration file argument'
++                        STOP 1
++                  ENDIF
++                  IF (ConfigFile.EQ.'-h' .OR. ConfigFile.EQ.'--help') THEN
++                        WRITE(6,'(A)') 'Usage: bhwide [config-file]'
++                        RETURN
++                  ENDIF
++                  OPEN(NEWUNIT=ConfigUnit,FILE=ConfigFile,STATUS='OLD',
++     &                 ACTION='READ',IOSTAT=IOStatus)
++                  IF (IOStatus.NE.0) THEN
++                        WRITE(6,*) 'Could not open config file: ',TRIM(ConfigFile)
++                        STOP 1
++                  ENDIF
++                  LineNumber = 0
++                  DO
++                        READ(ConfigUnit,'(A)',ADVANCE='NO',IOSTAT=IOStatus)
++     &                       ConfigLine
++                        IF (IOStatus.EQ.IOSTAT_END) EXIT
++                        LineNumber = LineNumber+1
++                        IF (IOStatus.NE.IOSTAT_EOR) GOTO 90
++                        First = VERIFY(ConfigLine,Whitespace)
++                        IF (First.EQ.0) CYCLE
++                        IF (ConfigLine(First:First).EQ.'#') CYCLE
++                        Last = VERIFY(ConfigLine,Whitespace,BACK=.TRUE.)
++                        Split = SCAN(ConfigLine(First:Last),Whitespace)
++                        IF (Split.EQ.0) GOTO 90
++                        Split = First+Split-1
++                        ValueArg = ConfigLine(Split:Last)
++                        ValueArg = ValueArg(VERIFY(ValueArg,Whitespace):)
++                        IF (ConfigLine(First:Split-1).EQ.'lhe') THEN
++                              IF (LEN_TRIM(ValueArg).GT.LEN(LHEFile)) GOTO 90
++                              LHEFile = ValueArg
++                              CYCLE
++                        ENDIF
++                        IF (VERIFY(TRIM(ValueArg),'0123456789+-.eEdD').NE.0)
++     &                       GOTO 90
++                        SELECT CASE (ConfigLine(First:Split-1))
++                        CASE ('events')
++                              READ(ValueArg,*,IOSTAT=IOStatus) NevTot
++                              IF (IOStatus.NE.0) GOTO 90
++                              IF (NevTot.LE.0) GOTO 90
++                        CASE ('seed')
++                              READ(ValueArg,*,IOSTAT=IOStatus) SeedIn
++                              IF (IOStatus.NE.0) GOTO 90
++                              IF (SeedIn.LT.0 .OR. SeedIn.GT.900000000) GOTO 90
++                        CASE ('cmsene')
++                              READ(ValueArg,*,IOSTAT=IOStatus) CMSEne
++                        CASE ('thminp')
++                              READ(ValueArg,*,IOSTAT=IOStatus) ThMinp
++                        CASE ('thmaxp')
++                              READ(ValueArg,*,IOSTAT=IOStatus) ThMaxp
++                        CASE ('thmine')
++                              READ(ValueArg,*,IOSTAT=IOStatus) ThMine
++                        CASE ('thmaxe')
++                              READ(ValueArg,*,IOSTAT=IOStatus) ThMaxe
++                        CASE ('enminp')
++                              READ(ValueArg,*,IOSTAT=IOStatus) EnMinp
++                        CASE ('enmine')
++                              READ(ValueArg,*,IOSTAT=IOStatus) EnMine
++                        CASE ('acolli')
++                              READ(ValueArg,*,IOSTAT=IOStatus) Acolli
++                        CASE ('epscms')
++                              READ(ValueArg,*,IOSTAT=IOStatus) epsCMS
++                        CASE ('wtmax')
++                              READ(ValueArg,*,IOSTAT=IOStatus) WTMAX
++                        CASE ('amaz')
++                              READ(ValueArg,*,IOSTAT=IOStatus) AMAZ
++                        CASE ('gammz')
++                              READ(ValueArg,*,IOSTAT=IOStatus) GAMMZ
++                        CASE ('sinw2')
++                              READ(ValueArg,*,IOSTAT=IOStatus) SINW2
++                        CASE ('amtop')
++                              READ(ValueArg,*,IOSTAT=IOStatus) AMTOP
++                        CASE ('amhig')
++                              READ(ValueArg,*,IOSTAT=IOStatus) AMHIG
++                        CASE ('keywgt')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyWgt
++                        CASE ('keyrnd')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyRnd
++                        CASE ('keycha')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyCha
++                        CASE ('keyzof')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyZof
++                        CASE ('keyewc')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyEWC
++                        CASE ('keylib')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyLib
++                        CASE ('keymod')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyMod
++                        CASE ('keypia')
++                              READ(ValueArg,*,IOSTAT=IOStatus) KeyPia
++                        CASE DEFAULT
++                              GOTO 90
++                        END SELECT
++                        IF (IOStatus.NE.0) GOTO 90
++                  ENDDO
++                  CLOSE(ConfigUnit)
++            ENDIF
++            WRITE(nout,*) 'Requested events = ',NevTot,
++     &                    ' RANMAR seed = ',SeedIn
++            Ebeam = CMSEne/2
++            KeyOpt = 1000*KeyZof +100*KeyCha +10*KeyWgt + KeyRnd
+       KeyRad = 1000*KeyEWC + 100*KeyLib + 10*KeyMod + KeyPia
+ ! Filling BHWIDE parameter arrays
+       npar( 1) = KeyOpt
+       npar( 2) = KeyRad
++      CALL MARINI(SeedIn,0,0)
+ !
+       xpar( 1) = CMSEne
+       xpar( 2) = ThMinp
+@@ -99,7 +222,7 @@
+       CALL Example(-1,xpar,npar)
+ !---------------------------------------------------------------------- 
+ ! Number of events to be generated
+-      NevTot = 100000
++      OPEN(12,STATUS='SCRATCH',FORM='FORMATTED')
+ !
+       WRITE(6,*) '   '
+       WRITE(6,*) '--------------  BHWdem ----------------------'
+@@ -112,34 +235,81 @@
+       DO Ievent = 1,NevTot
+ !--- Generation of a single event
+          CALL BHWIDE( 0,xpar,npar)
++         IF (KeyWgt .EQ. 0 .OR. wtcrud*wttrig .NE. 0d0) THEN
++           LHEwgt = 1d0
++           IF (KeyWgt .NE. 0) LHEwgt = wtmod
++           NUP = 4 + nphot
++           WRITE(12,'(A)') '<event>'
++           WRITE(12,2) NUP,1,LHEwgt,CMSEne,0d0,0d0
++           WRITE(12,3) -11,-1,0,0,0,0,
++     &         p1(1),p1(2),p1(3),p1(4),0.00051099895d0,0d0,9d0
++           WRITE(12,3)  11,-1,0,0,0,0,
++     &         q1(1),q1(2),q1(3),q1(4),0.00051099895d0,0d0,9d0
++           WRITE(12,3) -11, 1,1,2,0,0,
++     &         p2(1),p2(2),p2(3),p2(4),0.00051099895d0,0d0,9d0
++           WRITE(12,3)  11, 1,1,2,0,0,
++     &         q2(1),q2(2),q2(3),q2(4),0.00051099895d0,0d0,9d0
++           DO Iphot = 1,nphot
++             WRITE(12,3) 22,1,1,2,0,0,
++     &            phot(Iphot,1),phot(Iphot,2),phot(Iphot,3),
++     &            phot(Iphot,4),0d0,0d0,9d0
++           ENDDO
++           WRITE(12,'(A)') '</event>'
++        ENDIF
+ ! Fill histograms
+          CALL Example( 0,xpar,npar)
+-! Print four-momenta of first events
+-         IF (Ievent.LE.5) CALL dumps(nout)  
+-         IF (Ievent.LE.5) CALL dumps( 6)  
+          IF (MOD(Ievent,10000) .EQ. 0) THEN
+             WRITE(nout,1)' Ievent = ',Ievent,'[',Ievent*100/NevTot,'%]'
+             WRITE(6   ,1)' Ievent = ',Ievent,'[',Ievent*100/NevTot,'%]'
+          ENDIF
+       ENDDO
+  1    FORMAT(A,I7,A4,I3,A2)
++ 2    FORMAT(I6,1X,I6,4(1X,ES20.12))
++ 3    FORMAT(6I6,7(1X,ES20.12))
++ 4    FORMAT(2I8,2(1X,ES20.12),4I5,2I6)
++ 5    FORMAT(3(1X,ES20.12),1X,I6)
+ !----------------------------------------------------------------------
+       WRITE(6,*)  ' =======> Generation finished!'
+       WRITE(6,*) '   '
+ !---------------------------------------------------------------------- 
+ !--- Finalization stage
+       CALL BHWIDE( 2,xpar,npar)
+-! Save/Print histograms
+-      CALL Example( 1,xpar,npar)
+ !---------------------------------------------------------------------- 
+ ! Print x-section
+       Xsec = xpar(10)
+       Erel = xpar(11)
++      IDWTUP = 3
++      IF (KeyWgt .NE. 0) IDWTUP = 4
++            OPEN(17,FILE=TRIM(LHEFile),STATUS='REPLACE',IOSTAT=IOStatus)
++            IF (IOStatus.NE.0) THEN
++                  WRITE(6,*) 'Could not open LHE file: ',TRIM(LHEFile)
++                  STOP 1
++            ENDIF
++      WRITE(17,'(A)') '<LesHouchesEvents version="1.0">'
++      WRITE(17,'(A)') '<header><generator name="BHWIDE" '
++     & // 'version="1.08"/></header>'
++      WRITE(17,'(A)') '<init>'
++      WRITE(17,4) -11,11,Ebeam,Ebeam,0,0,0,0,IDWTUP,1
++      WRITE(17,5) Xsec,Xsec*Erel,0d0,1
++      WRITE(17,'(A)') '</init>'
++      REWIND(12)
++ 6    READ(12,'(A)',IOSTAT=Iostat) LHEline
++      IF (Iostat .EQ. 0) THEN
++         WRITE(17,'(A)') TRIM(LHEline)
++         GOTO 6
++      ENDIF
++      WRITE(17,'(A)') '</LesHouchesEvents>'
++      CLOSE(12)
++      CLOSE(17)
+       WRITE(nout,*)'|||||||||||||||||||||||||||||||||||||||||||||||||||'
+       WRITE(nout,'(a,f15.8,a)')' Xsection_tot = ',Xsec    ,' [pb]'
+      $                        ,' error        = ',Xsec*Erel,' [pb]'
+       WRITE(nout,*)'|||||||||||||||||||||||||||||||||||||||||||||||||||'
+       CLOSE(nout)
++        RETURN
++ 90   WRITE(6,'(A,A,A,I0)') 'Invalid config entry in ',
++     &     TRIM(ConfigFile), ' at line ', LineNumber
++        STOP 1
+       END
+ 
+       SUBROUTINE Example(mode,xpar,npar)
